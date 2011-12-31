@@ -16,7 +16,7 @@
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
  * Portions created by the Initial Developer are
- * Copyright (C) 2011 SoftMetaWare Ltd.
+ * Copyright (C) 2011-2012 SoftMetaWare Ltd.
  * All Rights Reserved.
  *
  * Contributor(s):
