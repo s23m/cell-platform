@@ -15,7 +15,7 @@
  * The Initial Developer of the Original Code is
  * Sofismo AG (Sofismo).
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2010 Sofismo AG.
+ * Copyright (C) 2009-2012 Sofismo AG.
  * All Rights Reserved.
  *
  * Contributor(s):
