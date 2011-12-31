@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.s23m.cell.editor.semanticdomain
+Bundle-SymbolicName: org.s23m.cell.editor.semanticdomain; singleton:=true
+Bundle-Version: 0.0.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.s23m.cell.connector.database,
+ org.s23m.cell.repository.client,
+ org.s23m.cell.semanticextensions.testscripts
+Require-Bundle: org.s23m.cell.kernel,
+ org.s23m.cell.repository.client,
+ org.s23m.cell.serialization,
+ org.s23m.cell.common,
+ org.s23m.cell.semanticextensions
+Bundle-ClassPath: WebContent/WEB-INF/lib/vaadin-6.6.0.jar,
+ WebContent/WEB-INF/lib/CustomField-0.9.3.jar,
+ lib/commons-lang-2.6.jar,
+ .

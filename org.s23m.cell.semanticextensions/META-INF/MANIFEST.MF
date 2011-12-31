@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.s23m.cell.semanticextensions
+Bundle-SymbolicName: org.s23m.cell.semanticextensions; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.s23m.cell,
+ org.s23m.cell.api,
+ org.s23m.cell.impl
+Export-Package: org.s23m.cell.semanticextensions,
+ org.s23m.cell.semanticextensions.outershells
+Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0"
