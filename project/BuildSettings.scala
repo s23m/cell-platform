@@ -53,20 +53,14 @@ object BuildSettings {
 		credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
   )
 
-	val buildAndPackageSettings = buildSettings ++ Packaging.defaultSettings 
-
-  val javaProjectSettings = buildAndPackageSettings ++ Seq(
-    // set the main Java source directory to be <base>/src
-    javaSource in Compile <<= baseDirectory(_ / "src")
-  )
+  val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
   
   val javaTestProjectSettings = javaProjectSettings ++ Seq(
-    javaSource in Test <<= baseDirectory(_ / "src"),
     parallelExecution in Test := false,
     libraryDependencies += "com.novocode" % "junit-interface" % "0.7" % "test->default",
     libraryDependencies += DependencyManagement.JUnit,
     testListeners <+= (target).map {
-			t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
-		}
+      t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
+	}
   )
 }

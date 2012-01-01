@@ -56,12 +56,12 @@ object GmodelBuild extends Build {
     hibernateosgi,
     objectpool,
     kernel,
-		kernelTestbench,
+    kernelTestbench,
     repository,
     repositoryClient,
     serialization,
     semanticextensions,
-		semanticextensionsTestscripts,
+    semanticextensionsTestscripts,
     statistics,
     
     artifactpoolTests,
@@ -133,7 +133,7 @@ object GmodelBuild extends Build {
   lazy val kernelTests = Project(
     "kernel-tests",
     file ("org.s23m.cell.kernel.tests"),
-		settings = javaTestProjectSettings ++ Seq(
+    settings = javaTestProjectSettings ++ Seq(
 	    libraryDependencies ++= Seq( JUnit )
   	)
   ) dependsOn (kernel)
@@ -141,7 +141,7 @@ object GmodelBuild extends Build {
   lazy val kernelTestbench = Project(
     "kernel-testbench",
     file ("org.s23m.cell.kernel.testbench"),
-		settings = javaProjectSettings
+    settings = javaProjectSettings
   ) dependsOn (kernel)
 
   lazy val repository = Project(
@@ -153,7 +153,7 @@ object GmodelBuild extends Build {
   lazy val repositoryClient = Project(
     "repository-client",
     file ("org.s23m.cell.repository.client"),
-    settings = buildAndPackageSettings
+    settings = javaProjectSettings
   ) dependsOn (connector, kernel, objectpool, repository, serialization, statistics)
 
   lazy val serialization = Project(
