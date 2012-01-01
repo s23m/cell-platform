@@ -28,3 +28,4 @@ Bundle-ClassPath: .,
  lib/rabbitmq-client.jar
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.s23m.cell.hibernateosgi
+Import-Package: org.hibernate.cfg

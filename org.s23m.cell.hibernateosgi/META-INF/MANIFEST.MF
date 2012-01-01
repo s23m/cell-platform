@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.s23m.cell.hibernateosgi
 Bundle-SymbolicName: org.s23m.cell.hibernateosgi
-Bundle-Version: 0.0.0
+Bundle-Version: 1.0.0
 Bundle-ClassPath: lib/ant-1.6.5.jar,
  lib/ant-antlr-1.6.5.jar,
  lib/ant-junit-1.6.5.jar,
