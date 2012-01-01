@@ -23,7 +23,7 @@
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
 
-package org.s23m.cell.testbench;
+package org.s23m.cell.kernel.testbench;
 
 import static org.s23m.cell.G.coreGraphs;
 

@@ -15,7 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.kernel"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.connector"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.connector.database"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.semanticextensions.testscripts"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.repository.client"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.s23m.cell.serialization"/>

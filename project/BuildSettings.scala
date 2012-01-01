@@ -30,7 +30,7 @@ object BuildSettings {
   // TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
 
   val buildSettings = Defaults.defaultSettings ++ Seq(
-    organization := "org.gmodel",
+    organization := "org.s23m",
     // TODO replace with sbt-release version
     version      := "1.0.0",
     scalaVersion := "2.9.1",

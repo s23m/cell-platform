@@ -37,9 +37,9 @@ import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
+import org.s23m.cell.kernel.testbench.KernelTestSequence;
+import org.s23m.cell.kernel.testbench.TestSequence;
 import org.s23m.cell.semanticextensions.outershells.SemanticExtensionsDomain;
-import org.s23m.cell.testbench.KernelTestSequence;
-import org.s23m.cell.testbench.TestSequence;
 
 public class Test {
 
@@ -52,7 +52,7 @@ public class Test {
 		int inMemoryComplexity = identityFactory.inMemoryComplexity();
 		int inMemorySetCount = org.s23m.cell.api.Query.inMemorySets().size();
 		int changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
-		org.s23m.cell.testbench.KernelTestSequence.run();
+		KernelTestSequence.run();
 		Transaction.commitChangedSets();
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
 
@@ -61,11 +61,11 @@ public class Test {
 		Transaction.commitChangedSets();
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
 
-		org.s23m.cell.testbench.TestSequence.run();
+		TestSequence.run();
 		Transaction.commitChangedSets();
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
 
-		org.s23m.cell.testbench.TestSequence.run();
+		TestSequence.run();
 		Transaction.commitChangedSets();
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
 		// extensive visualizedGraph test with icon assignment
@@ -92,11 +92,11 @@ public class Test {
 		// TODO fix up: org.s23m.cell.core.F_Query.getSetFromLocalMemory(id);
 		Transaction.commitChangedSets();
 
-		final Set d1 = org.s23m.cell.testbench.TestSequence.crm_aviz.decommission();
+		final Set d1 = TestSequence.crm_aviz.decommission();
 		Transaction.commitChangedSets();
-		final Set d2 = org.s23m.cell.testbench.TestSequence.order.decommission();
+		final Set d2 = TestSequence.order.decommission();
 		Transaction.commitChangedSets();
-		final Set d3 = org.s23m.cell.testbench.TestSequence.product_to_price.decommission();
+		final Set d3 = TestSequence.product_to_price.decommission();
 		Transaction.commitChangedSets();
 
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
