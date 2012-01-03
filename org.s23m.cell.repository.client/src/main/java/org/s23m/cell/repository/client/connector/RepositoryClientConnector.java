@@ -68,7 +68,7 @@ public class RepositoryClientConnector implements RepositoryClient {
 			final Channel ch = conn.createChannel();
 			clientService = new RpcClient(ch, "", ConfigValues.getString("RepositoryClientServer.QUEUE"));
 		} catch (final IOException ex) {
-			throw new IllegalStateException("Client set up is failed",ex);
+			throw new IllegalStateException("Client set up failed",ex);
 		}
 	}
 
