@@ -1,0 +1,63 @@
+@import url(../reindeer/styles.css);
+
+.select-pointer   {cursor: auto;}
+.select-crosshair {cursor: crosshair;}
+.select-default   {cursor: default;}
+.select-help      {cursor: help;}
+.select-move      {cursor: move;}
+.select-pointer   {cursor: pointer;}
+.select-progress  {cursor: progress;}
+.select-text      {cursor: text;}
+.select-wait      {cursor: wait;}
+.select-inherit   {cursor: inherit;}
+
+.meta-element {
+ 	color: #848484;
+ 	font-style: italic;
+ 	text-decoration:underline;
+ 	cursor: pointer;
+}
+ 
+.instance-element {
+ 	color: #2E2EFE;
+ 	text-decoration:underline;
+ 	cursor: pointer;
+}
+ 
+.name-tag {
+ 	color: #848484;
+ 	margin-right:2px;
+}
+ 
+.value-tag {
+ 	color: #000000;
+ 	margin-right:5px;
+}
+ 
+.title-label {
+ 	font-size:14px;
+ 	font-style: bold;
+}
+ 
+.link.link-selected {
+   color:red;  
+}
+ 
+.current-link .v-button-link .v-button-caption, .v-nativebutton-link .v-nativebutton-caption {
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: inherit;
+    text-shadow: none;
+}
+
+.v-tree-node-caption-disabled {
+    color: graytext;
+    font-style: italic;
+}
+
+.v-gridlayout-gridexpandratio .v-gridlayout-margin {
+    padding: 5px;     
+}
+
+
