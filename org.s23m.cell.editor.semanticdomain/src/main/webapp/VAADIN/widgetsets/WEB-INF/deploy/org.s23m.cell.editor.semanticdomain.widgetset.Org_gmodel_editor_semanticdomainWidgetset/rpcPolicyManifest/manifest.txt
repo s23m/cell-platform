@@ -1,0 +1,2 @@
+# Module org.s23m.cell.editor.semanticdomain.widgetset.Org_gmodel_editor_semanticdomainWidgetset
+# RPC service class, partial path of RPC policy file
