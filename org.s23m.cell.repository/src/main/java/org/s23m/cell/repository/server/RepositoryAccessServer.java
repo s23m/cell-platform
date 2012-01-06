@@ -32,7 +32,6 @@ public class RepositoryAccessServer {
 		}
 	}
 
-
 	private RepositoryAccessServer() throws IOException {
 		setupConnection();
 	}
