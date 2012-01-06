@@ -24,7 +24,7 @@
 			<description>
 			Application widgetset</description>
 			<param-name>widgetset</param-name>
-			<param-value>org.s23m.cell.editor.semanticdomain.widgetset.Org_gmodel_editor_semanticdomainWidgetset</param-value>
+			<param-value>org.s23m.cell.editor.semanticdomain.widgetset.editorWidgetset</param-value>
 		</init-param>
 	</servlet>
 	<servlet>

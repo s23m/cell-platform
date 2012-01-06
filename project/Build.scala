@@ -99,15 +99,19 @@ object GmodelBuild extends Build {
     file ("org.s23m.cell.editor.semanticdomain"),
     settings = {
       buildSettings ++
-	  	WebPlugin.webSettings ++
-	  	Seq(
-	      libraryDependencies ++= Seq(Vaadin, Jetty),
-	      // see https://github.com/harrah/xsbt/wiki/Library-Management
-	      unmanagedJars in Compile <++= baseDirectory map { base =>
-					val dir = base / "src" / "main" / "webapp" / "WEB-INF" / "lib"
-					val customJars = (dir ** "*.jar")
-					customJars.classpath
-	      }
+	  WebPlugin.webSettings ++
+	  VaadinPlugin.vaadinSettings ++
+	  Seq(
+	    libraryDependencies ++= Seq(Vaadin, Jetty),
+        // see https://github.com/harrah/xsbt/wiki/Library-Management
+        unmanagedJars in Compile <++= baseDirectory map { base =>
+		  val dir = base / "src" / "main" / "webapp" / "WEB-INF" / "lib"
+		  val customJars = (dir ** "*.jar")
+		  customJars.classpath
+        },
+        
+        //port := 8080,
+        VaadinPlugin.vaadinWidgetSet := "org.s23m.cell.editor.semanticdomain.widgetset.editorWidgetset"
       )
     }
   ) dependsOn (kernel, repositoryClient, serialization, common, semanticextensions)
