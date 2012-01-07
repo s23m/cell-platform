@@ -26,9 +26,11 @@ public class RepositoryAccessServer {
 
 	public static void main(final String[] args) {
 		try {
+			System.out.println("Starting servers...");
 			new RepositoryAccessServer().startServers();
+			System.out.println("Servers started");
 		} catch (final IOException e) {
-			e.printStackTrace();
+			System.err.println("Could not start servers: " + e);
 		}
 	}
 

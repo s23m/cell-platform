@@ -25,7 +25,8 @@ Bundle-ClassPath: .,
  lib/commons-dbcp-1.3.jar,
  lib/commons-pool-1.5.5.jar,
  lib/commons-collections-3.2.1.jar,
- lib/rabbitmq-client.jar
+ lib/rabbitmq-client.jar,
+ lib/commons-io-2.1.jar
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.s23m.cell.hibernateosgi
 Import-Package: org.hibernate.cfg
