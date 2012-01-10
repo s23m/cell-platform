@@ -28,12 +28,14 @@ import Keys._
 
 object BuildSettings {
   // TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
-
+  val buildVersion = "1.0.0"
+  
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "org.s23m",
     // TODO replace with sbt-release version
-    version      := "1.0.0",
+    version      := buildVersion,
     scalaVersion := "2.9.1",
+    shellPrompt  := ShellPrompt.buildShellPrompt,
     crossPaths := false,
     
     ivyXML := DependencyManagement.ivyXml,
