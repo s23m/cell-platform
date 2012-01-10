@@ -21,6 +21,8 @@
  *
  * Contributor(s):
  * Chul Kim
+ * Andrew Shewring
+ * 
  * ***** END LICENSE BLOCK ***** */
 
 package org.s23m.cell.serialization.serializer;
@@ -33,6 +35,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+/**
+ * See
+ * 
+ * http://cmaki.blogspot.com/2007/09/annotated-jaxb-classes.html?showComment=1230640440000#c8002831406668901813
+ * 
+ * for comments on correct JAXBContext initialisation
+ */
 public class SerializationMarshaller {
 
 	private SerializationMarshaller() {
@@ -47,7 +56,8 @@ public class SerializationMarshaller {
 		if (MarshallerHolder.MARSHALLER_MAP.containsKey(packageName)) {
 			return MarshallerHolder.MARSHALLER_MAP.get(packageName);
 		} else {
-			final Marshaller marshaller = JAXBContext.newInstance(packageName).createMarshaller();
+			final JAXBContext jaxbContext = JAXBContext.newInstance(packageName, SerializationMarshaller.class.getClassLoader());
+			final Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_ENCODING, Serializer.CONTENT_ENCODING);
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			MarshallerHolder.MARSHALLER_MAP.put(packageName, marshaller);
@@ -59,7 +69,7 @@ public class SerializationMarshaller {
 		if (MarshallerHolder.UN_MARSHALLER_MAP.containsKey(packageName)) {
 			return MarshallerHolder.UN_MARSHALLER_MAP.get(packageName);
 		} else {
-			final JAXBContext jcx = JAXBContext.newInstance(packageName);
+			final JAXBContext jcx = JAXBContext.newInstance(packageName, SerializationMarshaller.class.getClassLoader());
 			final Unmarshaller unMarsahller = jcx.createUnmarshaller();
 			MarshallerHolder.UN_MARSHALLER_MAP.put(packageName, unMarsahller);
 			return unMarsahller;
