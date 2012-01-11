@@ -66,11 +66,11 @@ public class RepositoryClientServer {
 	private static boolean isServerRunning = false;
 
 	static class RepositoryClientServerHolder {
-		private static final RepositoryClientServer repositoryClinetServer = new RepositoryClientServer();
+		private static final RepositoryClientServer repositoryClientServer = new RepositoryClientServer();
 	}
 
 	public static RepositoryClientServer getInstance() {
-		return RepositoryClientServerHolder.repositoryClinetServer;
+		return RepositoryClientServerHolder.repositoryClientServer;
 	}
 
 	public synchronized void start() throws IllegalStateException {
@@ -95,8 +95,12 @@ public class RepositoryClientServer {
 	}
 
 	public static void main(final String[] args) {
-		if (!RepositoryClientServerHolder.repositoryClinetServer.isRepositoryServerRunning()) {
-			RepositoryClientServerHolder.repositoryClinetServer.start();
+		final boolean alreadyRunning = RepositoryClientServerHolder.repositoryClientServer.isRepositoryServerRunning();
+		if (alreadyRunning) {
+			System.err.println("The repository client server is already running");
+		} else {
+			System.out.println("Starting repository client...");
+			RepositoryClientServerHolder.repositoryClientServer.start();
 		}
 	}
 

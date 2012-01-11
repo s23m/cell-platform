@@ -72,11 +72,11 @@ public class RcpServerLauncher {
 			public void onMessage(final String msg) {
 				try {
 					if (msg.equals(START_PROMPT)) {
-						System.err.println("Repository Client Server started.");
+						System.out.println("Repository Client Server started.");
 						server.mainloop();
 					}
 				} catch (final IOException ex) {
-					throw new IllegalStateException("Server faliled to start", ex);
+					throw new IllegalStateException("Server failed to start", ex);
 				}
 			}
 		};

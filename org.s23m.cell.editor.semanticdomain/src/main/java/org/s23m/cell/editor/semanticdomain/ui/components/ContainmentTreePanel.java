@@ -236,15 +236,20 @@ public class ContainmentTreePanel extends Panel {
 			} else {
 				log.info("Loading semantic extension instances.");
 				final RepositoryClient client = RepositoryClientMediator.getInstance().getComponent(ProtocolType.REPOSITORY_CLIENT);
+				log.info("client: " + client);
 				final ArtefactContainer container = ObjectFactoryHolder.getInstance().createArtefactContainer();
 				container.setContentType(SerializationType.CONTAINMENT_TREE.toString());
+				log.info("container: " + container);
 				final Content uuidContent = ObjectFactoryHolder.getInstance().createArtefactContainerContent();
 				uuidContent.setContent(Root.root.identity().uniqueRepresentationReference().toString());
+				log.info("uuidContent: " + uuidContent);
 				final Content depthContent = ObjectFactoryHolder.getInstance().createArtefactContainerContent();
 				depthContent.setContent(""+0);
 				container.getContent().add(uuidContent);
 				container.getContent().add(depthContent);
 				final ArtefactContainer returnedArtifacts = client.get(container);
+				log.info("returnedArtifacts: " + returnedArtifacts);
+
 				if (!returnedArtifacts.getContent().isEmpty()) {
 					new ArtifactContainerContentMapper().recreateInstancesFromArtifactContainer(returnedArtifacts);
 				}

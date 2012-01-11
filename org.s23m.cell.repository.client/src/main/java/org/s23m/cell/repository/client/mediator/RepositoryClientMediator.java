@@ -26,7 +26,6 @@
 package org.s23m.cell.repository.client.mediator;
 
 import org.s23m.cell.repository.client.RepositoryClient;
-import org.s23m.cell.repository.client.RepositoryClientImpl;
 import org.s23m.cell.repository.client.connector.RepositoryClientConnector;
 import org.s23m.cell.repository.client.server.ConfigValues;
 import org.s23m.cell.serialization.serializer.ProtocolType;
@@ -48,11 +47,14 @@ public class RepositoryClientMediator {
 		if (!type.equals(ProtocolType.REPOSITORY_CLIENT)) {
 			throw new UnsupportedOperationException("Not supported protocol");
 		}
+		return RepositoryClientConnector.getComponent(); //pass back an interface that send artefacts over AMQP
+		/*
 		if (isLocallyDeployed()) {
 			return RepositoryClientImpl.getInstance();
 		} else {
 			return RepositoryClientConnector.getComponent(); //pass back an interface that send artefacts over AMQP
 		}
+		 */
 	}
 
 	private boolean isLocallyDeployed() {
