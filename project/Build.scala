@@ -138,7 +138,12 @@ object GmodelBuild extends Build {
     "kernel-tests",
     file ("org.s23m.cell.kernel.tests"),
     settings = javaTestProjectSettings ++ Seq(
-	    libraryDependencies ++= Seq( JUnit )
+	    libraryDependencies ++= Seq( JUnit ),
+	    /*
+	     * Set the Java test source directory to be <base>/src/main/java
+	     * because of the cell-eclipse projects which depend on these classes 
+	     */
+	    javaSource in Test <<= baseDirectory(_ / "src" / "main" / "java")
   	)
   ) dependsOn (kernel)
 
