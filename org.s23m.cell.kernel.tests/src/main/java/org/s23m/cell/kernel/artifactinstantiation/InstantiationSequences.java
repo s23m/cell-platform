@@ -50,6 +50,9 @@ public class InstantiationSequences {
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,
 			GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
 
+	public static void main(final String[] args) {
+		run();
+	}
 
 	public static void run() {
 		RunInstantiationSequence.run();
