@@ -6,14 +6,13 @@ import static org.s23m.cell.api.models.GmodelSemanticDomains.is_UNKNOWN;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class QueryTest extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set crm_product = InstantiationSequences.crm_product;
-		final Set entityrelationshipschema = InstantiationSequences.entityrelationshipschema;
+		final Set crm_product = instantiationSequences.crm_product;
+		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
 
 		final boolean t1 = Query.visibility.isEqualToRepresentation(Query.findSet(Query.visibility.identity().uniqueRepresentationReference().toString()));
 		final boolean t2 = crm_product.isEqualToRepresentation(Query.findSet(crm_product.identity().uniqueRepresentationReference().toString()));

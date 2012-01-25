@@ -9,15 +9,14 @@ import static org.s23m.cell.api.models.GmodelSemanticDomains.is_UNKNOWN;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models2.RepositoryStructure;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class InformationQualityLogicTestB extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set entity = InstantiationSequences.entity;
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set crm_product = InstantiationSequences.crm_product;
+		final Set entity = instantiationSequences.entity;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set crm_product = instantiationSequences.crm_product;
 
 		final Set iqLogicTest = RepositoryStructure.domainengineering.addConcrete(vertex, addDisjunctSemanticIdentitySet("IQ-Logic Test", "set of IQ-Logic Tests", testDomain));
 

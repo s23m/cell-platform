@@ -7,16 +7,15 @@ import static org.s23m.cell.api.Instantiation.link;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class EnterpriseArchitectureModellingTest extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set acmeEA = InstantiationSequences.acmeEA;
-		final Set acmeMelbourne = InstantiationSequences.acmeMelbourne;
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set whoToWho = InstantiationSequences.whoToWho;
+		final Set acmeEA = instantiationSequences.acmeEA;
+		final Set acmeMelbourne = instantiationSequences.acmeMelbourne;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set whoToWho = instantiationSequences.whoToWho;
 
 		// instantiation level 1
 		final Set person = acmeEA.addConcrete(EnterpriseArchitecture.who,

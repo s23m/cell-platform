@@ -4,16 +4,15 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.api.models2.Visualization;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class VisualisationExampleTest extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set crm_aviz = InstantiationSequences.crm_aviz;
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set crm = InstantiationSequences.crm;
-		final Set crm_product = InstantiationSequences.crm_product;
+		final Set crm_aviz = instantiationSequences.crm_aviz;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set crm = instantiationSequences.crm;
+		final Set crm_product = instantiationSequences.crm_product;
 
 		final Set crm_viz = crm_aviz.addConcrete(Visualization.visualizedGraph,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema graphVisualizations", testDomain));

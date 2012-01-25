@@ -44,7 +44,7 @@ public class GmodelSemanticDomains {
 	public static final Set infiniteSets =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.infiniteSets()));
 	public static final Set finiteSets =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.finiteSets()));
 
-	public static final Set gmodel = ((Graph)finiteSets).addAbstract(SemanticDomain.semanticdomain, xtensionIdentityFactory.gmodel() );
+	public static final Set gmodel = ((Graph)finiteSets).addAbstract(SemanticDomain.semanticdomain, xtensionIdentityFactory.gmodel());
 	public static final Set root = gmodel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.root);
 	public static final Set semanticDomains = gmodel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.semanticdomains);
 	public static final Set models = gmodel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.models);
@@ -317,19 +317,19 @@ public class GmodelSemanticDomains {
 	}
 
 	private static void addGmodelKernelElementsToInMemorySets() {
-		Graph.addSetToInMemorySets(infiniteSets );
+		Graph.addSetToInMemorySets(infiniteSets);
 		Graph.addSetToInMemorySets(finiteSets);
 
 		Graph.addSetToInMemorySets(gmodel) ;
 		Graph.addSetToInMemorySets(root);
-		Graph.addSetToInMemorySets(semanticDomains );
-		Graph.addSetToInMemorySets(models );
+		Graph.addSetToInMemorySets(semanticDomains);
+		Graph.addSetToInMemorySets(models);
 
-		Graph.addSetToInMemorySets(semanticDomain );
-		Graph.addSetToInMemorySets(semanticIdentity );
+		Graph.addSetToInMemorySets(semanticDomain);
+		Graph.addSetToInMemorySets(semanticIdentity);
 
-		Graph.addSetToInMemorySets(semanticIdentitySet );
-		Graph.addSetToInMemorySets(semanticRole );
+		Graph.addSetToInMemorySets(semanticIdentitySet);
+		Graph.addSetToInMemorySets(semanticRole);
 		Graph.addSetToInMemorySets(disjunctSemanticIdentitySet) ;
 		Graph.addSetToInMemorySets(variantDisjunctSemanticIdentitySet);
 		Graph.addSetToInMemorySets(equivalenceClass);
@@ -437,91 +437,91 @@ public class GmodelSemanticDomains {
 		Graph.addSetToInMemorySets(command);
 		Graph.addSetToInMemorySets(commandFunction);
 		Graph.addSetToInMemorySets(flavorCommandFunction);
-		Graph.addSetToInMemorySets(query );
-		Graph.addSetToInMemorySets(queryFunction );
-		Graph.addSetToInMemorySets(flavorQueryFunction );
+		Graph.addSetToInMemorySets(query);
+		Graph.addSetToInMemorySets(queryFunction);
+		Graph.addSetToInMemorySets(flavorQueryFunction);
 
 		/**
 		 * OrderedPairFlavor queries
 		 */
 
-		Graph.addSetToInMemorySets(identity );
-		Graph.addSetToInMemorySets(isEqualTo );
+		Graph.addSetToInMemorySets(identity);
+		Graph.addSetToInMemorySets(isEqualTo);
 
 
 		/**
 		 * OrderedSetFlavor queries
 		 */
 
-		Graph.addSetToInMemorySets(contains );
-		Graph.addSetToInMemorySets(containsAll );
-		Graph.addSetToInMemorySets(get );
-		Graph.addSetToInMemorySets(indexOf );
-		Graph.addSetToInMemorySets(isEmpty );
-		Graph.addSetToInMemorySets(lastIndexOf );
-		Graph.addSetToInMemorySets(listIterator );
-		Graph.addSetToInMemorySets(listIteratorInt );
-		Graph.addSetToInMemorySets(size );
-		Graph.addSetToInMemorySets(toArray );
-		Graph.addSetToInMemorySets(toArrayInstance );
+		Graph.addSetToInMemorySets(contains);
+		Graph.addSetToInMemorySets(containsAll);
+		Graph.addSetToInMemorySets(get);
+		Graph.addSetToInMemorySets(indexOf);
+		Graph.addSetToInMemorySets(isEmpty);
+		Graph.addSetToInMemorySets(lastIndexOf);
+		Graph.addSetToInMemorySets(listIterator);
+		Graph.addSetToInMemorySets(listIteratorInt);
+		Graph.addSetToInMemorySets(size);
+		Graph.addSetToInMemorySets(toArray);
+		Graph.addSetToInMemorySets(toArrayInstance);
 
 		/**
 		 * GraphFlavor commands
 		 */
 
-		Graph.addSetToInMemorySets(addAbstract );
-		Graph.addSetToInMemorySets(addConcrete );
-		Graph.addSetToInMemorySets(isALink );
-		Graph.addSetToInMemorySets(addConcreteSubGraph );
-		Graph.addSetToInMemorySets(addToVariables );
-		Graph.addSetToInMemorySets(addToValues );
-		Graph.addSetToInMemorySets(decommission );
-		Graph.addSetToInMemorySets(instantiateAbstract );
-		Graph.addSetToInMemorySets(instantiateConcrete );
-		Graph.addSetToInMemorySets(removeFromVariables );
-		Graph.addSetToInMemorySets(removeFromValues );
-		Graph.addSetToInMemorySets(setPropertyValue );
+		Graph.addSetToInMemorySets(addAbstract);
+		Graph.addSetToInMemorySets(addConcrete);
+		Graph.addSetToInMemorySets(isALink);
+		Graph.addSetToInMemorySets(addConcreteSubGraph);
+		Graph.addSetToInMemorySets(addToVariables);
+		Graph.addSetToInMemorySets(addToValues);
+		Graph.addSetToInMemorySets(decommission);
+		Graph.addSetToInMemorySets(instantiateAbstract);
+		Graph.addSetToInMemorySets(instantiateConcrete);
+		Graph.addSetToInMemorySets(removeFromVariables);
+		Graph.addSetToInMemorySets(removeFromValues);
+		Graph.addSetToInMemorySets(setPropertyValue);
 
 		/**
 		 * GraphFlavor, VertexFlavor, EdgeEndFlavor queries
 		 */
 
-		Graph.addSetToInMemorySets(artifact );
-		Graph.addSetToInMemorySets(categorizedSet );
-		Graph.addSetToInMemorySets(containsEdgeFromOrTo );
+		Graph.addSetToInMemorySets(artifact);
+		Graph.addSetToInMemorySets(categorizedSet);
+		Graph.addSetToInMemorySets(containsEdgeFromOrTo);
 		Graph.addSetToInMemorySets(flavoredSet);
-		Graph.addSetToInMemorySets(hasVisibilityOf );
-		Graph.addSetToInMemorySets(instanceSet );
-		Graph.addSetToInMemorySets(isSuperSetOf );
-		Graph.addSetToInMemorySets(isLocalSuperSetOf );
-		Graph.addSetToInMemorySets(linkSet );
-		Graph.addSetToInMemorySets(localRootSuperSetOf );
-		Graph.addSetToInMemorySets(directSuperSetOf );
-		Graph.addSetToInMemorySets(category );
-		Graph.addSetToInMemorySets(containerCategory );
-		Graph.addSetToInMemorySets(variables );
-		Graph.addSetToInMemorySets(value );
-		Graph.addSetToInMemorySets(values );
-		Graph.addSetToInMemorySets(visibleArtifactsForSubGraph );
+		Graph.addSetToInMemorySets(hasVisibilityOf);
+		Graph.addSetToInMemorySets(instanceSet);
+		Graph.addSetToInMemorySets(isSuperSetOf);
+		Graph.addSetToInMemorySets(isLocalSuperSetOf);
+		Graph.addSetToInMemorySets(linkSet);
+		Graph.addSetToInMemorySets(localRootSuperSetOf);
+		Graph.addSetToInMemorySets(directSuperSetOf);
+		Graph.addSetToInMemorySets(category);
+		Graph.addSetToInMemorySets(containerCategory);
+		Graph.addSetToInMemorySets(variables);
+		Graph.addSetToInMemorySets(value);
+		Graph.addSetToInMemorySets(values);
+		Graph.addSetToInMemorySets(visibleArtifactsForSubGraph);
 
 		/**
 		 * LinkFlavor queries
 		 */
 
-		Graph.addSetToInMemorySets(from );
-		Graph.addSetToInMemorySets(isExternal );
+		Graph.addSetToInMemorySets(from);
+		Graph.addSetToInMemorySets(isExternal);
 		Graph.addSetToInMemorySets(to);
 
 		/**
 		 * EdgeFlavor queries
 		 */
 
-		Graph.addSetToInMemorySets(edgeEnds );
-		Graph.addSetToInMemorySets(fromEdgeEnd );
-		Graph.addSetToInMemorySets(toEdgeEnd );
+		Graph.addSetToInMemorySets(edgeEnds);
+		Graph.addSetToInMemorySets(fromEdgeEnd);
+		Graph.addSetToInMemorySets(toEdgeEnd);
 
-		Graph.addSetToInMemorySets(event );
-		Graph.addSetToInMemorySets(setMaintenanceCommand );
+		Graph.addSetToInMemorySets(event);
+		Graph.addSetToInMemorySets(setMaintenanceCommand);
 
 	}
 

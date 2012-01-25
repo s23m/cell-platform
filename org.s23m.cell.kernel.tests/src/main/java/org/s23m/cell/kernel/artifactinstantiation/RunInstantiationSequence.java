@@ -15,6 +15,10 @@ import org.s23m.cell.kernel.tests.VisualisationExampleTest;
 
 public class RunInstantiationSequence {
 
+	public static void main(final String[] args) {
+		run();
+	}
+
 	public static void run() {
 		new RunInstantiationSequence();
 	}
@@ -34,6 +38,7 @@ public class RunInstantiationSequence {
 	}
 
 	private void execute(final GmodelTestCase testCase) {
+		testCase.setUp();
 		testCase.testInstantiationSequence();
 	}
 }

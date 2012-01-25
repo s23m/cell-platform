@@ -35,14 +35,18 @@ import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
-import org.s23m.cell.core.SemanticIdentityRegistry;
 
+/**
+ * A lazily-initialised singleton
+ */
 public class InstantiationSequences {
 
-	private static SemanticIdentityRegistry nameRegistry;
+	private static InstantiationSequences instance;
+
 	// just for the fun of it we create an instance of an edge
-	public static final Set testDomain = addSemanticDomain("test domain", "test domains", GmodelSemanticDomains.finiteSets);
-	public static final Set whoToWho = link(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
+	public final Set testDomain = addSemanticDomain("test domain", "test domains", GmodelSemanticDomains.finiteSets);
+
+	public final Set whoToWho = link(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
 //			F_SemanticStateOfInMemoryModel.addAnonymousDisjunctSemanticIdentitySet(testDomain), EnterpriseArchitecture.who,
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,
 			GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE,
@@ -50,42 +54,45 @@ public class InstantiationSequences {
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,
 			GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
 
-	public static void main(final String[] args) {
-		run();
-	}
-
-	public static void run() {
-		RunInstantiationSequence.run();
-	}
-
-	public static final Set acmeEA = RepositoryStructure.domainengineering.addConcrete(EnterpriseArchitecture.enterpriseArchitectureGraph,
+	public final Set acmeEA = RepositoryStructure.domainengineering.addConcrete(EnterpriseArchitecture.enterpriseArchitectureGraph,
 			addDisjunctSemanticIdentitySet("ACME Enterprise Architecture", "set of ACME Enterprise Architecture", testDomain));
 
-	public static final Set acmeMelbourne = RepositoryStructure.applicationengineering.addConcrete(acmeEA,
+	public final Set acmeMelbourne = RepositoryStructure.applicationengineering.addConcrete(acmeEA,
 			addDisjunctSemanticIdentitySet("ACME Melbourne Enterprise Architecture", "set of ACME Melbourne Enterprise Architecture", testDomain));
 
-	public static final Set entityrelationshipschema = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex,
+	public final Set entityrelationshipschema = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex,
 			addDisjunctSemanticIdentitySet("entity relationship schema", "entity relationship schemas", testDomain));
-	public static final Set hierarchicalerschema = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex,
+	public final Set hierarchicalerschema = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex,
 			addDisjunctSemanticIdentitySet("hierarchical entity relationship schema", "hierarchical entity relationship schemas", testDomain));
 
-	public static final Set crm = RepositoryStructure.applicationengineering.addConcrete(entityrelationshipschema,
+	public final Set crm = RepositoryStructure.applicationengineering.addConcrete(entityrelationshipschema,
 			addDisjunctSemanticIdentitySet("customer relationship management", "customer relationship management", testDomain));
-	public static final Set entity = entityrelationshipschema.addConcrete(coreGraphs.vertex, addDisjunctSemanticIdentitySet("entity", "entities" , testDomain));
+	public final Set entity = entityrelationshipschema.addConcrete(coreGraphs.vertex, addDisjunctSemanticIdentitySet("entity", "entities" , testDomain));
 
-	public static final Set crm_product = crm.addConcrete(entity,
+	public final Set crm_product = crm.addConcrete(entity,
 			addDisjunctSemanticIdentitySet("product", "products" , testDomain));
 
-	public static Set product_to_price;
-	public static Set order;
+	public Set product_to_price;
+	public Set order;
 
 
-	public static final Set crm_aviz = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization,
+	public final Set crm_aviz = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization,
 			addDisjunctSemanticIdentitySet("crm schema container visualizedGraph", "crm schema container graphVisualizations", testDomain));
 
-	public static Set crm_viz_structure_diag_product;
+	public Set crm_viz_structure_diag_product;
 
-	public static void visualizationExample() {
+	private InstantiationSequences() {
+	}
+
+	public static InstantiationSequences getInstance() {
+		if (instance == null) {
+			instance = new InstantiationSequences();
+		}
+		return instance;
+	}
+
+
+	public void visualizationExample() {
 		final Set crm_viz = crm_aviz.addConcrete(Visualization.visualizedGraph,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema graphVisualizations", testDomain));
 
@@ -192,7 +199,7 @@ public class InstantiationSequences {
 
 	}
 
-	public static Set createGraphVisualization(final Set semanticDomain) {
+	public Set createGraphVisualization(final Set semanticDomain) {
 		final Set gv = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization, semanticDomain);
 		final Set v = gv.addConcrete(Visualization.visualizedGraph, semanticDomain);
 
@@ -218,7 +225,7 @@ public class InstantiationSequences {
 		return gv;
 	}
 
-	public static void addIcon(final Set semanticIdentity, final String iconFile) {
+	public void addIcon(final Set semanticIdentity, final String iconFile) {
 		final Set semanticDomain = semanticIdentity.container();
 
 		Set graphVisualization = GmodelSemanticDomains.is_UNKNOWN;;

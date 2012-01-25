@@ -16,13 +16,13 @@ public class InstantiationData {
 	public final Set product_to_price;
 	public final Set order;
 
-	public InstantiationData() {
-		final Set entityrelationshipschema = InstantiationSequences.entityrelationshipschema;
-		final Set entity = InstantiationSequences.entity;
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set crm = InstantiationSequences.crm;
+	public InstantiationData(final InstantiationSequences instantiationSequences) {
+		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
+		final Set entity = instantiationSequences.entity;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set crm = instantiationSequences.crm;
 
-		crm_product = InstantiationSequences.crm_product;
+		crm_product = instantiationSequences.crm_product;
 
 		final Set sex = addDisjunctSemanticIdentitySet("sex", "sexes" , testDomain);
 		final Set male = addDisjunctSemanticIdentitySet("male", "males" , testDomain);

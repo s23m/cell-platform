@@ -5,12 +5,13 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
-import org.junit.Test;
+import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public abstract class GmodelTestCase extends TestCase implements EventListener {
 
@@ -18,20 +19,29 @@ public abstract class GmodelTestCase extends TestCase implements EventListener {
 
 	protected static InstantiationData testData;
 
-	protected final List<Set> setMaintenanceEvents = new ArrayList<Set>();
+	protected static InstantiationSequences instantiationSequences;
+
+	protected final List<Set> setMaintenanceEvents;
+
+	public GmodelTestCase() {
+		this.setMaintenanceEvents = new ArrayList<Set>();
+	}
 
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() {
 		if (!kernelHasBooted) {
 			org.s23m.cell.G.boot();
-			testData = new InstantiationData();
+			instantiationSequences = InstantiationSequences.getInstance();
+			testData = new InstantiationData(instantiationSequences);
+
 			kernelHasBooted = true;
 		}
+
+		this.setMaintenanceEvents.clear();
 	}
 
 	@Test
 	public void testInstantiationSequence() {
-		this.setMaintenanceEvents.clear();
 		executeInstantiationSequence();
 		checkForRuntimeErrors();
 	}

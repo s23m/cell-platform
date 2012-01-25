@@ -7,18 +7,17 @@ import static org.s23m.cell.api.Instantiation.link;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.ArtifactDerivation;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class EntityRelationshipModellingTest extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set entityrelationshipschema = InstantiationSequences.entityrelationshipschema;
-		final Set crm = InstantiationSequences.crm;
-		final Set crm_product = InstantiationSequences.crm_product;
-		final Set hierarchicalerschema = InstantiationSequences.hierarchicalerschema;
-		final Set entity = InstantiationSequences.entity;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
+		final Set crm = instantiationSequences.crm;
+		final Set crm_product = instantiationSequences.crm_product;
+		final Set hierarchicalerschema = instantiationSequences.hierarchicalerschema;
+		final Set entity = instantiationSequences.entity;
 
 		final Set sex = addDisjunctSemanticIdentitySet("sex", "sexes" , testDomain);
 		final Set male = addDisjunctSemanticIdentitySet("male", "males" , testDomain);

@@ -8,15 +8,14 @@ import org.s23m.cell.api.models.ArtifactDerivation;
 import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.core.SemanticIdentityRegistry;
 import org.s23m.cell.impl.DerivationCode;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class ArtefactDerivationTest extends GmodelTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
-		final Set entityrelationshipschema = InstantiationSequences.entityrelationshipschema;
-		final Set testDomain = InstantiationSequences.testDomain;
-		final Set entity = InstantiationSequences.entity;
+		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
+		final Set testDomain = instantiationSequences.testDomain;
+		final Set entity = instantiationSequences.entity;
 		final SemanticIdentityRegistry path = SemanticIdentityRegistry.somePathInFileSystem;
 
 
