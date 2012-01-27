@@ -43,8 +43,8 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	 * QUERIES
 	 */
 
-	Set and() ;
-	Set and( Set b) ;
+	Set and();
+	Set and(Set b);
 
 	/**
 	 * Exposes the contents of this {@link Set} as a list
@@ -80,9 +80,9 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 
 	Set extractUniqueMatch(Identity identity);
 
-	Set extractUniqueMatch( Set set);
+	Set extractUniqueMatch(Set set);
 
-	Set extractUniqueMatch( String uuidAsString);
+	Set extractUniqueMatch(String uuidAsString);
 
 	/**
 	 * Retrieves all elements of a given category that are contained in the flavored sets within this {@link Set}
@@ -91,17 +91,17 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filter(Set category);
-	Set filterByEquivalenceClass( Set set) ;
-	Set filterByLinkedFrom( Set fromSet) ;
-	Set filterByLinkedFromAndTo( Set fromSet,  Set toSet);
-	Set filterByLinkedFromAndToSemanticRole( Set fromSetReferencedSemanticRole,  Set toSetReferencedSemanticRole);
-	Set filterByLinkedFromAndToVia( Set fromEdgeEnd,  Set toEdgeEnd);
-	Set filterByLinkedFromSemanticRole( Set fromSetReferencedSemanticRole) ;
-	Set filterByLinkedFromVia( Set fromEdgeEnd);
-	Set filterByLinkedTo( Set toSet) ;
-	Set filterByLinkedToSemanticRole( Set toSetReferencedSemanticRole) ;
-	Set filterByLinkedToVia( Set toEdgeEnd) ;
-	Set filterBySemanticIdentity( Set set) ;
+	Set filterByEquivalenceClass(Set set);
+	Set filterByLinkedFrom(Set fromSet);
+	Set filterByLinkedFromAndTo(Set fromSet,  Set toSet);
+	Set filterByLinkedFromAndToSemanticRole(Set fromSetReferencedSemanticRole,  Set toSetReferencedSemanticRole);
+	Set filterByLinkedFromAndToVia(Set fromEdgeEnd,  Set toEdgeEnd);
+	Set filterByLinkedFromSemanticRole(Set fromSetReferencedSemanticRole);
+	Set filterByLinkedFromVia(Set fromEdgeEnd);
+	Set filterByLinkedTo(Set toSet);
+	Set filterByLinkedToSemanticRole(Set toSetReferencedSemanticRole);
+	Set filterByLinkedToVia(Set toEdgeEnd);
+	Set filterBySemanticIdentity(Set set);
 
 	/**
 	 * Retrieves a given flavored Set contained within the Set
@@ -110,8 +110,8 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filterFlavor(Set flavor);
-	Set filterFrom() ;
-	Set filterFromAndTo() ;
+	Set filterFrom();
+	Set filterFromAndTo();
 	Set filterInstances();
 	/**
 	 * queries that emulate graph functionality
@@ -127,7 +127,7 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	 * 
 	 * @return the resulting list {@link Set}
 	 */
-	Set filterLinks( Set flavorOrCategory,  Set fromSet,  Set toSet);
+	Set filterLinks(Set flavorOrCategory,  Set fromSet,  Set toSet);
 	/**
 	 * Retrieves all elements of a given category or a subset of that category from the flavored sets within this {@link Set}
 	 * 
@@ -135,13 +135,13 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filterPolymorphic(Set category);
-	Set filterTo() ;
-	Set extractFirst() ;
-	Set extractSecond() ;
-	Set extractLast() ;
-	Set extractNext( Set element) ;
-	Set extractPrevious( Set element) ;
-	Set includesValue( Set value, Set equivalenceClass) ;
+	Set filterTo();
+	Set extractFirst();
+	Set extractSecond();
+	Set extractLast();
+	Set extractNext(Set element);
+	Set extractPrevious(Set element);
+	Set includesValue(Set value, Set equivalenceClass);
 	/**
 	 * the intersection of this and s
 	 */
@@ -164,10 +164,10 @@ public interface OrderedSetFlavor extends SetMaintenanceEvents, Iterable<Set> {
 	/**
 	 * Support for Information Quality Logic
 	 */
-	Set not() ;
+	Set not();
 
-	Set or() ;
-	Set or( Set b) ;
+	Set or();
+	Set or(Set b);
 	/**
 	 * See {@link java.util.List#size()}
 	 */
