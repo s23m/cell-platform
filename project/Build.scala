@@ -63,7 +63,8 @@ object GmodelBuild extends Build {
     semanticextensions,
     semanticextensionsTestscripts,
     statistics,
-    
+    generator,
+
     artifactpoolTests,
     kernelTests
   )
@@ -188,4 +189,11 @@ object GmodelBuild extends Build {
     file ("org.s23m.cell.statistics"),
     settings = javaProjectSettings
   )
+
+  lazy val generator = Project(
+    "generator",
+    file ("org.s23m.cell.generator"),
+    settings = javaProjectSettings
+  )
+
 }

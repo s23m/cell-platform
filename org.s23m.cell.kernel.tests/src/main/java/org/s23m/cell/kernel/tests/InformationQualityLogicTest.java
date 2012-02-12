@@ -17,7 +17,6 @@ import static org.s23m.cell.api.models.GmodelSemanticDomains.is_UNKNOWN;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.InformationQualityLogic;
 import org.s23m.cell.api.models2.RepositoryStructure;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public class InformationQualityLogicTest extends GmodelTestCase {
 
