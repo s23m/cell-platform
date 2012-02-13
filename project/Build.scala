@@ -194,6 +194,6 @@ object GmodelBuild extends Build {
     "generator",
     file ("org.s23m.cell.generator"),
     settings = javaProjectSettings
-  )
+  ) dependsOn (kernel)
 
 }
