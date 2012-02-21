@@ -77,6 +77,9 @@ public class Instantiation {
 	public static Set link(final Set category, final Set fromInstance, final Set toInstance) {
 		return org.s23m.cell.core.F_Instantiation.link(category, fromInstance, toInstance);
 	}
+	public static Set declareFunction(final Set semanticIdentity, final Set category, final Set parameters) {
+		return org.s23m.cell.core.F_InstantiationImpl.declareFunction(semanticIdentity.identity(), category, parameters);
+	}
 
 	public static Set link(final Set category,
 			final Set edgeFlavoredIdentity,
@@ -92,7 +95,7 @@ public class Instantiation {
 			final Set secondMaxCardinality,
 			final Set secondIsNavigable,
 			final Set secondIsContainer
-	) {
+			) {
 		return org.s23m.cell.core.F_Instantiation.link(category,
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(edgeFlavoredIdentity),
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(firstSemanticIdentity),
@@ -107,7 +110,7 @@ public class Instantiation {
 				secondMaxCardinality,
 				secondIsNavigable,
 				secondIsContainer
-		);
+				);
 	}
 
 	public static Set linktoEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {

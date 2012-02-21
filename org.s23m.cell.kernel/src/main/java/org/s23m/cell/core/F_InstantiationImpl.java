@@ -49,7 +49,13 @@ public final class F_InstantiationImpl {
 		os.add(parameter);
 		return os;
 	}
-
+	public static Set declareFunction(final Identity semanticIdentity, final Set category, final Set parameters) {
+		final OrderedSet os = new OrderedSet(semanticIdentity, category);
+		for (final Set parameter : parameters) {
+			os.add(parameter);
+		}
+		return os;
+	}
 	protected static Vertex createSemanticIdentityVertex() {
 		return new Vertex(Graph.graph, identityFactory.createIdentityReification(), Vertex.vertex);
 	}
