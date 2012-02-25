@@ -74,25 +74,24 @@
 
 	<xsd:complexType name="edge">
 		<xsd:sequence>
-			<xsd:sequence minOccurs="2" maxOccurs="2">
-				<xsd:element name="edgeEnd">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element ref="s23m:semanticIdentity"/>
-							<xsd:element name="minCardinality" type="s23m:cardinality"/>
-							<xsd:element name="maxCardinality" type="s23m:cardinality"/>
-							<xsd:element name="isContainer" type="xsd:boolean"/>
-							<xsd:element name="isNavigable" type="xsd:boolean"/>
-						</xsd:sequence>
-						<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
-						<xsd:attribute name="instanceId" type="s23m:referenceId" use="required"/>
-					</xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
+			<xsd:element name="from" type="s23m:edgeEnd"/>
+			<xsd:element name="to" type="s23m:edgeEnd"/>
 			<xsd:element ref="s23m:semanticIdentity"/>
 		</xsd:sequence>
 		<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
 		<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="edgeEnd">
+		<xsd:sequence>
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element name="minCardinality" type="s23m:cardinality"/>
+			<xsd:element name="maxCardinality" type="s23m:cardinality"/>
+			<xsd:element name="isContainer" type="xsd:boolean"/>
+			<xsd:element name="isNavigable" type="xsd:boolean"/>
+		</xsd:sequence>
+		<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
+		<xsd:attribute name="instanceId" type="s23m:referenceId" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="superSetReference">
