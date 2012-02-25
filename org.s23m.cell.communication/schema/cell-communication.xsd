@@ -73,17 +73,17 @@
 	<!-- Arrows -->
 
 	<xsd:complexType name="edge">
-	    <xsd:complexContent>
-        	<xsd:extension base="s23m:graph">
-				<xsd:sequence>
-					<xsd:element name="from" type="s23m:edgeEnd"/>
-					<xsd:element name="to" type="s23m:edgeEnd"/>
-					<xsd:element ref="s23m:semanticIdentity"/>
-				</xsd:sequence>
-				<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
-				<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
-            </xsd:extension>
-        </xsd:complexContent>		
+		<xsd:complexContent>
+			<xsd:extension base="s23m:graph">
+		<xsd:sequence>
+			<xsd:element name="from" type="s23m:edgeEnd"/>
+			<xsd:element name="to" type="s23m:edgeEnd"/>
+			<xsd:element ref="s23m:semanticIdentity"/>
+		</xsd:sequence>
+		<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
+				</xsd:extension>
+		</xsd:complexContent>		
 	</xsd:complexType>
 
 	<xsd:complexType name="edgeEnd">
@@ -99,26 +99,26 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="superSetReference">
-        <xsd:complexContent>
-        	<xsd:extension base="s23m:graph">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:graph">
 				<xsd:sequence>
 					<xsd:element ref="s23m:semanticIdentity"/>
 				</xsd:sequence>
 				<xsd:attribute name="id" type="s23m:uuid" use="required"/>
 				<xsd:attribute name="from" type="s23m:referenceId" use="required"/>
 				<xsd:attribute name="to" type="s23m:referenceId" use="required"/>				
-            </xsd:extension>
-        </xsd:complexContent>		
+			</xsd:extension>
+		</xsd:complexContent>		
 	</xsd:complexType>
 
 	<xsd:complexType name="visibility">
-        <xsd:complexContent>
-            <xsd:extension base="s23m:graph">
-            	<!-- NOTE: these attributes cannot be of type "s23m:semanticIdentity". We could make them elements -->
-                <xsd:attribute name="from" type="s23m:semanticIdentity" use="required"/>
-                <xsd:attribute name="to" type="s23m:semanticIdentity" use="required"/>      
-            </xsd:extension>
-        </xsd:complexContent>        
+		<xsd:complexContent>
+			<xsd:extension base="s23m:graph">
+				<!-- NOTE: these attributes cannot be of type "s23m:semanticIdentity". We could make them elements -->
+				<xsd:attribute name="from" type="s23m:semanticIdentity" use="required"/>
+				<xsd:attribute name="to" type="s23m:semanticIdentity" use="required"/>      
+			</xsd:extension>
+		</xsd:complexContent>        
 	</xsd:complexType>
 
 	<xsd:simpleType name="cardinality">
