@@ -75,14 +75,14 @@
 	<xsd:complexType name="edge">
 		<xsd:complexContent>
 			<xsd:extension base="s23m:graph">
-		<xsd:sequence>
-			<xsd:element name="from" type="s23m:edgeEnd"/>
-			<xsd:element name="to" type="s23m:edgeEnd"/>
-			<xsd:element ref="s23m:semanticIdentity"/>
-		</xsd:sequence>
-		<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
-		<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
-				</xsd:extension>
+				<xsd:sequence>
+					<xsd:element name="from" type="s23m:edgeEnd"/>
+					<xsd:element name="to" type="s23m:edgeEnd"/>
+					<xsd:element ref="s23m:semanticIdentity"/>
+				</xsd:sequence>
+				<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
+				<xsd:attribute name="category" type="s23m:referenceId" use="required"/>
+			</xsd:extension>
 		</xsd:complexContent>		
 	</xsd:complexType>
 
