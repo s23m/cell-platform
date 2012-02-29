@@ -4,177 +4,18 @@
 	targetNamespace="http://schemas.s23m.org/serialization/2012"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
-	
-	<!-- Root element -->
-
-	<xsd:element name="artifactSet" type="s23m:artifactSet"/>
-	
-	<xsd:complexType name="artifactSet">
-		<xsd:sequence>
-			<xsd:element name="semanticDomain" type="s23m:semanticDomain" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="model" type="s23m:model" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="model">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:graph"/>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="semanticDomain">
-		<xsd:sequence>
-			<xsd:element name="model" type="s23m:model"/>
-			<xsd:element name="identity" type="s23m:identity" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- Reused elements -->
-	
+	<!-- Reused elements -->	
 	<xsd:element name="semanticIdentity" type="s23m:identityReference"/>
 	<xsd:element name="category" type="s23m:identityReference"/>
-
+	<xsd:element name="isAbstract" type="s23m:identityReference"/>
+	<xsd:element name="maxCardinality" type="s23m:identityReference"/>
+	<xsd:element name="minCardinality" type="s23m:identityReference"/>
+	<xsd:element name="isContainer" type="s23m:identityReference"/>
+	<xsd:element name="isNavigable" type="s23m:identityReference"/>
+	<xsd:element name="from" type="s23m:identityReference"/>
+	<xsd:element name="to" type="s23m:identityReference"/>
+	<xsd:element name="parameter" type="s23m:identityReference"/>
 	<xsd:element name="function" type="s23m:function"/>
-
-	<xsd:complexType name="graph">
-		<xsd:sequence>
-			<xsd:element ref="s23m:semanticIdentity"/>
-			<xsd:element ref="s23m:category"/>
-			<xsd:element name="container" type="s23m:identityReference"/>
-			
-			<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
-
-			<xsd:element name="variable" type="s23m:variable" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="value" type="s23m:value" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-
-	<xsd:complexType name="vertex">
-		<xsd:sequence>
-			<!-- pointer to an artifact -->
-			<xsd:element ref="s23m:semanticIdentity"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-
-	<!-- Arrows -->
-
-	<xsd:complexType name="edge">
-		<xsd:sequence>
-			<!-- pointer to an artifact -->
-			<xsd:element ref="s23m:semanticIdentity"/>
-			<xsd:element name="from" type="s23m:edgeEnd"/>
-			<xsd:element name="to" type="s23m:edgeEnd"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="edgeEnd">
-		<xsd:sequence>
-			<!-- pointer to an artifact -->
-			<xsd:element ref="s23m:semanticIdentity"/>
-			<xsd:element name="minCardinality" type="s23m:cardinality"/>
-			<xsd:element name="maxCardinality" type="s23m:cardinality"/>
-			<xsd:element name="isContainer" type="xsd:boolean"/>
-			<xsd:element name="isNavigable" type="xsd:boolean"/>
-		</xsd:sequence>
-		<xsd:attribute name="category" type="s23m:identifierReference" use="required"/>
-		<xsd:attribute name="instanceId" type="s23m:identifierReference" use="required"/>
-	</xsd:complexType>
-
-	<xsd:complexType name="superSetReference">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:graph">
-				<xsd:sequence>
-					<xsd:element ref="s23m:semanticIdentity"/>
-				</xsd:sequence>
-				<xsd:attribute name="id" type="s23m:uuid" use="required"/>
-				<xsd:attribute name="from" type="s23m:identifierReference" use="required"/>
-				<xsd:attribute name="to" type="s23m:identifierReference" use="required"/>				
-			</xsd:extension>
-		</xsd:complexContent>		
-	</xsd:complexType>
-
-	<xsd:complexType name="visibility">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:graph">
-				<!-- NOTE: these attributes cannot be of type "s23m:semanticIdentity". We could make them elements -->
-				<xsd:attribute name="from" type="s23m:semanticIdentity" use="required"/>
-				<xsd:attribute name="to" type="s23m:semanticIdentity" use="required"/>      
-			</xsd:extension>
-		</xsd:complexContent>        
-	</xsd:complexType>
-
-	<xsd:simpleType name="cardinality">
-		<!-- NOTE: this seems too restrictive -->
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="0"/>
-			<xsd:enumeration value="1"/>
-			<xsd:enumeration value="2"/>
-			<xsd:enumeration value="n"/>
-			<xsd:enumeration value="NOTAPPLICABLE"/>
-			<xsd:enumeration value="UNKNOWN"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-    
-    
-	<!-- Artefact content (ordered pairs or ordered sets) -->
-
-	<xsd:complexType name="value">
-		<xsd:sequence>
-			<xsd:element name="value" type="s23m:identifierReference"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="variable">
-		<xsd:sequence>
-			<xsd:element name="variable" type="s23m:identifierReference"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="command">
-		<xsd:sequence>
-			<xsd:element ref="s23m:function"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="query">
-		<xsd:sequence>
-			<xsd:element ref="s23m:function"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="function">
-		<xsd:sequence>
-			<xsd:element name="identity" type="s23m:semanticIdentity"/>
-			<xsd:element name="parameter" type="s23m:semanticIdentity"/>
-			<xsd:element ref="s23m:category"/>
-			<!-- NOTE: this does not seem necessary --> 
-			<xsd:element ref="s23m:function" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>    
-
-	<xsd:complexType name="orderedPair">
-		<xsd:sequence>
-			<xsd:element name="category" type="identityReference"/>
-			<xsd:element name="element" type="identityReference"/>
-		</xsd:sequence>
-	</xsd:complexType>
-        	
-	<xsd:complexType name="identity">
-		<xsd:sequence>
-			<xsd:element name="identifier" type="s23m:uuid"/>
-			<xsd:element name="name" type="xsd:string"/>
-			<xsd:element name="pluralName" type="xsd:string"/>
-			<xsd:element name="payload" type="xsd:string"/>
-			<xsd:element name="technicalName" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
 
 	<xsd:complexType name="identityReference">
 		<xsd:sequence>
@@ -187,6 +28,137 @@
 		<xsd:restriction base="xsd:string"/>
 	</xsd:simpleType>
 
+	<!-- Root element -->
+	<xsd:element name="artifactSet" type="s23m:artifactSet"/>
+	
+	<xsd:complexType name="artifactSet">
+		<xsd:sequence>
+			<xsd:element name="model" type="s23m:model" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="semanticDomain" type="s23m:semanticDomain" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
+	<!-- Encoding of model artifacts -->
+
+	<xsd:complexType name="model">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:graph"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="graph">
+		<xsd:sequence>
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element name="container" type="s23m:identityReference"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
+			<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Vertices --> 
+	<xsd:complexType name="vertex">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element ref="s23m:maxCardinality"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Arrows --> 
+	<xsd:complexType name="visibility">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element ref="s23m:from"/>
+			<xsd:element ref="s23m:to"/>
+		</xsd:sequence>
+	</xsd:complexType>  
+	<xsd:complexType name="edge">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element name="from" type="s23m:edgeEnd"/>
+			<xsd:element name="to" type="s23m:edgeEnd"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="edgeEnd">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element ref="s23m:minCardinality"/>
+			<xsd:element ref="s23m:maxCardinality"/>
+			<xsd:element ref="s23m:isContainer"/>
+			<xsd:element ref="s23m:isNavigable"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="superSetReference">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element ref="s23m:isAbstract"/>
+			<xsd:element ref="s23m:from"/>
+			<xsd:element ref="s23m:to"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Artifact functionality -->
+	<xsd:complexType name="command">
+		<xsd:sequence>
+			<xsd:element ref="s23m:function"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="function">
+		<xsd:sequence>
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+			<xsd:element name="parameter" type="s23m:parameter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>    
+	<xsd:complexType name="parameter">
+		<xsd:sequence>
+			<!-- pointer to an artifact -->
+			<xsd:element ref="s23m:semanticIdentity"/>
+			<xsd:element ref="s23m:category"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="query">
+		<xsd:sequence>
+			<xsd:element ref="s23m:function"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Encoding of semantic domain artifacts -->
+
+	<xsd:complexType name="semanticDomain">
+		<xsd:sequence>
+			<xsd:element name="model" type="s23m:model"/>
+			<xsd:element name="identity" type="s23m:identity" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="identity">
+		<xsd:sequence>
+			<xsd:element name="identifier" type="s23m:uuid"/>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="pluralName" type="xsd:string"/>
+			<xsd:element name="payload" type="xsd:string"/>
+			<xsd:element name="technicalName" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
         
 </xsd:schema>
