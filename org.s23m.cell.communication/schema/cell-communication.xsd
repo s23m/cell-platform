@@ -149,7 +149,6 @@
 	</xsd:complexType>    
 	<xsd:complexType name="parameter">
 		<xsd:sequence>
-			<!-- pointer to an artifact -->
 			<xsd:element ref="s23m:category"/>
 		</xsd:sequence>
 	</xsd:complexType>
