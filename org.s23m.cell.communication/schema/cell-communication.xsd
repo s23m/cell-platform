@@ -5,6 +5,7 @@
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
 	<!-- Reused elements -->	
+
 	<xsd:element name="semanticIdentity" type="s23m:identityReference"/>
 	<xsd:element name="model" type="s23m:model"/>
 	<xsd:element name="category" type="s23m:identityReference"/>
@@ -15,7 +16,6 @@
 	<xsd:element name="isNavigable" type="s23m:identityReference"/>
 	<xsd:element name="from" type="s23m:identityReference"/>
 	<xsd:element name="to" type="s23m:identityReference"/>
-	<xsd:element name="parameter" type="s23m:identityReference"/>
 	<xsd:element name="function" type="s23m:function"/>
 
 	<xsd:complexType name="identityReference">
@@ -84,6 +84,18 @@
 	</xsd:complexType>
 
 	<!-- Arrows --> 
+	
+	<xsd:complexType name="superSetReference">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:category">
+				<xsd:sequence>
+					<xsd:element ref="s23m:isAbstract"/>
+					<xsd:element ref="s23m:from"/>
+					<xsd:element ref="s23m:to"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 	<xsd:complexType name="visibility">
 		<xsd:complexContent>
 			<xsd:extension base="s23m:category">
@@ -119,25 +131,9 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="superSetReference">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:category">
-				<xsd:sequence>
-					<xsd:element ref="s23m:isAbstract"/>
-					<xsd:element ref="s23m:from"/>
-					<xsd:element ref="s23m:to"/>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
 
 	<!-- Artifact functionality -->
-	<xsd:complexType name="command">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:function"/>
-		</xsd:complexContent>
-	</xsd:complexType>
-
+	
 	<xsd:complexType name="function">
 		<xsd:complexContent>
 			<xsd:extension base="s23m:category">
@@ -146,11 +142,16 @@
 				</xsd:sequence>
 			</xsd:extension>			
 		</xsd:complexContent>
-	</xsd:complexType>    
+	</xsd:complexType>
 	<xsd:complexType name="parameter">
-		<xsd:sequence>
-			<xsd:element ref="s23m:category"/>
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="s23m:category"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="command">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:function"/>
+		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="query">
 		<xsd:complexContent>
@@ -176,5 +177,4 @@
 			<xsd:element name="technicalName" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
-        
 </xsd:schema>
