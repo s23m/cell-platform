@@ -1,197 +1,208 @@
 package org.s23m.cell.communication.xml
 
 import java.util.List
+import java.util.Collections
+import static java.util.Arrays.*
 
+// TODO use builder API approach
 class XmlSchemaTemplate {
 	
-	private static String XSD_NAMESPACE_PREFIX = "xsd"
+	private static String XSD = "xsd"
 	
-	private static String TARGET_NAMESPACE_PREFIX = "s23m"
-	private static String TARGET_NAMESPACE_VALUE = "http://schemas.s23m.org/serialization/2012"
+	private static String S23M = "s23m"
+	
+	private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
 	
 	// TODO: add jargon support
 	def createHumanReadableSchema() '''
 		<?xml version="1.0" encoding="UTF-8"?>
-		<xsd:schema xmlns:«XSD_NAMESPACE_PREFIX»="http://www.w3.org/2001/XMLSchema"
-				xmlns:«TARGET_NAMESPACE_PREFIX»="«TARGET_NAMESPACE_VALUE»"
-				targetNamespace="«TARGET_NAMESPACE_VALUE»"
+		<«xsd("schema")» xmlns:«XSD»="http://www.w3.org/2001/XMLSchema"
+				xmlns:«S23M»="«S23M_SCHEMA»"
+				targetNamespace="«S23M_SCHEMA»"
 				elementFormDefault="qualified"
 				attributeFormDefault="unqualified">
-		
-			<!-- Reused elements -->	
-		
-			«element("semanticIdentity", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("model", "«TARGET_NAMESPACE_PREFIX»:model")»
-			«element("category", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("isAbstract", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("maxCardinality", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("minCardinality", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("isContainer", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("isNavigable", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("from", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("to", "«TARGET_NAMESPACE_PREFIX»:identityReference")»
-			«element("function", "«TARGET_NAMESPACE_PREFIX»:function")»
-		
-			<xsd:complexType name="identityReference">
-				<xsd:sequence>
-					<xsd:element name="uniqueRepresentationReference" type="«TARGET_NAMESPACE_PREFIX»:uuid"/>
-					<xsd:element name="identifier" type="«TARGET_NAMESPACE_PREFIX»:uuid"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		
-			<xsd:complexType name="category">
-				<xsd:sequence>
-					<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:semanticIdentity"/>
-					<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:category"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		
-			<xsd:simpleType name="uuid">
-				<xsd:restriction base="xsd:string"/>
-			</xsd:simpleType>
-		
-			<!-- Root element -->
-			<xsd:element name="artifactSet" type="«TARGET_NAMESPACE_PREFIX»:artifactSet"/>
-			
-			<xsd:complexType name="artifactSet">
-				<xsd:sequence>
-					<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:model" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="semanticDomain" type="«TARGET_NAMESPACE_PREFIX»:semanticDomain" minOccurs="0" maxOccurs="unbounded"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		
-			<!-- Encoding of model artifacts -->
-		
-			<xsd:complexType name="model">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:graph"/>
-				</xsd:complexContent>
-			</xsd:complexType>
-		
-			«categoryComplexType("graph", newArrayList(
-				element("container", "«TARGET_NAMESPACE_PREFIX»:identityReference"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isAbstract"),
-				elementList("vertex", "«TARGET_NAMESPACE_PREFIX»:vertex"),
-				elementList("visibility", "«TARGET_NAMESPACE_PREFIX»:visibility"),
-				elementList("edge", "«TARGET_NAMESPACE_PREFIX»:edge"),
-				elementList("superSetReference", "«TARGET_NAMESPACE_PREFIX»:superSetReference"),
-				elementList("command", "«TARGET_NAMESPACE_PREFIX»:command"),
-				elementList("query", "«TARGET_NAMESPACE_PREFIX»:query")
-			))»
-			
-			<!-- Vertices --> 
-			<xsd:complexType name="vertex">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:category">
-						<xsd:sequence>
-							<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:isAbstract"/>
-							<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:maxCardinality"/>			
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-		
-			<!-- Arrows --> 
 
-			«categoryComplexType("superSetReference", newArrayList(
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isAbstract"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:from"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:to")
-			))»
-			«categoryComplexType("visibility", newArrayList(
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isAbstract"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:from"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:to")
-			))»
-			«categoryComplexType("edge", newArrayList(
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isAbstract"),
-				element("from", "«TARGET_NAMESPACE_PREFIX»:edgeEnd"),
-				element("to", "«TARGET_NAMESPACE_PREFIX»:edgeEnd")
-			))»
-			«categoryComplexType("edgeEnd", newArrayList(
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isAbstract"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:minCardinality"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:maxCardinality"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isContainer"),
-				elementRef("«TARGET_NAMESPACE_PREFIX»:isNavigable")
-			))»
-			
-			<!-- Artifact functionality -->
-			
-			<xsd:complexType name="function">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:category">
-						<xsd:sequence>
-							<xsd:element name="parameter" type="«TARGET_NAMESPACE_PREFIX»:parameter" minOccurs="0" maxOccurs="unbounded"/>
-						</xsd:sequence>
-					</xsd:extension>			
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:complexType name="parameter">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:category"/>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:complexType name="command">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:function"/>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:complexType name="query">
-				<xsd:complexContent>
-					<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:function"/>
-				</xsd:complexContent>
-			</xsd:complexType>
-		
-			<!-- Encoding of semantic domain artifacts -->
-		
-			<xsd:complexType name="semanticDomain">
-				<xsd:sequence>
-					<xsd:element ref="«TARGET_NAMESPACE_PREFIX»:model"/>
-					<xsd:element name="identity" type="«TARGET_NAMESPACE_PREFIX»:identity" minOccurs="0" maxOccurs="unbounded"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		
-			<xsd:complexType name="identity">
-				<xsd:sequence>
-					<xsd:element name="identifier" type="«TARGET_NAMESPACE_PREFIX»:uuid"/>
-					<xsd:element name="name" type="xsd:string"/>
-					<xsd:element name="pluralName" type="xsd:string"/>
-					<xsd:element name="payload" type="xsd:string"/>
-					<xsd:element name="technicalName" type="xsd:string"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
+			«reusedElements»
+			«rootElement»
+			«modelArtefactEncoding»
+			«vertices»
+			«arrows»
+			«artifactFunctionality»
+			«semanticDomainArtefactEncoding»
+
+		</«xsd("schema")»>
 	'''
 	
 	def createMachineReadableSchema() '''
 	'''
 	
-	def private categoryComplexType(String name, List<CharSequence> elementsInSequence) '''
-		<xsd:complexType name="«name»">
-			<xsd:complexContent>
-				<xsd:extension base="«TARGET_NAMESPACE_PREFIX»:category">
+	def private reusedElements() '''
+		«element("semanticIdentity", s23m("identityReference"))»
+		«element("model", s23m("model"))»
+		«element("category", s23m("identityReference"))»
+		«element("isAbstract", s23m("identityReference"))»
+		«element("maxCardinality", s23m("identityReference"))»
+		«element("minCardinality", s23m("identityReference"))»
+		«element("isContainer", s23m("identityReference"))»
+		«element("isNavigable", s23m("identityReference"))»
+		«element("from", s23m("identityReference"))»
+		«element("to", s23m("identityReference"))»
+		«element("function", s23m("function"))»
+	
+		«complexType("identityReference", asList(
+			element("uniqueRepresentationReference", s23m("uuid")),
+			element("identifier", s23m("uuid"))
+		))»
+		
+		«complexType("category", asList(
+			elementRef(s23m("semanticIdentity")),
+			elementRef(s23m("category"))
+		))»
+		
+		«simpleType("uuid", xsd("string"))»
+	'''
+	
+	def private rootElement() '''
+		«element("artifactSet", s23m("artifactSet"))»
+		
+		«complexType("artifactSet", asList(
+			elementRefList(s23m("model")),
+			elementList("semanticDomain", s23m("semanticDomain"))
+		))»
+	'''
+	
+	def private modelArtefactEncoding() '''
+		«complexTypeWithExtension("model", s23m("graph"))»
+	
+		«categoryComplexType("graph", asList(
+			element("container", s23m("identityReference")),
+			elementRef(s23m("isAbstract")),
+			elementList("vertex", s23m("vertex")),
+			elementList("visibility", s23m("visibility")),
+			elementList("edge", s23m("edge")),
+			elementList("superSetReference", s23m("superSetReference")),
+			elementList("command", s23m("command")),
+			elementList("query", s23m("query"))
+		))»
+	'''
+	
+	def private vertices() '''
+		«categoryComplexType("vertex", asList(
+			elementRef(s23m("isAbstract")),
+			elementRef(s23m("maxCardinality"))
+		))»
+	'''
+	
+	def private arrows() '''
+		«categoryComplexType("superSetReference", asList(
+			elementRef(s23m("isAbstract")),
+			elementRef(s23m("from")),
+			elementRef(s23m("to"))
+		))»
+		«categoryComplexType("visibility", asList(
+			elementRef(s23m("isAbstract")),
+			elementRef(s23m("from")),
+			elementRef(s23m("to"))
+		))»
+		«categoryComplexType("edge", asList(
+			elementRef(s23m("isAbstract")),
+			element("from", s23m("edgeEnd")),
+			element("to", s23m("edgeEnd"))
+		))»
+		«categoryComplexType("edgeEnd", asList(
+			elementRef(s23m("isAbstract")),
+			elementRef(s23m("minCardinality")),
+			elementRef(s23m("maxCardinality")),
+			elementRef(s23m("isContainer")),
+			elementRef(s23m("isNavigable"))
+		))»
+	'''
+	
+	def private artifactFunctionality() '''
+		«categoryComplexType("function", asList(
+			elementList("parameter", s23m("parameter"))
+		))»
+		«categoryComplexType("parameter", Collections::emptyList)»
+		«complexTypeWithExtension("command", s23m("function"))»
+		«complexTypeWithExtension("query", s23m("function"))»
+	'''
+	
+	def private semanticDomainArtefactEncoding() '''
+		«complexType("semanticDomain", asList(
+			elementRef(s23m("model")),
+			elementList("identity", s23m("identity"))
+		))»
+		
+		«complexType("identity", asList(
+			element("identifier", s23m("uuid")),
+			element("name", xsd("string")),
+			element("pluralName", xsd("string")),
+			element("payload", xsd("string")),
+			element("technicalName", xsd("string"))
+		))»
+	'''
+	
+	def private complexType(String name, List<CharSequence> elementsInSequence) '''
+		<«xsd("complexType")» name="«name»">
+			<«xsd("sequence")»>
+				«FOR element : elementsInSequence»
+				«element»
+				«ENDFOR»
+			</«xsd("sequence")»>
+		</«xsd("complexType")»>
+	'''
+	
+	def private complexTypeWithExtension(String name, String extensionBase) {
+		complexTypeWithExtension(name, extensionBase, Collections::emptyList)
+	}
+	
+	def private complexTypeWithExtension(String name, String extensionBase, List<CharSequence> elementsInSequence) '''
+		<«xsd("complexType")» name="«name»">
+			<«xsd("complexContent")»>
+				<«xsd("extension")» base="«S23M»:«extensionBase»">
 					«IF !elementsInSequence.empty»
-					<xsd:sequence>
+					<«xsd("sequence")»>
 						«FOR element : elementsInSequence»
 						«element»
 						«ENDFOR»
-					</xsd:sequence>
+					</«xsd("sequence")»>
 					«ENDIF»
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
+				</«xsd("extension")»>
+			</«xsd("complexContent")»>
+		</«xsd("complexType")»>
+	'''
+	
+	def private categoryComplexType(String name, List<CharSequence> elementsInSequence) '''
+		«complexTypeWithExtension(name, "category", elementsInSequence)»
+	'''
+	
+	def private simpleType(String name, String baseType) '''
+		<«xsd("simpleType")» name="«name»">
+			<«xsd("restriction")» base="«baseType»"/>
+		</«xsd("simpleType")»>
 	'''
 	
 	def private element(String name, String type) '''
-		<«XSD_NAMESPACE_PREFIX»:element name="«name»" type="«type»"/>
+		<«xsd("element")» name="«name»" type="«type»"/>
 	'''
 	
 	def private elementRef(String referencedName) '''
-		<«XSD_NAMESPACE_PREFIX»:element ref="«referencedName»"/>
+		<«xsd("element")» ref="«referencedName»"/>
+	'''
+	
+	def private elementRefList(String referencedName) '''
+		<«xsd("element")» ref="«referencedName»" minOccurs="0" maxOccurs="unbounded"/>
 	'''
 	
 	def private elementList(String name, String type) '''
-		<«XSD_NAMESPACE_PREFIX»:element name="«name»" type="«type»" minOccurs="0" maxOccurs="unbounded"/>
+		<«xsd("element")» name="«name»" type="«type»" minOccurs="0" maxOccurs="unbounded"/>
 	'''
+	
+	def private xsd(String name) {
+		XSD + ":" + name
+	}
+	
+	def private s23m(String name) {
+		S23M + ":" + name
+	}
 }
