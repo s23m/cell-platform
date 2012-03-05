@@ -3,67 +3,75 @@ package org.s23m.cell.communication.xml
 import java.util.List
 import java.util.Collections
 import static java.util.Arrays.*
-import static java.lang.String.*
-import org.eclipse.xtext.xbase.lib.StringExtensions
-import org.eclipse.xtext.xbase.lib.ListExtensions
-
 import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import static extension java.lang.String.*
 
-// TODO use builder API approach
+// TODO inject bean conforming to interface with method for each concept
+// TODO create a dynamic proxy which implements the interface, and test that each concept is used
 class XmlSchemaTemplate {
 	
 	static String XSD = "xsd"
+	
 	static String S23M = "s23m"
+	
 	static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
+	
+	static String SCHEMA_ATTRIBUTES = 'xmlns:'+XSD+'="http://www.w3.org/2001/XMLSchema" ' +
+									  'xmlns:'+S23M+'="'+S23M_SCHEMA+'" ' +
+									  'targetNamespace="'+S23M_SCHEMA+'" ' +
+									  'elementFormDefault="qualified" ' +
+									  'attributeFormDefault="unqualified"'
 	
 	// TODO: add jargon support
 	def createHumanReadableSchema() '''
 		<?xml version="1.0" encoding="UTF-8"?>
-		<«xsd("schema")» xmlns:«XSD»="http://www.w3.org/2001/XMLSchema"
-				xmlns:«S23M»="«S23M_SCHEMA»"
-				targetNamespace="«S23M_SCHEMA»"
-				elementFormDefault="qualified"
-				attributeFormDefault="unqualified">
-
-			«reusedElements»
-			«rootElement»
-			«modelArtefactEncoding»
-			«vertices»
-			«arrows»
-			«artifactFunctionality»
-			«semanticDomainArtefactEncoding»
-
-		</«xsd("schema")»>
+		«"schema".node(SCHEMA_ATTRIBUTES, asList(
+			reusedElements,
+			rootElement,
+			modelArtefactEncoding,
+			vertices,
+			arrows,
+			artifactFunctionality,
+			semanticDomainArtefactEncoding
+		))»
 	'''
 	
 	def createMachineReadableSchema() '''
 	'''
 	
 	def private reusedElements() '''
-		«element("semanticIdentity", s23m("identityReference"))»
-		«element("model", s23m("model"))»
-		«element("category", s23m("identityReference"))»
-		«element("isAbstract", s23m("identityReference"))»
-		«element("maxCardinality", s23m("identityReference"))»
-		«element("minCardinality", s23m("identityReference"))»
-		«element("isContainer", s23m("identityReference"))»
-		«element("isNavigable", s23m("identityReference"))»
-		«element("from", s23m("identityReference"))»
-		«element("to", s23m("identityReference"))»
+		«val identityReference = "identityReference"»
+		«val identityReferenceQualified = s23m(identityReference)»
+		«val uuid = "uuid"»
+		«val semanticIdentity = "semanticIdentity"»
+		«val model = "model"»
+		«val category = "category"»
+		«val isAbstract = "isAbstract"»
+		«val maxCardinality = "maxCardinality"»
+		
+		«element(semanticIdentity, identityReferenceQualified)»
+		«element(model, s23m(model))»
+		«element(category, identityReferenceQualified)»
+		«element(isAbstract, identityReferenceQualified)»
+		«element(maxCardinality, identityReferenceQualified)»
+		«element("minCardinality", identityReferenceQualified)»
+		«element("isContainer", identityReferenceQualified)»
+		«element("isNavigable", identityReferenceQualified)»
+		«element("from", identityReferenceQualified)»
+		«element("to", identityReferenceQualified)»
 		«element("function", s23m("function"))»
 	
-		«complexType("identityReference", asList(
-			element("uniqueRepresentationReference", s23m("uuid")),
-			element("identifier", s23m("uuid"))
+		«complexType(identityReference, asList(
+			element("uniqueRepresentationReference", s23m(uuid)),
+			element("identifier", s23m(uuid))
 		))»
 		
-		«complexType("category", asList(
-			element(s23m("semanticIdentity")),
-			element(s23m("category"))
+		«complexType(category, asList(
+			element(s23m(semanticIdentity)),
+			element(s23m(category))
 		))»
 		
-		«simpleType("uuid", xsd("string"))»
+		«simpleType(uuid, xsd("string"))»
 	'''
 	
 	def private rootElement() '''
@@ -192,6 +200,10 @@ class XmlSchemaTemplate {
 	
 	def private elementList(String name, String type) {
 		"element".node('name="%s" type="%s" minOccurs="0" maxOccurs="unbounded"'.format(name, type))
+	}
+	
+	def private node(String tagName, String attributeContents, List<CharSequence> nestedElements) {
+		node(tagName, attributeContents, nestedElements.join("\n"))
 	}
 	
 	def private node(String tagName, String attributeContents, CharSequence nestedElements) '''
