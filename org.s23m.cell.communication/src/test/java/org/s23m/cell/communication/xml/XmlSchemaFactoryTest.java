@@ -62,7 +62,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 				complexTypeNames.add(nameAttribute);	
 			}
 		}
-		assertTrue("Expected: " + complexTypeNames + "\nActual: " + kernelTypeNames, complexTypeNames.containsAll(kernelTypeNames));
+		assertTrue("Expected: " + kernelTypeNames + "\nActual: " + complexTypeNames, complexTypeNames.containsAll(kernelTypeNames));
 	}
 	
 	private static List<String> createNames(List<Set> sets) {

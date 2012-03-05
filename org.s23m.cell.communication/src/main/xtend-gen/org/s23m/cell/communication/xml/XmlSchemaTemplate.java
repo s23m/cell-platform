@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -158,10 +159,10 @@ public class XmlSchemaTemplate {
     _builder.newLine();
     _builder.append("\t");
     String _s23m_13 = this.s23m("semanticIdentity");
-    CharSequence _elementRef = this.elementRef(_s23m_13);
+    CharSequence _element_13 = this.element(_s23m_13);
     String _s23m_14 = this.s23m("category");
-    CharSequence _elementRef_1 = this.elementRef(_s23m_14);
-    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_elementRef, _elementRef_1);
+    CharSequence _element_14 = this.element(_s23m_14);
+    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element_13, _element_14);
     CharSequence _complexType_1 = this.complexType("category", _asList_1);
     _builder.append(_complexType_1, "	");
     _builder.newLineIfNotEmpty();
@@ -183,10 +184,10 @@ public class XmlSchemaTemplate {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     String _s23m_1 = this.s23m("model");
-    CharSequence _elementRefList = this.elementRefList(_s23m_1);
+    CharSequence _elementList = this.elementList(_s23m_1);
     String _s23m_2 = this.s23m("semanticDomain");
-    CharSequence _elementList = this.elementList("semanticDomain", _s23m_2);
-    List<CharSequence> _asList = Arrays.<CharSequence>asList(_elementRefList, _elementList);
+    CharSequence _elementList_1 = this.elementList("semanticDomain", _s23m_2);
+    List<CharSequence> _asList = Arrays.<CharSequence>asList(_elementList, _elementList_1);
     CharSequence _complexType = this.complexType("artifactSet", _asList);
     _builder.append(_complexType, "");
     _builder.newLineIfNotEmpty();
@@ -205,7 +206,7 @@ public class XmlSchemaTemplate {
     String _s23m_1 = this.s23m("identityReference");
     CharSequence _element = this.element("container", _s23m_1);
     String _s23m_2 = this.s23m("isAbstract");
-    CharSequence _elementRef = this.elementRef(_s23m_2);
+    CharSequence _element_1 = this.element(_s23m_2);
     String _s23m_3 = this.s23m("vertex");
     CharSequence _elementList = this.elementList("vertex", _s23m_3);
     String _s23m_4 = this.s23m("visibility");
@@ -218,7 +219,7 @@ public class XmlSchemaTemplate {
     CharSequence _elementList_4 = this.elementList("command", _s23m_7);
     String _s23m_8 = this.s23m("query");
     CharSequence _elementList_5 = this.elementList("query", _s23m_8);
-    List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _elementRef, _elementList, _elementList_1, _elementList_2, _elementList_3, _elementList_4, _elementList_5);
+    List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1, _elementList, _elementList_1, _elementList_2, _elementList_3, _elementList_4, _elementList_5);
     CharSequence _categoryComplexType = this.categoryComplexType("graph", _asList);
     _builder.append(_categoryComplexType, "	");
     _builder.newLineIfNotEmpty();
@@ -228,10 +229,10 @@ public class XmlSchemaTemplate {
   private CharSequence vertices() {
     StringConcatenation _builder = new StringConcatenation();
     String _s23m = this.s23m("isAbstract");
-    CharSequence _elementRef = this.elementRef(_s23m);
+    CharSequence _element = this.element(_s23m);
     String _s23m_1 = this.s23m("maxCardinality");
-    CharSequence _elementRef_1 = this.elementRef(_s23m_1);
-    List<CharSequence> _asList = Arrays.<CharSequence>asList(_elementRef, _elementRef_1);
+    CharSequence _element_1 = this.element(_s23m_1);
+    List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1);
     CharSequence _categoryComplexType = this.categoryComplexType("vertex", _asList);
     _builder.append(_categoryComplexType, "");
     _builder.newLineIfNotEmpty();
@@ -241,46 +242,46 @@ public class XmlSchemaTemplate {
   private CharSequence arrows() {
     StringConcatenation _builder = new StringConcatenation();
     String _s23m = this.s23m("isAbstract");
-    CharSequence _elementRef = this.elementRef(_s23m);
+    CharSequence _element = this.element(_s23m);
     String _s23m_1 = this.s23m("from");
-    CharSequence _elementRef_1 = this.elementRef(_s23m_1);
+    CharSequence _element_1 = this.element(_s23m_1);
     String _s23m_2 = this.s23m("to");
-    CharSequence _elementRef_2 = this.elementRef(_s23m_2);
-    List<CharSequence> _asList = Arrays.<CharSequence>asList(_elementRef, _elementRef_1, _elementRef_2);
+    CharSequence _element_2 = this.element(_s23m_2);
+    List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1, _element_2);
     CharSequence _categoryComplexType = this.categoryComplexType("superSetReference", _asList);
     _builder.append(_categoryComplexType, "");
     _builder.newLineIfNotEmpty();
     String _s23m_3 = this.s23m("isAbstract");
-    CharSequence _elementRef_3 = this.elementRef(_s23m_3);
+    CharSequence _element_3 = this.element(_s23m_3);
     String _s23m_4 = this.s23m("from");
-    CharSequence _elementRef_4 = this.elementRef(_s23m_4);
+    CharSequence _element_4 = this.element(_s23m_4);
     String _s23m_5 = this.s23m("to");
-    CharSequence _elementRef_5 = this.elementRef(_s23m_5);
-    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_elementRef_3, _elementRef_4, _elementRef_5);
+    CharSequence _element_5 = this.element(_s23m_5);
+    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element_3, _element_4, _element_5);
     CharSequence _categoryComplexType_1 = this.categoryComplexType("visibility", _asList_1);
     _builder.append(_categoryComplexType_1, "");
     _builder.newLineIfNotEmpty();
     String _s23m_6 = this.s23m("isAbstract");
-    CharSequence _elementRef_6 = this.elementRef(_s23m_6);
+    CharSequence _element_6 = this.element(_s23m_6);
     String _s23m_7 = this.s23m("edgeEnd");
-    CharSequence _element = this.element("from", _s23m_7);
+    CharSequence _element_7 = this.element("from", _s23m_7);
     String _s23m_8 = this.s23m("edgeEnd");
-    CharSequence _element_1 = this.element("to", _s23m_8);
-    List<CharSequence> _asList_2 = Arrays.<CharSequence>asList(_elementRef_6, _element, _element_1);
+    CharSequence _element_8 = this.element("to", _s23m_8);
+    List<CharSequence> _asList_2 = Arrays.<CharSequence>asList(_element_6, _element_7, _element_8);
     CharSequence _categoryComplexType_2 = this.categoryComplexType("edge", _asList_2);
     _builder.append(_categoryComplexType_2, "");
     _builder.newLineIfNotEmpty();
     String _s23m_9 = this.s23m("isAbstract");
-    CharSequence _elementRef_7 = this.elementRef(_s23m_9);
+    CharSequence _element_9 = this.element(_s23m_9);
     String _s23m_10 = this.s23m("minCardinality");
-    CharSequence _elementRef_8 = this.elementRef(_s23m_10);
+    CharSequence _element_10 = this.element(_s23m_10);
     String _s23m_11 = this.s23m("maxCardinality");
-    CharSequence _elementRef_9 = this.elementRef(_s23m_11);
+    CharSequence _element_11 = this.element(_s23m_11);
     String _s23m_12 = this.s23m("isContainer");
-    CharSequence _elementRef_10 = this.elementRef(_s23m_12);
+    CharSequence _element_12 = this.element(_s23m_12);
     String _s23m_13 = this.s23m("isNavigable");
-    CharSequence _elementRef_11 = this.elementRef(_s23m_13);
-    List<CharSequence> _asList_3 = Arrays.<CharSequence>asList(_elementRef_7, _elementRef_8, _elementRef_9, _elementRef_10, _elementRef_11);
+    CharSequence _element_13 = this.element(_s23m_13);
+    List<CharSequence> _asList_3 = Arrays.<CharSequence>asList(_element_9, _element_10, _element_11, _element_12, _element_13);
     CharSequence _categoryComplexType_3 = this.categoryComplexType("edgeEnd", _asList_3);
     _builder.append(_categoryComplexType_3, "");
     _builder.newLineIfNotEmpty();
@@ -313,142 +314,42 @@ public class XmlSchemaTemplate {
   private CharSequence semanticDomainArtefactEncoding() {
     StringConcatenation _builder = new StringConcatenation();
     String _s23m = this.s23m("model");
-    CharSequence _elementRef = this.elementRef(_s23m);
+    CharSequence _element = this.element(_s23m);
     String _s23m_1 = this.s23m("identity");
     CharSequence _elementList = this.elementList("identity", _s23m_1);
-    List<CharSequence> _asList = Arrays.<CharSequence>asList(_elementRef, _elementList);
+    List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _elementList);
     CharSequence _complexType = this.complexType("semanticDomain", _asList);
     _builder.append(_complexType, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     String _s23m_2 = this.s23m("uuid");
-    CharSequence _element = this.element("identifier", _s23m_2);
+    CharSequence _element_1 = this.element("identifier", _s23m_2);
     String _xsd = this.xsd("string");
-    CharSequence _element_1 = this.element("name", _xsd);
+    CharSequence _element_2 = this.element("name", _xsd);
     String _xsd_1 = this.xsd("string");
-    CharSequence _element_2 = this.element("pluralName", _xsd_1);
+    CharSequence _element_3 = this.element("pluralName", _xsd_1);
     String _xsd_2 = this.xsd("string");
-    CharSequence _element_3 = this.element("payload", _xsd_2);
+    CharSequence _element_4 = this.element("payload", _xsd_2);
     String _xsd_3 = this.xsd("string");
-    CharSequence _element_4 = this.element("technicalName", _xsd_3);
-    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element, _element_1, _element_2, _element_3, _element_4);
+    CharSequence _element_5 = this.element("technicalName", _xsd_3);
+    List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element_1, _element_2, _element_3, _element_4, _element_5);
     CharSequence _complexType_1 = this.complexType("identity", _asList_1);
     _builder.append(_complexType_1, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  private CharSequence complexType(final String name, final List<CharSequence> elementsInSequence) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _xsd = this.xsd("complexType");
-    _builder.append(_xsd, "");
-    _builder.append(" name=\"");
-    _builder.append(name, "");
-    _builder.append("\">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("<");
-    String _xsd_1 = this.xsd("sequence");
-    _builder.append(_xsd_1, "	");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    {
-      for(final CharSequence element : elementsInSequence) {
-        _builder.append("\t\t");
-        _builder.append(element, "		");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("</");
-    String _xsd_2 = this.xsd("sequence");
-    _builder.append(_xsd_2, "	");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</");
-    String _xsd_3 = this.xsd("complexType");
-    _builder.append(_xsd_3, "");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+  private CharSequence complexType(final String name, final List<CharSequence> containedElements) {
+    String _format = String.format("name=\"%s\"", name);
+    String _join = IterableExtensions.join(containedElements, "\n");
+    CharSequence _node = this.node("complexType", _format, _join);
+    return _node;
   }
   
   private CharSequence complexTypeWithExtension(final String name, final String extensionBase) {
     List<CharSequence> _emptyList = Collections.<CharSequence>emptyList();
     CharSequence _complexTypeWithExtension = this.complexTypeWithExtension(name, extensionBase, _emptyList);
     return _complexTypeWithExtension;
-  }
-  
-  private CharSequence complexTypeWithExtension(final String name, final String extensionBase, final List<CharSequence> elementsInSequence) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _xsd = this.xsd("complexType");
-    _builder.append(_xsd, "");
-    _builder.append(" name=\"");
-    _builder.append(name, "");
-    _builder.append("\">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("<");
-    String _xsd_1 = this.xsd("complexContent");
-    _builder.append(_xsd_1, "	");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("<");
-    String _xsd_2 = this.xsd("extension");
-    _builder.append(_xsd_2, "		");
-    _builder.append(" base=\"");
-    _builder.append(XmlSchemaTemplate.S23M, "		");
-    _builder.append(":");
-    _builder.append(extensionBase, "		");
-    _builder.append("\">");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _isEmpty = elementsInSequence.isEmpty();
-      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-      if (_operator_not) {
-        _builder.append("\t\t\t");
-        _builder.append("<");
-        String _xsd_3 = this.xsd("sequence");
-        _builder.append(_xsd_3, "			");
-        _builder.append(">");
-        _builder.newLineIfNotEmpty();
-        {
-          for(final CharSequence element : elementsInSequence) {
-            _builder.append("\t\t\t");
-            _builder.append("\t");
-            _builder.append(element, "				");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("\t\t\t");
-        _builder.append("</");
-        String _xsd_4 = this.xsd("sequence");
-        _builder.append(_xsd_4, "			");
-        _builder.append(">");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t\t");
-    _builder.append("</");
-    String _xsd_5 = this.xsd("extension");
-    _builder.append(_xsd_5, "		");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("</");
-    String _xsd_6 = this.xsd("complexContent");
-    _builder.append(_xsd_6, "	");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</");
-    String _xsd_7 = this.xsd("complexType");
-    _builder.append(_xsd_7, "");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
-    return _builder;
   }
   
   private CharSequence categoryComplexType(final String name, final List<CharSequence> elementsInSequence) {
@@ -459,91 +360,115 @@ public class XmlSchemaTemplate {
     return _builder;
   }
   
+  private CharSequence complexTypeWithExtension(final String name, final String extensionBase, final List<CharSequence> containedElements) {
+    String _format = String.format("name=\"%s\"", name);
+    String _s23m = this.s23m(extensionBase);
+    String _format_1 = String.format("base=\"%s\"", _s23m);
+    CharSequence _sequence = this.sequence(containedElements);
+    CharSequence _node = this.node("extension", _format_1, _sequence);
+    CharSequence _node_1 = this.node("complexContent", "", _node);
+    CharSequence _node_2 = this.node("complexType", _format, _node_1);
+    return _node_2;
+  }
+  
+  private CharSequence sequence(final List<CharSequence> containedElements) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = containedElements.isEmpty();
+      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+      if (_operator_not) {
+        String _join = IterableExtensions.join(containedElements, "\n");
+        CharSequence _node = this.node("sequence", "", _join);
+        _builder.append(_node, "");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
   private CharSequence simpleType(final String name, final String baseType) {
+    String _format = String.format("name=\"%s\"", name);
+    String _format_1 = String.format("base=\"%s\"", baseType);
+    CharSequence _node = this.node("restriction", _format_1);
+    CharSequence _node_1 = this.node("simpleType", _format, _node);
+    return _node_1;
+  }
+  
+  private CharSequence element(final String name, final String type) {
+    String _format = String.format("name=\"%s\" type=\"%s\"", name, type);
+    CharSequence _node = this.node("element", _format);
+    return _node;
+  }
+  
+  private CharSequence element(final String referencedName) {
+    String _format = String.format("ref=\"%s\"", referencedName);
+    CharSequence _node = this.node("element", _format);
+    return _node;
+  }
+  
+  private CharSequence elementList(final String referencedName) {
+    String _format = String.format("ref=\"%s\" minOccurs=\"0\" maxOccurs=\"unbounded\"", referencedName);
+    CharSequence _node = this.node("element", _format);
+    return _node;
+  }
+  
+  private CharSequence elementList(final String name, final String type) {
+    String _format = String.format("name=\"%s\" type=\"%s\" minOccurs=\"0\" maxOccurs=\"unbounded\"", name, type);
+    CharSequence _node = this.node("element", _format);
+    return _node;
+  }
+  
+  private CharSequence node(final String tagName, final String attributeContents, final CharSequence nestedElements) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<");
-    String _xsd = this.xsd("simpleType");
+    String _xsd = this.xsd(tagName);
     _builder.append(_xsd, "");
-    _builder.append(" name=\"");
-    _builder.append(name, "");
-    _builder.append("\">");
+    {
+      boolean _isEmpty = attributeContents.isEmpty();
+      if (_isEmpty) {
+        _builder.append(">");
+      } else {
+        _builder.append(" ");
+        _builder.append(attributeContents, "");
+        _builder.append(">");
+      }
+    }
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("<");
-    String _xsd_1 = this.xsd("restriction");
-    _builder.append(_xsd_1, "	");
-    _builder.append(" base=\"");
-    _builder.append(baseType, "	");
-    _builder.append("\"/>");
+    _builder.append(nestedElements, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("</");
-    String _xsd_2 = this.xsd("simpleType");
-    _builder.append(_xsd_2, "");
+    String _xsd_1 = this.xsd(tagName);
+    _builder.append(_xsd_1, "");
     _builder.append(">");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  private CharSequence element(final String name, final String type) {
+  private CharSequence node(final String tagName, final String attributeContents) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<");
-    String _xsd = this.xsd("element");
+    String _xsd = this.xsd(tagName);
     _builder.append(_xsd, "");
-    _builder.append(" name=\"");
-    _builder.append(name, "");
-    _builder.append("\" type=\"");
-    _builder.append(type, "");
-    _builder.append("\"/>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  private CharSequence elementRef(final String referencedName) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _xsd = this.xsd("element");
-    _builder.append(_xsd, "");
-    _builder.append(" ref=\"");
-    _builder.append(referencedName, "");
-    _builder.append("\"/>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  private CharSequence elementRefList(final String referencedName) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _xsd = this.xsd("element");
-    _builder.append(_xsd, "");
-    _builder.append(" ref=\"");
-    _builder.append(referencedName, "");
-    _builder.append("\" minOccurs=\"0\" maxOccurs=\"unbounded\"/>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  private CharSequence elementList(final String name, final String type) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _xsd = this.xsd("element");
-    _builder.append(_xsd, "");
-    _builder.append(" name=\"");
-    _builder.append(name, "");
-    _builder.append("\" type=\"");
-    _builder.append(type, "");
-    _builder.append("\" minOccurs=\"0\" maxOccurs=\"unbounded\"/>");
+    _builder.append(" ");
+    _builder.append(attributeContents, "");
+    _builder.append("/>");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
   private String xsd(final String name) {
-    String _operator_plus = StringExtensions.operator_plus(XmlSchemaTemplate.XSD, ":");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
-    return _operator_plus_1;
+    String _qualifiedName = this.qualifiedName(XmlSchemaTemplate.XSD, name);
+    return _qualifiedName;
   }
   
   private String s23m(final String name) {
-    String _operator_plus = StringExtensions.operator_plus(XmlSchemaTemplate.S23M, ":");
+    String _qualifiedName = this.qualifiedName(XmlSchemaTemplate.S23M, name);
+    return _qualifiedName;
+  }
+  
+  private String qualifiedName(final String namespacePrefix, final String name) {
+    String _operator_plus = StringExtensions.operator_plus(namespacePrefix, ":");
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
     return _operator_plus_1;
   }

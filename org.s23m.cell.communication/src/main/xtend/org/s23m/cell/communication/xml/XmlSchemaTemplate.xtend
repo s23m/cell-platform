@@ -3,15 +3,19 @@ package org.s23m.cell.communication.xml
 import java.util.List
 import java.util.Collections
 import static java.util.Arrays.*
+import static java.lang.String.*
+import org.eclipse.xtext.xbase.lib.StringExtensions
+import org.eclipse.xtext.xbase.lib.ListExtensions
+
+import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
+import static extension java.lang.String.*
 
 // TODO use builder API approach
 class XmlSchemaTemplate {
 	
-	private static String XSD = "xsd"
-	
-	private static String S23M = "s23m"
-	
-	private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
+	static String XSD = "xsd"
+	static String S23M = "s23m"
+	static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
 	
 	// TODO: add jargon support
 	def createHumanReadableSchema() '''
@@ -55,8 +59,8 @@ class XmlSchemaTemplate {
 		))»
 		
 		«complexType("category", asList(
-			elementRef(s23m("semanticIdentity")),
-			elementRef(s23m("category"))
+			element(s23m("semanticIdentity")),
+			element(s23m("category"))
 		))»
 		
 		«simpleType("uuid", xsd("string"))»
@@ -66,7 +70,7 @@ class XmlSchemaTemplate {
 		«element("artifactSet", s23m("artifactSet"))»
 		
 		«complexType("artifactSet", asList(
-			elementRefList(s23m("model")),
+			elementList(s23m("model")),
 			elementList("semanticDomain", s23m("semanticDomain"))
 		))»
 	'''
@@ -76,7 +80,7 @@ class XmlSchemaTemplate {
 	
 		«categoryComplexType("graph", asList(
 			element("container", s23m("identityReference")),
-			elementRef(s23m("isAbstract")),
+			element(s23m("isAbstract")),
 			elementList("vertex", s23m("vertex")),
 			elementList("visibility", s23m("visibility")),
 			elementList("edge", s23m("edge")),
@@ -88,33 +92,33 @@ class XmlSchemaTemplate {
 	
 	def private vertices() '''
 		«categoryComplexType("vertex", asList(
-			elementRef(s23m("isAbstract")),
-			elementRef(s23m("maxCardinality"))
+			element(s23m("isAbstract")),
+			element(s23m("maxCardinality"))
 		))»
 	'''
 	
 	def private arrows() '''
 		«categoryComplexType("superSetReference", asList(
-			elementRef(s23m("isAbstract")),
-			elementRef(s23m("from")),
-			elementRef(s23m("to"))
+			element(s23m("isAbstract")),
+			element(s23m("from")),
+			element(s23m("to"))
 		))»
 		«categoryComplexType("visibility", asList(
-			elementRef(s23m("isAbstract")),
-			elementRef(s23m("from")),
-			elementRef(s23m("to"))
+			element(s23m("isAbstract")),
+			element(s23m("from")),
+			element(s23m("to"))
 		))»
 		«categoryComplexType("edge", asList(
-			elementRef(s23m("isAbstract")),
+			element(s23m("isAbstract")),
 			element("from", s23m("edgeEnd")),
 			element("to", s23m("edgeEnd"))
 		))»
 		«categoryComplexType("edgeEnd", asList(
-			elementRef(s23m("isAbstract")),
-			elementRef(s23m("minCardinality")),
-			elementRef(s23m("maxCardinality")),
-			elementRef(s23m("isContainer")),
-			elementRef(s23m("isNavigable"))
+			element(s23m("isAbstract")),
+			element(s23m("minCardinality")),
+			element(s23m("maxCardinality")),
+			element(s23m("isContainer")),
+			element(s23m("isNavigable"))
 		))»
 	'''
 	
@@ -129,7 +133,7 @@ class XmlSchemaTemplate {
 	
 	def private semanticDomainArtefactEncoding() '''
 		«complexType("semanticDomain", asList(
-			elementRef(s23m("model")),
+			element(s23m("model")),
 			elementList("identity", s23m("identity"))
 		))»
 		
@@ -142,67 +146,73 @@ class XmlSchemaTemplate {
 		))»
 	'''
 	
-	def private complexType(String name, List<CharSequence> elementsInSequence) '''
-		<«xsd("complexType")» name="«name»">
-			<«xsd("sequence")»>
-				«FOR element : elementsInSequence»
-				«element»
-				«ENDFOR»
-			</«xsd("sequence")»>
-		</«xsd("complexType")»>
-	'''
+	def private complexType(String name, List<CharSequence> containedElements) {
+		"complexType".node('name="%s"'.format(name), containedElements.join("\n"))
+	}
 	
 	def private complexTypeWithExtension(String name, String extensionBase) {
 		complexTypeWithExtension(name, extensionBase, Collections::emptyList)
 	}
 	
-	def private complexTypeWithExtension(String name, String extensionBase, List<CharSequence> elementsInSequence) '''
-		<«xsd("complexType")» name="«name»">
-			<«xsd("complexContent")»>
-				<«xsd("extension")» base="«S23M»:«extensionBase»">
-					«IF !elementsInSequence.empty»
-					<«xsd("sequence")»>
-						«FOR element : elementsInSequence»
-						«element»
-						«ENDFOR»
-					</«xsd("sequence")»>
-					«ENDIF»
-				</«xsd("extension")»>
-			</«xsd("complexContent")»>
-		</«xsd("complexType")»>
-	'''
-	
 	def private categoryComplexType(String name, List<CharSequence> elementsInSequence) '''
 		«complexTypeWithExtension(name, "category", elementsInSequence)»
 	'''
 	
-	def private simpleType(String name, String baseType) '''
-		<«xsd("simpleType")» name="«name»">
-			<«xsd("restriction")» base="«baseType»"/>
-		</«xsd("simpleType")»>
+	def private complexTypeWithExtension(String name, String extensionBase, List<CharSequence> containedElements) {
+		"complexType".node('name="%s"'.format(name),
+			"complexContent".node("",
+				"extension".node('base="%s"'.format(s23m(extensionBase)),
+					sequence(containedElements)
+				)
+			)
+		)
+	}
+	
+	def private sequence(List<CharSequence> containedElements) '''
+		«IF !containedElements.empty»«node("sequence", "", containedElements.join("\n"))»«ENDIF»
 	'''
 	
-	def private element(String name, String type) '''
-		<«xsd("element")» name="«name»" type="«type»"/>
+	def private simpleType(String name, String baseType) {
+		"simpleType".node('name="%s"'.format(name),
+			"restriction".node('base="%s"'.format(baseType))
+		)
+	}
+	
+	def private element(String name, String type) {
+		"element".node('name="%s" type="%s"'.format(name, type))
+	}
+	
+	def private element(String referencedName) {
+		"element".node('ref="%s"'.format(referencedName))
+	}
+	
+	def private elementList(String referencedName) {
+		"element".node('ref="%s" minOccurs="0" maxOccurs="unbounded"'.format(referencedName))
+	}
+	
+	def private elementList(String name, String type) {
+		"element".node('name="%s" type="%s" minOccurs="0" maxOccurs="unbounded"'.format(name, type))
+	}
+	
+	def private node(String tagName, String attributeContents, CharSequence nestedElements) '''
+		<«xsd(tagName)»«IF attributeContents.empty»>«ELSE» «attributeContents»>«ENDIF»
+			«nestedElements»
+		</«xsd(tagName)»>
 	'''
 	
-	def private elementRef(String referencedName) '''
-		<«xsd("element")» ref="«referencedName»"/>
-	'''
-	
-	def private elementRefList(String referencedName) '''
-		<«xsd("element")» ref="«referencedName»" minOccurs="0" maxOccurs="unbounded"/>
-	'''
-	
-	def private elementList(String name, String type) '''
-		<«xsd("element")» name="«name»" type="«type»" minOccurs="0" maxOccurs="unbounded"/>
+	def private node(String tagName, String attributeContents) '''
+		<«xsd(tagName)» «attributeContents»/>
 	'''
 	
 	def private xsd(String name) {
-		XSD + ":" + name
+		qualifiedName(XSD, name)
 	}
 	
 	def private s23m(String name) {
-		S23M + ":" + name
+		qualifiedName(S23M, name)
+	}
+	
+	def private qualifiedName(String namespacePrefix, String name) {
+		namespacePrefix + ":" + name
 	}
 }
