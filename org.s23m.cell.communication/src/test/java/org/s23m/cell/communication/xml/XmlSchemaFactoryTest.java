@@ -19,18 +19,29 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final String XML_SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
 	
 	private static final String NAMESPACE_PREFIX = "xmlns:";
+
+	// TODO discover this automatically
+	private static final String OUR_NAMESPACE = "s23m";
 	
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {
 			return Node.ELEMENT_NODE == input.getNodeType();
+		}
+	};
+	
+	private static final Function<String, String> QUALIFY_NAME = new Function<String, String>() {
+		public String apply(String input) {
+			return OUR_NAMESPACE + ":" + input;
 		}
 	};
 	
@@ -95,9 +106,8 @@ public class XmlSchemaFactoryTest extends TestCase {
 		ourDeclaredTypes.remove(xsdStringType);
 		
 		java.util.Set<String> names = retrieveAllElementNames();
-		for (String type : ourDeclaredTypes) {
-			// TODO
-		}
+		List<String> qualifiedNames = Lists.transform(new ArrayList<String>(names), QUALIFY_NAME);
+		assertTrue("At least one type does not refer to a declared element", qualifiedNames.containsAll(ourDeclaredTypes));
 	}
 	
 	public void testOnlyXsdTypeInUseIsStringType() {
@@ -111,7 +121,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 					String qualifiedXsdTypeName = type.getNodeValue();
 					if (qualifiedXsdTypeName.startsWith(xsdNamespacePrefix)) {
 						String xsdTypeName = retrieveXsdStringType();
-						assertEquals(XSD_STRING, xsdTypeName);
+						assertEquals(qualifiedXsdTypeName, xsdTypeName);
 					}
 				}
 			}
