@@ -60,7 +60,6 @@ class XmlSchemaTemplate {
 		this.identityReference = terminology.identityReference
 		this.identityReferenceQualified = s23m(identityReference)
 		this.model = terminology.model
-		this.function = terminology.function
 		this.category = terminology.category
 		this.uuid = terminology.uuid
 		this.uuidQualified = s23m(uuid)
@@ -80,6 +79,7 @@ class XmlSchemaTemplate {
 		this.superSetReference = terminology.superSetReference
 		this.command = terminology.command
 		this.query = terminology.query
+		this.function = terminology.function
 	}
 
 	def createSchema() '''
@@ -114,8 +114,8 @@ class XmlSchemaTemplate {
 		))»
 		
 		«complexType(category, asList(
-			element(s23m(semanticIdentity)),
-			element(s23m(category))
+			element(semanticIdentity),
+			element(category)
 		))»
 		
 		«simpleType(uuid, XSD_STRING)»
@@ -139,7 +139,7 @@ class XmlSchemaTemplate {
 	
 		«categoryComplexType(graph, asList(
 			element(container, identityReferenceQualified),
-			element(s23m(isAbstract)),
+			element(isAbstract),
 			elementList(vertex, s23m(vertex)),
 			elementList(visibility, s23m(visibility)),
 			elementList(edge, s23m(edge)),
@@ -151,34 +151,34 @@ class XmlSchemaTemplate {
 	
 	def private vertices() '''
 		«categoryComplexType(vertex, asList(
-			element(s23m(isAbstract)),
-			element(s23m(maxCardinality))
+			element(isAbstract),
+			element(maxCardinality)
 		))»
 	'''
 	
 	def private arrows() '''
 	
 		«categoryComplexType(superSetReference, asList(
-			element(s23m(isAbstract)),
-			element(s23m(from)),
-			element(s23m(to))
+			element(isAbstract),
+			element(from),
+			element(to)
 		))»
 		«categoryComplexType(visibility, asList(
-			element(s23m(isAbstract)),
-			element(s23m(from)),
-			element(s23m(to))
+			element(isAbstract),
+			element(from),
+			element(to)
 		))»
 		«categoryComplexType(edge, asList(
-			element(s23m(isAbstract)),
+			element(isAbstract),
 			element(from, s23m(edgeEnd)),
 			element(to, s23m(edgeEnd))
 		))»
 		«categoryComplexType(edgeEnd, asList(
-			element(s23m(isAbstract)),
-			element(s23m(minCardinality)),
-			element(s23m(maxCardinality)),
-			element(s23m(isContainer)),
-			element(s23m(isNavigable))
+			element(isAbstract),
+			element(minCardinality),
+			element(maxCardinality),
+			element(isContainer),
+			element(isNavigable)
 		))»
 	'''
 	
@@ -203,7 +203,7 @@ class XmlSchemaTemplate {
 		«val technicalName = terminology.technicalName»
 		
 		«complexType(semanticDomain, asList(
-			element(s23m(model)),
+			element(model),
 			elementList(identity, s23m(identity))
 		))»
 		
@@ -253,7 +253,7 @@ class XmlSchemaTemplate {
 	}
 	
 	def private element(String referencedName) {
-		"element".node('ref="%s"'.format(referencedName))
+		"element".node('ref="%s"'.format(s23m(referencedName)))
 	}
 	
 	def private elementList(String referencedName) {

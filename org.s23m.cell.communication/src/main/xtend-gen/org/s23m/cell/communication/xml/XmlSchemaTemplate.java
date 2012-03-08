@@ -107,8 +107,6 @@ public class XmlSchemaTemplate {
       this.identityReferenceQualified = _s23m;
       String _model = terminology.model();
       this.model = _model;
-      String _function = terminology.function();
-      this.function = _function;
       String _category = terminology.category();
       this.category = _category;
       String _uuid = terminology.uuid();
@@ -145,6 +143,8 @@ public class XmlSchemaTemplate {
       this.command = _command;
       String _query = terminology.query();
       this.query = _query;
+      String _function = terminology.function();
+      this.function = _function;
   }
   
   public CharSequence createSchema() {
@@ -226,10 +226,8 @@ public class XmlSchemaTemplate {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    String _s23m_2 = XmlSchemaTemplate.s23m(this.semanticIdentity);
-    CharSequence _element_13 = this.element(_s23m_2);
-    String _s23m_3 = XmlSchemaTemplate.s23m(this.category);
-    CharSequence _element_14 = this.element(_s23m_3);
+    CharSequence _element_13 = this.element(this.semanticIdentity);
+    CharSequence _element_14 = this.element(this.category);
     List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element_13, _element_14);
     CharSequence _complexType_1 = this.complexType(this.category, _asList_1);
     _builder.append(_complexType_1, "	");
@@ -284,20 +282,19 @@ public class XmlSchemaTemplate {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _element = this.element(container, this.identityReferenceQualified);
-    String _s23m_1 = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element_1 = this.element(_s23m_1);
-    String _s23m_2 = XmlSchemaTemplate.s23m(this.vertex);
-    CharSequence _elementList = this.elementList(this.vertex, _s23m_2);
-    String _s23m_3 = XmlSchemaTemplate.s23m(this.visibility);
-    CharSequence _elementList_1 = this.elementList(this.visibility, _s23m_3);
-    String _s23m_4 = XmlSchemaTemplate.s23m(this.edge);
-    CharSequence _elementList_2 = this.elementList(this.edge, _s23m_4);
-    String _s23m_5 = XmlSchemaTemplate.s23m(this.superSetReference);
-    CharSequence _elementList_3 = this.elementList(this.superSetReference, _s23m_5);
-    String _s23m_6 = XmlSchemaTemplate.s23m(this.command);
-    CharSequence _elementList_4 = this.elementList(this.command, _s23m_6);
-    String _s23m_7 = XmlSchemaTemplate.s23m(this.query);
-    CharSequence _elementList_5 = this.elementList(this.query, _s23m_7);
+    CharSequence _element_1 = this.element(this.isAbstract);
+    String _s23m_1 = XmlSchemaTemplate.s23m(this.vertex);
+    CharSequence _elementList = this.elementList(this.vertex, _s23m_1);
+    String _s23m_2 = XmlSchemaTemplate.s23m(this.visibility);
+    CharSequence _elementList_1 = this.elementList(this.visibility, _s23m_2);
+    String _s23m_3 = XmlSchemaTemplate.s23m(this.edge);
+    CharSequence _elementList_2 = this.elementList(this.edge, _s23m_3);
+    String _s23m_4 = XmlSchemaTemplate.s23m(this.superSetReference);
+    CharSequence _elementList_3 = this.elementList(this.superSetReference, _s23m_4);
+    String _s23m_5 = XmlSchemaTemplate.s23m(this.command);
+    CharSequence _elementList_4 = this.elementList(this.command, _s23m_5);
+    String _s23m_6 = XmlSchemaTemplate.s23m(this.query);
+    CharSequence _elementList_5 = this.elementList(this.query, _s23m_6);
     List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1, _elementList, _elementList_1, _elementList_2, _elementList_3, _elementList_4, _elementList_5);
     CharSequence _categoryComplexType = this.categoryComplexType(this.graph, _asList);
     _builder.append(_categoryComplexType, "	");
@@ -307,10 +304,8 @@ public class XmlSchemaTemplate {
   
   private CharSequence vertices() {
     StringConcatenation _builder = new StringConcatenation();
-    String _s23m = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element = this.element(_s23m);
-    String _s23m_1 = XmlSchemaTemplate.s23m(this.maxCardinality);
-    CharSequence _element_1 = this.element(_s23m_1);
+    CharSequence _element = this.element(this.isAbstract);
+    CharSequence _element_1 = this.element(this.maxCardinality);
     List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1);
     CharSequence _categoryComplexType = this.categoryComplexType(this.vertex, _asList);
     _builder.append(_categoryComplexType, "");
@@ -322,49 +317,37 @@ public class XmlSchemaTemplate {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("\t");
-    String _s23m = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element = this.element(_s23m);
-    String _s23m_1 = XmlSchemaTemplate.s23m(this.from);
-    CharSequence _element_1 = this.element(_s23m_1);
-    String _s23m_2 = XmlSchemaTemplate.s23m(this.to);
-    CharSequence _element_2 = this.element(_s23m_2);
+    CharSequence _element = this.element(this.isAbstract);
+    CharSequence _element_1 = this.element(this.from);
+    CharSequence _element_2 = this.element(this.to);
     List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _element_1, _element_2);
     CharSequence _categoryComplexType = this.categoryComplexType(this.superSetReference, _asList);
     _builder.append(_categoryComplexType, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    String _s23m_3 = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element_3 = this.element(_s23m_3);
-    String _s23m_4 = XmlSchemaTemplate.s23m(this.from);
-    CharSequence _element_4 = this.element(_s23m_4);
-    String _s23m_5 = XmlSchemaTemplate.s23m(this.to);
-    CharSequence _element_5 = this.element(_s23m_5);
+    CharSequence _element_3 = this.element(this.isAbstract);
+    CharSequence _element_4 = this.element(this.from);
+    CharSequence _element_5 = this.element(this.to);
     List<CharSequence> _asList_1 = Arrays.<CharSequence>asList(_element_3, _element_4, _element_5);
     CharSequence _categoryComplexType_1 = this.categoryComplexType(this.visibility, _asList_1);
     _builder.append(_categoryComplexType_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    String _s23m_6 = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element_6 = this.element(_s23m_6);
-    String _s23m_7 = XmlSchemaTemplate.s23m(this.edgeEnd);
-    CharSequence _element_7 = this.element(this.from, _s23m_7);
-    String _s23m_8 = XmlSchemaTemplate.s23m(this.edgeEnd);
-    CharSequence _element_8 = this.element(this.to, _s23m_8);
+    CharSequence _element_6 = this.element(this.isAbstract);
+    String _s23m = XmlSchemaTemplate.s23m(this.edgeEnd);
+    CharSequence _element_7 = this.element(this.from, _s23m);
+    String _s23m_1 = XmlSchemaTemplate.s23m(this.edgeEnd);
+    CharSequence _element_8 = this.element(this.to, _s23m_1);
     List<CharSequence> _asList_2 = Arrays.<CharSequence>asList(_element_6, _element_7, _element_8);
     CharSequence _categoryComplexType_2 = this.categoryComplexType(this.edge, _asList_2);
     _builder.append(_categoryComplexType_2, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    String _s23m_9 = XmlSchemaTemplate.s23m(this.isAbstract);
-    CharSequence _element_9 = this.element(_s23m_9);
-    String _s23m_10 = XmlSchemaTemplate.s23m(this.minCardinality);
-    CharSequence _element_10 = this.element(_s23m_10);
-    String _s23m_11 = XmlSchemaTemplate.s23m(this.maxCardinality);
-    CharSequence _element_11 = this.element(_s23m_11);
-    String _s23m_12 = XmlSchemaTemplate.s23m(this.isContainer);
-    CharSequence _element_12 = this.element(_s23m_12);
-    String _s23m_13 = XmlSchemaTemplate.s23m(this.isNavigable);
-    CharSequence _element_13 = this.element(_s23m_13);
+    CharSequence _element_9 = this.element(this.isAbstract);
+    CharSequence _element_10 = this.element(this.minCardinality);
+    CharSequence _element_11 = this.element(this.maxCardinality);
+    CharSequence _element_12 = this.element(this.isContainer);
+    CharSequence _element_13 = this.element(this.isNavigable);
     List<CharSequence> _asList_3 = Arrays.<CharSequence>asList(_element_9, _element_10, _element_11, _element_12, _element_13);
     CharSequence _categoryComplexType_3 = this.categoryComplexType(this.edgeEnd, _asList_3);
     _builder.append(_categoryComplexType_3, "	");
@@ -423,17 +406,16 @@ public class XmlSchemaTemplate {
     final String technicalName = _technicalName;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _s23m = XmlSchemaTemplate.s23m(this.model);
-    CharSequence _element = this.element(_s23m);
-    String _s23m_1 = XmlSchemaTemplate.s23m(identity);
-    CharSequence _elementList = this.elementList(identity, _s23m_1);
+    CharSequence _element = this.element(this.model);
+    String _s23m = XmlSchemaTemplate.s23m(identity);
+    CharSequence _elementList = this.elementList(identity, _s23m);
     List<CharSequence> _asList = Arrays.<CharSequence>asList(_element, _elementList);
     CharSequence _complexType = this.complexType(semanticDomain, _asList);
     _builder.append(_complexType, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    String _s23m_2 = XmlSchemaTemplate.s23m(this.uuid);
-    CharSequence _element_1 = this.element(identifier, _s23m_2);
+    String _s23m_1 = XmlSchemaTemplate.s23m(this.uuid);
+    CharSequence _element_1 = this.element(identifier, _s23m_1);
     CharSequence _element_2 = this.element(name, XmlSchemaTemplate.XSD_STRING);
     CharSequence _element_3 = this.element(pluralName, XmlSchemaTemplate.XSD_STRING);
     CharSequence _element_4 = this.element(payload, XmlSchemaTemplate.XSD_STRING);
@@ -507,7 +489,8 @@ public class XmlSchemaTemplate {
   }
   
   private CharSequence element(final String referencedName) {
-    String _format = String.format("ref=\"%s\"", referencedName);
+    String _s23m = XmlSchemaTemplate.s23m(referencedName);
+    String _format = String.format("ref=\"%s\"", _s23m);
     CharSequence _node = this.node("element", _format);
     return _node;
   }
