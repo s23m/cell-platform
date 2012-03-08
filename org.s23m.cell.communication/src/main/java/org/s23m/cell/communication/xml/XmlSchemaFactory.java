@@ -11,20 +11,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-// TODO add caching of machine-readable version
+// TODO add caching
 public class XmlSchemaFactory {
 	
-	private final XmlSchemaTemplate schemaTemplate;
-	
-	public XmlSchemaFactory() {
-		this.schemaTemplate = new XmlSchemaTemplate();
-	}
-	
-	// TODO support resolving schema for a specified jargon
-	public Document createHumanReadableSchema() {
+	public Document createSchema(final XmlSchemaTerminology terminology) {
 		try {
+			final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate(terminology);
 			// generate schema from template
-			final CharSequence schemaText = schemaTemplate.createHumanReadableSchema();
+			final CharSequence schemaText = schemaTemplate.createSchema();
 			
 			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setNamespaceAware(true);
@@ -42,6 +36,14 @@ public class XmlSchemaFactory {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+
+	}
+	
+	// TODO support resolving schema for a specified jargon
+	public Document createHumanReadableSchema() {
+		// TODO replace by implementation which uses kernel sets to construct names
+		final XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
+		return createSchema(terminology);
 	}
 	
 	public Document createMachineReadableSchema() {

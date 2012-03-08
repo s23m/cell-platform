@@ -6,11 +6,14 @@ import static java.util.Arrays.*
 import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import static extension java.lang.String.*
 
-// TODO inject bean conforming to interface with method for each concept
-// TODO create a dynamic proxy which implements the interface, and test that each concept is used
 class XmlSchemaTemplate {
 	
+	/* Schema constants */
+	
 	static String XSD = "xsd"
+	static String XSD_STRING = xsd("string")
+	
+	/* Namespace-related constants */
 	
 	static String S23M = "s23m"
 	
@@ -21,9 +24,65 @@ class XmlSchemaTemplate {
 									  'targetNamespace="'+S23M_SCHEMA+'" ' +
 									  'elementFormDefault="qualified" ' +
 									  'attributeFormDefault="unqualified"'
+
+	XmlSchemaTerminology terminology
 	
-	// TODO: add jargon support
-	def createHumanReadableSchema() '''
+	// reused elements
+	String semanticIdentity
+	String identityReference
+	String identityReferenceQualified
+	String model
+	String category
+	String uuid
+	String uuidQualified
+	String isAbstract
+	String maxCardinality
+	String minCardinality
+	String isContainer
+	String isNavigable
+	String from
+	String to
+	
+	// kernel concepts
+	String graph
+	String vertex
+	String visibility
+	String edge
+	String edgeEnd
+	String superSetReference
+	String command
+	String query
+	String function
+									  
+	new(XmlSchemaTerminology terminology) {
+		this.terminology = terminology
+		this.semanticIdentity = terminology.semanticIdentity
+		this.identityReference = terminology.identityReference
+		this.identityReferenceQualified = s23m(identityReference)
+		this.model = terminology.model
+		this.function = terminology.function
+		this.category = terminology.category
+		this.uuid = terminology.uuid
+		this.uuidQualified = s23m(uuid)
+		this.isAbstract = terminology.isAbstract
+		this.maxCardinality = terminology.maxCardinality
+		this.minCardinality = terminology.minCardinality
+		this.isContainer = terminology.isContainer
+		this.isNavigable = terminology.isNavigable
+		this.from = terminology.from
+		this.to = terminology.to
+		
+		this.graph = terminology.graph 
+		this.vertex = terminology.vertex
+		this.visibility = terminology.visibility
+		this.edge = terminology.edge
+		this.edgeEnd = terminology.edgeEnd
+		this.superSetReference = terminology.superSetReference
+		this.command = terminology.command
+		this.query = terminology.query
+	}
+
+	def createSchema() '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		«"schema".node(SCHEMA_ATTRIBUTES, asList(
 			reusedElements,
@@ -36,34 +95,22 @@ class XmlSchemaTemplate {
 		))»
 	'''
 	
-	def createMachineReadableSchema() '''
-	'''
-	
 	def private reusedElements() '''
-		«val identityReference = "identityReference"»
-		«val identityReferenceQualified = s23m(identityReference)»
-		«val uuid = "uuid"»
-		«val semanticIdentity = "semanticIdentity"»
-		«val model = "model"»
-		«val category = "category"»
-		«val isAbstract = "isAbstract"»
-		«val maxCardinality = "maxCardinality"»
-		
 		«element(semanticIdentity, identityReferenceQualified)»
 		«element(model, s23m(model))»
 		«element(category, identityReferenceQualified)»
 		«element(isAbstract, identityReferenceQualified)»
 		«element(maxCardinality, identityReferenceQualified)»
-		«element("minCardinality", identityReferenceQualified)»
-		«element("isContainer", identityReferenceQualified)»
-		«element("isNavigable", identityReferenceQualified)»
-		«element("from", identityReferenceQualified)»
-		«element("to", identityReferenceQualified)»
-		«element("function", s23m("function"))»
+		«element(minCardinality, identityReferenceQualified)»
+		«element(isContainer, identityReferenceQualified)»
+		«element(isNavigable, identityReferenceQualified)»
+		«element(from, identityReferenceQualified)»
+		«element(to, identityReferenceQualified)»
+		«element(function, s23m(function))»
 	
 		«complexType(identityReference, asList(
-			element("uniqueRepresentationReference", s23m(uuid)),
-			element("identifier", s23m(uuid))
+			element(terminology.uniqueRepresentationReference, uuidQualified),
+			element(terminology.identifier, uuidQualified)
 		))»
 		
 		«complexType(category, asList(
@@ -71,86 +118,101 @@ class XmlSchemaTemplate {
 			element(s23m(category))
 		))»
 		
-		«simpleType(uuid, xsd("string"))»
+		«simpleType(uuid, XSD_STRING)»
 	'''
 	
 	def private rootElement() '''
-		«element("artifactSet", s23m("artifactSet"))»
+		«val artifactSet = terminology.artifactSet»
+		«val semanticDomain = terminology.semanticDomain»
 		
-		«complexType("artifactSet", asList(
-			elementList(s23m("model")),
-			elementList("semanticDomain", s23m("semanticDomain"))
+		«element(artifactSet, s23m(artifactSet))»		
+		«complexType(artifactSet, asList(
+			elementList(s23m(model)),
+			elementList(semanticDomain, s23m(semanticDomain))
 		))»
 	'''
 	
 	def private modelArtefactEncoding() '''
-		«complexTypeWithExtension("model", s23m("graph"))»
+		«val container = terminology.container»
+		
+		«complexTypeWithExtension(model, s23m(graph))»
 	
-		«categoryComplexType("graph", asList(
-			element("container", s23m("identityReference")),
-			element(s23m("isAbstract")),
-			elementList("vertex", s23m("vertex")),
-			elementList("visibility", s23m("visibility")),
-			elementList("edge", s23m("edge")),
-			elementList("superSetReference", s23m("superSetReference")),
-			elementList("command", s23m("command")),
-			elementList("query", s23m("query"))
+		«categoryComplexType(graph, asList(
+			element(container, identityReferenceQualified),
+			element(s23m(isAbstract)),
+			elementList(vertex, s23m(vertex)),
+			elementList(visibility, s23m(visibility)),
+			elementList(edge, s23m(edge)),
+			elementList(superSetReference, s23m(superSetReference)),
+			elementList(command, s23m(command)),
+			elementList(query, s23m(query))
 		))»
 	'''
 	
 	def private vertices() '''
-		«categoryComplexType("vertex", asList(
-			element(s23m("isAbstract")),
-			element(s23m("maxCardinality"))
+		«categoryComplexType(vertex, asList(
+			element(s23m(isAbstract)),
+			element(s23m(maxCardinality))
 		))»
 	'''
 	
 	def private arrows() '''
-		«categoryComplexType("superSetReference", asList(
-			element(s23m("isAbstract")),
-			element(s23m("from")),
-			element(s23m("to"))
+	
+		«categoryComplexType(superSetReference, asList(
+			element(s23m(isAbstract)),
+			element(s23m(from)),
+			element(s23m(to))
 		))»
-		«categoryComplexType("visibility", asList(
-			element(s23m("isAbstract")),
-			element(s23m("from")),
-			element(s23m("to"))
+		«categoryComplexType(visibility, asList(
+			element(s23m(isAbstract)),
+			element(s23m(from)),
+			element(s23m(to))
 		))»
-		«categoryComplexType("edge", asList(
-			element(s23m("isAbstract")),
-			element("from", s23m("edgeEnd")),
-			element("to", s23m("edgeEnd"))
+		«categoryComplexType(edge, asList(
+			element(s23m(isAbstract)),
+			element(from, s23m(edgeEnd)),
+			element(to, s23m(edgeEnd))
 		))»
-		«categoryComplexType("edgeEnd", asList(
-			element(s23m("isAbstract")),
-			element(s23m("minCardinality")),
-			element(s23m("maxCardinality")),
-			element(s23m("isContainer")),
-			element(s23m("isNavigable"))
+		«categoryComplexType(edgeEnd, asList(
+			element(s23m(isAbstract)),
+			element(s23m(minCardinality)),
+			element(s23m(maxCardinality)),
+			element(s23m(isContainer)),
+			element(s23m(isNavigable))
 		))»
 	'''
 	
 	def private artifactFunctionality() '''
-		«categoryComplexType("function", asList(
-			elementList("parameter", s23m("parameter"))
+		«val parameter = terminology.parameter»
+		
+		«categoryComplexType(function, asList(
+			elementList(parameter, s23m(parameter))
 		))»
-		«categoryComplexType("parameter", Collections::emptyList)»
-		«complexTypeWithExtension("command", s23m("function"))»
-		«complexTypeWithExtension("query", s23m("function"))»
+		«categoryComplexType(parameter, Collections::emptyList)»
+		«complexTypeWithExtension(command, s23m(function))»
+		«complexTypeWithExtension(query, s23m(function))»
 	'''
 	
 	def private semanticDomainArtefactEncoding() '''
-		«complexType("semanticDomain", asList(
-			element(s23m("model")),
-			elementList("identity", s23m("identity"))
+		«val identity = terminology.identity»
+		«val semanticDomain = terminology.semanticDomain»
+		«val identifier = terminology.identifier»
+		«val name = terminology.name»
+		«val pluralName = terminology.pluralName»
+		«val payload = terminology.payload»
+		«val technicalName = terminology.technicalName»
+		
+		«complexType(semanticDomain, asList(
+			element(s23m(model)),
+			elementList(identity, s23m(identity))
 		))»
 		
-		«complexType("identity", asList(
-			element("identifier", s23m("uuid")),
-			element("name", xsd("string")),
-			element("pluralName", xsd("string")),
-			element("payload", xsd("string")),
-			element("technicalName", xsd("string"))
+		«complexType(identity, asList(
+			element(identifier, s23m(uuid)),
+			element(name, XSD_STRING),
+			element(pluralName, XSD_STRING),
+			element(payload, XSD_STRING),
+			element(technicalName, XSD_STRING)
 		))»
 	'''
 	
@@ -163,7 +225,7 @@ class XmlSchemaTemplate {
 	}
 	
 	def private categoryComplexType(String name, List<CharSequence> elementsInSequence) '''
-		«complexTypeWithExtension(name, "category", elementsInSequence)»
+		«complexTypeWithExtension(name, category, elementsInSequence)»
 	'''
 	
 	def private complexTypeWithExtension(String name, String extensionBase, List<CharSequence> containedElements) {
@@ -216,15 +278,15 @@ class XmlSchemaTemplate {
 		<«xsd(tagName)» «attributeContents»/>
 	'''
 	
-	def private xsd(String name) {
+	def private static xsd(String name) {
 		qualifiedName(XSD, name)
 	}
 	
-	def private s23m(String name) {
+	def private static s23m(String name) {
 		qualifiedName(S23M, name)
 	}
 	
-	def private qualifiedName(String namespacePrefix, String name) {
+	def private static qualifiedName(String namespacePrefix, String name) {
 		namespacePrefix + ":" + name
 	}
 }

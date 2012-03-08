@@ -29,6 +29,7 @@ public interface XmlSchemaTerminology {
 	String superSetReference();
 	String technicalName();
 	String to();
+	String uniqueRepresentationReference();
 	String uuid();
 	String vertex();
 	String visibility();
