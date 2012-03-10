@@ -1,38 +1,38 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.s23m.cell.communication.xml.DocumentObjectModel.CompositeNode;
 import org.s23m.cell.communication.xml.DocumentObjectModel.LeafNode;
+import org.s23m.cell.communication.xml.DocumentObjectModel.Namespace;
 import org.s23m.cell.communication.xml.DocumentObjectModel.Node;
 
 interface XmlSchema {
 	
 	class Schema extends CompositeNode {
-		public Schema() {
-			this.name = "schema";
+		public Schema(Namespace namespace) {
+			super(namespace, "schema");
 		}
 	}
 
 	class ComplexType extends CompositeNode {
-		public ComplexType() {
-			this.name = "complexType";
+		public ComplexType(Namespace namespace) {
+			super(namespace, "complexType");
 		}
 		
-		public ComplexType(Extension extension) {
-			this();
-			children.add(new ComplexContent(extension));
+		public ComplexType(Namespace namespace, Extension extension) {
+			this(namespace);
+			children.add(new ComplexContent(namespace, extension));
 		}
 	}
 	
 	class ComplexContent extends Node {
 		final Extension extension;
 		
-		public ComplexContent(Extension extension) {
-			this.name = "complexContent";
+		public ComplexContent(Namespace namespace, Extension extension) {
+			super(namespace, "complexContent");
 			this.extension = extension;
 		}
 	}
@@ -41,8 +41,8 @@ interface XmlSchema {
 		final Node base;
 		final Sequence sequence;
 		
-		public Extension(Node base, Sequence sequence) {
-			this.name = "extension";
+		public Extension(Namespace namespace, Node base, Sequence sequence) {
+			super(namespace, "extension");
 			this.base = base;
 			this.sequence = sequence;
 		}
@@ -51,8 +51,8 @@ interface XmlSchema {
 	class Sequence extends Node {
 		final List<LeafNode> children;
 		
-		public Sequence() {
-			this.name = "sequence";
+		public Sequence(Namespace namespace) {
+			super(namespace, "sequence");
 			this.children = new ArrayList<LeafNode>();
 		}
 	}
@@ -61,11 +61,10 @@ interface XmlSchema {
 		final Cardinality cardinality;
 		final Node type;
 		
-		public Element(String name, Node type, Cardinality cardinality) {
-			this.name = "element";
+		public Element(Namespace namespace, String name, Node type, Cardinality cardinality) {
+			super(namespace, "element");
 			this.type = type;
 			this.cardinality = cardinality;
-			this.attributes = new LinkedHashMap<String, String>();
 			this.attributes.put("type", type.qualifiedName());
 			cardinality.addToAttributes(attributes);
 		}
@@ -76,16 +75,15 @@ interface XmlSchema {
 		/* Optional cardinality which can override that of the referenced element */
 		final Cardinality cardinality;
 		
-		public ElementReference(Element referencedElement) {
-			this(referencedElement, null);
+		public ElementReference(Namespace namespace, Element referencedElement) {
+			this(namespace, referencedElement, null);
 		}
 		
-		public ElementReference(Element referencedElement, Cardinality cardinality) {
-			this.name = "element";
+		public ElementReference(Namespace namespace, Element referencedElement, Cardinality cardinality) {
+			super(namespace, "element");
 			this.referencedElement = referencedElement;
 			this.cardinality = cardinality;
-			
-			this.attributes = new LinkedHashMap<String, String>(referencedElement.attributes);
+			this.attributes.putAll(referencedElement.attributes);
 			if (cardinality != null) {
 				// replace attributes
 				Cardinality.removeFromAttributes(attributes);

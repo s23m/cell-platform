@@ -5,31 +5,48 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface DocumentObjectModel {
+	
     abstract class Node {
-    	Namespace namespace;
+    	final Namespace namespace;
         
     	/* The tag name */
-    	String name;
+    	final String name;
     	
-    	String qualifiedName() {
+    	public Node(Namespace namespace, String name) {
+			this.namespace = namespace;
+			this.name = name;
+		}
+
+		String qualifiedName() {
     		return namespace.prefix + ":" + name;
     	}
      }
 
     class Namespace {
-        String prefix;
-        String uri;
+        final String prefix;
+        final String uri;
+        
+		public Namespace(String prefix, String uri) {
+			this.prefix = prefix;
+			this.uri = uri;
+		}
     }
 
     abstract class LeafNode extends Node {
-    	LinkedHashMap<String, String> attributes;
+    	final LinkedHashMap<String, String> attributes;
+		
+    	public LeafNode(Namespace namespace, String name) {
+			super(namespace, name);
+			attributes = new LinkedHashMap<String, String>();
+		}
     }
 
     abstract class CompositeNode extends LeafNode {
-        List<Node> children;
+        final List<Node> children;
         
-        public CompositeNode() {
-        	this.children = new ArrayList<Node>();
+        public CompositeNode(Namespace namespace, String name) {
+        	super(namespace, name);
+        	children = new ArrayList<Node>();
 		}
     }
 }
