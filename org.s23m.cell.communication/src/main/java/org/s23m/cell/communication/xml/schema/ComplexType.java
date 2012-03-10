@@ -24,17 +24,21 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.CompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
+import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-public final class ComplexType extends CompositeNode {
+public final class ComplexType extends WrapperNode {
 	
-	public ComplexType(Namespace namespace) {
-		super(namespace, "complexType");
+	private ComplexType(Node child, Namespace namespace) {
+		super(namespace, "complexType", child);
 	}
 	
-	public ComplexType(Namespace namespace, Extension extension) {
-		this(namespace);
-		children.add(new ComplexContent(namespace, extension));
+	public ComplexType(Namespace namespace, Sequence child) {
+		this(child, namespace);
+	}
+	
+	public ComplexType(Namespace namespace, ComplexContent child) {
+		this(child, namespace);
 	}
 }

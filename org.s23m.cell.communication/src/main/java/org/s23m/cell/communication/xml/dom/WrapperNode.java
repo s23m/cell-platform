@@ -29,10 +29,10 @@ package org.s23m.cell.communication.xml.dom;
  *
  * @param <N>
  */
-public abstract class WrapperNode<N extends Node> extends Node {
-	public N child;
+public abstract class WrapperNode extends Node {
+	public Node child;
 
-	public WrapperNode(Namespace namespace, String name, N child) {
+	public WrapperNode(Namespace namespace, String name, Node child) {
 		super(namespace, name);
 		this.child = child;
 	}

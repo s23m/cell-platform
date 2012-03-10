@@ -24,12 +24,11 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.CompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-public final class Extension extends WrapperNode<Sequence> {
+public final class Extension extends WrapperNode {
 	final Node base;
 	
 	public Extension(Namespace namespace, Node base, Sequence sequence) {
