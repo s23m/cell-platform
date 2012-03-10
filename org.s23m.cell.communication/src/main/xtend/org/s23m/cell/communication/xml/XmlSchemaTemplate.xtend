@@ -30,11 +30,19 @@ import static java.util.Arrays.*
 import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import static extension java.lang.String.*
 
+import org.s23m.cell.communication.xml.dom.Namespace
+import com.sun.org.apache.xml.internal.utils.NameSpace
+import org.s23m.cell.communication.xml.schema.Schema
+import static extension org.s23m.cell.communication.xml.Extensions.*
+
 class XmlSchemaTemplate {
 	
 	/* Schema constants */
 	
 	static String XSD = "xsd"
+	
+	static String XSD_SCHEMA = "http://www.w3.org/2001/XMLSchema"
+	
 	static String XSD_STRING = xsd("string")
 	
 	/* Namespace-related constants */
@@ -104,6 +112,16 @@ class XmlSchemaTemplate {
 		this.command = terminology.command
 		this.query = terminology.query
 		this.function = terminology.function
+	}
+
+	// TODO finish
+	def createSchemaModel() {
+		val s23mNamespace = new Namespace(S23M, S23M_SCHEMA)
+		val xsdNamespace = new Namespace(XSD, XSD_SCHEMA)
+		val schema = new Schema(xsdNamespace)
+		schema.attributes += ('xmlns:'+XSD -> XSD_SCHEMA)
+		
+		schema.attributes.toString
 	}
 
 	def createSchema() '''

@@ -7,8 +7,13 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.s23m.cell.communication.xml.Extensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
+import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.schema.Schema;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {
@@ -16,6 +21,8 @@ public class XmlSchemaTemplate {
    * Schema constants
    */
   private static String XSD = "xsd";
+  
+  private static String XSD_SCHEMA = "http://www.w3.org/2001/XMLSchema";
   
   private static String XSD_STRING = new Function0<String>() {
     public String apply() {
@@ -145,6 +152,24 @@ public class XmlSchemaTemplate {
       this.query = _query;
       String _function = terminology.function();
       this.function = _function;
+  }
+  
+  public String createSchemaModel() {
+    String _xblockexpression = null;
+    {
+      Namespace _namespace = new Namespace(XmlSchemaTemplate.S23M, XmlSchemaTemplate.S23M_SCHEMA);
+      final Namespace s23mNamespace = _namespace;
+      Namespace _namespace_1 = new Namespace(XmlSchemaTemplate.XSD, XmlSchemaTemplate.XSD_SCHEMA);
+      final Namespace xsdNamespace = _namespace_1;
+      Schema _schema = new Schema(xsdNamespace);
+      final Schema schema = _schema;
+      String _operator_plus = StringExtensions.operator_plus("xmlns:", XmlSchemaTemplate.XSD);
+      Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_operator_plus, XmlSchemaTemplate.XSD_SCHEMA);
+      Extensions.<String, String>operator_add(schema.attributes, _operator_mappedTo);
+      String _string = schema.attributes.toString();
+      _xblockexpression = (_string);
+    }
+    return _xblockexpression;
   }
   
   public CharSequence createSchema() {
