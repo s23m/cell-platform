@@ -1,8 +1,8 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface DocumentObjectModel {
     abstract class Node {
@@ -22,7 +22,7 @@ public interface DocumentObjectModel {
     }
 
     abstract class LeafNode extends Node {
-        Map<String, String> attributes;
+    	LinkedHashMap<String, String> attributes;
     }
 
     abstract class CompositeNode extends LeafNode {

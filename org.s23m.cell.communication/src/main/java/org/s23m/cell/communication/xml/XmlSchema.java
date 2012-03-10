@@ -1,7 +1,7 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +65,7 @@ interface XmlSchema {
 			this.name = "element";
 			this.type = type;
 			this.cardinality = cardinality;
-			this.attributes = new HashMap<String, String>();
+			this.attributes = new LinkedHashMap<String, String>();
 			this.attributes.put("type", type.qualifiedName());
 			cardinality.addToAttributes(attributes);
 		}
@@ -74,12 +74,18 @@ interface XmlSchema {
 	class ElementReference extends LeafNode {
 		final Element referencedElement;
 		/* Optional cardinality which can override that of the referenced element */
-		Cardinality cardinality;
+		final Cardinality cardinality;
 		
-		public ElementReference(String name, Element referencedElement, Cardinality cardinality) {
+		public ElementReference(Element referencedElement) {
+			this(referencedElement, null);
+		}
+		
+		public ElementReference(Element referencedElement, Cardinality cardinality) {
 			this.name = "element";
 			this.referencedElement = referencedElement;
-			this.attributes = new HashMap<String, String>(referencedElement.attributes);
+			this.cardinality = cardinality;
+			
+			this.attributes = new LinkedHashMap<String, String>(referencedElement.attributes);
 			if (cardinality != null) {
 				// replace attributes
 				Cardinality.removeFromAttributes(attributes);
@@ -89,7 +95,9 @@ interface XmlSchema {
 	}
     
     class Cardinality {
-        private static int DEFAULT_VALUE = 1;
+        private static final int DEFAULT_VALUE = 1;
+        private static final String MIN_OCCURS = "minOccurs";
+        private static final String MAX_OCCURS = "maxOccurs";
         
     	final int minOccurs;
         final int maxOccurs;
@@ -105,14 +113,14 @@ interface XmlSchema {
         
 		public void addToAttributes(Map<String, String> attributes) {
 			if (minOccurs != DEFAULT_VALUE || maxOccurs != DEFAULT_VALUE) {
-				attributes.put("minOccurs", displayedValue(minOccurs));
-				attributes.put("maxOccurs", displayedValue(maxOccurs));
+				attributes.put(MIN_OCCURS, displayedValue(minOccurs));
+				attributes.put(MAX_OCCURS, displayedValue(maxOccurs));
 			}
 		}
 
         public static void removeFromAttributes(Map<String, String> attributes) {
-        	attributes.remove("minOccurs");
-			attributes.remove("maxOccurs");
+        	attributes.remove(MIN_OCCURS);
+			attributes.remove(MAX_OCCURS);
         }
 
 		private static String displayedValue(int number) {
