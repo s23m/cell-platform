@@ -48,6 +48,10 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
+// TODO test for maximum reuse (reusable elements whenever there are repeated (name, type) pairs)
+// TODO check that all types are qualified
+// TODO check children of complexTypes (make sure elements are wrapped in a sequence)
+// TODO check isAbstract usage
 public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final String XML_SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";

@@ -26,8 +26,6 @@ package org.s23m.cell.communication.xml.dom;
 
 /**
  * A node with a single child
- *
- * @param <N>
  */
 public abstract class WrapperNode extends Node {
 	public Node child;

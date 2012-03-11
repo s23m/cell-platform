@@ -1,19 +1,31 @@
 package org.s23m.cell.communication.xml;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.Extensions;
+import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.schema.ComplexType;
+import org.s23m.cell.communication.xml.schema.DataType;
+import org.s23m.cell.communication.xml.schema.Element;
+import org.s23m.cell.communication.xml.schema.Restriction;
 import org.s23m.cell.communication.xml.schema.Schema;
+import org.s23m.cell.communication.xml.schema.Sequence;
+import org.s23m.cell.communication.xml.schema.SimpleType;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {
@@ -53,6 +65,20 @@ public class XmlSchemaTemplate {
       String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "elementFormDefault=\"qualified\" ");
       String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "attributeFormDefault=\"unqualified\"");
       return _operator_plus_11;
+    }
+  }.apply();
+  
+  private static Namespace NS_S23M = new Function0<Namespace>() {
+    public Namespace apply() {
+      Namespace _namespace = new Namespace(XmlSchemaTemplate.S23M, XmlSchemaTemplate.S23M_SCHEMA);
+      return _namespace;
+    }
+  }.apply();
+  
+  private static Namespace NS_XSD = new Function0<Namespace>() {
+    public Namespace apply() {
+      Namespace _namespace = new Namespace(XmlSchemaTemplate.XSD, XmlSchemaTemplate.XSD_SCHEMA);
+      return _namespace;
     }
   }.apply();
   
@@ -157,17 +183,66 @@ public class XmlSchemaTemplate {
   public String createSchemaModel() {
     String _xblockexpression = null;
     {
-      Namespace _namespace = new Namespace(XmlSchemaTemplate.S23M, XmlSchemaTemplate.S23M_SCHEMA);
-      final Namespace s23mNamespace = _namespace;
-      Namespace _namespace_1 = new Namespace(XmlSchemaTemplate.XSD, XmlSchemaTemplate.XSD_SCHEMA);
-      final Namespace xsdNamespace = _namespace_1;
-      Schema _schema = new Schema(xsdNamespace);
+      final Procedure1<Schema> _function = new Procedure1<Schema>() {
+          public void apply(final Schema it) {
+            {
+              String _xmlns = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.XSD);
+              Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, XmlSchemaTemplate.XSD_SCHEMA);
+              String _xmlns_1 = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.S23M);
+              Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_xmlns_1, XmlSchemaTemplate.S23M_SCHEMA);
+              Pair<String,String> _operator_mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo("targetNamespace", XmlSchemaTemplate.S23M_SCHEMA);
+              Pair<String,String> _operator_mappedTo_3 = ObjectExtensions.<String, String>operator_mappedTo("elementFormDefault", "qualified");
+              Pair<String,String> _operator_mappedTo_4 = ObjectExtensions.<String, String>operator_mappedTo("attributeFormDefault", "unqualified");
+              LinkedHashMap<String,String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2, _operator_mappedTo_3, _operator_mappedTo_4);
+              Extensions.<String, String>operator_add(it.attributes, _newLinkedHashMap);
+              List<Element> _createReusedElements = XmlSchemaTemplate.this.createReusedElements();
+              it.children.addAll(_createReusedElements);
+            }
+          }
+        };
+      Schema _schema = SchemaBuilder.schema(XmlSchemaTemplate.NS_XSD, _function);
       final Schema schema = _schema;
-      String _operator_plus = StringExtensions.operator_plus("xmlns:", XmlSchemaTemplate.XSD);
-      Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_operator_plus, XmlSchemaTemplate.XSD_SCHEMA);
-      Extensions.<String, String>operator_add(schema.attributes, _operator_mappedTo);
       String _string = schema.attributes.toString();
       _xblockexpression = (_string);
+    }
+    return _xblockexpression;
+  }
+  
+  private List<Element> createReusedElements() {
+    ArrayList<Element> _xblockexpression = null;
+    {
+      DataType _dataType = new DataType(XmlSchemaTemplate.NS_XSD, "string");
+      final DataType xsdString = _dataType;
+      Restriction _restriction = new Restriction(XmlSchemaTemplate.NS_XSD, xsdString);
+      final Restriction uuidRestriction = _restriction;
+      SimpleType _simpleType = new SimpleType(XmlSchemaTemplate.NS_XSD, "uuid", uuidRestriction);
+      final SimpleType uuid = _simpleType;
+      final Procedure1<Sequence> _function = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              String _uniqueRepresentationReference = XmlSchemaTemplate.this.terminology.uniqueRepresentationReference();
+              Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, _uniqueRepresentationReference, uuid);
+              CollectionExtensions.<Element>operator_add(it.children, _element);
+              String _identifier = XmlSchemaTemplate.this.terminology.identifier();
+              Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, _identifier, uuid);
+              CollectionExtensions.<Element>operator_add(it.children, _element_1);
+            }
+          }
+        };
+      Sequence _sequence = SchemaBuilder.sequence(XmlSchemaTemplate.NS_XSD, _function);
+      ComplexType _complexType = new ComplexType(XmlSchemaTemplate.NS_XSD, _sequence);
+      final ComplexType identityReference = _complexType;
+      Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.semanticIdentity, identityReference);
+      Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.category, identityReference);
+      Element _element_2 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isAbstract, identityReference);
+      Element _element_3 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.maxCardinality, identityReference);
+      Element _element_4 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.minCardinality, identityReference);
+      Element _element_5 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isContainer, identityReference);
+      Element _element_6 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isNavigable, identityReference);
+      Element _element_7 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.from, identityReference);
+      Element _element_8 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.to, identityReference);
+      ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList(_element, _element_1, _element_2, _element_3, _element_4, _element_5, _element_6, _element_7, _element_8);
+      _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;
   }
@@ -584,6 +659,11 @@ public class XmlSchemaTemplate {
   
   private static String s23m(final String name) {
     String _qualifiedName = XmlSchemaTemplate.qualifiedName(XmlSchemaTemplate.S23M, name);
+    return _qualifiedName;
+  }
+  
+  private static String xmlns(final String name) {
+    String _qualifiedName = XmlSchemaTemplate.qualifiedName("xmlns", name);
     return _qualifiedName;
   }
   

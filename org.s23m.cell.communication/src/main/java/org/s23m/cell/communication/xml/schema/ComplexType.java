@@ -29,6 +29,7 @@ import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
 public final class ComplexType extends WrapperNode {
+	Namespace targetNamespace; // TODO
 	
 	private ComplexType(Node child, Namespace namespace) {
 		super(namespace, "complexType", child);

@@ -35,6 +35,14 @@ import com.sun.org.apache.xml.internal.utils.NameSpace
 import org.s23m.cell.communication.xml.schema.Schema
 import static extension org.s23m.cell.communication.xml.Extensions.*
 
+import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
+import org.s23m.cell.communication.xml.dom.Node
+import org.s23m.cell.communication.xml.schema.ComplexType
+import org.s23m.cell.communication.xml.schema.SimpleType
+import org.s23m.cell.communication.xml.schema.DataType
+import org.s23m.cell.communication.xml.schema.Restriction
+import org.s23m.cell.communication.xml.schema.Element
+
 class XmlSchemaTemplate {
 	
 	/* Schema constants */
@@ -56,6 +64,9 @@ class XmlSchemaTemplate {
 									  'targetNamespace="'+S23M_SCHEMA+'" ' +
 									  'elementFormDefault="qualified" ' +
 									  'attributeFormDefault="unqualified"'
+
+	static Namespace NS_S23M = new Namespace(S23M, S23M_SCHEMA)
+	static Namespace NS_XSD = new Namespace(XSD, XSD_SCHEMA)
 
 	XmlSchemaTerminology terminology
 	
@@ -116,12 +127,49 @@ class XmlSchemaTemplate {
 
 	// TODO finish
 	def createSchemaModel() {
-		val s23mNamespace = new Namespace(S23M, S23M_SCHEMA)
-		val xsdNamespace = new Namespace(XSD, XSD_SCHEMA)
-		val schema = new Schema(xsdNamespace)
-		schema.attributes += ('xmlns:'+XSD -> XSD_SCHEMA)
+		
+		val schema = schema(NS_XSD) [
+			attributes += newLinkedHashMap(
+				xmlns(XSD) -> XSD_SCHEMA,
+				xmlns(S23M) -> S23M_SCHEMA,
+				"targetNamespace" -> S23M_SCHEMA,
+				"elementFormDefault" -> "qualified",
+				"attributeFormDefault" -> "unqualified"
+			)
+			children.addAll(createReusedElements)
+		]
+		
 		
 		schema.attributes.toString
+	}
+	
+	// TODO for nodes which can be referenced we need to record two namespaces:
+	// namespace of used nodes ("source"?) and target namespace
+	// These are element, complexType, simpleType.
+	// The target namespace is used during rendering of types and references
+	def private List<Element> createReusedElements() {
+		val xsdString = new DataType(NS_XSD, "string")
+		val uuidRestriction = new Restriction(NS_XSD, xsdString)
+		val uuid = new SimpleType(NS_XSD, "uuid", uuidRestriction)
+		
+		val identityReference = new ComplexType(NS_XSD, sequence(NS_XSD)[
+			children += SchemaBuilder::element(NS_XSD, terminology.uniqueRepresentationReference, uuid)
+			children += SchemaBuilder::element(NS_XSD, terminology.identifier, uuid)
+		])
+		
+		newArrayList(
+			SchemaBuilder::element(NS_XSD, semanticIdentity, identityReference),
+			//SchemaBuilder::element(NS_XSD, model, model),
+			//SchemaBuilder::element(NS_XSD, function, function)
+			SchemaBuilder::element(NS_XSD, category, identityReference),
+			SchemaBuilder::element(NS_XSD, isAbstract, identityReference),
+			SchemaBuilder::element(NS_XSD, maxCardinality, identityReference),
+			SchemaBuilder::element(NS_XSD, minCardinality, identityReference),
+			SchemaBuilder::element(NS_XSD, isContainer, identityReference),
+			SchemaBuilder::element(NS_XSD, isNavigable, identityReference),
+			SchemaBuilder::element(NS_XSD, from, identityReference),
+			SchemaBuilder::element(NS_XSD, to, identityReference)
+		)
 	}
 
 	def createSchema() '''
@@ -320,15 +368,19 @@ class XmlSchemaTemplate {
 		<«xsd(tagName)» «attributeContents»/>
 	'''
 	
-	def private static xsd(String name) {
+	def private static String xsd(String name) {
 		qualifiedName(XSD, name)
 	}
 	
-	def private static s23m(String name) {
+	def private static String s23m(String name) {
 		qualifiedName(S23M, name)
 	}
 	
-	def private static qualifiedName(String namespacePrefix, String name) {
+	def private static String xmlns(String name) {
+		qualifiedName("xmlns", name)
+	}
+	
+	def private static String qualifiedName(String namespacePrefix, String name) {
 		namespacePrefix + ":" + name
 	}
 }

@@ -29,6 +29,7 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 public final class Element extends LeafNode {
+	Namespace targetNamespace; // TODO
 	final Cardinality cardinality;
 	final Node type;
 	

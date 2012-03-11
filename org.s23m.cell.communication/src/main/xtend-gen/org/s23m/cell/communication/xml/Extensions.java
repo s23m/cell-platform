@@ -15,4 +15,8 @@ public class Extensions {
     B _put = map.put(_key, _value);
     return _put;
   }
+  
+  public static <A extends Object, B extends Object> void operator_add(final LinkedHashMap<A,B> map, final LinkedHashMap<A,B> additions) {
+    map.putAll(additions);
+  }
 }

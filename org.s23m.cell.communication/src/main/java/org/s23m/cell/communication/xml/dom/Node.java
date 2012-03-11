@@ -27,6 +27,7 @@ package org.s23m.cell.communication.xml.dom;
 import java.util.LinkedHashMap;
 
 public abstract class Node {
+	/* Declared namespace */
 	public final Namespace namespace;
     
 	/* The tag name */

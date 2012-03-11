@@ -12,4 +12,8 @@ class Extensions {
 	def static <A, B> operator_add(LinkedHashMap<A, B> map, Pair<A, B> pair) {
 		map.put(pair.key, pair.value)
 	}
+	
+	def static <A, B> operator_add(LinkedHashMap<A, B> map, LinkedHashMap<A, B> additions) {
+		map.putAll(additions)
+	}
 }
