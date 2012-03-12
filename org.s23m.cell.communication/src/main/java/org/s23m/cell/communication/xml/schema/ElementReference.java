@@ -26,9 +26,9 @@ package org.s23m.cell.communication.xml.schema;
 
 import java.util.LinkedHashMap;
 
-import org.s23m.cell.communication.xml.dom.LeafNode;
+import org.s23m.cell.communication.xml.dom.AbstractLeafNode;
 
-public final class ElementReference extends LeafNode {
+public final class ElementReference extends AbstractLeafNode {
 	private final Element referencedElement;
 	
 	/**

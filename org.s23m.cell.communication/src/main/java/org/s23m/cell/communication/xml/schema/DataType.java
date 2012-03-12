@@ -1,11 +1,11 @@
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.Node;
+import org.s23m.cell.communication.xml.dom.AbstractNode;
 
 /**
  * Used for built-in data types only
  */
-public class DataType extends Node {
+public class DataType extends AbstractNode {
 	
 	public static final DataType STRING = new DataType("string");
 

@@ -24,14 +24,13 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-public final class Extension extends WrapperNode {
+final class Extension extends WrapperNode {
 	private final ComplexType base;
 	
-	public Extension(Namespace namespace, ComplexType base, Sequence sequence) {
-		super(namespace, "extension", sequence);
+	public Extension(ComplexType base, Sequence sequence) {
+		super(Constants.XML_SCHEMA_NAMESPACE, "extension", sequence);
 		this.base = base;
 		
 		setAttribute("base", base.getIdentifier());

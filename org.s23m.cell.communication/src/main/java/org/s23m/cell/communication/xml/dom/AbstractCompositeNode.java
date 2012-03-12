@@ -24,9 +24,20 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.dom;
 
-public abstract class LeafNode extends Node {
-	
-	public LeafNode(Namespace namespace, String name) {
-		super(namespace, name);
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class AbstractCompositeNode extends AbstractNode implements CompositeNode {
+    private final List<Node> children;
+    
+    public AbstractCompositeNode(Namespace namespace, String name) {
+    	super(namespace, name);
+    	children = new ArrayList<Node>();
 	}
+    
+    @Override
+    public List<Node> getChildren() {
+    	return children;
+    }
 }
+

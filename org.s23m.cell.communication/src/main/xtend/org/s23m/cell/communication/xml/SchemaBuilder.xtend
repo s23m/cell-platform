@@ -7,13 +7,12 @@ import org.s23m.cell.communication.xml.schema.Schema
 import org.s23m.cell.communication.xml.schema.Sequence
 
 import static org.s23m.cell.communication.xml.SchemaBuilder.*
-import org.s23m.cell.communication.xml.schema.ComplexType
-import org.s23m.cell.communication.xml.schema.SimpleType
+import org.s23m.cell.communication.xml.schema.Type
 
 class SchemaBuilder {
 	
-	def static schema(Namespace namespace, (Schema)=>void initialiser) {
-		val result = new Schema(namespace)
+	def static schema((Schema)=>void initialiser) {
+		val result = new Schema()
 		initialiser.apply(result)
 		result
 	}
@@ -25,45 +24,17 @@ class SchemaBuilder {
 	}
 	
 	
-	def static element(Namespace namespace,
-					   String name,
-					   SimpleType type) {
+	def static element(Namespace namespace, String name, Type type) {
 		element(namespace, name, type, [])				   	
 	}
 	
-	def static element(Namespace namespace,
-					   String name,
-					   SimpleType type,
-					   (Element)=>void initialiser) {
+	def static element(Namespace namespace, String name, Type type, (Element)=>void initialiser) {
 		element(namespace, name, type, Cardinality::EXACTLY_ONE, initialiser)				   	
 	}
 	
 	def static element(Namespace namespace,
 					   String name,
-					   SimpleType type,
-					   Cardinality cardinality,
-					   (Element)=>void initialiser) {
-		val result = new Element(namespace, name, type, cardinality)
-		initialiser.apply(result)
-		result
-	}
-	
-	def static element(Namespace namespace,
-					   String name,
-					   ComplexType type) {
-		element(namespace, name, type, [])				   	
-	}
-	
-	def static element(Namespace namespace,
-					   String name,
-					   ComplexType type,
-					   (Element)=>void initialiser) {
-		element(namespace, name, type, Cardinality::EXACTLY_ONE, initialiser)				   	
-	}
-	
-	def static element(Namespace namespace,
-					   String name,
-					   ComplexType type,
+					   Type type,
 					   Cardinality cardinality,
 					   (Element)=>void initialiser) {
 		val result = new Element(namespace, name, type, cardinality)

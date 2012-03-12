@@ -1,10 +1,11 @@
 package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
-public interface ReferenceableNode {
+public interface ReferenceableNode extends Node {
 	
-	String getName();
+	String getNameAttribute();
 
 	Namespace getTargetNamespace();
 	

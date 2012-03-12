@@ -26,40 +26,18 @@ package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
-import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-public final class ComplexType extends WrapperNode implements ReferenceableNode {
+public final class ComplexType extends AbstractType {
 	
-	private final Namespace targetNamespace;
-	private final String name;
-	
-	private ComplexType(Node child, String name, Namespace targetNamespace) {
-		super(Constants.XML_SCHEMA_NAMESPACE, "complexType", child);
-		this.name = name;
-		this.targetNamespace = targetNamespace;
-		
-		setAttribute("name", name);
+	private ComplexType(Node child, String nameAttribute, Namespace targetNamespace) {
+		super(targetNamespace, "complexType", nameAttribute, child);
 	}
 	
 	public ComplexType(Namespace targetNamespace, String name, Sequence child) {
 		this(child, name, targetNamespace);
 	}
 	
-	public ComplexType(Namespace targetNamespace, String name, ComplexContent child) {
-		this(child, name, targetNamespace);
-	}
-	
-	public Namespace getTargetNamespace() {
-		return targetNamespace;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getIdentifier() {
-		return targetNamespace + ":" + name;
+	public ComplexType(Namespace targetNamespace, String name, Extension extension) {
+		this(new ComplexContent(extension), name, targetNamespace);
 	}
 }

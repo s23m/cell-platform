@@ -31,16 +31,12 @@ import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import static extension java.lang.String.*
 
 import org.s23m.cell.communication.xml.dom.Namespace
-import com.sun.org.apache.xml.internal.utils.NameSpace
-import org.s23m.cell.communication.xml.schema.Schema
 import static extension org.s23m.cell.communication.xml.Extensions.*
 
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
-import org.s23m.cell.communication.xml.dom.Node
 import org.s23m.cell.communication.xml.schema.ComplexType
 import org.s23m.cell.communication.xml.schema.SimpleType
 import org.s23m.cell.communication.xml.schema.DataType
-import org.s23m.cell.communication.xml.schema.Restriction
 import org.s23m.cell.communication.xml.schema.Element
 
 class XmlSchemaTemplate {
@@ -128,7 +124,7 @@ class XmlSchemaTemplate {
 	// TODO finish
 	def createSchemaModel() {
 		
-		val schema = schema(NS_XSD) [
+		val schema = schema [
 			attributes += newLinkedHashMap(
 				xmlns(XSD) -> XSD_SCHEMA,
 				xmlns(S23M) -> S23M_SCHEMA,
@@ -148,9 +144,7 @@ class XmlSchemaTemplate {
 	// These are element, complexType, simpleType.
 	// The target namespace is used during rendering of types and references
 	def private List<Element> createReusedElements() {
-		val xsdString = DataType::STRING
-		val uuidRestriction = new Restriction(xsdString)
-		val uuid = new SimpleType(NS_S23M, "uuid", uuidRestriction)
+		val uuid = new SimpleType(NS_S23M, "uuid", DataType::STRING)
 		
 		val identityReference = new ComplexType(NS_S23M, identityReference, sequence [
 			children += SchemaBuilder::element(NS_S23M, terminology.uniqueRepresentationReference, uuid)

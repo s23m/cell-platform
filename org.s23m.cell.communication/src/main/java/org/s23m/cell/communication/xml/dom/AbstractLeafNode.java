@@ -22,13 +22,11 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.schema;
+package org.s23m.cell.communication.xml.dom;
 
-import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
-
-public final class Schema extends AbstractCompositeNode {
+public abstract class AbstractLeafNode extends AbstractNode {
 	
-	public Schema() {
-		super(Constants.XML_SCHEMA_NAMESPACE, "schema");
+	public AbstractLeafNode(Namespace namespace, String name) {
+		super(namespace, name);
 	}
 }

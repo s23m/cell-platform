@@ -19,10 +19,10 @@ import org.s23m.cell.communication.xml.Extensions;
 import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.ComplexType;
 import org.s23m.cell.communication.xml.schema.DataType;
 import org.s23m.cell.communication.xml.schema.Element;
-import org.s23m.cell.communication.xml.schema.Restriction;
 import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.SimpleType;
@@ -196,12 +196,13 @@ public class XmlSchemaTemplate {
               Pair<String,String> _operator_mappedTo_4 = ObjectExtensions.<String, String>operator_mappedTo("attributeFormDefault", "unqualified");
               LinkedHashMap<String,String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2, _operator_mappedTo_3, _operator_mappedTo_4);
               Extensions.<String, String>operator_add(_attributes, _newLinkedHashMap);
+              List<Node> _children = it.getChildren();
               List<Element> _createReusedElements = XmlSchemaTemplate.this.createReusedElements();
-              it.children.addAll(_createReusedElements);
+              _children.addAll(_createReusedElements);
             }
           }
         };
-      Schema _schema = SchemaBuilder.schema(XmlSchemaTemplate.NS_XSD, _function);
+      Schema _schema = SchemaBuilder.schema(_function);
       final Schema schema = _schema;
       LinkedHashMap<String,String> _attributes = schema.getAttributes();
       String _string = _attributes.toString();
@@ -213,20 +214,19 @@ public class XmlSchemaTemplate {
   private List<Element> createReusedElements() {
     ArrayList<Element> _xblockexpression = null;
     {
-      final DataType xsdString = DataType.STRING;
-      Restriction _restriction = new Restriction(xsdString);
-      final Restriction uuidRestriction = _restriction;
-      SimpleType _simpleType = new SimpleType(XmlSchemaTemplate.NS_S23M, "uuid", uuidRestriction);
+      SimpleType _simpleType = new SimpleType(XmlSchemaTemplate.NS_S23M, "uuid", DataType.STRING);
       final SimpleType uuid = _simpleType;
       final Procedure1<Sequence> _function = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
+              List<Node> _children = it.getChildren();
               String _uniqueRepresentationReference = XmlSchemaTemplate.this.terminology.uniqueRepresentationReference();
               Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, _uniqueRepresentationReference, uuid);
-              CollectionExtensions.<Element>operator_add(it.children, _element);
+              CollectionExtensions.<Element>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
               String _identifier = XmlSchemaTemplate.this.terminology.identifier();
               Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, _identifier, uuid);
-              CollectionExtensions.<Element>operator_add(it.children, _element_1);
+              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
             }
           }
         };

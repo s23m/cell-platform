@@ -1,8 +1,8 @@
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.Node;
+import org.s23m.cell.communication.xml.dom.AbstractNode;
 
-public class Restriction extends Node {
+final class Restriction extends AbstractNode {
 	
 	public Restriction(DataType base) {
 		super(Constants.XML_SCHEMA_NAMESPACE, "restriction");

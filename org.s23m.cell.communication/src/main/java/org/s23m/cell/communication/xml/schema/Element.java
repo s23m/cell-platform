@@ -24,22 +24,16 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.LeafNode;
+import org.s23m.cell.communication.xml.dom.AbstractLeafNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.dom.Node;
 
-public final class Element extends LeafNode implements ReferenceableNode {
+public final class Element extends AbstractLeafNode implements ReferenceableNode {
 	private final Namespace targetNamespace;
 	private final String name;
 	private final Cardinality cardinality;
-	private final Node type;
+	private final Type type;
 	
-	private Element(Namespace targetNamespace,
-					String name,
-					Cardinality cardinality,
-					Node type,
-					String typeIdentifier) {
-		
+	public Element(Namespace targetNamespace, String name, Type type, Cardinality cardinality) {
 		super(Constants.XML_SCHEMA_NAMESPACE, "element");
 		this.targetNamespace = targetNamespace;
 		this.name = name;
@@ -47,23 +41,15 @@ public final class Element extends LeafNode implements ReferenceableNode {
 		this.cardinality = cardinality;
 		
 		setAttribute("name", name);
-		setAttribute("type", typeIdentifier);
+		setAttribute("type", type.getIdentifier());
 		updateCardinality(cardinality);
-	}	
-	
-	public Element(Namespace targetNamespace, String name, ComplexType type, Cardinality cardinality) {
-		this(targetNamespace, name, cardinality, type, type.getIdentifier());
-	}
-	
-	public Element(Namespace targetNamespace, String name, SimpleType type, Cardinality cardinality) {
-		this(targetNamespace, name, cardinality, type, type.getIdentifier());
 	}
 	
 	public Namespace getTargetNamespace() {
 		return targetNamespace;
 	}
 
-	public String getName() {
+	public String getNameAttribute() {
 		return name;
 	}
 	
@@ -71,7 +57,7 @@ public final class Element extends LeafNode implements ReferenceableNode {
 		return cardinality;
 	}
 
-	public Node getType() {
+	public Type getType() {
 		return type;
 	}
 	
