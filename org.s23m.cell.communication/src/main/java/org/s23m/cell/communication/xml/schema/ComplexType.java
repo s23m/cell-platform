@@ -28,18 +28,38 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-public final class ComplexType extends WrapperNode {
-	Namespace targetNamespace; // TODO
+public final class ComplexType extends WrapperNode implements ReferenceableNode {
 	
-	private ComplexType(Node child, Namespace namespace) {
-		super(namespace, "complexType", child);
+	private final Namespace targetNamespace;
+	private final String name;
+	
+	private ComplexType(Node child, String name, Namespace targetNamespace) {
+		super(Constants.XML_SCHEMA_NAMESPACE, "complexType", child);
+		this.name = name;
+		this.targetNamespace = targetNamespace;
+		
+		setAttribute("name", name);
 	}
 	
-	public ComplexType(Namespace namespace, Sequence child) {
-		this(child, namespace);
+	public ComplexType(Namespace targetNamespace, String name, Sequence child) {
+		this(child, name, targetNamespace);
 	}
 	
-	public ComplexType(Namespace namespace, ComplexContent child) {
-		this(child, namespace);
+	public ComplexType(Namespace targetNamespace, String name, ComplexContent child) {
+		this(child, name, targetNamespace);
+	}
+	
+	public Namespace getTargetNamespace() {
+		return targetNamespace;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getIdentifier() {
+		return targetNamespace + ":" + name;
 	}
 }

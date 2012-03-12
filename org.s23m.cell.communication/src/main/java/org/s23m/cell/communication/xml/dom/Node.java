@@ -26,14 +26,16 @@ package org.s23m.cell.communication.xml.dom;
 
 import java.util.LinkedHashMap;
 
+import org.s23m.cell.communication.xml.schema.Cardinality;
+
 public abstract class Node {
 	/* Declared namespace */
-	public final Namespace namespace;
+	private final Namespace namespace;
     
-	/* The tag name */
-	public final String name;
+	/* Tag name */
+	private final String name;
 	
-	public final LinkedHashMap<String, String> attributes;
+	private final LinkedHashMap<String, String> attributes;
 	
 	public Node(Namespace namespace, String name) {
 		this.namespace = namespace;
@@ -42,7 +44,27 @@ public abstract class Node {
 		attributes = new LinkedHashMap<String, String>();
 	}
 
-	public String qualifiedName() {
+	public String getQualifiedName() {
 		return namespace.prefix + ":" + name;
+	}
+
+	protected void setAttribute(String key, String value) {
+		this.attributes.put(key, value);
+	}
+
+	protected void updateCardinality(Cardinality cardinality) {
+		cardinality.addToAttributes(attributes);
+	}
+
+	public Namespace getNamespace() {
+		return namespace;
+	}
+	
+	public LinkedHashMap<String, String> getAttributes() {
+		return attributes;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

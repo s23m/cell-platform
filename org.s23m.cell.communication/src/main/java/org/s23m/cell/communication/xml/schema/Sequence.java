@@ -25,11 +25,10 @@
 package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.CompositeNode;
-import org.s23m.cell.communication.xml.dom.Namespace;
 
 public final class Sequence extends CompositeNode {
 	
-	public Sequence(Namespace namespace) {
-		super(namespace, "sequence");
+	public Sequence() {
+		super(Constants.XML_SCHEMA_NAMESPACE, "sequence");
 	}
 }

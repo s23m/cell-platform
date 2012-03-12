@@ -1,15 +1,15 @@
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 /**
- * Built-in data types
+ * Used for built-in data types only
  */
 public class DataType extends Node {
+	
+	public static final DataType STRING = new DataType("string");
 
-	public DataType(Namespace namespace, String name) {
-		super(namespace, name);
+	private DataType(String name) {
+		super(Constants.XML_SCHEMA_NAMESPACE, name);
 	}
-
 }

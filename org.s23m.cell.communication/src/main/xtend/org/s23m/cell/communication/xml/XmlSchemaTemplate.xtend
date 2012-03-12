@@ -148,13 +148,13 @@ class XmlSchemaTemplate {
 	// These are element, complexType, simpleType.
 	// The target namespace is used during rendering of types and references
 	def private List<Element> createReusedElements() {
-		val xsdString = new DataType(NS_XSD, "string")
-		val uuidRestriction = new Restriction(NS_XSD, xsdString)
-		val uuid = new SimpleType(NS_XSD, "uuid", uuidRestriction)
+		val xsdString = DataType::STRING
+		val uuidRestriction = new Restriction(xsdString)
+		val uuid = new SimpleType(NS_S23M, "uuid", uuidRestriction)
 		
-		val identityReference = new ComplexType(NS_XSD, sequence(NS_XSD)[
-			children += SchemaBuilder::element(NS_XSD, terminology.uniqueRepresentationReference, uuid)
-			children += SchemaBuilder::element(NS_XSD, terminology.identifier, uuid)
+		val identityReference = new ComplexType(NS_S23M, identityReference, sequence [
+			children += SchemaBuilder::element(NS_S23M, terminology.uniqueRepresentationReference, uuid)
+			children += SchemaBuilder::element(NS_S23M, terminology.identifier, uuid)
 		])
 		
 		newArrayList(

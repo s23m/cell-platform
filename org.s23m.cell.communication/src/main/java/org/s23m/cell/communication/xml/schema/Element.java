@@ -28,17 +28,55 @@ import org.s23m.cell.communication.xml.dom.LeafNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
-public final class Element extends LeafNode {
-	Namespace targetNamespace; // TODO
-	final Cardinality cardinality;
-	final Node type;
+public final class Element extends LeafNode implements ReferenceableNode {
+	private final Namespace targetNamespace;
+	private final String name;
+	private final Cardinality cardinality;
+	private final Node type;
 	
-	public Element(Namespace namespace, String name, Node type, Cardinality cardinality) {
-		super(namespace, "element");
+	private Element(Namespace targetNamespace,
+					String name,
+					Cardinality cardinality,
+					Node type,
+					String typeIdentifier) {
+		
+		super(Constants.XML_SCHEMA_NAMESPACE, "element");
+		this.targetNamespace = targetNamespace;
+		this.name = name;
 		this.type = type;
 		this.cardinality = cardinality;
 		
-		attributes.put("type", type.qualifiedName());
-		cardinality.addToAttributes(attributes);
+		setAttribute("name", name);
+		setAttribute("type", typeIdentifier);
+		updateCardinality(cardinality);
+	}	
+	
+	public Element(Namespace targetNamespace, String name, ComplexType type, Cardinality cardinality) {
+		this(targetNamespace, name, cardinality, type, type.getIdentifier());
+	}
+	
+	public Element(Namespace targetNamespace, String name, SimpleType type, Cardinality cardinality) {
+		this(targetNamespace, name, cardinality, type, type.getIdentifier());
+	}
+	
+	public Namespace getTargetNamespace() {
+		return targetNamespace;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	public Cardinality getCardinality() {
+		return cardinality;
+	}
+
+	public Node getType() {
+		return type;
+	}
+	
+	@Override
+	public String getIdentifier() {
+		return targetNamespace + ":" + name;
 	}
 }

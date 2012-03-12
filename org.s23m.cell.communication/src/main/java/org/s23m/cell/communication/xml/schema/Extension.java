@@ -25,16 +25,19 @@
 package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
 public final class Extension extends WrapperNode {
-	final Node base;
+	private final ComplexType base;
 	
-	public Extension(Namespace namespace, Node base, Sequence sequence) {
+	public Extension(Namespace namespace, ComplexType base, Sequence sequence) {
 		super(namespace, "extension", sequence);
 		this.base = base;
 		
-		attributes.put("base", base.qualifiedName());
+		setAttribute("base", base.getIdentifier());
+	}
+	
+	public ComplexType getBase() {
+		return base;
 	}
 }

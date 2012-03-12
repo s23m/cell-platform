@@ -186,6 +186,7 @@ public class XmlSchemaTemplate {
       final Procedure1<Schema> _function = new Procedure1<Schema>() {
           public void apply(final Schema it) {
             {
+              LinkedHashMap<String,String> _attributes = it.getAttributes();
               String _xmlns = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.XSD);
               Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, XmlSchemaTemplate.XSD_SCHEMA);
               String _xmlns_1 = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.S23M);
@@ -194,7 +195,7 @@ public class XmlSchemaTemplate {
               Pair<String,String> _operator_mappedTo_3 = ObjectExtensions.<String, String>operator_mappedTo("elementFormDefault", "qualified");
               Pair<String,String> _operator_mappedTo_4 = ObjectExtensions.<String, String>operator_mappedTo("attributeFormDefault", "unqualified");
               LinkedHashMap<String,String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2, _operator_mappedTo_3, _operator_mappedTo_4);
-              Extensions.<String, String>operator_add(it.attributes, _newLinkedHashMap);
+              Extensions.<String, String>operator_add(_attributes, _newLinkedHashMap);
               List<Element> _createReusedElements = XmlSchemaTemplate.this.createReusedElements();
               it.children.addAll(_createReusedElements);
             }
@@ -202,7 +203,8 @@ public class XmlSchemaTemplate {
         };
       Schema _schema = SchemaBuilder.schema(XmlSchemaTemplate.NS_XSD, _function);
       final Schema schema = _schema;
-      String _string = schema.attributes.toString();
+      LinkedHashMap<String,String> _attributes = schema.getAttributes();
+      String _string = _attributes.toString();
       _xblockexpression = (_string);
     }
     return _xblockexpression;
@@ -211,26 +213,25 @@ public class XmlSchemaTemplate {
   private List<Element> createReusedElements() {
     ArrayList<Element> _xblockexpression = null;
     {
-      DataType _dataType = new DataType(XmlSchemaTemplate.NS_XSD, "string");
-      final DataType xsdString = _dataType;
-      Restriction _restriction = new Restriction(XmlSchemaTemplate.NS_XSD, xsdString);
+      final DataType xsdString = DataType.STRING;
+      Restriction _restriction = new Restriction(xsdString);
       final Restriction uuidRestriction = _restriction;
-      SimpleType _simpleType = new SimpleType(XmlSchemaTemplate.NS_XSD, "uuid", uuidRestriction);
+      SimpleType _simpleType = new SimpleType(XmlSchemaTemplate.NS_S23M, "uuid", uuidRestriction);
       final SimpleType uuid = _simpleType;
       final Procedure1<Sequence> _function = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               String _uniqueRepresentationReference = XmlSchemaTemplate.this.terminology.uniqueRepresentationReference();
-              Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, _uniqueRepresentationReference, uuid);
+              Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, _uniqueRepresentationReference, uuid);
               CollectionExtensions.<Element>operator_add(it.children, _element);
               String _identifier = XmlSchemaTemplate.this.terminology.identifier();
-              Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, _identifier, uuid);
+              Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, _identifier, uuid);
               CollectionExtensions.<Element>operator_add(it.children, _element_1);
             }
           }
         };
-      Sequence _sequence = SchemaBuilder.sequence(XmlSchemaTemplate.NS_XSD, _function);
-      ComplexType _complexType = new ComplexType(XmlSchemaTemplate.NS_XSD, _sequence);
+      Sequence _sequence = SchemaBuilder.sequence(_function);
+      ComplexType _complexType = new ComplexType(XmlSchemaTemplate.NS_S23M, this.identityReference, _sequence);
       final ComplexType identityReference = _complexType;
       Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.semanticIdentity, identityReference);
       Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.category, identityReference);

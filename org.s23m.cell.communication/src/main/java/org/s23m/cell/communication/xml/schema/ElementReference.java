@@ -24,31 +24,41 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
+import java.util.LinkedHashMap;
+
 import org.s23m.cell.communication.xml.dom.LeafNode;
-import org.s23m.cell.communication.xml.dom.Namespace;
 
 public final class ElementReference extends LeafNode {
-	final Element referencedElement;
-	/**
-	 * Optional cardinality which can override
-	 * that of the referenced element
-	 */
-	final Cardinality cardinality;
+	private final Element referencedElement;
 	
-	public ElementReference(Namespace namespace, Element referencedElement) {
-		this(namespace, referencedElement, null);
+	/**
+	 * Cardinality (if not specified explicitly, the cardinality
+	 * of the referenced element will be used)
+	 */
+	private final Cardinality cardinality;
+	
+	public ElementReference(Element referencedElement) {
+		this(referencedElement, referencedElement.getCardinality());
 	}
 	
-	public ElementReference(Namespace namespace, Element referencedElement, Cardinality cardinality) {
-		super(namespace, "element");
+	public ElementReference(Element referencedElement, Cardinality cardinality) {
+		super(Constants.XML_SCHEMA_NAMESPACE, "element");
 		this.referencedElement = referencedElement;
 		this.cardinality = cardinality;
 		
-		attributes.putAll(referencedElement.attributes);
-		if (cardinality != null) {
-			// replace attributes
-			Cardinality.removeFromAttributes(attributes);
-			cardinality.addToAttributes(attributes);
-		}
+		final LinkedHashMap<String, String> attributes = getAttributes();
+		attributes.putAll(referencedElement.getAttributes());
+		
+		// replace attributes
+		Cardinality.removeFromAttributes(attributes);
+		cardinality.addToAttributes(attributes);
+	}
+
+	public Element getReferencedElement() {
+		return referencedElement;
+	}
+
+	public Cardinality getCardinality() {
+		return cardinality;
 	}
 }

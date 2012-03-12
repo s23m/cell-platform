@@ -28,10 +28,14 @@ package org.s23m.cell.communication.xml.dom;
  * A node with a single child
  */
 public abstract class WrapperNode extends Node {
-	public Node child;
+	private final Node child;
 
 	public WrapperNode(Namespace namespace, String name, Node child) {
 		super(namespace, name);
 		this.child = child;
+	}
+	
+	public Node getChild() {
+		return child;
 	}
 }
