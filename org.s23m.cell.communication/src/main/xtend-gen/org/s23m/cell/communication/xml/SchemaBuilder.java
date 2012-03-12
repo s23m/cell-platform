@@ -3,7 +3,10 @@ package org.s23m.cell.communication.xml;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.schema.Cardinality;
+import org.s23m.cell.communication.xml.schema.ComplexType;
 import org.s23m.cell.communication.xml.schema.Element;
+import org.s23m.cell.communication.xml.schema.ElementReference;
+import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.Type;
@@ -21,6 +24,21 @@ public class SchemaBuilder {
     return _xblockexpression;
   }
   
+  public static ComplexType complexType(final Namespace targetNamespace, final String name, final Sequence sequence) {
+    ComplexType _complexType = new ComplexType(targetNamespace, name, sequence);
+    return _complexType;
+  }
+  
+  public static ComplexType complexType(final Namespace targetNamespace, final String name, final Extension ext) {
+    ComplexType _complexType = new ComplexType(targetNamespace, name, ext);
+    return _complexType;
+  }
+  
+  public static Extension withExtension(final ComplexType base, final Sequence sequence) {
+    Extension _extension = new Extension(base, sequence);
+    return _extension;
+  }
+  
   public static Sequence sequence(final Procedure1<? super Sequence> initialiser) {
     Sequence _xblockexpression = null;
     {
@@ -30,6 +48,11 @@ public class SchemaBuilder {
       _xblockexpression = (result);
     }
     return _xblockexpression;
+  }
+  
+  public static ElementReference element(final Element referencedElement) {
+    ElementReference _elementReference = new ElementReference(referencedElement);
+    return _elementReference;
   }
   
   public static Element element(final Namespace namespace, final String name, final Type type) {

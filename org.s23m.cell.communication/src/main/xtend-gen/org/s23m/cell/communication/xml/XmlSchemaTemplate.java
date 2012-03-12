@@ -23,6 +23,7 @@ import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.ComplexType;
 import org.s23m.cell.communication.xml.schema.DataType;
 import org.s23m.cell.communication.xml.schema.Element;
+import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.SimpleType;
@@ -231,18 +232,41 @@ public class XmlSchemaTemplate {
           }
         };
       Sequence _sequence = SchemaBuilder.sequence(_function);
-      ComplexType _complexType = new ComplexType(XmlSchemaTemplate.NS_S23M, this.identityReference, _sequence);
+      ComplexType _complexType = SchemaBuilder.complexType(XmlSchemaTemplate.NS_S23M, this.identityReference, _sequence);
       final ComplexType identityReference = _complexType;
-      Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.semanticIdentity, identityReference);
-      Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.category, identityReference);
-      Element _element_2 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isAbstract, identityReference);
-      Element _element_3 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.maxCardinality, identityReference);
-      Element _element_4 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.minCardinality, identityReference);
-      Element _element_5 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isContainer, identityReference);
-      Element _element_6 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.isNavigable, identityReference);
-      Element _element_7 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.from, identityReference);
-      Element _element_8 = SchemaBuilder.element(XmlSchemaTemplate.NS_XSD, this.to, identityReference);
-      ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList(_element, _element_1, _element_2, _element_3, _element_4, _element_5, _element_6, _element_7, _element_8);
+      Element _element = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.semanticIdentity, identityReference);
+      final Element semanticIdentityElement = _element;
+      Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.category, identityReference);
+      final Element categoryElement = _element_1;
+      final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              CollectionExtensions.<Element>operator_add(_children, semanticIdentityElement);
+              List<Node> _children_1 = it.getChildren();
+              CollectionExtensions.<Element>operator_add(_children_1, categoryElement);
+            }
+          }
+        };
+      Sequence _sequence_1 = SchemaBuilder.sequence(_function_1);
+      ComplexType _complexType_1 = SchemaBuilder.complexType(XmlSchemaTemplate.NS_S23M, this.category, _sequence_1);
+      final ComplexType categoryComplexType = _complexType_1;
+      final Procedure1<Sequence> _function_2 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+          }
+        };
+      Sequence _sequence_2 = SchemaBuilder.sequence(_function_2);
+      Extension _withExtension = SchemaBuilder.withExtension(categoryComplexType, _sequence_2);
+      ComplexType _complexType_2 = SchemaBuilder.complexType(XmlSchemaTemplate.NS_S23M, this.graph, _withExtension);
+      final ComplexType graphComplexType = _complexType_2;
+      Element _element_2 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.isAbstract, identityReference);
+      Element _element_3 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.maxCardinality, identityReference);
+      Element _element_4 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.minCardinality, identityReference);
+      Element _element_5 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.isContainer, identityReference);
+      Element _element_6 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.isNavigable, identityReference);
+      Element _element_7 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.from, identityReference);
+      Element _element_8 = SchemaBuilder.element(XmlSchemaTemplate.NS_S23M, this.to, identityReference);
+      ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList(semanticIdentityElement, categoryElement, _element_2, _element_3, _element_4, _element_5, _element_6, _element_7, _element_8);
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;

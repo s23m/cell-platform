@@ -25,11 +25,19 @@
 package org.s23m.cell.communication.xml.dom;
 
 public class Namespace {
-	public final String prefix;
-	public final String uri;
+	private final String prefix;
+	private final String uri;
     
 	public Namespace(String prefix, String uri) {
 		this.prefix = prefix;
 		this.uri = uri;
+	}
+	
+	public String getPrefix() {
+		return prefix;
+	}
+	
+	public String getUri() {
+		return uri;
 	}
 }

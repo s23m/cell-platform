@@ -8,6 +8,9 @@ import org.s23m.cell.communication.xml.schema.Sequence
 
 import static org.s23m.cell.communication.xml.SchemaBuilder.*
 import org.s23m.cell.communication.xml.schema.Type
+import org.s23m.cell.communication.xml.schema.ComplexType
+import org.s23m.cell.communication.xml.schema.Extension
+import org.s23m.cell.communication.xml.schema.ElementReference
 
 class SchemaBuilder {
 	
@@ -17,12 +20,27 @@ class SchemaBuilder {
 		result
 	}
 	
+	def static complexType(Namespace targetNamespace, String name, Sequence sequence) {
+		new ComplexType(targetNamespace, name, sequence)
+	}
+	
+	def static complexType(Namespace targetNamespace, String name, Extension ext) {
+		new ComplexType(targetNamespace, name, ext)
+	}
+	
+	def static withExtension(ComplexType base, Sequence sequence) {
+		new Extension(base, sequence)
+	}
+	
 	def static sequence((Sequence)=>void initialiser) {
 		val result = new Sequence()
 		initialiser.apply(result)
 		result
 	}
 	
+	def static ElementReference element(Element referencedElement) {
+		new ElementReference(referencedElement)
+	}
 	
 	def static element(Namespace namespace, String name, Type type) {
 		element(namespace, name, type, [])				   	

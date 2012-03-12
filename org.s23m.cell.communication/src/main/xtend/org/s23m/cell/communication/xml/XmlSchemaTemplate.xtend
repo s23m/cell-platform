@@ -139,30 +139,62 @@ class XmlSchemaTemplate {
 		schema.attributes.toString
 	}
 	
-	// TODO for nodes which can be referenced we need to record two namespaces:
-	// namespace of used nodes ("source"?) and target namespace
-	// These are element, complexType, simpleType.
 	// The target namespace is used during rendering of types and references
 	def private List<Element> createReusedElements() {
 		val uuid = new SimpleType(NS_S23M, "uuid", DataType::STRING)
 		
-		val identityReference = new ComplexType(NS_S23M, identityReference, sequence [
+		val identityReference = complexType(NS_S23M, identityReference, sequence [
 			children += SchemaBuilder::element(NS_S23M, terminology.uniqueRepresentationReference, uuid)
 			children += SchemaBuilder::element(NS_S23M, terminology.identifier, uuid)
 		])
 		
+		val semanticIdentityElement = SchemaBuilder::element(NS_S23M, semanticIdentity, identityReference)
+		
+		val categoryElement = SchemaBuilder::element(NS_S23M, category, identityReference)
+		
+		val categoryComplexType = complexType(NS_S23M, category, sequence [
+			children += semanticIdentityElement
+			children += categoryElement
+		])
+		
+		val graphComplexType = complexType(NS_S23M, graph, withExtension(categoryComplexType, sequence [
+			// TODO
+		]))
+		 
+		/*
+
+	<xsd:complexType name="graph">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:category">
+				<xsd:sequence>
+					<xsd:element name="container" type="s23m:identityReference"/>
+					<xsd:element ref="s23m:isAbstract"/>
+					<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
+					<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+		 */
+		
+		
 		newArrayList(
-			SchemaBuilder::element(NS_XSD, semanticIdentity, identityReference),
+			semanticIdentityElement,
 			//SchemaBuilder::element(NS_XSD, model, model),
 			//SchemaBuilder::element(NS_XSD, function, function)
-			SchemaBuilder::element(NS_XSD, category, identityReference),
-			SchemaBuilder::element(NS_XSD, isAbstract, identityReference),
-			SchemaBuilder::element(NS_XSD, maxCardinality, identityReference),
-			SchemaBuilder::element(NS_XSD, minCardinality, identityReference),
-			SchemaBuilder::element(NS_XSD, isContainer, identityReference),
-			SchemaBuilder::element(NS_XSD, isNavigable, identityReference),
-			SchemaBuilder::element(NS_XSD, from, identityReference),
-			SchemaBuilder::element(NS_XSD, to, identityReference)
+			categoryElement,
+			SchemaBuilder::element(NS_S23M, isAbstract, identityReference),
+			SchemaBuilder::element(NS_S23M, maxCardinality, identityReference),
+			SchemaBuilder::element(NS_S23M, minCardinality, identityReference),
+			SchemaBuilder::element(NS_S23M, isContainer, identityReference),
+			SchemaBuilder::element(NS_S23M, isNavigable, identityReference),
+			SchemaBuilder::element(NS_S23M, from, identityReference),
+			SchemaBuilder::element(NS_S23M, to, identityReference)
 		)
 	}
 

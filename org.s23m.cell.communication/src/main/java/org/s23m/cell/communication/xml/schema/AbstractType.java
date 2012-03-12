@@ -30,7 +30,7 @@ public class AbstractType extends WrapperNode implements Type {
 
 	@Override
 	public String getIdentifier() {
-		return targetNamespace + ":" + nameAttribute;
+		return createQualifiedName(targetNamespace, nameAttribute);
 	}
 
 }

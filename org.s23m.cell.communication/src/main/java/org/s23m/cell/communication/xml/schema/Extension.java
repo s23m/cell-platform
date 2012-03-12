@@ -26,7 +26,7 @@ package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
-final class Extension extends WrapperNode {
+public final class Extension extends WrapperNode {
 	private final ComplexType base;
 	
 	public Extension(ComplexType base, Sequence sequence) {

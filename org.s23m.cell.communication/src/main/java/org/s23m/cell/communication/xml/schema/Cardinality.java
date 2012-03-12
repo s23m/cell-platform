@@ -28,8 +28,8 @@ import java.util.Map;
 
 public class Cardinality {
     private static final int DEFAULT_VALUE = 1;
-    private static final String MIN_OCCURS = "minOccurs";
-    private static final String MAX_OCCURS = "maxOccurs";
+    public static final String MIN_OCCURS = "minOccurs";
+    public static final String MAX_OCCURS = "maxOccurs";
     
 	public final int minOccurs;
 	public final int maxOccurs;

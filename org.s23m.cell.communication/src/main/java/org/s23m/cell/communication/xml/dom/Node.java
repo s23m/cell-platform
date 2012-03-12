@@ -8,7 +8,7 @@ public interface Node {
 
 	Namespace getNamespace();
 	
-	String getNameAttribute();
+	String getName();
 		
 	Map<String, String> getAttributes();
 	

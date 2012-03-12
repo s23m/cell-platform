@@ -44,8 +44,12 @@ public abstract class AbstractNode implements Node {
 		attributes = new LinkedHashMap<String, String>();
 	}
 
+	protected String createQualifiedName(Namespace namespace, String name) {
+		return namespace.getPrefix() + ":" + name;
+	}
+
 	public String getQualifiedName() {
-		return namespace.prefix + ":" + name;
+		return createQualifiedName(namespace, name);
 	}
 
 	public void setAttribute(String key, String value) {
@@ -64,7 +68,7 @@ public abstract class AbstractNode implements Node {
 		return attributes;
 	}
 	
-	public String getNameAttribute() {
+	public String getName() {
 		return name;
 	}
 }
