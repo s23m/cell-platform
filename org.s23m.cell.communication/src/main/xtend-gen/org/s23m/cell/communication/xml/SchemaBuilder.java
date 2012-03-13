@@ -1,18 +1,32 @@
 package org.s23m.cell.communication.xml;
 
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
+import org.s23m.cell.communication.xml.schema.DataType;
 import org.s23m.cell.communication.xml.schema.Element;
 import org.s23m.cell.communication.xml.schema.ElementReference;
 import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
+import org.s23m.cell.communication.xml.schema.SimpleType;
 import org.s23m.cell.communication.xml.schema.Type;
 
 @SuppressWarnings("all")
 public class SchemaBuilder {
+  private static String S23M = "s23m";
+  
+  private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
+  
+  private static Namespace NS_S23M = new Function0<Namespace>() {
+    public Namespace apply() {
+      Namespace _namespace = new Namespace(SchemaBuilder.S23M, SchemaBuilder.S23M_SCHEMA);
+      return _namespace;
+    }
+  }.apply();
+  
   public static Schema schema(final Procedure1<? super Schema> initialiser) {
     Schema _xblockexpression = null;
     {
@@ -24,18 +38,24 @@ public class SchemaBuilder {
     return _xblockexpression;
   }
   
-  public static ComplexType complexType(final Namespace targetNamespace, final String name, final Sequence sequence) {
-    ComplexType _complexType = new ComplexType(targetNamespace, name, sequence);
+  public static SimpleType simpleType(final String nameAttribute, final DataType restrictionDataType) {
+    SimpleType _simpleType = new SimpleType(SchemaBuilder.NS_S23M, nameAttribute, restrictionDataType);
+    return _simpleType;
+  }
+  
+  public static ComplexType complexType(final String name, final Sequence sequence) {
+    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, sequence);
     return _complexType;
   }
   
-  public static ComplexType complexType(final Namespace targetNamespace, final String name, final Extension ext) {
-    ComplexType _complexType = new ComplexType(targetNamespace, name, ext);
+  public static ComplexType complexType(final String name, final Extension ext) {
+    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, ext);
     return _complexType;
   }
   
-  public static Extension withExtension(final ComplexType base, final Sequence sequence) {
-    Extension _extension = new Extension(base, sequence);
+  public static Extension withExtension(final ComplexType base, final Procedure1<? super Sequence> initialiser) {
+    Sequence _sequence = SchemaBuilder.sequence(initialiser);
+    Extension _extension = new Extension(base, _sequence);
     return _extension;
   }
   
@@ -55,24 +75,24 @@ public class SchemaBuilder {
     return _elementReference;
   }
   
-  public static Element element(final Namespace namespace, final String name, final Type type) {
+  public static Element element(final String name, final Type type) {
     final Procedure1<Element> _function = new Procedure1<Element>() {
         public void apply(final Element it) {
         }
       };
-    Element _element = SchemaBuilder.element(namespace, name, type, _function);
+    Element _element = SchemaBuilder.element(name, type, _function);
     return _element;
   }
   
-  public static Element element(final Namespace namespace, final String name, final Type type, final Procedure1<? super Element> initialiser) {
-    Element _element = SchemaBuilder.element(namespace, name, type, Cardinality.EXACTLY_ONE, initialiser);
+  public static Element element(final String name, final Type type, final Procedure1<? super Element> initialiser) {
+    Element _element = SchemaBuilder.element(name, type, Cardinality.EXACTLY_ONE, initialiser);
     return _element;
   }
   
-  public static Element element(final Namespace namespace, final String name, final Type type, final Cardinality cardinality, final Procedure1<? super Element> initialiser) {
+  public static Element element(final String name, final Type type, final Cardinality cardinality, final Procedure1<? super Element> initialiser) {
     Element _xblockexpression = null;
     {
-      Element _element = new Element(namespace, name, type, cardinality);
+      Element _element = new Element(SchemaBuilder.NS_S23M, name, type, cardinality);
       final Element result = _element;
       initialiser.apply(result);
       _xblockexpression = (result);

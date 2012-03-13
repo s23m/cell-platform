@@ -62,7 +62,6 @@ class XmlSchemaTemplate {
 									  'attributeFormDefault="unqualified"'
 
 	static Namespace NS_S23M = new Namespace(S23M, S23M_SCHEMA)
-	static Namespace NS_XSD = new Namespace(XSD, XSD_SCHEMA)
 
 	XmlSchemaTerminology terminology
 	
@@ -141,23 +140,23 @@ class XmlSchemaTemplate {
 	
 	// The target namespace is used during rendering of types and references
 	def private List<Element> createReusedElements() {
-		val uuid = new SimpleType(NS_S23M, "uuid", DataType::STRING)
+		val uuid = simpleType(uuid, DataType::STRING)
 		
-		val identityReference = complexType(NS_S23M, identityReference, sequence [
-			children += SchemaBuilder::element(NS_S23M, terminology.uniqueRepresentationReference, uuid)
-			children += SchemaBuilder::element(NS_S23M, terminology.identifier, uuid)
+		val identityReference = complexType(identityReference, sequence [
+			children += SchemaBuilder::element(terminology.uniqueRepresentationReference, uuid)
+			children += SchemaBuilder::element(terminology.identifier, uuid)
 		])
 		
-		val semanticIdentityElement = SchemaBuilder::element(NS_S23M, semanticIdentity, identityReference)
+		val semanticIdentityElement = SchemaBuilder::element(semanticIdentity, identityReference)
 		
-		val categoryElement = SchemaBuilder::element(NS_S23M, category, identityReference)
+		val categoryElement = SchemaBuilder::element(category, identityReference)
 		
-		val categoryComplexType = complexType(NS_S23M, category, sequence [
+		val categoryComplexType = complexType(category, sequence [
 			children += semanticIdentityElement
 			children += categoryElement
 		])
 		
-		val graphComplexType = complexType(NS_S23M, graph, withExtension(categoryComplexType, sequence [
+		val graphComplexType = complexType(graph, withExtension(categoryComplexType, [
 			// TODO
 		]))
 		 
@@ -188,13 +187,13 @@ class XmlSchemaTemplate {
 			//SchemaBuilder::element(NS_XSD, model, model),
 			//SchemaBuilder::element(NS_XSD, function, function)
 			categoryElement,
-			SchemaBuilder::element(NS_S23M, isAbstract, identityReference),
-			SchemaBuilder::element(NS_S23M, maxCardinality, identityReference),
-			SchemaBuilder::element(NS_S23M, minCardinality, identityReference),
-			SchemaBuilder::element(NS_S23M, isContainer, identityReference),
-			SchemaBuilder::element(NS_S23M, isNavigable, identityReference),
-			SchemaBuilder::element(NS_S23M, from, identityReference),
-			SchemaBuilder::element(NS_S23M, to, identityReference)
+			SchemaBuilder::element(isAbstract, identityReference),
+			SchemaBuilder::element(maxCardinality, identityReference),
+			SchemaBuilder::element(minCardinality, identityReference),
+			SchemaBuilder::element(isContainer, identityReference),
+			SchemaBuilder::element(isNavigable, identityReference),
+			SchemaBuilder::element(from, identityReference),
+			SchemaBuilder::element(to, identityReference)
 		)
 	}
 
