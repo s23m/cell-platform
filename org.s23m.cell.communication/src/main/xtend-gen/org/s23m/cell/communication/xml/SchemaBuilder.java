@@ -76,6 +76,11 @@ public class SchemaBuilder {
     return _elementReference;
   }
   
+  public static ElementReference element(final Element referencedElement, final Cardinality cardinality) {
+    ElementReference _elementReference = new ElementReference(referencedElement, cardinality);
+    return _elementReference;
+  }
+  
   public static Element element(final String name, final Type type) {
     final Procedure1<Element> _function = new Procedure1<Element>() {
         public void apply(final Element it) {

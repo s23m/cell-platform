@@ -54,8 +54,12 @@ class SchemaBuilder {
 		new ElementReference(referencedElement)
 	}
 	
+	def static ElementReference element(Element referencedElement, Cardinality cardinality) {
+		new ElementReference(referencedElement, cardinality)
+	}
+	
 	def static element(String name, Type type) {
-		element(name, type, [])				   	
+		element(name, type, [])		   	
 	}
 	
 	def static element(String name, Type type, (Element)=>void initialiser) {

@@ -418,6 +418,79 @@ public class XmlSchemaTemplate {
       Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_11);
       ComplexType _complexType_11 = SchemaBuilder.complexType(this.graph, _withExtension_9);
       final ComplexType graphComplexType = _complexType_11;
+      final Procedure1<Sequence> _function_12 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+          }
+        };
+      Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType, _function_12);
+      ComplexType _complexType_12 = SchemaBuilder.complexType(this.model, _withExtension_10);
+      final ComplexType modelComplexType = _complexType_12;
+      Element _element_9 = SchemaBuilder.element(this.model, modelComplexType);
+      final Element modelElement = _element_9;
+      String _identity = this.terminology.identity();
+      final Procedure1<Sequence> _function_13 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              String _identifier = XmlSchemaTemplate.this.terminology.identifier();
+              Element _element = SchemaBuilder.element(_identifier, uuid);
+              CollectionExtensions.<Element>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              String _name = XmlSchemaTemplate.this.terminology.name();
+              Element _element_1 = SchemaBuilder.element(_name, uuid);
+              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              String _pluralName = XmlSchemaTemplate.this.terminology.pluralName();
+              Element _element_2 = SchemaBuilder.element(_pluralName, uuid);
+              CollectionExtensions.<Element>operator_add(_children_2, _element_2);
+              List<Node> _children_3 = it.getChildren();
+              String _payload = XmlSchemaTemplate.this.terminology.payload();
+              Element _element_3 = SchemaBuilder.element(_payload, uuid);
+              CollectionExtensions.<Element>operator_add(_children_3, _element_3);
+              List<Node> _children_4 = it.getChildren();
+              String _technicalName = XmlSchemaTemplate.this.terminology.technicalName();
+              Element _element_4 = SchemaBuilder.element(_technicalName, uuid);
+              CollectionExtensions.<Element>operator_add(_children_4, _element_4);
+            }
+          }
+        };
+      ComplexType _complexType_13 = SchemaBuilder.complexType(_identity, _function_13);
+      final ComplexType identityComplexType = _complexType_13;
+      String _semanticDomain = this.terminology.semanticDomain();
+      final Procedure1<Sequence> _function_14 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(modelElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              String _identity = XmlSchemaTemplate.this.terminology.identity();
+              Element _element_1 = SchemaBuilder.element(_identity, identityComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
+            }
+          }
+        };
+      ComplexType _complexType_14 = SchemaBuilder.complexType(_semanticDomain, _function_14);
+      final ComplexType semanticDomainComplexType = _complexType_14;
+      String _artifactSet = this.terminology.artifactSet();
+      final Procedure1<Sequence> _function_15 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(modelElement, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              String _semanticDomain = XmlSchemaTemplate.this.terminology.semanticDomain();
+              Element _element_1 = SchemaBuilder.element(_semanticDomain, semanticDomainComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
+            }
+          }
+        };
+      ComplexType _complexType_15 = SchemaBuilder.complexType(_artifactSet, _function_15);
+      final ComplexType artifactSetComplexType = _complexType_15;
+      String _artifactSet_1 = this.terminology.artifactSet();
+      Element _element_10 = SchemaBuilder.element(_artifactSet_1, artifactSetComplexType);
+      final Element artifactSetElement = _element_10;
       ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList();
       _xblockexpression = (_newArrayList);
     }

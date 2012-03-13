@@ -220,6 +220,8 @@ class XmlSchemaTemplate {
 			// TODO do we need to store the result?
 		]))
 
+		/* Encoding of model artifacts */
+	
 		val graphComplexType = complexType(graph, withExtension(categoryComplexType, [
 			children += SchemaBuilder::element(terminology.container, identityReference)
 			children += SchemaBuilder::element(isAbstractElement)
@@ -230,6 +232,33 @@ class XmlSchemaTemplate {
 			children += SchemaBuilder::element(command, commandComplexType, Cardinality::ZERO_TO_MANY)
 			children += SchemaBuilder::element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
 		]))
+		
+		val modelComplexType = complexType(model, withExtension(graphComplexType, []))
+		
+		val modelElement = SchemaBuilder::element(model, modelComplexType)
+		
+		val identityComplexType = complexType(terminology.identity, [
+			children += SchemaBuilder::element(terminology.identifier, uuid)
+			children += SchemaBuilder::element(terminology.name, uuid) // TODO change to xsd:string
+			children += SchemaBuilder::element(terminology.pluralName, uuid) // TODO change to xsd:string
+			children += SchemaBuilder::element(terminology.payload, uuid) // TODO change to xsd:string
+			children += SchemaBuilder::element(terminology.technicalName, uuid) // TODO change to xsd:string
+		])
+
+		/* Encoding of semantic domain artifacts */
+		val semanticDomainComplexType = complexType(terminology.semanticDomain, [
+			children += SchemaBuilder::element(modelElement)
+			children += SchemaBuilder::element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
+		])
+
+		val artifactSetComplexType = complexType(terminology.artifactSet, [
+			children += SchemaBuilder::element(modelElement, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
+		])
+		
+		/* Root element */
+		
+		val artifactSetElement = SchemaBuilder::element(terminology.artifactSet, artifactSetComplexType)
 	
 		newArrayList(
 		)
