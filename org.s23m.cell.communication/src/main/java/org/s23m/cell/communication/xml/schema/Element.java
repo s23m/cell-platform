@@ -24,6 +24,9 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.s23m.cell.communication.xml.dom.AbstractLeafNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
@@ -32,6 +35,7 @@ public final class Element extends AbstractLeafNode implements ReferenceableNode
 	private final String name;
 	private final Cardinality cardinality;
 	private final Type type;
+	private final List<ElementReference> references;
 	
 	public Element(Namespace targetNamespace, String name, Type type, Cardinality cardinality) {
 		super(Constants.XML_SCHEMA_NAMESPACE, "element");
@@ -39,10 +43,15 @@ public final class Element extends AbstractLeafNode implements ReferenceableNode
 		this.name = name;
 		this.type = type;
 		this.cardinality = cardinality;
+		this.references = new ArrayList<ElementReference>();
 		
 		setAttribute("name", name);
 		setAttribute("type", type.getIdentifier());
 		updateCardinality(cardinality);
+	}
+
+	public void addReference(ElementReference elementReference) {
+		references.add(elementReference);
 	}
 	
 	public Namespace getTargetNamespace() {

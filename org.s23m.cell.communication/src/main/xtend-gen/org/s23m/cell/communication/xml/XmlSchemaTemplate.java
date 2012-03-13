@@ -20,9 +20,11 @@ import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
+import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
 import org.s23m.cell.communication.xml.schema.DataType;
 import org.s23m.cell.communication.xml.schema.Element;
+import org.s23m.cell.communication.xml.schema.ElementReference;
 import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
@@ -224,13 +226,26 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      Sequence _sequence = SchemaBuilder.sequence(_function);
-      ComplexType _complexType = SchemaBuilder.complexType(this.identityReference, _sequence);
+      ComplexType _complexType = SchemaBuilder.complexType(this.identityReference, _function);
       final ComplexType identityReference = _complexType;
       Element _element = SchemaBuilder.element(this.semanticIdentity, identityReference);
       final Element semanticIdentityElement = _element;
-      Element _element_1 = SchemaBuilder.element(this.category, identityReference);
-      final Element categoryElement = _element_1;
+      Element _element_1 = SchemaBuilder.element(this.isAbstract, identityReference);
+      final Element isAbstractElement = _element_1;
+      Element _element_2 = SchemaBuilder.element(this.minCardinality, identityReference);
+      final Element minCardinalityElement = _element_2;
+      Element _element_3 = SchemaBuilder.element(this.maxCardinality, identityReference);
+      final Element maxCardinalityElement = _element_3;
+      Element _element_4 = SchemaBuilder.element(this.isContainer, identityReference);
+      final Element isContainerElement = _element_4;
+      Element _element_5 = SchemaBuilder.element(this.isNavigable, identityReference);
+      final Element isNavigableElement = _element_5;
+      Element _element_6 = SchemaBuilder.element(this.from, identityReference);
+      final Element fromElement = _element_6;
+      Element _element_7 = SchemaBuilder.element(this.to, identityReference);
+      final Element toElement = _element_7;
+      Element _element_8 = SchemaBuilder.element(this.category, identityReference);
+      final Element categoryElement = _element_8;
       final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
@@ -241,24 +256,169 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      Sequence _sequence_1 = SchemaBuilder.sequence(_function_1);
-      ComplexType _complexType_1 = SchemaBuilder.complexType(this.category, _sequence_1);
+      ComplexType _complexType_1 = SchemaBuilder.complexType(this.category, _function_1);
       final ComplexType categoryComplexType = _complexType_1;
       final Procedure1<Sequence> _function_2 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = SchemaBuilder.element(maxCardinalityElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+            }
           }
         };
       Extension _withExtension = SchemaBuilder.withExtension(categoryComplexType, _function_2);
-      ComplexType _complexType_2 = SchemaBuilder.complexType(this.graph, _withExtension);
-      final ComplexType graphComplexType = _complexType_2;
-      Element _element_2 = SchemaBuilder.element(this.isAbstract, identityReference);
-      Element _element_3 = SchemaBuilder.element(this.maxCardinality, identityReference);
-      Element _element_4 = SchemaBuilder.element(this.minCardinality, identityReference);
-      Element _element_5 = SchemaBuilder.element(this.isContainer, identityReference);
-      Element _element_6 = SchemaBuilder.element(this.isNavigable, identityReference);
-      Element _element_7 = SchemaBuilder.element(this.from, identityReference);
-      Element _element_8 = SchemaBuilder.element(this.to, identityReference);
-      ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList(semanticIdentityElement, categoryElement, _element_2, _element_3, _element_4, _element_5, _element_6, _element_7, _element_8);
+      ComplexType _complexType_2 = SchemaBuilder.complexType(this.vertex, _withExtension);
+      final ComplexType vertexComplexType = _complexType_2;
+      final Procedure1<Sequence> _function_3 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = SchemaBuilder.element(fromElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              ElementReference _element_2 = SchemaBuilder.element(toElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_2, _element_2);
+            }
+          }
+        };
+      Extension _withExtension_1 = SchemaBuilder.withExtension(categoryComplexType, _function_3);
+      ComplexType _complexType_3 = SchemaBuilder.complexType(this.visibility, _withExtension_1);
+      final ComplexType visibilityComplexType = _complexType_3;
+      final Procedure1<Sequence> _function_4 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = SchemaBuilder.element(fromElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              ElementReference _element_2 = SchemaBuilder.element(toElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_2, _element_2);
+            }
+          }
+        };
+      Extension _withExtension_2 = SchemaBuilder.withExtension(categoryComplexType, _function_4);
+      ComplexType _complexType_4 = SchemaBuilder.complexType(this.superSetReference, _withExtension_2);
+      final ComplexType superSetReferenceComplexType = _complexType_4;
+      final Procedure1<Sequence> _function_5 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = SchemaBuilder.element(minCardinalityElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              ElementReference _element_2 = SchemaBuilder.element(maxCardinalityElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_2, _element_2);
+              List<Node> _children_3 = it.getChildren();
+              ElementReference _element_3 = SchemaBuilder.element(isContainerElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_3, _element_3);
+              List<Node> _children_4 = it.getChildren();
+              ElementReference _element_4 = SchemaBuilder.element(isNavigableElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_4, _element_4);
+            }
+          }
+        };
+      Extension _withExtension_3 = SchemaBuilder.withExtension(categoryComplexType, _function_5);
+      ComplexType _complexType_5 = SchemaBuilder.complexType(this.edgeEnd, _withExtension_3);
+      final ComplexType edgeEndComplexType = _complexType_5;
+      final Procedure1<Sequence> _function_6 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              ElementReference _element = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              Element _element_1 = SchemaBuilder.element(XmlSchemaTemplate.this.from, edgeEndComplexType);
+              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              Element _element_2 = SchemaBuilder.element(XmlSchemaTemplate.this.to, edgeEndComplexType);
+              CollectionExtensions.<Element>operator_add(_children_2, _element_2);
+            }
+          }
+        };
+      Extension _withExtension_4 = SchemaBuilder.withExtension(categoryComplexType, _function_6);
+      ComplexType _complexType_6 = SchemaBuilder.complexType(this.edge, _withExtension_4);
+      final ComplexType edgeComplexType = _complexType_6;
+      String _parameter = this.terminology.parameter();
+      final String parameter = _parameter;
+      final Procedure1<Sequence> _function_7 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+          }
+        };
+      Extension _withExtension_5 = SchemaBuilder.withExtension(categoryComplexType, _function_7);
+      ComplexType _complexType_7 = SchemaBuilder.complexType(parameter, _withExtension_5);
+      final ComplexType parameterComplexType = _complexType_7;
+      final Procedure1<Sequence> _function_8 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            List<Node> _children = it.getChildren();
+            Element _element = SchemaBuilder.element(parameter, parameterComplexType, Cardinality.ZERO_TO_MANY);
+            CollectionExtensions.<Element>operator_add(_children, _element);
+          }
+        };
+      Extension _withExtension_6 = SchemaBuilder.withExtension(categoryComplexType, _function_8);
+      ComplexType _complexType_8 = SchemaBuilder.complexType(this.function, _withExtension_6);
+      final ComplexType functionComplexType = _complexType_8;
+      final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+          }
+        };
+      Extension _withExtension_7 = SchemaBuilder.withExtension(functionComplexType, _function_9);
+      ComplexType _complexType_9 = SchemaBuilder.complexType(this.command, _withExtension_7);
+      final ComplexType commandComplexType = _complexType_9;
+      final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+          }
+        };
+      Extension _withExtension_8 = SchemaBuilder.withExtension(functionComplexType, _function_10);
+      ComplexType _complexType_10 = SchemaBuilder.complexType(this.query, _withExtension_8);
+      final ComplexType queryComplexType = _complexType_10;
+      final Procedure1<Sequence> _function_11 = new Procedure1<Sequence>() {
+          public void apply(final Sequence it) {
+            {
+              List<Node> _children = it.getChildren();
+              String _container = XmlSchemaTemplate.this.terminology.container();
+              Element _element = SchemaBuilder.element(_container, identityReference);
+              CollectionExtensions.<Element>operator_add(_children, _element);
+              List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = SchemaBuilder.element(isAbstractElement);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
+              Element _element_2 = SchemaBuilder.element(XmlSchemaTemplate.this.vertex, vertexComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_2, _element_2);
+              List<Node> _children_3 = it.getChildren();
+              Element _element_3 = SchemaBuilder.element(XmlSchemaTemplate.this.visibility, visibilityComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_3, _element_3);
+              List<Node> _children_4 = it.getChildren();
+              Element _element_4 = SchemaBuilder.element(XmlSchemaTemplate.this.edge, edgeComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_4, _element_4);
+              List<Node> _children_5 = it.getChildren();
+              Element _element_5 = SchemaBuilder.element(XmlSchemaTemplate.this.superSetReference, superSetReferenceComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_5, _element_5);
+              List<Node> _children_6 = it.getChildren();
+              Element _element_6 = SchemaBuilder.element(XmlSchemaTemplate.this.command, commandComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_6, _element_6);
+              List<Node> _children_7 = it.getChildren();
+              Element _element_7 = SchemaBuilder.element(XmlSchemaTemplate.this.query, queryComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_7, _element_7);
+            }
+          }
+        };
+      Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_11);
+      ComplexType _complexType_11 = SchemaBuilder.complexType(this.graph, _withExtension_9);
+      final ComplexType graphComplexType = _complexType_11;
+      ArrayList<Element> _newArrayList = CollectionLiterals.<Element>newArrayList();
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;

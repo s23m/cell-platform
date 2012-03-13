@@ -43,8 +43,9 @@ public class SchemaBuilder {
     return _simpleType;
   }
   
-  public static ComplexType complexType(final String name, final Sequence sequence) {
-    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, sequence);
+  public static ComplexType complexType(final String name, final Procedure1<? super Sequence> initialiser) {
+    Sequence _sequence = SchemaBuilder.sequence(initialiser);
+    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, _sequence);
     return _complexType;
   }
   
@@ -86,6 +87,11 @@ public class SchemaBuilder {
   
   public static Element element(final String name, final Type type, final Procedure1<? super Element> initialiser) {
     Element _element = SchemaBuilder.element(name, type, Cardinality.EXACTLY_ONE, initialiser);
+    return _element;
+  }
+  
+  public static Element element(final String name, final Type type, final Cardinality cardinality) {
+    Element _element = new Element(SchemaBuilder.NS_S23M, name, type, cardinality);
     return _element;
   }
   

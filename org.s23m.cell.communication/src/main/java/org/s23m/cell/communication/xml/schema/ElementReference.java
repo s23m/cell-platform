@@ -44,6 +44,7 @@ public final class ElementReference extends AbstractLeafNode {
 	public ElementReference(Element referencedElement, Cardinality cardinality) {
 		super(Constants.XML_SCHEMA_NAMESPACE, "element");
 		this.referencedElement = referencedElement;
+		this.referencedElement.addReference(this);
 		this.cardinality = cardinality;
 		
 		final LinkedHashMap<String, String> attributes = getAttributes();

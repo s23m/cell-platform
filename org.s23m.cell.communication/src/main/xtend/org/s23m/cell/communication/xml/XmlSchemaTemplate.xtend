@@ -34,6 +34,7 @@ import org.s23m.cell.communication.xml.dom.Namespace
 import static extension org.s23m.cell.communication.xml.Extensions.*
 
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
+import org.s23m.cell.communication.xml.schema.Cardinality
 import org.s23m.cell.communication.xml.schema.ComplexType
 import org.s23m.cell.communication.xml.schema.SimpleType
 import org.s23m.cell.communication.xml.schema.DataType
@@ -139,61 +140,98 @@ class XmlSchemaTemplate {
 	}
 	
 	// The target namespace is used during rendering of types and references
+	// TODO record links between elements and their references
 	def private List<Element> createReusedElements() {
 		val uuid = simpleType(uuid, DataType::STRING)
 		
-		val identityReference = complexType(identityReference, sequence [
+		val identityReference = complexType(identityReference, [
 			children += SchemaBuilder::element(terminology.uniqueRepresentationReference, uuid)
 			children += SchemaBuilder::element(terminology.identifier, uuid)
 		])
-		
+				
 		val semanticIdentityElement = SchemaBuilder::element(semanticIdentity, identityReference)
 		
-		val categoryElement = SchemaBuilder::element(category, identityReference)
+		val isAbstractElement = SchemaBuilder::element(isAbstract, identityReference)
 		
-		val categoryComplexType = complexType(category, sequence [
+		val minCardinalityElement = SchemaBuilder::element(minCardinality, identityReference)
+		
+		val maxCardinalityElement = SchemaBuilder::element(maxCardinality, identityReference)
+		
+		val isContainerElement = SchemaBuilder::element(isContainer, identityReference)
+		
+		val isNavigableElement = SchemaBuilder::element(isNavigable, identityReference)
+		
+		val fromElement = SchemaBuilder::element(from, identityReference)
+	
+		val toElement = SchemaBuilder::element(to, identityReference)
+		
+		val categoryElement = SchemaBuilder::element(category, identityReference)
+	
+		val categoryComplexType = complexType(category, [
 			children += semanticIdentityElement
 			children += categoryElement
 		])
 		
-		val graphComplexType = complexType(graph, withExtension(categoryComplexType, [
-			// TODO
+		val vertexComplexType = complexType(vertex, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(maxCardinalityElement)
 		]))
-		 
-		/*
-
-	<xsd:complexType name="graph">
-		<xsd:complexContent>
-			<xsd:extension base="s23m:category">
-				<xsd:sequence>
-					<xsd:element name="container" type="s23m:identityReference"/>
-					<xsd:element ref="s23m:isAbstract"/>
-					<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
-					<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-		 */
 		
+		val visibilityComplexType = complexType(visibility, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(fromElement)
+			children += SchemaBuilder::element(toElement)
+		]))
 		
+		val superSetReferenceComplexType = complexType(superSetReference, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(fromElement)
+			children += SchemaBuilder::element(toElement)
+		]))
+		
+		val edgeEndComplexType = complexType(edgeEnd, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(minCardinalityElement)
+			children += SchemaBuilder::element(maxCardinalityElement)
+			children += SchemaBuilder::element(isContainerElement)
+			children += SchemaBuilder::element(isNavigableElement)
+		]))
+		
+		val edgeComplexType = complexType(edge, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(from, edgeEndComplexType)
+			children += SchemaBuilder::element(to, edgeEndComplexType)
+		]))
+		
+		/* Artifact functionality */
+
+		val parameter = terminology.parameter
+
+		val parameterComplexType = complexType(parameter, withExtension(categoryComplexType, []))
+		
+		val functionComplexType = complexType(function, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(parameter, parameterComplexType, Cardinality::ZERO_TO_MANY)
+		]))
+
+		val commandComplexType = complexType(command, withExtension(functionComplexType, [
+		]))
+
+		val queryComplexType = complexType(query, withExtension(functionComplexType, [
+			// TODO do we need to store the result?
+		]))
+
+		val graphComplexType = complexType(graph, withExtension(categoryComplexType, [
+			children += SchemaBuilder::element(terminology.container, identityReference)
+			children += SchemaBuilder::element(isAbstractElement)
+			children += SchemaBuilder::element(vertex, vertexComplexType, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(visibility, visibilityComplexType, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(edge, edgeComplexType, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(superSetReference, superSetReferenceComplexType, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(command, commandComplexType, Cardinality::ZERO_TO_MANY)
+			children += SchemaBuilder::element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
+		]))
+	
 		newArrayList(
-			semanticIdentityElement,
-			//SchemaBuilder::element(NS_XSD, model, model),
-			//SchemaBuilder::element(NS_XSD, function, function)
-			categoryElement,
-			SchemaBuilder::element(isAbstract, identityReference),
-			SchemaBuilder::element(maxCardinality, identityReference),
-			SchemaBuilder::element(minCardinality, identityReference),
-			SchemaBuilder::element(isContainer, identityReference),
-			SchemaBuilder::element(isNavigable, identityReference),
-			SchemaBuilder::element(from, identityReference),
-			SchemaBuilder::element(to, identityReference)
 		)
 	}
 

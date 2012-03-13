@@ -50,7 +50,9 @@ import com.google.common.collect.Lists;
 
 // TODO test for maximum reuse (reusable elements whenever there are repeated (name, type) pairs)
 // TODO check that all types are qualified
+// TODO check that all type names are unique
 // TODO check children of complexTypes (make sure elements are wrapped in a sequence)
+// TODO check that all XSD nodes (complexTypes, simpleTypes, elements, etc.) use the XSD namespace
 // TODO check isAbstract usage
 public class XmlSchemaFactoryTest extends TestCase {
 	

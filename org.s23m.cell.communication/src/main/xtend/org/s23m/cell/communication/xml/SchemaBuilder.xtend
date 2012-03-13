@@ -32,8 +32,8 @@ class SchemaBuilder {
 		new SimpleType(NS_S23M, nameAttribute, restrictionDataType)
 	}
 		
-	def static complexType(String name, Sequence sequence) {
-		new ComplexType(NS_S23M, name, sequence)
+	def static complexType(String name, (Sequence)=>void initialiser) {
+		new ComplexType(NS_S23M, name, sequence(initialiser))
 	}
 	
 	def static complexType(String name, Extension ext) {
@@ -62,10 +62,11 @@ class SchemaBuilder {
 		element(name, type, Cardinality::EXACTLY_ONE, initialiser)				   	
 	}
 	
-	def static element(String name,
-					   Type type,
-					   Cardinality cardinality,
-					   (Element)=>void initialiser) {
+	def static element(String name, Type type, Cardinality cardinality) {
+		new Element(NS_S23M, name, type, cardinality)
+	}
+	
+	def static element(String name, Type type, Cardinality cardinality, (Element)=>void initialiser) {
 		val result = new Element(NS_S23M, name, type, cardinality)
 		initialiser.apply(result)
 		result
