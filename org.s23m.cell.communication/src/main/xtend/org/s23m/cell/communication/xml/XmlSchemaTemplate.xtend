@@ -239,10 +239,10 @@ class XmlSchemaTemplate {
 		
 		val identityComplexType = complexType(terminology.identity, [
 			children += SchemaBuilder::element(terminology.identifier, uuid)
-			children += SchemaBuilder::element(terminology.name, uuid) // TODO change to xsd:string
-			children += SchemaBuilder::element(terminology.pluralName, uuid) // TODO change to xsd:string
-			children += SchemaBuilder::element(terminology.payload, uuid) // TODO change to xsd:string
-			children += SchemaBuilder::element(terminology.technicalName, uuid) // TODO change to xsd:string
+			children += SchemaBuilder::element(terminology.name, DataType::STRING)
+			children += SchemaBuilder::element(terminology.pluralName, DataType::STRING)
+			children += SchemaBuilder::element(terminology.payload, DataType::STRING)
+			children += SchemaBuilder::element(terminology.technicalName, DataType::STRING)
 		])
 
 		/* Encoding of semantic domain artifacts */

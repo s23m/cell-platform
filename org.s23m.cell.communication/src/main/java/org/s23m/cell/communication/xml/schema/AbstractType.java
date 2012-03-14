@@ -19,18 +19,7 @@ public class AbstractType extends WrapperNode implements Type {
 	}
 
 	@Override
-	public String getNameAttribute() {
-		return nameAttribute;
-	}
-
-	@Override
-	public Namespace getTargetNamespace() {
-		return targetNamespace;
-	}
-
-	@Override
 	public String getIdentifier() {
 		return createQualifiedName(targetNamespace, nameAttribute);
 	}
-
 }

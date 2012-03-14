@@ -437,19 +437,19 @@ public class XmlSchemaTemplate {
               CollectionExtensions.<Element>operator_add(_children, _element);
               List<Node> _children_1 = it.getChildren();
               String _name = XmlSchemaTemplate.this.terminology.name();
-              Element _element_1 = SchemaBuilder.element(_name, uuid);
+              Element _element_1 = SchemaBuilder.element(_name, DataType.STRING);
               CollectionExtensions.<Element>operator_add(_children_1, _element_1);
               List<Node> _children_2 = it.getChildren();
               String _pluralName = XmlSchemaTemplate.this.terminology.pluralName();
-              Element _element_2 = SchemaBuilder.element(_pluralName, uuid);
+              Element _element_2 = SchemaBuilder.element(_pluralName, DataType.STRING);
               CollectionExtensions.<Element>operator_add(_children_2, _element_2);
               List<Node> _children_3 = it.getChildren();
               String _payload = XmlSchemaTemplate.this.terminology.payload();
-              Element _element_3 = SchemaBuilder.element(_payload, uuid);
+              Element _element_3 = SchemaBuilder.element(_payload, DataType.STRING);
               CollectionExtensions.<Element>operator_add(_children_3, _element_3);
               List<Node> _children_4 = it.getChildren();
               String _technicalName = XmlSchemaTemplate.this.terminology.technicalName();
-              Element _element_4 = SchemaBuilder.element(_technicalName, uuid);
+              Element _element_4 = SchemaBuilder.element(_technicalName, DataType.STRING);
               CollectionExtensions.<Element>operator_add(_children_4, _element_4);
             }
           }
