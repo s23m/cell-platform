@@ -60,8 +60,8 @@ object GmodelBuild extends Build {
     repository,
     repositoryClient,
     serialization,
-    semanticextensions,
-    semanticextensionsTestscripts,
+    platform,
+    platformTestscripts,
     statistics,
     generator,
 
@@ -115,7 +115,7 @@ object GmodelBuild extends Build {
         VaadinPlugin.vaadinWidgetSet := "org.s23m.cell.editor.semanticdomain.widgetset.editorWidgetset"
       )
     }
-  ) dependsOn (kernel, repositoryClient, serialization, common, semanticextensions)
+  ) dependsOn (kernel, repositoryClient, serialization, common, platform)
 
   lazy val hibernateosgi = Project(
     "hibernateosgi",
@@ -172,17 +172,17 @@ object GmodelBuild extends Build {
     settings = javaProjectSettings
   ) dependsOn (kernel, statistics)
 
-  lazy val semanticextensions = Project(
-    "semanticextensions",
-    file ("org.s23m.cell.semanticextensions"),
+  lazy val platform = Project(
+    "platform",
+    file ("org.s23m.cell.platform"),
     settings = javaProjectSettings
   ) dependsOn (kernel)
 
-  lazy val semanticextensionsTestscripts = Project(
-    "semanticextensions-testscripts",
-    file ("org.s23m.cell.semanticextensions.testscripts"),
+  lazy val platformTestscripts = Project(
+    "platform-testscripts",
+    file ("org.s23m.cell.platform.testscripts"),
     settings = javaProjectSettings
-  ) dependsOn (kernel, kernelTests, kernelTestbench, semanticextensions)
+  ) dependsOn (kernel, kernelTests, kernelTestbench, platform)
 
   lazy val statistics = Project(
     "statistics",
