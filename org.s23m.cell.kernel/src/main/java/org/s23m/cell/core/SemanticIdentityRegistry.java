@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -27,13 +27,13 @@ package org.s23m.cell.core;
 
 /**
  * {@link SemanticIdentityRegistry} is an ordered list of the SemanticIdentities
- * that are used to construct the Instances and Properties of the Gmodel kernel.
+ * that are used to construct the Instances and Properties of the Cell kernel.
  * 
  * Important: Elements in this list may never be removed or resequenced,
- * as the stability of the UUIDs of semantic identities in the kernel of Gmodel depends
+ * as the stability of the UUIDs of semantic identities in the Cell kernel depends
  * on the sequence of elements in this list.
  * 
- * 	==>	If new semantic identities need to be added to the Gmodel kernel,
+ * 	==>	If new semantic identities need to be added to the Cell kernel,
  * 		this list needs to be appended with a corresponding element.
  * 	==>	If a semantic identity <si> becomes obsolete, the corresponding element in this list must
  * 		be renamed from <si> to <si>_DEPRECATED.
@@ -46,7 +46,7 @@ public enum SemanticIdentityRegistry {
 	orderedPair,
 	orderedSet,
 	graph,
-	link,
+	arrow,
 	edge,
 	superSetReference,
 	visibility,
@@ -97,28 +97,28 @@ public enum SemanticIdentityRegistry {
 	kernelDefect,
 	kernelDefect_KernelHasReachedAnIllegalState,
 	semanticErr,
-	semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors,
-	semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles,
-	semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances,
-	semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph,
-	semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph,
-	semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet,
-	semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet,
-	semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction,
-	semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail,
-	semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex,
+	semanticErr_OnlyEdgesHaveEdgeEndFlavors,
+	semanticErr_OnlyEdgesHaveConnectedRoles,
+	semanticErr_OnlyEdgesHaveConnectedInstances,
+	semanticErr_OnlyVisibilitiesHaveFromSubGraph,
+	semanticErr_OnlyVisibilitiesHaveToSubGraph,
+	semanticErr_OnlySuperSetReferencesHaveSuperSet,
+	semanticErr_OnlySuperSetReferencesHaveSubSet,
+	semanticErr_OnlyEdgeTracesHaveAbstraction,
+	semanticErr_OnlyEdgeTracesHaveDetail,
+	semanticErr_OnlyEdgeEndsHaveEdgeEndVertex,
 	semanticErr_OnlyInstancesHaveIsAbstract,
-	semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality,
-	semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality,
-	semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer,
-	semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable,
+	semanticErr_OnlyEdgeEndsHaveMinCardinality,
+	semanticErr_OnlyEdgeEndsHaveMaxCardinality,
+	semanticErr_OnlyEdgeEndsHaveIsContainer,
+	semanticErr_OnlyEdgeEndsHaveIsNavigable,
 	semanticErr_ValueIsNotAssigned,
-	semanticErr_LinkIsNotApplicable,
+	semanticErr_ArrowIsNotApplicable,
 	semanticErr_TargetIsNotWithinVisibility,
 	semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor,
 	semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor,
 	semanticErr_GraphGraphCantBeModified,
-	semanticErr_VariableCantBeRemovedArtifactStillHasInstances,
+	semanticErr_VariableCantBeRemovedCategoryStillHasInstances,
 	semanticErr_GraphsCantBeDecommissioned,
 	semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance,
 	semanticErr_maxFromCardinalityIsOne,
@@ -151,16 +151,16 @@ public enum SemanticIdentityRegistry {
 	function,
 	command,
 	commandFunction,
-	flavorCommandFunction,
+	properClassCommandFunction,
 	query,
 	queryFunction,
-	flavorQueryFunction,
+	properClassQueryFunction,
 
 	/**
 	 * OrderedPairFlavor queries
 	 */
 
-	flavor,
+	properClass,
 	identity,
 	isEqualTo,
 	isInformation,
@@ -219,7 +219,7 @@ public enum SemanticIdentityRegistry {
 	variables,
 	value,
 	values,
-	visibleArtifactsForSubGraph,
+	visibleInstancesForSubGraph,
 
 	/**
 	 * LinkFlavor queries
@@ -277,8 +277,8 @@ public enum SemanticIdentityRegistry {
 	xpand,
 	locationFunction,
 	derivationRule,
-	derivedArtifact,
-	sourceArtifact,
+	derivedInstance,
+	sourceInstance,
 	execute,
 
 	htmlRepresentation,
@@ -394,14 +394,14 @@ public enum SemanticIdentityRegistry {
 	extractFirst,
 	extractSecond,
 	extractLast,
-	ListIterator,
+	DEPRECATED_ListIterator,
 	transformToOrderedSetOfSemanticIdentities,
 	uuidAsString,
 	fromSet,
 	toSet,
 	fromSetReferencedSemanticRole,
 	toSetReferencedSemanticRole,
-	flavorOrCategory,
+	properClassOrCategory,
 	a,
 	b,
 	setMaintenanceCommand,

@@ -11,10 +11,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
  * Copyright (C) 2009-2011 Sofismo AG.
  * All Rights Reserved.
@@ -79,7 +79,7 @@ public class RepositoryClientConnector implements RepositoryClient {
 	public ArtefactContainer get(final ArtefactContainer artifact) throws UnsupportedOperationException {
 		final Map<String,Object> artifactsToGet = new HashMap<String,Object>();
 		Map<String,Object> returnedArtifacts = null;
-		final Serializer sz = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+		final Serializer sz = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 		artifactsToGet.put(artifact.getContentType(), sz.serializeContainer(artifact));
 		try {
 			returnedArtifacts = clientService.mapCall(artifactsToGet);

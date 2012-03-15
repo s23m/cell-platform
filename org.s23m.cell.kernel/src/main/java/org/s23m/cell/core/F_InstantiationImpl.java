@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Identity;
@@ -61,9 +61,9 @@ public final class F_InstantiationImpl {
 	}
 
 	public static Vertex raiseError(final Identity semanticIdentity, final Set category) {
-		// Errors are attached to the Gmodel Graph container.
+		// Errors are attached to the S23M Graph container.
 		// Currently errors are not stored in a persistent log.
-		// Persisent logging is a matter of reading & serialising the error vertices contained in the Gmodel Graph
+		// Persisent logging is a matter of reading & serialising the error vertices contained in the S23M Graph
 		return new Vertex((Graph) coreGraphs.graph, semanticIdentity, category);
 	}
 
@@ -122,10 +122,10 @@ public final class F_InstantiationImpl {
 	protected static SuperSetReference createSuperSetReference(final Set specialization, final Set generalization, final Set category) {
 		return new SuperSetReference(specialization, generalization, category);
 	}
-	protected static Link createInstanceListIterator() {
-		return new Link(identityFactory.createAnonymousIdentity());
+	protected static Arrow createInstanceListIterator() {
+		return new Arrow(identityFactory.createAnonymousIdentity());
 	}
-	protected static Link createInstanceIterator() {
-		return new Link(identityFactory.createAnonymousIdentity());
+	protected static Arrow createInstanceIterator() {
+		return new Arrow(identityFactory.createAnonymousIdentity());
 	}
 }

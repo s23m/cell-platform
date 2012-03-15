@@ -24,9 +24,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="instanceIdentity" type="{http://schemas.gmodel.org/container/2010}instanceIdentityType"/>
- *         &lt;element name="metaInstanceIdentity" type="{http://schemas.gmodel.org/container/2010}instanceIdentityType"/>
- *         &lt;element name="containerIdentity" type="{http://schemas.gmodel.org/container/2010}instanceIdentityType"/>
+ *         &lt;element name="instanceIdentity" type="{http://schemas.S23M.org/container/2010}instanceIdentityType"/>
+ *         &lt;element name="metaInstanceIdentity" type="{http://schemas.S23M.org/container/2010}instanceIdentityType"/>
+ *         &lt;element name="containerIdentity" type="{http://schemas.S23M.org/container/2010}instanceIdentityType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,11 +43,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class SearchResultType {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected InstanceIdentityType instanceIdentity;
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected InstanceIdentityType metaInstanceIdentity;
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected InstanceIdentityType containerIdentity;
 
     /**

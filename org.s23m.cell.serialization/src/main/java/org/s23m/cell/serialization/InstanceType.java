@@ -29,15 +29,15 @@ import org.s23m.cell.serialization.InstanceType.Variables;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="link" type="{http://schemas.gmodel.org/serialization/2010}linkType" minOccurs="0"/>
- *         &lt;element name="instance" type="{http://schemas.gmodel.org/serialization/2010}instanceType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="semanticIdentity" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
+ *         &lt;element name="link" type="{http://schemas.S23M.org/serialization/2010}linkType" minOccurs="0"/>
+ *         &lt;element name="instance" type="{http://schemas.S23M.org/serialization/2010}instanceType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="semanticIdentity" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
  *         &lt;element name="variables" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence maxOccurs="unbounded">
- *                   &lt;element name="variable" type="{http://schemas.gmodel.org/serialization/2010}variableType"/>
+ *                   &lt;element name="variable" type="{http://schemas.S23M.org/serialization/2010}variableType"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -48,19 +48,19 @@ import org.s23m.cell.serialization.InstanceType.Variables;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence maxOccurs="unbounded">
- *                   &lt;element name="value" type="{http://schemas.gmodel.org/serialization/2010}valueType"/>
+ *                   &lt;element name="value" type="{http://schemas.S23M.org/serialization/2010}valueType"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
  *       &lt;/sequence>
- *       &lt;attribute name="container" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
- *       &lt;attribute name="id" use="required" type="{http://schemas.gmodel.org/serialization/2010}uuid" />
+ *       &lt;attribute name="container" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
+ *       &lt;attribute name="id" use="required" type="{http://schemas.S23M.org/serialization/2010}uuid" />
  *       &lt;attribute name="isAbstract" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="isSerializationArgument" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="metaElement" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
- *       &lt;attribute name="type" use="required" type="{http://schemas.gmodel.org/serialization/2010}instantiationSemantic" />
+ *       &lt;attribute name="metaElement" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
+ *       &lt;attribute name="type" use="required" type="{http://schemas.S23M.org/serialization/2010}instantiationSemantic" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -78,15 +78,15 @@ import org.s23m.cell.serialization.InstanceType.Variables;
 })
 public class InstanceType {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010")
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010")
     protected LinkType link;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected List<InstanceType> instance;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected SemanticIdType semanticIdentity;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010")
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010")
     protected Variables variables;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010")
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010")
     protected Values values;
     @XmlAttribute(required = true)
     protected String artifact;
@@ -365,7 +365,7 @@ public class InstanceType {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence maxOccurs="unbounded">
-     *         &lt;element name="value" type="{http://schemas.gmodel.org/serialization/2010}valueType"/>
+     *         &lt;element name="value" type="{http://schemas.S23M.org/serialization/2010}valueType"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -380,7 +380,7 @@ public class InstanceType {
     })
     public static class Values {
 
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
         protected List<ValueType> value;
 
         /**
@@ -425,7 +425,7 @@ public class InstanceType {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence maxOccurs="unbounded">
-     *         &lt;element name="variable" type="{http://schemas.gmodel.org/serialization/2010}variableType"/>
+     *         &lt;element name="variable" type="{http://schemas.S23M.org/serialization/2010}variableType"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -440,7 +440,7 @@ public class InstanceType {
     })
     public static class Variables {
 
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
         protected List<VariableType> variable;
 
         /**

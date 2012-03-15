@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -26,7 +26,7 @@
 package org.s23m.cell.core;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.impl.SemanticDomainCode;
 
@@ -48,7 +48,7 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set unionOfconnectingLinks(final Set set1, final Set set2) {
-		return set1.unionOfconnectingLinks(set2);
+		return set1.unionOfconnectingArrows(set2);
 	}
 
 	public static Set intersection(final Set set1, final Set set2) {
@@ -77,14 +77,14 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set isElementOf(final Set element, final Set set) {
-		if (SemanticDomain.semanticIdentity.isSuperSetOf(element.category()).isEqualTo(GmodelSemanticDomains.is_TRUE)
-				&& (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(GmodelSemanticDomains.is_TRUE))) 	{
+		if (SemanticDomain.semanticIdentity.isSuperSetOf(element.category()).isEqualTo(S23MSemanticDomains.is_TRUE)
+				&& (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE))) 	{
 			return SemanticDomainCode.isElementOf(element.container(), element, set);
 		} else {
 			if (transformToOrderedSet(set).containsRepresentation(element)) {
-				return GmodelSemanticDomains.is_TRUE;
+				return S23MSemanticDomains.is_TRUE;
 			} else {
-				return GmodelSemanticDomains.is_FALSE;
+				return S23MSemanticDomains.is_FALSE;
 			}
 		}
 	}
@@ -117,10 +117,10 @@ public final class F_SetAlgebra {
 	}
 
 	private static Set transformToOrderedSet(final Set set) {
-		if(set.flavor().isEqualTo(GmodelSemanticDomains.orderedSet)) {
+		if(set.properClass().isEqualTo(S23MSemanticDomains.orderedSet)) {
 			return set;
 		} else {
-			if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(GmodelSemanticDomains.is_TRUE)) {
+			if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE)) {
 				return transformSemanticIdentitySetToOrderedSet(set);
 			} else {
 				return set.filterInstances();

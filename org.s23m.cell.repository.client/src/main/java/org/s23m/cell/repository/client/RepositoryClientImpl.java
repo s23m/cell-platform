@@ -11,10 +11,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
  * Copyright (C) 2009-2011 Sofismo AG.
  * All Rights Reserved.
@@ -34,7 +34,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.objectpool.ObjectPool;
 import org.s23m.cell.objectpool.ObjectPoolArtifact;
@@ -65,7 +65,7 @@ public class RepositoryClientImpl implements RepositoryClient {
 
 	final ObjectPool objectPool;
 
-	private static final Serializer serializer = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+	private static final Serializer serializer = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 
 	private RepositoryClientImpl() {
 		objectPool = RepositoryClientObjectPool.getObjectPool();
@@ -170,7 +170,7 @@ public class RepositoryClientImpl implements RepositoryClient {
 	}
 
 	public String getName() {
-		return "repository client"; //TODO: to be replaced by the name of a corresponding Gmodel instance
+		return "repository client"; //TODO: to be replaced by the name of a corresponding S23M instance
 	}
 
 	public ObjectPool getPool() {
@@ -221,7 +221,7 @@ public class RepositoryClientImpl implements RepositoryClient {
 				}
 			}
 			//Serialize nodepaths and flick them to the repository
-			final Serializer serializer = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+			final Serializer serializer = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 			final  List<String> serializedInstances = new ArrayList<String>();
 			for (final ChangesetNode node : nodePaths) {
 				serializeNodePath(serializer, node, serializedInstances);
@@ -232,7 +232,7 @@ public class RepositoryClientImpl implements RepositoryClient {
 	}
 
 	private void persistInstancesInMemory() {
-		final Serializer serializer = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+		final Serializer serializer = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 		final List<String> serializedInstances = serializer.serializeAllInstancesInMemory();
 		persistArtifacts(serializedInstances);
 	}
@@ -319,12 +319,12 @@ public class RepositoryClientImpl implements RepositoryClient {
 
 	private void serializeNodePath(final Serializer serializer, final ChangesetNode node, final List<String> serializedInstances) {
 		final Set set = node.getSet();
-		if (set.flavor().isEqualTo(G.coreGraphs.vertex)) {
+		if (set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 			final String content = serializer.serializeInstance(set, false).getContent();
 			serializedInstances.add(content);
 			final UUID uuid = node.getSet().identity().uniqueRepresentationReference();
 			objectPool.addArtifact(uuid.toString(),
-					new ObjectPoolArtifact(uuid, G.coreGraphs.graph.identity().uniqueRepresentationReference(),
+					new ObjectPoolArtifact(uuid, S23MKernel.coreGraphs.graph.identity().uniqueRepresentationReference(),
 							content));
 			for (final ChangesetNode childNode : node.getChildNodes()){
 				serializeNodePath(serializer, childNode, serializedInstances);

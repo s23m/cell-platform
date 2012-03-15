@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -28,14 +28,14 @@ package org.s23m.cell.core;
 
 /**
  * {@link XtensionSemanticIdentityRegistry} is a temporary extension of the semantic identity registry
- * that is in use until the initial Gmodel editor is live. It is an ordered list of the SemanticIdentities
- * that are used to construct the Instances and Properties of the Gmodel outer shells and semantic extensions.
+ * that is in use until the initial S23M editor is live. It is an ordered list of the SemanticIdentities
+ * that are used to construct the Instances and Properties of the S23M outer shells and cell platform.
  * 
  * Important: Elements in this list may never be removed or resequenced,
- * as the stability of the UUIDs of semantic identities in the kernel of Gmodel depends
+ * as the stability of the UUIDs of semantic identities in the kernel of S23M depends
  * on the sequence of elements in this list.
  * 
- * 	==>	If new semantic identities need to be added to the Gmodel kernel,
+ * 	==>	If new semantic identities need to be added to the S23M kernel,
  * 		this list needs to be appended with a corresponding element.
  * 	==>	If a semantic identity <si> becomes obsolete, the corresponding element in this list must
  * 		be renamed from <si> to <si>_DEPRECATED.
@@ -43,10 +43,10 @@ package org.s23m.cell.core;
 
 public enum XtensionSemanticIdentityRegistry {
 	/**
-	 * outer shells & semantic extensions
+	 * outer shells & cell platform
 	 */
 	infiniteSets,
 	finiteSets,
-	gmodel
+	cellKernel
 }
 

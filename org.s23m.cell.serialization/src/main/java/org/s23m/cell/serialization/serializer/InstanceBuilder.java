@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -32,24 +32,24 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.CoreGraphs;
-import org.s23m.cell.api.CoreSets;
-import org.s23m.cell.api.models.ArtifactDerivation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.ProperClasses;
+import org.s23m.cell.api.KernelSets;
+import org.s23m.cell.api.models.InstanceDerivation;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.HTMLRepresentation;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.ObjectFactory;
 import org.s23m.cell.serialization.SemanticIdType;
 
 public class InstanceBuilder {
 
-	protected static final String ANONYMOUS_ID_NAME = GmodelSemanticDomains.anonymous.identity().name();
+	protected static final String ANONYMOUS_ID_NAME = S23MSemanticDomains.anonymous.identity().name();
 	private static ObjectFactory objectFactory = null;
 
 	protected static Set addAbstractVertex(final Set artifact,
@@ -72,17 +72,17 @@ public class InstanceBuilder {
 
 	protected static void addKernelInstances(final Map<String, Set> instanceMap) {
 		try {
-			final CoreGraphs cg = G.coreGraphs;
-			final CoreSets cs = G.coreSets;
+			final ProperClasses cg = S23MKernel.coreGraphs;
+			final KernelSets cs = S23MKernel.coreSets;
 			addPublicSetFields(instanceMap, cg);
 			addPublicSetFields(instanceMap, cs);
 			instanceMap.put(Root.root.identity().uniqueRepresentationReference().toString(), Root.root);
 			addPublicSetFields(instanceMap, Root.class);
-			addPublicSetFields(instanceMap, ArtifactDerivation.class);
-			//addPublicSetFields(instanceMap, GmodelSemanticDomain.class);
+			addPublicSetFields(instanceMap, InstanceDerivation.class);
+			//addPublicSetFields(instanceMap, S23MSemanticDomain.class);
 			addPublicSetFields(instanceMap, HTMLRepresentation.class);
 			addPublicSetFields(instanceMap, SemanticDomain.class);
-			addPublicSetFields(instanceMap, GmodelSemanticDomains.class);
+			addPublicSetFields(instanceMap, S23MSemanticDomains.class);
 		} catch (final IllegalArgumentException ex) {
 			java.util.logging.Logger.getLogger("global").log(
 					java.util.logging.Level.SEVERE, null, ex);
@@ -93,10 +93,10 @@ public class InstanceBuilder {
 	}
 
 	protected static void addInnershellInstancesInMemory(final Map<String, Set> instanceMap) {
-		final Set e = G.coreGraphs.edge;
-		transverseInnershell(G.coreGraphs.graph, instanceMap);
+		final Set e = S23MKernel.coreGraphs.edge;
+		transverseInnershell(S23MKernel.coreGraphs.graph, instanceMap);
 		try {
-			addPublicSetFields(instanceMap, G.coreGraphs);
+			addPublicSetFields(instanceMap, S23MKernel.coreGraphs);
 		} catch (final IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (final IllegalAccessException e1) {
@@ -187,43 +187,43 @@ public class InstanceBuilder {
 
 	protected static Set createContainer (final boolean isContainer) {
 		if (isContainer) {
-			return GmodelSemanticDomains.isContainer_TRUE;
+			return S23MSemanticDomains.isContainer_TRUE;
 		} else {
-			return GmodelSemanticDomains.isContainer_FALSE;
+			return S23MSemanticDomains.isContainer_FALSE;
 		}
 	}
 
 	protected static Set createMaxCardinality (final String n) {
-		if (n.equals(GmodelSemanticDomains.maxCardinality_0.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_0;
-		} else if (n.equals(GmodelSemanticDomains.maxCardinality_1.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_1;
-		} else if (n.equals(GmodelSemanticDomains.maxCardinality_2.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_2;
-		} else if (n.equals(GmodelSemanticDomains.maxCardinality_n.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_n;
-		} else if (n.equals(GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE;
-		} else if (n.equals(GmodelSemanticDomains.maxCardinality_UNKNOWN.identity().name())) {
-			return GmodelSemanticDomains.maxCardinality_UNKNOWN;
+		if (n.equals(S23MSemanticDomains.maxCardinality_0.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_0;
+		} else if (n.equals(S23MSemanticDomains.maxCardinality_1.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_1;
+		} else if (n.equals(S23MSemanticDomains.maxCardinality_2.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_2;
+		} else if (n.equals(S23MSemanticDomains.maxCardinality_n.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_n;
+		} else if (n.equals(S23MSemanticDomains.maxCardinality_NOTAPPLICABLE.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_NOTAPPLICABLE;
+		} else if (n.equals(S23MSemanticDomains.maxCardinality_UNKNOWN.identity().name())) {
+			return S23MSemanticDomains.maxCardinality_UNKNOWN;
 		} else {
 			throw new java.lang.IllegalArgumentException("Non legal cardinality value");
 		}
 	}
 
 	protected static Set createMinCardinality (final String n) {
-		if (n.equals(GmodelSemanticDomains.minCardinality_0.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_0;
-		} else if (n.equals(GmodelSemanticDomains.minCardinality_1.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_1;
-		} else if (n.equals(GmodelSemanticDomains.minCardinality_2.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_2;
-		} else if (n.equals(GmodelSemanticDomains.minCardinality_n.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_n;
-		} else if (n.equals(GmodelSemanticDomains.minCardinality_NOTAPPLICABLE.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_NOTAPPLICABLE;
-		} else if (n.equals(GmodelSemanticDomains.minCardinality_UNKNOWN.identity().name())) {
-			return GmodelSemanticDomains.minCardinality_UNKNOWN;
+		if (n.equals(S23MSemanticDomains.minCardinality_0.identity().name())) {
+			return S23MSemanticDomains.minCardinality_0;
+		} else if (n.equals(S23MSemanticDomains.minCardinality_1.identity().name())) {
+			return S23MSemanticDomains.minCardinality_1;
+		} else if (n.equals(S23MSemanticDomains.minCardinality_2.identity().name())) {
+			return S23MSemanticDomains.minCardinality_2;
+		} else if (n.equals(S23MSemanticDomains.minCardinality_n.identity().name())) {
+			return S23MSemanticDomains.minCardinality_n;
+		} else if (n.equals(S23MSemanticDomains.minCardinality_NOTAPPLICABLE.identity().name())) {
+			return S23MSemanticDomains.minCardinality_NOTAPPLICABLE;
+		} else if (n.equals(S23MSemanticDomains.minCardinality_UNKNOWN.identity().name())) {
+			return S23MSemanticDomains.minCardinality_UNKNOWN;
 		} else {
 			throw new java.lang.IllegalArgumentException("Non legal cardinality value");
 		}
@@ -231,24 +231,24 @@ public class InstanceBuilder {
 
 	protected static Set createNavigability (final boolean isNavigable) {
 		if (isNavigable) {
-			return GmodelSemanticDomains.isNavigable_TRUE;
+			return S23MSemanticDomains.isNavigable_TRUE;
 		} else {
-			return GmodelSemanticDomains.isNavigable_FALSE;
+			return S23MSemanticDomains.isNavigable_FALSE;
 		}
 	}
 
 	public static void decommssionInstances() {
 		//TODO: Kernel's decommission method does not work as intended
-		removeInstances(GmodelSemanticDomains.infiniteSets, true);
-		removeInstances(GmodelSemanticDomains.finiteSets, true);
+		removeInstances(S23MSemanticDomains.infiniteSets, true);
+		removeInstances(S23MSemanticDomains.finiteSets, true);
 		removeInstances(Root.models, true);
 	}
 
 	public static void decommssionOutdatedOuterShellInstances() {
 		//TODO: Kernel's decommission method does not work as intended
 		removeInstances(Root.semanticdomains, true);
-		removeInstances(GmodelSemanticDomains.infiniteSets, false);
-		removeInstances(GmodelSemanticDomains.finiteSets, false);
+		removeInstances(S23MSemanticDomains.infiniteSets, false);
+		removeInstances(S23MSemanticDomains.finiteSets, false);
 		removeInstances(Root.models, true);
 	}
 
@@ -277,13 +277,13 @@ public class InstanceBuilder {
 	}
 
 	public static boolean IsSemanticDomainTopInstances(final Set set) {
-		return set.identity().isEqualToRepresentation(GmodelSemanticDomains.finiteSets.identity()) ||
-		set.identity().isEqualToRepresentation(GmodelSemanticDomains.infiniteSets.identity());
+		return set.identity().isEqualToRepresentation(S23MSemanticDomains.finiteSets.identity()) ||
+		set.identity().isEqualToRepresentation(S23MSemanticDomains.infiniteSets.identity());
 	}
 
 	public static boolean isSerializableInstance(final Set set) {
 		return !set.identity().isPartOfKernel() ||
-		set.identity().isEqualToRepresentation(Root.universalartifactengineering.identity()) ||
+		set.identity().isEqualToRepresentation(Root.cellengineering.identity()) ||
 		set.identity().isEqualToRepresentation(Root.semanticdomains.identity()) ||
 		set.identity().isEqualToRepresentation(Root.models.identity()) ||
 		set.container().identity().isEqualToRepresentation(Root.models.identity());
@@ -294,8 +294,8 @@ public class InstanceBuilder {
 	}
 
 	/**
-	 * Map a given Gmodel identity to a serialization identity type
-	 * @param identity Gmodel Identity
+	 * Map a given S23M identity to a serialization identity type
+	 * @param identity S23M Identity
 	 * @return SemanticIdType Serialization identity Type
 	 */
 	protected static SemanticIdType mapSemanticIdentity(final Identity identity) {
@@ -357,7 +357,7 @@ public class InstanceBuilder {
 					itr.remove();
 				}
 			} else {
-				if (!s.identity().isEqualTo(GmodelSemanticDomains.gmodel.identity())) {
+				if (!s.identity().isEqualTo(S23MSemanticDomains.cellKernel.identity())) {
 					itr.remove();
 				}
 			}

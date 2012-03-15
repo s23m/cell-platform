@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.Root;
@@ -105,18 +105,18 @@ public class Verifier {
 		allInstancesInMemory.add(set);
 		//process links
 		for (final Set i : set.filterInstances()) {
-			if (i.flavor().isEqualTo(G.coreGraphs.edge)) {
+			if (i.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 				allInstancesInMemory.add(i);
-			} else if (i.flavor().isEqualTo(G.coreGraphs.visibility)) {
+			} else if (i.properClass().isEqualTo(S23MKernel.coreGraphs.visibility)) {
 				allInstancesInMemory.add(i);
-			}  else if (i.flavor().isEqualTo(G.coreGraphs.superSetReference)) {
+			}  else if (i.properClass().isEqualTo(S23MKernel.coreGraphs.superSetReference)) {
 				allInstancesInMemory.add(i);
 			}
 		}
 		allInstancesInMemory.add(null);
 		for (final Set i : set.filterInstances()) {
 			//if (i.flavor().isEqualTo(F_SemanticStateOfInMemoryModel.coreGraphs.vertex) && !i.identity().isEqualTo(Root.transportcontainer.identity())) {
-			if (i.flavor().isEqualTo(G.coreGraphs.vertex) ) {
+			if (i.properClass().isEqualTo(S23MKernel.coreGraphs.vertex) ) {
 
 				getInstancesInMemory(i, allInstancesInMemory);
 			}
@@ -133,7 +133,7 @@ public class Verifier {
 			if (i == null) {
 				sBuff.append(SEPERATOR+"\r\n");
 			} else if (!i.identity().name().contains("this set is not available in memory")) {
-				sBuff.append(i.identity().uniqueRepresentationReference()+","+i+","+i.flavor()+"\r\n");
+				sBuff.append(i.identity().uniqueRepresentationReference()+","+i+","+i.properClass()+"\r\n");
 			}
 		}
 		dumpContent(path,sBuff.toString());

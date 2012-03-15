@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -74,14 +74,14 @@ public class Instantiation {
 	public static Set instantiateConcrete(final Set category, final Set semanticIdentity) {
 		return Reconstitution.instantiateConcrete(category, org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(semanticIdentity));
 	}
-	public static Set link(final Set category, final Set fromInstance, final Set toInstance) {
-		return org.s23m.cell.core.F_Instantiation.link(category, fromInstance, toInstance);
+	public static Set arrow(final Set category, final Set fromInstance, final Set toInstance) {
+		return org.s23m.cell.core.F_Instantiation.arrow(category, fromInstance, toInstance);
 	}
 	public static Set declareFunction(final Set semanticIdentity, final Set category, final Set parameters) {
 		return org.s23m.cell.core.F_InstantiationImpl.declareFunction(semanticIdentity.identity(), category, parameters);
 	}
 
-	public static Set link(final Set category,
+	public static Set arrow(final Set category,
 			final Set edgeFlavoredIdentity,
 			final Set firstSemanticIdentity,
 			final Set firstOrderedPair,
@@ -96,7 +96,7 @@ public class Instantiation {
 			final Set secondIsNavigable,
 			final Set secondIsContainer
 			) {
-		return org.s23m.cell.core.F_Instantiation.link(category,
+		return org.s23m.cell.core.F_Instantiation.arrow(category,
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(edgeFlavoredIdentity),
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(firstSemanticIdentity),
 				firstOrderedPair,
@@ -113,8 +113,8 @@ public class Instantiation {
 				);
 	}
 
-	public static Set linktoEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {
-		return F_Instantiation.linkToEquivalenceClass(newSemanticRole, equivalenceClass);
+	public static Set arrowToEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {
+		return F_Instantiation.arrowToEquivalenceClass(newSemanticRole, equivalenceClass);
 	}
 
 	public static Set raiseError(final Set semanticIdentity, final Set category) {

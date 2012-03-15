@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gmodel="http://schemas.gmodel.org/serialization/2010" targetNamespace="http://schemas.gmodel.org/serialization/2010" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xsd:element name="gmodel">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:S23M="http://schemas.S23M.org/serialization/2010" targetNamespace="http://schemas.S23M.org/serialization/2010" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="S23M">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="instance" maxOccurs="unbounded">
 					<xsd:complexType>
 						<xsd:complexContent>
-							<xsd:extension base="gmodel:instanceType"/>
+							<xsd:extension base="S23M:instanceType"/>
 						</xsd:complexContent>
 					</xsd:complexType>
 				</xsd:element>
@@ -26,8 +26,8 @@
 	</xsd:simpleType>
 	<xsd:complexType name="commandType"/>
 	<xsd:complexType name="edgeTraceType">
-		<xsd:attribute name="abstractionInstance" type="gmodel:referenceId" use="required"/>
-		<xsd:attribute name="detailInstance" type="gmodel:referenceId" use="required"/>
+		<xsd:attribute name="abstractionInstance" type="S23M:referenceId" use="required"/>
+		<xsd:attribute name="detailInstance" type="S23M:referenceId" use="required"/>
 	</xsd:complexType>
 	<xsd:complexType name="edgeType">
 		<xsd:sequence>
@@ -35,31 +35,31 @@
 				<xsd:element name="edgeEnd">
 					<xsd:complexType>
 						<xsd:sequence>
-							<xsd:element name="semanticIdentity" type="gmodel:semanticIdType"/>
-							<xsd:element name="minCardinality" type="gmodel:cardinalityType"/>
-							<xsd:element name="maxCardinality" type="gmodel:cardinalityType"/>
+							<xsd:element name="semanticIdentity" type="S23M:semanticIdType"/>
+							<xsd:element name="minCardinality" type="S23M:cardinalityType"/>
+							<xsd:element name="maxCardinality" type="S23M:cardinalityType"/>
 							<xsd:element name="isContainer" type="xsd:boolean"/>
 							<xsd:element name="isNavigable" type="xsd:boolean"/>
 						</xsd:sequence>
-						<xsd:attribute name="metaElement" type="gmodel:referenceId" use="required"/>
-						<xsd:attribute name="instanceId" type="gmodel:referenceId" use="required"/>
+						<xsd:attribute name="metaElement" type="S23M:referenceId" use="required"/>
+						<xsd:attribute name="instanceId" type="S23M:referenceId" use="required"/>
 					</xsd:complexType>
 				</xsd:element>
 			</xsd:sequence>
-			<xsd:element name="semanticIdentity" type="gmodel:semanticIdType"/>
+			<xsd:element name="semanticIdentity" type="S23M:semanticIdType"/>
 		</xsd:sequence>
 		<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
-		<xsd:attribute name="metaElement" type="gmodel:referenceId" use="required"/>
+		<xsd:attribute name="metaElement" type="S23M:referenceId" use="required"/>
 	</xsd:complexType>
-	<xsd:simpleType name="gmodelIdentifier">
+	<xsd:simpleType name="S23MIdentifier">
 		<xsd:restriction base="xsd:string"/>
 	</xsd:simpleType>
 	<xsd:complexType name="linkType">
 		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
-			<xsd:element name="visibility" type="gmodel:visibilityType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="edge" type="gmodel:edgeType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="edgeTrace" type="gmodel:edgeTraceType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="superSetReference" type="gmodel:superSetReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="visibility" type="S23M:visibilityType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="edge" type="S23M:edgeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="edgeTrace" type="S23M:edgeTraceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="superSetReference" type="S23M:superSetReferenceType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:simpleType name="instantiationSemantic">
@@ -78,39 +78,39 @@
 	</xsd:simpleType>
 	<xsd:complexType name="instanceType">
 		<xsd:sequence>
-			<xsd:element name="link" type="gmodel:linkType" minOccurs="0"/>
-			<xsd:element name="instance" type="gmodel:instanceType" minOccurs="0" maxOccurs="unbounded"/>
-			<xsd:element name="semanticIdentity" type="gmodel:semanticIdType"/>
+			<xsd:element name="link" type="S23M:linkType" minOccurs="0"/>
+			<xsd:element name="instance" type="S23M:instanceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="semanticIdentity" type="S23M:semanticIdType"/>
 			<xsd:element name="variables" minOccurs="0">
 				<xsd:complexType>
 					<xsd:sequence maxOccurs="unbounded">
-						<xsd:element name="variable" type="gmodel:variableType"/>
+						<xsd:element name="variable" type="S23M:variableType"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="values" minOccurs="0">
 				<xsd:complexType>
 					<xsd:sequence maxOccurs="unbounded">
-						<xsd:element name="value" type="gmodel:valueType"/>
+						<xsd:element name="value" type="S23M:valueType"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 		</xsd:sequence>
-		<xsd:attribute name="id" type="gmodel:uuid" use="required"/>
-		<xsd:attribute name="type" type="gmodel:instantiationSemantic" use="required"/>
+		<xsd:attribute name="id" type="S23M:uuid" use="required"/>
+		<xsd:attribute name="type" type="S23M:instantiationSemantic" use="required"/>
 		<xsd:attribute name="isAbstract" type="xsd:boolean" use="required"/>
-		<xsd:attribute name="artifact" type="gmodel:referenceId" use="required"/>
-		<xsd:attribute name="metaElement" type="gmodel:referenceId" use="required"/>
+		<xsd:attribute name="artifact" type="S23M:referenceId" use="required"/>
+		<xsd:attribute name="metaElement" type="S23M:referenceId" use="required"/>
 		<xsd:attribute name="isSerializationArgument" type="xsd:boolean" use="required"/>
 	</xsd:complexType>
 	<xsd:complexType name="orderedPair">
 		<xsd:sequence>
-			<xsd:element name="metaElement" type="gmodel:semanticIdType"/>
-			<xsd:element name="element" type="gmodel:semanticIdType"/>
+			<xsd:element name="metaElement" type="S23M:semanticIdType"/>
+			<xsd:element name="element" type="S23M:semanticIdType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:simpleType name="referenceId">
-		<xsd:restriction base="gmodel:gmodelIdentifier"/>
+		<xsd:restriction base="S23M:S23MIdentifier"/>
 	</xsd:simpleType>
 	<xsd:complexType name="queryType"/>
 	<xsd:complexType name="semanticIdType">
@@ -120,41 +120,41 @@
 			<xsd:element name="payload" type="xsd:string"/>
 			<xsd:element name="technicalName" type="xsd:string"/>
 		</xsd:sequence>
-		<xsd:attribute name="uniqueRepresentationReference" type="gmodel:uuid" use="required"/>
-		<xsd:attribute name="identifier" type="gmodel:uuid" use="required"/>
+		<xsd:attribute name="uniqueRepresentationReference" type="S23M:uuid" use="required"/>
+		<xsd:attribute name="identifier" type="S23M:uuid" use="required"/>
 		<xsd:attribute name="isAnonymous" type="xsd:boolean" use="required"/>
 	</xsd:complexType>
 	<xsd:complexType name="superSetReferenceType">
 		<xsd:sequence>
-			<xsd:element name="semanticIdentity" type="gmodel:semanticIdType"/>
+			<xsd:element name="semanticIdentity" type="S23M:semanticIdType"/>
 		</xsd:sequence>
-		<xsd:attribute name="id" type="gmodel:uuid" use="required" />
-		<xsd:attribute name="superSetInstance" type="gmodel:referenceId"
+		<xsd:attribute name="id" type="S23M:uuid" use="required" />
+		<xsd:attribute name="superSetInstance" type="S23M:referenceId"
 			use="required" />
-		<xsd:attribute name="subSetInstance" type="gmodel:referenceId"
+		<xsd:attribute name="subSetInstance" type="S23M:referenceId"
 			use="required" />
 	</xsd:complexType>
 	<xsd:simpleType name="uuid">
-		<xsd:restriction base="gmodel:gmodelIdentifier"/>
+		<xsd:restriction base="S23M:S23MIdentifier"/>
 	</xsd:simpleType>
 	<xsd:complexType name="valueType">
 		<xsd:sequence>
-			<xsd:element name="valuePair" type="gmodel:orderedPair"/>
+			<xsd:element name="valuePair" type="S23M:orderedPair"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="variableType">
 		<xsd:sequence>
-			<xsd:element name="variablePair" type="gmodel:orderedPair"/>
+			<xsd:element name="variablePair" type="S23M:orderedPair"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="visibilityType">
 		<xsd:sequence>
-			<xsd:element name="semanticIdentity" type="gmodel:semanticIdType"/>
+			<xsd:element name="semanticIdentity" type="S23M:semanticIdType"/>
 		</xsd:sequence>
-		<xsd:attribute name="id" type="gmodel:uuid" use="required" />
-		<xsd:attribute name="sourceInstance" type="gmodel:referenceId"
+		<xsd:attribute name="id" type="S23M:uuid" use="required" />
+		<xsd:attribute name="sourceInstance" type="S23M:referenceId"
 			use="required" />
-		<xsd:attribute name="targetInstance" type="gmodel:referenceId"
+		<xsd:attribute name="targetInstance" type="S23M:referenceId"
 			use="required" />
 	</xsd:complexType>
 </xsd:schema>

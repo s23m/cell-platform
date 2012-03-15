@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,7 +29,7 @@ package org.s23m.cell.editor.semanticdomain.data;
 
 import java.io.Serializable;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 
 @SuppressWarnings("serial")
@@ -54,10 +54,10 @@ public class LinkDetailsData implements Serializable {
 
 	public LinkDetailsData(final Set edge) {
 		this.name = edge.identity().name();
-		if (edge.flavor().isEqualTo(G.coreGraphs.visibility)) {
+		if (edge.properClass().isEqualTo(S23MKernel.coreGraphs.visibility)) {
 			this.fromInstanceName = edge.from().identity().name();
 			this.toInstanceName = edge.to().identity().name();
-		} else if (edge.flavor().isEqualTo(G.coreGraphs.superSetReference)) {
+		} else if (edge.properClass().isEqualTo(S23MKernel.coreGraphs.superSetReference)) {
 			this.fromInstanceName = edge.from().identity().name();
 			this.toInstanceName = edge.to().identity().name();
 		} else {

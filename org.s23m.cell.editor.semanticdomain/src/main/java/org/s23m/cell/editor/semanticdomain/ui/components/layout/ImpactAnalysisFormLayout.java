@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 import org.s23m.cell.editor.semanticdomain.ui.components.MultitabPanel;
@@ -120,11 +120,11 @@ public class ImpactAnalysisFormLayout extends VerticalLayout {
 			Label lblDescription = null;
 			if (analysedSet.isEqualToRepresentation(s.category())) {
 				lblDescription = new StyledLabel("Meta Element of", StyledLabel.VALUE_TAG_STYLE);
-			} else if (s.flavor().isEqualTo(G.coreGraphs.visibility)) {
+			} else if (s.properClass().isEqualTo(S23MKernel.coreGraphs.visibility)) {
 				lblDescription = new StyledLabel("Part of Visibility", StyledLabel.VALUE_TAG_STYLE);
-			} else if (s.flavor().isEqualTo(G.coreGraphs.superSetReference)) {
+			} else if (s.properClass().isEqualTo(S23MKernel.coreGraphs.superSetReference)) {
 				lblDescription = new StyledLabel("Part of Superset Reference", StyledLabel.VALUE_TAG_STYLE);
-			} else if (s.flavor().isEqualTo(G.coreGraphs.edge)) {
+			} else if (s.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 				lblDescription = new StyledLabel("Part of Edge", StyledLabel.VALUE_TAG_STYLE);
 			}
 			resultsContentPanel.addComponent(lblDescription);

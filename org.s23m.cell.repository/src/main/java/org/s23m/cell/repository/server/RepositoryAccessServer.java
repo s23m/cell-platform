@@ -45,7 +45,7 @@ public class RepositoryAccessServer {
 				if (request.entrySet().iterator().hasNext()) {
 					final String serializedArtifacts = request.entrySet().iterator().next().getValue().toString();
 					System.err.println("Got: "+serializedArtifacts);
-					final Serializer sz = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+					final Serializer sz = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 					final ArtefactContainer artifacts = sz.unmarshallContainer(serializedArtifacts);
 					final SerializationType typeOfService = SerializationType.valueOf(artifacts.getContentType());
 					System.err.println("Type: "+typeOfService);

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,7 +29,7 @@ import org.s23m.cell.Identity;
 
 /**
  * {@link KernelIdentities} provides access to the SemanticIdentities
- * that are used to construct the Instances and Properties of the Gmodel kernel.
+ * that are used to construct the Instances and Properties of the S23M kernel.
  */
 public interface KernelIdentities {
 
@@ -76,9 +76,9 @@ public interface KernelIdentities {
 	Identity filterInstances() ;
 	Identity filterLinks() ;
 	Identity filterPolymorphic() ;
-	Identity flavor();
-	Identity flavorCommandFunction() ;
-	Identity flavorQueryFunction() ;
+	Identity properClass();
+	Identity properClassCommandFunction() ;
+	Identity properClassQueryFunction() ;
 	Identity from() ;
 	Identity fromEdgeEnd() ;
 	Identity function() ;
@@ -126,7 +126,7 @@ public interface KernelIdentities {
 	Identity kernelDefect_KernelHasReachedAnIllegalState();
 
 	Identity lastIndexOf() ;
-	Identity link();
+	Identity arrow();
 	Identity listIterator() ;
 	Identity listIteratorInt() ;
 	Identity localRootSuperSetOf() ;
@@ -218,6 +218,6 @@ public interface KernelIdentities {
 	Identity variables() ;
 	Identity vertex();
 	Identity visibility();
-	Identity visibleArtifactsForSubGraph() ;
+	Identity visibleInstancesForSubGraph() ;
 
 }

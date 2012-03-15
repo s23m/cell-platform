@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,9 +29,9 @@ package org.s23m.cell.serialization.serializer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.api.models.Root;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.InstanceType;
 import org.s23m.cell.serialization.SemanticIdentityIndex;
 
@@ -67,7 +67,7 @@ public class SerializedContentIndexer {
 		index.setUniqueRepresentationReference(instance.getSemanticIdentity().getUniqueRepresentationReference());
 		index.setIsAnonymous(instance.getSemanticIdentity().isIsAnonymous());
 		index.setMetaElementId(instance.getMetaElement());
-		index.setMetaElementTypeName(G.coreGraphs.vertex.identity().name());
+		index.setMetaElementTypeName(S23MKernel.coreGraphs.vertex.identity().name());
 		index.setName(instance.getSemanticIdentity().getName());
 		index.setPayload(instance.getSemanticIdentity().getPayload());
 		index.setPluralName(instance.getSemanticIdentity().getPluralName());

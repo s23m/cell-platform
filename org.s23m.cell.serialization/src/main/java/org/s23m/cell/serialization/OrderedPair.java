@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="metaElement" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
- *         &lt;element name="element" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
+ *         &lt;element name="metaElement" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
+ *         &lt;element name="element" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,9 +41,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class OrderedPair {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected SemanticIdType metaElement;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected SemanticIdType element;
 
     /**

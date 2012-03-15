@@ -23,8 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType name="edgeTraceType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="abstractionInstance" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
- *       &lt;attribute name="detailInstance" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
+ *       &lt;attribute name="abstractionInstance" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
+ *       &lt;attribute name="detailInstance" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

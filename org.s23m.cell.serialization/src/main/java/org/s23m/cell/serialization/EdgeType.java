@@ -34,23 +34,23 @@ import org.s23m.cell.serialization.EdgeType.EdgeEnd;
  *               &lt;complexContent>
  *                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                   &lt;sequence>
- *                     &lt;element name="semanticIdentity" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
- *                     &lt;element name="minCardinality" type="{http://schemas.gmodel.org/serialization/2010}cardinalityType"/>
- *                     &lt;element name="maxCardinality" type="{http://schemas.gmodel.org/serialization/2010}cardinalityType"/>
+ *                     &lt;element name="semanticIdentity" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
+ *                     &lt;element name="minCardinality" type="{http://schemas.S23M.org/serialization/2010}cardinalityType"/>
+ *                     &lt;element name="maxCardinality" type="{http://schemas.S23M.org/serialization/2010}cardinalityType"/>
  *                     &lt;element name="isContainer" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *                     &lt;element name="isNavigable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *                   &lt;/sequence>
- *                   &lt;attribute name="instanceId" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
- *                   &lt;attribute name="metaElement" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
+ *                   &lt;attribute name="instanceId" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
+ *                   &lt;attribute name="metaElement" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
  *                 &lt;/restriction>
  *               &lt;/complexContent>
  *             &lt;/complexType>
  *           &lt;/element>
  *         &lt;/sequence>
- *         &lt;element name="semanticIdentity" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
+ *         &lt;element name="semanticIdentity" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="isAbstract" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="metaElement" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
+ *       &lt;attribute name="metaElement" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -65,9 +65,9 @@ import org.s23m.cell.serialization.EdgeType.EdgeEnd;
 })
 public class EdgeType {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected List<EdgeEnd> edgeEnd;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected SemanticIdType semanticIdentity;
     @XmlAttribute(required = true)
     protected boolean isAbstract;
@@ -178,14 +178,14 @@ public class EdgeType {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="semanticIdentity" type="{http://schemas.gmodel.org/serialization/2010}semanticIdType"/>
-     *         &lt;element name="minCardinality" type="{http://schemas.gmodel.org/serialization/2010}cardinalityType"/>
-     *         &lt;element name="maxCardinality" type="{http://schemas.gmodel.org/serialization/2010}cardinalityType"/>
+     *         &lt;element name="semanticIdentity" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
+     *         &lt;element name="minCardinality" type="{http://schemas.S23M.org/serialization/2010}cardinalityType"/>
+     *         &lt;element name="maxCardinality" type="{http://schemas.S23M.org/serialization/2010}cardinalityType"/>
      *         &lt;element name="isContainer" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
      *         &lt;element name="isNavigable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
      *       &lt;/sequence>
-     *       &lt;attribute name="instanceId" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
-     *       &lt;attribute name="metaElement" use="required" type="{http://schemas.gmodel.org/serialization/2010}referenceId" />
+     *       &lt;attribute name="instanceId" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
+     *       &lt;attribute name="metaElement" use="required" type="{http://schemas.S23M.org/serialization/2010}referenceId" />
      *     &lt;/restriction>
      *   &lt;/complexContent>
      * &lt;/complexType>
@@ -203,15 +203,15 @@ public class EdgeType {
     })
     public static class EdgeEnd {
 
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
         protected SemanticIdType semanticIdentity;
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
         protected String minCardinality;
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
         protected String maxCardinality;
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010")
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010")
         protected boolean isContainer;
-        @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010")
+        @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010")
         protected boolean isNavigable;
         @XmlAttribute(required = true)
         protected String instanceId;

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -26,7 +26,7 @@
 
 package org.s23m.cell.serialization.serializer;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.models.SemanticDomain.semanticRole_to_equivalenceClass;
 
 import java.util.ArrayList;
@@ -39,13 +39,13 @@ import javax.naming.OperationNotSupportedException;
 
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 import org.s23m.cell.serialization.EdgeType;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
-import org.s23m.cell.serialization.Gmodel;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.InstanceType;
 import org.s23m.cell.serialization.SemanticIdType;
 import org.s23m.cell.serialization.SuperSetReferenceType;
@@ -189,7 +189,7 @@ public class DeserializationMapper {
 		}
 	}
 
-	protected void deserializeRootModels(final Map<String, Gmodel> artifacts) throws OperationNotSupportedException {
+	protected void deserializeRootModels(final Map<String, S23M> artifacts) throws OperationNotSupportedException {
 		throw new OperationNotSupportedException("");
 	}
 
@@ -197,20 +197,20 @@ public class DeserializationMapper {
 	 * Deserialize all instances of the map
 	 * @param artifacts map
 	 */
-	protected void deserializeInstances(final Map<String, Gmodel> artifacts) {
+	protected void deserializeInstances(final Map<String, S23M> artifacts) {
 		//create a depth first list of the containment tree instances
 		if (artifacts.containsKey(Root.models.identity().uniqueRepresentationReference().toString())) {
-			final List<Gmodel> instances = new ArrayList<Gmodel>();
+			final List<S23M> instances = new ArrayList<S23M>();
 			createDepthFirstTreeList(instances, artifacts, Root.models.identity().uniqueRepresentationReference().toString());
-			for (final Gmodel modelsArtifact : instances) {
+			for (final S23M modelsArtifact : instances) {
 				final Instance model = modelsArtifact.getInstance().get(ROOT_INDEX);
 				final String name = model.getSemanticIdentity().getName();
 
 				deserializeModelsInstances(model, artifacts, false);
 			}
 		} else {
-			for (final Entry<String, Gmodel> e : artifacts.entrySet()) {
-				final Gmodel modelsArtifact = e.getValue();
+			for (final Entry<String, S23M> e : artifacts.entrySet()) {
+				final S23M modelsArtifact = e.getValue();
 				final Instance model = modelsArtifact.getInstance().get(ROOT_INDEX);
 				final String name = model.getSemanticIdentity().getName();
 
@@ -224,9 +224,9 @@ public class DeserializationMapper {
 		}
 	}
 
-	private void createDepthFirstTreeList(final List<Gmodel> instances, final Map<String, Gmodel> artifacts, final String rootId) {
+	private void createDepthFirstTreeList(final List<S23M> instances, final Map<String, S23M> artifacts, final String rootId) {
 		if (artifacts.containsKey(rootId)) {
-			final Gmodel instance = artifacts.get(rootId);
+			final S23M instance = artifacts.get(rootId);
 			instances.add(instance);
 			final Instance model = instance.getInstance().get(ROOT_INDEX);
 			for (final InstanceType containedInstance : model.getInstance()) {
@@ -235,7 +235,7 @@ public class DeserializationMapper {
 		}
 	}
 
-	private void deserializeModelsInstances(final Instance instance, final Map<String, Gmodel> artifacts, final boolean isRecursive) {
+	private void deserializeModelsInstances(final Instance instance, final Map<String, S23M> artifacts, final boolean isRecursive) {
 
 		createLinks(instance);
 		if (!instanceMap.isBuiltInstance(instance.getSemanticIdentity()) &&
@@ -326,13 +326,13 @@ public class DeserializationMapper {
 		}
 	}
 
-	protected  void deserializeSemanticDomains(final Map<String, Gmodel> artifacts) throws OperationNotSupportedException {
+	protected  void deserializeSemanticDomains(final Map<String, S23M> artifacts) throws OperationNotSupportedException {
 		throw new OperationNotSupportedException("Seperate method to deserialize semantic domain instance is not supported.");
 	}
 
 	private boolean isAbstractValuePair(final ValueType value) {
 		return value.getValuePair().getMetaElement().getName().equals(
-				GmodelSemanticDomains.isAbstract.identity().name());
+				S23MSemanticDomains.isAbstract.identity().name());
 	}
 
 }

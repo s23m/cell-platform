@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.s23m.cell.G;
 import org.s23m.cell.Identity;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 import org.s23m.cell.core.IdentityImpl;
 
@@ -123,17 +123,17 @@ public class DetailsData implements Serializable {
 
 	public DetailsData(final Set instance) {
 		this.instance = instance;
-		this.isAbstract = instance.value(GmodelSemanticDomains.isAbstract) == (GmodelSemanticDomains.isAbstract_TRUE);
+		this.isAbstract = instance.value(S23MSemanticDomains.isAbstract) == (S23MSemanticDomains.isAbstract_TRUE);
 		this.urr = instance.identity().uniqueRepresentationReference().toString();
 		this.name = getIdentityInstanceIdentity(instance.identity()).name();
 		this.pluralName = getIdentityInstanceIdentity(instance.identity()).pluralName();
 		this.technicalName = getIdentityInstanceIdentity(instance.identity()).technicalName();
 		this.container = instance.container().identity().name();
 		this.metaElement = instance.category().identity().name();
-		visibilities = getEdgesOfType(instance, G.coreGraphs.visibility);
-		superSetReferences = getEdgesOfType(instance, G.coreGraphs.superSetReference);
-		edges = getEdgesOfType(instance, G.coreGraphs.edge);
-		vertexFlavoredSets = instance.filterFlavor(G.coreGraphs.vertex).asList();
+		visibilities = getEdgesOfType(instance, S23MKernel.coreGraphs.visibility);
+		superSetReferences = getEdgesOfType(instance, S23MKernel.coreGraphs.superSetReference);
+		edges = getEdgesOfType(instance, S23MKernel.coreGraphs.edge);
+		vertexFlavoredSets = instance.filterProperClass(S23MKernel.coreGraphs.vertex).asList();
 		commands = instance.commands().asList();
 		queries = instance.queries().asList();
 
@@ -213,17 +213,17 @@ public class DetailsData implements Serializable {
 	private List<Set> getEdgesOfType(final Set instance, final Set type) {
 		final List<Set> edges = new ArrayList<Set>();
 		// TODO do we need the instanceof checks?
-		for (final Set s: instance.filterLinks()) {
-			if (type.identity().isEqualToRepresentation(G.coreGraphs.edge.identity())) {
-				if (s.flavor().isEqualTo(G.coreGraphs.edge)) {
+		for (final Set s: instance.filterArrows()) {
+			if (type.identity().isEqualToRepresentation(S23MKernel.coreGraphs.edge.identity())) {
+				if (s.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 					edges.add(s);
 				}
-			} else if (type.identity().isEqualToRepresentation(G.coreGraphs.superSetReference.identity())) {
-				if (s.flavor().isEqualTo(G.coreGraphs.superSetReference)) {
+			} else if (type.identity().isEqualToRepresentation(S23MKernel.coreGraphs.superSetReference.identity())) {
+				if (s.properClass().isEqualTo(S23MKernel.coreGraphs.superSetReference)) {
 					edges.add(s);
 				}
-			} else if (type.identity().isEqualToRepresentation(G.coreGraphs.visibility.identity())) {
-				if (s.flavor().isEqualTo(G.coreGraphs.visibility)) {
+			} else if (type.identity().isEqualToRepresentation(S23MKernel.coreGraphs.visibility.identity())) {
+				if (s.properClass().isEqualTo(S23MKernel.coreGraphs.visibility)) {
 					edges.add(s);
 				}
 			}

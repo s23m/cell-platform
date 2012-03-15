@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -28,7 +28,7 @@ package org.s23m.cell.editor.semanticdomain.ui.components.field.factory;
 import java.util.List;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.editor.semanticdomain.data.EdgeData;
 import org.s23m.cell.editor.semanticdomain.ui.components.field.EdgeDisplayField;
 
@@ -51,14 +51,14 @@ public class EdgeListFieldFactory implements ListFieldFactory {
 				 s,
 				 firstEdgeEnd,
 				 secondEdgeEnd,
-				 firstEdgeEnd.value(GmodelSemanticDomains.minCardinality),
-				 firstEdgeEnd.value(GmodelSemanticDomains.maxCardinality),
-				 firstEdgeEnd.value(GmodelSemanticDomains.isNavigable),
-				 firstEdgeEnd.value(GmodelSemanticDomains.isContainer),
-				 secondEdgeEnd.value(GmodelSemanticDomains.minCardinality),
-				 secondEdgeEnd.value(GmodelSemanticDomains.maxCardinality),
-				 secondEdgeEnd.value(GmodelSemanticDomains.isNavigable),
-				 secondEdgeEnd.value(GmodelSemanticDomains.isContainer)
+				 firstEdgeEnd.value(S23MSemanticDomains.minCardinality),
+				 firstEdgeEnd.value(S23MSemanticDomains.maxCardinality),
+				 firstEdgeEnd.value(S23MSemanticDomains.isNavigable),
+				 firstEdgeEnd.value(S23MSemanticDomains.isContainer),
+				 secondEdgeEnd.value(S23MSemanticDomains.minCardinality),
+				 secondEdgeEnd.value(S23MSemanticDomains.maxCardinality),
+				 secondEdgeEnd.value(S23MSemanticDomains.isNavigable),
+				 secondEdgeEnd.value(S23MSemanticDomains.isContainer)
 			));
     	}
     	return new EdgeDisplayField(title, container);

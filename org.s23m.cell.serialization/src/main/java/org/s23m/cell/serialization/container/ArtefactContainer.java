@@ -34,7 +34,7 @@ import org.s23m.cell.serialization.container.ArtefactContainer.SearchResult;
  *           &lt;element name="content" maxOccurs="unbounded" minOccurs="0">
  *             &lt;complexType>
  *               &lt;complexContent>
- *                 &lt;extension base="{http://schemas.gmodel.org/container/2010}contentType">
+ *                 &lt;extension base="{http://schemas.S23M.org/container/2010}contentType">
  *                 &lt;/extension>
  *               &lt;/complexContent>
  *             &lt;/complexType>
@@ -42,15 +42,15 @@ import org.s23m.cell.serialization.container.ArtefactContainer.SearchResult;
  *           &lt;element name="searchResult" maxOccurs="unbounded" minOccurs="0">
  *             &lt;complexType>
  *               &lt;complexContent>
- *                 &lt;extension base="{http://schemas.gmodel.org/container/2010}searchResultType">
+ *                 &lt;extension base="{http://schemas.S23M.org/container/2010}searchResultType">
  *                 &lt;/extension>
  *               &lt;/complexContent>
  *             &lt;/complexType>
  *           &lt;/element>
  *         &lt;/sequence>
- *         &lt;attribute name="contentType" use="required" type="{http://schemas.gmodel.org/container/2010}typeOfContent" />
- *         &lt;attribute name="id" use="required" type="{http://schemas.gmodel.org/container/2010}containerId" />
- *         &lt;attribute name="timeStamp" use="required" type="{http://schemas.gmodel.org/container/2010}timeStamp" />
+ *         &lt;attribute name="contentType" use="required" type="{http://schemas.S23M.org/container/2010}typeOfContent" />
+ *         &lt;attribute name="id" use="required" type="{http://schemas.S23M.org/container/2010}containerId" />
+ *         &lt;attribute name="timeStamp" use="required" type="{http://schemas.S23M.org/container/2010}timeStamp" />
  *       &lt;/restriction>
  *     &lt;/complexContent>
  *   &lt;/complexType>
@@ -67,9 +67,9 @@ import org.s23m.cell.serialization.container.ArtefactContainer.SearchResult;
 @XmlRootElement(name = "artefactContainer")
 public class ArtefactContainer {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected List<Content> content;
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected List<SearchResult> searchResult;
     @XmlAttribute(required = true)
     protected String contentType;
@@ -217,7 +217,7 @@ public class ArtefactContainer {
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://schemas.gmodel.org/container/2010}contentType">
+     *     &lt;extension base="{http://schemas.S23M.org/container/2010}contentType">
      *     &lt;/extension>
      *   &lt;/complexContent>
      * &lt;/complexType>
@@ -243,7 +243,7 @@ public class ArtefactContainer {
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://schemas.gmodel.org/container/2010}searchResultType">
+     *     &lt;extension base="{http://schemas.S23M.org/container/2010}searchResultType">
      *     &lt;/extension>
      *   &lt;/complexContent>
      * &lt;/complexType>

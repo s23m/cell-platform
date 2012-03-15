@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -30,15 +30,15 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.s23m.cell.api.models.SemanticDomain;
-import org.s23m.cell.serialization.Gmodel;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.container.ArtefactContainer;
 import org.s23m.cell.serialization.container.ArtefactContainer.Content;
 import org.s23m.cell.serialization.container.ContainerTypeMapper;
 
 public class ArtifactContainerContentMapper {
 
-	private final Serializer serializer = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+	private final Serializer serializer = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 
 	public ArtifactContainerContentMapper() {
 	}
@@ -50,7 +50,7 @@ public class ArtifactContainerContentMapper {
 		return metaId.equals(ssetId1) || metaId.equals(ssetId2) || metaId.equals(ssetId3);
 	}
 
-	private void recreateGmodelInstances(final Map<String, Gmodel> deserializedInstances) {
+	private void recreateS23MInstances(final Map<String, S23M> deserializedInstances) {
 		if (!deserializedInstances.isEmpty()) {
 			serializer.deserializeInstances(deserializedInstances);
 		}
@@ -68,13 +68,13 @@ public class ArtifactContainerContentMapper {
 
 	private void recreateInstances(final Map<String, String> serializedTreeInstances) {
 		//Get semantic domain instances
-		final Map<String, Gmodel> deserializedSemanticDomainInstances = new HashMap<String, Gmodel>();
-		final Map<String,Gmodel> deserializedModelInstances = new HashMap<String,Gmodel>();
+		final Map<String, S23M> deserializedSemanticDomainInstances = new HashMap<String, S23M>();
+		final Map<String,S23M> deserializedModelInstances = new HashMap<String,S23M>();
 
 		for (final Iterator<Map.Entry<String,String>> itr = serializedTreeInstances.entrySet().iterator(); itr.hasNext(); ) {
 			final Map.Entry<String,String> entry = itr.next();
 			final String key = entry.getKey().toString();
-			final Gmodel deserializedModel = serializer.unmarshallModel(entry.getValue());
+			final S23M deserializedModel = serializer.unmarshallModel(entry.getValue());
 			final Instance i = deserializedModel.getInstance().get(0);
 			final String metaId = i.getMetaElement();
 
@@ -86,8 +86,8 @@ public class ArtifactContainerContentMapper {
 			}
 		}
 		//re-create the fetched instances
-		recreateGmodelInstances(deserializedSemanticDomainInstances);
-		recreateGmodelInstances(deserializedModelInstances);
+		recreateS23MInstances(deserializedSemanticDomainInstances);
+		recreateS23MInstances(deserializedModelInstances);
 	}
 
 	public void recreateInstancesFromArtifactContainer(final ArtefactContainer returnedArtifacts) {

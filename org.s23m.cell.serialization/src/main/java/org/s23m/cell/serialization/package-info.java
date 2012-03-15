@@ -5,5 +5,5 @@
 // Generated on: 2011.03.23 at 04:41:58 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://schemas.gmodel.org/serialization/2010")
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://schemas.S23M.org/serialization/2010")
 package org.s23m.cell.serialization;

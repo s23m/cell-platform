@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -48,8 +48,8 @@ public class Reconstitution {
 		return ((Graph)artifact).addConcrete(category, identity);
 	}
 
-	public static void completeGmodelSemanticDomainInitialization() {
-		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeGmodelSemanticDomainInitialization();
+	public static void completeS23MSemanticDomainInitialization() {
+		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeCellKernelSemanticDomainInitialization();
 	}
 	public static Set getSetFromLocalMemory(final Identity identity) {
 		return org.s23m.cell.core.F_Query.getSetFromLocalMemory(identity);

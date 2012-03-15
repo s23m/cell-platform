@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.api.models;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Set;
@@ -42,14 +42,14 @@ public class Root {
 
 	public static final Set semanticdomains = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("semantic domains", "set of semantic domains", SemanticIdentityRegistry.semanticdomains.ordinal()));
 	public static final Set models = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("models", "set of models", SemanticIdentityRegistry.models.ordinal()));
-	public static final Set universalartifactengineering = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("universal container engineering", "set of universal container engineering", SemanticIdentityRegistry.universalartifactengineering.ordinal()));
+	public static final Set cellengineering = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("cell engineering", "set of cell engineering", SemanticIdentityRegistry.universalartifactengineering.ordinal()));
 
 	public static void instantiateFeature() {
-		Instantiation.link(coreGraphs.visibility, Root.root, semanticdomains);
-		Instantiation.link(coreGraphs.visibility, Root.root, models);
+		Instantiation.arrow(coreGraphs.visibility, Root.root, semanticdomains);
+		Instantiation.arrow(coreGraphs.visibility, Root.root, models);
 
 		// MODELS --> SEMANTICDOMAINS
-		Instantiation.link(coreGraphs.visibility, models, semanticdomains);
+		Instantiation.arrow(coreGraphs.visibility, models, semanticdomains);
 
 	}
 

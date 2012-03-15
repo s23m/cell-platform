@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -43,12 +43,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.serialization.EdgeType;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
-import org.s23m.cell.serialization.Gmodel;
+import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.InstanceType;
 import org.s23m.cell.serialization.LinkType;
 import org.s23m.cell.serialization.ObjectFactory;
@@ -99,9 +99,9 @@ public final class FileIndexer {
 	private static void indexInstance (final Set instance, final List<SemanticIdentityIndex> ids, final boolean isSession) {
 		ids.add(buildSemanticIdForIndex(instance));
 		for (final Set i : instance.filterInstances()) {
-			if (i.flavor().isEqualTo(G.coreGraphs.vertex) && !isSession) {
+			if (i.properClass().isEqualTo(S23MKernel.coreGraphs.vertex) && !isSession) {
 				indexInstance(i, ids, isSession);
-			} else if (i.flavor().isEqualTo(G.coreGraphs.edge)) {
+			} else if (i.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 				final Set edge = i;
 				ids.add(buildSemanticIdForIndex(i));
 				for (final Set j : edge.edgeEnds()) {
@@ -113,7 +113,7 @@ public final class FileIndexer {
 
 	private static SemanticIdentityIndex buildSemanticIdForIndex(final Set instance) {
 		final SemanticIdentityIndex idx = new SemanticIdentityIndex();
-		final String metaTypeName = (instance.flavor().isEqualTo(G.coreGraphs.vertex)) ? G.coreGraphs.vertex.identity().name(): G.coreGraphs.edge.identity().name();
+		final String metaTypeName = (instance.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) ? S23MKernel.coreGraphs.vertex.identity().name(): S23MKernel.coreGraphs.edge.identity().name();
 		idx.setIdentifier(instance.identity().identifier().toString());
 		idx.setName(instance.identity().name());
 		idx.setPluralName(instance.identity().pluralName());
@@ -139,9 +139,9 @@ public final class FileIndexer {
 	private static void indexInstance (final Set instance, final List<SemanticIdType> ids, final ObjectFactory objFactory, final boolean isSession) {
 		ids.add(buildSemanticIdForIndex(objFactory, instance));
 		for (final Set i : instance.filterInstances()) {
-			if (i.flavor().isEqualTo(G.coreGraphs.vertex) && !isSession) {
+			if (i.properClass().isEqualTo(S23MKernel.coreGraphs.vertex) && !isSession) {
 				indexInstance(i, ids, objFactory, isSession);
-			} else if (i.flavor().isEqualTo(G.coreGraphs.edge)) {
+			} else if (i.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 				final Set edge = i;
 				ids.add(buildSemanticIdForIndex(objFactory, i));
 				for (final Set j : edge.edgeEnds()) {
@@ -171,8 +171,8 @@ public final class FileIndexer {
 		final List<String> instances = new ArrayList<String>();
 		//if this model's root's container is graph then return the empty list
 		try {
-			final Gmodel.Instance root = getGmodelRootInstance(uri);
-			if (!root.getArtifact().equals(G.coreGraphs.graph.identity().name())) {
+			final S23M.Instance root = getS23MRootInstance(uri);
+			if (!root.getArtifact().equals(S23MKernel.coreGraphs.graph.identity().name())) {
 				if (!isLocalInstance(root.getArtifact(), uri, modelRegistry)) {
 					if (!instances.contains(root.getArtifact())) {
 						instances.add(root.getArtifact());
@@ -242,11 +242,11 @@ public final class FileIndexer {
 	}
 
 	public static boolean isKernelElement(final String name) {
-		if (name.equals(G.coreGraphs.graph.identity().name()) ||
-				name.equals(G.coreGraphs.vertex.identity().name()) ||
-				name.equals(G.coreGraphs.edge.identity().name()) ||
-				name.equals(G.coreGraphs.edgeEnd.identity().name()) ||
-				name.equals(GmodelSemanticDomains.anonymous.identity().name())) {
+		if (name.equals(S23MKernel.coreGraphs.graph.identity().name()) ||
+				name.equals(S23MKernel.coreGraphs.vertex.identity().name()) ||
+				name.equals(S23MKernel.coreGraphs.edge.identity().name()) ||
+				name.equals(S23MKernel.coreGraphs.edgeEnd.identity().name()) ||
+				name.equals(S23MSemanticDomains.anonymous.identity().name())) {
 			return true;
 		} else {
 			return false;
@@ -256,7 +256,7 @@ public final class FileIndexer {
 
 	private static void createFileIndex(final URI uri, final Map<String, URI> indexMap) {
 		try {
-			final Gmodel.Instance root = getGmodelRootInstance(uri);
+			final S23M.Instance root = getS23MRootInstance(uri);
 			indexMap.put(root.getId(), uri);
 			indexLinkType(root.getLink(), uri, indexMap);
 			for (final InstanceType instance : root.getInstance()) {
@@ -271,13 +271,13 @@ public final class FileIndexer {
 		}
 	}
 
-	private static Gmodel.Instance getGmodelRootInstance(final URI uri)
+	private static S23M.Instance getS23MRootInstance(final URI uri)
 	throws JAXBException, FileNotFoundException {
-		final JAXBContext jc = JAXBContext.newInstance(Gmodel.class.getPackage().getName());
+		final JAXBContext jc = JAXBContext.newInstance(S23M.class.getPackage().getName());
 		final Unmarshaller unMarsahller = jc.createUnmarshaller();
-		final Gmodel gmodel = (Gmodel) unMarsahller
+		final S23M S23M = (S23M) unMarsahller
 		.unmarshal(new FileInputStream(uri.getPath()));
-		final Gmodel.Instance root = gmodel.getInstance().get(0); // get its root
+		final S23M.Instance root = S23M.getInstance().get(0); // get its root
 		return root;
 	}
 
@@ -327,7 +327,7 @@ public final class FileIndexer {
 		}
 	}
 
-	public static void getSemanticIdIndex(final Gmodel.Instance root, final Map<String, String> documentMap) {
+	public static void getSemanticIdIndex(final S23M.Instance root, final Map<String, String> documentMap) {
 		final String ownerDocId = root.getSemanticIdentity().getUniqueRepresentationReference();
 		documentMap.put(ownerDocId, ownerDocId);
 		indexLinkType(root.getLink(), ownerDocId, documentMap);
@@ -336,7 +336,7 @@ public final class FileIndexer {
 		}
 	}
 
-	public static void getRootSemanticIdIndex(final Gmodel.Instance root, final Map<String, String> documentMap) {
+	public static void getRootSemanticIdIndex(final S23M.Instance root, final Map<String, String> documentMap) {
 		final String ownerDocId = root.getSemanticIdentity().getUniqueRepresentationReference();
 		documentMap.put(ownerDocId, ownerDocId);
 		indexLinkType(root.getLink(), ownerDocId, documentMap);

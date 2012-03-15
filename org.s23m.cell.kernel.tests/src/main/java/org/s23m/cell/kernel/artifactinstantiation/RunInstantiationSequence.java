@@ -5,7 +5,7 @@ import org.s23m.cell.kernel.tests.EcoreEmulationTest;
 import org.s23m.cell.kernel.tests.EnterpriseArchitectureModellingTest;
 import org.s23m.cell.kernel.tests.EntityRelationshipModellingTest;
 import org.s23m.cell.kernel.tests.EventHandlingTest;
-import org.s23m.cell.kernel.tests.GmodelTestCase;
+import org.s23m.cell.kernel.tests.S23MTestCase;
 import org.s23m.cell.kernel.tests.GraphVisualisationCreationTest;
 import org.s23m.cell.kernel.tests.InformationQualityLogicTest;
 import org.s23m.cell.kernel.tests.InformationQualityLogicTestB;
@@ -37,7 +37,7 @@ public class RunInstantiationSequence {
 		execute(new EventHandlingTest());
 	}
 
-	private void execute(final GmodelTestCase testCase) {
+	private void execute(final S23MTestCase testCase) {
 		testCase.setUp();
 		testCase.testInstantiationSequence();
 	}

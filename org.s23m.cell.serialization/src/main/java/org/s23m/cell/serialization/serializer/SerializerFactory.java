@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -33,7 +33,7 @@ public class SerializerFactory {
 	 * @param type
 	 * @return Serializer
 	 */
-	public static Serializer getGmodelInstanceSerializer(final SerializationType type) {
+	public static Serializer getS23MInstanceSerializer(final SerializationType type) {
 		if (type.equals(SerializationType.XML)) {
 			return new FileSystemSerializer();
 		} else {

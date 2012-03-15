@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,14 +29,14 @@ package org.s23m.cell.serialization.serializer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.serialization.EdgeType;
-import org.s23m.cell.serialization.Gmodel;
+import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.InstanceType;
 import org.s23m.cell.serialization.InstantiationSemantic;
 import org.s23m.cell.serialization.LinkType;
@@ -50,14 +50,14 @@ public final class SerializationMapper {
 
 	private final ObjectFactory objectFactory;
 	// private static final String ANON_NAME = new IdentityFactory().createAnonymousIdentity().name();
-	private static final String ANON_NAME = GmodelSemanticDomains.anonymous.identity().name();
+	private static final String ANON_NAME = S23MSemanticDomains.anonymous.identity().name();
 
 	protected SerializationMapper() {
 		objectFactory = InstanceBuilder.getObjectFactory();
 	}
 
 	private void addInstanceToInstanceSet(
-			final Gmodel.Instance serializedRootInstance, final Set set) {
+			final S23M.Instance serializedRootInstance, final Set set) {
 		final InstanceType serializedVertexInstance = objectFactory.createInstanceType();
 		mapVertexToInstanceType(set, serializedVertexInstance, false);
 		serializedRootInstance.getInstance().add(serializedVertexInstance);
@@ -98,8 +98,8 @@ public final class SerializationMapper {
 		final boolean isAnon = instance.identity().name().equals(ANON_NAME) ? true: false;
 		final Set metaSet = instance.category();
 		InstantiationSemantic type = null;
-		if (instance.isEqualToRepresentation(GmodelSemanticDomains.infiniteSets) ||
-				instance.isEqualToRepresentation(GmodelSemanticDomains.finiteSets)) {
+		if (instance.isEqualToRepresentation(S23MSemanticDomains.infiniteSets) ||
+				instance.isEqualToRepresentation(S23MSemanticDomains.finiteSets)) {
 			type = InstantiationSemantic.INSTANTIATE_SEMANTIC_DOMAIN;
 		} else if (metaSet.isEqualToRepresentation(SemanticDomain.disjunctSemanticIdentitySet)) {
 			if (isAnon) {
@@ -129,7 +129,7 @@ public final class SerializationMapper {
 	}
 
 	private boolean isConcrete(final Set vertex) {
-		return vertex.value(GmodelSemanticDomains.isAbstract) == (GmodelSemanticDomains.isAbstract_FALSE);
+		return vertex.value(S23MSemanticDomains.isAbstract) == (S23MSemanticDomains.isAbstract_FALSE);
 	}
 
 	private boolean isRootAttached(final Set instance) {
@@ -156,9 +156,9 @@ public final class SerializationMapper {
 	}
 
 	/**
-	 * Map an Gmodel Edge to an EdgeType
+	 * Map an S23M Edge to an EdgeType
 	 * @mappedInstance InstanceType
-	 * @param edge Gmodel Edge
+	 * @param edge S23M Edge
 	 * */
 	private void mapEdge(final InstanceType mappedInstance, final Set edge) {
 		LinkType mappedLink;
@@ -174,8 +174,8 @@ public final class SerializationMapper {
 	}
 
 	/**
-	 * Map an Gmodel Edge to an EdgeType
-	 * @param edge Gmodel Edge
+	 * Map an S23M Edge to an EdgeType
+	 * @param edge S23M Edge
 	 * @param mappedEdge EdgeType
 	 */
 	private void mapEdgeToEdgeType (final Set edge, final EdgeType mappedEdge) {
@@ -194,24 +194,24 @@ public final class SerializationMapper {
 			} else {
 				mappedEE.setInstanceId(getURR(toVertex.identity()));
 			}
-			final Set minValue = ee.value(GmodelSemanticDomains.minCardinality);
-			final Set maxValue = ee.value(GmodelSemanticDomains.maxCardinality);
+			final Set minValue = ee.value(S23MSemanticDomains.minCardinality);
+			final Set maxValue = ee.value(S23MSemanticDomains.maxCardinality);
 			final String iMin = minValue.identity().name();
 			final String iMax = maxValue.identity().name();
-			mappedEE.setIsContainer(ee.value(GmodelSemanticDomains.isContainer).equals(
-					GmodelSemanticDomains.isContainer_TRUE));
-			mappedEE.setIsNavigable(ee.value(GmodelSemanticDomains.isNavigable).equals(
-					GmodelSemanticDomains.isNavigable_TRUE));
+			mappedEE.setIsContainer(ee.value(S23MSemanticDomains.isContainer).equals(
+					S23MSemanticDomains.isContainer_TRUE));
+			mappedEE.setIsNavigable(ee.value(S23MSemanticDomains.isNavigable).equals(
+					S23MSemanticDomains.isNavigable_TRUE));
 			mappedEE.setMinCardinality(iMin);
 			mappedEE.setMaxCardinality(iMax);
-			if (metaEdge != G.coreGraphs.edge) {
+			if (metaEdge != S23MKernel.coreGraphs.edge) {
 				if (index == 0) {
 					mappedEE.setMetaElement(getURR( metaEdge.edgeEnds().extractFirst().identity()));
 				} else {
 					mappedEE.setMetaElement(getURR( metaEdge.edgeEnds().extractSecond().identity()));
 				}
 			} else {
-				mappedEE.setMetaElement(getURR(G.coreGraphs.edgeEnd.identity()));
+				mappedEE.setMetaElement(getURR(S23MKernel.coreGraphs.edgeEnd.identity()));
 			}
 			mappedEE.setSemanticIdentity(InstanceBuilder.mapSemanticIdentity(ee.identity()));
 			mappedEdge.getEdgeEnd().add(mappedEE);
@@ -226,24 +226,24 @@ public final class SerializationMapper {
 	 * hierarchy with the serialization classes
 	 * 
 	 * @param rootVertex
-	 * @return List<Gmodel>
+	 * @return List<S23M>
 	 */
-	public List<GmodelContent> mapRoot(final Set rootVertex) {
-		final List<GmodelContent> gmodels = new ArrayList<GmodelContent>();
+	public List<S23MContent> mapRoot(final Set rootVertex) {
+		final List<S23MContent> S23Ms = new ArrayList<S23MContent>();
 
-		serializeRootInstance(gmodels, Root.models);
+		serializeRootInstance(S23Ms, Root.models);
 
 		for ( final Set set: rootVertex.filterInstances()) {
 			if (InstanceBuilder.isTopSemanticDomainSet(set)) {
 				//process semantic domain instances
 				for (final Set innerSet : set.filterInstances()) {
 					if (InstanceBuilder.IsSemanticDomainTopInstances(innerSet)) {
-						serializeSemanticInstance(gmodels, innerSet);
+						serializeSemanticInstance(S23Ms, innerSet);
 					}
 				}
 			}
 		}
-		return gmodels;
+		return S23Ms;
 	}
 
 	/**
@@ -251,11 +251,11 @@ public final class SerializationMapper {
 	 * @param vertex
 	 * @return
 	 */
-	public GmodelContent mapInstance(final Set vertex, final boolean isKernelSerialization) {
-		final List<GmodelContent> gmodels = new ArrayList<GmodelContent>();
-		serializeInstance(gmodels, vertex, isKernelSerialization);
-		if (!gmodels.isEmpty()) {
-			return gmodels.get(0);
+	public S23MContent mapInstance(final Set vertex, final boolean isKernelSerialization) {
+		final List<S23MContent> S23Ms = new ArrayList<S23MContent>();
+		serializeInstance(S23Ms, vertex, isKernelSerialization);
+		if (!S23Ms.isEmpty()) {
+			return S23Ms.get(0);
 		} else {
 			throw new IllegalStateException("No serialization is done");
 		}
@@ -308,8 +308,8 @@ public final class SerializationMapper {
 		}
 	}
 
-	private void mapVertexToGmodelInstance(final InstanceType instance,
-			final Gmodel.Instance mappedInstance,
+	private void mapVertexToS23MInstance(final InstanceType instance,
+			final S23M.Instance mappedInstance,
 			final boolean isSerializedInstance) {
 		mappedInstance.setId(instance.getId());
 		mappedInstance.setArtifact(instance.getArtifact());
@@ -334,8 +334,8 @@ public final class SerializationMapper {
 		mappedInstance.setArtifact(getURR(instance.container().identity()));
 		mappedInstance.setMetaElement(getURR(instance.category().identity()));
 		mappedInstance.setIsSerializationArgument(isSerializedInstance);
-		mappedInstance.setIsAbstract(!instance.value(GmodelSemanticDomains.isAbstract)
-				.equals(GmodelSemanticDomains.isAbstract_FALSE));
+		mappedInstance.setIsAbstract(!instance.value(S23MSemanticDomains.isAbstract)
+				.equals(S23MSemanticDomains.isAbstract_FALSE));
 		mappedInstance.setType(getInstantiationSemantic(instance));
 		mappedInstance.setSemanticIdentity(InstanceBuilder.mapSemanticIdentity(instance
 				.identity()));
@@ -363,70 +363,70 @@ public final class SerializationMapper {
 		mappedLink.getVisibilityAndEdgeAndEdgeTrace().add(mappedVisible);
 	}
 
-	private void serializeInstance(final List<GmodelContent> gmodels, final Set instance, final boolean isKernelSerialization, final boolean isSemanticInstance, final boolean isRecursive) {
-		final Gmodel serializedModel = objectFactory.createGmodel();
+	private void serializeInstance(final List<S23MContent> S23Ms, final Set instance, final boolean isKernelSerialization, final boolean isSemanticInstance, final boolean isRecursive) {
+		final S23M serializedModel = objectFactory.createS23M();
 		final InstanceType serializedInstance = objectFactory.createInstanceType();
-		final Gmodel.Instance serializedRootInstance = objectFactory.createGmodelInstance();
+		final S23M.Instance serializedRootInstance = objectFactory.createS23MInstance();
 		mapVertexToInstanceType(instance, serializedInstance, true);
-		mapVertexToGmodelInstance(serializedInstance, serializedRootInstance, true);
+		mapVertexToS23MInstance(serializedInstance, serializedRootInstance, true);
 		serializedModel.getInstance().add(serializedRootInstance);
 
 		mapValues(instance, serializedInstance);
 		mapVariables(instance, serializedInstance);
 
 		for (final Set set : instance.filterInstances()) {
-			if (set.flavor().isEqualTo(G.coreGraphs.edge)) {
+			if (set.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 				mapEdge(serializedRootInstance, set);
-			} else if (set.flavor().isEqualTo(G.coreGraphs.visibility)) {
+			} else if (set.properClass().isEqualTo(S23MKernel.coreGraphs.visibility)) {
 				mapVisibility(serializedRootInstance, set);
-			} else if (set.flavor().isEqualTo(G.coreGraphs.superSetReference)) {
+			} else if (set.properClass().isEqualTo(S23MKernel.coreGraphs.superSetReference)) {
 				mapSuperSetReference(serializedRootInstance, set);
 			}
 		}
 
 		for (final Set set : instance.filterInstances()) {
 			//add instance reference
-			if (isKernelSerialization && set.flavor().isEqualTo(G.coreGraphs.vertex)) {
+			if (isKernelSerialization && set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 				addInstanceToInstanceSet(serializedRootInstance, set);
 			} else {
-				if (isSemanticInstance && set.flavor().isEqualTo(G.coreGraphs.vertex)) {
+				if (isSemanticInstance && set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 					addInstanceToInstanceSet(serializedRootInstance, set);
 				} else if(InstanceBuilder.IsSemanticDomainTopInstances(set)) {
 					addInstanceToInstanceSet(serializedRootInstance, set);
-				} else if (set.flavor().isEqualTo(G.coreGraphs.vertex)) {
+				} else if (set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 					addInstanceToInstanceSet(serializedRootInstance, set);
 				}
 			}
 		}
 
-		gmodels.add(new GmodelContent(instance.identity().uniqueRepresentationReference().toString(),
+		S23Ms.add(new S23MContent(instance.identity().uniqueRepresentationReference().toString(),
 				serializedModel));
 		if (isRecursive) {
 			for (final Set set : instance.filterInstances()) {
-				if (isSemanticInstance && set.flavor().isEqualTo(G.coreGraphs.vertex)) {
-					serializeInstance(gmodels, set, isKernelSerialization, isSemanticInstance, true);
-				} else if (set.flavor().isEqualTo(G.coreGraphs.vertex)){ //&& InstanceBuilder.isSerializableInstance(set)) {
-					serializeInstance(gmodels, set, isKernelSerialization, isSemanticInstance, true);
+				if (isSemanticInstance && set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
+					serializeInstance(S23Ms, set, isKernelSerialization, isSemanticInstance, true);
+				} else if (set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)){ //&& InstanceBuilder.isSerializableInstance(set)) {
+					serializeInstance(S23Ms, set, isKernelSerialization, isSemanticInstance, true);
 				}
 			}
 		}
 	}
 
-	private void serializeRootInstance(final List<GmodelContent> gmodels, final Set models) {
-		if (models.flavor().isEqualTo(G.coreGraphs.vertex)) {
-			serializeInstance(gmodels, models, false, false, true);
+	private void serializeRootInstance(final List<S23MContent> S23Ms, final Set models) {
+		if (models.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
+			serializeInstance(S23Ms, models, false, false, true);
 		}
 	}
 
-	private void serializeInstance(final List<GmodelContent> gmodels, final Set models, final boolean isKernelSerialization) {
-		if (models.flavor().isEqualTo(G.coreGraphs.vertex)) {
-			serializeInstance(gmodels, models, isKernelSerialization, false, false);
+	private void serializeInstance(final List<S23MContent> S23Ms, final Set models, final boolean isKernelSerialization) {
+		if (models.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
+			serializeInstance(S23Ms, models, isKernelSerialization, false, false);
 		}
 	}
 
-	private void serializeSemanticInstance(final List<GmodelContent> gmodels, final Set instance) {
-		if (instance.flavor().isEqualTo(G.coreGraphs.vertex)) {
-			serializeInstance(gmodels, instance, false, true, true);
+	private void serializeSemanticInstance(final List<S23MContent> S23Ms, final Set instance) {
+		if (instance.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
+			serializeInstance(S23Ms, instance, false, true, true);
 		}
 	}
 

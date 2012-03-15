@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,11 +25,11 @@
 
 package org.s23m.cell.kernel.artifactinstantiation;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
@@ -39,14 +39,14 @@ public class KernelTestSequence {
 
 	private static SemanticIdentityRegistry nameRegistry;
 	// just for the fun of it we create an instance of an edge
-	public static final Set testDomain = Instantiation.addSemanticDomain("test domain", "test domains", GmodelSemanticDomains.finiteSets);
-	public static final Set whoToWho = Instantiation.link(coreGraphs.edge, Instantiation.addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
+	public static final Set testDomain = Instantiation.addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
+	public static final Set whoToWho = Instantiation.arrow(coreGraphs.edge, Instantiation.addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
 //			F_SemanticStateOfInMemoryModel.addAnonymousDisjunctSemanticIdentitySet(testDomain), EnterpriseArchitecture.who,
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,
-			GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE,
 //			F_SemanticStateOfInMemoryModel.addAnonymousDisjunctSemanticIdentitySet(testDomain), EnterpriseArchitecture.who,
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,
-			GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+			S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 
 
 	public static void run() {

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -32,18 +32,18 @@ import org.s23m.cell.Set;
 
 public class IdentityImpl implements Identity {
 
-	private static UUIDReservoirForKernelGraph kernelIdentityReservoir;
+	private static UUIDReservoirForKernel kernelIdentityReservoir;
 	private UUID identifier;
 	private UUID uniqueRepresentationReference;
 	private String name;
 	private String pluralName;
 	private String payload;
-	private boolean isPartOfUniversalArtifactConcept = false;
+	private boolean isPartOfUniversalCellConcept = false;
 	private String newName;
 	private String newPluralName;
 
 
-	public static void initialize(final UUIDReservoirForKernelGraph reservoir) {
+	public static void initialize(final UUIDReservoirForKernel reservoir) {
 		kernelIdentityReservoir = reservoir;
 	}
 
@@ -51,7 +51,7 @@ public class IdentityImpl implements Identity {
 		super();
 		this.setName(name);
 		this.setPluralName(pluralName);
-		if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setIdentifier(UUID.randomUUID());
 			this.setUniqueRepresentationReference(identifier());
 			if ((nameRegistryIndex == SemanticIdentityRegistry.anonymousInKernel.ordinal())
@@ -80,7 +80,7 @@ public class IdentityImpl implements Identity {
 		super();
 		this.setName(semanticIdentity.name());
 		this.setPluralName(semanticIdentity.pluralName());
-		if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setUniqueRepresentationReference(UUID.randomUUID());
 		} else {
 			this.setUniqueRepresentationReference(kernelIdentityReservoir.getNextUUIDForAnonymousUse());
@@ -168,12 +168,12 @@ public class IdentityImpl implements Identity {
 		return null;
 	}
 
-	public boolean isPartOfUniversalArtifactConcept() {
-		return isPartOfUniversalArtifactConcept;
+	public boolean isPartOfUniversalCellConcept() {
+		return isPartOfUniversalCellConcept;
 	}
 
-	public void makePartOfUniversalArtifactConcept() {
-		this.isPartOfUniversalArtifactConcept = true;
+	public void makePartOfUniversalCellConcept() {
+		this.isPartOfUniversalCellConcept = true;
 	}
 	public void assignNewName(final String newName) {
 		this.newName = newName;

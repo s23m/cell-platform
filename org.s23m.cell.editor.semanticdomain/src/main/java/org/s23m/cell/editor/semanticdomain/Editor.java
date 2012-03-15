@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -27,6 +27,7 @@ package org.s23m.cell.editor.semanticdomain;
 
 import java.util.logging.Logger;
 
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.SemanticStateOfInMemoryModel;
 import org.s23m.cell.editor.semanticdomain.ui.components.ContainmentTreePanel;
 import org.s23m.cell.editor.semanticdomain.ui.components.MultitabPanel;
@@ -128,7 +129,7 @@ public class Editor extends Application {
 			log.info("Gmodel open source kernel was set up");
 		} else {
 			log.info("Setting up Gmodel kernel...");
-			org.s23m.cell.G.completeOpenSourceKernelInitialization();
+			S23MKernel.completeCellKernelInitialization();
 		}
 	}
 

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,10 +29,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.editor.semanticdomain.EditorController;
 import org.s23m.cell.editor.semanticdomain.data.LinkData;
 import org.s23m.cell.editor.semanticdomain.data.TreeNode;
@@ -85,14 +85,14 @@ public class LinkCreationFormLayout extends VerticalLayout {
 
 	private Map<String, String> addAllVisibleInstanceUUIDs(final Set instance) {
 		final Map<String, String> instanceMap = new HashMap<String, String>();
-		final Set visibleInstances = instance.container().visibleArtifactsForSubGraph(instance);
+		final Set visibleInstances = instance.container().visibleInstancesForSubGraph(instance);
 		for (final Set set : visibleInstances) {
-			if (set.flavor().isEqualTo(G.coreGraphs.vertex)) {
+			if (set.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 				if (!instanceMap.containsKey(set.identity().uniqueRepresentationReference().toString())) {
 					instanceMap.put(set.identity().uniqueRepresentationReference().toString(), "");
 				}
 				for (final Set subSet : set) {
-					if (subSet.flavor().isEqualTo(G.coreGraphs.vertex)) {
+					if (subSet.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 						if (!instanceMap.containsKey(subSet.identity().uniqueRepresentationReference().toString())) {
 							instanceMap.put(subSet.identity().uniqueRepresentationReference()
 									.toString(), "");
@@ -119,7 +119,7 @@ public class LinkCreationFormLayout extends VerticalLayout {
 
 		// set up form data binding
 		final LinkData linkData = new LinkData(fromInstance);
-		linkData.setToInstance(G.coreGraphs.vertex); //default target instance
+		linkData.setToInstance(S23MKernel.coreGraphs.vertex); //default target instance
 		final BeanItem<LinkData> item = new BeanItem<LinkData>(linkData);
 		inputForm.setItemDataSource(item);
 		inputForm.setVisibleItemProperties(LinkData.getDisplayedInstances());
@@ -165,15 +165,15 @@ public class LinkCreationFormLayout extends VerticalLayout {
 		final Button okBtn = new Button("OK", new Button.ClickListener() {
 			public void buttonClick(final ClickEvent event) {
 				// create a new link instance
-				final Set metaInstance = (action.equals(TreeActionHandler.ACTION_CREATE_VISIBILITY)) ? G.coreGraphs.visibility : G.coreGraphs.superSetReference;
+				final Set metaInstance = (action.equals(TreeActionHandler.ACTION_CREATE_VISIBILITY)) ? S23MKernel.coreGraphs.visibility : S23MKernel.coreGraphs.superSetReference;
 				if (action.equals(TreeActionHandler.ACTION_CREATE_VISIBILITY)
 						|| action.equals(TreeActionHandler.ACTION_CREATE_SSR)) {
 					final Set src = (Set) inputForm.getItemDataSource().getItemProperty(LinkData.FROM_INSTANCE).getValue();
 					final Set trgt = (Set) inputForm.getItemDataSource().getItemProperty(LinkData.TO_INSTANCE).getValue();
 					if (src != null && trgt != null) {
-						final Set v = Instantiation.link(metaInstance, src, trgt);
+						final Set v = Instantiation.arrow(metaInstance, src, trgt);
 						String msg = "";
-						if (!v.identity().isEqualTo(GmodelSemanticDomains.semanticErr_TargetIsNotWithinVisibility.identity())) {
+						if (!v.identity().isEqualTo(S23MSemanticDomains.semanticErr_TargetIsNotWithinVisibility.identity())) {
 							inputForm.commit();
 							msg = "Successfully created a new link";
 							parent.getMainApplication().getMainWindow().showNotification(msg);

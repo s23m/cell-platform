@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -36,15 +36,15 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.collections.map.MultiValueMap;
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 import org.s23m.cell.serialization.EdgeType;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.InstanceType;
 import org.s23m.cell.serialization.SemanticIdType;
 import org.s23m.cell.serialization.SuperSetReferenceType;
@@ -283,21 +283,21 @@ public final class InstanceMap {
 								.getIdentifier()));
 				final Set ee1I = Reconstitution.getSetFromLocalMemory(ee1Id);
 				final Set ee2I = Reconstitution.getSetFromLocalMemory(ee1Id);
-				final Identity idRef = GmodelSemanticDomains.referencingSemanticRole.identity();
+				final Identity idRef = S23MSemanticDomains.referencingSemanticRole.identity();
 				final Set i = Reconstitution.getSetFromLocalMemory(idRef);
 
 				final Set semanticRoleEdge = Reconstitution.reconstituteLink(
 						semanticRole_to_equivalenceClass.identity(),
 						edgeId, ee1Id, sourceInstance.identity(),
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE.identity(),
-						GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE.identity(),
-						GmodelSemanticDomains.isNavigable_FALSE.identity(),
-						GmodelSemanticDomains.isContainer_FALSE.identity(), ee2Id,
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE.identity(),
+						S23MSemanticDomains.maxCardinality_NOTAPPLICABLE.identity(),
+						S23MSemanticDomains.isNavigable_FALSE.identity(),
+						S23MSemanticDomains.isContainer_FALSE.identity(), ee2Id,
 						targetInstance.identity(),
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE.identity(),
-						GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE.identity(),
-						GmodelSemanticDomains.isNavigable_FALSE.identity(),
-						GmodelSemanticDomains.isContainer_FALSE.identity());
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE.identity(),
+						S23MSemanticDomains.maxCardinality_NOTAPPLICABLE.identity(),
+						S23MSemanticDomains.isNavigable_FALSE.identity(),
+						S23MSemanticDomains.isContainer_FALSE.identity());
 
 				if (InstanceBuilder.hasSemanticError(semanticRoleEdge, edgeId)) {
 					System.err.println("Semantic error");
@@ -354,7 +354,7 @@ public final class InstanceMap {
 					UUID.fromString(sRef.getSemanticIdentity()
 							.getUniqueRepresentationReference()));
 			final Set set = Reconstitution.reconstituteLink(
-					G.coreGraphs.superSetReference.identity(), si,
+					S23MKernel.coreGraphs.superSetReference.identity(), si,
 					getBuiltInstance(sRef.getSubSetInstance()).identity(),
 					getBuiltInstance(sRef.getSuperSetInstance()).identity());
 			if (InstanceBuilder.hasSemanticError(set, si)) {
@@ -457,8 +457,8 @@ public final class InstanceMap {
 						"addConcrete(metaproperty, semanticIdentity)")) {
 							final Set mElement = getBuiltInstance(instance
 									.getMetaElement());
-							Instantiation.link(G.coreGraphs.superSetReference, mElement,
-									G.coreGraphs.vertex);
+							Instantiation.arrow(S23MKernel.coreGraphs.superSetReference, mElement,
+									S23MKernel.coreGraphs.vertex);
 							buildUnBuiltInstance(instance);
 						}
 						return false;
@@ -549,7 +549,7 @@ public final class InstanceMap {
 							.getIdentifier()), UUID.fromString(visibility
 									.getSemanticIdentity().getUniqueRepresentationReference()));
 			final Set set = Reconstitution
-			.reconstituteLink(G.coreGraphs.visibility.identity(), si,
+			.reconstituteLink(S23MKernel.coreGraphs.visibility.identity(), si,
 					getBuiltInstance(visibility.getSourceInstance())
 					.identity(),
 					getBuiltInstance(visibility.getTargetInstance())
@@ -603,7 +603,7 @@ public final class InstanceMap {
 				UUID.fromString(uuid), UUID.fromString(urr));
 		final Set set = Reconstitution.getSetFromLocalMemory(identity);
 		if (!set.identity().name()
-				.equals(GmodelSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name())) {
+				.equals(S23MSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name())) {
 			return set;
 		} else {
 			// try in-memory map for non-Root instances

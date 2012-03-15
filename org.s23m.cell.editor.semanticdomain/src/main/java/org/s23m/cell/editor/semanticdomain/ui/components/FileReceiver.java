@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -51,7 +51,7 @@ public class FileReceiver implements Receiver {
 
 	public String getBase64ContentString() {
 		final Byte[] bytes = byteList.toArray(new Byte[byteList.size()]);
-		return SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML).encodeByteArrayInBase64(ArrayUtils.toPrimitive(bytes));
+		return SerializerHolder.getS23MInstanceSerializer(SerializationType.XML).encodeByteArrayInBase64(ArrayUtils.toPrimitive(bytes));
 	}
 
 	public OutputStream receiveUpload(final String filename, final String mimeType) {

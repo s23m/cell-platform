@@ -1,17 +1,17 @@
 package org.s23m.cell.kernel.tests;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
 import static org.s23m.cell.api.Instantiation.addSemanticDomain;
-import static org.s23m.cell.api.Instantiation.link;
+import static org.s23m.cell.api.Instantiation.arrow;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.Transaction;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
 
-public class EventHandlingTest extends GmodelTestCase {
+public class EventHandlingTest extends S23MTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
@@ -19,15 +19,15 @@ public class EventHandlingTest extends GmodelTestCase {
 			addSubscriptions();
 
 			// Event #1 , triggered by "addEvent" in inMemorySets()
-			final Set testDomain = addSemanticDomain("test domain", "test domains", GmodelSemanticDomains.finiteSets);
+			final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
 
 			// Event #2 .. #5  , triggered by "addEvent" in inMemorySets : 1 new SemanticIdentity, 1 new Edge, and 2 new EdgeEnds
 			// Event #6  , triggered by "addEvent" in who.instanceSet : 1 new Edge
-			final Set l = link(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
+			final Set l = arrow(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
 					EnterpriseArchitecture.who, EnterpriseArchitecture.who,
-					GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE,
+					S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE,
 					EnterpriseArchitecture.who, EnterpriseArchitecture.who,
-					GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+					S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 
 			// decommission generates no events, since no elements are removed from any sets
 			l.decommission();

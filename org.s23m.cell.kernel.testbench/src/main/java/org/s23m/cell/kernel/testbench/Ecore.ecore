@@ -16,7 +16,7 @@
  var codesite_token = "be2d5ffc047db7e47046fc750f8a46fd";
  
  
- var CS_env = {"profileUrl":["/u/114757815731922588908/"],"token":"be2d5ffc047db7e47046fc750f8a46fd","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/10977552491916013749","projectHomeUrl":"/p/gmodel","relativeBaseUrl":"","projectName":"gmodel","loggedInUserEmail":"a.shewring@gmail.com"};
+ var CS_env = {"profileUrl":["/u/114757815731922588908/"],"token":"be2d5ffc047db7e47046fc750f8a46fd","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/10977552491916013749","projectHomeUrl":"/p/S23M","relativeBaseUrl":"","projectName":"S23M","loggedInUserEmail":"a.shewring@gmail.com"};
  var _gaq = _gaq || [];
  _gaq.push(
  ['siteTracker._setAccount', 'UA-18071-1'],
@@ -27,10 +27,10 @@
  
  
  <title>Ecore.ecore - 
- gmodel -
+ S23M -
  
  
- Gmodel - The Semantic Database - Google Project Hosting
+ S23M - The Semantic Database - Google Project Hosting
  </title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
@@ -141,7 +141,7 @@
  | <a href="/u/114757815731922588908/" onclick="_CS_click('/gb/ph/profile');"
  title="Profile, Updates, and Settings"
  ><u>Profile</u></a>
- | <a href="https://www.google.com/accounts/Logout?continue=http%3A%2F%2Fcode.google.com%2Fp%2Fgmodel%2Fsource%2Fbrowse%2Ftrunk%2Forg.s23m.cell.kernel.testbench%2Fsrc%2Forg%2Fgmodel%2Ftestbench%2FEcore.ecore%3Fr%3D758" 
+ | <a href="https://www.google.com/accounts/Logout?continue=http%3A%2F%2Fcode.google.com%2Fp%2FS23M%2Fsource%2Fbrowse%2Ftrunk%2Forg.s23m.cell.kernel.testbench%2Fsrc%2Forg%2FS23M%2Ftestbench%2FEcore.ecore%3Fr%3D758" 
  onclick="_CS_click('/gb/ph/signout');"
  ><u>Sign out</u></a>
  
@@ -171,11 +171,11 @@ contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>
  <tr style="height: 58px;">
  
  <td id="plogo">
- <link itemprop="url" href="/p/gmodel">
- <a href="/p/gmodel/">
+ <link itemprop="url" href="/p/S23M">
+ <a href="/p/S23M/">
  
  
- <img src="/p/gmodel/logo?cct=1321437398"
+ <img src="/p/S23M/logo?cct=1321437398"
  alt="Logo" itemprop="image">
  
  </a>
@@ -184,12 +184,12 @@ contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>
  <td style="padding-left: 0.5em">
  
  <div id="pname">
- <a href="/p/gmodel/"><span itemprop="name">gmodel</span></a>
+ <a href="/p/S23M/"><span itemprop="name">S23M</span></a>
  </div>
  
  <div id="psum">
  <a id="project_summary_link"
- href="/p/gmodel/"><span itemprop="description">Gmodel - The Semantic Database</span></a>
+ href="/p/S23M/"><span itemprop="description">S23M - The Semantic Database</span></a>
  
  </div>
  
@@ -210,35 +210,35 @@ contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>
 
  
 <div id="mt" class="gtb"> 
- <a href="/p/gmodel/" class="tab ">Project&nbsp;Home</a>
+ <a href="/p/S23M/" class="tab ">Project&nbsp;Home</a>
  
  
  
  
- <a href="/p/gmodel/downloads/list" class="tab ">Downloads</a>
- 
- 
- 
- 
- 
- <a href="/p/gmodel/w/list" class="tab ">Wiki</a>
+ <a href="/p/S23M/downloads/list" class="tab ">Downloads</a>
  
  
  
  
  
- <a href="/p/gmodel/issues/list"
+ <a href="/p/S23M/w/list" class="tab ">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="/p/S23M/issues/list"
  class="tab ">Issues</a>
  
  
  
  
  
- <a href="/p/gmodel/source/checkout"
+ <a href="/p/S23M/source/checkout"
  class="tab active">Source</a>
  
  
- <a href="/p/gmodel/admin"
+ <a href="/p/S23M/admin"
  class="tab inactive">Administer</a>
  
  
@@ -261,21 +261,21 @@ contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>
  
 
 
- <span class="inst1"><a href="/p/gmodel/source/checkout">Checkout</a></span> &nbsp;
- <span class="inst2"><a href="/p/gmodel/source/browse/">Browse</a></span> &nbsp;
- <span class="inst3"><a href="/p/gmodel/source/list">Changes</a></span> &nbsp;
+ <span class="inst1"><a href="/p/S23M/source/checkout">Checkout</a></span> &nbsp;
+ <span class="inst2"><a href="/p/S23M/source/browse/">Browse</a></span> &nbsp;
+ <span class="inst3"><a href="/p/S23M/source/list">Changes</a></span> &nbsp;
  
  
  &nbsp;
  <form action="http://www.google.com/codesearch" method="get" style="display:inline"
- onsubmit="document.getElementById('codesearchq').value = document.getElementById('origq').value + ' package:http://gmodel\\.googlecode\\.com'">
+ onsubmit="document.getElementById('codesearchq').value = document.getElementById('origq').value + ' package:http://S23M\\.googlecode\\.com'">
  <input type="hidden" name="q" id="codesearchq" value="">
  <input type="text" maxlength="2048" size="38" id="origq" name="origq" value="" title="Google Code Search" style="font-size:92%">&nbsp;<input type="submit" value="Search Trunk" name="btnG" style="font-size:92%">
  
  
  
  
- <a href="/p/gmodel/issues/entry?show=review&former=sourcelist">Request code review</a>
+ <a href="/p/S23M/issues/entry?show=review&former=sourcelist">Request code review</a>
  
  
  
@@ -322,8 +322,8 @@ contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>
  <strong class="src_nav">Source path:&nbsp;</strong>
  <span id="crumb_root">
  
- <a href="/p/gmodel/source/browse/?r=758">svn</a>/&nbsp;</span>
- <span id="crumb_links" class="ifClosed"><a href="/p/gmodel/source/browse/trunk/?r=758">trunk</a><span class="sp">/&nbsp;</span><a href="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/?r=758">org.s23m.cell.kernel.testbench</a><span class="sp">/&nbsp;</span><a href="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/?r=758">src</a><span class="sp">/&nbsp;</span><a href="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org/?r=758">org</a><span class="sp">/&nbsp;</span><a href="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/?r=758">gmodel</a><span class="sp">/&nbsp;</span><a href="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/?r=758">testbench</a><span class="sp">/&nbsp;</span>Ecore.ecore</span>
+ <a href="/p/S23M/source/browse/?r=758">svn</a>/&nbsp;</span>
+ <span id="crumb_links" class="ifClosed"><a href="/p/S23M/source/browse/trunk/?r=758">trunk</a><span class="sp">/&nbsp;</span><a href="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/?r=758">org.s23m.cell.kernel.testbench</a><span class="sp">/&nbsp;</span><a href="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/?r=758">src</a><span class="sp">/&nbsp;</span><a href="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org/?r=758">org</a><span class="sp">/&nbsp;</span><a href="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/?r=758">S23M</a><span class="sp">/&nbsp;</span><a href="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/?r=758">testbench</a><span class="sp">/&nbsp;</span>Ecore.ecore</span>
  
  
 
@@ -4759,10 +4759,10 @@ id=sl_svn758_357
  <div id="changelog">
  <p>Change log</p>
  <div>
- <a href="/p/gmodel/source/detail?spec=svn758&amp;r=756">r756</a>
+ <a href="/p/S23M/source/detail?spec=svn758&amp;r=756">r756</a>
  by jorn.bettin
  on Yesterday (20 hours ago)
- &nbsp; <a href="/p/gmodel/source/diff?spec=svn758&r=756&amp;format=side&amp;path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&amp;old_path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&amp;old=">Diff</a>
+ &nbsp; <a href="/p/S23M/source/diff?spec=svn758&r=756&amp;format=side&amp;path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&amp;old_path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&amp;old=">Diff</a>
  </div>
  <pre>essential kernel tests</pre>
  </div>
@@ -4773,136 +4773,136 @@ id=sl_svn758_357
  
  
  <script type="text/javascript">
- var detail_url = '/p/gmodel/source/detail?r=756&spec=svn758';
- var publish_url = '/p/gmodel/source/detail?r=756&spec=svn758#publish';
+ var detail_url = '/p/S23M/source/detail?r=756&spec=svn758';
+ var publish_url = '/p/S23M/source/detail?r=756&spec=svn758#publish';
  // describe the paths of this revision in javascript.
  var changed_paths = [];
  var changed_urls = [];
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/.classpath');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.classpath?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.classpath?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/.project');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.project?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.project?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/.settings');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.core.prefs');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.core.prefs?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.core.prefs?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.ui.prefs');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.ui.prefs?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.ui.prefs?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/META-INF');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/META-INF/MANIFEST.MF');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF/MANIFEST.MF?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF/MANIFEST.MF?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/test');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/test?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/test?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Ecore.ecore');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Ecore.ecore?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Ecore.ecore?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/KernelTestSequence.class');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/KernelTestSequence.class?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/KernelTestSequence.class?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Test.class');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Test.class?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Test.class?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/TestSequence.class');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/TestSequence.class?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/TestSequence.class?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/build.properties');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/build.properties?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/build.properties?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/test');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/test?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/test?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore?r\x3d756\x26spec\x3dsvn758');
  
  var selected_path = '/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore';
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/KernelTestSequence.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/KernelTestSequence.java?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/KernelTestSequence.java?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Test.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Test.java?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Test.java?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/TestSequence.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/TestSequence.java?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/TestSequence.java?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/Graph.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/Graph.java?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/Graph.java?r\x3d756\x26spec\x3dsvn758');
  
  
  changed_paths.push('/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/OrderedPair.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/OrderedPair.java?r\x3d756\x26spec\x3dsvn758');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/OrderedPair.java?r\x3d756\x26spec\x3dsvn758');
  
  
- changed_paths.push('/trunk/org.s23m.cell.semanticextensions.testscripts/.classpath');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.semanticextensions.testscripts/.classpath?r\x3d756\x26spec\x3dsvn758');
+ changed_paths.push('/trunk/org.s23m.cell.cellplatform.testscripts/.classpath');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.cellplatform.testscripts/.classpath?r\x3d756\x26spec\x3dsvn758');
  
  
- changed_paths.push('/trunk/org.s23m.cell.semanticextensions.testscripts/src/org.s23m.cell/semanticextensions/testscripts/Test.java');
- changed_urls.push('/p/gmodel/source/browse/trunk/org.s23m.cell.semanticextensions.testscripts/src/org.s23m.cell/semanticextensions/testscripts/Test.java?r\x3d756\x26spec\x3dsvn758');
+ changed_paths.push('/trunk/org.s23m.cell.cellplatform.testscripts/src/org.s23m.cell/cellplatform/testscripts/Test.java');
+ changed_urls.push('/p/S23M/source/browse/trunk/org.s23m.cell.cellplatform.testscripts/src/org.s23m.cell/cellplatform/testscripts/Test.java?r\x3d756\x26spec\x3dsvn758');
  
  
  function getCurrentPageIndex() {
@@ -4966,127 +4966,127 @@ id=sl_svn758_357
  <table><tr><td>Go to:&nbsp;</td><td>
  <select name="files_in_rev" onchange="window.location=this.value">
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench?r=756&amp;spec=svn758"
  
  >/trunk/org.s23m.cell.kernel.testbench</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.classpath?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.classpath?r=756&amp;spec=svn758"
  
  >...odel.kernel.testbench/.classpath</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.project?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.project?r=756&amp;spec=svn758"
  
- >...gmodel.kernel.testbench/.project</option>
+ >...S23M.kernel.testbench/.project</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings?r=756&amp;spec=svn758"
  
  >...model.kernel.testbench/.settings</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.core.prefs?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.core.prefs?r=756&amp;spec=svn758"
  
  >...tings/org.eclipse.jdt.core.prefs</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.ui.prefs?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/.settings/org.eclipse.jdt.ui.prefs?r=756&amp;spec=svn758"
  
  >...ettings/org.eclipse.jdt.ui.prefs</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF?r=756&amp;spec=svn758"
  
- >...gmodel.kernel.testbench/META-INF</option>
+ >...S23M.kernel.testbench/META-INF</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF/MANIFEST.MF?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/META-INF/MANIFEST.MF?r=756&amp;spec=svn758"
  
  >...l.testbench/META-INF/MANIFEST.MF</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin?r=756&amp;spec=svn758"
  
  >.../org.s23m.cell.kernel.testbench/bin</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org?r=756&amp;spec=svn758"
  
- >....gmodel.kernel.testbench/bin/org</option>
+ >....S23M.kernel.testbench/bin/org</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell?r=756&amp;spec=svn758"
  
  >....kernel.testbench/bin/org.s23m.cell</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/test?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/test?r=756&amp;spec=svn758"
  
  >...el.testbench/bin/org.s23m.cell/test</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench?r=756&amp;spec=svn758"
  
  >...stbench/bin/org.s23m.cell/testbench</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Ecore.ecore?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Ecore.ecore?r=756&amp;spec=svn758"
  
  >...org.s23m.cell/testbench/Ecore.ecore</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/KernelTestSequence.class?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/KernelTestSequence.class?r=756&amp;spec=svn758"
  
  >...stbench/KernelTestSequence.class</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Test.class?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/Test.class?r=756&amp;spec=svn758"
  
  >.../org.s23m.cell/testbench/Test.class</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/TestSequence.class?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/bin/org.s23m.cell/testbench/TestSequence.class?r=756&amp;spec=svn758"
  
  >...del/testbench/TestSequence.class</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/build.properties?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/build.properties?r=756&amp;spec=svn758"
  
  >...ernel.testbench/build.properties</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src?r=756&amp;spec=svn758"
  
  >.../org.s23m.cell.kernel.testbench/src</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org?r=756&amp;spec=svn758"
  
- >....gmodel.kernel.testbench/src/org</option>
+ >....S23M.kernel.testbench/src/org</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell?r=756&amp;spec=svn758"
  
  >....kernel.testbench/src/org.s23m.cell</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/test?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/test?r=756&amp;spec=svn758"
  
  >...el.testbench/src/org.s23m.cell/test</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench?r=756&amp;spec=svn758"
  
  >...stbench/src/org.s23m.cell/testbench</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore?r=756&amp;spec=svn758"
  selected="selected"
  >...org.s23m.cell/testbench/Ecore.ecore</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/KernelTestSequence.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/KernelTestSequence.java?r=756&amp;spec=svn758"
  
  >...estbench/KernelTestSequence.java</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Test.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Test.java?r=756&amp;spec=svn758"
  
  >...c/org.s23m.cell/testbench/Test.java</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/TestSequence.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/TestSequence.java?r=756&amp;spec=svn758"
  
  >...odel/testbench/TestSequence.java</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/Graph.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/Graph.java?r=756&amp;spec=svn758"
  
  >...l/src/org.s23m.cell/core/Graph.java</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/OrderedPair.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.kernel/src/org.s23m.cell/core/OrderedPair.java?r=756&amp;spec=svn758"
  
  >...org.s23m.cell/core/OrderedPair.java</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.semanticextensions.testscripts/.classpath?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.cellplatform.testscripts/.classpath?r=756&amp;spec=svn758"
  
  >...xtensions.testscripts/.classpath</option>
  
- <option value="/p/gmodel/source/browse/trunk/org.s23m.cell.semanticextensions.testscripts/src/org.s23m.cell/semanticextensions/testscripts/Test.java?r=756&amp;spec=svn758"
+ <option value="/p/S23M/source/browse/trunk/org.s23m.cell.cellplatform.testscripts/src/org.s23m.cell/cellplatform/testscripts/Test.java?r=756&amp;spec=svn758"
  
  >...extensions/testscripts/Test.java</option>
  
@@ -5095,7 +5095,7 @@ id=sl_svn758_357
  
  
  <div id="review_instr" class="closed">
- <a class="ifOpened" href="/p/gmodel/source/detail?r=756&spec=svn758#publish">Publish your comments</a>
+ <a class="ifOpened" href="/p/S23M/source/detail?r=756&spec=svn758#publish">Publish your comments</a>
  <div class="ifClosed">Double click a line to add a comment</div>
  </div>
  
@@ -5115,7 +5115,7 @@ id=sl_svn758_357
  <div id="older_bubble">
  <p>Older revisions</p>
  
- <a href="/p/gmodel/source/list?path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&start=756">All revisions of this file</a>
+ <a href="/p/S23M/source/list?path=/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore&start=756">All revisions of this file</a>
  </div>
  </div>
  <div class="round1"></div>
@@ -5134,7 +5134,7 @@ id=sl_svn758_357
  <div>Size: 25726 bytes,
  357 lines</div>
  
- <div><a href="//gmodel.googlecode.com/svn-history/r758/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore">View raw file</a></div>
+ <div><a href="//S23M.googlecode.com/svn-history/r758/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore">View raw file</a></div>
  </div>
  
  </div>
@@ -5268,7 +5268,7 @@ id=sl_svn758_357
  // register our source container with the commenting code
  var paths = {'svn758': '/trunk/org.s23m.cell.kernel.testbench/src/org.s23m.cell/testbench/Ecore.ecore'}
  codereviews = CR_controller.setup(
- {"profileUrl":["/u/114757815731922588908/"],"token":"be2d5ffc047db7e47046fc750f8a46fd","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/10977552491916013749","projectHomeUrl":"/p/gmodel","relativeBaseUrl":"","projectName":"gmodel","loggedInUserEmail":"a.shewring@gmail.com"}, '', 'svn758', paths,
+ {"profileUrl":["/u/114757815731922588908/"],"token":"be2d5ffc047db7e47046fc750f8a46fd","assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/10977552491916013749","projectHomeUrl":"/p/S23M","relativeBaseUrl":"","projectName":"S23M","loggedInUserEmail":"a.shewring@gmail.com"}, '', 'svn758', paths,
  CR_BrowseIntegrationFactory);
  
  // register our source container with the commenting code

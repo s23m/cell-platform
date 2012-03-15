@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="payload" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="technicalName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *       &lt;attribute name="identifier" use="required" type="{http://schemas.gmodel.org/serialization/2010}uuid" />
+ *       &lt;attribute name="identifier" use="required" type="{http://schemas.S23M.org/serialization/2010}uuid" />
  *       &lt;attribute name="isAnonymous" use="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="uniqueRepresentationReference" use="required" type="{http://schemas.gmodel.org/serialization/2010}uuid" />
+ *       &lt;attribute name="uniqueRepresentationReference" use="required" type="{http://schemas.S23M.org/serialization/2010}uuid" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -49,13 +49,13 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class SemanticIdType {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected String name;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected String pluralName;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected String payload;
-    @XmlElement(namespace = "http://schemas.gmodel.org/serialization/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/serialization/2010", required = true)
     protected String technicalName;
     @XmlAttribute(required = true)
     protected String identifier;

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.editor.semanticdomain.ui.components;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Transaction;
 import org.s23m.cell.api.models.Root;
@@ -184,12 +184,12 @@ public class TreeActionHandler implements Action.Handler   {
 
 	private void loadInstanceAdditionForm(final Set instance) {
 		addToTab(
-				new VertexCreationFormLayout(G.coreGraphs.vertex, instance, mainApp.getMultiTabPanel(), ACTION_ADD), ACTION_ADD.getCaption(), EditorIcon.VERTEX.getIconImage());
+				new VertexCreationFormLayout(S23MKernel.coreGraphs.vertex, instance, mainApp.getMultiTabPanel(), ACTION_ADD), ACTION_ADD.getCaption(), EditorIcon.VERTEX.getIconImage());
 	}
 
 	private void attemptToDecommission(final Set instance) {
 		final Set decommissioningResult = instance.decommission();
-		if (decommissioningResult.isEqualTo(G.coreSets.successful)) {
+		if (decommissioningResult.isEqualTo(S23MKernel.coreSets.successful)) {
 			mainApp.getMainWindow().showNotification("Decommissioning was successful");
 			// TODO is this required?
 			// Do we just enable the commit / rollback buttons instead of automatically committing?

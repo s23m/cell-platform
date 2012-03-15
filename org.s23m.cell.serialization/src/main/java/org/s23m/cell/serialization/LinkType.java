@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence maxOccurs="unbounded" minOccurs="0">
- *         &lt;element name="visibility" type="{http://schemas.gmodel.org/serialization/2010}visibilityType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="edge" type="{http://schemas.gmodel.org/serialization/2010}edgeType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="edgeTrace" type="{http://schemas.gmodel.org/serialization/2010}edgeTraceType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="superSetReference" type="{http://schemas.gmodel.org/serialization/2010}superSetReferenceType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="visibility" type="{http://schemas.S23M.org/serialization/2010}visibilityType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="edge" type="{http://schemas.S23M.org/serialization/2010}edgeType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="edgeTrace" type="{http://schemas.S23M.org/serialization/2010}edgeTraceType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="superSetReference" type="{http://schemas.S23M.org/serialization/2010}superSetReferenceType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,10 +46,10 @@ import javax.xml.bind.annotation.XmlType;
 public class LinkType {
 
     @XmlElements({
-        @XmlElement(name = "edgeTrace", namespace = "http://schemas.gmodel.org/serialization/2010", required = true, type = EdgeTraceType.class),
-        @XmlElement(name = "edge", namespace = "http://schemas.gmodel.org/serialization/2010", required = true, type = EdgeType.class),
-        @XmlElement(name = "visibility", namespace = "http://schemas.gmodel.org/serialization/2010", required = true, type = VisibilityType.class),
-        @XmlElement(name = "superSetReference", namespace = "http://schemas.gmodel.org/serialization/2010", required = true, type = SuperSetReferenceType.class)
+        @XmlElement(name = "edgeTrace", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = EdgeTraceType.class),
+        @XmlElement(name = "edge", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = EdgeType.class),
+        @XmlElement(name = "visibility", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = VisibilityType.class),
+        @XmlElement(name = "superSetReference", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = SuperSetReferenceType.class)
     })
     protected List<Object> visibilityAndEdgeAndEdgeTrace;
 

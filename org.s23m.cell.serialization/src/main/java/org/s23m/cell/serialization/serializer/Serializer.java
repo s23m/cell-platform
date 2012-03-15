@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -35,7 +35,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.serialization.Gmodel;
+import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.container.ArtefactContainer;
 
 /**
@@ -96,7 +96,7 @@ public interface Serializer {
 	 * Deserialize the given artifacts
 	 * @param artifacts
 	 */
-	void deserializeInstances(final Map<String, Gmodel> artifacts);
+	void deserializeInstances(final Map<String, S23M> artifacts);
 
 	/**
 	 * Perform the initial full deserialization
@@ -104,7 +104,7 @@ public interface Serializer {
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
 	 */
-	void doInitialFullDeserialization(Map<String, Gmodel> artifacts) throws IllegalArgumentException, IllegalAccessException;
+	void doInitialFullDeserialization(Map<String, S23M> artifacts) throws IllegalArgumentException, IllegalAccessException;
 
 	/**
 	 * Encode the given byte array to a base64 string
@@ -166,16 +166,16 @@ public interface Serializer {
 	/**
 	 * Unmarshall a given XML String
 	 * @param String XML string
-	 * @return Gmodel
+	 * @return S23M
 	 */
-	Gmodel unmarshallModel (final String xmlString);
+	S23M unmarshallModel (final String xmlString);
 
 	/**
 	 * Unmarshall a given XML file at the given uri
 	 * @param uri Serialization destination
-	 * @return Gmodel
+	 * @return S23M
 	 */
-	Gmodel unmarshallModel (final URI uri);
+	S23M unmarshallModel (final URI uri);
 
 
 }

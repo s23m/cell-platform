@@ -10,7 +10,7 @@ package org.s23m.cell.serialization;
 
 import javax.xml.bind.annotation.XmlRegistry;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.InstanceType.Values;
 import org.s23m.cell.serialization.InstanceType.Variables;
 
@@ -41,11 +41,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Gmodel }
+     * Create an instance of {@link S23M }
      * 
      */
-    public Gmodel createGmodel() {
-        return new Gmodel();
+    public S23M createS23M() {
+        return new S23M();
     }
 
     /**
@@ -60,7 +60,7 @@ public class ObjectFactory {
      * Create an instance of {@link Instance }
      * 
      */
-    public Instance createGmodelInstance() {
+    public Instance createS23MInstance() {
         return new Instance();
     }
 

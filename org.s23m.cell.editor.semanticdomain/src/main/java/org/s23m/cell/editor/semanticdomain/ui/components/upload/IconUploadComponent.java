@@ -1,3 +1,27 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is S23M.
+ *
+ * The Initial Developer of the Original Code is
+ * The S23M Foundation.
+ * Portions created by the Initial Developer are
+ * Copyright (C) 2012 The S23M Foundation.
+ * All Rights Reserved.
+ *
+ * Contributor(s):
+ * Chul Kim
+ * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.editor.semanticdomain.ui.components.upload;
 
 import java.io.ByteArrayInputStream;
@@ -7,10 +31,10 @@ import java.io.OutputStream;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
-import org.s23m.cell.semanticextensions.outershells.SemanticExtensionsDomain;
+import org.s23m.cell.platform.models.CellPlatformDomain;
 
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
@@ -127,20 +151,20 @@ public class IconUploadComponent extends CustomComponent
 		final Set gv = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization, graph);
 		final Set v = gv.addConcrete(Visualization.visualizedGraph, graph);
 
-		final Set vg_to_graph = Instantiation.link(Visualization.visualizedGraph_to_graph,
-				GmodelSemanticDomains.anonymous,
+		final Set vg_to_graph = Instantiation.arrow(Visualization.visualizedGraph_to_graph,
+				S23MSemanticDomains.anonymous,
 				Visualization.visualizedGraph,
 				v,
-			    GmodelSemanticDomains.minCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isNavigable_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isContainer_FALSE,
+			    S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.isNavigable_NOTAPPLICABLE,
+			    S23MSemanticDomains.isContainer_FALSE,
 				graph,
 				graph,
-			    GmodelSemanticDomains.minCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isNavigable_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isContainer_FALSE);
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_NOTAPPLICABLE,
+				S23MSemanticDomains.isContainer_FALSE);
 
 		final Set details = gv.addConcrete(Visualization.details,Visualization.details);
 		final Set structure = gv.addConcrete(Visualization.structure,Visualization.structure);
@@ -155,7 +179,7 @@ public class IconUploadComponent extends CustomComponent
 	//			return r_to_ri.fromConnectedInstance();
 	//		}
 	//	}
-	//	return F_InstantiationImpl.raiseError(visualizedGraph.identity(), GmodelSemanticDomains.semanticErr);
+	//	return F_InstantiationImpl.raiseError(visualizedGraph.identity(), S23MSemanticDomains.semanticErr);
 	//}
 
     private Set findIcon(final Set graphVisualization) {
@@ -163,26 +187,26 @@ public class IconUploadComponent extends CustomComponent
 
 			for (final Set symbol_to_si: graphVisualization.filter(Visualization.symbol_to_semantic_identity)) {
 				if (symbol_to_si.to().isEqualTo(set)
-						&& symbol_to_si.fromEdgeEnd().isEqualTo(SemanticExtensionsDomain.theDefault)) {
+						&& symbol_to_si.fromEdgeEnd().isEqualTo(CellPlatformDomain.theDefault)) {
 					return symbol_to_si.from();
 			}
 		}
 		// create the icon artefact, as it does not exist yet
-		final Set icon = graphVisualization.addConcrete(Visualization.symbol, SemanticExtensionsDomain.icon);
-		Instantiation.link(Visualization.symbol_to_semantic_identity,
-				GmodelSemanticDomains.anonymous,
-			    SemanticExtensionsDomain.theDefault,
+		final Set icon = graphVisualization.addConcrete(Visualization.symbol, CellPlatformDomain.icon);
+		Instantiation.arrow(Visualization.symbol_to_semantic_identity,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.theDefault,
 			    icon,
-			    GmodelSemanticDomains.minCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isNavigable_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isContainer_FALSE,
+			    S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.isNavigable_NOTAPPLICABLE,
+			    S23MSemanticDomains.isContainer_FALSE,
 			    set,
 			    set,
-			    GmodelSemanticDomains.minCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isNavigable_NOTAPPLICABLE,
-			    GmodelSemanticDomains.isContainer_FALSE
+			    S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			    S23MSemanticDomains.isNavigable_NOTAPPLICABLE,
+			    S23MSemanticDomains.isContainer_FALSE
 			);
 		return createGraphVisualization(container);
 	}

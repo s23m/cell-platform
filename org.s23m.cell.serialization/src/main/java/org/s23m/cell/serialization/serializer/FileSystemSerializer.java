@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -49,17 +49,17 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.codec.binary.Base64;
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.Root;
-import org.s23m.cell.serialization.Gmodel;
+import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.SemanticIdType;
 import org.s23m.cell.serialization.container.ArtefactContainer;
 
 public class FileSystemSerializer implements Serializer {
 
 	public FileSystemSerializer() {
-		initGmodelMarshaller();
+		initS23MMarshaller();
 	}
 
 	public byte[] compressSerializationContent(final String content) throws IOException {
@@ -106,12 +106,12 @@ public class FileSystemSerializer implements Serializer {
 		return decompressSerializationContent(decodedByte);
 	}
 
-	public void deserializeInstances(final Map<String, Gmodel> artifacts) {
+	public void deserializeInstances(final Map<String, S23M> artifacts) {
 		final DeserializationMapper deSerializationMapper = new DeserializationMapper();
 		deSerializationMapper.deserializeInstances(artifacts);
 	}
 
-	public void doInitialFullDeserialization(final Map<String,Gmodel> artifacts) throws IllegalArgumentException, IllegalAccessException {
+	public void doInitialFullDeserialization(final Map<String,S23M> artifacts) throws IllegalArgumentException, IllegalAccessException {
 		final DeserializationMapper deSerializationMapper = new DeserializationMapper();
 		try {
 			deSerializationMapper.deserializeSemanticDomains(artifacts);
@@ -126,21 +126,21 @@ public class FileSystemSerializer implements Serializer {
 	}
 
 	private void getAllChildVerticesInMemory(final Set parentInstance, final List<Set> allInstancesInMemory) {
-		if (parentInstance.flavor().isEqualTo(G.coreGraphs.vertex)) {
+		if (parentInstance.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 			allInstancesInMemory.add(parentInstance);
 		}
 		for (final Set i : parentInstance.filterInstances()) {
 			//if (i.flavor().isEqualTo(F_SemanticStateOfInMemoryModel.coreGraphs.vertex) && !i.identity().isEqualTo(Root.transportcontainer.identity())) {
-			if (i.flavor().isEqualTo(G.coreGraphs.vertex)) {
+			if (i.properClass().isEqualTo(S23MKernel.coreGraphs.vertex)) {
 
 				getAllChildVerticesInMemory(i, allInstancesInMemory);
 			}
 		}
 	}
 
-	private void getAllIdentities(final Set instance, final List<Gmodel> identities) {
-		final Gmodel serializedModel = InstanceBuilder.getObjectFactory().createGmodel();
-		final Gmodel.Instance serializedInstance = InstanceBuilder.getObjectFactory().createGmodelInstance();
+	private void getAllIdentities(final Set instance, final List<S23M> identities) {
+		final S23M serializedModel = InstanceBuilder.getObjectFactory().createS23M();
+		final S23M.Instance serializedInstance = InstanceBuilder.getObjectFactory().createS23MInstance();
 		final SemanticIdType sId = InstanceBuilder.mapSemanticIdentity(instance.identity());
 		serializedInstance.setSemanticIdentity(sId);
 		serializedModel.getInstance().add(serializedInstance);
@@ -162,10 +162,10 @@ public class FileSystemSerializer implements Serializer {
 	}
 	 */
 
-	private void initGmodelMarshaller() {
+	private void initS23MMarshaller() {
 		try {
-			SerializationMarshaller.getMarshaller(Gmodel.class.getPackage().getName());
-			SerializationMarshaller.getUnmarshaller(Gmodel.class.getPackage().getName());
+			SerializationMarshaller.getMarshaller(S23M.class.getPackage().getName());
+			SerializationMarshaller.getUnmarshaller(S23M.class.getPackage().getName());
 			SerializationMarshaller.getMarshaller(ArtefactContainer.class.getPackage().getName());
 			SerializationMarshaller.getUnmarshaller(ArtefactContainer.class.getPackage().getName());
 		} catch (final JAXBException ex) {
@@ -183,7 +183,7 @@ public class FileSystemSerializer implements Serializer {
 	public List<String> serializeAllInstancesInMemory() {
 		final List<String> serializedInstances = new ArrayList<String>();
 		final List<Set> allInstancesInMemory = new ArrayList<Set>();
-		final Set rootSet = G.coreGraphs.graph;//(Vertex) Root.root;
+		final Set rootSet = S23MKernel.coreGraphs.graph;//(Vertex) Root.root;
 		getAllChildVerticesInMemory(rootSet, allInstancesInMemory);
 		//for all instances memory sort them by urr and write to a file
 		Collections.sort(allInstancesInMemory, new InstanceComparator());
@@ -206,7 +206,7 @@ public class FileSystemSerializer implements Serializer {
 		try {
 			final Marshaller marshaller = createMarshaller(container.getClass().getPackage().getName());
 			marshaller.marshal(container, sw);
-			final String content = sw.toString(); //dumpContent(gmodel.getId(), content);	//do content dump
+			final String content = sw.toString(); //dumpContent(S23M.getId(), content);	//do content dump
 			return content;
 		} catch (final JAXBException ex) {
 			// TODO Auto-generated catch block
@@ -214,13 +214,13 @@ public class FileSystemSerializer implements Serializer {
 		}
 	}
 
-	public List<Gmodel> serializeIdentities(final Set instance) {
-		final List<Gmodel> ids = new ArrayList<Gmodel>();
+	public List<S23M> serializeIdentities(final Set instance) {
+		final List<S23M> ids = new ArrayList<S23M>();
 		getAllIdentities(instance, ids);
 		Marshaller marshaller;
 		try {
 			marshaller = ids.isEmpty() ? null : createMarshaller(ids.get(0).getClass().getPackage().getName());
-			for (final Gmodel id : ids) {
+			for (final S23M id : ids) {
 				final Writer sw = new StringWriter();
 				marshaller.marshal(id, sw);
 			}
@@ -235,12 +235,12 @@ public class FileSystemSerializer implements Serializer {
 	 */
 	public SerializationContent serializeInstance(final Set vertex, final boolean isKernelSerialization) {
 		try {
-			final GmodelContent gmodel = new SerializationMapper().mapInstance(vertex, isKernelSerialization);
+			final S23MContent S23M = new SerializationMapper().mapInstance(vertex, isKernelSerialization);
 			final Writer sw = new StringWriter();
-			final Marshaller marshaller = createMarshaller(gmodel.getContent().getClass().getPackage().getName());
-			marshaller.marshal(gmodel.getContent(), sw);
-			final String content = sw.toString(); //dumpContent(gmodel.getId(), content);	//do content dump
-			return new SerializationContent(gmodel.getId(), content, gmodel.getContent(), gmodel.getSemanticIds());
+			final Marshaller marshaller = createMarshaller(S23M.getContent().getClass().getPackage().getName());
+			marshaller.marshal(S23M.getContent(), sw);
+			final String content = sw.toString(); //dumpContent(S23M.getId(), content);	//do content dump
+			return new SerializationContent(S23M.getId(), content, S23M.getContent(), S23M.getSemanticIds());
 		} catch (final JAXBException ex) {
 			throw new IllegalStateException("Serialization failture.");
 		}
@@ -250,40 +250,40 @@ public class FileSystemSerializer implements Serializer {
 	 * @return String
 	 */
 	public List<SerializationContent> serializeRoot() {
-		final List<GmodelContent> gmodels = new SerializationMapper().mapRoot(Root.root);
-		final List<SerializationContent> serializedGmodels = new ArrayList<SerializationContent>();
+		final List<S23MContent> S23Ms = new SerializationMapper().mapRoot(Root.root);
+		final List<SerializationContent> serializedS23Ms = new ArrayList<SerializationContent>();
 		try {
-			final Marshaller marshaller = gmodels.isEmpty() ? null :createMarshaller(gmodels.get(0).getContent().getClass().getPackage().getName());
-			for(final GmodelContent gmodel : gmodels) {
+			final Marshaller marshaller = S23Ms.isEmpty() ? null :createMarshaller(S23Ms.get(0).getContent().getClass().getPackage().getName());
+			for(final S23MContent S23M : S23Ms) {
 				final Writer sw = new StringWriter();
-				marshaller.marshal(gmodel.getContent(), sw);
+				marshaller.marshal(S23M.getContent(), sw);
 				final String content = sw.toString();
 				//do content dump
-				//dumpContent(gmodel.getId(), content);
-				serializedGmodels.add(new SerializationContent(gmodel.getId(), content, gmodel.getContent(), gmodel.getSemanticIds()));
+				//dumpContent(S23M.getId(), content);
+				serializedS23Ms.add(new SerializationContent(S23M.getId(), content, S23M.getContent(), S23M.getSemanticIds()));
 			}
 		} catch (final JAXBException ex) {
 			java.util.logging.Logger.getLogger("global").log(
 					java.util.logging.Level.SEVERE, null, ex);
 		}
-		return serializedGmodels;
+		return serializedS23Ms;
 	}
 
 	/* public List<SerializationContent> serializeTransportContainerContent() {
-		final List<SerializationContent> serializedGmodels = new ArrayList<SerializationContent>();
+		final List<SerializationContent> serializedS23Ms = new ArrayList<SerializationContent>();
 		final Set containedSet = getTransportContainerContent();
 		if (containedSet != null) {
 			if (containedSet.isEqualToRepresentation(Root.root)) {
-				serializedGmodels.addAll(serializeRoot());
+				serializedS23Ms.addAll(serializeRoot());
 			} else {
-				final List<GmodelContent> gmodels = new SerializationMapper().mapRoot(containedSet);
-				for(final GmodelContent gmodel : gmodels) {
+				final List<S23MContent> S23Ms = new SerializationMapper().mapRoot(containedSet);
+				for(final S23MContent S23M : S23Ms) {
 					try {
 						final Writer sw = new StringWriter();
-						final Marshaller marshaller = createMarshaller(gmodel.getContent().getClass().getPackage().getName());
-						marshaller.marshal(gmodel.getContent(), sw);
+						final Marshaller marshaller = createMarshaller(S23M.getContent().getClass().getPackage().getName());
+						marshaller.marshal(S23M.getContent(), sw);
 						final String content = sw.toString();
-						serializedGmodels.add(new SerializationContent(gmodel.getId(), content, gmodel.getContent(), gmodel.getSemanticIds()));
+						serializedS23Ms.add(new SerializationContent(S23M.getId(), content, S23M.getContent(), S23M.getSemanticIds()));
 					} catch (final JAXBException ex) {
 						java.util.logging.Logger.getLogger("global").log(
 								java.util.logging.Level.SEVERE, null, ex);
@@ -291,7 +291,7 @@ public class FileSystemSerializer implements Serializer {
 				}
 			}
 		}
-		return serializedGmodels;
+		return serializedS23Ms;
 	}
 	 */
 
@@ -309,18 +309,18 @@ public class FileSystemSerializer implements Serializer {
 		}
 	}
 
-	public Gmodel unmarshallModel (final String xmlString) {
+	public S23M unmarshallModel (final String xmlString) {
 		try {
-			return (Gmodel) unMarshall(Gmodel.class.getPackage().getName(), xmlString);
+			return (S23M) unMarshall(S23M.class.getPackage().getName(), xmlString);
 		} catch (final JAXBException ex) {
 			throw new IllegalStateException ("Unmarshalling failed.", ex);
 		}
 	}
 
-	public Gmodel unmarshallModel (final URI uri) {
+	public S23M unmarshallModel (final URI uri) {
 		try {
-			final Unmarshaller unMarsahller = SerializationMarshaller.getUnmarshaller(Gmodel.class.getPackage().getName());
-			return (Gmodel) unMarsahller.unmarshal( new FileInputStream(uri.getPath()));
+			final Unmarshaller unMarsahller = SerializationMarshaller.getUnmarshaller(S23M.class.getPackage().getName());
+			return (S23M) unMarsahller.unmarshal( new FileInputStream(uri.getPath()));
 		} catch (final JAXBException ex) {
 			throw new IllegalStateException ("Unmarshalling failed.", ex);
 		} catch (final FileNotFoundException ex) {

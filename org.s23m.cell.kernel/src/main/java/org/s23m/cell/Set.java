@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,28 +25,28 @@
 
 package org.s23m.cell;
 
-import org.s23m.cell.flavors.OrderedPairFlavor;
-import org.s23m.cell.flavors.OrderedSetFlavor;
+import org.s23m.cell.properclasses.ProperClassOfOrderedPairs;
+import org.s23m.cell.properclasses.ProperClassOfOrderedSets;
 
 
 /**
- * <p>The Gmodel {@link Set} interface enables the attachment of new artifacts and container content
- * to the Gmodel repository. An {@link Set} has the role of {@link Graph}, which includes the role
- * of a list ({@link OrderedSetFlavor}).</p>
+ * <p>The S23M {@link Set} interface enables the attachment of new artifacts and container content
+ * to the S23M repository. An {@link Set} has the role of {@link Graph}, which includes the role
+ * of a list ({@link ProperClassOfOrderedSets}).</p>
  * 
- * <p><b>IMPORTANT NOTE: Gmodel does not make use of the Java typing mechanism</b></p>
+ * <p><b>IMPORTANT NOTE: S23M does not make use of the Java typing mechanism</b></p>
  * 
- * <p>In Gmodel every element is part of the following technical Java interface hierarchy:
+ * <p>In S23M every element is part of the following technical Java interface hierarchy:
  * 
  * <ul>
- * <li>{@link OrderedPairFlavor} &lt;-- {@link Artifact} &lt;-- {@link Set}</li>
+ * <li>{@link ProperClassOfOrderedPairs} &lt;-- {@link Artifact} &lt;-- {@link Set}</li>
  * </ul>
  * 
  * <p>The user can plug in an external SemanticIdentity mechanism as needed
- * The classification mechanism used in Gmodel is the <i>isInformation</i>,
+ * The classification mechanism used in S23M is the <i>isInformation</i>,
  * which is a recursively applicable mechanism that enables multi-level modelling</p>
  * 
- * <p>In Gmodel the only things that a user creates are:
+ * <p>In S23M the only things that a user creates are:
  * 
  * <ol>
  * <li>{@link Set}s, which require an externally provided {@link Identity}</li>
@@ -58,7 +58,7 @@ import org.s23m.cell.flavors.OrderedSetFlavor;
  * </ol>
  * </p>
  */
-public interface Set extends OrderedPairFlavor {
+public interface Set extends ProperClassOfOrderedPairs {
 
 
 }

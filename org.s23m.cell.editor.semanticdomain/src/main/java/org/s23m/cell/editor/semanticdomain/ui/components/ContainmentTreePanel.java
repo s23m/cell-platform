@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.SemanticStateOfInMemoryModel;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.Root;
@@ -39,9 +39,9 @@ import org.s23m.cell.editor.semanticdomain.EditorIcon;
 import org.s23m.cell.editor.semanticdomain.data.DetailsData;
 import org.s23m.cell.editor.semanticdomain.data.TreeContainer;
 import org.s23m.cell.editor.semanticdomain.data.TreeNode;
+import org.s23m.cell.platform.models.CellPlatform;
 import org.s23m.cell.repository.client.RepositoryClient;
 import org.s23m.cell.repository.client.mediator.RepositoryClientMediator;
-import org.s23m.cell.semanticextensions.outershells.SemanticExtensions;
 import org.s23m.cell.serialization.container.ArtefactContainer;
 import org.s23m.cell.serialization.container.ArtefactContainer.Content;
 import org.s23m.cell.serialization.container.ObjectFactoryHolder;
@@ -226,13 +226,13 @@ public class ContainmentTreePanel extends Panel {
 	}
 
 	public void recreateOutshellInstances() {
-		if (!SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (!SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			log.info("Editor is not online and outershell re-creation is to be done.");
 
 			final boolean inMemoryInstances = Boolean.valueOf(System.getProperty(IN_MEMORY_INSTANCES_PROPERTY));
 			if (inMemoryInstances) {
-				org.s23m.cell.G.completeOpenSourceKernelInitialization();
-	            SemanticExtensions.instantiateFeature();
+				S23MKernel.completeCellKernelInitialization();
+				CellPlatform.instantiateFeature();
 			} else {
 				log.info("Loading semantic extension instances.");
 				final RepositoryClient client = RepositoryClientMediator.getInstance().getComponent(ProtocolType.REPOSITORY_CLIENT);
@@ -255,7 +255,7 @@ public class ContainmentTreePanel extends Panel {
 				}
 				log.info("Semantic extension initialization is done.");
 			}
-			G.goLiveWithGmodelEditor();
+			S23MKernel.goLiveWithCellEditor();
 		} else {
 			log.info("Editor is online and outershell re-creation is skipped.");
 		}

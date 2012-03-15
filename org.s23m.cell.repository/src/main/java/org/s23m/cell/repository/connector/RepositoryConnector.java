@@ -50,7 +50,7 @@ public class RepositoryConnector implements Repository {
 	public ArtefactContainer get(final ArtefactContainer artifact)throws UnsupportedOperationException {
 		final Map<String,Object> artifactsToGet = new HashMap<String,Object>();
 		Map<String,Object> returnedArtifacts = null;
-		final Serializer sz = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+		final Serializer sz = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 		artifactsToGet.put(artifact.getContentType(), sz.serializeContainer(artifact));
 		try {
 			returnedArtifacts = repositoryAccessClient.mapCall(artifactsToGet);

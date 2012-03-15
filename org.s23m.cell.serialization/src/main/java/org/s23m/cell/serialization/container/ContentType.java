@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="content" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *       &lt;attribute name="contentEncoding" use="required" type="{http://schemas.gmodel.org/container/2010}contentEncodingType" />
- *       &lt;attribute name="id" use="required" type="{http://schemas.gmodel.org/container/2010}contentId" />
- *       &lt;attribute name="type" use="required" type="{http://schemas.gmodel.org/container/2010}typeOfContent" />
+ *       &lt;attribute name="contentEncoding" use="required" type="{http://schemas.S23M.org/container/2010}contentEncodingType" />
+ *       &lt;attribute name="id" use="required" type="{http://schemas.S23M.org/container/2010}contentId" />
+ *       &lt;attribute name="type" use="required" type="{http://schemas.S23M.org/container/2010}typeOfContent" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ContentType {
 
-    @XmlElement(namespace = "http://schemas.gmodel.org/container/2010", required = true)
+    @XmlElement(namespace = "http://schemas.S23M.org/container/2010", required = true)
     protected String content;
     @XmlAttribute(required = true)
     protected ContentEncodingType contentEncoding;

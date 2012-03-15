@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -28,7 +28,7 @@ package org.s23m.cell.serialization.serializer;
 import java.util.UUID;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 
@@ -57,8 +57,8 @@ public class InstanceGetter {
 	 */
 	public static boolean isNonMemoryResidentInstance(final Set set) {
 		// NOTE : the test based on names may fail, the only correct test is for representational equivalence via isEqualToRepresentation()
-		//return set.identity().name().equals((GmodelSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()));
-		return org.s23m.cell.api.serializerinterface.Reconstitution.getSetFromLocalMemory(set.identity()).isEqualToRepresentation(GmodelSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory) ;
+		//return set.identity().name().equals((S23MSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()));
+		return org.s23m.cell.api.serializerinterface.Reconstitution.getSetFromLocalMemory(set.identity()).isEqualToRepresentation(S23MSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory) ;
 	}
 
 	/**

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,8 +25,8 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreGraphs;
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import java.util.List;
@@ -36,13 +36,13 @@ import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.VisitorFunction;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.models2.Visualization;
 
 public class Graph extends OrderedPair implements Set {
 
-	/* Reify the Gmodel Graph concept */
+	/* Reify the S23M Graph concept */
 	protected static final Graph graph = new Graph();
 	protected static final OrderedSet inMemorySets = new OrderedSet();
 	protected static final OrderedSet inMemorySemanticIdentities = new OrderedSet();
@@ -51,11 +51,11 @@ public class Graph extends OrderedPair implements Set {
 	private boolean orderedSetsInitialized;
 	private boolean executableFunctionsInitialized;
 
-	private OrderedSet edgeFlavored;
-	private OrderedSet allContainedLinkInstances;
-	private OrderedSet superSetReferenceFlavored;
-	private OrderedSet vertexFlavored;
-	private OrderedSet visibilityFlavored;
+	private OrderedSet containedEdges;
+	private OrderedSet allContainedArrows;
+	private OrderedSet containedSuperSetReferences;
+	private OrderedSet containedVertices;
+	private OrderedSet containedVisibilities;
 	private OrderedSet allContainedInstances;
 
 	private OrderedSet variables;
@@ -90,12 +90,12 @@ public class Graph extends OrderedPair implements Set {
 		this.addToVariables(coreSets.maxCardinality);
 		this.addToVariables(coreSets.isAbstract);
 		this.addToValues(coreSets.isAbstract_TRUE);
-		this.addFlavorQueries();
-		this.addFlavorCommands();
+		this.addProperClassQueries();
+		this.addProperClassCommands();
 		this.containsDecommissionedSets = false;
 		this.containsNewSets = false;
 		this.isDecommissioned = false;
-		if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.isNewInstance = true;
 		} else {
 			this.isNewInstance = false;
@@ -138,14 +138,14 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Graph category() {
-		if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 			/*
 			 * orderedPairCategory() duplicates category() but is essential to break recursive loop in Graph
-			 * This is the only class/method in Gmodel where orderedPairCategory() must be used
+			 * This is the only class/method in S23M where orderedPairCategory() must be used
 			 * All other code must only use category()
 			 */
-			if (this.orderedPairCategory().isEqualTo(coreSets.semanticErr)) {return ((Graph) GmodelSemanticDomains.semanticErr);}
-			if (this.orderedPairCategory().isEqualTo(coreSets.kernelDefect)) {return ((Graph) GmodelSemanticDomains.kernelDefect);}
+			if (this.orderedPairCategory().isEqualTo(coreSets.semanticErr)) {return ((Graph) S23MSemanticDomains.semanticErr);}
+			if (this.orderedPairCategory().isEqualTo(coreSets.kernelDefect)) {return ((Graph) S23MSemanticDomains.kernelDefect);}
 		}
 		return ((Graph) category);
 	}
@@ -161,7 +161,7 @@ public class Graph extends OrderedPair implements Set {
 		if (this.identity().isPartOfKernel()) {
 			if (!this.variables.containsSemanticMatch(set)) {
 				this.variables.add(set);
-				if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+				if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 					this.containsNewSets = true;
 					Graph.addSetToChangedSets(this);
 				}
@@ -179,17 +179,17 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	private void setValue(final Set value) {
-		if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 			if (!this.values.containsSemanticMatch(value)) {
 				this.values.add(value);
-				if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+				if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 					this.containsNewSets = true;
 					Graph.addSetToChangedSets(this);
 				}
 			}
 		} else {
 			this.values.add(value);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.containsNewSets = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -202,7 +202,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		if ((this.identity().isPartOfKernel() && !this.values.containsSemanticMatch(anElement))
 				|| (
-						(this.category().flavor().variables().containsSemanticMatch(((OrderedPair)anElement).category())
+						(this.category().properClass().variables().containsSemanticMatch(((OrderedPair)anElement).category())
 								|| this.category().variables().containsSemanticMatch(((OrderedPair)anElement).category())
 								|| anElement.category().isEqualTo(coreSets.isAbstract)
 								|| anElement.category().isEqualTo(coreSets.maxCardinality)
@@ -213,20 +213,20 @@ public class Graph extends OrderedPair implements Set {
 			this.setValue(anElement);
 			return coreSets.successful;
 		} else {
-			if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+			if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 				final Set theSemanticIdentity = anElement.semanticIdentity();
-				for (final Set variable : this.category().flavor().variables()) {
+				for (final Set variable : this.category().properClass().variables()) {
 					if (theSemanticIdentity.isElementOf(variable.semanticIdentity()).isEqualTo(coreSets.is_TRUE)) {
 						this.setValue(theSemanticIdentity);
-						return GmodelSemanticDomains.successful;
+						return S23MSemanticDomains.successful;
 					}
 				}
 				for (final Set variable : this.category().variables()) {
-					if (theSemanticIdentity.isElementOf(GmodelSemanticDomains.isAbstract).isEqualTo(coreSets.is_TRUE)
-							|| theSemanticIdentity.isElementOf(GmodelSemanticDomains.maxCardinality).isEqualTo(coreSets.is_TRUE)
+					if (theSemanticIdentity.isElementOf(S23MSemanticDomains.isAbstract).isEqualTo(coreSets.is_TRUE)
+							|| theSemanticIdentity.isElementOf(S23MSemanticDomains.maxCardinality).isEqualTo(coreSets.is_TRUE)
 							|| theSemanticIdentity.isElementOf(variable.semanticIdentity()).isEqualTo(coreSets.is_TRUE)) {
 						this.setValue(theSemanticIdentity);
-						return GmodelSemanticDomains.successful;
+						return S23MSemanticDomains.successful;
 					}
 				}
 				return F_InstantiationImpl.raiseError(coreSets.semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance.identity(), coreSets.semanticErr);
@@ -240,7 +240,7 @@ public class Graph extends OrderedPair implements Set {
 	public Set value(final Set variable) {
 		this.ensureInitializedOrderedSets();
 		for (final Set value : values) {
-			if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+			if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 				if (value.semanticIdentity().isElementOf(variable.semanticIdentity()).isEqualTo(coreSets.is_TRUE)) {
 					return value;
 				}
@@ -276,7 +276,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		if (!this.commands.containsSemanticMatch(anElement)) {
 			this.commands.add(anElement);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.containsNewSets = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -290,7 +290,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		if (!(this.container().isEqualTo(Graph.graph))) {
 			this.commands.remove(anElement);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.containsNewSets = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -309,8 +309,8 @@ public class Graph extends OrderedPair implements Set {
 		if (!executableFunctionsInitialized) {
 			if (!isEqualTo(Graph.graph)) {
 				// ensure that all flavor-level queries are included in the result
-				addFlavorQueries();
-				addFlavorCommands();
+				addProperClassQueries();
+				addProperClassCommands();
 			}
 			final Set superClasses = this.category().container().filterPolymorphic(this.category().container().localRootSuperSetOf(this.category()));
 			for (final Set superClass : superClasses) {
@@ -332,7 +332,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		if (!this.queries.containsSemanticMatch(anElement)) {
 			this.queries.add(anElement);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.containsNewSets = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -360,7 +360,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		if (!(this.container().isEqualTo(Graph.graph))) {
 			this.queries.remove(anElement);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.containsNewSets = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -375,11 +375,11 @@ public class Graph extends OrderedPair implements Set {
 			values = new OrderedSet(identityFactory.createAnonymousIdentity());
 			variables = new OrderedSet(identityFactory.createAnonymousIdentity());
 			allContainedInstances = new OrderedSet(identityFactory.createAnonymousIdentity());
-			vertexFlavored = new OrderedSet(identityFactory.createAnonymousIdentity());
-			edgeFlavored = new OrderedSet(identityFactory.createAnonymousIdentity());
-			allContainedLinkInstances = new OrderedSet(identityFactory.createAnonymousIdentity());
-			superSetReferenceFlavored = new OrderedSet(identityFactory.createAnonymousIdentity());
-			visibilityFlavored = new OrderedSet(identityFactory.createAnonymousIdentity());
+			containedVertices = new OrderedSet(identityFactory.createAnonymousIdentity());
+			containedEdges = new OrderedSet(identityFactory.createAnonymousIdentity());
+			allContainedArrows = new OrderedSet(identityFactory.createAnonymousIdentity());
+			containedSuperSetReferences = new OrderedSet(identityFactory.createAnonymousIdentity());
+			containedVisibilities = new OrderedSet(identityFactory.createAnonymousIdentity());
 			commands = new OrderedSet(identityFactory.createAnonymousIdentity());
 			queries = new OrderedSet(identityFactory.createAnonymousIdentity());
 			executableCommands = new OrderedSet(identityFactory.createAnonymousIdentity());
@@ -391,94 +391,94 @@ public class Graph extends OrderedPair implements Set {
 
 	protected Set getVertices() {
 		this.ensureInitializedOrderedSets();
-		return vertexFlavored;
+		return containedVertices;
 	}
 
 	protected void addToVertices(final Vertex anElement) {
 		this.ensureInitializedOrderedSets();
-		this.vertexFlavored.add(anElement);
+		this.containedVertices.add(anElement);
 		this.allContainedInstances.add(anElement);
 	}
 
 	protected void removeFromVertices(final Vertex anElement) {
 		this.ensureInitializedOrderedSets();
-		this.vertexFlavored.remove(anElement);
+		this.containedVertices.remove(anElement);
 		this.allContainedInstances.remove(anElement);
 	}
 
 	protected Set getEdges() {
 		this.ensureInitializedOrderedSets();
-		return edgeFlavored;
+		return containedEdges;
 	}
 
 	protected void addToEdges(final Edge anElement) {
 		this.ensureInitializedOrderedSets();
-		this.edgeFlavored.add(anElement);
-		this.allContainedLinkInstances.add(anElement);
+		this.containedEdges.add(anElement);
+		this.allContainedArrows.add(anElement);
 		this.allContainedInstances.add(anElement);
 	}
 
 	protected void removeFromEdges(final Edge anElement) {
 		this.ensureInitializedOrderedSets();
-		this.edgeFlavored.remove(anElement);
-		this.allContainedLinkInstances.remove(anElement);
+		this.containedEdges.remove(anElement);
+		this.allContainedArrows.remove(anElement);
 		this.allContainedInstances.remove(anElement);
 	}
 
 	protected Set getSuperSetReferences() {
 		this.ensureInitializedOrderedSets();
-		return superSetReferenceFlavored;
+		return containedSuperSetReferences;
 	}
 
 	protected void addToSuperSetReferences(final SuperSetReference anElement) {
 		this.ensureInitializedOrderedSets();
-		this.superSetReferenceFlavored.add(anElement);
-		this.allContainedLinkInstances.add(anElement);
+		this.containedSuperSetReferences.add(anElement);
+		this.allContainedArrows.add(anElement);
 		this.allContainedInstances.add(anElement);
 	}
 
 	protected void removeFromGeneralizationReferences(final SuperSetReference anElement) {
 		this.ensureInitializedOrderedSets();
-		this.superSetReferenceFlavored.remove(anElement);
-		this.allContainedLinkInstances.remove(anElement);
+		this.containedSuperSetReferences.remove(anElement);
+		this.allContainedArrows.remove(anElement);
 		this.allContainedInstances.remove(anElement);
 	}
 
 	protected Set getVisibilities() {
 		this.ensureInitializedOrderedSets();
-		return visibilityFlavored;
+		return containedVisibilities;
 	}
 
 	protected void addToVisibilities(final Visibility anElement) {
 		this.ensureInitializedOrderedSets();
-		this.visibilityFlavored.add(anElement);
-		this.allContainedLinkInstances.add(anElement);
+		this.containedVisibilities.add(anElement);
+		this.allContainedArrows.add(anElement);
 		this.allContainedInstances.add(anElement);
 	}
 
 	protected void removeFromVisibilities(final Visibility anElement) {
 		this.ensureInitializedOrderedSets();
-		this.visibilityFlavored.remove(anElement);
-		this.allContainedLinkInstances.remove(anElement);
+		this.containedVisibilities.remove(anElement);
+		this.allContainedArrows.remove(anElement);
 		this.allContainedInstances.remove(anElement);
 	}
 
 	@Override
 	public Set container() {
-		if (this.flavor().isEqualTo(Vertex.vertex)) {
+		if (this.properClass().isEqualTo(Vertex.vertex)) {
 			return ((Vertex) this).container();
 		}
-		else if (this.flavor().isEqualTo(Edge.edge)) {
+		else if (this.properClass().isEqualTo(Edge.edge)) {
 			return ((Edge) this).container();
 		}
-		else if (this.flavor().isEqualTo(Visibility.visibility)) {
+		else if (this.properClass().isEqualTo(Visibility.visibility)) {
 			return ((Visibility) this).container();
 		}
-		else if (this.flavor().isEqualTo(SuperSetReference.superSetReference)) {
+		else if (this.properClass().isEqualTo(SuperSetReference.superSetReference)) {
 			return ((SuperSetReference) this).container();
 		}
-		else if (this.flavor().isEqualTo(Link.link)) {
-			return ((Link) this).container();
+		else if (this.properClass().isEqualTo(Arrow.link)) {
+			return ((Arrow) this).container();
 		}
 		else if (this.isEqualTo(Graph.graph)) {
 			return Graph.graph;
@@ -491,9 +491,9 @@ public class Graph extends OrderedPair implements Set {
 	public Set isSuperSetOf(final Set orderedPair) {
 		if (this.isEqualToRepresentation(orderedPair)) {return coreSets.is_TRUE;}
 		// only for performance optimisation
-		if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
-			if (this.isEqualTo(GmodelSemanticDomains.semanticIdentity)
-					&& (((OrderedPair)orderedPair.category()).isASemanticIdentity())) {return GmodelSemanticDomains.is_TRUE;}
+		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
+			if (this.isEqualTo(S23MSemanticDomains.semanticIdentity)
+					&& (((OrderedPair)orderedPair.category()).isASemanticIdentity())) {return S23MSemanticDomains.is_TRUE;}
 		}
 
 		final Set a = this;
@@ -558,7 +558,7 @@ public class Graph extends OrderedPair implements Set {
 		} else {
 			if (this.isEqualTo(graph) && (
 					(orderedPair.isEqualTo(graph)
-							||	(orderedPair.isEqualTo(Link.link))
+							||	(orderedPair.isEqualTo(Arrow.link))
 							||	(orderedPair.isEqualTo(Vertex.vertex))
 					))) {
 				return graph;
@@ -578,14 +578,14 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	@Override
-	public Set visibleArtifactsForSubGraph(final Set subGraph) {
+	public Set visibleInstancesForSubGraph(final Set subGraph) {
 		final OrderedSet visibleGraphs = new OrderedSet(identityFactory.createAnonymousIdentity());
 		final OrderedSet visibleChildren = new OrderedSet(identityFactory.createAnonymousIdentity());
 
 		// add the universally visible core instances
 		visibleGraphs.add(coreGraphs.vertex);
 		visibleGraphs.add(coreGraphs.graph);
-		for (final Set coreInstance : coreGraphs.vertex.filterFlavor(coreGraphs.vertex)) {
+		for (final Set coreInstance : coreGraphs.vertex.filterProperClass(coreGraphs.vertex)) {
 			visibleGraphs.add(coreInstance);
 		}
 
@@ -612,11 +612,11 @@ public class Graph extends OrderedPair implements Set {
 	public Set hasVisibilityOf(final Set target) {
 		if (	(this.container().isEqualTo(target.container()))
 				|| (this.isEqualTo(target.container()))
-				|| (this.category().identity().isPartOfUniversalArtifactConcept())
+				|| (this.category().identity().isPartOfUniversalCellConcept())
 		)	{
 			return coreSets.is_TRUE;
 		} else {
-			final Set viz = this.container().container().visibleArtifactsForSubGraph(this.container());
+			final Set viz = this.container().container().visibleInstancesForSubGraph(this.container());
 			if (viz.containsSemanticMatch(target)) {
 				return coreSets.is_TRUE;
 			} else {
@@ -636,7 +636,7 @@ public class Graph extends OrderedPair implements Set {
 				||	(this.isEqualTo(target.container())))	{
 			return Visibility.visibility;
 		} else {
-			final Set viz = this.container().container().filterFlavor(coreGraphs.visibility);
+			final Set viz = this.container().container().filterProperClass(coreGraphs.visibility);
 			for (final Set visibility : viz) {
 				if (   visibility.from().isEqualTo(this.container())
 						&& (visibility.to().isEqualTo(target.container())
@@ -656,47 +656,47 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	@Override
-	public Set filterLinks() {
+	public Set filterArrows() {
 		this.ensureInitializedOrderedSets();
-		return this.allContainedLinkInstances;
+		return this.allContainedArrows;
 	}
 
 	@Override
-	public Set filterLinks(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
+	public Set filterArrows(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
 		if (flavorOrCategory.isInformation().is_TRUE()) {
 			if (fromSet.isInformation().is_FALSE()
 					&& toSet.isInformation().is_FALSE()) {
-				if (((OrderedPair)flavorOrCategory).isLinkFlavor()) {
-					return this.filterFlavor(flavorOrCategory);
+				if (((OrderedPair)flavorOrCategory).isArrow()) {
+					return this.filterProperClass(flavorOrCategory);
 				} else {
-					return this.filterLinks().filter(flavorOrCategory);
+					return this.filterArrows().filter(flavorOrCategory);
 				}
 			}
-			if (((OrderedPair)flavorOrCategory).isLinkFlavor()) {
-				return this.filterFlavor(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+			if (((OrderedPair)flavorOrCategory).isArrow()) {
+				return this.filterProperClass(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			} else {
-				return this.filterLinks().filter(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+				return this.filterArrows().filter(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			}
 		} else {
-			return this.filterLinks().filterByLinkedFromAndTo(fromSet, toSet);
+			return this.filterArrows().filterByLinkedFromAndTo(fromSet, toSet);
 		}
 	}
 
 	@Override
-	public Set filterFlavor(final Set flavor) {
+	public Set filterProperClass(final Set flavor) {
 		this.ensureInitializedOrderedSets();
 		if (flavor.isEqualTo(coreGraphs.vertex)) {
-			return this.vertexFlavored;
-		} else if (flavor.isEqualTo(coreGraphs.link) && this.isEqualTo(Graph.graph)) {
-			return Link.link;
-		} else if (flavor.isEqualTo(coreGraphs.link)) {
+			return this.containedVertices;
+		} else if (flavor.isEqualTo(coreGraphs.arrow) && this.isEqualTo(Graph.graph)) {
+			return Arrow.link;
+		} else if (flavor.isEqualTo(coreGraphs.arrow)) {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		} else if (flavor.isEqualTo(coreGraphs.edge)) {
-			return this.edgeFlavored;
+			return this.containedEdges;
 		} else if (flavor.isEqualTo(coreGraphs.visibility)) {
-			return this.visibilityFlavored;
+			return this.containedVisibilities;
 		} else if (flavor.isEqualTo(coreGraphs.superSetReference)) {
-			return this.superSetReferenceFlavored;
+			return this.containedSuperSetReferences;
 		} else if (flavor.isEqualTo(coreGraphs.edgeEnd)) {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		} else if (flavor.isEqualTo(coreGraphs.graph) && this.isEqualTo(Graph.graph)) {
@@ -775,12 +775,12 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	@Override
-	public Set flavor() {
+	public Set properClass() {
 		return Graph.graph;
 	}
 
 	public Set addConcrete(final Set category, final Identity semanticIdentity) {
-		if (category.flavor().isEqualTo(coreGraphs.vertex)) {
+		if (category.properClass().isEqualTo(coreGraphs.vertex)) {
 			return (F_Instantiation.addConcreteVertex(this, semanticIdentity, category));
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor.identity(), coreSets.semanticErr);
@@ -789,7 +789,7 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set addConcrete(final Set category, final Set semanticIdentity) {
-		if (category.flavor().isEqualTo(coreGraphs.vertex)) {
+		if (category.properClass().isEqualTo(coreGraphs.vertex)) {
 			return (F_Instantiation.addConcreteVertex(this, identityFactory.reuseSemanticIdentity(semanticIdentity.identity()), category));
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor.identity(), coreSets.semanticErr);
@@ -797,7 +797,7 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	public Set addAbstract(final Set category, final Identity semanticIdentity) {
-		if (category.flavor().isEqualTo(coreGraphs.vertex)) {
+		if (category.properClass().isEqualTo(coreGraphs.vertex)) {
 			return (F_Instantiation.addAbstractVertex(this, semanticIdentity, category));
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor.identity(), coreSets.semanticErr);
@@ -806,7 +806,7 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set addAbstract(final Set category, final Set semanticIdentity) {
-		if (category.flavor().isEqualTo(coreGraphs.vertex)) {
+		if (category.properClass().isEqualTo(coreGraphs.vertex)) {
 			return (F_Instantiation.addAbstractVertex(this, identityFactory.reuseSemanticIdentity(semanticIdentity.identity()), category));
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor.identity(), coreSets.semanticErr);
@@ -815,7 +815,7 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set decommission() {
-		if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 			final Set dependentSets = Query.findDependentSets(this);
 			if (dependentSets.size() == 0) {
 				this.isDecommissioned = true;
@@ -833,20 +833,20 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	public Set delete(final Set set) {
-		if (set.category().flavor().isEqualTo(coreGraphs.vertex)) {
+		if (set.category().properClass().isEqualTo(coreGraphs.vertex)) {
 			this.removeFromVertices((Vertex)set);
 			return set;
 		} else {
-			if (set.category().flavor().isEqualTo(coreGraphs.edge)) {
+			if (set.category().properClass().isEqualTo(coreGraphs.edge)) {
 				this.removeFromEdges((Edge)set);
 				return set;
 			} else {
 
-				if (set.category().flavor().isEqualTo(coreGraphs.superSetReference)) {
+				if (set.category().properClass().isEqualTo(coreGraphs.superSetReference)) {
 					this.removeFromGeneralizationReferences((SuperSetReference)set);
 					return set;
 				} else {
-					if (set.category().flavor().isEqualTo(coreGraphs.visibility)) {
+					if (set.category().properClass().isEqualTo(coreGraphs.visibility)) {
 						this.removeFromVisibilities((Visibility)set);
 						return set;
 					} else {
@@ -876,9 +876,9 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set isExternal() {
-		if (  	this.flavor().isEqualTo(coreGraphs.edge)
-				||	this.flavor().isEqualTo(coreGraphs.superSetReference)
-				||	this.flavor().isEqualTo(coreGraphs.visibility)
+		if (  	this.properClass().isEqualTo(coreGraphs.edge)
+				||	this.properClass().isEqualTo(coreGraphs.superSetReference)
+				||	this.properClass().isEqualTo(coreGraphs.visibility)
 		) {
 			return F_InstantiationImpl.raiseError(coreSets.kernelDefect_KernelHasReachedAnIllegalState.identity(), coreSets.kernelDefect); // result must be overriden by specialization!
 		} else {
@@ -889,9 +889,9 @@ public class Graph extends OrderedPair implements Set {
 	/**
 	 * GraphFlavor queries
 	 */
-	protected void addFlavorQueries() {
+	protected void addProperClassQueries() {
 		this.addToExecutableQueries(coreSets.identity);
-		this.addToExecutableQueries(coreSets.artifact);
+		this.addToExecutableQueries(coreSets.container);
 		this.addToExecutableQueries(coreSets.filter);
 		this.addToExecutableQueries(coreSets.containsEdgeFromOrTo);
 		this.addToExecutableQueries(coreSets.filterFlavor);
@@ -920,7 +920,7 @@ public class Graph extends OrderedPair implements Set {
 	/**
 	 * GraphFlavor commands
 	 */
-	protected void addFlavorCommands() {
+	protected void addProperClassCommands() {
 		this.addToExecutableCommands(coreSets.addAbstract);
 		this.addToExecutableCommands(coreSets.addConcrete);
 	}
@@ -1009,7 +1009,7 @@ public class Graph extends OrderedPair implements Set {
 	public Set assignNewName(final String newName) {
 		if (SemanticDomain.semanticIdentity.isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)) {
 			((IdentityImpl) this.identity()).assignNewName(newName);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.hasNewName = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -1023,7 +1023,7 @@ public class Graph extends OrderedPair implements Set {
 	public Set assignNewPluralName(final String newPluralName) {
 		if (SemanticDomain.semanticIdentity.isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)) {
 			((IdentityImpl) this.identity()).assignNewPluralName(newPluralName);
-			if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 				this.hasNewPluralName = true;
 				Graph.addSetToChangedSets(this);
 			}
@@ -1036,7 +1036,7 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set assignNewPayload(final String newPayload) {
 		this.identity().setPayload(newPayload);
-		if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setHasNewPayload(true);
 			this.setHasDecommissionedPayload(false);
 			Graph.addSetToChangedSets(this);
@@ -1047,7 +1047,7 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set decommissionPayload() {
 		this.identity().setPayload(null);
-		if (F_SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setHasDecommissionedPayload(true);
 			this.setHasNewPayload(false);
 			Graph.addSetToChangedSets(this);
@@ -1070,9 +1070,9 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set allowableEdgeCategories(final Set orderedPair) {
 		final OrderedSet result = new OrderedSet(identityFactory.createAnonymousIdentity());
-		for (final Set edge : this.category().container().filterFlavor(Edge.edge)) {
+		for (final Set edge : this.category().container().filterProperClass(Edge.edge)) {
 			if (((edge.from().isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)))
-					&& (LinkConstraints.isAllowableEdgeFlavoredLinkCategory(edge, this, orderedPair).isEqualTo(coreSets.is_TRUE))) {
+					&& (ArrowConstraints.isAllowableEdgeFlavoredLinkCategory(edge, this, orderedPair).isEqualTo(coreSets.is_TRUE))) {
 				result.add(edge);
 			}
 			if (this.category().container().isEqualTo(graph)) {
@@ -1088,15 +1088,15 @@ public class Graph extends OrderedPair implements Set {
 	}
 
 	@Override
-	public Set unionOfconnectingLinks(final Set instance) {
+	public Set unionOfconnectingArrows(final Set instance) {
 		final OrderedSet result = new OrderedSet(identityFactory.createAnonymousIdentity());
-		for (final Set link : instance.container().filterLinks()) {
+		for (final Set link : instance.container().filterArrows()) {
 			if ((link.from().isEqualToRepresentation(instance) && (link.to().isEqualToRepresentation(this)))
 					|| ((link.from().isEqualToRepresentation(this) && link.to().isEqualToRepresentation(instance)))) {
 				result.add(link);
 			}
 		}
-		for (final Set link : this.container().filterLinks()) {
+		for (final Set link : this.container().filterArrows()) {
 			if ((link.from().isEqualToRepresentation(instance) && (link.to().isEqualToRepresentation(this)))
 					|| ((link.from().isEqualToRepresentation(this) && link.to().isEqualToRepresentation(instance)))) {
 				result.add(link);
@@ -1151,19 +1151,19 @@ public class Graph extends OrderedPair implements Set {
 	}
 	@Override
 	public  boolean is_NOTAPPLICABLE() {
-		return this.isEqualTo(GmodelSemanticDomains.is_NOTAPPLICABLE);
+		return this.isEqualTo(S23MSemanticDomains.is_NOTAPPLICABLE);
 	}
 	@Override
 	public  boolean is_FALSE() {
-		return this.isEqualTo(GmodelSemanticDomains.is_FALSE);
+		return this.isEqualTo(S23MSemanticDomains.is_FALSE);
 	}
 	@Override
 	public  boolean is_UNKNOWN() {
-		return this.isEqualTo(GmodelSemanticDomains.is_UNKNOWN);
+		return this.isEqualTo(S23MSemanticDomains.is_UNKNOWN);
 	}
 	@Override
 	public  boolean is_TRUE() {
-		return this.isEqualTo(GmodelSemanticDomains.is_TRUE);
+		return this.isEqualTo(S23MSemanticDomains.is_TRUE);
 	}
 	@Override
 	public Set includesValue(final Set value, final Set equivalenceClass) {
@@ -1216,51 +1216,51 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set filterByLinkedTo(final Set toSet) {
-		return this.filterLinks().filterByLinkedTo(toSet);
+		return this.filterArrows().filterByLinkedTo(toSet);
 	}
 	@Override
 	public Set filterByLinkedFrom(final Set fromSet) {
-		return this.filterLinks().filterByLinkedFrom(fromSet);
+		return this.filterArrows().filterByLinkedFrom(fromSet);
 	}
 	@Override
 	public Set filterByLinkedFromAndTo(final Set fromSet, final Set toSet) {
-		return this.filterLinks().filterByLinkedFromAndTo(toSet, fromSet);
+		return this.filterArrows().filterByLinkedFromAndTo(toSet, fromSet);
 	}
 	@Override
 	public Set filterByLinkedToVia(final Set toEdgeEnd) {
-		return this.filterLinks().filterByLinkedToVia(toEdgeEnd);
+		return this.filterArrows().filterByLinkedToVia(toEdgeEnd);
 	}
 	@Override
 	public Set filterByLinkedFromVia(final Set fromEdgeEnd) {
-		return this.filterLinks().filterByLinkedFromVia(fromEdgeEnd);
+		return this.filterArrows().filterByLinkedFromVia(fromEdgeEnd);
 	}
 	@Override
 	public Set filterByLinkedFromAndToVia(final Set fromEdgeEnd, final Set toEdgeEnd) {
-		return this.filterLinks().filterByLinkedFromAndToVia(fromEdgeEnd, toEdgeEnd );
+		return this.filterArrows().filterByLinkedFromAndToVia(fromEdgeEnd, toEdgeEnd );
 	}
 	@Override
 	public Set filterFrom() {
-		return this.filterLinks().filterFrom();
+		return this.filterArrows().filterFrom();
 	}
 	@Override
 	public Set filterTo() {
-		return this.filterLinks().filterTo();
+		return this.filterArrows().filterTo();
 	}
 	@Override
 	public Set filterFromAndTo() {
-		return this.filterLinks().filterFromAndTo();
+		return this.filterArrows().filterFromAndTo();
 	}
 	@Override
 	public Set filterByLinkedToSemanticRole(final Set toSetReferencedSemanticRole) {
-		return this.filterLinks().filterByLinkedToSemanticRole(toSetReferencedSemanticRole);
+		return this.filterArrows().filterByLinkedToSemanticRole(toSetReferencedSemanticRole);
 	}
 	@Override
 	public Set filterByLinkedFromSemanticRole(final Set fromSetReferencedSemanticRole) {
-		return this.filterLinks().filterByLinkedFromSemanticRole(fromSetReferencedSemanticRole);
+		return this.filterArrows().filterByLinkedFromSemanticRole(fromSetReferencedSemanticRole);
 	}
 	@Override
 	public Set filterByLinkedFromAndToSemanticRole(final Set fromSetReferencedSemanticRole, final Set toSetReferencedSemanticRole) {
-		return this.filterLinks().filterByLinkedFromAndToSemanticRole(fromSetReferencedSemanticRole, toSetReferencedSemanticRole);
+		return this.filterArrows().filterByLinkedFromAndToSemanticRole(fromSetReferencedSemanticRole, toSetReferencedSemanticRole);
 	}
 	@Override
 	public Set filterBySemanticIdentity(final Set set) {

@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.api.models.SemanticDomain.disjunctSemanticIdentitySet;
 import static org.s23m.cell.api.models.SemanticDomain.elements_to_disjunctSemanticIdentitySet;
 import static org.s23m.cell.api.models.SemanticDomain.semanticIdentitySet;
@@ -47,7 +47,7 @@ public final class F_Query {
 	public static Set findDependentLinks(final Set referencedSet) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set instance : inMemorySets()) {
-			for (final Set link : referencedSet.unionOfconnectingLinks(instance)) {
+			for (final Set link : referencedSet.unionOfconnectingArrows(instance)) {
 				result.add(link);
 			}
 		}
@@ -73,7 +73,7 @@ public final class F_Query {
 		}
 		for (final Set instance : inMemorySets()) {
 			// test for instances that are linked with the set
-			for (final Set link : set.unionOfconnectingLinks(instance)) {
+			for (final Set link : set.unionOfconnectingArrows(instance)) {
 				result.add(link);
 			}
 			// test for instances that depend on a category
@@ -102,23 +102,23 @@ public final class F_Query {
 		return Graph.changedSets;
 	}
 
-	public static Vertex vertexFlavor() {
+	public static Vertex vertex() {
 		return Vertex.vertex;
 	}
 
-	public static OrderedSet orderedSetFlavor() {
+	public static OrderedSet orderedSet() {
 		return OrderedSet.orderedSet;
 	}
 
-	public static Link linkFlavor() {
-		return Link.link;
+	public static Arrow arrow() {
+		return Arrow.link;
 	}
 
-	public static SuperSetReference superSetReferenceFlavor() {
+	public static SuperSetReference superSetReference() {
 		return SuperSetReference.superSetReference;
 	}
 
-	public static Visibility visibilityFlavor() {
+	public static Visibility visibility() {
 		return Visibility.visibility;
 	}
 
@@ -126,11 +126,11 @@ public final class F_Query {
 		return Graph.graph;
 	}
 
-	public static EdgeEnd edgeEndFlavor() {
+	public static EdgeEnd edgeEnd() {
 		return EdgeEnd.edgeEnd;
 	}
 
-	public static Edge edgeFlavor() {
+	public static Edge edge() {
 		return Edge.edge;
 	}
 
@@ -174,10 +174,10 @@ public final class F_Query {
 
 	public static Set testDeserialisationPrerequisites(final Set set) {
 		if (set.container().isEqualTo(Root.root)) {
-			return set.container().visibleArtifactsForSubGraph(set);
+			return set.container().visibleInstancesForSubGraph(set);
 		} else {
 			final OrderedSet prerequisites = ((OrderedSet) testDeserialisationPrerequisites(set.container()));
-			for (final Set visibleSet : set.container().visibleArtifactsForSubGraph(set)) {
+			for (final Set visibleSet : set.container().visibleInstancesForSubGraph(set)) {
 				prerequisites.add(visibleSet);
 			}
 			return prerequisites;

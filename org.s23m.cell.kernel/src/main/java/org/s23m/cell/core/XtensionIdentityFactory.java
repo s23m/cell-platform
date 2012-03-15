@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -29,7 +29,7 @@ import org.s23m.cell.Identity;
 
 /**
  * {@link XtensionIdentityFactory} is a temporary extension of the identity factory for Semantic Identities
- * that is in use until the initial Gmodel editor is live.
+ * that is in use until the initial S23M editor is live.
  */
 public class XtensionIdentityFactory {
 
@@ -37,11 +37,11 @@ public class XtensionIdentityFactory {
 	}
 	//private final int maxXtentedSemanticIdentityIndex = 5000-1;
 	/**
-	 * Outer shells & semantic extensions
+	 * Outer shells & cell platform
 	 */
 
 	public final Identity infiniteSets() {return F_Instantiation.identityFactory.createIdentityInKernel("infinite sets", "set of infinite sets", XtensionSemanticIdentityRegistry.infiniteSets.ordinal());}
 	public final Identity finiteSets() {return F_Instantiation.identityFactory.createIdentityInKernel("finite sets", "set of finite sets", XtensionSemanticIdentityRegistry.finiteSets.ordinal());}
-	public final Identity gmodel() {return F_Instantiation.identityFactory.createIdentityInKernel("gmodel", "gmodel", XtensionSemanticIdentityRegistry.gmodel.ordinal());}
+	public final Identity cellKernel() {return F_Instantiation.identityFactory.createIdentityInKernel("cell kernel", "cell kernel", XtensionSemanticIdentityRegistry.cellKernel.ordinal());}
 
 }

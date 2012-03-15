@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import java.util.ArrayList;
@@ -38,19 +38,19 @@ import java.util.UUID;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.collections.map.MultiValueMap;
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Query;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.impl.SemanticDomainCode;
 
 @SuppressWarnings("unchecked")
 public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
-	/* Reify the Gmodel OrderedSet concept */
+	/* Reify the S23M OrderedSet concept */
 	protected static final OrderedSet orderedSet = new OrderedSet();
 
 	private boolean listInitialized = false;
@@ -77,7 +77,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 
 	@Override
-	public Set flavor() {
+	public Set properClass() {
 		return OrderedSet.orderedSet;
 	}
 
@@ -233,7 +233,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 
 		// Create and propagate Set Maintenance EventImpl
-		if (org.s23m.cell.core.F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()) {
+		if (org.s23m.cell.core.F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
 			final Set addEvent = this.elementAdded(o);
 			final Iterator<EventListener> i = subscribers.iterator();
 			while (i.hasNext()) {
@@ -247,21 +247,21 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (this.size() > 0) {
 			return this.getValue(0);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractSecond() {
 		if (this.size() > 1) {
 			return this.getValue(1);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractLast() {
 		if (this.size() > 0) {
 			return this.getValue(this.size()-1);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractNext(final Set element) {
@@ -269,7 +269,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (this.size() > next && next > -1) {
 			return this.getValue(next);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractPrevious(final Set element) {
@@ -277,7 +277,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (-1 < previous && previous < this.size()) {
 			return this.getValue(previous);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractUniqueMatch(final Identity identity) {
@@ -289,7 +289,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (j > -1) {
 			return this.get(j);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 	@Override
 	public Set extractUniqueMatch(final Set set) {
@@ -303,7 +303,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (i >= -1) {
 			return this.get(i);
 		}
-		return GmodelSemanticDomains.is_NOTAPPLICABLE;
+		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 
 	@Override
@@ -343,7 +343,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedTo(final Set toSet) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.to().isEqualToRepresentation(toSet)) {
 					result.add(element);
 				}
@@ -355,7 +355,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFrom(final Set fromSet) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.from().isEqualToRepresentation(fromSet)) {
 					result.add(element);
 				}
@@ -373,7 +373,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.to().isEqualToRepresentation(toSet)
 						&& element.from().isEqualToRepresentation(fromSet)) {
 					result.add(element);
@@ -386,7 +386,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterFrom() {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
 			}
 		}
@@ -396,7 +396,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterTo() {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.to());
 			}
 		}
@@ -406,7 +406,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterFromAndTo() {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
 				result.add(element.to());
 			}
@@ -417,7 +417,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedToSemanticRole(final Set toSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = toSetReferencedSemanticRole.container()
-		.filterLinks(SemanticDomain.semanticRole_to_equivalenceClass, GmodelSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
+		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 		.filterFrom();
 		((OrderedSet)semanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
@@ -431,7 +431,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFromSemanticRole(final Set fromSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = fromSetReferencedSemanticRole.container()
-		.filterLinks(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, GmodelSemanticDomains.is_NOTAPPLICABLE)
+		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 		.filterTo();
 		((OrderedSet)semanticIdentities).add(fromSetReferencedSemanticRole);
 		for (final Set element : this) {
@@ -445,11 +445,11 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFromAndToSemanticRole(final Set fromSetReferencedSemanticRole, final Set toSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set fromSemanticIdentities = fromSetReferencedSemanticRole.container()
-		.filterLinks(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, GmodelSemanticDomains.is_NOTAPPLICABLE)
+		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 		.filterTo();
 		((OrderedSet)fromSemanticIdentities).add(fromSetReferencedSemanticRole);
 		final Set toSemanticIdentities = toSetReferencedSemanticRole.container()
-		.filterLinks(SemanticDomain.semanticRole_to_equivalenceClass, GmodelSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
+		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 		.filterFrom();
 		((OrderedSet)toSemanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
@@ -463,7 +463,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedToVia(final Set toEdgeEnd) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)) {
 					result.add(element);
 				}
@@ -476,7 +476,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFromVia(final Set fromEdgeEnd) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
 					result.add(element);
 				}
@@ -495,7 +495,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)
 						&& element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
 					result.add(element);
@@ -510,19 +510,19 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	 */
 
 	@Override
-	public Set filterFlavor(final Set flavor) {
-		if (flavor.isEqualTo(F_Query.vertexFlavor())
+	public Set filterProperClass(final Set flavor) {
+		if (flavor.isEqualTo(F_Query.vertex())
 				|| flavor.isEqualTo(F_Query.graph())
-				|| flavor.isEqualTo(F_Query.visibilityFlavor())
-				|| flavor.isEqualTo(F_Query.superSetReferenceFlavor())
-				|| flavor.isEqualTo(F_Query.edgeFlavor())
-				|| flavor.isEqualTo(F_Query.edgeEndFlavor())
-				|| flavor.isEqualTo(F_Query.orderedSetFlavor())
+				|| flavor.isEqualTo(F_Query.visibility())
+				|| flavor.isEqualTo(F_Query.superSetReference())
+				|| flavor.isEqualTo(F_Query.edge())
+				|| flavor.isEqualTo(F_Query.edgeEnd())
+				|| flavor.isEqualTo(F_Query.orderedSet())
 				|| flavor.isEqualTo(coreSets.orderedPair)
 		) {
 			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for ( final Set element : this) {
-				if (element.flavor().isEqualTo(flavor)) {
+				if (element.properClass().isEqualTo(flavor)) {
 					result.add(element);
 				}
 			}
@@ -580,10 +580,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		return this;
 	}
 	@Override
-	public Set filterLinks() {
+	public Set filterArrows() {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for ( final Set element : this) {
-			if (element.isALink().is_TRUE())  {
+			if (element.isAnArrow().is_TRUE())  {
 				result.add(element);
 			}
 		}
@@ -591,23 +591,23 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 
 	@Override
-	public Set filterLinks(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
+	public Set filterArrows(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
 		if (flavorOrCategory.isInformation().is_TRUE()) {
 			if (fromSet.isInformation().is_FALSE()
 					&& toSet.isInformation().is_FALSE()) {
-				if (flavorOrCategory.isALink().is_TRUE()) {
-					return this.filterFlavor(flavorOrCategory);
+				if (flavorOrCategory.isAnArrow().is_TRUE()) {
+					return this.filterProperClass(flavorOrCategory);
 				} else {
-					return this.filterLinks().filter(flavorOrCategory);
+					return this.filterArrows().filter(flavorOrCategory);
 				}
 			}
-			if (flavorOrCategory.isALink().is_TRUE()) {
-				return this.filterFlavor(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+			if (flavorOrCategory.isAnArrow().is_TRUE()) {
+				return this.filterProperClass(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			} else {
-				return this.filterLinks().filter(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+				return this.filterArrows().filter(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			}
 		} else {
-			return this.filterLinks().filterByLinkedFromAndTo(fromSet, toSet);
+			return this.filterArrows().filterByLinkedFromAndTo(fromSet, toSet);
 		}
 	}
 
@@ -624,12 +624,12 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		return  new EventImpl(identityFactory.createAnonymousIdentity(), category, element, this);
 	}
 	private Set elementAdded(final Set newElement) {
-		final Set addEvent = createEvent(G.coreSets.elementAdded, newElement);
+		final Set addEvent = createEvent(S23MKernel.coreSets.elementAdded, newElement);
 		return addEvent;
 	}
 
 	private Set elementRemoved(final Set removedElement) {
-		final Set removeEvent = createEvent(G.coreSets.elementRemoved, removedElement);
+		final Set removeEvent = createEvent(S23MKernel.coreSets.elementRemoved, removedElement);
 		return removeEvent;
 	}
 
@@ -654,7 +654,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set and(final Set b) {
-		if (b.flavor().isEqualTo(Query.orderedSet)) {
+		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.and(this.union(b));
 		} else {
 			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
@@ -668,7 +668,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set or(final Set b) {
-		if (b.flavor().isEqualTo(Query.orderedSet)) {
+		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.or(this.union(b));
 		} else {
 			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
@@ -698,7 +698,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	@Override
 	public Set isEqualTo(final Set set, final Set equivalenceClass) {
 		final Set setSemantics = set.transformToOrderedSetOfSemanticIdentities();
-		Set result = GmodelSemanticDomains.is_FALSE;
+		Set result = S23MSemanticDomains.is_FALSE;
 		for (final Set element : this) {
 			if (setSemantics.containsSemanticMatch(element)) {
 				result = result.and(setSemantics.extractUniqueMatch(element.semanticIdentity())).isEqualTo(element.semanticIdentity(), equivalenceClass) ;

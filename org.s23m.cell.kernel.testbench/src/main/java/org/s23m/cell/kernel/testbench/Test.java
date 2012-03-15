@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,8 +25,8 @@
 
 package org.s23m.cell.kernel.testbench;
 
-import static org.s23m.cell.G.coreGraphs;
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Set;
@@ -38,14 +38,14 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		org.s23m.cell.G.boot();
+		org.s23m.cell.S23MKernel.boot();
 		TestSequence.run();
 
 		final Set g = coreGraphs.graph;
 		final Set kerDef = g.filter(coreSets.kernelDefect);
 		final Set semErr = g.filter(coreSets.semanticErr);
 		final Set v = coreGraphs.vertex;
-		final Set l = coreGraphs.link;
+		final Set l = coreGraphs.arrow;
 		final Set e = coreGraphs.edge;
 		final Set viz = coreGraphs.visibility;
 		final Set s = coreGraphs.superSetReference;

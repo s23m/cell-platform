@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,22 +25,22 @@
 
 package org.s23m.cell.impl;
 
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreSets;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.ArtifactDerivation;
+import org.s23m.cell.api.models.InstanceDerivation;
 import org.s23m.cell.core.F_InstantiationImpl;
 
 public class DerivationCode {
 
 	public static void execute(final Set derivationRule, final Set setOfInstances) {
-		if (   derivationRule.category().isEqualTo(ArtifactDerivation.derivationRule)) {
+		if (   derivationRule.category().isEqualTo(InstanceDerivation.derivationRule)) {
 			//	TODO validation to be strengthened!
 			//	&&
 			//  setOfInstances.categoryOfOrderedPair().isEqualTo(F_SemanticStateOfInMemoryModel.coreGraphs.orderedSet)) {
 
-			final String tech = derivationRule.value(ArtifactDerivation.derivationTechnology).identity().technicalName();
-			final String lf = derivationRule.value(ArtifactDerivation.locationFunction).identity().technicalName();;
+			final String tech = derivationRule.value(InstanceDerivation.derivationTechnology).identity().technicalName();
+			final String lf = derivationRule.value(InstanceDerivation.locationFunction).identity().technicalName();;
 			for (final Set element : setOfInstances) {
 				final Set iInstance = element;
 				if (derivationRule.to().isLocalSuperSetOf(iInstance).isEqualTo(coreSets.is_TRUE)) {

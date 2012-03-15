@@ -11,10 +11,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
  * Copyright (C) 2009-2011 Sofismo AG.
  * All Rights Reserved.
@@ -29,7 +29,7 @@ import org.s23m.cell.Set;
 
 /**
  * Enables components which produce textual output to
- * integrate with Gmodel's support for derived artefacts.
+ * integrate with S23M's support for derived artefacts.
  */
 public interface DerivedFileGenerator {
 

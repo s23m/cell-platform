@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreSets;
 
 import java.util.UUID;
 
@@ -201,7 +201,7 @@ public final class F_Instantiation {
 		return ((Graph)semanticDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, identityFactory.createAnonymousIdentity(true));
 	}
 
-	public static Set link(final Set category,
+	public static Set arrow(final Set category,
 			final Identity firstSemanticIdentity,
 			final Set firstOrderedPair,
 			final Set firstMinCardinality,
@@ -215,7 +215,7 @@ public final class F_Instantiation {
 			final Set secondIsNavigable,
 			final Set secondIsContainer
 	) {
-		return LinkConstraints.link(category,
+		return ArrowConstraints.link(category,
 				identityFactory.anonymous(),
 				firstSemanticIdentity,
 				firstOrderedPair,
@@ -232,7 +232,7 @@ public final class F_Instantiation {
 		);
 	}
 
-	public static Set link(final Set category,
+	public static Set arrow(final Set category,
 			final Identity edgeFlavoredIdentity,
 			final Identity firstSemanticIdentity,
 			final Set firstOrderedPair,
@@ -247,7 +247,7 @@ public final class F_Instantiation {
 			final Set secondIsNavigable,
 			final Set secondIsContainer
 	) {
-		return LinkConstraints.link(category,
+		return ArrowConstraints.link(category,
 				edgeFlavoredIdentity,
 				firstSemanticIdentity,
 				firstOrderedPair,
@@ -264,8 +264,8 @@ public final class F_Instantiation {
 		);
 	}
 
-	public static Set link(final Set category, final Set fromInstance, final Set toInstance) {
-		return LinkConstraints.link(category, fromInstance, toInstance);
+	public static Set arrow(final Set category, final Set fromInstance, final Set toInstance) {
+		return ArrowConstraints.link(category, fromInstance, toInstance);
 	}
 
 	// only for use in the context of deserialization!
@@ -284,7 +284,7 @@ public final class F_Instantiation {
 			final Identity secondIsNavigable,
 			final Identity secondIsContainer
 	) {
-		return link(F_Query.getSetFromLocalMemory(category),
+		return arrow(F_Query.getSetFromLocalMemory(category),
 				edgeFlavoredIdentity,
 				firstSemanticIdentity,
 				F_Query.getSetFromLocalMemory(firstOrderedPair),
@@ -307,13 +307,13 @@ public final class F_Instantiation {
 		return result;
 	}
 
-	public static Set linkToEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {
+	public static Set arrowToEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {
 		return SemanticDomainCode.linkSemanticRole(newSemanticRole, equivalenceClass);
 	}
 
 	// only for use in the context of deserialization!
 	public static Set reconstituteLink(final Identity category, final Identity edgeFlavoredIdentity, final Identity fromInstance, final Identity toInstance) {
-		return LinkConstraints.reconstituteLink(F_Query.getSetFromLocalMemory(category), edgeFlavoredIdentity, F_Query.getSetFromLocalMemory(fromInstance), F_Query.getSetFromLocalMemory(toInstance));
+		return ArrowConstraints.reconstituteLink(F_Query.getSetFromLocalMemory(category), edgeFlavoredIdentity, F_Query.getSetFromLocalMemory(fromInstance), F_Query.getSetFromLocalMemory(toInstance));
 	}
 
 	// only for use in the context of deserialization!
@@ -322,7 +322,7 @@ public final class F_Instantiation {
 	}
 
 	public static Set raiseError(final Identity semanticIdentity, final Set category) {
-		return LinkConstraints.raiseError(semanticIdentity, category);
+		return ArrowConstraints.raiseError(semanticIdentity, category);
 	}
 
 	// to reuse an existing SemanticIdentity
@@ -330,7 +330,7 @@ public final class F_Instantiation {
 		return new IdentityImpl(semanticIdentity.identity());
 	}
 
-	// only for use within the inner Shell � is not part of the public Gmodel API
+	// only for use within the inner Shell � is not part of the public S23M API
 	public static Identity reuseSemanticIdentity(final Identity semanticIdentity) {
 		return new IdentityImpl(semanticIdentity);
 	}

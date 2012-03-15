@@ -6,7 +6,7 @@ import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 
-public class SemanticIdentityReconstitutionTest extends GmodelTestCase {
+public class SemanticIdentityReconstitutionTest extends S23MTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {

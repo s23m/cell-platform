@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -54,13 +54,13 @@ import org.apache.commons.dbcp.PoolingDriver;
 import org.apache.commons.pool.KeyedObjectPoolFactory;
 import org.apache.commons.pool.impl.GenericKeyedObjectPoolFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.connector.Component;
 import org.s23m.cell.serialization.EdgeType;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
 import org.s23m.cell.serialization.Flavor;
-import org.s23m.cell.serialization.Gmodel;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.SemanticIdType;
 import org.s23m.cell.serialization.SuperSetReferenceType;
 import org.s23m.cell.serialization.VisibilityType;
@@ -195,7 +195,7 @@ public class RelationalDatabaseRepository implements Repository, Component {
 	private SessionFactory factory;
 
 	private RelationalDatabaseRepository() {
-		serializer = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML);
+		serializer = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML);
 	}
 
 	private RelationalDatabaseRepository(final Configuration config) {
@@ -641,7 +641,7 @@ public class RelationalDatabaseRepository implements Repository, Component {
 					UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 
 			for (final String artefact : artefacts) {
-				final Gmodel model = serializer.unmarshallModel(artefact);
+				final S23M model = serializer.unmarshallModel(artefact);
 				final Instance root = model.getInstance().get(0);
 
 				persistArtifact(idInsertStatementMan, artifactInsertStatementMan,connection, root.getSemanticIdentity(),
@@ -651,11 +651,11 @@ public class RelationalDatabaseRepository implements Repository, Component {
 					for (final Object link : root.getLink().getVisibilityAndEdgeAndEdgeTrace()) {
 						if (link instanceof VisibilityType) {
 							final VisibilityType v = (VisibilityType) link;
-							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, G.coreGraphs.visibility.identity().uniqueRepresentationReference().toString(),
+							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, S23MKernel.coreGraphs.visibility.identity().uniqueRepresentationReference().toString(),
 									root.getSemanticIdentity().getUniqueRepresentationReference(), Flavor.VIS, null, v.getSemanticIdentity(), v.getSourceInstance(), v.getTargetInstance());
 						} else if (link instanceof SuperSetReferenceType) {
 							final SuperSetReferenceType s = (SuperSetReferenceType) link;
-							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, G.coreGraphs.superSetReference.identity().uniqueRepresentationReference().toString(),
+							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, S23MKernel.coreGraphs.superSetReference.identity().uniqueRepresentationReference().toString(),
 									root.getSemanticIdentity().getUniqueRepresentationReference(), Flavor.SUP, null, s.getSemanticIdentity(),  s.getSubSetInstance(), s.getSuperSetInstance());
 						} else if (link instanceof EdgeType) {
 							final EdgeType e = (EdgeType) link;

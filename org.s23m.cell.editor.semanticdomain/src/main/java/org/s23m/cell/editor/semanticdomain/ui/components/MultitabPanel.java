@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -36,11 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Transaction;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 import org.s23m.cell.editor.semanticdomain.Editor;
 import org.s23m.cell.editor.semanticdomain.EditorController;
@@ -196,10 +196,10 @@ public class MultitabPanel extends Panel {
 												UUID.fromString(id.getUuid()),
 												UUID.fromString(id.getUuid())));
 							// TODO name based equivalence test needs to be replaced by isEqualToRepresentation()
-								if (!set.identity().name().equals((GmodelSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()))) {
+								if (!set.identity().name().equals((S23MSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()))) {
 
 								TreeNode node2Select = null;
-								if (set.flavor().isEqualTo(G.coreGraphs.edge)) {
+								if (set.properClass().isEqualTo(S23MKernel.coreGraphs.edge)) {
 									node2Select = new TreeNode(set.container().identity().uniqueRepresentationReference().toString(),
 											TreeNode.NO_SET);
 								} else {
@@ -233,7 +233,7 @@ public class MultitabPanel extends Panel {
 								UUID.fromString(r.getMetaInstanceIdentity().getUuid()), UUID.fromString(r.getMetaInstanceIdentity().getUuid()))
 				);
 				// TODO name based equivalence test needs to be replaced by isEqualToRepresentation()
-				     if (!metaSet.identity().name().equals((GmodelSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()))) {
+				     if (!metaSet.identity().name().equals((S23MSemanticDomains.semanticErr_ThisSetIsNotAvailableInMemory.identity().name()))) {
 
 			    	 lblMeta.setValue(metaSet.identity().name()+" : ");
 			     } else {
@@ -353,7 +353,7 @@ public class MultitabPanel extends Panel {
 
 			public void uploadFinished(final FinishedEvent event) {
 				final String imgContent = receiver.getBase64ContentString();
-				final byte[] imgData = SerializerHolder.getGmodelInstanceSerializer(SerializationType.XML).decodeBase64StringToByteArray(imgContent);
+				final byte[] imgData = SerializerHolder.getS23MInstanceSerializer(SerializationType.XML).decodeBase64StringToByteArray(imgContent);
 				DataOutputStream os = null;
 				try {
 					final String id = detailsData.getInstance().identity().identifier().toString();

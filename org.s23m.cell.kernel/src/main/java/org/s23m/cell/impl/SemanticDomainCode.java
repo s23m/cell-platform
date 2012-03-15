@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,7 +25,7 @@
 
 package org.s23m.cell.impl;
 
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.api.models.SemanticDomain.disjunctSemanticIdentitySet;
 import static org.s23m.cell.api.models.SemanticDomain.elements_to_disjunctSemanticIdentitySet;
 import static org.s23m.cell.api.models.SemanticDomain.elements_to_semanticIdentitySet;
@@ -35,7 +35,7 @@ import static org.s23m.cell.api.models.SemanticDomain.variantDisjunctSemanticIde
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.F_InstantiationImpl;
@@ -45,7 +45,7 @@ public class SemanticDomainCode {
 	public static Set addElement(final Set set, final Set element){
 		if (   set.category().isEqualTo(disjunctSemanticIdentitySet)
 				|| set.category().isEqualTo(variantDisjunctSemanticIdentitySet)	) {
-			return F_Instantiation.link(elements_to_disjunctSemanticIdentitySet,
+			return F_Instantiation.arrow(elements_to_disjunctSemanticIdentitySet,
 					F_Instantiation.reuseSemanticIdentity(identityFactory.element()),
 					element,
 					coreSets.minCardinality_NOTAPPLICABLE,
@@ -61,7 +61,7 @@ public class SemanticDomainCode {
 			);
 		} else {
 			if (   set.category().isEqualTo(semanticIdentitySet)) {
-				return F_Instantiation.link(elements_to_semanticIdentitySet,
+				return F_Instantiation.arrow(elements_to_semanticIdentitySet,
 						F_Instantiation.reuseSemanticIdentity(identityFactory.element()),
 						element,
 						coreSets.minCardinality_NOTAPPLICABLE,
@@ -99,17 +99,17 @@ public class SemanticDomainCode {
 		for (final Set e : elementLinks) {
 			if (e.from().isEqualTo(elementClass)
 					&&  e.to().isEqualTo(setClass)) {
-				return GmodelSemanticDomains.is_TRUE;
+				return S23MSemanticDomains.is_TRUE;
 			}
 		}
 		final Set elementLinks2 = semanticDomain.filter(elements_to_disjunctSemanticIdentitySet);
 		for (final Set e : elementLinks2) {
 			if (e.from().isEqualTo(elementClass)
 					&&  e.to().isEqualTo(setClass)) {
-				return GmodelSemanticDomains.is_TRUE;
+				return S23MSemanticDomains.is_TRUE;
 			}
 		}
-		return GmodelSemanticDomains.is_FALSE;
+		return S23MSemanticDomains.is_FALSE;
 	}
 
 	public static Set addSemanticRole(final Set newSemanticRole, final Set equivalenceClass){
@@ -121,7 +121,7 @@ public class SemanticDomainCode {
 	}
 
 	public static Set linkSemanticRole(final Set semanticRole, final Set equivalenceClass) {
-		return F_Instantiation.link(SemanticDomain.semanticRole_to_equivalenceClass,
+		return F_Instantiation.arrow(SemanticDomain.semanticRole_to_equivalenceClass,
 				F_Instantiation.reuseSemanticIdentity(identityFactory.referencingSemanticRole()),
 				semanticRole,
 				coreSets.minCardinality_NOTAPPLICABLE,
@@ -151,7 +151,7 @@ public class SemanticDomainCode {
 				return resultSet.extractFirst();
 			}
 		} else {
-			return GmodelSemanticDomains.is_NOTAPPLICABLE;
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
 		}
 	}
 }

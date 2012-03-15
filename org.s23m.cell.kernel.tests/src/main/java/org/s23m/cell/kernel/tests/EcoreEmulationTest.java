@@ -1,13 +1,13 @@
 package org.s23m.cell.kernel.tests;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.RepositoryStructure;
 
-public class EcoreEmulationTest extends GmodelTestCase {
+public class EcoreEmulationTest extends S23MTestCase {
 
 	private Set EReference;
 	private Set EcoreDomain;
@@ -34,7 +34,7 @@ public class EcoreEmulationTest extends GmodelTestCase {
 
 	public void eclipseModellingFramework() {
 
-		EcoreDomain = Instantiation.addSemanticDomain("EcoreDomain", "EcoreDomain", GmodelSemanticDomains.finiteSets);
+		EcoreDomain = Instantiation.addSemanticDomain("EcoreDomain", "EcoreDomain", S23MSemanticDomains.finiteSets);
 		final Set ecore = Instantiation.addDisjunctSemanticIdentitySet("Ecore", "Ecore", EcoreDomain);
 		final Set eObject = Instantiation.addDisjunctSemanticIdentitySet("EObject", "EObjects", EcoreDomain);
 		final Set eModelElement = Instantiation.addDisjunctSemanticIdentitySet("EModelElement", "EModelElements", EcoreDomain);
@@ -124,63 +124,63 @@ public class EcoreEmulationTest extends GmodelTestCase {
 		final Set Ecore = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex, ecore);
 
 		final Set EObject = Ecore.addConcrete(coreGraphs.vertex,eObject);
-		final Set sr1 = Instantiation.link(coreGraphs.superSetReference, EObject, coreGraphs.vertex);
-		EReference = Instantiation.link(coreGraphs.edge, eReference,
-				EObject, EObject, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet("eReferenceType", "eReferenceType", EcoreDomain), EObject, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		final Set sr1 = Instantiation.arrow(coreGraphs.superSetReference, EObject, coreGraphs.vertex);
+		EReference = Instantiation.arrow(coreGraphs.edge, eReference,
+				EObject, EObject, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet("eReferenceType", "eReferenceType", EcoreDomain), EObject, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 
 		final Set EModelElement = Ecore.addAbstract(EObject, eModelElement);
-		final Set sr2 = Instantiation.link(coreGraphs.superSetReference, EModelElement, EObject);
+		final Set sr2 = Instantiation.arrow(coreGraphs.superSetReference, EModelElement, EObject);
 		final Set EAnnotation = Ecore.addConcrete(EObject, eAnnotation);
-		final Set sr3 = Instantiation.link(coreGraphs.superSetReference, EAnnotation, EModelElement);
+		final Set sr3 = Instantiation.arrow(coreGraphs.superSetReference, EAnnotation, EModelElement);
 		final Set EFactory = Ecore.addConcrete(EObject, eFactory);
-		final Set sr4 = Instantiation.link(coreGraphs.superSetReference, EFactory, EModelElement);
+		final Set sr4 = Instantiation.arrow(coreGraphs.superSetReference, EFactory, EModelElement);
 		final Set ENamedElement = Ecore.addAbstract(EObject, eNamedElement);
-		final Set sr5 = Instantiation.link(coreGraphs.superSetReference, ENamedElement, EModelElement);
+		final Set sr5 = Instantiation.arrow(coreGraphs.superSetReference, ENamedElement, EModelElement);
 		final Set EPackage = Ecore.addConcrete(EObject, ePackage);
-		final Set sr6 = Instantiation.link(coreGraphs.superSetReference, EPackage, ENamedElement);
+		final Set sr6 = Instantiation.arrow(coreGraphs.superSetReference, EPackage, ENamedElement);
 		final Set EClassifier = Ecore.addAbstract(EObject, eClassifier);
-		final Set sr7 = Instantiation.link(coreGraphs.superSetReference, EClassifier, ENamedElement);
+		final Set sr7 = Instantiation.arrow(coreGraphs.superSetReference, EClassifier, ENamedElement);
 		final Set EEnumLiteral = Ecore.addConcrete(EObject, eEnumLiteral);
-		final Set sr8 = Instantiation.link(coreGraphs.superSetReference, EEnumLiteral, ENamedElement);
+		final Set sr8 = Instantiation.arrow(coreGraphs.superSetReference, EEnumLiteral, ENamedElement);
 		final Set ETypedElement = Ecore.addAbstract(EObject, eTypedElement);
-		final Set sr9 = Instantiation.link(coreGraphs.superSetReference, ETypedElement, ENamedElement);
+		final Set sr9 = Instantiation.arrow(coreGraphs.superSetReference, ETypedElement, ENamedElement);
 		final Set EClass = Ecore.addConcrete(EObject, eClass);
-		final Set sr10 = Instantiation.link(coreGraphs.superSetReference, EClass, EClassifier);
+		final Set sr10 = Instantiation.arrow(coreGraphs.superSetReference, EClass, EClassifier);
 		final Set EDataType = Ecore.addConcrete(EObject, eDataType);
-		final Set sr11 = Instantiation.link(coreGraphs.superSetReference, EDataType, EClassifier);
+		final Set sr11 = Instantiation.arrow(coreGraphs.superSetReference, EDataType, EClassifier);
 		final Set EEnum = Ecore.addConcrete(EObject, eEnum);
-		final Set sr12 = Instantiation.link(coreGraphs.superSetReference, EEnum, EDataType);
+		final Set sr12 = Instantiation.arrow(coreGraphs.superSetReference, EEnum, EDataType);
 		final Set EStructuralFeature = Ecore.addAbstract(EObject, eStructuralFeature);
-		final Set sr13 = Instantiation.link(coreGraphs.superSetReference, EStructuralFeature, ETypedElement);
+		final Set sr13 = Instantiation.arrow(coreGraphs.superSetReference, EStructuralFeature, ETypedElement);
 		final Set EOperation = Ecore.addConcrete(EObject, eOperation);
-		final Set sr14 = Instantiation.link(coreGraphs.superSetReference, EOperation, ETypedElement);
+		final Set sr14 = Instantiation.arrow(coreGraphs.superSetReference, EOperation, ETypedElement);
 		final Set EParameter = Ecore.addConcrete(EObject, eParameter);
-		final Set sr15 = Instantiation.link(coreGraphs.superSetReference, EParameter, ETypedElement);
+		final Set sr15 = Instantiation.arrow(coreGraphs.superSetReference, EParameter, ETypedElement);
 		final Set EAttribute = Ecore.addConcrete(EObject, eAttribute);
-		final Set sr16 = Instantiation.link(coreGraphs.superSetReference, EAttribute, EStructuralFeature);
-		final Set sr17 = Instantiation.link(coreGraphs.superSetReference, EReference, EStructuralFeature);
+		final Set sr16 = Instantiation.arrow(coreGraphs.superSetReference, EAttribute, EStructuralFeature);
+		final Set sr17 = Instantiation.arrow(coreGraphs.superSetReference, EReference, EStructuralFeature);
 
-		final Set vis1 = Instantiation.link(coreGraphs.visibility, RepositoryStructure.domainengineering, Ecore);
+		final Set vis1 = Instantiation.arrow(coreGraphs.visibility, RepositoryStructure.domainengineering, Ecore);
 
 		final Set eModelElement_to_eAnnotations = linkByContainment(EModelElement, "eModelElement", "eAnnotations", EAnnotation);
 		final Set eFactoryInstance_to_ePackage = linkBySimpleReference(EFactory, "eFactoryInstance", "ePackage", EPackage);
 		final Set ePackage_to_eClassifiers = linkByContainment(EPackage, "ePackage", "eClassifiers", EClassifier);
 		final Set eSuperPackage_to_eSubpackages = linkByContainment(EPackage, "eSuperPackage", "eSubpackages", EPackage);
 		final Set eOperation_to_eParameters = linkByContainment(EOperation, "eOperation", "eParameters", EParameter);
-		final Set eOperation_to_eExceptions = linkBySimpleReference(EOperation, "eExceptions", EClassifier, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n);
+		final Set eOperation_to_eExceptions = linkBySimpleReference(EOperation, "eExceptions", EClassifier, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n);
 		final Set eContainingClass_to_eOperations = linkByContainment(EClass, "eContainingClass", "eOperations", EOperation);
 		final Set eContainingClass_to_eStructuralFeatures = linkByContainment(EClass, "eContainingClass", "eStructuralFeatures", EStructuralFeature);
-		final Set to_eSuperTypes = linkBySimpleReference(EClass, "eSuperTypes", EClass, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n);
-		// Set to_eOpposite = linkBySimpleReference(EReference, "eOpposite", EReference, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_1);
+		final Set to_eSuperTypes = linkBySimpleReference(EClass, "eSuperTypes", EClass, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n);
+		// Set to_eOpposite = linkBySimpleReference(EReference, "eOpposite", EReference, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_1);
 		final Set eEnum_to_eLiterals = linkByContainment(EEnum, "eEnum", "eLiterals", EEnumLiteral);
 		//Set eAnnotation_to_contents = linkByContainment(EAnnotation, "contents", EObject);
-		//Set eAnnotation_to_references = linkBySimpleReference(EAnnotation, "references", EObject, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_1);
-		eClassReference = linkBySimpleReference(EClass, "eClassReference", EClass, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n);
+		//Set eAnnotation_to_references = linkBySimpleReference(EAnnotation, "references", EObject, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_1);
+		eClassReference = linkBySimpleReference(EClass, "eClassReference", EClass, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n);
 
 		final Set EcoreDataTypes = RepositoryStructure.domainengineering.addConcrete(coreGraphs.vertex, ecoreDataTypes);
-		final Set vis2 = Instantiation.link(coreGraphs.visibility, RepositoryStructure.domainengineering, EcoreDataTypes);
-		final Set vis3 = Instantiation.link(coreGraphs.visibility, Ecore, EcoreDataTypes);
+		final Set vis2 = Instantiation.arrow(coreGraphs.visibility, RepositoryStructure.domainengineering, EcoreDataTypes);
+		final Set vis3 = Instantiation.arrow(coreGraphs.visibility, Ecore, EcoreDataTypes);
 
 		final Set EBigDecimal = EcoreDataTypes.addConcrete(EDataType, eBigDecimal);
 		final Set EBigInteger = EcoreDataTypes.addConcrete(EDataType, eBigInteger);
@@ -358,33 +358,33 @@ public class EcoreEmulationTest extends GmodelTestCase {
 	}
 
 	private final Set linkBySimpleReference(final Set fromElement, final String toRole, final Set toElement, final Set min, final Set max) {
-		return Instantiation.link(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Uni-directional Simple Link", "ecore Uni-directional Simple Links", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, min, max, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Uni-directional Simple Link", "ecore Uni-directional Simple Links", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, min, max, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set linkBySimpleReference(final Set fromElement, final String fromRole, final String toRole, final Set toElement) {
-		return Instantiation.link(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Bi-directional Simple Link", "ecore Bi-directional Simple Links", EcoreDomain),
-				Instantiation.addDisjunctSemanticIdentitySet(fromRole, fromRole, EcoreDomain), fromElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Bi-directional Simple Link", "ecore Bi-directional Simple Links", EcoreDomain),
+				Instantiation.addDisjunctSemanticIdentitySet(fromRole, fromRole, EcoreDomain), fromElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set linkByContainment(final Set fromElement, final String fromRole, final String toRole, final Set toElement) {
-		return Instantiation.link(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Bi-directional Containment Link", "ecore Bi-directional Containment Links", EcoreDomain),
-				Instantiation.addDisjunctSemanticIdentitySet(fromRole, fromRole, EcoreDomain), fromElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_TRUE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(EReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Bi-directional Containment Link", "ecore Bi-directional Containment Links", EcoreDomain),
+				Instantiation.addDisjunctSemanticIdentitySet(fromRole, fromRole, EcoreDomain), fromElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_TRUE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refByContainment(final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(eClassReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Containment Reference", "ecore Containment References", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_TRUE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(eClassReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Containment Reference", "ecore Containment References", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_TRUE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refBySimpleToOne(final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(eClassReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Simple To-One Reference", "ecore Simple To-One References", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(eClassReference, Instantiation.addDisjunctSemanticIdentitySet("ecore Simple To-One Reference", "ecore Simple To-One References", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	public void ecoreERMetaModel() {
@@ -465,38 +465,38 @@ public class EcoreEmulationTest extends GmodelTestCase {
 	}
 
 	private final Set refToInstance(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Instance", "ecore Reference to Instances", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Instance", "ecore Reference to Instances", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refToInstancePart(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType,Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Instance Part", "ecore Reference to Instance Parts", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_TRUE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType,Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Instance Part", "ecore Reference to Instance Parts", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_TRUE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refToOne(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to One", "set of ecore Reference to One", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to One", "set of ecore Reference to One", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refToOnePart(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to One Part", "set of ecore Reference to One Part", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_TRUE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_1, GmodelSemanticDomains.maxCardinality_1, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to One Part", "set of ecore Reference to One Part", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_TRUE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_1, S23MSemanticDomains.maxCardinality_1, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refToMany(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Many", "set of ecore Reference to Many", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_FALSE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Many", "set of ecore Reference to Many", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_FALSE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 
 	private final Set refToManyParts(final Set refType, final Set fromElement, final String toRole, final Set toElement) {
-		return Instantiation.link(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Many Parts", "set of ecore Reference to Many Parts", EcoreDomain),
-				fromElement, fromElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_FALSE, GmodelSemanticDomains.isContainer_TRUE,
-				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, GmodelSemanticDomains.minCardinality_0, GmodelSemanticDomains.maxCardinality_n, GmodelSemanticDomains.isNavigable_TRUE, GmodelSemanticDomains.isContainer_FALSE);
+		return Instantiation.arrow(refType, Instantiation.addDisjunctSemanticIdentitySet("ecore Reference to Many Parts", "set of ecore Reference to Many Parts", EcoreDomain),
+				fromElement, fromElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_FALSE, S23MSemanticDomains.isContainer_TRUE,
+				Instantiation.addDisjunctSemanticIdentitySet(toRole, toRole, EcoreDomain), toElement, S23MSemanticDomains.minCardinality_0, S23MSemanticDomains.maxCardinality_n, S23MSemanticDomains.isNavigable_TRUE, S23MSemanticDomains.isContainer_FALSE);
 	}
 }

@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -28,7 +28,7 @@ package org.s23m.cell.serialization.serializer;
 
 import java.util.List;
 
-import org.s23m.cell.serialization.Gmodel;
+import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.SemanticIdentityIndex;
 
 public class SerializationContent extends SemanticIdContent {
@@ -36,10 +36,10 @@ public class SerializationContent extends SemanticIdContent {
 	private String content;
 	private String contentChecksum;
 	private final SemanticIdContent data = new SemanticIdContent();
-	private final Gmodel model;
+	private final S23M model;
 	private final String id;
 
-	public SerializationContent(final String id, final String content, final Gmodel model, final List<SemanticIdentityIndex> semanticIds) {
+	public SerializationContent(final String id, final String content, final S23M model, final List<SemanticIdentityIndex> semanticIds) {
 		this.id = id;
 		this.content = content;
 		this.model = model;
@@ -87,7 +87,7 @@ public class SerializationContent extends SemanticIdContent {
 		return id;
 	}
 
-	public Gmodel getModel() {
+	public S23M getModel() {
 		return model;
 	}
 

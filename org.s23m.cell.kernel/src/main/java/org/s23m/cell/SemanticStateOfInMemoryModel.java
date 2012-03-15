@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -30,22 +30,22 @@ public class SemanticStateOfInMemoryModel {
 		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.semanticDomainIsInitialized();
 	}
 
-	public static boolean gmodelSemanticDomainIsInitialized() {
-		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized();
+	public static boolean cellKernelSemanticDomainIsInitialized() {
+		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized();
 	}
 
-	public static boolean gmodelEditorIsLive() {
-		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.gmodelEditorIsLive();
+	public static boolean cellEditorIsLive() {
+		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.cellEditorIsLive();
 	}
 
-	public static boolean openSourceKernelIsInitialized() {
-		return openSourceKernelIsInitialized;
+	public static boolean cellKernelIsInitialized() {
+		return cellKernelIsInitialized;
 	}
 
 	public static boolean isDebugModeOn() {
 		return org.s23m.cell.core.F_SemanticStateOfInMemoryModel.isDebugModeOn();
 	}
 
-	static boolean openSourceKernelIsInitialized = false;
+	static boolean cellKernelIsInitialized = false;
 
 }

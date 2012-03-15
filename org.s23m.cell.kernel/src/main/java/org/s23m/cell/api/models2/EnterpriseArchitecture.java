@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,11 +25,11 @@
 
 package org.s23m.cell.api.models2;
 
-import static org.s23m.cell.G.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreGraphs;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
 
 /**
@@ -42,27 +42,27 @@ import org.s23m.cell.api.models.Root;
  */
 public final class EnterpriseArchitecture {
 
-	//public static final Set enterpriseArchitectureGraph = F_SemanticStateOfInMemoryModel.instantiateConcrete(StateConsciousArtifact.stateConsciousArtifact, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("enterprise architecture", "set of enterprise architecture", GmodelSemanticDomains.gmodel));
-	public static final Set enterpriseArchitectureGraph = Root.universalartifactengineering.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("enterprise architecture", "set of enterprise architecture", GmodelSemanticDomains.gmodel));
-	public static final Set how = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("how", "how? - processes", GmodelSemanticDomains.gmodel));
-	public static final Set who = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("who", "who? - persons, organisations, groups", GmodelSemanticDomains.gmodel));
-	public static final Set what = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("what", "what? - funding, assets, resources", GmodelSemanticDomains.gmodel));
-	public static final Set when = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("when", "when? - actions, events, episodes", GmodelSemanticDomains.gmodel));
-	public static final Set where = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("where", "where? - location, addresses, spacial shapes", GmodelSemanticDomains.gmodel));
-	public static final Set why = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("why", "why? - laws, policies,  agreements", GmodelSemanticDomains.gmodel));
+	//public static final Set enterpriseArchitectureGraph = F_SemanticStateOfInMemoryModel.instantiateConcrete(StateConsciousArtifact.stateConsciousArtifact, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("enterprise architecture", "set of enterprise architecture", S23MSemanticDomains.S23M));
+	public static final Set enterpriseArchitectureGraph = Root.cellengineering.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("enterprise architecture", "set of enterprise architecture", S23MSemanticDomains.cellKernel));
+	public static final Set how = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("how", "how? - processes", S23MSemanticDomains.cellKernel));
+	public static final Set who = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("who", "who? - persons, organisations, groups", S23MSemanticDomains.cellKernel));
+	public static final Set what = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("what", "what? - funding, assets, resources", S23MSemanticDomains.cellKernel));
+	public static final Set when = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("when", "when? - actions, events, episodes", S23MSemanticDomains.cellKernel));
+	public static final Set where = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("where", "where? - location, addresses, spacial shapes", S23MSemanticDomains.cellKernel));
+	public static final Set why = enterpriseArchitectureGraph.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("why", "why? - laws, policies,  agreements", S23MSemanticDomains.cellKernel));
 
 	public static Set instantiateFeature() {
 
 		// Here we ensure that the enterpriseArchitectureGraph is a true extension of Graph,
 		// so that effectively the enterpriseArchitectureGraph is still at Instantiation level 0 - the same as Graph.
 		// See the TestSequence script to understand the effect.
-		Instantiation.link(coreGraphs.superSetReference, enterpriseArchitectureGraph, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, how, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, who, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, what, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, when, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, where, coreGraphs.vertex);
-		Instantiation.link(coreGraphs.superSetReference, why, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, enterpriseArchitectureGraph, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, how, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, who, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, what, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, when, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, where, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, why, coreGraphs.vertex);
 
 		return enterpriseArchitectureGraph;
 	}

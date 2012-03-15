@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -53,7 +53,7 @@ public interface Identity {
 
 	/**
 	 * Computes a technicalName that is suitable for use as a name in textual programming languages
-	 * In the multi-vocabulary edition of Gmodel, the result depends on the context in which the
+	 * In the multi-vocabulary edition of S23M, the result depends on the context in which the
 	 * getTechnicalName() is used.
 	 * In a "Java" context the result may comply with specific naming standards,
 	 * in a "COBOL" context the result may comply with different naming standards,
@@ -78,9 +78,9 @@ public interface Identity {
 	boolean isEqualToRepresentation(Identity representation) ;
 
 	/**
-	 * Indicates whether the Identity is part of the Gmodel kernel.
+	 * Indicates whether the Identity is part of the S23M kernel.
 	 * All kernel Identities have immutable identifiers and immutable uniqueRepresentationReferences
-	 * (the corresponding UUIDs are fixed in all Gmodel systems)
+	 * (the corresponding UUIDs are fixed in all S23M systems)
 	 */
 	boolean isPartOfKernel();
 
@@ -90,7 +90,7 @@ public interface Identity {
 	 * can be instantiated such that the instances may reference any container,
 	 * without any need for visibility based declarations of scope
 	 */
-	boolean isPartOfUniversalArtifactConcept();
+	boolean isPartOfUniversalCellConcept();
 	/**
 	 * An Identity can be made part of the universal container concept.
 	 * Once an Identity is part of the universal container concept, it may reference any container,
@@ -99,7 +99,7 @@ public interface Identity {
 	 * as such an operation could leave a repository in a corrupt state with respect to
 	 * semantics relating to scope (visibility declarations).
 	 */
-	void makePartOfUniversalArtifactConcept();
+	void makePartOfUniversalCellConcept();
 
 	/**
 	 * Retrieves the payload

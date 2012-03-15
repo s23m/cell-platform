@@ -2,10 +2,10 @@ package org.s23m.cell.kernel.tests;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.Visualization;
 
-public class VisualisationExampleTest extends GmodelTestCase {
+public class VisualisationExampleTest extends S23MTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {
@@ -32,89 +32,89 @@ public class VisualisationExampleTest extends GmodelTestCase {
 		// add diagram information
 		final Set crm_viz_structure_diag = crm_aviz.addConcrete(Visualization.diagram,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1", "crm schema visualizedGraph | structure diag 1", testDomain));
-		Instantiation.link(Visualization.visualizedAspect_to_diagram,
-				GmodelSemanticDomains.anonymous, crm_viz_structure,
+		Instantiation.arrow(Visualization.visualizedAspect_to_diagram,
+				S23MSemanticDomains.anonymous, crm_viz_structure,
 				crm_viz_structure,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 				crm_viz_structure_diag,
 				crm_viz_structure_diag,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 
 		// add representation information
 		final Set crm_viz_structure_diag_product = crm_aviz.addConcrete(Visualization.representation,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product", "crm schema visualizedGraph | structure diag 1 | product", testDomain));
-		Instantiation.link(Visualization.diagram_to_representation,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag,
+		Instantiation.arrow(Visualization.diagram_to_representation,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag,
 				crm_viz_structure_diag,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 				crm_viz_structure_diag_product,
 				crm_viz_structure_diag_product,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 		// add icon to representation
 		final Set crm_viz_structure_diag_product_icon = crm_aviz.addConcrete(Visualization.symbol,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product icon", "crm schema visualizedGraph | structure diag 1 | product icon", testDomain));
 		crm_viz_structure_diag_product_icon.identity().setPayload("here goes the content of the icon file");
-		Instantiation.link(Visualization.symbol_to_semantic_identity,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag_product_icon,
+		Instantiation.arrow(Visualization.symbol_to_semantic_identity,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag_product_icon,
 				crm_viz_structure_diag_product_icon,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 				crm_viz_structure_diag_product.semanticIdentity(),
 				crm_viz_structure_diag_product.semanticIdentity(),
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 		// add coordinates to representation
 		final Set crm_viz_structure_diag_product_x = crm_aviz.addConcrete(Visualization.x,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product x", "crm schema visualizedGraph | structure diag 1 | product x", testDomain));
 		crm_viz_structure_diag_product_x.identity().setPayload("57");
-		Instantiation.link(Visualization.representation_to_x,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag_product,
+		Instantiation.arrow(Visualization.representation_to_x,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag_product,
 				crm_viz_structure_diag_product,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 				crm_viz_structure_diag_product_x,
 				crm_viz_structure_diag_product_x,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 		final Set crm_viz_structure_diag_product_y = crm_aviz.addConcrete(Visualization.y,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product y", "crm schema visualizedGraph | structure diag 1 | product y", testDomain));
 		crm_viz_structure_diag_product_y.identity().setPayload("4");
-		Instantiation.link(Visualization.representation_to_y,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag_product,
+		Instantiation.arrow(Visualization.representation_to_y,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag_product,
 				crm_viz_structure_diag_product,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 				crm_viz_structure_diag_product_y,
 				crm_viz_structure_diag_product_y,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 		final Set crm_viz_structure_diag_product_z = crm_aviz.addConcrete(Visualization.z,
 						Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product z", "crm schema visualizedGraph | structure diag 1 | product z", testDomain));
 
 				crm_viz_structure_diag_product_z.identity().setPayload("0");
-		Instantiation.link(Visualization.representation_to_z,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag_product,
+		Instantiation.arrow(Visualization.representation_to_z,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag_product,
 				crm_viz_structure_diag_product,
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_TRUE,
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_TRUE,
 						crm_viz_structure_diag_product_z,
 						crm_viz_structure_diag_product_z,
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 
-		Instantiation.link(Visualization.visualizedGraph_to_graph,
-				GmodelSemanticDomains.anonymous, crm_viz,
+		Instantiation.arrow(Visualization.visualizedGraph_to_graph,
+				S23MSemanticDomains.anonymous, crm_viz,
 						crm_viz,
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE,
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE,
 						crm,
 						crm,
-						GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+						S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
-		Instantiation.link(Visualization.representation_to_representedInstance,
-				GmodelSemanticDomains.anonymous, crm_viz_structure_diag_product,
+		Instantiation.arrow(Visualization.representation_to_representedInstance,
+				S23MSemanticDomains.anonymous, crm_viz_structure_diag_product,
 				crm_viz_structure_diag_product,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE,
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE,
 				crm_product,
 				crm_product,
-				GmodelSemanticDomains.minCardinality_NOTAPPLICABLE, GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE, GmodelSemanticDomains.isNavigable_NOTAPPLICABLE, GmodelSemanticDomains.isContainer_FALSE
+				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 		);
 	}
 

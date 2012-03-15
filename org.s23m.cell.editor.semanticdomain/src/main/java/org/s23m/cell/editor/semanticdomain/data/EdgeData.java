@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2011 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -34,10 +34,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.OrderedSet;
 
 @SuppressWarnings("serial")
@@ -103,7 +103,7 @@ public class EdgeData implements Serializable {
 		SECOND_IS_CONTAINER
 	);
 
-	private Set metaElement = G.coreGraphs.edge;
+	private Set metaElement = S23MKernel.coreGraphs.edge;
 	private Set edgeIdentityInstance;
 	private Set sourceInstance;
 	private Set targetInstance;
@@ -280,29 +280,29 @@ public class EdgeData implements Serializable {
 	public static List<SetData> getAssociatedListOf(final String pid) {
 		final List<SetData> list = new ArrayList<SetData>();
 		if (pid.equals(FIRST_MIN_CARDINALITY) || pid.equals(SECOND_MIN_CARDINALITY)) {
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_0));
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_1));
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_2));
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_n));
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_NOTAPPLICABLE));
-			list.add(new SetData(GmodelSemanticDomains.minCardinality_UNKNOWN));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_0));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_1));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_2));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_n));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_NOTAPPLICABLE));
+			list.add(new SetData(S23MSemanticDomains.minCardinality_UNKNOWN));
 		} else if (pid.equals(FIRST_MAX_CARDINALITY) || pid.equals(SECOND_MAX_CARDINALITY)) {
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_0));
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_1));
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_2));
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_n));
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_NOTAPPLICABLE));
-			list.add(new SetData(GmodelSemanticDomains.maxCardinality_UNKNOWN));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_0));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_1));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_2));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_n));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_NOTAPPLICABLE));
+			list.add(new SetData(S23MSemanticDomains.maxCardinality_UNKNOWN));
 		} else if (pid.equals(FIRST_IS_NAVIGABLE) || pid.equals(SECOND_IS_NAVIGABLE)) {
-			list.add(new SetData(GmodelSemanticDomains.isNavigable_FALSE));
-			list.add(new SetData(GmodelSemanticDomains.isNavigable_TRUE));
-			list.add(new SetData(GmodelSemanticDomains.isNavigable_NOTAPPLICABLE));
-			list.add(new SetData(GmodelSemanticDomains.isNavigable_UNKNOWN));
+			list.add(new SetData(S23MSemanticDomains.isNavigable_FALSE));
+			list.add(new SetData(S23MSemanticDomains.isNavigable_TRUE));
+			list.add(new SetData(S23MSemanticDomains.isNavigable_NOTAPPLICABLE));
+			list.add(new SetData(S23MSemanticDomains.isNavigable_UNKNOWN));
 		} else if (pid.equals(FIRST_IS_CONTAINER) || pid.equals(SECOND_IS_CONTAINER)) {
-			list.add(new SetData(GmodelSemanticDomains.isContainer_FALSE));
-			list.add(new SetData(GmodelSemanticDomains.isContainer_TRUE));
-			list.add(new SetData(GmodelSemanticDomains.isContainer_NOTAPPLICABLE));
-			list.add(new SetData(GmodelSemanticDomains.isContainer_UNKNOWN));
+			list.add(new SetData(S23MSemanticDomains.isContainer_FALSE));
+			list.add(new SetData(S23MSemanticDomains.isContainer_TRUE));
+			list.add(new SetData(S23MSemanticDomains.isContainer_NOTAPPLICABLE));
+			list.add(new SetData(S23MSemanticDomains.isContainer_UNKNOWN));
 		}
 		return list;
 	}
@@ -317,7 +317,7 @@ public class EdgeData implements Serializable {
 
 	private void getAllVisibleSets(final Set set, final Set setToMatch, final List<SetData> acc) {
 		for (final Set s : set.filterInstances()) {
-			if (setToMatch.hasVisibilityOf(s).isEqualTo(GmodelSemanticDomains.is_TRUE)) {
+			if (setToMatch.hasVisibilityOf(s).isEqualTo(S23MSemanticDomains.is_TRUE)) {
 				acc.add(new SetData(s));
 			}
 			if (!s.filterInstances().isEmpty()) {

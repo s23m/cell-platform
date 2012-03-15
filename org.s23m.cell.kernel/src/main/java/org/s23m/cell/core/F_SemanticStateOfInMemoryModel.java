@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -27,15 +27,15 @@ package org.s23m.cell.core;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
-import org.s23m.cell.api.models.ArtifactDerivation;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.InstanceDerivation;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.HTMLRepresentation;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the Gmodel kernel
- * that constitute the basic Gmodel vocabulary.
+ * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
+ * that constitute the basic S23M vocabulary.
  * 
  * Additionally F_SemanticStateOfInMemoryModel enables the creation of links between Sets,
  * and automatically attaches the link to the appropriate container Set.
@@ -43,9 +43,9 @@ import org.s23m.cell.api.models.SemanticDomain;
  * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to LinkConstraints, IdentityFactory, CoreSets,
  * and KernelOrderedSets.
  * 
- * Extensions: Gmodel is designed to be extensible. All extensions that only involve a structural extension
- * of the meta model can be achieved by modelling the extension in Gmodel. Beyond such basic extensions,
- * Gmodel can be extended/modified by plugging in a different IdentityFactory and/or by writing a custom Shell.
+ * Extensions: S23M is designed to be extensible. All extensions that only involve a structural extension
+ * of the meta model can be achieved by modelling the extension in S23M. Beyond such basic extensions,
+ * S23M can be extended/modified by plugging in a different IdentityFactory and/or by writing a custom Shell.
  * Such extensions are created by creating a subclass of F_SemanticStateOfInMemoryModel that
  * 
  * 	(a) adds a method that references the appropriate SemanticIndentityFactory:
@@ -70,20 +70,20 @@ public class F_SemanticStateOfInMemoryModel {
 	public static final int indexIsNotAvailable = -1;
 
 	private static boolean semanticDomainIsInitialized = false;
-	private static boolean gmodelSemanticDomainIsInitialized = false;
-	private static boolean gmodelEditorIsLive = false;
+	private static boolean cellKernelSemanticDomainIsInitialized = false;
+	private static boolean cellEditorIsLive = false;
 	private static boolean isDebugModeOn = false;
 
 	public static boolean semanticDomainIsInitialized() {
 		return semanticDomainIsInitialized;
 	}
 
-	public static boolean gmodelSemanticDomainIsInitialized() {
-		return gmodelSemanticDomainIsInitialized;
+	public static boolean cellKernelSemanticDomainIsInitialized() {
+		return cellKernelSemanticDomainIsInitialized;
 	}
 
-	public static boolean gmodelEditorIsLive() {
-		return gmodelEditorIsLive;
+	public static boolean cellEditorIsLive() {
+		return cellEditorIsLive;
 	}
 
 	public static boolean isDebugModeOn() {
@@ -102,23 +102,23 @@ public class F_SemanticStateOfInMemoryModel {
 		semanticDomainIsInitialized = true;
 	}
 
-	public static void completeGmodelSemanticDomainInitialization() {
-		if (!gmodelEditorIsLive()) {
+	public static void completeCellKernelSemanticDomainInitialization() {
+		if (!cellEditorIsLive()) {
 			if (!semanticDomainIsInitialized) {
 				completeSemanticDomainInitialization();
 			}
-			GmodelSemanticDomains.instantiateFeature();
-			ArtifactDerivation.instantiateFeature();
+			S23MSemanticDomains.instantiateFeature();
+			InstanceDerivation.instantiateFeature();
 			HTMLRepresentation.instantiateFeature();
 		}
 		final int kernelComplexity = identityFactory.kernelComplexity();
 		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
-		gmodelSemanticDomainIsInitialized = true;
+		cellKernelSemanticDomainIsInitialized = true;
 		semanticDomainIsInitialized = true;
 	}
 
-	public static void goLiveWithGmodelEditor() {
-		gmodelEditorIsLive = true;
+	public static void goLiveWithCellEditor() {
+		cellEditorIsLive = true;
 	}
 
 	public static void switchOnDebugMode() {

@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -26,7 +26,7 @@
 package org.s23m.cell.api;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_IqLogic;
 
 public class InformationQualityLogic {
@@ -42,19 +42,19 @@ public class InformationQualityLogic {
 	}
 
 	public static boolean is_FALSE(final Set set) {
-		return set.isEqualTo(GmodelSemanticDomains.is_FALSE);
+		return set.isEqualTo(S23MSemanticDomains.is_FALSE);
 	}
 
 	public static boolean is_NOTAPPLICABLE(final Set set) {
-		return set.isEqualTo(GmodelSemanticDomains.is_NOTAPPLICABLE);
+		return set.isEqualTo(S23MSemanticDomains.is_NOTAPPLICABLE);
 	}
 
 	public static boolean is_TRUE(final Set set) {
-		return set.isEqualTo(GmodelSemanticDomains.is_TRUE);
+		return set.isEqualTo(S23MSemanticDomains.is_TRUE);
 	}
 
 	public static boolean is_UNKNOWN(final Set set) {
-		return set.isEqualTo(GmodelSemanticDomains.is_UNKNOWN);
+		return set.isEqualTo(S23MSemanticDomains.is_UNKNOWN);
 	}
 
 	public static Set isEqualTo(final Set a, final Set b) {

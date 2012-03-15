@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,8 +25,8 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreGraphs;
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Identity;
@@ -34,7 +34,7 @@ import org.s23m.cell.Set;
 
 public final class EdgeEnd extends Graph  {
 
-	/* Reify the Gmodel EdgeEnd concept */
+	/* Reify the S23M EdgeEnd concept */
 	public static final EdgeEnd edgeEnd = new EdgeEnd();
 	private Set connectedSet;
 	private final Set container;
@@ -44,7 +44,7 @@ public final class EdgeEnd extends Graph  {
 		this.connectedSet = vertex;
 		this.container = container;
 
-		if (F_SemanticStateOfInMemoryModel.gmodelSemanticDomainIsInitialized()
+		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()
 				&& !(firstSemanticIdentity.isEqualTo(identityFactory.element()))
 				&& !(firstSemanticIdentity.isEqualTo(identityFactory.set()))
 				&& !(firstSemanticIdentity.isEqualTo(identityFactory.referencingSemanticRole()))
@@ -60,7 +60,7 @@ public final class EdgeEnd extends Graph  {
 		this.addToVariables(coreSets.isNavigable);
 		this.addToVariables(coreSets.isContainer);
 		this.addToValues(coreSets.isAbstract_FALSE);
-		this.addFlavorQueries();
+		this.addProperClassQueries();
 		this.container = Graph.graph;
 	}
 
@@ -78,7 +78,7 @@ public final class EdgeEnd extends Graph  {
 		return connectedSet;
 	}
 	@Override
-	public Set flavor() {
+	public Set properClass() {
 		return coreGraphs.edgeEnd;
 	}
 }

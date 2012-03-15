@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -35,14 +35,14 @@ import org.s23m.cell.api.Instantiation;
 
 /**
  * {@link IdentityFactory} is a factory for Semantic Identities that connects
- * to the basic implementation of SemanticIdentity delivered with Gmodel.
+ * to the basic implementation of SemanticIdentity delivered with S23M.
  * 
  * The implementation can be overridden as needed by an alternative class that implements
  * the FundamentalSemanticIdentities interface.
  */
 public class IdentityFactory implements KernelIdentities {
 	private final ListOrderedMap inMemoryIdentities = new ListOrderedMap();
-	private final UUIDReservoirForKernelGraph uUIDReservoir = new UUIDReservoirForKernelGraph();
+	private final UUIDReservoirForKernel uUIDReservoir = new UUIDReservoirForKernel();
 
 
 	public IdentityFactory() {
@@ -151,9 +151,9 @@ public class IdentityFactory implements KernelIdentities {
 	public final	Identity filterInstances() {return createIdentityInKernel("filterInstances" , "filterInstances", SemanticIdentityRegistry.filterInstances.ordinal());}
 	public final	Identity filterLinks() {return createIdentityInKernel("filterLinks" , "filterLinks", SemanticIdentityRegistry.filterLinks.ordinal());}
 	public final 	Identity filterPolymorphic() {return createIdentityInKernel("filterPolymorphic" , "filterPolymorphic", SemanticIdentityRegistry.filterPolymorphic.ordinal());}
-	public final	Identity flavor() {return createIdentityInKernel("flavor" , "flavor", SemanticIdentityRegistry.flavor.ordinal());}
-	public final	Identity flavorCommandFunction() {return createIdentityInKernel("flavor command function" , "flavor command functions", SemanticIdentityRegistry.flavorCommandFunction.ordinal());}
-	public final	Identity flavorQueryFunction() {return createIdentityInKernel("flavor query function" , "flavor query functions", SemanticIdentityRegistry.flavorQueryFunction.ordinal());}
+	public final	Identity properClass() {return createIdentityInKernel("proper class" , "proper class", SemanticIdentityRegistry.properClass.ordinal());}
+	public final	Identity properClassCommandFunction() {return createIdentityInKernel("proper class command function" , "proper class command functions", SemanticIdentityRegistry.properClassCommandFunction.ordinal());}
+	public final	Identity properClassQueryFunction() {return createIdentityInKernel("proper class query function" , "proper class query functions", SemanticIdentityRegistry.properClassQueryFunction.ordinal());}
 	public final	Identity from() {return createIdentityInKernel("from" , "from", SemanticIdentityRegistry.from.ordinal());}
 	public final	Identity fromEdgeEnd() {return createIdentityInKernel("fromEdgeEnd" , "fromEdgeEnd", SemanticIdentityRegistry.fromEdgeEnd.ordinal());}
 	public final	Identity function() {return createIdentityInKernel("function" , "functions", SemanticIdentityRegistry.function.ordinal());}
@@ -215,10 +215,10 @@ public class IdentityFactory implements KernelIdentities {
 		return complexity;
 	}
 	public final	Identity kernelDefect() {return createIdentityInKernel("kernel defect - this should never happen" , "kernelDefects", SemanticIdentityRegistry.kernelDefect.ordinal());}
-	public final	Identity kernelDefect_KernelHasReachedAnIllegalState() {return createIdentityInKernel("kernel CONSTRAINTVIOLATION" , "the Gmodel kernel has reached an illegal state", SemanticIdentityRegistry.kernelDefect_KernelHasReachedAnIllegalState.ordinal());}
+	public final	Identity kernelDefect_KernelHasReachedAnIllegalState() {return createIdentityInKernel("kernel CONSTRAINTVIOLATION" , "the S23M kernel has reached an illegal state", SemanticIdentityRegistry.kernelDefect_KernelHasReachedAnIllegalState.ordinal());}
 
 	public final	Identity lastIndexOf() {return createIdentityInKernel("lastIndexOf" , "lastIndexOf", SemanticIdentityRegistry.lastIndexOf.ordinal());}
-	public final    Identity link() {return createIdentityInKernel("link" , "links", SemanticIdentityRegistry.link.ordinal());}
+	public final    Identity arrow() {return createIdentityInKernel("arrow" , "arrows", SemanticIdentityRegistry.arrow.ordinal());}
 	public final	Identity listIterator() {return createIdentityInKernel("listIterator" , "listIterator", SemanticIdentityRegistry.listIterator.ordinal());}
 	public final	Identity listIteratorInt() {return createIdentityInKernel("listIterator(int)" , "listIterator(int)", SemanticIdentityRegistry.listIteratorInt.ordinal());}
 	public final	Identity localRootSuperSetOf() {return createIdentityInKernel("localRootSuperSetOf" , "localRootSuperSetOf", SemanticIdentityRegistry.localRootSuperSetOf.ordinal());}
@@ -266,42 +266,42 @@ public class IdentityFactory implements KernelIdentities {
 	}
 
 	public final    Identity semanticDomain() {return createIdentityInKernel("semantic domain" , "semantic domain", SemanticIdentityRegistry.semanticDomain.ordinal());}
-	public final	Identity semanticErr() {return createIdentityInKernel("semantic error - attempt to violate Gmodel semantics" , "semantic errors", SemanticIdentityRegistry.semanticErr.ordinal());}
+	public final	Identity semanticErr() {return createIdentityInKernel("semantic error - attempt to violate S23M semantics" , "semantic errors", SemanticIdentityRegistry.semanticErr.ordinal());}
 	public final	Identity semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor() {return createIdentityInKernel("addAbstract(category, semanticIdentity) is only valid for abstract VertexFlavored Instances" , "addConcrete(category, semanticIdentity) is only valid for abstract VertexFlavored Instances", SemanticIdentityRegistry.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor.ordinal());}
 	public final	Identity semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor() {return createIdentityInKernel("addConcrete(category, semanticIdentity) is only valid for concrete VertexFlavored Instances" , "addConcrete(category, semanticIdentity) is only valid for concrete VertexFlavored Instances", SemanticIdentityRegistry.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor.ordinal());}
 	public final    Identity semanticErr_ASetWithThisIdentityAndRepresentationIsAlreadyLoaded() {return createIdentityInKernel("attempt to ceate a second copy of a set in memory","a set with this identity and representation is already loaded", SemanticIdentityRegistry.semanticErr_ASetWithThisIdentityAndRepresentationIsAlreadyLoaded.ordinal());}
-	public final	Identity semanticErr_GraphGraphCantBeModified() {return createIdentityInKernel("Graph.graph is the representation of the Gmodel kernel and can't be modified" , "Graph.graph is the representation of the Gmodel kernel and can't be modified", SemanticIdentityRegistry.semanticErr_GraphGraphCantBeModified.ordinal());}
+	public final	Identity semanticErr_GraphGraphCantBeModified() {return createIdentityInKernel("Graph.graph is the representation of the S23M kernel and can't be modified" , "Graph.graph is the representation of the S23M kernel and can't be modified", SemanticIdentityRegistry.semanticErr_GraphGraphCantBeModified.ordinal());}
 	public final	Identity semanticErr_GraphsCantBeDecommissioned() {return createIdentityInKernel("Graphs are transient and can't be decommissioned" , "Graphs are transient and can't be decommissioned", SemanticIdentityRegistry.semanticErr_GraphsCantBeDecommissioned.ordinal());}
-	public final	Identity semanticErr_LinkIsNotApplicable() {return createIdentityInKernel("link(isInformation, fromInstance, toInstance) is NOTAPPLICABLE" , "link(isInformation, fromInstance, toInstance) is only applicable when the isInformation is of visibility, edgeTrace, or generalizationReference flavor", SemanticIdentityRegistry.semanticErr_LinkIsNotApplicable.ordinal());}
+	public final	Identity semanticErr_LinkIsNotApplicable() {return createIdentityInKernel("link(isInformation, fromInstance, toInstance) is NOTAPPLICABLE" , "link(isInformation, fromInstance, toInstance) is only applicable when the isInformation is of visibility, edgeTrace, or generalizationReference flavor", SemanticIdentityRegistry.semanticErr_ArrowIsNotApplicable.ordinal());}
 	public final	Identity semanticErr_maxFromCardinalityIsIllegal() {return createIdentityInKernel("maximumFromCardinality is illegal" , "maximumFromCardinality is illegal", SemanticIdentityRegistry.semanticErr_maxFromCardinalityIsIllegal.ordinal());}
 	public final	Identity semanticErr_maxFromCardinalityIsOne() {return createIdentityInKernel("maximumFromCardinality is 1" , "maximumFromCardinality is 1", SemanticIdentityRegistry.semanticErr_maxFromCardinalityIsOne.ordinal());}
 	public final	Identity semanticErr_maxFromCardinalityIsTwo() {return createIdentityInKernel("maximumFromCardinality is 2" , "maximumFromCardinality is 2", SemanticIdentityRegistry.semanticErr_maxFromCardinalityIsTwo.ordinal());}
 	public final	Identity semanticErr_maxToCardinalityIsIllegal() {return createIdentityInKernel("maximumToCardinality is illegal" , "maximumToCardinality is illegal", SemanticIdentityRegistry.semanticErr_maxToCardinalityIsIllegal.ordinal());}
 	public final	Identity semanticErr_maxToCardinalityIsOne() {return createIdentityInKernel("maximumToCardinality is 1" , "maximumToCardinality is 1", SemanticIdentityRegistry.semanticErr_maxToCardinalityIsOne.ordinal());}
 	public final	Identity semanticErr_maxToCardinalityIsTwo() {return createIdentityInKernel("maximumToCardinality is 2" , "maximumToCardinality is 2", SemanticIdentityRegistry.semanticErr_maxToCardinalityIsTwo.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an edgeEndVertex", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an isContainer value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an isNavigable value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have a maxCardinality value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have a minCardinality value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have connected to/fromInstances", SemanticIdentityRegistry.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have connected to/fromRoles", SemanticIdentityRegistry.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have edgeEndFlavors", SemanticIdentityRegistry.semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeTraceFlavored instances have an abstraction", SemanticIdentityRegistry.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction.ordinal());}
-	public final	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeTraceFlavored instances have a detail", SemanticIdentityRegistry.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an edgeEndVertex", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndsHaveEdgeEndVertex.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an isContainer value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndsHaveIsContainer.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have an isNavigable value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndsHaveIsNavigable.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have a maxCardinality value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndsHaveMaxCardinality.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeEnds instances have a minCardinality value", SemanticIdentityRegistry.semanticErr_OnlyEdgeEndsHaveMinCardinality.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have connected to/fromInstances", SemanticIdentityRegistry.semanticErr_OnlyEdgesHaveConnectedInstances.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have connected to/fromRoles", SemanticIdentityRegistry.semanticErr_OnlyEdgesHaveConnectedRoles.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeFlavored instances have edgeEndFlavors", SemanticIdentityRegistry.semanticErr_OnlyEdgesHaveEdgeEndFlavors.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeTraceFlavored instances have an abstraction", SemanticIdentityRegistry.semanticErr_OnlyEdgeTracesHaveAbstraction.ordinal());}
+	public final	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only edgeTraceFlavored instances have a detail", SemanticIdentityRegistry.semanticErr_OnlyEdgeTracesHaveDetail.ordinal());}
 	public final	Identity semanticErr_OnlyInstancesHaveIsAbstract() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only instances have an isAbstract value", SemanticIdentityRegistry.semanticErr_OnlyInstancesHaveIsAbstract.ordinal());}
-	public final	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only generalizationReferenceFlavored instances have a specialization", SemanticIdentityRegistry.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet.ordinal());}
-	public final	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only generalizationReferenceFlavored instances have a generalization", SemanticIdentityRegistry.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet.ordinal());}
+	public final	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only generalizationReferenceFlavored instances have a specialization", SemanticIdentityRegistry.semanticErr_OnlySuperSetReferencesHaveSubSet.ordinal());}
+	public final	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only generalizationReferenceFlavored instances have a generalization", SemanticIdentityRegistry.semanticErr_OnlySuperSetReferencesHaveSuperSet.ordinal());}
 	public final    Identity semanticErr_OnlyTransportContainerCanHaveContentElements() {return createIdentityInKernel("only transport container can have content elements" , "only transport container can have content elements", SemanticIdentityRegistry.semanticErr_OnlyTransportContainerCanHaveContentElements.ordinal());}
-	public final	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only visibilityFlavored instances have a fromSubGraph", SemanticIdentityRegistry.semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph.ordinal());}
-	public final	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only visibilityFlavored instances have a toSubGraph", SemanticIdentityRegistry.semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph.ordinal());}
+	public final	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only visibilityFlavored instances have a fromSubGraph", SemanticIdentityRegistry.semanticErr_OnlyVisibilitiesHaveFromSubGraph.ordinal());}
+	public final	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph() {return createIdentityInKernel("operation is NOTAPPLICABLE" , "Only visibilityFlavored instances have a toSubGraph", SemanticIdentityRegistry.semanticErr_OnlyVisibilitiesHaveToSubGraph.ordinal());}
 	public final	Identity semanticErr_operationIsIllegalOnThisInstance() {return createIdentityInKernel("operation is illegal on this instance" , "operation is illegal on this instance", SemanticIdentityRegistry.semanticErr_operationIsIllegalOnThisInstance.ordinal());}
 	public final    Identity semanticErr_operationIsNotYetImplemented() {return createIdentityInKernel("operation is not yet implemented" , "operation is not yet implemented", SemanticIdentityRegistry.semanticErr_operationIsNotYetImplemented.ordinal());}
 	public final	Identity semanticErr_TargetIsNotWithinVisibility() {return createIdentityInKernel("target of link is NOTWITHINVISIBILITY" , "the target of an AbstractEdgeFlavored link must be within the range of visibilities defined in the category of the source", SemanticIdentityRegistry.semanticErr_TargetIsNotWithinVisibility.ordinal());}
 	public final    Identity semanticErr_ThisSetIsNotAvailableInMemory() {return createIdentityInKernel("this set is not available in memory","this set has not been loaded", SemanticIdentityRegistry.semanticErr_ThisSetIsNotAvailableInMemory.ordinal());}
 	public final	Identity semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance() {return createIdentityInKernel("the Value is not an instance of a Variable of the isInformation of this Set" , "the Value is not an instance of a Variable of the isInformation of this Set", SemanticIdentityRegistry.semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance.ordinal());}
 	public final	Identity semanticErr_ValueIsNotAssigned() {return createIdentityInKernel("property is NOTASSIGNED" , "Property has not been assigned", SemanticIdentityRegistry.semanticErr_ValueIsNotAssigned.ordinal());}
-	public final	Identity semanticErr_VariableCantBeRemovedArtifactStillHasInstances() {return createIdentityInKernel("Variable can't be removed, container still has instances" , "Variable can't be removed, container still has instances", SemanticIdentityRegistry.semanticErr_VariableCantBeRemovedArtifactStillHasInstances.ordinal());}
+	public final	Identity semanticErr_VariableCantBeRemovedArtifactStillHasInstances() {return createIdentityInKernel("Variable can't be removed, container still has instances" , "Variable can't be removed, container still has instances", SemanticIdentityRegistry.semanticErr_VariableCantBeRemovedCategoryStillHasInstances.ordinal());}
 	public final    Identity semanticIdentity() {return createIdentityInKernel("semantic identity","semantic identities", SemanticIdentityRegistry.semanticIdentity.ordinal());}
 	public final    Identity semanticIdentitySet() {return createIdentityInKernel("semantic identity set","semantic identity sets", SemanticIdentityRegistry.semanticIdentitySet.ordinal());}
 	public final    Identity semanticRole() {return createIdentityInKernel("semantic role","semantic roles", SemanticIdentityRegistry.semanticRole.ordinal());}
@@ -329,6 +329,6 @@ public class IdentityFactory implements KernelIdentities {
 	public final    Identity variantIdentifier() {return createIdentityInKernel("variant identifier", "variant identifiers", SemanticIdentityRegistry.variantIdentifier.ordinal());}
 	public final 	Identity vertex() {return createIdentityInKernel("vertex" , "vertices", SemanticIdentityRegistry.vertex.ordinal());}
 	public final 	Identity visibility() {return createIdentityInKernel("visibility" , "visibilitis", SemanticIdentityRegistry.visibility.ordinal());}
-	public final	Identity visibleArtifactsForSubGraph() {return createIdentityInKernel("visibleArtifactsForSubGraph" , "visibleArtifactsForSubGraph", SemanticIdentityRegistry.visibleArtifactsForSubGraph.ordinal());}
+	public final	Identity visibleInstancesForSubGraph() {return createIdentityInKernel("visibleInstancesForSubGraph" , "visibleInstancesForSubGraph", SemanticIdentityRegistry.visibleInstancesForSubGraph.ordinal());}
 
 }

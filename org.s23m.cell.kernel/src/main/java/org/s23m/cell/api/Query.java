@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -25,14 +25,14 @@
 
 package org.s23m.cell.api;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.Visualization;
 import org.s23m.cell.core.Edge;
 import org.s23m.cell.core.EdgeEnd;
 import org.s23m.cell.core.F_Query;
-import org.s23m.cell.core.Link;
+import org.s23m.cell.core.Arrow;
 import org.s23m.cell.core.OrderedSet;
 import org.s23m.cell.core.SuperSetReference;
 import org.s23m.cell.core.Vertex;
@@ -41,8 +41,8 @@ import org.s23m.cell.core.Visibility;
 
 
 /**
- * {@link Query} provides access to the Sets and Properties of the Gmodel kernel
- * that constitute the basic Gmodel vocabulary.
+ * {@link Query} provides access to the Sets and Properties of the S23M kernel
+ * that constitute the basic S23M vocabulary.
  * 
  * Additionally F_SemanticStateOfInMemoryModel enables the creation of links between Sets,
  * and automatically attaches the link to the appropriate container Set.
@@ -50,9 +50,9 @@ import org.s23m.cell.core.Visibility;
  * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to LinkConstraints, IdentityFactory, CoreSets,
  * and KernelOrderedSets.
  * 
- * Extensions: Gmodel is designed to be extensible. All extensions that only involve a structural extension
- * of the meta model can be achieved by modelling the extension in Gmodel. Beyond such basic extensions,
- * Gmodel can be extended/modified by plugging in a different IdentityFactory and/or by writing a custom Shell.
+ * Extensions: S23M is designed to be extensible. All extensions that only involve a structural extension
+ * of the meta model can be achieved by modelling the extension in S23M. Beyond such basic extensions,
+ * S23M can be extended/modified by plugging in a different IdentityFactory and/or by writing a custom Shell.
  * Such extensions are created by creating a subclass of F_SemanticStateOfInMemoryModel that
  * 
  * 	(a) adds a method that references the appropriate SemanticIndentityFactory:
@@ -73,7 +73,7 @@ public class Query {
 
 	public static Set orderedSet = orderedSet();
 
-	public static Set link = link();
+	public static Set arrow = link();
 
 	public static Set superSetReference = superSetReference();
 	public static Set visibility = visibility();
@@ -86,24 +86,24 @@ public class Query {
 	}
 
 	private static Edge edge() {
-		return F_Query.edgeFlavor();
+		return F_Query.edge();
 	}
 	private static EdgeEnd edgeEnd() {
-		return F_Query.edgeEndFlavor();
+		return F_Query.edgeEnd();
 	}
 
 	public static Set find(final Set searchSpaceContainer, final Set searchSpaceDepth) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
 	public static Set find(final Set searchSpaceContainer, final Set searchSpaceDepth, final Set category) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
 
 	public static Set findByName(final String instanceNameFragment, final String categoryNameFragment, final String containerNameFragment) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
 	public static Set findDependentInstances(final Set category) {
 		return F_Query.findDependentInstances(category);
@@ -120,21 +120,21 @@ public class Query {
 
 	public static Set findFromSets(final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
-	public static Set findFromSets(final Set categoryOfLink, final Set toSet) {
+	public static Set findFromSets(final Set categoryOfArrow, final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
-	}
-
-	public static Set findFromSets(final Set categoryOfLink, final Set toEdgeEnd, final Set toSet) {
-		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
 
-	public static Set findFromSets(final Set categoryOfLink, final Set fromEdgeEnd, final Set toEdgeEnd, final Set toSet) {
+	public static Set findFromSets(final Set categoryOfArrow, final Set toEdgeEnd, final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
+	}
+
+	public static Set findFromSets(final Set categoryOfArrow, final Set fromEdgeEnd, final Set toEdgeEnd, final Set toSet) {
+		// TODO: implement
+		return S23MSemanticDomains.isEmpty;
 	}
 
 	public static Set findGraphVisualization(final Set set) {
@@ -144,17 +144,17 @@ public class Query {
 	public static Set findSet(final String uniqueRepresentationReference) {
 		return org.s23m.cell.core.F_Query.findSet(uniqueRepresentationReference);
 	}
-	public static Set findUniqueFromSet(final Set categoryOfLink, final Set toSet) {
+	public static Set findUniqueFromSet(final Set categoryOfArrow, final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
-	public static Set findUniqueFromSet(final Set categoryOfLink, final Set toEdgeEnd, final Set toSet) {
+	public static Set findUniqueFromSet(final Set categoryOfArrow, final Set toEdgeEnd, final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
-	public static Set findUniqueFromSet(final Set categoryOfLink, final Set fromEdgeEnd, final Set toEdgeEnd, final Set toSet) {
+	public static Set findUniqueFromSet(final Set categoryOfArrow, final Set fromEdgeEnd, final Set toEdgeEnd, final Set toSet) {
 		// TODO: implement
-		return GmodelSemanticDomains.isEmpty;
+		return S23MSemanticDomains.isEmpty;
 	}
 	private static Set graph() {
 		return F_Query.graph();
@@ -166,17 +166,17 @@ public class Query {
 
 	public static Set isLoadedInLocalMemory(final Set set) {
 		if (Query.inMemorySets().containsRepresentation(set)) {
-			return G.coreSets.is_TRUE;
-		} else {return G.coreSets.is_FALSE;
+			return S23MKernel.coreSets.is_TRUE;
+		} else {return S23MKernel.coreSets.is_FALSE;
 		}
 	}
 
-	private static Link link() {
-		return F_Query.linkFlavor();
+	private static Arrow link() {
+		return F_Query.arrow();
 	}
 
 	private static OrderedSet orderedSet() {
-		return F_Query.orderedSetFlavor();
+		return F_Query.orderedSet();
 	}
 
 	public static Set runtimeErrors() {
@@ -184,13 +184,13 @@ public class Query {
 	}
 
 	private static SuperSetReference superSetReference() {
-		return F_Query.superSetReferenceFlavor();
+		return F_Query.superSetReference();
 	}
 	private static Vertex vertex() {
-		return F_Query.vertexFlavor();
+		return F_Query.vertex();
 	}
 	private static Visibility visibility() {
-		return F_Query.visibilityFlavor();
+		return F_Query.visibility();
 	}
 
 }

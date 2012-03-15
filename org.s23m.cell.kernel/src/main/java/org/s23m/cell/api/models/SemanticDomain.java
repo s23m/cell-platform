@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,8 +25,8 @@
 
 package org.s23m.cell.api.models;
 
-import static org.s23m.cell.G.coreGraphs;
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Set;
@@ -45,7 +45,7 @@ public class SemanticDomain {
 	public static final Set disjunctSemanticIdentitySet = ((Graph)semanticdomain).addConcrete(coreGraphs.vertex, identityFactory.disjunctSemanticIdentitySet());
 	public static final Set variantDisjunctSemanticIdentitySet = ((Graph)semanticdomain).addConcrete(coreGraphs.vertex, identityFactory.variantDisjunctSemanticIdentitySet());
 
-	public static final Set semanticRole_to_equivalenceClass = F_Instantiation.link(coreGraphs.edge,
+	public static final Set semanticRole_to_equivalenceClass = F_Instantiation.arrow(coreGraphs.edge,
 			F_Instantiation.reuseSemanticIdentity(semanticRole.identity()),
 			semanticRole,
 			coreSets.minCardinality_0,
@@ -61,7 +61,7 @@ public class SemanticDomain {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set elements_to_disjunctSemanticIdentitySet = F_Instantiation.link(coreGraphs.edge,
+	public static final Set elements_to_disjunctSemanticIdentitySet = F_Instantiation.arrow(coreGraphs.edge,
 			F_Instantiation.reuseSemanticIdentity(identityFactory.element()),
 			disjunctSemanticIdentitySet,
 			coreSets.minCardinality_0,
@@ -77,7 +77,7 @@ public class SemanticDomain {
 			coreSets.isContainer_FALSE
 
 	);
-	public static final Set elements_to_semanticIdentitySet = F_Instantiation.link(coreGraphs.edge,
+	public static final Set elements_to_semanticIdentitySet = F_Instantiation.arrow(coreGraphs.edge,
 
 			F_Instantiation.reuseSemanticIdentity(identityFactory.element()),
 			semanticIdentity,
@@ -98,12 +98,12 @@ public class SemanticDomain {
 
 		// Instantiation level 1
 
-		F_Instantiation.link(coreGraphs.superSetReference, semanticIdentitySet, semanticIdentity);
-		F_Instantiation.link(coreGraphs.superSetReference, semanticRole, semanticIdentity);
-		F_Instantiation.link(coreGraphs.superSetReference, disjunctSemanticIdentitySet, semanticIdentity);
-		F_Instantiation.link(coreGraphs.superSetReference, variantDisjunctSemanticIdentitySet, disjunctSemanticIdentitySet);
+		F_Instantiation.arrow(coreGraphs.superSetReference, semanticIdentitySet, semanticIdentity);
+		F_Instantiation.arrow(coreGraphs.superSetReference, semanticRole, semanticIdentity);
+		F_Instantiation.arrow(coreGraphs.superSetReference, disjunctSemanticIdentitySet, semanticIdentity);
+		F_Instantiation.arrow(coreGraphs.superSetReference, variantDisjunctSemanticIdentitySet, disjunctSemanticIdentitySet);
 
-		final Set disjunctSemanticIdentitySet_to_semanticIdentitySet = F_Instantiation.link(coreGraphs.edge,
+		final Set disjunctSemanticIdentitySet_to_semanticIdentitySet = F_Instantiation.arrow(coreGraphs.edge,
 				F_Instantiation.reuseSemanticIdentity(disjunctSemanticIdentitySet.identity()),
 				disjunctSemanticIdentitySet,
 				coreSets.minCardinality_1,
@@ -117,7 +117,7 @@ public class SemanticDomain {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set disjunctSemanticIdentitySet_to_variantDisjunctSemanticIdentitySet = F_Instantiation.link(coreGraphs.edge,
+		final Set disjunctSemanticIdentitySet_to_variantDisjunctSemanticIdentitySet = F_Instantiation.arrow(coreGraphs.edge,
 				F_Instantiation.reuseSemanticIdentity(disjunctSemanticIdentitySet.identity()),
 				disjunctSemanticIdentitySet,
 				coreSets.minCardinality_1,
@@ -132,7 +132,7 @@ public class SemanticDomain {
 				coreSets.isContainer_FALSE
 		);
 
-		semanticIdentitySet.addToQueries(F_InstantiationImpl.createFunction(identityFactory.filterFlavor(), coreSets.flavor, coreSets.queryFunction));
+		semanticIdentitySet.addToQueries(F_InstantiationImpl.createFunction(identityFactory.filterFlavor(), coreSets.properClass, coreSets.queryFunction));
 
 		/**
 		 * semanticIdentitySet and disjunctSemanticIdentitySet commands

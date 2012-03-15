@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * SoftMetaWare Limited (SoftMetaWare).
@@ -26,17 +26,17 @@
 package org.s23m.cell.core;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.GmodelSemanticDomains;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 
 public final class F_Semantics {
 
 	private static Set transformToUniqueSemanticIdentity(final Set a) {
-		if (a.flavor().isEqualTo(GmodelSemanticDomains.orderedSet)) {
+		if (a.properClass().isEqualTo(S23MSemanticDomains.orderedSet)) {
 			final Set aS = a.transformToOrderedSetOfSemanticIdentities();
 			if (aS.size() == 1) {
 				return aS.extractFirst();
 			} else {
-				return GmodelSemanticDomains.is_NOTAPPLICABLE;
+				return S23MSemanticDomains.is_NOTAPPLICABLE;
 			}
 		}
 		else {

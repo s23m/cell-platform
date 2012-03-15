@@ -2,15 +2,15 @@ package org.s23m.cell.kernel.tests;
 
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
 import static org.s23m.cell.api.Query.vertex;
-import static org.s23m.cell.api.models.GmodelSemanticDomains.is_FALSE;
-import static org.s23m.cell.api.models.GmodelSemanticDomains.is_NOTAPPLICABLE;
-import static org.s23m.cell.api.models.GmodelSemanticDomains.is_TRUE;
-import static org.s23m.cell.api.models.GmodelSemanticDomains.is_UNKNOWN;
+import static org.s23m.cell.api.models.S23MSemanticDomains.is_FALSE;
+import static org.s23m.cell.api.models.S23MSemanticDomains.is_NOTAPPLICABLE;
+import static org.s23m.cell.api.models.S23MSemanticDomains.is_TRUE;
+import static org.s23m.cell.api.models.S23MSemanticDomains.is_UNKNOWN;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models2.RepositoryStructure;
 
-public class InformationQualityLogicTestB extends GmodelTestCase {
+public class InformationQualityLogicTestB extends S23MTestCase {
 
 	@Override
 	protected void executeInstantiationSequence() {

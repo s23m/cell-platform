@@ -35,7 +35,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import junit.framework.TestCase;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.w3c.dom.Document;
@@ -87,7 +87,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	private Document document;
 	
 	public XmlSchemaFactoryTest() {
-		G.boot();
+		S23MKernel.boot();
 		
 		kernelTypes = Arrays.asList(Query.edge, Query.graph, Query.vertex, Query.visibility);
 		

@@ -11,10 +11,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
  * Copyright (C) 2009-2011 Sofismo AG.
  * All Rights Reserved.
@@ -60,7 +60,7 @@ public class RepositoryClientMediator {
 	private boolean isLocallyDeployed() {
 		// TODO remove the need for this system property
 		return Boolean.valueOf(ConfigValues.getString("RepositoryClientServer.IS_LOCALLY_DEPLOYED")) ||
-				Boolean.valueOf(System.getProperty("gmodel.development.local.database"));
+				Boolean.valueOf(System.getProperty("S23M.development.local.database"));
 	}
 
 }

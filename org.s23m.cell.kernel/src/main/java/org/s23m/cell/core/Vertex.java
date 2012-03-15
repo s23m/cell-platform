@@ -11,12 +11,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Gmodel.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
- * Sofismo AG (Sofismo).
+ * The S23M Foundation.
  * Portions created by the Initial Developer are
- * Copyright (C) 2009-2012 Sofismo AG.
+ * Copyright (C) 2012 The S23M Foundation.
  * All Rights Reserved.
  *
  * Contributor(s):
@@ -25,11 +25,11 @@
 
 package org.s23m.cell.core;
 
-import static org.s23m.cell.G.coreGraphs;
-import static org.s23m.cell.G.coreSets;
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
-import org.s23m.cell.G;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
 import org.s23m.cell.SemanticStateOfInMemoryModel;
 import org.s23m.cell.Set;
@@ -38,9 +38,9 @@ import org.s23m.cell.impl.SemanticDomainCode;
 
 public class Vertex extends Graph {
 
-	/* Reify the Gmodel Vertex concept */
+	/* Reify the S23M Vertex concept */
 	public static final Vertex vertex = new Vertex();
-	/* Reify the Gmodel  SemanticIdentity concept */
+	/* Reify the S23M  SemanticIdentity concept */
 	private Graph container;
 
 	protected Vertex(final Graph container, final Identity semanticIdentity, final Set category) {
@@ -49,7 +49,7 @@ public class Vertex extends Graph {
 		this.setContainer(container);
 		Graph.addSetToInMemorySets(this);
 
-		if (SemanticStateOfInMemoryModel.gmodelEditorIsLive()) {
+		if (SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			(this.container()).setContainsNewSets(true);
 			Graph.addSetToChangedSets(this);
 			Graph.addSetToChangedSets(this.container());
@@ -63,7 +63,7 @@ public class Vertex extends Graph {
 		//this.addToVariables(coreSets.maxCardinality);
 		this.addToValues(coreSets.isAbstract_FALSE);
 		Graph.graph.addToVertices(this);
-		this.addFlavorQueries();
+		this.addProperClassQueries();
 		this.addCategoryQueries();
 		this.addCategoryCommands();
 
@@ -79,7 +79,7 @@ public class Vertex extends Graph {
 		this.container = artifact;
 	}
 	@Override
-	public Set flavor() {
+	public Set properClass() {
 		return coreGraphs.vertex;
 	}
 	/**
@@ -87,7 +87,7 @@ public class Vertex extends Graph {
 	 */
 	protected final void addCategoryCommands() {
 		if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
-			if (SemanticDomain.semanticIdentity.isSuperSetOf(this).isEqualTo(G.coreSets.is_TRUE)) {
+			if (SemanticDomain.semanticIdentity.isSuperSetOf(this).isEqualTo(S23MKernel.coreSets.is_TRUE)) {
 				this.addToCommands(coreSets.union);
 				this.addToCommands(coreSets.intersection);
 				this.addToCommands(coreSets.complement);
@@ -102,7 +102,7 @@ public class Vertex extends Graph {
 	 */
 	protected final void addCategoryQueries() {
 		if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
-			if (SemanticDomain.semanticIdentity.isSuperSetOf(this).isEqualTo(G.coreSets.is_TRUE)) {
+			if (SemanticDomain.semanticIdentity.isSuperSetOf(this).isEqualTo(S23MKernel.coreSets.is_TRUE)) {
 				this.addToCommands(coreSets.isElementOf);
 			}
 		}

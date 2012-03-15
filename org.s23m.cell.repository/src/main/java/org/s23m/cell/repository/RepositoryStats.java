@@ -20,8 +20,8 @@ import org.apache.commons.dbcp.PoolingDriver;
 import org.apache.commons.pool.KeyedObjectPoolFactory;
 import org.apache.commons.pool.impl.GenericKeyedObjectPoolFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.s23m.cell.serialization.Gmodel;
-import org.s23m.cell.serialization.Gmodel.Instance;
+import org.s23m.cell.serialization.S23M;
+import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.serializer.SerializationContent;
 import org.s23m.cell.statistics.Timer;
 import org.jetlang.channels.Channel;
@@ -52,7 +52,7 @@ public class RepositoryStats {
 			final PreparedStatement linkInsertStatement = (PreparedStatement) connection.prepareStatement("insert into link values (?, ?, ?, ?, ?, ?, ?)");
 
 			for (final SerializationContent artifact : artefacts) {
-				final Gmodel model = artifact.getModel();
+				final S23M model = artifact.getModel();
 				final Instance root = model.getInstance().get(0);
 				final String payload = root.getSemanticIdentity().getPayload() == null ? null : root.getSemanticIdentity().getPayload();
 
@@ -178,7 +178,7 @@ public class RepositoryStats {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/repository?"
 					+ "user=root&password=");
-			//connection = DriverManager.getConnection("jdbc:mysql://gmodeldemo.cmclk9pnjkez.us-east-1.rds.amazonaws.com/tmp?"
+			//connection = DriverManager.getConnection("jdbc:mysql://S23Mdemo.cmclk9pnjkez.us-east-1.rds.amazonaws.com/tmp?"
 			//		+ "user=adminrds&password=biF3ld896i");
 			//Multiple statements are grouped into a single transaction
 			connection.setAutoCommit(false);
