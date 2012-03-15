@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.s23m.cell.cellplatform
+Bundle-Name: org.s23m.cell.platform
 Bundle-SymbolicName: org.s23m.cell.platform;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
