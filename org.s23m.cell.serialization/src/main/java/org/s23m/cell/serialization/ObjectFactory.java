@@ -41,7 +41,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link S23M }
+     * Create an instance of {@arrow S23M }
      * 
      */
     public S23M createS23M() {
@@ -49,7 +49,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link OrderedPair }
+     * Create an instance of {@arrow OrderedPair }
      * 
      */
     public OrderedPair createOrderedPair() {
@@ -57,7 +57,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Instance }
+     * Create an instance of {@arrow Instance }
      * 
      */
     public Instance createS23MInstance() {
@@ -65,7 +65,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link VariableType }
+     * Create an instance of {@arrow VariableType }
      * 
      */
     public VariableType createVariableType() {
@@ -73,7 +73,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Values }
+     * Create an instance of {@arrow Values }
      * 
      */
     public Values createInstanceTypeValues() {
@@ -81,7 +81,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Variables }
+     * Create an instance of {@arrow Variables }
      * 
      */
     public Variables createInstanceTypeVariables() {
@@ -89,7 +89,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InstanceType }
+     * Create an instance of {@arrow InstanceType }
      * 
      */
     public InstanceType createInstanceType() {
@@ -97,7 +97,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link QueryType }
+     * Create an instance of {@arrow QueryType }
      * 
      */
     public QueryType createQueryType() {
@@ -105,7 +105,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link VisibilityType }
+     * Create an instance of {@arrow VisibilityType }
      * 
      */
     public VisibilityType createVisibilityType() {
@@ -113,7 +113,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SuperSetReferenceType }
+     * Create an instance of {@arrow SuperSetReferenceType }
      * 
      */
     public SuperSetReferenceType createSuperSetReferenceType() {
@@ -121,7 +121,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CommandType }
+     * Create an instance of {@arrow CommandType }
      * 
      */
     public CommandType createCommandType() {
@@ -129,7 +129,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LinkType }
+     * Create an instance of {@arrow LinkType }
      * 
      */
     public LinkType createLinkType() {
@@ -137,7 +137,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EdgeType }
+     * Create an instance of {@arrow EdgeType }
      * 
      */
     public EdgeType createEdgeType() {
@@ -145,7 +145,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SemanticIdType }
+     * Create an instance of {@arrow SemanticIdType }
      * 
      */
     public SemanticIdType createSemanticIdType() {
@@ -153,7 +153,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EdgeEnd }
+     * Create an instance of {@arrow EdgeEnd }
      * 
      */
     public EdgeEnd createEdgeTypeEdgeEnd() {
@@ -161,7 +161,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EdgeTraceType }
+     * Create an instance of {@arrow EdgeTraceType }
      * 
      */
     public EdgeTraceType createEdgeTraceType() {
@@ -169,7 +169,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ValueType }
+     * Create an instance of {@arrow ValueType }
      * 
      */
     public ValueType createValueType() {

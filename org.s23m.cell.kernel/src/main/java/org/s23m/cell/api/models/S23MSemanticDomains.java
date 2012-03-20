@@ -122,28 +122,26 @@ public class S23MSemanticDomains {
 	public static final Set kernelDefect_KernelHasReachedAnIllegalState = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.kernelDefect_KernelHasReachedAnIllegalState);
 
 	public static final Set semanticErr = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr);
-	public static final Set semanticErr_OnlyEdgeMembersHaveEdgeEndFlavors = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors);
-	public static final Set semanticErr_OnlyEdgeMembersHaveConnectedRoles = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles);
-	public static final Set semanticErr_OnlyEdgeMembersHaveConnectedInstances = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances);
-	public static final Set semanticErr_OnlyVisibilityMembersHaveFromSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph);
-	public static final Set semanticErr_OnlyVisibilityMembersHaveToSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph);
-	public static final Set semanticErr_OnlySuperSetReferenceMembersHaveSuperSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet);
-	public static final Set semanticErr_OnlySuperSetReferenceMembersHaveSubSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet);
-	public static final Set semanticErr_OnlyEdgeTraceMembersHaveAbstraction = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction);
-	public static final Set semanticErr_OnlyEdgeTraceMembersHaveDetail = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail);
-	public static final Set semanticErr_OnlyEdgeEndMembersHaveEdgeEndVertex = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex);
+	public static final Set semanticErr_OnlyEdgeMembersHaveEdgeEnds = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeInstancesHaveEdgeEnds);
+	public static final Set semanticErr_OnlyEdgeMembersHaveConnectedRoles = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeInstancesHaveConnectedRoles);
+	public static final Set semanticErr_OnlyEdgeMembersHaveConnectedInstances = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeInstancesHaveConnectedInstances);
+	public static final Set semanticErr_OnlyVisibilityMembersHaveFromSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyVisibilityInstancesHaveFromSubGraph);
+	public static final Set semanticErr_OnlyVisibilityMembersHaveToSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyVisibilityInstancesHaveToSubGraph);
+	public static final Set semanticErr_OnlySuperSetReferenceMembersHaveSuperSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlySuperSetReferenceInstancesHaveSuperSet);
+	public static final Set semanticErr_OnlySuperSetReferenceMembersHaveSubSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlySuperSetReferenceInstancesHaveSubSet);
+	public static final Set semanticErr_OnlyEdgeEndMembersHaveEdgeEndVertex = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndInstancesHaveEdgeEndVertex);
 	public static final Set semanticErr_OnlyInstancesHaveIsAbstract = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyInstancesHaveIsAbstract);
-	public static final Set semanticErr_OnlyEdgeEndMambersHaveMinCardinality = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality);
-	public static final Set semanticErr_OnlyEdgeEndMembersHaveMaxCardinality = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality);
-	public static final Set semanticErr_OnlyEdgeEndMambersHaveIsContainer = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer);
-	public static final Set semanticErr_OnlyEdgeEndMembersHaveIsNavigable = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable);
+	public static final Set semanticErr_OnlyEdgeEndMambersHaveMinCardinality = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndInstancesHaveMinCardinality);
+	public static final Set semanticErr_OnlyEdgeEndMembersHaveMaxCardinality = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndInstancesHaveMaxCardinality);
+	public static final Set semanticErr_OnlyEdgeEndMambersHaveIsContainer = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndInstancesHaveIsContainer);
+	public static final Set semanticErr_OnlyEdgeEndMembersHaveIsNavigable = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_OnlyEdgeEndInstancesHaveIsNavigable);
 	public static final Set semanticErr_ValueIsNotAssigned = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_ValueIsNotAssigned);
-	public static final Set semanticErr_LinkIsNotApplicable = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_LinkIsNotApplicable);
+	public static final Set semanticErr_ArrowIsNotApplicable = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_ArrowIsNotApplicable);
 	public static final Set semanticErr_TargetIsNotWithinVisibility = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_TargetIsNotWithinVisibility);
-	public static final Set semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor);
-	public static final Set semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor);
+	public static final Set semanticErr_AddConcreteIsOnlyValidForConcreteVertex = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertex);
+	public static final Set semanticErr_AddAbstractIsOnlyValidForAbstractVertex = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertex);
 	public static final Set semanticErr_GraphGraphCantBeModified = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_GraphGraphCantBeModified);
-	public static final Set semanticErr_VariableCantBeRemovedArtifactStillHasInstances = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_VariableCantBeRemovedArtifactStillHasInstances);
+	public static final Set semanticErr_VariableCantBeRemovedCategoryStillHasInstances = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_VariableCantBeRemovedCategoryStillHasInstances);
 	public static final Set semanticErr_GraphsCantBeDecommissioned = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_GraphsCantBeDecommissioned);
 	public static final Set semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance);
 	public static final Set semanticErr_maxFromCardinalityIsOne = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.semanticErr_maxFromCardinalityIsOne);
@@ -168,13 +166,13 @@ public class S23MSemanticDomains {
 	public static final Set properClassQueryFunction = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.properClassQueryFunction);
 
 	/**
-	 * OrderedPairFlavor queries
+	 * OrderedPair queries
 	 */
 	public static final Set identity = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.identity);
 	public static final Set isEqualTo = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.isEqualTo);
 
 	/**
-	 * OrderedSetFlavor queries
+	 * OrderedSet queries
 	 */
 	public static final Set contains = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.contains);
 	public static final Set containsAll = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.containsAll);
@@ -189,11 +187,11 @@ public class S23MSemanticDomains {
 	public static final Set toArrayInstance = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.toArrayInstance);
 
 	/**
-	 * GraphFlavor commands
+	 * Graph commands
 	 */
 	public static final Set addAbstract = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addAbstract);
 	public static final Set addConcrete = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addConcrete);
-	public static final Set isALink = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addAbstractSubGraph);
+	public static final Set isAnArrow = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addAbstractSubGraph);
 	public static final Set addConcreteSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.isASemanticIdentity);
 	public static final Set addToVariables = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addToVariables);
 	public static final Set addToValues = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.addToValues);
@@ -205,18 +203,18 @@ public class S23MSemanticDomains {
 	public static final Set setPropertyValue = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.setValue);
 
 	/**
-	 * GraphFlavor, VertexFlavor, EdgeEndFlavor queries
+	 * Graph, Vertex, EdgeEnd queries
 	 */
 
-	public static final Set artifact = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.container);
+	public static final Set instance = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.container);
 	public static final Set categorizedSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filter);
 	public static final Set containsEdgeFromOrTo = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.containsEdgeFromOrTo);
-	public static final Set filterMembersOfProperClass = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filterFlavor);
+	public static final Set filterMembersOfProperClass = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filterProperClass);
 	public static final Set hasVisibilityOf = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.hasVisibilityOf);
 	public static final Set instanceSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filterInstances);
 	public static final Set isSuperSetOf = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.isSuperSetOf);
 	public static final Set isLocalSuperSetOf = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.isLocalSuperSetOf);
-	public static final Set linkSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filterLinks);
+	public static final Set arrowSet = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.filterArrows);
 	public static final Set localRootSuperSetOf = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.localRootSuperSetOf);
 	public static final Set directSuperSetOf = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.directSuperSetOf);
 	public static final Set category = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.category);
@@ -224,14 +222,14 @@ public class S23MSemanticDomains {
 	public static final Set variables = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.variables);
 	public static final Set value = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.value);
 	public static final Set values = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.values);
-	public static final Set visibleArtifactsForSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.visibleArtifactsForSubGraph);
+	public static final Set visibleInstancesForSubGraph = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.visibleInstancesForSubGraph);
 
 	/**
 	 * F_SemanticStateOfInMemoryModel commands
 	 */
 
 	/**
-	 * LinkFlavor queries
+	 * Arrow queries
 	 */
 
 	public static final Set from = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.from);
@@ -239,7 +237,7 @@ public class S23MSemanticDomains {
 	public static final Set to = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.to);
 
 	/**
-	 * EdgeFlavor queries
+	 * Edge queries
 	 */
 
 	public static final Set edgeEnds = ((Graph)cellKernel).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, coreSets.edgeEnds);
@@ -391,15 +389,13 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(kernelDefect_KernelHasReachedAnIllegalState);
 
 		Graph.addSetToInMemorySets(semanticErr);
-		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeMembersHaveEdgeEndFlavors);
+		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeMembersHaveEdgeEnds);
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeMembersHaveConnectedRoles);
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeMembersHaveConnectedInstances);
 		Graph.addSetToInMemorySets(semanticErr_OnlyVisibilityMembersHaveFromSubGraph);
 		Graph.addSetToInMemorySets(semanticErr_OnlyVisibilityMembersHaveToSubGraph);
 		Graph.addSetToInMemorySets(semanticErr_OnlySuperSetReferenceMembersHaveSuperSet);
 		Graph.addSetToInMemorySets(semanticErr_OnlySuperSetReferenceMembersHaveSubSet);
-		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeTraceMembersHaveAbstraction);
-		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeTraceMembersHaveDetail);
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeEndMembersHaveEdgeEndVertex);
 		Graph.addSetToInMemorySets(semanticErr_OnlyInstancesHaveIsAbstract);
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeEndMambersHaveMinCardinality);
@@ -407,12 +403,12 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeEndMambersHaveIsContainer);
 		Graph.addSetToInMemorySets(semanticErr_OnlyEdgeEndMembersHaveIsNavigable);
 		Graph.addSetToInMemorySets(semanticErr_ValueIsNotAssigned);
-		Graph.addSetToInMemorySets(semanticErr_LinkIsNotApplicable);
+		Graph.addSetToInMemorySets(semanticErr_ArrowIsNotApplicable);
 		Graph.addSetToInMemorySets(semanticErr_TargetIsNotWithinVisibility);
-		Graph.addSetToInMemorySets(semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor);
-		Graph.addSetToInMemorySets(semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor);
+		Graph.addSetToInMemorySets(semanticErr_AddConcreteIsOnlyValidForConcreteVertex);
+		Graph.addSetToInMemorySets(semanticErr_AddAbstractIsOnlyValidForAbstractVertex);
 		Graph.addSetToInMemorySets(semanticErr_GraphGraphCantBeModified);
-		Graph.addSetToInMemorySets(semanticErr_VariableCantBeRemovedArtifactStillHasInstances);
+		Graph.addSetToInMemorySets(semanticErr_VariableCantBeRemovedCategoryStillHasInstances);
 		Graph.addSetToInMemorySets(semanticErr_GraphsCantBeDecommissioned);
 		Graph.addSetToInMemorySets(semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance);
 		Graph.addSetToInMemorySets(semanticErr_maxFromCardinalityIsOne);
@@ -442,7 +438,7 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(properClassQueryFunction);
 
 		/**
-		 * OrderedPairFlavor queries
+		 * OrderedPair queries
 		 */
 
 		Graph.addSetToInMemorySets(identity);
@@ -450,7 +446,7 @@ public class S23MSemanticDomains {
 
 
 		/**
-		 * OrderedSetFlavor queries
+		 * OrderedSet queries
 		 */
 
 		Graph.addSetToInMemorySets(contains);
@@ -466,12 +462,12 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(toArrayInstance);
 
 		/**
-		 * GraphFlavor commands
+		 * Graph commands
 		 */
 
 		Graph.addSetToInMemorySets(addAbstract);
 		Graph.addSetToInMemorySets(addConcrete);
-		Graph.addSetToInMemorySets(isALink);
+		Graph.addSetToInMemorySets(isAnArrow);
 		Graph.addSetToInMemorySets(addConcreteSubGraph);
 		Graph.addSetToInMemorySets(addToVariables);
 		Graph.addSetToInMemorySets(addToValues);
@@ -483,10 +479,10 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(setPropertyValue);
 
 		/**
-		 * GraphFlavor, VertexFlavor, EdgeEndFlavor queries
+		 * Graph, Vertex, EdgeEnd queries
 		 */
 
-		Graph.addSetToInMemorySets(artifact);
+		Graph.addSetToInMemorySets(instance);
 		Graph.addSetToInMemorySets(categorizedSet);
 		Graph.addSetToInMemorySets(containsEdgeFromOrTo);
 		Graph.addSetToInMemorySets(filterMembersOfProperClass);
@@ -494,7 +490,7 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(instanceSet);
 		Graph.addSetToInMemorySets(isSuperSetOf);
 		Graph.addSetToInMemorySets(isLocalSuperSetOf);
-		Graph.addSetToInMemorySets(linkSet);
+		Graph.addSetToInMemorySets(arrowSet);
 		Graph.addSetToInMemorySets(localRootSuperSetOf);
 		Graph.addSetToInMemorySets(directSuperSetOf);
 		Graph.addSetToInMemorySets(category);
@@ -502,10 +498,10 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(variables);
 		Graph.addSetToInMemorySets(value);
 		Graph.addSetToInMemorySets(values);
-		Graph.addSetToInMemorySets(visibleArtifactsForSubGraph);
+		Graph.addSetToInMemorySets(visibleInstancesForSubGraph);
 
 		/**
-		 * LinkFlavor queries
+		 * Arrow queries
 		 */
 
 		Graph.addSetToInMemorySets(from);
@@ -513,7 +509,7 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(to);
 
 		/**
-		 * EdgeFlavor queries
+		 * Edge queries
 		 */
 
 		Graph.addSetToInMemorySets(edgeEnds);

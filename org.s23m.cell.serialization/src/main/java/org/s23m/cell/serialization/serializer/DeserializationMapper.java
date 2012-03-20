@@ -110,7 +110,7 @@ public class DeserializationMapper {
 			// Jorn: no need for a special case
 			// TODO: Chul to confirm
 			// } else {
-			final Set newEdge = org.s23m.cell.api.serializerinterface.Reconstitution.reconstituteLink(
+			final Set newEdge = org.s23m.cell.api.serializerinterface.Reconstitution.reconstituteArrow(
 					instanceMap.getBuiltInstance(edge.getMetaElement()).identity(),
 					InstanceBuilder.buildIdentity(edge.getSemanticIdentity()),
 					InstanceBuilder.buildIdentity(ee1.getSemanticIdentity()),
@@ -150,7 +150,7 @@ public class DeserializationMapper {
 				final Identity id = Reconstitution.reconstituteIdentity(sId.getName(), sId.getPluralName(), UUID.fromString(sId.getIdentifier()), UUID.fromString(sId.getUniqueRepresentationReference()));
 				final Identity subSetId = Reconstitution.reconstituteIdentity("", "", UUID.fromString(superRef.getSubSetInstance()), UUID.fromString(superRef.getSubSetInstance()));
 				final Identity superSetId = Reconstitution.reconstituteIdentity("", "", UUID.fromString(superRef.getSuperSetInstance()), UUID.fromString(superRef.getSuperSetInstance()));
-				final Set sRef = Reconstitution.reconstituteLink(coreGraphs.superSetReference.identity(),
+				final Set sRef = Reconstitution.reconstituteArrow(coreGraphs.superSetReference.identity(),
 						id,
 						subSetId,
 						superSetId);
@@ -173,7 +173,7 @@ public class DeserializationMapper {
 				final Identity id = Reconstitution.reconstituteIdentity(sId.getName(), sId.getPluralName(), UUID.fromString(sId.getIdentifier()), UUID.fromString(sId.getUniqueRepresentationReference()));
 				final Identity sourceId = Reconstitution.reconstituteIdentity("", "", UUID.fromString(v.getSourceInstance()), UUID.fromString(v.getSourceInstance()));
 				final Identity targeId = Reconstitution.reconstituteIdentity("", "", UUID.fromString(v.getTargetInstance()), UUID.fromString(v.getTargetInstance()));
-				final Set vLink = Reconstitution.reconstituteLink(coreGraphs.visibility.identity(),
+				final Set vLink = Reconstitution.reconstituteArrow(coreGraphs.visibility.identity(),
 						id,
 						sourceId,
 						targeId);

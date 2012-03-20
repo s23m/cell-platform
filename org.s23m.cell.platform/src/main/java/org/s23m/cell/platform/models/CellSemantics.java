@@ -33,10 +33,10 @@ import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
 /**
- * {@link CellSemantics} implements all instantiation semantics related to the modelling of container state machines
- * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
+ * {@arrow CellSemantics} implements all instantiation semantics related to the modelling of container state machines
+ * that must be enforced for all Instances/cells (instantiation level n, with n > 0)
  *
- * The semantics enforced in Artifact provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
+ * The semantics enforced in Cell provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
  */
 public final class CellSemantics {
 
@@ -47,8 +47,8 @@ public final class CellSemantics {
 
 	// the S23M semantics state machine, tied to the S23MSemanticLifecycle
 	//public static final Set S23MSemantics = F_SemanticStateOfInMemoryModel.instantiateConcrete(Artifact.artifact, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.S23M));
-	public static final Set s23mSemantics = Root.cellengineering.addConcrete(Cell.artifact, Instantiation.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.cellKernel));
-	public static final Set s23mSemantics_to_lifecycle = Instantiation.arrow(Cell.artifact_to_lifeCycle,
+	public static final Set s23mSemantics = Root.cellengineering.addConcrete(Cell.cell, Instantiation.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.cellKernel));
+	public static final Set s23mSemantics_to_lifecycle = Instantiation.arrow(Cell.cell_to_lifeCycle,
 			Instantiation.addDisjunctSemanticIdentitySet("S23MSemantics_to_lifecycle", "S23MSemantics_to_lifecycle", S23MSemanticDomains.cellKernel),
 			s23mSemantics,
 			s23mSemantics,
@@ -69,9 +69,9 @@ public final class CellSemantics {
 		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, Root.models, S23MSemanticLifecycle);
 
 		// initialization of the S23M semantics state machine with the semanticDomainInitialized state
-		final Set state = Instantiation.arrow(Cell.artifact_to_state,
+		final Set state = Instantiation.arrow(Cell.cell_to_state,
 				Instantiation.addDisjunctSemanticIdentitySet("S23MSemantics_to_state", "S23MSemantics_to_state", S23MSemanticDomains.cellKernel),
-				Cell.artifact,
+				Cell.cell,
 				s23mSemantics,
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,

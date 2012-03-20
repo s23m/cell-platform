@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence maxOccurs="unbounded" minOccurs="0">
  *         &lt;element name="visibility" type="{http://schemas.S23M.org/serialization/2010}visibilityType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="edge" type="{http://schemas.S23M.org/serialization/2010}edgeType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="edgeTrace" type="{http://schemas.S23M.org/serialization/2010}edgeTraceType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="DEPRECATED_edgeTrace" type="{http://schemas.S23M.org/serialization/2010}edgeTraceType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="superSetReference" type="{http://schemas.S23M.org/serialization/2010}superSetReferenceType" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
 public class LinkType {
 
     @XmlElements({
-        @XmlElement(name = "edgeTrace", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = EdgeTraceType.class),
+        @XmlElement(name = "DEPRECATED_edgeTrace", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = EdgeTraceType.class),
         @XmlElement(name = "edge", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = EdgeType.class),
         @XmlElement(name = "visibility", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = VisibilityType.class),
         @XmlElement(name = "superSetReference", namespace = "http://schemas.S23M.org/serialization/2010", required = true, type = SuperSetReferenceType.class)
@@ -71,10 +71,10 @@ public class LinkType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link EdgeTraceType }
-     * {@link EdgeType }
-     * {@link VisibilityType }
-     * {@link SuperSetReferenceType }
+     * {@arrow EdgeTraceType }
+     * {@arrow EdgeType }
+     * {@arrow VisibilityType }
+     * {@arrow SuperSetReferenceType }
      * 
      * 
      */

@@ -89,28 +89,26 @@ public final class KernelSets {
 	public final Set kernelDefect_KernelHasReachedAnIllegalState;
 
 	public final Set semanticErr;
-	public final Set semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors;
-	public final Set semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles;
-	public final Set semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances;
-	public final Set semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph;
-	public final Set semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph;
-	public final Set semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet;
-	public final Set semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet;
-	public final Set semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction;
-	public final Set semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail;
-	public final Set semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex;
+	public final Set semanticErr_OnlyEdgeInstancesHaveEdgeEnds;
+	public final Set semanticErr_OnlyEdgeInstancesHaveConnectedRoles;
+	public final Set semanticErr_OnlyEdgeInstancesHaveConnectedInstances;
+	public final Set semanticErr_OnlyVisibilityInstancesHaveFromSubGraph;
+	public final Set semanticErr_OnlyVisibilityInstancesHaveToSubGraph;
+	public final Set semanticErr_OnlySuperSetReferenceInstancesHaveSuperSet;
+	public final Set semanticErr_OnlySuperSetReferenceInstancesHaveSubSet;
+	public final Set semanticErr_OnlyEdgeEndInstancesHaveEdgeEndVertex;
 	public final Set semanticErr_OnlyInstancesHaveIsAbstract;
-	public final Set semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality;
-	public final Set semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality;
-	public final Set semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer;
-	public final Set semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable;
+	public final Set semanticErr_OnlyEdgeEndInstancesHaveMinCardinality;
+	public final Set semanticErr_OnlyEdgeEndInstancesHaveMaxCardinality;
+	public final Set semanticErr_OnlyEdgeEndInstancesHaveIsContainer;
+	public final Set semanticErr_OnlyEdgeEndInstancesHaveIsNavigable;
 	public final Set semanticErr_ValueIsNotAssigned;
-	public final Set semanticErr_LinkIsNotApplicable;
+	public final Set semanticErr_ArrowIsNotApplicable;
 	public final Set semanticErr_TargetIsNotWithinVisibility;
-	public final Set semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor;
-	public final Set semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor;
+	public final Set semanticErr_AddConcreteIsOnlyValidForConcreteVertex;
+	public final Set semanticErr_AddAbstractIsOnlyValidForAbstractVertex;
 	public final Set semanticErr_GraphGraphCantBeModified;
-	public final Set semanticErr_VariableCantBeRemovedArtifactStillHasInstances;
+	public final Set semanticErr_VariableCantBeRemovedCategoryStillHasInstances;
 	public final Set semanticErr_GraphsCantBeDecommissioned;
 	public final Set semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance;
 	public final Set semanticErr_maxFromCardinalityIsOne;
@@ -144,17 +142,17 @@ public final class KernelSets {
 	public final Set properClassQueryFunction ;
 
 	/**
-	 * OrderedPairFlavor queries
+	 * OrderedPair queries
 	 */
 
-	//public final Set flavor;
+	//public final Set ;
 	public final Set identity ;
 	public final Set isEqualTo ;
 	public final Set semanticIdentity;
 
 	//public final Set isInformation ;
 	/**
-	 * OrderedSetFlavor commands
+	 * OrderedSet commands
 	 */
 
 	public final Set union;
@@ -162,7 +160,7 @@ public final class KernelSets {
 	public final Set complement;
 
 	/**
-	 * OrderedSetFlavor queries
+	 * OrderedSet queries
 	 */
 
 	public final Set contains ;
@@ -179,7 +177,7 @@ public final class KernelSets {
 	public final Set indexOfIdentifier;
 
 	/**
-	 * GraphFlavor commands
+	 * Graph commands
 	 */
 
 	public final Set addAbstract ;
@@ -209,18 +207,18 @@ public final class KernelSets {
 	 */
 	public final Set isElementOf;
 	/**
-	 * GraphFlavor, VertexFlavor, EdgeEndFlavor queries
+	 * Graph, Vertex, EdgeEnd queries
 	 */
 
 	public final Set container ;
 	public final Set filter ;
 	public final Set containsEdgeFromOrTo ;
-	public final Set filterFlavor;
+	public final Set filterProperClass;
 	public final Set hasVisibilityOf ;
 	public final Set filterInstances ;
 	public final Set isSuperSetOf ;
 	public final Set isLocalSuperSetOf ;
-	public final Set filterLinks ;
+	public final Set filterArrows ;
 	public final Set localRootSuperSetOf ;
 	public final Set directSuperSetOf ;
 	public final Set category ;
@@ -228,7 +226,7 @@ public final class KernelSets {
 	public final Set variables ;
 	public final Set value ;
 	public final Set values ;
-	public final Set visibleArtifactsForSubGraph ;
+	public final Set visibleInstancesForSubGraph ;
 	public final Set allowableEdgeCategories;
 	public final Set filterPolymorphic;
 	public final Set queries ;
@@ -238,7 +236,7 @@ public final class KernelSets {
 
 
 	/**
-	 * LinkFlavor queries
+	 * Arrow queries
 	 */
 
 	public final Set from ;
@@ -246,7 +244,7 @@ public final class KernelSets {
 	public final Set to;
 
 	/**
-	 * EdgeFlavor queries
+	 * Edge queries
 	 */
 
 	public final Set edgeEnds;
@@ -324,28 +322,26 @@ public final class KernelSets {
 		kernelDefect_KernelHasReachedAnIllegalState = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.kernelDefect_KernelHasReachedAnIllegalState(), kernelDefect);
 
 		semanticErr = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr(), orderedPair);
-		semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors(), semanticErr);
-		semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles(), semanticErr);
-		semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances(), semanticErr);
-		semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph(), semanticErr);
-		semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph(), semanticErr);
-		semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet(), semanticErr);
-		semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet(), semanticErr);
-		semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction(), semanticErr);
-		semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail(), semanticErr);
-		semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex(), semanticErr);
+		semanticErr_OnlyEdgeInstancesHaveEdgeEnds = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeInstancesHaveEdgeEnds(), semanticErr);
+		semanticErr_OnlyEdgeInstancesHaveConnectedRoles = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeInstancesHaveConnectedRoles(), semanticErr);
+		semanticErr_OnlyEdgeInstancesHaveConnectedInstances = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeInstancesHaveConnectedInstances(), semanticErr);
+		semanticErr_OnlyVisibilityInstancesHaveFromSubGraph = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyVisibilityInstancesHaveFromSubGraph(), semanticErr);
+		semanticErr_OnlyVisibilityInstancesHaveToSubGraph = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyVisibilityInstancesHaveToSubGraph(), semanticErr);
+		semanticErr_OnlySuperSetReferenceInstancesHaveSuperSet = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlySuperSetReferenceInstancesHaveSuperSet(), semanticErr);
+		semanticErr_OnlySuperSetReferenceInstancesHaveSubSet = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlySuperSetReferenceInstancesHaveSubSet(), semanticErr);
+		semanticErr_OnlyEdgeEndInstancesHaveEdgeEndVertex = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndInstancesHaveEdgeEndVertex(), semanticErr);
 		semanticErr_OnlyInstancesHaveIsAbstract = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyInstancesHaveIsAbstract(), semanticErr);
-		semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality(), semanticErr);
-		semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality(), semanticErr);
-		semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer(), semanticErr);
-		semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable(), semanticErr);
+		semanticErr_OnlyEdgeEndInstancesHaveMinCardinality = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndInstancesHaveMinCardinality(), semanticErr);
+		semanticErr_OnlyEdgeEndInstancesHaveMaxCardinality = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndInstancesHaveMaxCardinality(), semanticErr);
+		semanticErr_OnlyEdgeEndInstancesHaveIsContainer = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndInstancesHaveIsContainer(), semanticErr);
+		semanticErr_OnlyEdgeEndInstancesHaveIsNavigable = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyEdgeEndInstancesHaveIsNavigable(), semanticErr);
 		semanticErr_ValueIsNotAssigned = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_ValueIsNotAssigned(), semanticErr);
-		semanticErr_LinkIsNotApplicable = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_LinkIsNotApplicable(), semanticErr);
+		semanticErr_ArrowIsNotApplicable = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_ArrowIsNotApplicable(), semanticErr);
 		semanticErr_TargetIsNotWithinVisibility = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_TargetIsNotWithinVisibility(), semanticErr);
-		semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor(), semanticErr);
-		semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor(), semanticErr);
+		semanticErr_AddConcreteIsOnlyValidForConcreteVertex = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_AddConcreteIsOnlyValidForConcreteVertex(), semanticErr);
+		semanticErr_AddAbstractIsOnlyValidForAbstractVertex = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_AddAbstractIsOnlyValidForAbstractVertex(), semanticErr);
 		semanticErr_GraphGraphCantBeModified = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_GraphGraphCantBeModified(), semanticErr);
-		semanticErr_VariableCantBeRemovedArtifactStillHasInstances = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_VariableCantBeRemovedArtifactStillHasInstances(), semanticErr);
+		semanticErr_VariableCantBeRemovedCategoryStillHasInstances = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_VariableCantBeRemovedCategoryStillHasInstances(), semanticErr);
 		semanticErr_GraphsCantBeDecommissioned = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_GraphsCantBeDecommissioned(), semanticErr);
 		semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance(), semanticErr);
 		semanticErr_maxFromCardinalityIsOne = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_maxFromCardinalityIsOne(), semanticErr);
@@ -394,7 +390,7 @@ public final class KernelSets {
 		properClassQueryFunction = F_InstantiationImpl.createOrderedPair(identityFactory.properClassQueryFunction(), query) ;
 
 		/**
-		 * OrderedPairFlavor queries
+		 * OrderedPair queries
 		 */
 		identity = F_InstantiationImpl.createFunction(identityFactory.identity(), properClassQueryFunction) ;
 		isEqualTo = F_InstantiationImpl.createFunction(identityFactory.isEqualTo(), properClassQueryFunction) ;
@@ -403,14 +399,14 @@ public final class KernelSets {
 		isInformation = F_InstantiationImpl.createFunction(identityFactory.isInformation(), query);
 
 		/**
-		 * OrderedSetFlavor commands
+		 * OrderedSet commands
 		 */
 		union = F_InstantiationImpl.createFunction(identityFactory.union(), properClassCommandFunction) ;
 		intersection = F_InstantiationImpl.createFunction(identityFactory.intersection(), properClassCommandFunction) ;
 		complement = F_InstantiationImpl.createFunction(identityFactory.complement(), properClassCommandFunction) ;
 
 		/**
-		 * OrderedSetFlavor queries
+		 * OrderedSet queries
 		 */
 		contains = F_InstantiationImpl.createFunction(identityFactory.contains(), properClassQueryFunction) ;
 		containsAll = F_InstantiationImpl.createFunction(identityFactory.containsAll(), properClassQueryFunction) ;
@@ -436,11 +432,11 @@ public final class KernelSets {
 		isElementOf = F_InstantiationImpl.createFunction(identityFactory.isElementOf(), queryFunction) ;
 
 		/**
-		 * GraphFlavor commands
+		 * Graph commands
 		 */
 		addAbstract = F_InstantiationImpl.createFunction(identityFactory.addAbstract(), properClassCommandFunction) ;
 		addConcrete = F_InstantiationImpl.createFunction(identityFactory.addConcrete(), properClassCommandFunction) ;
-		addAbstractSubGraph = F_InstantiationImpl.createFunction(identityFactory.isALink(), properClassCommandFunction) ;
+		addAbstractSubGraph = F_InstantiationImpl.createFunction(identityFactory.isAnArrow(), properClassCommandFunction) ;
 		addToVariables = F_InstantiationImpl.createFunction(identityFactory.addToVariables(), properClassCommandFunction) ;
 		addToValues = F_InstantiationImpl.createFunction(identityFactory.addToValues(), properClassCommandFunction) ;
 		decommission = F_InstantiationImpl.createFunction(identityFactory.decommission(), properClassCommandFunction) ;
@@ -450,17 +446,17 @@ public final class KernelSets {
 		removeFromValues = F_InstantiationImpl.createFunction(identityFactory.removeFromValues(), properClassCommandFunction) ;
 		setValue = F_InstantiationImpl.createFunction(identityFactory.setValue(), properClassCommandFunction) ;
 		/**
-		 * GraphFlavor queries
+		 * Graph queries
 		 */
 		container = F_InstantiationImpl.createFunction(identityFactory.container(), properClassQueryFunction);
 		filter = F_InstantiationImpl.createFunction(identityFactory.filter(), isInformation, properClassQueryFunction);
 		containsEdgeFromOrTo = F_InstantiationImpl.createFunction(identityFactory.containsEdgeFromOrTo(), orderedPair, properClassQueryFunction);
-		filterFlavor = F_InstantiationImpl.createFunction(identityFactory.filterFlavor(), properClass, properClassQueryFunction);
+		filterProperClass = F_InstantiationImpl.createFunction(identityFactory.filterProperClass(), properClass, properClassQueryFunction);
 		hasVisibilityOf = F_InstantiationImpl.createFunction(identityFactory.hasVisibilityOf(), target, properClassQueryFunction);
 		filterInstances = F_InstantiationImpl.createFunction(identityFactory.filterInstances(), properClassQueryFunction);
 		isSuperSetOf = F_InstantiationImpl.createFunction(identityFactory.isSuperSetOf(), orderedPair, properClassQueryFunction);
 		isLocalSuperSetOf = F_InstantiationImpl.createFunction(identityFactory.isLocalSuperSetOf(), orderedPair, properClassQueryFunction);
-		filterLinks = F_InstantiationImpl.createFunction(identityFactory.filterLinks(), properClassQueryFunction);
+		filterArrows = F_InstantiationImpl.createFunction(identityFactory.filterArrows(), properClassQueryFunction);
 		localRootSuperSetOf = F_InstantiationImpl.createFunction(identityFactory.localRootSuperSetOf(), orderedPair, properClassQueryFunction);
 		directSuperSetOf = F_InstantiationImpl.createFunction(identityFactory.directSuperSetOf(), orderedPair, properClassQueryFunction);
 		category = F_InstantiationImpl.createFunction(identityFactory.category(), properClassQueryFunction);
@@ -468,7 +464,7 @@ public final class KernelSets {
 		variables = F_InstantiationImpl.createFunction(identityFactory.variables(), properClassQueryFunction);
 		value = F_InstantiationImpl.createFunction(identityFactory.value(), orderedPair, properClassQueryFunction);
 		values = F_InstantiationImpl.createFunction(identityFactory.values(), properClassQueryFunction);
-		visibleArtifactsForSubGraph = F_InstantiationImpl.createFunction(identityFactory.visibleInstancesForSubGraph(), subGraph, properClassQueryFunction);
+		visibleInstancesForSubGraph = F_InstantiationImpl.createFunction(identityFactory.visibleInstancesForSubGraph(), subGraph, properClassQueryFunction);
 		allowableEdgeCategories = F_InstantiationImpl.createFunction(identityFactory.allowableEdgeCategories(), orderedPair, properClassQueryFunction);
 		filterPolymorphic = F_InstantiationImpl.createFunction(identityFactory.filterPolymorphic(), category, properClassQueryFunction);
 		queries = F_InstantiationImpl.createFunction(identityFactory.queries(), properClassQueryFunction);
@@ -477,14 +473,14 @@ public final class KernelSets {
 		executableCommands = F_InstantiationImpl.createFunction(identityFactory.executableCommands(), properClassQueryFunction);
 
 		/**
-		 * LinkFlavor queries
+		 * Arrow queries
 		 */
 		from = F_InstantiationImpl.createFunction(identityFactory.from(), properClassQueryFunction);
 		isExternal = F_InstantiationImpl.createFunction(identityFactory.isExternal(), properClassQueryFunction);
 		to = F_InstantiationImpl.createFunction(identityFactory.to(), properClassQueryFunction);
 
 		/**
-		 * EdgeFlavor queries
+		 * Edge queries
 		 */
 		edgeEnds = F_InstantiationImpl.createFunction(identityFactory.edgeEnds(), properClassQueryFunction);
 		fromEdgeEnd = F_InstantiationImpl.createFunction(identityFactory.fromEdgeEnd(), properClassQueryFunction);

@@ -127,15 +127,15 @@ public class OrderedPair implements Set {
 	}
 
 	public Set isAnArrow() {
-		final boolean flavorIsLinkConcept = properClass().isEqualTo(Query.visibility)
+		final boolean isAnArrow = properClass().isEqualTo(Query.visibility)
 		|| properClass().isEqualTo(Query.edge)
 		|| properClass().isEqualTo(Query.superSetReference);
 
-		final boolean isLinkConcept = isEqualTo(Query.visibility)
+		final boolean isAProperClass = isEqualTo(Query.visibility)
 		|| isEqualTo(Query.edge)
 		|| isEqualTo(Query.superSetReference);
 
-		if (flavorIsLinkConcept && !isLinkConcept) {
+		if (isAnArrow && !isAProperClass) {
 			return S23MSemanticDomains.is_TRUE;
 		} else {
 			return S23MSemanticDomains.is_FALSE;
@@ -656,7 +656,7 @@ public class OrderedPair implements Set {
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 	}
 
-	public Set filterArrows(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
+	public Set filterArrows(final Set properClassOrCategory, final Set fromSet, final Set toSet) {
 		if (F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {return S23MSemanticDomains.is_NOTAPPLICABLE;}
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 	}

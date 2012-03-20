@@ -40,25 +40,25 @@ public final class SuperSetReference extends Arrow  {
 
 	/* Instantiate GeneralizationReferences */
 	protected static final SuperSetReference graph_SPECIALIZES_orderedPair =
-		F_InstantiationImpl.createSuperSetReference(Graph.graph, coreSets.orderedPair, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(Graph.graph, coreSets.orderedPair, superSetReference);
 
 	protected static final SuperSetReference vertex_SPECIALIZES_graph =
-		F_InstantiationImpl.createSuperSetReference(Vertex.vertex, Graph.graph, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(Vertex.vertex, Graph.graph, superSetReference);
 
 	protected static final SuperSetReference arrow_SPECIALIZES_graph =
-		F_InstantiationImpl.createSuperSetReference(Arrow.link, Graph.graph, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(Arrow.arrow, Graph.graph, superSetReference);
 
 	protected static final SuperSetReference edgeEnd_SPECIALIZES_graph =
-		F_InstantiationImpl.createSuperSetReference(EdgeEnd.edgeEnd, Graph.graph, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(EdgeEnd.edgeEnd, Graph.graph, superSetReference);
 
 	protected static final SuperSetReference edge_SPECIALIZES_arrow =
-		F_InstantiationImpl.createSuperSetReference(Edge.edge, Arrow.link, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(Edge.edge, Arrow.arrow, superSetReference);
 
 	protected static final SuperSetReference visibility_SPECIALIZES_arrow =
-		F_InstantiationImpl.createSuperSetReference(Visibility.visibility, Arrow.link, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(Visibility.visibility, Arrow.arrow, superSetReference);
 
 	protected static final SuperSetReference superSetReference_SPECIALIZES_arrow =
-		F_InstantiationImpl.createSuperSetReference(SuperSetReference.superSetReference, Arrow.link, superSetReference);
+			F_InstantiationImpl.createSuperSetReference(SuperSetReference.superSetReference, Arrow.arrow, superSetReference);
 
 	private Set container;
 	private Set to;
@@ -118,12 +118,12 @@ public final class SuperSetReference extends Arrow  {
 		}
 		if (isExternal().is_TRUE()) {
 			return "(" + from().identity().name() + " -S-> "
-			+ to().visualRecognitionText()  + ") : "
-			+ category().localVisualRecognitionText();
+					+ to().visualRecognitionText()  + ") : "
+					+ category().localVisualRecognitionText();
 		} else {
 			return "(" + from().identity().name() + " -S-> "
-			+ to().identity().name()  + ") : "
-			+ category().localVisualRecognitionText();
+					+ to().identity().name()  + ") : "
+					+ category().localVisualRecognitionText();
 		}
 	}
 
@@ -134,12 +134,12 @@ public final class SuperSetReference extends Arrow  {
 		} else {
 			if (isExternal().is_TRUE()) {
 				return "(" + from().identity().name() + " -S-> "
-				+ to().visualRecognitionText() + ")."
-				+ container().visualRecognitionText() ;
+						+ to().visualRecognitionText() + ")."
+						+ container().visualRecognitionText() ;
 			} else {
 				return "(" + from().identity().name() + " -S-> "
-				+ to().identity().name() + ")."
-				+ container().visualRecognitionText();
+						+ to().identity().name() + ")."
+						+ container().visualRecognitionText();
 			}
 		}
 	}
@@ -157,8 +157,8 @@ public final class SuperSetReference extends Arrow  {
 		return container;
 	}
 
-	private void setContainer(final Set artifact) {
-		this.container = artifact;
+	private void setContainer(final Set container) {
+		this.container = container;
 	}
 
 	private void setFrom(final Set subSet) {
@@ -190,7 +190,7 @@ public final class SuperSetReference extends Arrow  {
 	}
 
 	/**
-	 * the elements connected to a link
+	 * the elements connected to a arrow
 	 */
 	@Override
 	public Set from() {
@@ -203,7 +203,7 @@ public final class SuperSetReference extends Arrow  {
 	}
 
 	/**
-	 * SuperSetReferenceFlavor queries
+	 * SuperSetReference queries
 	 */
 	@Override
 	protected final void addProperClassQueries() {

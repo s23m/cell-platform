@@ -34,20 +34,20 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@link ArrowConstraints} implements all instantiation semantics that are not enforced within the kernel (instantiation level 0)
+ * {@arrow ArrowConstraints} implements all instantiation semantics that are not enforced within the kernel (instantiation level 0)
  * but that must be enforced for all other Instances/artifacts (instantiation level n, with n > 0)
  * 
- * The semantics enforced in LinkConstraints amount to assertions/constraints that apply to all use cases that involve S23M.
+ * The semantics enforced in ArrowConstraints amount to assertions/constraints that apply to all use cases that involve S23M.
  * 
  * An extension of the the S23M meta model may necessitate the creation of a further Shell in case
- * specific semantics (that complement the LinkConstraints semantics) apply to the additional meta model elements.
- * Such additional Shells must be built on top of LinkConstraints, and must never access the S23M kernel directly.
+ * specific semantics (that complement the ArrowConstraints semantics) apply to the additional meta model elements.
+ * Such additional Shells must be built on top of ArrowConstraints, and must never access the S23M kernel directly.
  */
 public final class ArrowConstraints {
 
 	private static final Set vertex = coreGraphs.vertex;
 	private static final Set edgeEnd = coreGraphs.edgeEnd;
-	private static final Set link = coreGraphs.arrow;
+	private static final Set arrow = coreGraphs.arrow;
 	private static final Set edge = coreGraphs.edge;
 	private static final Set superSetReference = coreGraphs.superSetReference;
 	private static final Set visibility = coreGraphs.visibility;
@@ -66,15 +66,15 @@ public final class ArrowConstraints {
 	private   Set 	secondIsNavigable;
 	private   Set 	secondIsContainer;
 	private   Set 	category;
-	private   Identity 	edgeFlavoredIdentity;
+	private   Identity 	edgeIdentity;
 
 
 	public static Set raiseError(final Identity semanticIdentity, final Set category) {
 		return F_InstantiationImpl.raiseError(semanticIdentity, category);
 	}
 
-	public static Set link(final Set category,
-			final Identity edgeFlavoredIdentity,
+	public static Set arrow(final Set category,
+			final Identity edgeIdentity,
 			final Identity firstEdgeEndIdentity,
 			final Set firstSet,
 			final Set firstMinCardinality,
@@ -87,7 +87,7 @@ public final class ArrowConstraints {
 			final Set secondMaxCardinality,
 			final Set secondIsNavigable,
 			final Set secondIsContainer
-	) {
+			) {
 		final ArrowConstraints input = new ArrowConstraints();
 		input.firstEdgeEndIdentity = firstEdgeEndIdentity;
 		input.firstSet = firstSet;
@@ -102,20 +102,20 @@ public final class ArrowConstraints {
 		input.secondIsNavigable	= secondIsNavigable;
 		input.secondIsContainer = secondIsContainer;
 		input.category =	category;
-		input.edgeFlavoredIdentity =	edgeFlavoredIdentity;
+		input.edgeIdentity =	edgeIdentity;
 
-		/* code to handle reconstitution of links involving semantic roles: START*/
+		/* code to handle reconstitution of arrows involving semantic roles: START*/
 		if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
 			// TODO Add relevant kinds of edges that appear in SemanticDomain!
 			if (category.isEqualTo(SemanticDomain.semanticRole_to_equivalenceClass)) {
-				return input.linkSemanticIdentities();
+				return input.arrowSemanticIdentities();
 			}
 		}
-		/* code to handle reconstitution of links involving semantic roles: END*/
+		/* code to handle reconstitution of arrows involving semantic roles: END*/
 
 		if (category.isEqualTo(edge)) {
 			if ((firstSet.category().isEqualTo(graph))
-					|| 	(firstSet.category().isEqualTo(link))
+					|| 	(firstSet.category().isEqualTo(arrow))
 					|| 	(firstSet.category().isEqualTo(edge))
 					|| 	(firstSet.category().isEqualTo(edgeEnd))
 					|| 	(firstSet.category().isEqualTo(superSetReference))
@@ -124,7 +124,7 @@ public final class ArrowConstraints {
 					|| (((coreGraphs.vertex.isEqualTo(firstSet.category())) || (coreGraphs.vertex.isSuperSetOf(firstSet.category())).isEqualTo(coreSets.is_TRUE))
 							&&
 							((coreGraphs.vertex.isEqualTo(secondSet.category())) || (coreGraphs.vertex.isSuperSetOf(secondSet.category())).isEqualTo(coreSets.is_TRUE)))
-			) {return input.addEdge();} else {return F_InstantiationImpl.raiseError(coreSets.semanticErr_LinkIsNotApplicable.identity(), coreSets.semanticErr);}
+					) {return input.addEdge();} else {return F_InstantiationImpl.raiseError(coreSets.semanticErr_ArrowIsNotApplicable.identity(), coreSets.semanticErr);}
 		} else {
 			final Set fromCategory = category.from();
 			final Set toCategory = category.to();
@@ -140,8 +140,8 @@ public final class ArrowConstraints {
 							|| ((SemanticDomain.semanticIdentity.isSuperSetOf(toCategory.category())).isEqualTo(coreSets.is_TRUE))
 							|| (((SemanticDomain.semanticIdentity.isSuperSetOf(secondSet)).isEqualTo(coreSets.is_TRUE)) && (secondSet.isElementOf(toCategory).isEqualTo(coreSets.is_TRUE)))
 
-					)
-			) {
+							)
+					) {
 				final int fromInstanceCount = firstSet.container().filterPolymorphic(category).filterByLinkedFrom(firstSet).size();
 				final int toInstanceCount = firstSet.container().filterPolymorphic(category).filterByLinkedTo(secondSet).size();
 
@@ -167,44 +167,44 @@ public final class ArrowConstraints {
 				}
 				return input.addEdge();
 			} else {
-				return F_InstantiationImpl.raiseError(coreSets.semanticErr_LinkIsNotApplicable.identity(), coreSets.semanticErr);
+				return F_InstantiationImpl.raiseError(coreSets.semanticErr_ArrowIsNotApplicable.identity(), coreSets.semanticErr);
 			}
 		}
 	}
 
-	public static Set link(final Set category, final Set fromInstance, final Set toInstance) {
+	public static Set arrow(final Set category, final Set fromInstance, final Set toInstance) {
 		if (category.properClass().isEqualTo(superSetReference)) {
 			return F_Instantiation.addSuperSetReference(fromInstance, toInstance, category);
 		} else if (category.properClass().isEqualTo(visibility)) {
 			return F_Instantiation.addVisibility(fromInstance, toInstance);
 		} else {
-			return raiseError(coreSets.semanticErr_LinkIsNotApplicable.identity(), coreSets.semanticErr);
+			return raiseError(coreSets.semanticErr_ArrowIsNotApplicable.identity(), coreSets.semanticErr);
 		}
 	}
 	/* only used for reconstitution during deserialisation */
-	public static Set reconstituteLink(final Set category, final Identity identity, final Set fromInstance, final Set toInstance) {
+	public static Set reconstituteArrow(final Set category, final Identity identity, final Set fromInstance, final Set toInstance) {
 		if (category.properClass().isEqualTo(superSetReference)) {
 			return F_Instantiation.reconstituteSuperSetReference(identity, fromInstance, toInstance, category);
 		} else if (category.properClass().isEqualTo(visibility)) {
 			return F_Instantiation.reconstituteVisibility(identity, fromInstance, toInstance);
 		} else {
-			return raiseError(coreSets.semanticErr_LinkIsNotApplicable.identity(), coreSets.semanticErr);
+			return raiseError(coreSets.semanticErr_ArrowIsNotApplicable.identity(), coreSets.semanticErr);
 		}
 	}
 
-	private Set linkSemanticIdentities() {
+	private Set arrowSemanticIdentities() {
 		// TODO Add relevant constraints for edges in Semantic Domain!
 		return this.addEdge();
 	}
 
-	public static Set isAllowableEdgeFlavoredLinkCategory(final Set category,
+	public static Set isAllowableEdgeCategory(final Set category,
 			final Set firstSet,
 			final Set secondSet
-	) {
+			) {
 
 		if (category.isEqualTo(edge)) {
 			if (    (firstSet.category().isEqualTo(graph))
-					|| 	(firstSet.category().isEqualTo(link))
+					|| 	(firstSet.category().isEqualTo(arrow))
 					|| 	(firstSet.category().isEqualTo(edge))
 					|| 	(firstSet.category().isEqualTo(edgeEnd))
 					|| 	(firstSet.category().isEqualTo(superSetReference))
@@ -213,8 +213,8 @@ public final class ArrowConstraints {
 					|| (((coreGraphs.vertex.isEqualTo(firstSet.category())) || (coreGraphs.vertex.isSuperSetOf(firstSet.category())).isEqualTo(coreSets.is_TRUE))
 							&&
 							((coreGraphs.vertex.isEqualTo(secondSet.category())) || (coreGraphs.vertex.isSuperSetOf(secondSet.category())).isEqualTo(coreSets.is_TRUE)))
-			) {
-				return coreSets.is_TRUE;} else {/* semanticErr_LinkIsNotApplicable */ return coreSets.is_FALSE;}
+					) {
+				return coreSets.is_TRUE;} else {/* semanticErr_ArrowIsNotApplicable */ return coreSets.is_FALSE;}
 		} else {
 			final Set fromCategory = category.from();
 			final Set toCategory = category.to();
@@ -231,8 +231,8 @@ public final class ArrowConstraints {
 							|| ((SemanticDomain.semanticIdentity.isSuperSetOf(toCategory.category())).isEqualTo(coreSets.is_TRUE))
 							|| (((SemanticDomain.semanticIdentity.isSuperSetOf(secondSet)).isEqualTo(coreSets.is_TRUE)) && (secondSet.isElementOf(toCategory).isEqualTo(coreSets.is_TRUE)))
 
-					)
-			) {
+							)
+					) {
 				final int fromInstanceCount = firstSet.container().filterPolymorphic(category).filterByLinkedFrom(firstSet).size();
 				final int toInstanceCount = firstSet.container().filterPolymorphic(category).filterByLinkedTo(secondSet).size();
 
@@ -261,7 +261,7 @@ public final class ArrowConstraints {
 					//semanticErr_maxToCardinalityIsIllegal
 					return coreSets.is_FALSE;} else {return coreSets.is_TRUE;}
 			}
-			//semanticErr_LinkIsNotApplicable
+			//semanticErr_ArrowIsNotApplicable
 			return coreSets.is_FALSE;
 		}
 	}
@@ -281,7 +281,7 @@ public final class ArrowConstraints {
 					secondIsNavigable,
 					secondIsContainer,
 					category,
-					edgeFlavoredIdentity);
+					edgeIdentity);
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_TargetIsNotWithinVisibility.identity(), coreSets.semanticErr);
 		}

@@ -36,7 +36,7 @@ import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@link Visualization} implements all semantics related to visualizing an container
+ * {@arrow Visualization} implements all semantics related to visualizing an container
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  * 
  * The semantics enforced in visualizedGraph provide the basis for modelling the of 1, 2, and 3 dimensional representations of S23M artifacts

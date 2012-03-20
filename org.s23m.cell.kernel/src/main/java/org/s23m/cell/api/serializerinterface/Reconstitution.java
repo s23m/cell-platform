@@ -36,16 +36,16 @@ import org.s23m.cell.core.Graph;
 
 
 /**
- * {@link Reconstitution} complements the public org.s23m.cell.G API and is only for use in the context of deserialization
+ * {@arrow Reconstitution} complements the public org.s23m.cell.G API and is only for use in the context of deserialization
  */
 public class Reconstitution {
 
-	public static Set addAbstract(final Set artifact, final Set category, final Identity identity) {
-		return ((Graph)artifact).addAbstract(category, identity);
+	public static Set addAbstract(final Set instance, final Set category, final Identity identity) {
+		return ((Graph)instance).addAbstract(category, identity);
 	}
 
-	public static Set addConcrete(final Set artifact, final Set category, final Identity identity) {
-		return ((Graph)artifact).addConcrete(category, identity);
+	public static Set addConcrete(final Set instance, final Set category, final Identity identity) {
+		return ((Graph)instance).addConcrete(category, identity);
 	}
 
 	public static void completeS23MSemanticDomainInitialization() {
@@ -55,11 +55,11 @@ public class Reconstitution {
 		return org.s23m.cell.core.F_Query.getSetFromLocalMemory(identity);
 	}
 	public static Set instantiateAbstract(final Set category, final Identity semanticIdentity) {
-		return F_Instantiation.instantiateAbstractArtifact(semanticIdentity, category);
+		return F_Instantiation.instantiateAbstract(semanticIdentity, category);
 	}
 
 	public static Set instantiateConcrete(final Set category, final Identity semanticIdentity) {
-		return F_Instantiation.instantiateConcreteArtifact(semanticIdentity, category);
+		return F_Instantiation.instantiateConcrete(semanticIdentity, category);
 	}
 
 	public static Set instantiateSemanticDomain(final Identity semanticIdentity) {
@@ -73,11 +73,11 @@ public class Reconstitution {
 	public static Identity reconstituteIdentity(final String name, final String pluralName, final UUID identifier, final UUID uniqueRepresentationReference) {
 		return org.s23m.cell.core.F_Instantiation.reconstituteIdentity(name, pluralName, identifier, uniqueRepresentationReference);
 	}
-	public static Set reconstituteLink(final Identity category, final Identity edgeFlavoredIdentity, final Identity fromInstance, final Identity toInstance) {
-		return org.s23m.cell.core.F_Instantiation.reconstituteLink(category, edgeFlavoredIdentity, fromInstance, toInstance);
+	public static Set reconstituteArrow(final Identity category, final Identity edgeIdentity, final Identity fromInstance, final Identity toInstance) {
+		return org.s23m.cell.core.F_Instantiation.reconstituteArrow(category, edgeIdentity, fromInstance, toInstance);
 	}
-	public static Set reconstituteLink(final Identity category,
-			final Identity edgeFlavoredIdentity,
+	public static Set reconstituteArrow(final Identity category,
+			final Identity edgeIdentity,
 			final Identity firstSemanticIdentity,
 			final Identity firstOrderedPair,
 			final Identity firstMinCardinality,
@@ -91,8 +91,8 @@ public class Reconstitution {
 			final Identity secondIsNavigable,
 			final Identity secondIsContainer
 	) {
-		return org.s23m.cell.core.F_Instantiation.reconstituteLink(category,
-				edgeFlavoredIdentity,
+		return org.s23m.cell.core.F_Instantiation.reconstituteArrow(category,
+				edgeIdentity,
 				firstSemanticIdentity,
 				firstOrderedPair,
 				firstMinCardinality,

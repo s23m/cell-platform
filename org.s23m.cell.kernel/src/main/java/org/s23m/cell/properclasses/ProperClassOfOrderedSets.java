@@ -33,7 +33,7 @@ import org.s23m.cell.Set;
 import org.s23m.cell.event.SetMaintenanceEvents;
 
 /**
- * Operations that provide the List aspect of {@link org.s23m.cell.core.Graph Graphs}.
+ * Operations that provide the List aspect of {@arrow org.s23m.cell.core.Graph Graphs}.
  * The use of Java-compatible signatures are a convenience to enable S23M to
  * easily talk to other Java based tools
  */
@@ -47,7 +47,7 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	Set and(Set b);
 
 	/**
-	 * Exposes the contents of this {@link Set} as a list
+	 * Exposes the contents of this {@arrow Set} as a list
 	 * 
 	 * @return the contents as a list
 	 */
@@ -69,12 +69,12 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	boolean containsRepresentation(Set o);
 
 	/**
-	 * See {@link java.util.List#contains(Object)}
+	 * See {@arrow java.util.List#contains(Object)}
 	 */
 	boolean containsSemanticMatch(Set o);
 
 	/**
-	 * See {@link java.util.List#containsAll(java.util.Collection)}
+	 * See {@arrow java.util.List#containsAll(java.util.Collection)}
 	 */
 	boolean containsSemanticMatchesForAll(Set c);
 
@@ -85,10 +85,10 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	Set extractUniqueMatch(String uuidAsString);
 
 	/**
-	 * Retrieves all elements of a given category that are contained in the flavored sets within this {@link Set}
+	 * Retrieves all instances of a given category that are contained in this instance
 	 * 
 	 * @param category
-	 * @return the resulting filtered list {@link Set}
+	 * @return the resulting filtered list {@arrow Set}
 	 */
 	Set filter(Set category);
 	Set filterByEquivalenceClass(Set set);
@@ -104,10 +104,10 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	Set filterBySemanticIdentity(Set set);
 
 	/**
-	 * Retrieves a given flavored Set contained within the Set
+	 * Retrieves instances of a given proper class contained within this instance
 	 * 
 	 * @param properClass
-	 * @return the resulting filtered list {@link Set}
+	 * @return the resulting filtered list {@arrow Set}
 	 */
 	Set filterProperClass(Set properClass);
 	Set filterFrom();
@@ -117,22 +117,22 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	 * queries that emulate graph functionality
 	 */
 	/**
-	 * Retrieves the set of all links between Instances that are contained in this {@link Set}
+	 * Retrieves the set of all links between Instances that are contained in this {@arrow Set}
 	 * 
-	 * @return the resulting list {@link Set}
+	 * @return the resulting list {@arrow Set}
 	 */
 	Set filterArrows();
 	/**
-	 * Retrieves a filtered set of all links between Instances that are contained in this {@link Set}
+	 * Retrieves a filtered set of all links between Instances that are contained in this {@arrow Set}
 	 * 
-	 * @return the resulting list {@link Set}
+	 * @return the resulting list {@arrow Set}
 	 */
-	Set filterArrows(Set flavorOrCategory,  Set fromSet,  Set toSet);
+	Set filterArrows(Set properSetOrCategory,  Set fromSet,  Set toSet);
 	/**
-	 * Retrieves all elements of a given category or a subset of that category from the flavored sets within this {@link Set}
+	 * Retrieves all instances of a given category or a subset of that category that are contained within this instance
 	 * 
 	 * @param category
-	 * @return the resulting filtered list {@link Set}
+	 * @return the resulting filtered list {@arrow Set}
 	 */
 	Set filterPolymorphic(Set category);
 	Set filterTo();
@@ -147,18 +147,18 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	 */
 	Set intersection(Set set);
 	/**
-	 * See {@link java.util.List#isEmpty()}
+	 * See {@arrow java.util.List#isEmpty()}
 	 */
 	boolean isEmpty();
 	Set isEqualTo(Set set, Set equivalenceClass);
 
 	/**
-	 * See {@link java.util.List#listIterator()}
+	 * See {@arrow java.util.List#listIterator()}
 	 */
 	ListIterator<Set> listIterator();
 
 	/**
-	 * See {@link java.util.List#listIterator(int)}
+	 * See {@arrow java.util.List#listIterator(int)}
 	 */
 	ListIterator<Set> listIterator(int index);
 	/**
@@ -169,15 +169,15 @@ public interface ProperClassOfOrderedSets extends SetMaintenanceEvents, Iterable
 	Set or();
 	Set or(Set b);
 	/**
-	 * See {@link java.util.List#size()}
+	 * See {@arrow java.util.List#size()}
 	 */
 	int size();
 	/**
-	 * See {@link java.util.List#toArray()}
+	 * See {@arrow java.util.List#toArray()}
 	 */
 	Set[] toArray();
 	/**
-	 * See {@link java.util.List#toArray(Object[])}
+	 * See {@arrow java.util.List#toArray(Object[])}
 	 */
 	Set[] toArray(Set[] a);
 	/**

@@ -93,12 +93,12 @@ public final class Visibility extends Arrow  {
 		}
 		if (this.isExternal().is_TRUE()) {
 			return "(" + this.from().identity().name() + " -V-> "
-			+ this.to().visualRecognitionText()  + ") : "
-			+ this.category().localVisualRecognitionText();
+					+ this.to().visualRecognitionText()  + ") : "
+					+ this.category().localVisualRecognitionText();
 		} else {
 			return "(" + this.from().identity().name() + " -V-> "
-			+ this.to().identity().name()  + ") : "
-			+ this.category().localVisualRecognitionText();
+					+ this.to().identity().name()  + ") : "
+					+ this.category().localVisualRecognitionText();
 		}
 
 	}
@@ -109,12 +109,12 @@ public final class Visibility extends Arrow  {
 		} else {
 			if (this.isExternal().is_TRUE()) {
 				return "(" + this.from().identity().name()
-				+ " -V-> " + this.to().visualRecognitionText() + ")."
-				+ this.container().visualRecognitionText() ;
+						+ " -V-> " + this.to().visualRecognitionText() + ")."
+						+ this.container().visualRecognitionText() ;
 			} else {
 				return "(" + this.from().identity().name()
-				+ " -V-> " + this.to().identity().name()
-				+ ")." + this.container().visualRecognitionText() ;
+						+ " -V-> " + this.to().identity().name()
+						+ ")." + this.container().visualRecognitionText() ;
 			}
 		}
 	}
@@ -151,7 +151,7 @@ public final class Visibility extends Arrow  {
 		return coreGraphs.visibility;
 	}
 	/**
-	 * the elements connected to a link
+	 * the elements connected to a arrow
 	 */
 	@Override
 	public Set from() {
@@ -162,7 +162,7 @@ public final class Visibility extends Arrow  {
 		return this.to;
 	}
 	/**
-	 * VisibilityFlavor queries
+	 * Visibility queries
 	 */
 	@Override
 	protected final void addProperClassQueries() {

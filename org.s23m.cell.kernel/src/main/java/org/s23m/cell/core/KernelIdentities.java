@@ -28,7 +28,7 @@ package org.s23m.cell.core;
 import org.s23m.cell.Identity;
 
 /**
- * {@link KernelIdentities} provides access to the SemanticIdentities
+ * {@arrow KernelIdentities} provides access to the SemanticIdentities
  * that are used to construct the Instances and Properties of the S23M kernel.
  */
 public interface KernelIdentities {
@@ -72,9 +72,9 @@ public interface KernelIdentities {
 	Identity extractUniqueMatch();
 
 	Identity filter() ;
-	Identity filterFlavor() ;
+	Identity filterProperClass() ;
 	Identity filterInstances() ;
-	Identity filterLinks() ;
+	Identity filterArrows() ;
 	Identity filterPolymorphic() ;
 	Identity properClass();
 	Identity properClassCommandFunction() ;
@@ -102,7 +102,7 @@ public interface KernelIdentities {
 	Identity isAbstract();
 	Identity isAbstract_FALSE();
 	Identity isAbstract_TRUE();
-	Identity isALink() ;
+	Identity isAnArrow() ;
 	Identity isASemanticIdentity() ;
 	Identity isContainer();
 	Identity isContainer_FALSE();
@@ -164,40 +164,40 @@ public interface KernelIdentities {
 
 	Identity semanticDomain();
 	Identity semanticErr();
-	Identity semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor();
-	Identity semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor();
+	Identity semanticErr_AddAbstractIsOnlyValidForAbstractVertex();
+	Identity semanticErr_AddConcreteIsOnlyValidForConcreteVertex();
 	Identity semanticErr_GraphGraphCantBeModified();
 	Identity semanticErr_GraphsCantBeDecommissioned();
-	Identity semanticErr_LinkIsNotApplicable();
+	Identity semanticErr_ArrowIsNotApplicable();
 	Identity semanticErr_maxFromCardinalityIsIllegal();
 	Identity semanticErr_maxFromCardinalityIsOne();
 	Identity semanticErr_maxFromCardinalityIsTwo();
 	Identity semanticErr_maxToCardinalityIsIllegal();
 	Identity semanticErr_maxToCardinalityIsOne();
 	Identity semanticErr_maxToCardinalityIsTwo();
-	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveEdgeEndVertex();
-	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsContainer();
-	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveIsNavigable();
-	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMaxCardinality();
-	Identity semanticErr_OnlyEdgeEndFlavoredInstancesHaveMinCardinality();
-	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedInstances();
-	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveConnectedRoles();
-	Identity semanticErr_OnlyEdgeFlavoredInstancesHaveEdgeEndFlavors();
-	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveAbstraction();
-	Identity semanticErr_OnlyEdgeTraceFlavoredInstancesHaveDetail();
+	Identity semanticErr_OnlyEdgeEndInstancesHaveEdgeEndVertex();
+	Identity semanticErr_OnlyEdgeEndInstancesHaveIsContainer();
+	Identity semanticErr_OnlyEdgeEndInstancesHaveIsNavigable();
+	Identity semanticErr_OnlyEdgeEndInstancesHaveMaxCardinality();
+	Identity semanticErr_OnlyEdgeEndInstancesHaveMinCardinality();
+	Identity semanticErr_OnlyEdgeInstancesHaveConnectedInstances();
+	Identity semanticErr_OnlyEdgeInstancesHaveConnectedRoles();
+	Identity semanticErr_OnlyEdgeInstancesHaveEdgeEnds();
+	Identity semanticErr_OnlyEdgeTraceInstancesHaveAbstraction();
+	Identity semanticErr_OnlyEdgeTraceInstancesHaveDetail();
 	Identity semanticErr_OnlyInstancesHaveIsAbstract();
-	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSubSet();
-	Identity semanticErr_OnlySuperSetReferenceFlavoredInstancesHaveSuperSet();
+	Identity semanticErr_OnlySuperSetReferenceInstancesHaveSubSet();
+	Identity semanticErr_OnlySuperSetReferenceInstancesHaveSuperSet();
 	Identity semanticErr_OnlyTransportContainerCanHaveContentElements();
-	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveFromSubGraph();
-	Identity semanticErr_OnlyVisibilityFlavoredInstancesHaveToSubGraph();
+	Identity semanticErr_OnlyVisibilityInstancesHaveFromSubGraph();
+	Identity semanticErr_OnlyVisibilityInstancesHaveToSubGraph();
 	Identity semanticErr_operationIsIllegalOnThisInstance();
 	Identity semanticErr_operationIsNotYetImplemented();
 	Identity semanticErr_TargetIsNotWithinVisibility();
 	Identity semanticErr_ThisSetIsNotAvailableInMemory();
 	Identity semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance();
 	Identity semanticErr_ValueIsNotAssigned();
-	Identity semanticErr_VariableCantBeRemovedArtifactStillHasInstances();
+	Identity semanticErr_VariableCantBeRemovedCategoryStillHasInstances();
 	Identity setMaintenanceCommand() ;
 	Identity setValue() ;
 	Identity size() ;

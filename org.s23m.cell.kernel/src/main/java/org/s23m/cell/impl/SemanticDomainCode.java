@@ -85,7 +85,7 @@ public class SemanticDomainCode {
 	public static Set removeElement(final Set set, final Set element){
 		if (   set.category().isEqualTo(disjunctSemanticIdentitySet)
 				|| set.category().isEqualTo(variantDisjunctSemanticIdentitySet)	) {
-			final Set links = element.filter(elements_to_disjunctSemanticIdentitySet);
+			final Set arrows = element.filter(elements_to_disjunctSemanticIdentitySet);
 			// TODO rest of implementation DECOMMISSION_SEMANTICS
 		}
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsNotYetImplemented.identity(), coreSets.semanticErr);

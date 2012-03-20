@@ -26,7 +26,7 @@
 package org.s23m.cell.core;
 
 /**
- * {@link SemanticIdentityRegistry} is an ordered list of the SemanticIdentities
+ * {@arrow SemanticIdentityRegistry} is an ordered list of the SemanticIdentities
  * that are used to construct the Instances and Properties of the Cell kernel.
  * 
  * Important: Elements in this list may never be removed or resequenced,
@@ -50,7 +50,7 @@ public enum SemanticIdentityRegistry {
 	edge,
 	superSetReference,
 	visibility,
-	edgeTrace,
+	DEPRECATED_edgeTrace,
 	vertex,
 	edgeEnd,
 
@@ -97,7 +97,7 @@ public enum SemanticIdentityRegistry {
 	kernelDefect,
 	kernelDefect_KernelHasReachedAnIllegalState,
 	semanticErr,
-	semanticErr_OnlyEdgesHaveEdgeEndFlavors,
+	semanticErr_OnlyEdgesHaveEdgeEnds,
 	semanticErr_OnlyEdgesHaveConnectedRoles,
 	semanticErr_OnlyEdgesHaveConnectedInstances,
 	semanticErr_OnlyVisibilitiesHaveFromSubGraph,
@@ -115,8 +115,8 @@ public enum SemanticIdentityRegistry {
 	semanticErr_ValueIsNotAssigned,
 	semanticErr_ArrowIsNotApplicable,
 	semanticErr_TargetIsNotWithinVisibility,
-	semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor,
-	semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor,
+	semanticErr_AddConcreteIsOnlyValidForConcreteVertex,
+	semanticErr_AddAbstractIsOnlyValidForAbstractVertex,
 	semanticErr_GraphGraphCantBeModified,
 	semanticErr_VariableCantBeRemovedCategoryStillHasInstances,
 	semanticErr_GraphsCantBeDecommissioned,
@@ -157,7 +157,7 @@ public enum SemanticIdentityRegistry {
 	properClassQueryFunction,
 
 	/**
-	 * OrderedPairFlavor queries
+	 * OrderedPair queries
 	 */
 
 	properClass,
@@ -167,7 +167,7 @@ public enum SemanticIdentityRegistry {
 
 
 	/**
-	 * OrderedSetFlavor queries
+	 * OrderedSet queries
 	 */
 
 	contains,
@@ -183,12 +183,12 @@ public enum SemanticIdentityRegistry {
 	toArrayInstance,
 
 	/**
-	 * GraphFlavor commands
+	 * Graph commands
 	 */
 
 	addAbstract,
 	addConcrete,
-	isALink,
+	isAnArrow,
 	isASemantikIdentity,
 	addToVariables,
 	addToValues,
@@ -200,18 +200,18 @@ public enum SemanticIdentityRegistry {
 	setPropertyValue,
 
 	/**
-	 * GraphFlavor, VertexFlavor, EdgeEndFlavor queries
+	 * Graph, Vertex, EdgeEnd queries
 	 */
 
 	container,
 	filter,
 	containsEdgeFromOrTo,
-	filterFlavor,
+	filterProperClass,
 	hasVisibilityOf,
 	filterInstances,
 	isSuperSetOf,
 	isLocalSuperSetOf,
-	filterLinks,
+	filterArrows,
 	localRootSuperSetOf,
 	directSuperSetOf,
 	category,
@@ -222,7 +222,7 @@ public enum SemanticIdentityRegistry {
 	visibleInstancesForSubGraph,
 
 	/**
-	 * LinkFlavor queries
+	 * Arrow queries
 	 */
 
 	from,
@@ -230,7 +230,7 @@ public enum SemanticIdentityRegistry {
 	to,
 
 	/**
-	 * EdgeFlavor queries
+	 * Edge queries
 	 */
 
 	edgeEnds,
@@ -239,21 +239,21 @@ public enum SemanticIdentityRegistry {
 	toEdgeEnd,
 
 	/**
-	 * EdgeTraceFlavor queries
+	 * EdgeTrace queries
 	 */
 
-	fromAbstraction,
-	toDetail,
+	DEPRECATED_fromAbstraction,
+	DEPRECATED_toDetail,
 
 	/**
-	 * SuperSetReferenceFlavor queries
+	 * SuperSetReference queries
 	 */
 
 	fromSubSet,
 	toSuperSet,
 
 	/**
-	 * VisibilityFlavor queries
+	 * Visibility queries
 	 */
 
 	fromSubGraph,
@@ -265,7 +265,7 @@ public enum SemanticIdentityRegistry {
 
 	semanticdomains,
 	models,
-	universalartifactengineering,
+	cellengineering,
 	extractUniqueMatch,
 	isQuality,
 	root,
@@ -283,7 +283,7 @@ public enum SemanticIdentityRegistry {
 
 	htmlRepresentation,
 	htmlTargetLocation,
-	html_to_artifact,
+	html_to_instance,
 	somePathInFileSystem,
 
 	semanticIdentitySet,
@@ -370,7 +370,7 @@ public enum SemanticIdentityRegistry {
 	isNewInstance,
 	not,
 	or,
-	unionOfconnectingLinks,
+	unionOfconnectingArrows,
 	fullVisualRecognitionText,
 	isASemanticIdentity,
 	localVisualRecognitionText,

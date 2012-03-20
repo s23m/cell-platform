@@ -57,7 +57,7 @@ public class SuperSetReferenceType {
      * 
      * @return
      *     possible object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public SemanticIdType getSemanticIdentity() {
@@ -69,7 +69,7 @@ public class SuperSetReferenceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public void setSemanticIdentity(SemanticIdType value) {
@@ -81,7 +81,7 @@ public class SuperSetReferenceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getId() {
@@ -93,7 +93,7 @@ public class SuperSetReferenceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setId(String value) {
@@ -105,7 +105,7 @@ public class SuperSetReferenceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getSubSetInstance() {
@@ -117,7 +117,7 @@ public class SuperSetReferenceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setSubSetInstance(String value) {
@@ -129,7 +129,7 @@ public class SuperSetReferenceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getSuperSetInstance() {
@@ -141,7 +141,7 @@ public class SuperSetReferenceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setSuperSetInstance(String value) {

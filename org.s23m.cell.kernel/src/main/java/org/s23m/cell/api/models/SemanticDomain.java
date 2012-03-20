@@ -132,7 +132,7 @@ public class SemanticDomain {
 				coreSets.isContainer_FALSE
 		);
 
-		semanticIdentitySet.addToQueries(F_InstantiationImpl.createFunction(identityFactory.filterFlavor(), coreSets.properClass, coreSets.queryFunction));
+		semanticIdentitySet.addToQueries(F_InstantiationImpl.createFunction(identityFactory.filterProperClass(), coreSets.properClass, coreSets.queryFunction));
 
 		/**
 		 * semanticIdentitySet and disjunctSemanticIdentitySet commands

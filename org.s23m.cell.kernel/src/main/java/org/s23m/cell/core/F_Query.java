@@ -44,11 +44,11 @@ public final class F_Query {
 		return Query.inMemorySets().extractUniqueMatch(uniqueRepresentationReference);
 	}
 
-	public static Set findDependentLinks(final Set referencedSet) {
+	public static Set findDependentArrows(final Set referencedSet) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set instance : inMemorySets()) {
-			for (final Set link : referencedSet.unionOfconnectingArrows(instance)) {
-				result.add(link);
+			for (final Set arrow : referencedSet.unionOfconnectingArrows(instance)) {
+				result.add(arrow);
 			}
 		}
 		return result;
@@ -73,8 +73,8 @@ public final class F_Query {
 		}
 		for (final Set instance : inMemorySets()) {
 			// test for instances that are linked with the set
-			for (final Set link : set.unionOfconnectingArrows(instance)) {
-				result.add(link);
+			for (final Set arrow : set.unionOfconnectingArrows(instance)) {
+				result.add(arrow);
 			}
 			// test for instances that depend on a category
 			if (instance.category().isEqualToRepresentation(set)) {
@@ -111,7 +111,7 @@ public final class F_Query {
 	}
 
 	public static Arrow arrow() {
-		return Arrow.link;
+		return Arrow.arrow;
 	}
 
 	public static SuperSetReference superSetReference() {

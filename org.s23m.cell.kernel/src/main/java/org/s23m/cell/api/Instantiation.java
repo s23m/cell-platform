@@ -82,7 +82,7 @@ public class Instantiation {
 	}
 
 	public static Set arrow(final Set category,
-			final Set edgeFlavoredIdentity,
+			final Set edgeIdentity,
 			final Set firstSemanticIdentity,
 			final Set firstOrderedPair,
 			final Set firstMinCardinality,
@@ -97,7 +97,7 @@ public class Instantiation {
 			final Set secondIsContainer
 			) {
 		return org.s23m.cell.core.F_Instantiation.arrow(category,
-				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(edgeFlavoredIdentity),
+				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(edgeIdentity),
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(firstSemanticIdentity),
 				firstOrderedPair,
 				firstMinCardinality,

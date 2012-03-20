@@ -74,7 +74,7 @@ public class S23M {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Instance }
+     * {@arrow Instance }
      * 
      * 
      */

@@ -51,7 +51,7 @@ public class OrderedPair {
      * 
      * @return
      *     possible object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public SemanticIdType getMetaElement() {
@@ -63,7 +63,7 @@ public class OrderedPair {
      * 
      * @param value
      *     allowed object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public void setMetaElement(SemanticIdType value) {
@@ -75,7 +75,7 @@ public class OrderedPair {
      * 
      * @return
      *     possible object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public SemanticIdType getElement() {
@@ -87,7 +87,7 @@ public class OrderedPair {
      * 
      * @param value
      *     allowed object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public void setElement(SemanticIdType value) {

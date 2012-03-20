@@ -92,7 +92,7 @@ public class EdgeType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link EdgeEnd }
+     * {@arrow EdgeEnd }
      * 
      * 
      */
@@ -108,7 +108,7 @@ public class EdgeType {
      * 
      * @return
      *     possible object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public SemanticIdType getSemanticIdentity() {
@@ -120,7 +120,7 @@ public class EdgeType {
      * 
      * @param value
      *     allowed object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public void setSemanticIdentity(SemanticIdType value) {
@@ -148,7 +148,7 @@ public class EdgeType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getMetaElement() {
@@ -160,7 +160,7 @@ public class EdgeType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setMetaElement(String value) {
@@ -223,7 +223,7 @@ public class EdgeType {
          * 
          * @return
          *     possible object is
-         *     {@link SemanticIdType }
+         *     {@arrow SemanticIdType }
          *     
          */
         public SemanticIdType getSemanticIdentity() {
@@ -235,7 +235,7 @@ public class EdgeType {
          * 
          * @param value
          *     allowed object is
-         *     {@link SemanticIdType }
+         *     {@arrow SemanticIdType }
          *     
          */
         public void setSemanticIdentity(SemanticIdType value) {
@@ -247,7 +247,7 @@ public class EdgeType {
          * 
          * @return
          *     possible object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public String getMinCardinality() {
@@ -259,7 +259,7 @@ public class EdgeType {
          * 
          * @param value
          *     allowed object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public void setMinCardinality(String value) {
@@ -271,7 +271,7 @@ public class EdgeType {
          * 
          * @return
          *     possible object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public String getMaxCardinality() {
@@ -283,7 +283,7 @@ public class EdgeType {
          * 
          * @param value
          *     allowed object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public void setMaxCardinality(String value) {
@@ -327,7 +327,7 @@ public class EdgeType {
          * 
          * @return
          *     possible object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public String getInstanceId() {
@@ -339,7 +339,7 @@ public class EdgeType {
          * 
          * @param value
          *     allowed object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public void setInstanceId(String value) {
@@ -351,7 +351,7 @@ public class EdgeType {
          * 
          * @return
          *     possible object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public String getMetaElement() {
@@ -363,7 +363,7 @@ public class EdgeType {
          * 
          * @param value
          *     allowed object is
-         *     {@link String }
+         *     {@arrow String }
          *     
          */
         public void setMetaElement(String value) {

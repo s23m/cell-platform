@@ -36,7 +36,7 @@ public interface Repository {
 
 	/**
 	 * Retrieve artifacts that confirms to the given constraints from the repository
-	 * @param artifact
+	 * @param instance
 	 * @return
 	 * @throws UnsupportedOperationException
 	 */
@@ -44,7 +44,7 @@ public interface Repository {
 
 	/**
 	 * Persist the given artifacts to the repository
-	 * @param artifact
+	 * @param instance
 	 * @throws UnsupportedOperationException
 	 */
 	public void put(ArtefactContainer artifact) throws UnsupportedOperationException;

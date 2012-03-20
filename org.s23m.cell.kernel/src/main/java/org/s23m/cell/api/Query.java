@@ -29,10 +29,10 @@ import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.Visualization;
+import org.s23m.cell.core.Arrow;
 import org.s23m.cell.core.Edge;
 import org.s23m.cell.core.EdgeEnd;
 import org.s23m.cell.core.F_Query;
-import org.s23m.cell.core.Arrow;
 import org.s23m.cell.core.OrderedSet;
 import org.s23m.cell.core.SuperSetReference;
 import org.s23m.cell.core.Vertex;
@@ -41,13 +41,13 @@ import org.s23m.cell.core.Visibility;
 
 
 /**
- * {@link Query} provides access to the Sets and Properties of the S23M kernel
+ * {@arrow Query} provides access to the Sets and Properties of the S23M kernel
  * that constitute the basic S23M vocabulary.
  * 
- * Additionally F_SemanticStateOfInMemoryModel enables the creation of links between Sets,
- * and automatically attaches the link to the appropriate container Set.
+ * Additionally F_SemanticStateOfInMemoryModel enables the creation of arrows between Sets,
+ * and automatically attaches the arrow to the appropriate container Set.
  * 
- * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to LinkConstraints, IdentityFactory, CoreSets,
+ * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to ArrowConstraints, IdentityFactory, CoreSets,
  * and KernelOrderedSets.
  * 
  * Extensions: S23M is designed to be extensible. All extensions that only involve a structural extension
@@ -61,8 +61,8 @@ import org.s23m.cell.core.Visibility;
  * 
  * 	and/or
  * 
- * 	(b) reference the appropriate custom Shell by overriding the raiseError and link methods in F_SemanticStateOfInMemoryModel and by delegating to LinkConstraints
- * 		to invoke the raiseError and link methods in the kernel.
+ * 	(b) reference the appropriate custom Shell by overriding the raiseError and arrow methods in F_SemanticStateOfInMemoryModel and by delegating to ArrowConstraints
+ * 		to invoke the raiseError and arrow methods in the kernel.
  * 
  * All extensions must use F_SemanticStateOfInMemoryModel's CoreSets and KernelOrderedSets.
  * 
@@ -73,7 +73,7 @@ public class Query {
 
 	public static Set orderedSet = orderedSet();
 
-	public static Set arrow = link();
+	public static Set arrow = arrow();
 
 	public static Set superSetReference = superSetReference();
 	public static Set visibility = visibility();
@@ -109,8 +109,8 @@ public class Query {
 		return F_Query.findDependentInstances(category);
 	}
 
-	public static Set findDependentLinks(final Set referencedSet) {
-		return F_Query.findDependentLinks(referencedSet);
+	public static Set findDependentArrows(final Set referencedSet) {
+		return F_Query.findDependentArrows(referencedSet);
 	}
 	public static Set findDependentSets(final Set set) {
 		// relevant for DECOMMISSION_SEMANTICS
@@ -171,7 +171,7 @@ public class Query {
 		}
 	}
 
-	private static Arrow link() {
+	private static Arrow arrow() {
 		return F_Query.arrow();
 	}
 

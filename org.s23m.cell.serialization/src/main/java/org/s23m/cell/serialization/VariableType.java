@@ -47,7 +47,7 @@ public class VariableType {
      * 
      * @return
      *     possible object is
-     *     {@link OrderedPair }
+     *     {@arrow OrderedPair }
      *     
      */
     public OrderedPair getVariablePair() {
@@ -59,7 +59,7 @@ public class VariableType {
      * 
      * @param value
      *     allowed object is
-     *     {@link OrderedPair }
+     *     {@arrow OrderedPair }
      *     
      */
     public void setVariablePair(OrderedPair value) {

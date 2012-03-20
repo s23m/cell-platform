@@ -32,10 +32,10 @@ import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.SemanticIdentityRegistry;
 
 /**
- * {@link HTMLRepresentation} implements all instantiation semantics related to HTMLRepresentation
+ * {@arrow HTMLRepresentation} implements all instantiation semantics related to HTMLRepresentation
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  * 
- * The semantics enforced in HTMLRepresentation apply to S23M artifacts.
+ * The semantics enforced in HTMLRepresentation apply to S23M istances.
  * 
  */
 public final class HTMLRepresentation {
@@ -43,27 +43,27 @@ public final class HTMLRepresentation {
 	public static final Set htmlRepresentation = coreGraphs.vertex.addConcrete(InstanceDerivation.derivedFile, F_Instantiation.addDisjunctSemanticIdentitySetInKernel("html representation", "html representation", S23MSemanticDomains.cellKernel, SemanticIdentityRegistry.htmlRepresentation.ordinal()));
 	public static final Set htmlTargetLocation = F_Instantiation.addDisjunctSemanticIdentitySetInKernel("/html/", "/html/", S23MSemanticDomains.cellKernel, SemanticIdentityRegistry.htmlTargetLocation.ordinal());
 
-	public static final Set html_to_artifact = org.s23m.cell.api.Instantiation.arrow(InstanceDerivation.derivationRule,
-			F_Instantiation.addDisjunctSemanticIdentitySetInKernel("html to container", "html to artifacts", S23MSemanticDomains.cellKernel, SemanticIdentityRegistry.html_to_artifact.ordinal()),
+	public static final Set html_to_instance = org.s23m.cell.api.Instantiation.arrow(InstanceDerivation.derivationRule,
+			F_Instantiation.addDisjunctSemanticIdentitySetInKernel("html to instance", "html to instances", S23MSemanticDomains.cellKernel, SemanticIdentityRegistry.html_to_instance.ordinal()),
 			htmlRepresentation,
 			htmlRepresentation,
 			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
-			S23MSemanticDomains.artifact,
+			S23MSemanticDomains.instance,
 			coreGraphs.vertex,
 			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_TRUE
-	);
+			);
 
 
 	public static Set instantiateFeature() {
 		InstanceDerivation.locationFunction.addElement(htmlTargetLocation);
-		html_to_artifact.addToValues(InstanceDerivation.xpand);
-		html_to_artifact.addToValues(htmlTargetLocation);
+		html_to_instance.addToValues(InstanceDerivation.xpand);
+		html_to_instance.addToValues(htmlTargetLocation);
 		return coreGraphs.graph;
 	}
 }

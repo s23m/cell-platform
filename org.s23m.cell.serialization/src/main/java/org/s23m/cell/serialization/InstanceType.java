@@ -29,7 +29,7 @@ import org.s23m.cell.serialization.InstanceType.Variables;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="link" type="{http://schemas.S23M.org/serialization/2010}linkType" minOccurs="0"/>
+ *         &lt;element name="arrow" type="{http://schemas.S23M.org/serialization/2010}linkType" minOccurs="0"/>
  *         &lt;element name="instance" type="{http://schemas.S23M.org/serialization/2010}instanceType" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="semanticIdentity" type="{http://schemas.S23M.org/serialization/2010}semanticIdType"/>
  *         &lt;element name="variables" minOccurs="0">
@@ -70,7 +70,7 @@ import org.s23m.cell.serialization.InstanceType.Variables;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "instanceType", propOrder = {
-    "link",
+    "arrow",
     "instance",
     "semanticIdentity",
     "variables",
@@ -102,11 +102,11 @@ public class InstanceType {
     protected InstantiationSemantic type;
 
     /**
-     * Gets the value of the link property.
+     * Gets the value of the arrow property.
      * 
      * @return
      *     possible object is
-     *     {@link LinkType }
+     *     {@arrow LinkType }
      *     
      */
     public LinkType getLink() {
@@ -114,11 +114,11 @@ public class InstanceType {
     }
 
     /**
-     * Sets the value of the link property.
+     * Sets the value of the arrow property.
      * 
      * @param value
      *     allowed object is
-     *     {@link LinkType }
+     *     {@arrow LinkType }
      *     
      */
     public void setLink(LinkType value) {
@@ -143,7 +143,7 @@ public class InstanceType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link InstanceType }
+     * {@arrow InstanceType }
      * 
      * 
      */
@@ -159,7 +159,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public SemanticIdType getSemanticIdentity() {
@@ -171,7 +171,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link SemanticIdType }
+     *     {@arrow SemanticIdType }
      *     
      */
     public void setSemanticIdentity(SemanticIdType value) {
@@ -183,7 +183,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link Variables }
+     *     {@arrow Variables }
      *     
      */
     public Variables getVariables() {
@@ -195,7 +195,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link Variables }
+     *     {@arrow Variables }
      *     
      */
     public void setVariables(Variables value) {
@@ -207,7 +207,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link Values }
+     *     {@arrow Values }
      *     
      */
     public Values getValues() {
@@ -219,7 +219,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link Values }
+     *     {@arrow Values }
      *     
      */
     public void setValues(Values value) {
@@ -231,7 +231,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getArtifact() {
@@ -243,7 +243,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setArtifact(String value) {
@@ -255,7 +255,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getId() {
@@ -267,7 +267,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setId(String value) {
@@ -311,7 +311,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getMetaElement() {
@@ -323,7 +323,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setMetaElement(String value) {
@@ -335,7 +335,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@link InstantiationSemantic }
+     *     {@arrow InstantiationSemantic }
      *     
      */
     public InstantiationSemantic getType() {
@@ -347,7 +347,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@link InstantiationSemantic }
+     *     {@arrow InstantiationSemantic }
      *     
      */
     public void setType(InstantiationSemantic value) {
@@ -401,7 +401,7 @@ public class InstanceType {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link ValueType }
+         * {@arrow ValueType }
          * 
          * 
          */
@@ -461,7 +461,7 @@ public class InstanceType {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link VariableType }
+         * {@arrow VariableType }
          * 
          * 
          */

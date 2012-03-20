@@ -47,7 +47,7 @@ public final class F_SetAlgebra {
 		return result;
 	}
 
-	public static Set unionOfconnectingLinks(final Set set1, final Set set2) {
+	public static Set unionOfconnectingArrows(final Set set1, final Set set2) {
 		return set1.unionOfconnectingArrows(set2);
 	}
 

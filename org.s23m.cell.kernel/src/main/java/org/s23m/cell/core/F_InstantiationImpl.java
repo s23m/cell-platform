@@ -83,8 +83,8 @@ public final class F_InstantiationImpl {
 			final Set secondIsNavigable,
 			final Set secondIsContainer,
 			final Set category,
-			final Identity edgeFlavoredIdentity) {
-		if (edgeFlavoredIdentity.isEqualTo(identityFactory.anonymous())) {
+			final Identity edgeIdentity) {
+		if (edgeIdentity.isEqualTo(identityFactory.anonymous())) {
 			return new Edge(firstEdgeEndIdentity,
 					firstSet,
 					firstMinCardinality,
@@ -112,7 +112,7 @@ public final class F_InstantiationImpl {
 					secondIsNavigable,
 					secondIsContainer,
 					category,
-					edgeFlavoredIdentity);
+					edgeIdentity);
 		}
 	}
 	protected static Edge createEdge(final Identity firstSemanticIdentity,final Set firstValue,

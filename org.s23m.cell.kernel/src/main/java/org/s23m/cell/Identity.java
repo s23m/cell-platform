@@ -61,19 +61,19 @@ public interface Identity {
 	 */
 	String technicalName();
 	/**
-	 * Indicates whether the provided {@link Identity} concept
+	 * Indicates whether the provided {@arrow Identity} concept
 	 * <code>concept</code> is equal to this one
 	 * 
 	 * @param concept
-	 * @return whether the provided {@link Identity} concept is equal to this one
+	 * @return whether the provided {@arrow Identity} concept is equal to this one
 	 */
 	boolean isEqualTo(Identity concept) ;
 	/**
-	 * Indicates whether the provided {@link Identity} representation
+	 * Indicates whether the provided {@arrow Identity} representation
 	 * <code>concept</code> is equal to this one
 	 * 
 	 * @param concept
-	 * @return whether the provided {@link Identity} representation is equal to this one
+	 * @return whether the provided {@arrow Identity} representation is equal to this one
 	 */
 	boolean isEqualToRepresentation(Identity representation) ;
 
@@ -86,7 +86,7 @@ public interface Identity {
 
 	/**
 	 * Indicates whether the Identity is part of the universal container concept.
-	 * All artifacts based on Identities that are part of the universal container concept
+	 * All instances based on Identities that are part of the universal container concept
 	 * can be instantiated such that the instances may reference any container,
 	 * without any need for visibility based declarations of scope
 	 */
@@ -95,7 +95,7 @@ public interface Identity {
 	 * An Identity can be made part of the universal container concept.
 	 * Once an Identity is part of the universal container concept, it may reference any container,
 	 * without any need for visibility based declarations of scope.
-	 * There is no operation to reverse the effect of the makePartOfUniversalArtifactConcept(),
+	 * There is no operation to reverse the effect of the makePartOfUniversalCellConcept(),
 	 * as such an operation could leave a repository in a corrupt state with respect to
 	 * semantics relating to scope (visibility declarations).
 	 */

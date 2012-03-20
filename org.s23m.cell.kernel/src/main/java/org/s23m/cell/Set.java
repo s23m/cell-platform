@@ -26,20 +26,19 @@
 package org.s23m.cell;
 
 import org.s23m.cell.properclasses.ProperClassOfOrderedPairs;
-import org.s23m.cell.properclasses.ProperClassOfOrderedSets;
 
 
 /**
- * <p>The S23M {@link Set} interface enables the attachment of new artifacts and container content
- * to the S23M repository. An {@link Set} has the role of {@link Graph}, which includes the role
- * of a list ({@link ProperClassOfOrderedSets}).</p>
+ * <p>The S23M {@arrow Set} interface enables the attachment of new artifacts and container content
+ * to the S23M repository. An {@arrow Set} has the role of {@arrow Graph}, which includes the role
+ * of a list ({@arrow ProperClassOfOrderedSets}).</p>
  * 
  * <p><b>IMPORTANT NOTE: S23M does not make use of the Java typing mechanism</b></p>
  * 
  * <p>In S23M every element is part of the following technical Java interface hierarchy:
  * 
  * <ul>
- * <li>{@link ProperClassOfOrderedPairs} &lt;-- {@link Artifact} &lt;-- {@link Set}</li>
+ * <li>{@arrow ProperClassOfOrderedPairs} &lt;-- {@arrow Artifact} &lt;-- {@arrow Set}</li>
  * </ul>
  * 
  * <p>The user can plug in an external SemanticIdentity mechanism as needed
@@ -49,9 +48,9 @@ import org.s23m.cell.properclasses.ProperClassOfOrderedSets;
  * <p>In S23M the only things that a user creates are:
  * 
  * <ol>
- * <li>{@link Set}s, which require an externally provided {@link Identity}</li>
- * <li>Links between {@link Set}s, which are also {@link Set}s</li>
- * <li>{@link Variables} and {@link Values}, are {@link Set}s that reference {@link Set}s
+ * <li>{@arrow Set}s, which require an externally provided {@arrow Identity}</li>
+ * <li>Arrows between {@arrow Set}s, which are also {@arrow Set}s</li>
+ * <li>{@arrow Variables} and {@arrow Values}, are {@arrow Set}s that reference {@arrow Set}s
  * 		that lie beyond the container boundary, and which are not considered
  * 		to be first-class citizens from the
  *		<i>view point</i> of the container that is being modelled</li>

@@ -30,12 +30,12 @@ public class EntityRelationshipModellingTest extends S23MTestCase {
 */
 
 		/*
-		link(coreGraphs.visibility, entityrelationshipschema, testDomain);
+		arrow(coreGraphs.visibility, entityrelationshipschema, testDomain);
 		// TODO: don't allow the creation of visibilities with target within a semantic domain such as: F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, entity, sex);
 
-		link(coreGraphs.visibility, RepositoryStructure.applicationengineering, testDomain);
-		link(coreGraphs.visibility, crm, testDomain);
-		link(coreGraphs.visibility, crm_product, testDomain);
+		arrow(coreGraphs.visibility, RepositoryStructure.applicationengineering, testDomain);
+		arrow(coreGraphs.visibility, crm, testDomain);
+		arrow(coreGraphs.visibility, crm_product, testDomain);
 		*/
 		arrow(coreGraphs.visibility, hierarchicalerschema, testDomain);
 

@@ -49,7 +49,7 @@ public class InstanceIdentityType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getName() {
@@ -61,7 +61,7 @@ public class InstanceIdentityType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setName(String value) {
@@ -73,7 +73,7 @@ public class InstanceIdentityType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getPluralName() {
@@ -85,7 +85,7 @@ public class InstanceIdentityType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setPluralName(String value) {
@@ -97,7 +97,7 @@ public class InstanceIdentityType {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public String getUuid() {
@@ -109,7 +109,7 @@ public class InstanceIdentityType {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@arrow String }
      *     
      */
     public void setUuid(String value) {

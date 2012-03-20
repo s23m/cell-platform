@@ -247,7 +247,7 @@ public class KernelTestSequence {
 				S23MSemanticDomains.isContainer_FALSE
 				);
 
-		//allowableEdgeFlavoredLinkTest()
+		//allowableEdgeTest()
 		if (entity.allowableEdgeCategories(attribute).size() < 2) {
 			Instantiation.raiseError(S23MSemanticDomains.kernelDefect_KernelHasReachedAnIllegalState, S23MSemanticDomains.kernelDefect);
 		}

@@ -35,7 +35,7 @@ import org.s23m.cell.Set;
 public class Arrow extends Graph  {
 
 	/* Reify the S23M AbstractEdge concept */
-	protected static final Arrow link =  new Arrow();
+	protected static final Arrow arrow =  new Arrow();
 
 	protected Arrow(final Identity semanticIdentity, final Set category) {
 		super(semanticIdentity, category);
@@ -53,7 +53,7 @@ public class Arrow extends Graph  {
 
 	@Override
 	public Set container() {
-		if (this.isEqualTo(link)) {
+		if (this.isEqualTo(arrow)) {
 			return Graph.graph;
 		} else {
 			return null; // null case is (and must be) overriden in sub classes
@@ -65,7 +65,7 @@ public class Arrow extends Graph  {
 	}
 
 	/**
-	 * LinkFlavor queries
+	 * Arrow queries
 	 */
 	@Override
 	protected void addProperClassQueries() {

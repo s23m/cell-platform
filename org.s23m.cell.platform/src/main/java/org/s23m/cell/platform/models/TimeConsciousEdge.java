@@ -35,8 +35,8 @@ public class TimeConsciousEdge {
 
 	public static final Set timeConsciousEdge = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.timeConsciousEdge,
-			Cell.artifact,
-			Cell.artifact,
+			Cell.cell,
+			Cell.cell,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,

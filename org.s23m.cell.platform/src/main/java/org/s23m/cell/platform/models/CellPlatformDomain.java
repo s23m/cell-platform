@@ -163,7 +163,7 @@ public class CellPlatformDomain {
 	public static final Set representationStyleElements = Instantiation.addDisjunctSemanticIdentitySet("representation style elements", "set of representation style elements", cellPlatformDomain);
 	public static final Set representationStyle = Instantiation.addDisjunctSemanticIdentitySet("representation style", "representation styles", cellPlatformDomain);
 	public static final Set vertexRepresentationStyle = Instantiation.addDisjunctSemanticIdentitySet("vertex representation style", "vertex representation styles", cellPlatformDomain);
-	public static final Set linkRepresentationStyle = Instantiation.addDisjunctSemanticIdentitySet("link representation style", "link representation styles", cellPlatformDomain);
+	public static final Set arrowRepresentationStyle = Instantiation.addDisjunctSemanticIdentitySet("arrow representation style", "arrow representation styles", cellPlatformDomain);
 	public static final Set color = Instantiation.addDisjunctSemanticIdentitySet("color", "colors", cellPlatformDomain);
 	public static final Set lineWidth = Instantiation.addDisjunctSemanticIdentitySet("line width", "set of line widths", cellPlatformDomain);
 	public static final Set lineStyle = Instantiation.addDisjunctSemanticIdentitySet("line style", "line styles", cellPlatformDomain);
@@ -183,8 +183,8 @@ public class CellPlatformDomain {
 	public static final Set representationStyle_to_color = Instantiation.addDisjunctSemanticIdentitySet("representation style to color", "set of representation style to colors", cellPlatformDomain);
 	public static final Set representationStyle_to_lineWidth = Instantiation.addDisjunctSemanticIdentitySet("representation style to line width", "set of representation style to line widths", cellPlatformDomain);
 	public static final Set vertexRepresentationStyle_to_superset_representationStyle = Instantiation.addDisjunctSemanticIdentitySet("vertex representation style to superset representation style", "set of vertex representation style to superset representation styles", cellPlatformDomain);
-	public static final Set linkRepresentationStyle_to_sourceConnectorSymbol = Instantiation.addDisjunctSemanticIdentitySet("link representation style to source connector symbol", "set of link representation style to source connector symbols", cellPlatformDomain);
-	public static final Set linkRepresentationStyle_to_targetConnectorSymbol = Instantiation.addDisjunctSemanticIdentitySet("link representation style to target connector symbol", "set of link representation style to target connector symbols", cellPlatformDomain);
+	public static final Set arrowRepresentationStyle_to_sourceConnectorSymbol = Instantiation.addDisjunctSemanticIdentitySet("arrow representation style to source connector symbol", "set of arrow representation style to source connector symbols", cellPlatformDomain);
+	public static final Set arrowRepresentationStyle_to_targetConnectorSymbol = Instantiation.addDisjunctSemanticIdentitySet("arrow representation style to target connector symbol", "set of arrow representation style to target connector symbols", cellPlatformDomain);
 
 	public static final Set theDefault = Instantiation.addDisjunctSemanticIdentitySet("default", "defaults", S23MSemanticDomains.cellKernel);
 	public static final Set icon = Instantiation.addDisjunctSemanticIdentitySet("icon", "icons", S23MSemanticDomains.cellKernel);

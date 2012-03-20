@@ -101,9 +101,9 @@ public final class Edge extends Arrow  {
 			final Set secondIsNavigable,
 			final Set secondIsContainer,
 			final Set category,
-			final Identity edgeFlavoredIdentity) {
+			final Identity edgeIdentity) {
 		// The new Edge must be made part of the same container as the firstProperty (a subtype Graph) edgeEnd!
-		super(edgeFlavoredIdentity, category);
+		super(edgeIdentity, category);
 		this.setContainer(firstSet.container());
 		this.addToValues(coreSets.isAbstract_FALSE);
 		this.addEdgeEnds(firstEdgeEndIdentity,
@@ -166,26 +166,26 @@ public final class Edge extends Arrow  {
 		}
 		if (this.isExternal().is_TRUE()) {
 			return "(" + this.from().identity().name() + " -E-> "
-			+ this.to().visualRecognitionText()  + ") : "
-			+ this.category().localVisualRecognitionText();
+					+ this.to().visualRecognitionText()  + ") : "
+					+ this.category().localVisualRecognitionText();
 		} else {
 			return "(" + this.from().identity().name() + " -E-> "
-			+ this.to().identity().name() + ") : "
-			+ this.category().localVisualRecognitionText();
+					+ this.to().identity().name() + ") : "
+					+ this.category().localVisualRecognitionText();
 		}
 	}
 	@Override
 	public String localVisualRecognitionTextWithEdgeEnds() {
 		if (this.isExternal().is_TRUE()) {
 			return "(" + this.from().identity().name()
-			+ "[" + this.fromEdgeEnd().identity().name() + "] -E-> ["
-			+ this.toEdgeEnd().identity().name() + "]"
-			+ this.to().visualRecognitionText() + ")";
+					+ "[" + this.fromEdgeEnd().identity().name() + "] -E-> ["
+					+ this.toEdgeEnd().identity().name() + "]"
+					+ this.to().visualRecognitionText() + ")";
 		} else {
 			return "(" + this.from().identity().name()
-			+ "[" + this.fromEdgeEnd().identity().name() + "] -E-> ["
-			+ this.toEdgeEnd().identity().name() + "]"
-			+  this.to().identity().name() + ")";
+					+ "[" + this.fromEdgeEnd().identity().name() + "] -E-> ["
+					+ this.toEdgeEnd().identity().name() + "]"
+					+  this.to().identity().name() + ")";
 		}
 	}
 	@Override
@@ -195,12 +195,12 @@ public final class Edge extends Arrow  {
 		} else {
 			if (this.isExternal().is_TRUE()) {
 				return "(" + this.from().identity().name() + " -E-> "
-				+ this.to().visualRecognitionText() + ")."
-				+ this.container().visualRecognitionText();
+						+ this.to().visualRecognitionText() + ")."
+						+ this.container().visualRecognitionText();
 			} else {
 				return "(" + this.from().identity().name() + " -E-> "
-				+ this.to().identity().name() + ")."
-				+ this.container().visualRecognitionText();
+						+ this.to().identity().name() + ")."
+						+ this.container().visualRecognitionText();
 			}
 		}
 	}
@@ -307,7 +307,7 @@ public final class Edge extends Arrow  {
 		return coreGraphs.edge;
 	}
 	/**
-	 * EdgeFlavor queries
+	 * Edge queries
 	 */
 	@Override
 	protected final void addProperClassQueries() {

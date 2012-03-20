@@ -35,27 +35,27 @@ import org.s23m.cell.api.models.Root;
 
 public class LogicalFunction {
 
-	public static final Set logicalExpression = Root.cellengineering.addAbstract(Cell.artifact, CellPlatformDomain.logicalExpression);
-	public static final Set logicalFunction = logicalExpression.addAbstract(Cell.artifact, CellPlatformDomain.logicalFunction);
-	public static final Set unaryLogicalFunction = logicalExpression.addAbstract(Cell.artifact, CellPlatformDomain.unaryLogicalFunction);
-	public static final Set binaryLogicalFunction = logicalExpression.addAbstract(Cell.artifact, CellPlatformDomain.binaryLogicalFunction);
-	public static final Set naryLogicalFunction = logicalExpression.addAbstract(Cell.artifact, CellPlatformDomain.naryLogicalFunction);
+	public static final Set logicalExpression = Root.cellengineering.addAbstract(Cell.cell, CellPlatformDomain.logicalExpression);
+	public static final Set logicalFunction = logicalExpression.addAbstract(Cell.cell, CellPlatformDomain.logicalFunction);
+	public static final Set unaryLogicalFunction = logicalExpression.addAbstract(Cell.cell, CellPlatformDomain.unaryLogicalFunction);
+	public static final Set binaryLogicalFunction = logicalExpression.addAbstract(Cell.cell, CellPlatformDomain.binaryLogicalFunction);
+	public static final Set naryLogicalFunction = logicalExpression.addAbstract(Cell.cell, CellPlatformDomain.naryLogicalFunction);
 
-	public static final Set not = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.not);
-	public static final Set exist = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.exist);
-	public static final Set empty = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.empty);
+	public static final Set not = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.not);
+	public static final Set exist = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.exist);
+	public static final Set empty = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.empty);
 
-	public static final Set contains = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.contains);
-	public static final Set smaller = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.smaller);
-	public static final Set smallerEqual = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.smallerEqual);
-	public static final Set greater = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.greater);
-	public static final Set greaterEqual = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.greaterEqual);
+	public static final Set contains = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.contains);
+	public static final Set smaller = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.smaller);
+	public static final Set smallerEqual = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.smallerEqual);
+	public static final Set greater = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.greater);
+	public static final Set greaterEqual = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.greaterEqual);
 
-	public static final Set equal = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.equal);
-	public static final Set equalToRepresentation = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.equalToRepresentation);
-	public static final Set and = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.and);
-	public static final Set or = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.or);
-	public static final Set xor = logicalExpression.addConcrete(Cell.artifact, CellPlatformDomain.xor);
+	public static final Set equal = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.equal);
+	public static final Set equalToRepresentation = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.equalToRepresentation);
+	public static final Set and = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.and);
+	public static final Set or = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.or);
+	public static final Set xor = logicalExpression.addConcrete(Cell.cell, CellPlatformDomain.xor);
 
 
 	public static Set instantiateFeature() {

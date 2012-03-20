@@ -74,7 +74,7 @@ public final class F_Instantiation {
 				}
 			}
 		}
-		return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertexFlavor.identity(), coreSets.semanticErr);
+		return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddConcreteIsOnlyValidForConcreteVertex.identity(), coreSets.semanticErr);
 	}
 
 	public static Vertex addAbstractVertex(final Graph container, final Identity semanticIdentity, final Set category) {
@@ -101,7 +101,7 @@ public final class F_Instantiation {
 				}
 			}
 		}
-		return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertexFlavor.identity(), coreSets.semanticErr);
+		return F_InstantiationImpl.raiseError(coreSets.semanticErr_AddAbstractIsOnlyValidForAbstractVertex.identity(), coreSets.semanticErr);
 	}
 
 	public static Set addVisibility(final Set fromSubGraph, final Set toSubGraph) {
@@ -152,7 +152,7 @@ public final class F_Instantiation {
 		}
 	}
 
-	public static Vertex instantiateConcreteArtifact(final Identity semanticIdentity, final Set category) {
+	public static Vertex instantiateConcrete(final Identity semanticIdentity, final Set category) {
 		if (semanticIdentity.isEqualTo(SemanticDomain.semanticdomain.identity())) {
 			final Vertex temp = new Vertex((Graph) Root.models, semanticIdentity, category);
 			temp.addToValues(coreSets.isAbstract_FALSE);
@@ -182,7 +182,7 @@ public final class F_Instantiation {
 		return temp;
 	}
 
-	public static Vertex instantiateAbstractArtifact(final Identity semanticIdentity, final Set category) {
+	public static Vertex instantiateAbstract(final Identity semanticIdentity, final Set category) {
 		if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
 			final Vertex temp;
 			temp = new Vertex((Graph) Root.models, semanticIdentity, category);
@@ -215,7 +215,7 @@ public final class F_Instantiation {
 			final Set secondIsNavigable,
 			final Set secondIsContainer
 	) {
-		return ArrowConstraints.link(category,
+		return ArrowConstraints.arrow(category,
 				identityFactory.anonymous(),
 				firstSemanticIdentity,
 				firstOrderedPair,
@@ -233,7 +233,7 @@ public final class F_Instantiation {
 	}
 
 	public static Set arrow(final Set category,
-			final Identity edgeFlavoredIdentity,
+			final Identity edgeIdentity,
 			final Identity firstSemanticIdentity,
 			final Set firstOrderedPair,
 			final Set firstMinCardinality,
@@ -247,8 +247,8 @@ public final class F_Instantiation {
 			final Set secondIsNavigable,
 			final Set secondIsContainer
 	) {
-		return ArrowConstraints.link(category,
-				edgeFlavoredIdentity,
+		return ArrowConstraints.arrow(category,
+				edgeIdentity,
 				firstSemanticIdentity,
 				firstOrderedPair,
 				firstMinCardinality,
@@ -265,12 +265,12 @@ public final class F_Instantiation {
 	}
 
 	public static Set arrow(final Set category, final Set fromInstance, final Set toInstance) {
-		return ArrowConstraints.link(category, fromInstance, toInstance);
+		return ArrowConstraints.arrow(category, fromInstance, toInstance);
 	}
 
 	// only for use in the context of deserialization!
-	public static Set reconstituteLink(final Identity category,
-			final Identity edgeFlavoredIdentity,
+	public static Set reconstituteArrow(final Identity category,
+			final Identity edgeIdentity,
 			final Identity firstSemanticIdentity,
 			final Identity firstOrderedPair,
 			final Identity firstMinCardinality,
@@ -285,7 +285,7 @@ public final class F_Instantiation {
 			final Identity secondIsContainer
 	) {
 		return arrow(F_Query.getSetFromLocalMemory(category),
-				edgeFlavoredIdentity,
+				edgeIdentity,
 				firstSemanticIdentity,
 				F_Query.getSetFromLocalMemory(firstOrderedPair),
 				F_Query.getSetFromLocalMemory(firstMinCardinality),
@@ -312,8 +312,8 @@ public final class F_Instantiation {
 	}
 
 	// only for use in the context of deserialization!
-	public static Set reconstituteLink(final Identity category, final Identity edgeFlavoredIdentity, final Identity fromInstance, final Identity toInstance) {
-		return ArrowConstraints.reconstituteLink(F_Query.getSetFromLocalMemory(category), edgeFlavoredIdentity, F_Query.getSetFromLocalMemory(fromInstance), F_Query.getSetFromLocalMemory(toInstance));
+	public static Set reconstituteArrow(final Identity category, final Identity edgeIdentity, final Identity fromInstance, final Identity toInstance) {
+		return ArrowConstraints.reconstituteArrow(F_Query.getSetFromLocalMemory(category), edgeIdentity, F_Query.getSetFromLocalMemory(fromInstance), F_Query.getSetFromLocalMemory(toInstance));
 	}
 
 	// only for use in the context of deserialization!

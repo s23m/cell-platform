@@ -33,7 +33,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
 
 /**
- * {@link EnterpriseArchitecture} implements all instantiation semantics related to Enterprise Architecture information modelling
+ * {@arrow EnterpriseArchitecture} implements all instantiation semantics related to Enterprise Architecture information modelling
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  * 
  * The semantics enforced in EnterpriseArchitecture relate to specific subsets of vertices

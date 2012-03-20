@@ -286,7 +286,7 @@ public final class InstanceMap {
 				final Identity idRef = S23MSemanticDomains.referencingSemanticRole.identity();
 				final Set i = Reconstitution.getSetFromLocalMemory(idRef);
 
-				final Set semanticRoleEdge = Reconstitution.reconstituteLink(
+				final Set semanticRoleEdge = Reconstitution.reconstituteArrow(
 						semanticRole_to_equivalenceClass.identity(),
 						edgeId, ee1Id, sourceInstance.identity(),
 						S23MSemanticDomains.minCardinality_NOTAPPLICABLE.identity(),
@@ -310,7 +310,7 @@ public final class InstanceMap {
 						.getUniqueRepresentationReference());
 				return true;
 			} else {
-				final Set newEdge = org.s23m.cell.api.serializerinterface.Reconstitution.reconstituteLink
+				final Set newEdge = org.s23m.cell.api.serializerinterface.Reconstitution.reconstituteArrow
 				(getBuiltInstance(edge.getMetaElement()).identity(),
 						InstanceBuilder.buildIdentity(edge.getSemanticIdentity()),
 						InstanceBuilder.buildIdentity(ee1
@@ -353,7 +353,7 @@ public final class InstanceMap {
 					.fromString(sRef.getSemanticIdentity().getIdentifier()),
 					UUID.fromString(sRef.getSemanticIdentity()
 							.getUniqueRepresentationReference()));
-			final Set set = Reconstitution.reconstituteLink(
+			final Set set = Reconstitution.reconstituteArrow(
 					S23MKernel.coreGraphs.superSetReference.identity(), si,
 					getBuiltInstance(sRef.getSubSetInstance()).identity(),
 					getBuiltInstance(sRef.getSuperSetInstance()).identity());
@@ -549,7 +549,7 @@ public final class InstanceMap {
 							.getIdentifier()), UUID.fromString(visibility
 									.getSemanticIdentity().getUniqueRepresentationReference()));
 			final Set set = Reconstitution
-			.reconstituteLink(S23MKernel.coreGraphs.visibility.identity(), si,
+			.reconstituteArrow(S23MKernel.coreGraphs.visibility.identity(), si,
 					getBuiltInstance(visibility.getSourceInstance())
 					.identity(),
 					getBuiltInstance(visibility.getTargetInstance())

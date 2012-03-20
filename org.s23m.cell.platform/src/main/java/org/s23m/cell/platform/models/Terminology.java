@@ -169,8 +169,8 @@ public class Terminology {
 		final Set semanticAtom_to_semanticUnit = Instantiation.arrow(coreGraphs.edge,
 				CellPlatformDomain.cell_to_semanticUnit,
 
-				Cell.artifact,
-				Cell.artifact,
+				Cell.cell,
+				Cell.cell,
 				coreSets.minCardinality_0,
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,

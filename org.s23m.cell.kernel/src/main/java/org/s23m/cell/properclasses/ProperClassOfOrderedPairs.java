@@ -36,7 +36,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 */
 
 	/**
-	 * Each {@link Set} has a <i>isInformation</i> that acts as the classification mechanism
+	 * Each {@arrow Set} has a <i>isInformation</i> that acts as the classification mechanism
 	 * 
 	 * @return the isInformation
 	 */
@@ -53,7 +53,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	String fullVisualRecognitionText() ;
 
 	/**
-	 * Each {@link Set} has a {@link Identity} that relates to a unique semantic unit (or concept)
+	 * Each {@arrow Set} has a {@arrow Identity} that relates to a unique semantic unit (or concept)
 	 * 
 	 * @return the identity
 	 */
@@ -69,7 +69,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 * This notion of equality enables different aspectual view points to be constructed on top of a semantic ontology.
 	 * 
 	 * @param orderedPair
-	 * @return whether this {@link Set} is equal to the <code>orderedPair</code> concept
+	 * @return whether this {@arrow Set} is equal to the <code>orderedPair</code> concept
 	 */
 	boolean isEqualTo(Set orderedPair);
 	/**
@@ -79,12 +79,12 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 * The notion of representation equality is mainly required in the context of serialization and deserialization.
 	 * 
 	 * @param orderedPair
-	 * @return whether this {@link Set} is equal to the <code>orderedPair</code> representation
+	 * @return whether this {@arrow Set} is equal to the <code>orderedPair</code> representation
 	 */
 	boolean isEqualToRepresentation(Set orderedPair);
 	String localVisualRecognitionText() ;
 	/**
-	 * Each {@link Artefact} has a {@link Semantic Identity} artefact that relates to a unique semantic unit (or concept)
+	 * Each {@arrow Artefact} has a {@arrow Semantic Identity} artefact that relates to a unique semantic unit (or concept)
 	 * 
 	 * @return the semantic identity
 	 */

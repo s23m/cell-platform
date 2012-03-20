@@ -27,20 +27,20 @@ package org.s23m.cell.core;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
-import org.s23m.cell.api.models.InstanceDerivation;
-import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.HTMLRepresentation;
+import org.s23m.cell.api.models.InstanceDerivation;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
+ * {@arrow F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
  * that constitute the basic S23M vocabulary.
  * 
- * Additionally F_SemanticStateOfInMemoryModel enables the creation of links between Sets,
- * and automatically attaches the link to the appropriate container Set.
+ * Additionally F_SemanticStateOfInMemoryModel enables the creation of arrows between Sets,
+ * and automatically attaches the arrow to the appropriate container Set.
  * 
- * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to LinkConstraints, IdentityFactory, CoreSets,
+ * Note: F_SemanticStateOfInMemoryModel contains no implementation, it simply delegates to ArrowConstraints, IdentityFactory, CoreSets,
  * and KernelOrderedSets.
  * 
  * Extensions: S23M is designed to be extensible. All extensions that only involve a structural extension
@@ -54,8 +54,8 @@ import org.s23m.cell.api.models.SemanticDomain;
  * 
  * 	and/or
  * 
- * 	(b) reference the appropriate custom Shell by overriding the raiseError and link methods in F_SemanticStateOfInMemoryModel and by delegating to LinkConstraints
- * 		to invoke the raiseError and link methods in the kernel.
+ * 	(b) reference the appropriate custom Shell by overriding the raiseError and arrow methods in F_SemanticStateOfInMemoryModel and by delegating to ArrowConstraints
+ * 		to invoke the raiseError and arrow methods in the kernel.
  * 
  * All extensions must use F_SemanticStateOfInMemoryModel's CoreSets and KernelOrderedSets.
  * 

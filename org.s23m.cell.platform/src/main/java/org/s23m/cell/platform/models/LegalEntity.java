@@ -125,8 +125,8 @@ public class LegalEntity {
 
 	public static final Set cell_to_producer = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_producer,
-			Cell.artifact,
-			Cell.artifact,
+			Cell.cell,
+			Cell.cell,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -140,8 +140,8 @@ public class LegalEntity {
 	);
 	public static final Set cell_to_consumers = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_consumers,
-			Cell.artifact,
-			Cell.artifact,
+			Cell.cell,
+			Cell.cell,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,

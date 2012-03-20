@@ -33,10 +33,10 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 
 /**
- * {@link Cell} implements all instantiation semantics related to the modelling of container state machines
- * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
+ * {@arrow Cell} implements all instantiation semantics related to the modelling of container state machines
+ * that must be enforced for all Instances/cells (instantiation level n, with n > 0)
  *
- * The semantics enforced in Artifact provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
+ * The semantics enforced in Cell provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
  */
 public final class Cell {
 
@@ -61,12 +61,12 @@ public final class Cell {
 	);
 
 	//public static final Set container = F_SemanticStateOfInMemoryModel.instantiateConcrete(coreGraphs.vertex, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("state conscious container", "set of state conscious artifacts", S23MSemanticDomains.S23M));
-	public static final Set artifact = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.cell);
+	public static final Set cell = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.cell);
 
-	public static final Set artifact_to_lifeCycle = Instantiation.arrow(coreGraphs.edge,
+	public static final Set cell_to_lifeCycle = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_lifeCycle,
-			artifact,
-			artifact,
+			cell,
+			cell,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_FALSE,
@@ -83,11 +83,11 @@ public final class Cell {
 	//private static final Set v1 = F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, container, lifeCycle);
 	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, lifeCycle);
 
-	public static final Set artifact_to_state = Instantiation.arrow(coreGraphs.edge,
+	public static final Set cell_to_state = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_state,
 
-			artifact,
-			artifact,
+			cell,
+			cell,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_FALSE,
@@ -99,10 +99,10 @@ public final class Cell {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set artifact_to_validityInterval = Instantiation.arrow(coreGraphs.edge,
+	public static final Set cell_to_validityInterval = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_validityInterval,
-			artifact,
-			artifact,
+			cell,
+			cell,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -115,10 +115,10 @@ public final class Cell {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set artifact_to_transaction = Instantiation.arrow(coreGraphs.edge,
+	public static final Set cell_to_transaction = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_transaction,
-			artifact,
-			artifact,
+			cell,
+			cell,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -133,11 +133,11 @@ public final class Cell {
 
 	static Set instantiateFeature() {
 
-		Instantiation.arrow(coreGraphs.superSetReference, artifact, coreGraphs.vertex);
+		Instantiation.arrow(coreGraphs.superSetReference, cell, coreGraphs.vertex);
 		// additional semantics
 		Instantiation.arrow(coreGraphs.superSetReference, lifeCycle, coreGraphs.vertex);
 
-		return artifact;
+		return cell;
 	}
 
 }

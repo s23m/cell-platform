@@ -27,7 +27,7 @@ package org.s23m.cell.core;
 
 
 /**
- * {@link XtensionSemanticIdentityRegistry} is a temporary extension of the semantic identity registry
+ * {@arrow XtensionSemanticIdentityRegistry} is a temporary extension of the semantic identity registry
  * that is in use until the initial S23M editor is live. It is an ordered list of the SemanticIdentities
  * that are used to construct the Instances and Properties of the S23M outer shells and cell platform.
  * 

@@ -33,7 +33,7 @@ import org.s23m.cell.api.models.Root;
 
 
 /**
- * {@link SemanticEnterprise} implements all instantiation semantics related to Enterprise Architecture information modelling
+ * {@arrow SemanticEnterprise} implements all instantiation semantics related to Enterprise Architecture information modelling
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  *
  * The semantics enforced in SemanticEnterprise relate to specific subsets of vertices
@@ -56,15 +56,15 @@ public final class SemanticEnterprise {
 		// Here we ensure that the enterpriseArchitectureGraph is a true extension of Graph,
 		// so that effectively the enterpriseArchitectureGraph is still at instantiation level 0 - the same as Graph.
 		// See the TestSequence script to understand the effect.
-		Instantiation.arrow(coreGraphs.visibility, semanticEnterprise, Cell.artifact);
+		Instantiation.arrow(coreGraphs.visibility, semanticEnterprise, Cell.cell);
 
-		Instantiation.arrow(coreGraphs.superSetReference, semanticEnterprise, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, how, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, who, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, what, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, when, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, where, Cell.artifact);
-		Instantiation.arrow(coreGraphs.superSetReference, why, Cell.artifact);
+		Instantiation.arrow(coreGraphs.superSetReference, semanticEnterprise, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, how, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, who, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, what, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, when, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, where, Cell.cell);
+		Instantiation.arrow(coreGraphs.superSetReference, why, Cell.cell);
 
 		return semanticEnterprise;
 	}

@@ -34,13 +34,13 @@ public interface ProperClassOfArrows {
 	 */
 
 	/**
-	 * isExternal indicates whether the toSubGraph/toDetail/toGeneralization/to
+	 * isExternal indicates whether the toSubGraph/DEPRECATED_toDetail/toGeneralization/to
 	 * has a container container that differs from the container container of the Set
 	 */
 	Set isExternal();
 
 	/**
-	 * the elements connected to a link
+	 * the elements connected to a arrow
 	 */
 	Set from();
 	Set to();

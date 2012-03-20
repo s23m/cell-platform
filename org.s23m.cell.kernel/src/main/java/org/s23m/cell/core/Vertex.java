@@ -75,8 +75,8 @@ public class Vertex extends Graph {
 	public Graph container() {
 		return container;
 	}
-	private void setContainer(final Graph artifact) {
-		this.container = artifact;
+	private void setContainer(final Graph container) {
+		this.container = container;
 	}
 	@Override
 	public Set properClass() {

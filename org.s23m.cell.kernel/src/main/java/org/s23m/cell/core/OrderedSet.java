@@ -510,19 +510,19 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	 */
 
 	@Override
-	public Set filterProperClass(final Set flavor) {
-		if (flavor.isEqualTo(F_Query.vertex())
-				|| flavor.isEqualTo(F_Query.graph())
-				|| flavor.isEqualTo(F_Query.visibility())
-				|| flavor.isEqualTo(F_Query.superSetReference())
-				|| flavor.isEqualTo(F_Query.edge())
-				|| flavor.isEqualTo(F_Query.edgeEnd())
-				|| flavor.isEqualTo(F_Query.orderedSet())
-				|| flavor.isEqualTo(coreSets.orderedPair)
+	public Set filterProperClass(final Set properClass) {
+		if (properClass.isEqualTo(F_Query.vertex())
+				|| properClass.isEqualTo(F_Query.graph())
+				|| properClass.isEqualTo(F_Query.visibility())
+				|| properClass.isEqualTo(F_Query.superSetReference())
+				|| properClass.isEqualTo(F_Query.edge())
+				|| properClass.isEqualTo(F_Query.edgeEnd())
+				|| properClass.isEqualTo(F_Query.orderedSet())
+				|| properClass.isEqualTo(coreSets.orderedPair)
 		) {
 			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for ( final Set element : this) {
-				if (element.properClass().isEqualTo(flavor)) {
+				if (element.properClass().isEqualTo(properClass)) {
 					result.add(element);
 				}
 			}
@@ -591,20 +591,20 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 
 	@Override
-	public Set filterArrows(final Set flavorOrCategory, final Set fromSet, final Set toSet) {
-		if (flavorOrCategory.isInformation().is_TRUE()) {
+	public Set filterArrows(final Set properClassOrCategory, final Set fromSet, final Set toSet) {
+		if (properClassOrCategory.isInformation().is_TRUE()) {
 			if (fromSet.isInformation().is_FALSE()
 					&& toSet.isInformation().is_FALSE()) {
-				if (flavorOrCategory.isAnArrow().is_TRUE()) {
-					return this.filterProperClass(flavorOrCategory);
+				if (properClassOrCategory.isAnArrow().is_TRUE()) {
+					return this.filterProperClass(properClassOrCategory);
 				} else {
-					return this.filterArrows().filter(flavorOrCategory);
+					return this.filterArrows().filter(properClassOrCategory);
 				}
 			}
-			if (flavorOrCategory.isAnArrow().is_TRUE()) {
-				return this.filterProperClass(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+			if (properClassOrCategory.isAnArrow().is_TRUE()) {
+				return this.filterProperClass(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			} else {
-				return this.filterArrows().filter(flavorOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+				return this.filterArrows().filter(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			}
 		} else {
 			return this.filterArrows().filterByLinkedFromAndTo(fromSet, toSet);

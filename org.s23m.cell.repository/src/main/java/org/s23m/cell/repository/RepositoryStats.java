@@ -48,8 +48,8 @@ public class RepositoryStats {
 			connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/repository?user=root&password=");
 			connection.setAutoCommit(false);
 			final PreparedStatement idInsertStatement =  (PreparedStatement) connection.prepareStatement("insert into identity values (?, ?, ?, ?)");;
-			final PreparedStatement artifactInsertStatement = (PreparedStatement) connection.prepareStatement("insert into artifact values (?, ?, ?, ?, ?, ?, ?)");
-			final PreparedStatement linkInsertStatement = (PreparedStatement) connection.prepareStatement("insert into link values (?, ?, ?, ?, ?, ?, ?)");
+			final PreparedStatement artifactInsertStatement = (PreparedStatement) connection.prepareStatement("insert into instance values (?, ?, ?, ?, ?, ?, ?)");
+			final PreparedStatement linkInsertStatement = (PreparedStatement) connection.prepareStatement("insert into arrow values (?, ?, ?, ?, ?, ?, ?)");
 
 			for (final SerializationContent artifact : artefacts) {
 				final S23M model = artifact.getModel();

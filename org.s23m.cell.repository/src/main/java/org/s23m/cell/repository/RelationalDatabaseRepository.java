@@ -58,7 +58,7 @@ import org.s23m.cell.S23MKernel;
 import org.s23m.cell.connector.Component;
 import org.s23m.cell.serialization.EdgeType;
 import org.s23m.cell.serialization.EdgeType.EdgeEnd;
-import org.s23m.cell.serialization.Flavor;
+import org.s23m.cell.serialization.ProperClass;
 import org.s23m.cell.serialization.S23M;
 import org.s23m.cell.serialization.S23M.Instance;
 import org.s23m.cell.serialization.SemanticIdType;
@@ -321,8 +321,8 @@ public class RelationalDatabaseRepository implements Repository, Component {
 			connection = DriverManager.getConnection("jdbc:apache:commons:dbcp:"+REPOSITORY_CONNECTION_POOL_ID); //$NON-NLS-1$
 			connection.setAutoCommit(false);
 
-			final String fetchXmlString = "select urr, contentAsXml from artifact where urr = ?";
-			final StatementBatchManager fetchXmlStatementMan = new StatementBatchManager(connection.prepareStatement(fetchXmlString),"artifact","", "", UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
+			final String fetchXmlString = "select urr, contentAsXml from instance where urr = ?";
+			final StatementBatchManager fetchXmlStatementMan = new StatementBatchManager(connection.prepareStatement(fetchXmlString),"instance","", "", UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 			final ListOrderedMap fetchedArtifacts = fetchArtifacts(createArtefactUUIDMap(artefactIds), fetchXmlStatementMan);
 			fetchXmlStatementMan.getStatement().close();
 			return fetchedArtifacts;
@@ -357,8 +357,8 @@ public class RelationalDatabaseRepository implements Repository, Component {
 			final Map uuidsToFetch = getContainmentTreeUUIDs(uuid);
 			System.err.println(uuidsToFetch.size());
 
-			final String fetchXmlString = "select urr, contentAsXml from artifact where urr = ?";
-			final StatementBatchManager fetchXmlStatementMan = new StatementBatchManager(connection.prepareStatement(fetchXmlString),"artifact","", "", UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
+			final String fetchXmlString = "select urr, contentAsXml from instance where urr = ?";
+			final StatementBatchManager fetchXmlStatementMan = new StatementBatchManager(connection.prepareStatement(fetchXmlString),"instance","", "", UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 
 			final ListOrderedMap fetchedArtifacts = fetchArtifacts(
 					uuidsToFetch, fetchXmlStatementMan);
@@ -458,12 +458,12 @@ public class RelationalDatabaseRepository implements Repository, Component {
 				"(SELECT  tCId.pluralName FROM  `identity` as tCId WHERE tCId.uuid  = containerId) as containerPluralName,"+
 				"tArtifact.category as metaElementId,"+
 				"(SELECT  tMId.name FROM  `identity` as tMId WHERE tMId.uuid  = metaElementId) as metaElementName "+
-				"FROM  `identity` as tId, artifact as tArtifact "+
+				"FROM  `identity` as tId, instance as tArtifact "+
 				"WHERE (tId.uuid = tArtifact.urr  AND tId.uuid  IN "+
 				"(SELECT identityTable.uuid "+
-				"FROM `identity` as identityTable, artifact as artifactTable "+
+				"FROM `identity` as identityTable, instance as artifactTable "+
 				"WHERE "+
-				"(identityTable.uuid = artifactTable.urr AND  (artifactTable.flavor='"+Flavor.VER.name()+"' OR artifactTable.flavor='"+Flavor.EDG.name()+"') AND identityTable.name LIKE  ?))) LIMIT 100";
+				"(identityTable.uuid = artifactTable.urr AND  (artifactTable.flavor='"+ProperClass.VER.name()+"' OR artifactTable.flavor='"+ProperClass.EDG.name()+"') AND identityTable.name LIKE  ?))) LIMIT 100";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -485,7 +485,7 @@ public class RelationalDatabaseRepository implements Repository, Component {
 	private void persistArtifact(final StatementBatchManager idInsertStatementMan,
 			final StatementBatchManager artifactInsertStatementMan,
 			final Connection connection,
-			final SemanticIdType id, final String metaElement, final String container, final String isAbstract, final Flavor flavor, final String xmlContent) throws SQLException {
+			final SemanticIdType id, final String metaElement, final String container, final String isAbstract, final ProperClass properClass, final String xmlContent) throws SQLException {
 
 		final String payload = id.getPayload() == null ? "" : id.getPayload(); //$NON-NLS-1$
 
@@ -502,7 +502,7 @@ public class RelationalDatabaseRepository implements Repository, Component {
 				metaElement,
 				container,
 				isAbstract,
-				flavor.name(),
+				properClass.name(),
 				xmlContent);
 		artifactInsertStatementMan.addToBatch(getQueryString(artifactInsertStatementMan.getStatement().toString()));
 
@@ -525,11 +525,11 @@ public class RelationalDatabaseRepository implements Repository, Component {
 
 
 	private void persistLink(final StatementBatchManager idInsertStatementMan, final StatementBatchManager artifactInsertStatementMan, final StatementBatchManager linkInsertStatementMan,
-			final Connection connection, final String category, final String  container, final Flavor flavor, final String payload, final SemanticIdType id, final String src, final String target) throws SQLException {
+			final Connection connection, final String category, final String  container, final ProperClass properClass, final String payload, final SemanticIdType id, final String src, final String target) throws SQLException {
 		persistArtifact(idInsertStatementMan, artifactInsertStatementMan, connection, id,
 				category,
-				container, "false", flavor, ""); //$NON-NLS-1$ //$NON-NLS-2$
-		setUpLinkStatement(linkInsertStatementMan, id.getUniqueRepresentationReference(), flavor,
+				container, "false", properClass, ""); //$NON-NLS-1$ //$NON-NLS-2$
+		setUpLinkStatement(linkInsertStatementMan, id.getUniqueRepresentationReference(), properClass,
 				category.toString(), src, target);
 	}
 
@@ -602,11 +602,11 @@ public class RelationalDatabaseRepository implements Repository, Component {
 		statement.setString(4, payload);
 	}
 
-	private void setUpLinkStatement(final StatementBatchManager linkInsertStatementMan, final String urr, final Flavor flavor,
+	private void setUpLinkStatement(final StatementBatchManager linkInsertStatementMan, final String urr, final ProperClass properClass,
 			final String category, final String sourceInstance, final String targetInstance) throws SQLException {
 		linkInsertStatementMan.getStatement().setString(1,urr);
 		linkInsertStatementMan.getStatement().setString(2, category);
-		linkInsertStatementMan.getStatement().setString(3, flavor.name());
+		linkInsertStatementMan.getStatement().setString(3, properClass.name());
 		linkInsertStatementMan.getStatement().setString(4, sourceInstance);
 		linkInsertStatementMan.getStatement().setString(5, targetInstance);
 		linkInsertStatementMan.addToBatch(getQueryString(linkInsertStatementMan.getStatement().toString()));
@@ -627,11 +627,11 @@ public class RelationalDatabaseRepository implements Repository, Component {
 					" ON DUPLICATE KEY update name=values(name), pluralName=values(pluralName), payLoad=values(payLoad)",UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 			final String artifactStatementString = "(?, ?, ?, ?, ?, ?, ?)";
 			final PreparedStatement artifactInsertStatement = connection.prepareStatement(artifactStatementString); //$NON-NLS-1$
-			final StatementBatchManager artifactInsertStatementMan = new StatementBatchManager(artifactInsertStatement,"artifact","insert into artifact (urr,uuid,category,container,isAbstractValue,flavor,contentAsXml) values ",
+			final StatementBatchManager artifactInsertStatementMan = new StatementBatchManager(artifactInsertStatement,"instance","insert into instance (urr,uuid,category,container,isAbstractValue,flavor,contentAsXml) values ",
 					" ON DUPLICATE KEY update uuid=values(uuid), category=values(category), container=values(container), isAbstractValue=values(isAbstractValue), flavor=values(flavor), contentAsXml=values(contentAsXml)",UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 			final String linkStatementString = "(?, ?, ?, ?, ?)";
 			final PreparedStatement linkInsertStatement = connection.prepareStatement(linkStatementString); //$NON-NLS-1$
-			final StatementBatchManager linkInsertStatementMan = new StatementBatchManager(linkInsertStatement,"link","insert into link (urr,category,flavor,fromArtifact,toArtifact) values ",
+			final StatementBatchManager linkInsertStatementMan = new StatementBatchManager(linkInsertStatement,"arrow","insert into arrow (urr,category,flavor,fromArtifact,toArtifact) values ",
 					" ON DUPLICATE KEY update category=values(category), flavor=values(flavor), fromArtifact=values(fromArtifact), toArtifact=values(toArtifact)", UPDATE_BATCH_SIZE, READ_BATCH_SIZE);
 			final String edgeStatementString = "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			final PreparedStatement edgeInsertStatement = connection.prepareStatement(edgeStatementString); //$NON-NLS-1$
@@ -645,30 +645,30 @@ public class RelationalDatabaseRepository implements Repository, Component {
 				final Instance root = model.getInstance().get(0);
 
 				persistArtifact(idInsertStatementMan, artifactInsertStatementMan,connection, root.getSemanticIdentity(),
-						root.getMetaElement(), root.getArtifact(), ""+root.isIsAbstract(), Flavor.VER, artefact); //$NON-NLS-1$
+						root.getMetaElement(), root.getArtifact(), ""+root.isIsAbstract(), ProperClass.VER, artefact); //$NON-NLS-1$
 
 				if (root.getLink() != null) {
 					for (final Object link : root.getLink().getVisibilityAndEdgeAndEdgeTrace()) {
 						if (link instanceof VisibilityType) {
 							final VisibilityType v = (VisibilityType) link;
 							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, S23MKernel.coreGraphs.visibility.identity().uniqueRepresentationReference().toString(),
-									root.getSemanticIdentity().getUniqueRepresentationReference(), Flavor.VIS, null, v.getSemanticIdentity(), v.getSourceInstance(), v.getTargetInstance());
+									root.getSemanticIdentity().getUniqueRepresentationReference(), ProperClass.VIS, null, v.getSemanticIdentity(), v.getSourceInstance(), v.getTargetInstance());
 						} else if (link instanceof SuperSetReferenceType) {
 							final SuperSetReferenceType s = (SuperSetReferenceType) link;
 							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, S23MKernel.coreGraphs.superSetReference.identity().uniqueRepresentationReference().toString(),
-									root.getSemanticIdentity().getUniqueRepresentationReference(), Flavor.SUP, null, s.getSemanticIdentity(),  s.getSubSetInstance(), s.getSuperSetInstance());
+									root.getSemanticIdentity().getUniqueRepresentationReference(), ProperClass.SUP, null, s.getSemanticIdentity(),  s.getSubSetInstance(), s.getSuperSetInstance());
 						} else if (link instanceof EdgeType) {
 							final EdgeType e = (EdgeType) link;
 							final EdgeEnd fromEdgeEnd = e.getEdgeEnd().get(0);
 							final EdgeEnd toEdgeEnd = e.getEdgeEnd().get(1);
 
 							persistArtifact(idInsertStatementMan, artifactInsertStatementMan, connection, fromEdgeEnd.getSemanticIdentity(),
-									fromEdgeEnd.getMetaElement(), root.getSemanticIdentity().getUniqueRepresentationReference(), ""+root.isIsAbstract(), Flavor.END, ""); //$NON-NLS-1$ //$NON-NLS-2$
+									fromEdgeEnd.getMetaElement(), root.getSemanticIdentity().getUniqueRepresentationReference(), ""+root.isIsAbstract(), ProperClass.END, ""); //$NON-NLS-1$ //$NON-NLS-2$
 							persistArtifact(idInsertStatementMan, artifactInsertStatementMan, connection, toEdgeEnd.getSemanticIdentity(),
-									toEdgeEnd.getMetaElement(), root.getSemanticIdentity().getUniqueRepresentationReference(), ""+root.isIsAbstract(), Flavor.END, null); //$NON-NLS-1$
+									toEdgeEnd.getMetaElement(), root.getSemanticIdentity().getUniqueRepresentationReference(), ""+root.isIsAbstract(), ProperClass.END, null); //$NON-NLS-1$
 
 							persistLink(idInsertStatementMan, artifactInsertStatementMan, linkInsertStatementMan, connection, e.getMetaElement(),
-									root.getSemanticIdentity().getUniqueRepresentationReference(), Flavor.EDG, null, e.getSemanticIdentity(),fromEdgeEnd.getInstanceId(), toEdgeEnd.getInstanceId());
+									root.getSemanticIdentity().getUniqueRepresentationReference(), ProperClass.EDG, null, e.getSemanticIdentity(),fromEdgeEnd.getInstanceId(), toEdgeEnd.getInstanceId());
 							persisteEdge(edgeInsertStatementMan, e, fromEdgeEnd, toEdgeEnd);
 						}
 

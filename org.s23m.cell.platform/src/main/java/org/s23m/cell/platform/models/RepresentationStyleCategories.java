@@ -37,25 +37,25 @@ public class RepresentationStyleCategories {
 
 	public static final Set representationStyleCategories = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.representationStyleCategories);
 
-	public static final Set representationStyle = representationStyleCategories.addAbstract(Cell.artifact, CellPlatformDomain.representationStyle);
-	public static final Set vertexRepresentationStyle = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.vertexRepresentationStyle);
-	public static final Set linkRepresentationStyle = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.linkRepresentationStyle);
-	public static final Set color = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.color);
-	public static final Set lineWidth = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.lineWidth);
-	public static final Set lineStyle = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.lineStyle);
-	public static final Set connectorSymbol = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.connectorSymbol);
-	public static final Set symbolBoundaryShape = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.symbolBoundaryShape);
-	public static final Set symbolImage = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.symbolImage);
-	public static final Set symbolIcon = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.symbolIcon);
-	public static final Set includesName = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.includesName);
-	public static final Set includesIcon = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.includesIcon);
-	public static final Set includesImage = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.includesImage);
-	public static final Set isBold = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.isBold);
-	public static final Set isInItalics = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.isInItalics);
-	public static final Set imageSize = representationStyleCategories.addConcrete(Cell.artifact, CellPlatformDomain.imageSize);
+	public static final Set representationStyle = representationStyleCategories.addAbstract(Cell.cell, CellPlatformDomain.representationStyle);
+	public static final Set vertexRepresentationStyle = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.vertexRepresentationStyle);
+	public static final Set arrowRepresentationStyle = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.arrowRepresentationStyle);
+	public static final Set color = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.color);
+	public static final Set lineWidth = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.lineWidth);
+	public static final Set lineStyle = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.lineStyle);
+	public static final Set connectorSymbol = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.connectorSymbol);
+	public static final Set symbolBoundaryShape = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.symbolBoundaryShape);
+	public static final Set symbolImage = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.symbolImage);
+	public static final Set symbolIcon = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.symbolIcon);
+	public static final Set includesName = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.includesName);
+	public static final Set includesIcon = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.includesIcon);
+	public static final Set includesImage = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.includesImage);
+	public static final Set isBold = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.isBold);
+	public static final Set isInItalics = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.isInItalics);
+	public static final Set imageSize = representationStyleCategories.addConcrete(Cell.cell, CellPlatformDomain.imageSize);
 
 	public static final Set vertexRepresentationStyle_to_superset_representationStyle = Instantiation.arrow(coreGraphs.superSetReference, vertexRepresentationStyle, representationStyle);
-	public static final Set linkRepresentationStyle_to_superset_representationStyle = Instantiation.arrow(coreGraphs.superSetReference, linkRepresentationStyle, representationStyle);
+	public static final Set arrowRepresentationStyle_to_superset_representationStyle = Instantiation.arrow(coreGraphs.superSetReference, arrowRepresentationStyle, representationStyle);
 
 
 	public static Set instantiateFeature() {
@@ -92,10 +92,10 @@ public class RepresentationStyleCategories {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set linkRepresentationStyle_to_sourceConnectorSymbol = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
-				CellPlatformDomain.linkRepresentationStyle_to_sourceConnectorSymbol,
-				linkRepresentationStyle,
-				linkRepresentationStyle,
+		final Set arrowRepresentationStyle_to_sourceConnectorSymbol = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+				CellPlatformDomain.arrowRepresentationStyle_to_sourceConnectorSymbol,
+				arrowRepresentationStyle,
+				arrowRepresentationStyle,
 				coreSets.minCardinality_0,
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,
@@ -107,10 +107,10 @@ public class RepresentationStyleCategories {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set linkRepresentationStyle_to_targetConnectorSymbol = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
-				CellPlatformDomain.linkRepresentationStyle_to_targetConnectorSymbol,
-				linkRepresentationStyle,
-				linkRepresentationStyle,
+		final Set arrowRepresentationStyle_to_targetConnectorSymbol = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+				CellPlatformDomain.arrowRepresentationStyle_to_targetConnectorSymbol,
+				arrowRepresentationStyle,
+				arrowRepresentationStyle,
 				coreSets.minCardinality_0,
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,

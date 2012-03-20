@@ -137,7 +137,7 @@ public class StatementBatchManager {
 
 	private List<String> getSelectQuery() {
 		final List<String> qryStrings = new ArrayList<String>();
-		final String qry = "select urr, contentAsXml from artifact where urr in ";
+		final String qry = "select urr, contentAsXml from instance where urr in ";
 		int n = 1;
 		int lastIndex = 0;
 		final String openToken = "(";

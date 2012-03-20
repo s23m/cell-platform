@@ -34,7 +34,7 @@ public interface ProperClassOfEdges extends ProperClassOfArrows {
 	 */
 
 	/**
-	 * the elements connected to an EdgeFlavored link
+	 * the elements connected to an Edge arrow
 	 */
 	Set fromEdgeEnd();
 	Set toEdgeEnd();
