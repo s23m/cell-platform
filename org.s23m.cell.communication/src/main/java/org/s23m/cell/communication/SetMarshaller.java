@@ -27,7 +27,7 @@ package org.s23m.cell.communication;
 import org.s23m.cell.Set;
 
 /**
- * Handles conversion to and from {@arrow Set} to type <code>T</code>
+ * Handles conversion to and from {@link Set} to type <code>T</code>
  * 
  * @param <T> the type to use in conversion
  */

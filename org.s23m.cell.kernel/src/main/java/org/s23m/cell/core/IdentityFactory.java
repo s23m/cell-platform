@@ -34,7 +34,7 @@ import org.s23m.cell.Identity;
 import org.s23m.cell.api.Instantiation;
 
 /**
- * {@arrow IdentityFactory} is a factory for Semantic Identities that connects
+ * {@link IdentityFactory} is a factory for Semantic Identities that connects
  * to the basic implementation of SemanticIdentity delivered with S23M.
  * 
  * The implementation can be overridden as needed by an alternative class that implements

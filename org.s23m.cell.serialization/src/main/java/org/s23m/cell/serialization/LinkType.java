@@ -71,10 +71,10 @@ public class LinkType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@arrow EdgeTraceType }
-     * {@arrow EdgeType }
-     * {@arrow VisibilityType }
-     * {@arrow SuperSetReferenceType }
+     * {@link EdgeTraceType }
+     * {@link EdgeType }
+     * {@link VisibilityType }
+     * {@link SuperSetReferenceType }
      * 
      * 
      */

@@ -61,19 +61,19 @@ public interface Identity {
 	 */
 	String technicalName();
 	/**
-	 * Indicates whether the provided {@arrow Identity} concept
+	 * Indicates whether the provided {@link Identity} concept
 	 * <code>concept</code> is equal to this one
 	 * 
 	 * @param concept
-	 * @return whether the provided {@arrow Identity} concept is equal to this one
+	 * @return whether the provided {@link Identity} concept is equal to this one
 	 */
 	boolean isEqualTo(Identity concept) ;
 	/**
-	 * Indicates whether the provided {@arrow Identity} representation
+	 * Indicates whether the provided {@link Identity} representation
 	 * <code>concept</code> is equal to this one
 	 * 
 	 * @param concept
-	 * @return whether the provided {@arrow Identity} representation is equal to this one
+	 * @return whether the provided {@link Identity} representation is equal to this one
 	 */
 	boolean isEqualToRepresentation(Identity representation) ;
 

@@ -54,7 +54,7 @@ public class ContainerType {
      * 
      * @return
      *     possible object is
-     *     {@arrow ContentType }
+     *     {@link ContentType }
      *     
      */
     public ContentType getContent() {
@@ -66,7 +66,7 @@ public class ContainerType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow ContentType }
+     *     {@link ContentType }
      *     
      */
     public void setContent(ContentType value) {
@@ -78,7 +78,7 @@ public class ContainerType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getId() {
@@ -90,7 +90,7 @@ public class ContainerType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setId(String value) {
@@ -102,7 +102,7 @@ public class ContainerType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getTimeStamp() {
@@ -114,7 +114,7 @@ public class ContainerType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setTimeStamp(String value) {

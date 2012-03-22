@@ -26,7 +26,7 @@
 package org.s23m.cell.core;
 
 /**
- * {@arrow SemanticIdentityRegistry} is an ordered list of the SemanticIdentities
+ * {@link SemanticIdentityRegistry} is an ordered list of the SemanticIdentities
  * that are used to construct the Instances and Properties of the Cell kernel.
  * 
  * Important: Elements in this list may never be removed or resequenced,
@@ -405,5 +405,7 @@ public enum SemanticIdentityRegistry {
 	a,
 	b,
 	setMaintenanceCommand,
+	agents,
+	sandbox,
 }
 

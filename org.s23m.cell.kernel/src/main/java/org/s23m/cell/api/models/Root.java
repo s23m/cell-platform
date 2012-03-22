@@ -43,13 +43,19 @@ public class Root {
 	public static final Set semanticdomains = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("semantic domains", "set of semantic domains", SemanticIdentityRegistry.semanticdomains.ordinal()));
 	public static final Set models = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("models", "set of models", SemanticIdentityRegistry.models.ordinal()));
 	public static final Set cellengineering = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("cell engineering", "set of cell engineering", SemanticIdentityRegistry.cellengineering.ordinal()));
+	public static final Set agents = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("agents", "set of agents", SemanticIdentityRegistry.agents.ordinal()));
+	public static final Set sandbox = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("sandbox", "set of sandbox", SemanticIdentityRegistry.sandbox.ordinal()));
 
 	public static void instantiateFeature() {
 		Instantiation.arrow(coreGraphs.visibility, Root.root, semanticdomains);
 		Instantiation.arrow(coreGraphs.visibility, Root.root, models);
+		Instantiation.arrow(coreGraphs.visibility, Root.models, agents);
+		Instantiation.arrow(coreGraphs.visibility, Root.models, sandbox);
 
 		// MODELS --> SEMANTICDOMAINS
 		Instantiation.arrow(coreGraphs.visibility, models, semanticdomains);
+		Instantiation.arrow(coreGraphs.visibility, agents, semanticdomains);
+		Instantiation.arrow(coreGraphs.visibility, sandbox, semanticdomains);
 
 	}
 

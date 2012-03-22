@@ -32,16 +32,17 @@ public class CellPlatform {
 	public static void instantiateFeature() {
 		final int kernelComplexity = identityFactory.kernelComplexity();
 		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
-		Cell.instantiateFeature();
+		CellEngineering.instantiateFeature();
+		//CellEngineering.instantiateFeature();
 		// TODO Fix up S23MSemantics.instantiateFeature();
-		SemanticEnterprise.instantiateFeature();
-		ValidityInterval.instantiateFeature();
-		Transaction.instantiateFeature();
-		TimeConsciousEdge.instantiateFeature();
-		Language.instantiateFeature();
-		Terminology.instantiateFeature();
-		LegalEntity.instantiateFeature();
-		// TODO Fix up LogicalFunction.instantiateFeature();
+		//ValidityInterval.instantiateFeature();
+		//TimeConsciousness.instantiateFeature();
+		//Language.instantiateFeature();
+		//Terminology.instantiateFeature();
+		//SemanticDimension.instantiateFeature();
+		//Licensing.instantiateFeature();
+		Organization.instantiateFeature();
+		LogicalFunction.instantiateFeature();
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
 

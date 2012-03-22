@@ -34,9 +34,9 @@ import org.s23m.cell.api.models.Root;
 
 public class ValidityInterval {
 
-	public static final Set validityInterval = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.validityInterval);
-	public static final Set validFromTimestamp = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.validFromTimestamp);
-	public static final Set validUntilTimestamp = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.validUntilTimestamp);
+	public static final Set validityInterval = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validityInterval);
+	public static final Set validFromTimestamp = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validFromTimestamp);
+	public static final Set validUntilTimestamp = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validUntilTimestamp);
 	public static final Set validityIntervals = Root.models.addAbstract(coreGraphs.vertex, CellPlatformDomain.validityIntervals);
 	public static final Set timestamps = Root.models.addAbstract(coreGraphs.vertex, CellPlatformDomain.timestamps);
 

@@ -31,9 +31,10 @@ import org.s23m.cell.api.models2.EnterpriseArchitecture;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
 import org.s23m.cell.core.F_Instantiation;
+import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
 
 /**
- * {@arrow F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
+ * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
  * that constitute the basic S23M vocabulary.
  * 
  * Additionally F_SemanticStateOfInMemoryModel enables the creation of arrows between Sets,
@@ -81,8 +82,9 @@ public class S23MKernel {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeCellKernelSemanticDomainInitialization();
 		if (!SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			Visualization.instantiateFeature();
-			EnterpriseArchitecture.instantiateFeature();
+			//EnterpriseArchitecture.instantiateFeature();
 			RepositoryStructure.instantiateFeature();
+			EnterpriseArchitecture.instantiateFeature();
 		}
 		SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
 	}

@@ -34,25 +34,23 @@ import org.s23m.cell.api.models.Root;
 
 public class Language {
 
-	public static final Set language = Root.cellengineering.addConcrete(SemanticEnterprise.what, CellPlatformDomain.language);
-	public static final Set languageElement = language.addAbstract(SemanticEnterprise.what, CellPlatformDomain.languageElement);
-	public static final Set abstractWord = language.addAbstract(SemanticEnterprise.what, CellPlatformDomain.abstractWord);
-	public static final Set wordSeparator = language.addAbstract(SemanticEnterprise.what, CellPlatformDomain.wordSeparator);
-	public static final Set word = language.addConcrete(SemanticEnterprise.what, CellPlatformDomain.word);
-	public static final Set whiteSpaceElement = language.addConcrete(SemanticEnterprise.what, CellPlatformDomain.whiteSpaceElement);
-	public static final Set sentenceSeparator = language.addConcrete(SemanticEnterprise.what, CellPlatformDomain.sentenceSeparator);
+	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.language);
+
+	public static final Set languageElement = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.languageElement);
+	public static final Set abstractWord = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.abstractWord);
+	public static final Set wordSeparator = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.wordSeparator);
+	public static final Set word = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.word);
+	public static final Set whiteSpaceElement = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.whiteSpaceElement);
+	public static final Set sentenceSeparator = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.sentenceSeparator);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, abstractWord, languageElement);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, wordSeparator, languageElement);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, word, abstractWord);
+	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, whiteSpaceElement, wordSeparator);
+	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, sentenceSeparator, wordSeparator);
 
 	public static Set instantiateFeature() {
 
-			Instantiation.arrow(coreGraphs.superSetReference, language, SemanticEnterprise.what);
-			Instantiation.arrow(coreGraphs.superSetReference, languageElement, SemanticEnterprise.what);
-			Instantiation.arrow(coreGraphs.superSetReference, abstractWord, languageElement);
-			Instantiation.arrow(coreGraphs.superSetReference, wordSeparator, languageElement);
-			Instantiation.arrow(coreGraphs.superSetReference, word, abstractWord);
-			Instantiation.arrow(coreGraphs.superSetReference, whiteSpaceElement, wordSeparator);
-			Instantiation.arrow(coreGraphs.superSetReference, sentenceSeparator, wordSeparator);
-
-		return language;
+		return CellEngineering.language;
 	}
 
 }

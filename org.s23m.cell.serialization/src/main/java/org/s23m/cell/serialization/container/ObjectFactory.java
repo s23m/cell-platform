@@ -39,7 +39,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow InstanceIdentityType }
+     * Create an instance of {@link InstanceIdentityType }
      * 
      */
     public InstanceIdentityType createInstanceIdentityType() {
@@ -47,7 +47,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow SearchResult }
+     * Create an instance of {@link SearchResult }
      * 
      */
     public SearchResult createArtefactContainerSearchResult() {
@@ -55,7 +55,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow ContainerType }
+     * Create an instance of {@link ContainerType }
      * 
      */
     public ContainerType createContainerType() {
@@ -63,7 +63,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow Content }
+     * Create an instance of {@link Content }
      * 
      */
     public Content createArtefactContainerContent() {
@@ -71,7 +71,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow ContentType }
+     * Create an instance of {@link ContentType }
      * 
      */
     public ContentType createContentType() {
@@ -79,7 +79,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow SearchResultType }
+     * Create an instance of {@link SearchResultType }
      * 
      */
     public SearchResultType createSearchResultType() {
@@ -87,7 +87,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@arrow ArtefactContainer }
+     * Create an instance of {@link ArtefactContainer }
      * 
      */
     public ArtefactContainer createArtefactContainer() {

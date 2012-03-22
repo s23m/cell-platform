@@ -36,7 +36,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 
 	/**
-	 * Adds an abstract Vertex element with a specific category to the {@arrow Instance}.
+	 * Adds an abstract Vertex element with a specific category to the {@link Instance}.
 	 * Rule: valid only if the category is an element of the category
 	 * 
 	 * @param category
@@ -46,7 +46,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set addAbstract(Set category, Set semanticIdentity);
 
 	/**
-	 * Adds a concrete Vertex element with a specific category to the {@arrow Instance}.
+	 * Adds a concrete Vertex element with a specific category to the {@link Instance}.
 	 * Rule: valid only if the category is an element of the category
 	 * 
 	 * @param category
@@ -60,14 +60,14 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set addToQueries(Set anElement);
 
 	/**
-	 * Add the provided {@arrow Set} as a value to the set of values within this {@arrow Set}
+	 * Add the provided {@link Set} as a value to the set of values within this {@link Set}
 	 * 
 	 * @param set
 	 */
 	Set addToValues(Set set);
 
 	/**
-	 * Add the provided {@arrow Set} to the set of variables of this {@arrow Set}
+	 * Add the provided {@link Set} to the set of variables of this {@link Set}
 	 * 
 	 * @param set
 	 */
@@ -97,10 +97,10 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 
 	/**
-	 * The container {@arrow Set} of which this container is part of.
+	 * The container {@link Set} of which this container is part of.
 	 * 
-	 * The {@arrow #container()} is the place where the elements visible to the
-	 * {@arrow Set} are described via visibility links
+	 * The {@link #container()} is the place where the elements visible to the
+	 * {@link Set} are described via visibility links
 	 * 
 	 * @return the container container
 	 */
@@ -116,12 +116,12 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set containsDecommissionedSets();
 
 	/**
-	 * Indicates whether this {@arrow Set} contains an Edge
-	 * {@arrow Set} <code>property</code>
+	 * Indicates whether this {@link Set} contains an Edge
+	 * {@link Set} <code>property</code>
 	 * 
 	 * @param orderedPair
-	 * @return <code>true</code> if the {@arrow Set} contains an Edge
-	 * {@arrow Set} <code>orderedPair</code>, and <code>false</code> otherwise
+	 * @return <code>true</code> if the {@link Set} contains an Edge
+	 * {@link Set} <code>orderedPair</code>, and <code>false</code> otherwise
 	 */
 	Set containsEdgeTo(Set orderedPair);
 
@@ -135,21 +135,21 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set containsNewSets();
 
 	/**
-	 * Attempts to remove this {@arrow Set} from its container() {@arrow Set}.
+	 * Attempts to remove this {@link Set} from its container() {@link Set}.
 	 * 
-	 * @return CoreSets.successful if the {@arrow Set} was successfully
+	 * @return CoreSets.successful if the {@link Set} was successfully
 	 * decommissioned (referential integrity was not violated); otherwise, returns
-	 * the dependent {@arrow Set}s which need to be decommissioned first.
+	 * the dependent {@link Set}s which need to be decommissioned first.
 	 */
 	Set decommission();
 	Set decommissionPayload();
 
 	/**
-	 * Indicates whether this {@arrow Set} is a generalization of
-	 * {@arrow Set} <code>orderedPair</code>
+	 * Indicates whether this {@link Set} is a generalization of
+	 * {@link Set} <code>orderedPair</code>
 	 * 
 	 * @param orderedPair
-	 * @return the generalization {@arrow Set}
+	 * @return the generalization {@link Set}
 	 */
 	Set directSuperSetOf(Set orderedPair);
 
@@ -160,7 +160,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * Retrieves all instances of a given category that are contained in this instance
 	 * 
 	 * @param category
-	 * @return the resulting filtered list {@arrow Set}
+	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filter(Set category);
 
@@ -168,28 +168,28 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * Retrieves the proper class of the instance
 	 * 
 	 * @param properClass
-	 * @return the resulting filtered list {@arrow Set}
+	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filterProperClass(Set properClass);
 
 	/**
 	 * Retrieves the set of all instances that are contained in this instance
 	 * 
-	 * @return the resulting list {@arrow Set}
+	 * @return the resulting list {@link Set}
 	 */
 	Set filterInstances();
 
 	/**
 	 * Retrieves the set of all arrows between Instances that are contained in this instance
 	 * 
-	 * @return the resulting list {@arrow Set}
+	 * @return the resulting list {@link Set}
 	 */
 	Set filterArrows();
 
 	/**
 	 * Retrieves a filtered set of arrows between Instances that are contained in this instance
 	 * 
-	 * @return the resulting list {@arrow Set}
+	 * @return the resulting list {@link Set}
 	 */
 	Set filterArrows( Set properSetOrCategory,  Set fromSet,  Set toSet);
 
@@ -197,7 +197,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * Retrieves all instances of a given category or a subset of that category from the instances contained within this instance
 	 * 
 	 * @param category
-	 * @return the resulting filtered list {@arrow Set}
+	 * @return the resulting filtered list {@link Set}
 	 */
 	Set filterPolymorphic(Set category);
 
@@ -270,12 +270,12 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set isInformation() ;
 
 	/**
-	 * Indicates whether this {@arrow Set} is a local generalization of
-	 * {@arrow Set} <code>orderedPair</code>
+	 * Indicates whether this {@link Set} is a local generalization of
+	 * {@link Set} <code>orderedPair</code>
 	 * 
 	 * @param orderedPair
-	 * @return <code>true</code> if the {@arrow Set} is a local generalization of
-	 * {@arrow Set} <code>orderedPair</code>, and <code>false</code> otherwise
+	 * @return <code>true</code> if the {@link Set} is a local generalization of
+	 * {@link Set} <code>orderedPair</code>, and <code>false</code> otherwise
 	 * @see #directSuperSetOf(Set)
 	 */
 	Set isLocalSuperSetOf(Set orderedPair);
@@ -289,18 +289,18 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	Set isNewInstance();
 	Set isQuality() ;
 	/**
-	 * Retrieves the generalization of a {@arrow Set}
+	 * Retrieves the generalization of a {@link Set}
 	 * 
 	 * @param orderedPair
-	 * @return the generalization {@arrow Set}
+	 * @return the generalization {@link Set}
 	 */
 	Set isSuperSetOf(Set orderedPair);
 	/**
 	 * Retrieves the top-most generalization of orderedPair contained within the Set
-	 * (a recursive application of {@arrow #directSuperSetOf(Set)})
+	 * (a recursive application of {@link #directSuperSetOf(Set)})
 	 * 
 	 * @param orderedPair
-	 * @return the root generalization {@arrow Set}
+	 * @return the root generalization {@link Set}
 	 */
 	Set localRootSuperSetOf(Set orderedPair);
 	Set not() ;
@@ -313,15 +313,15 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 
 	Set unionOfconnectingArrows( Set instance);
 	/**
-	 * Return the value associated with isInformation variable from this {@arrow Set}
+	 * Return the value associated with isInformation variable from this {@link Set}
 	 */
 	Set value(Set variable);
 	/**
-	 * Return the set of values from this {@arrow Set}
+	 * Return the set of values from this {@link Set}
 	 */
 	Set values();
 	/**
-	 * Return contained variables from this {@arrow Set}
+	 * Return contained variables from this {@link Set}
 	 */
 	Set variables();
 
@@ -330,7 +330,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * that are visible from a specific subgraph of this instance
 	 * 
 	 * @param subgraph
-	 * @return the list {@arrow Set}
+	 * @return the list {@link Set}
 	 */
 	Set visibleInstancesForSubGraph(Set subgraph);
 

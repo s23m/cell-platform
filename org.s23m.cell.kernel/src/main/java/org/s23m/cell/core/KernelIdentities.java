@@ -28,7 +28,7 @@ package org.s23m.cell.core;
 import org.s23m.cell.Identity;
 
 /**
- * {@arrow KernelIdentities} provides access to the SemanticIdentities
+ * {@link KernelIdentities} provides access to the SemanticIdentities
  * that are used to construct the Instances and Properties of the S23M kernel.
  */
 public interface KernelIdentities {

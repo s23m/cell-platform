@@ -47,7 +47,7 @@ public class ValueType {
      * 
      * @return
      *     possible object is
-     *     {@arrow OrderedPair }
+     *     {@link OrderedPair }
      *     
      */
     public OrderedPair getValuePair() {
@@ -59,7 +59,7 @@ public class ValueType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow OrderedPair }
+     *     {@link OrderedPair }
      *     
      */
     public void setValuePair(OrderedPair value) {

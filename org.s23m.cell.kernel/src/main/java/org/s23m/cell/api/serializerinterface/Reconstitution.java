@@ -36,7 +36,7 @@ import org.s23m.cell.core.Graph;
 
 
 /**
- * {@arrow Reconstitution} complements the public org.s23m.cell.G API and is only for use in the context of deserialization
+ * {@link Reconstitution} complements the public org.s23m.cell.G API and is only for use in the context of deserialization
  */
 public class Reconstitution {
 

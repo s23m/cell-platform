@@ -34,7 +34,7 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@arrow ArrowConstraints} implements all instantiation semantics that are not enforced within the kernel (instantiation level 0)
+ * {@link ArrowConstraints} implements all instantiation semantics that are not enforced within the kernel (instantiation level 0)
  * but that must be enforced for all other Instances/artifacts (instantiation level n, with n > 0)
  * 
  * The semantics enforced in ArrowConstraints amount to assertions/constraints that apply to all use cases that involve S23M.

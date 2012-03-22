@@ -106,7 +106,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow LinkType }
+     *     {@link LinkType }
      *     
      */
     public LinkType getLink() {
@@ -118,7 +118,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow LinkType }
+     *     {@link LinkType }
      *     
      */
     public void setLink(LinkType value) {
@@ -143,7 +143,7 @@ public class InstanceType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@arrow InstanceType }
+     * {@link InstanceType }
      * 
      * 
      */
@@ -159,7 +159,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow SemanticIdType }
+     *     {@link SemanticIdType }
      *     
      */
     public SemanticIdType getSemanticIdentity() {
@@ -171,7 +171,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow SemanticIdType }
+     *     {@link SemanticIdType }
      *     
      */
     public void setSemanticIdentity(SemanticIdType value) {
@@ -183,7 +183,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow Variables }
+     *     {@link Variables }
      *     
      */
     public Variables getVariables() {
@@ -195,7 +195,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow Variables }
+     *     {@link Variables }
      *     
      */
     public void setVariables(Variables value) {
@@ -207,7 +207,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow Values }
+     *     {@link Values }
      *     
      */
     public Values getValues() {
@@ -219,7 +219,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow Values }
+     *     {@link Values }
      *     
      */
     public void setValues(Values value) {
@@ -231,7 +231,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getArtifact() {
@@ -243,7 +243,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setArtifact(String value) {
@@ -255,7 +255,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getId() {
@@ -267,7 +267,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setId(String value) {
@@ -311,7 +311,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getMetaElement() {
@@ -323,7 +323,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setMetaElement(String value) {
@@ -335,7 +335,7 @@ public class InstanceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow InstantiationSemantic }
+     *     {@link InstantiationSemantic }
      *     
      */
     public InstantiationSemantic getType() {
@@ -347,7 +347,7 @@ public class InstanceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow InstantiationSemantic }
+     *     {@link InstantiationSemantic }
      *     
      */
     public void setType(InstantiationSemantic value) {
@@ -401,7 +401,7 @@ public class InstanceType {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@arrow ValueType }
+         * {@link ValueType }
          * 
          * 
          */
@@ -461,7 +461,7 @@ public class InstanceType {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@arrow VariableType }
+         * {@link VariableType }
          * 
          * 
          */

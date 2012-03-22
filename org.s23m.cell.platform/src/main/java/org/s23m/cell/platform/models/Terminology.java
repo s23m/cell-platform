@@ -35,17 +35,17 @@ import org.s23m.cell.api.models.Root;
 
 public class Terminology {
 
-	public static final Set terminology = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.terminology);
-	public static final Set idiom = terminology.addConcrete(SemanticEnterprise.what, CellPlatformDomain.idiom);
-	public static final Set abbreviation = terminology.addConcrete(SemanticEnterprise.what, CellPlatformDomain.abbreviation);
-	public static final Set semanticUnit = terminology.addConcrete(coreGraphs.vertex, CellPlatformDomain.semanticUnit);
-	public static final Set wordDefinition = terminology.addConcrete(SemanticEnterprise.what, CellPlatformDomain.wordDefinition);
+	private static final Set v3 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.terminology);
+	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.terminology, CellEngineering.language);
+	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.terminology, CellEngineering.timeConsciousness);
+
+	public static final Set idiom = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.idiom);
+	public static final Set abbreviation = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.abbreviation);
+	public static final Set wordDefinition = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.wordDefinition);
 
 	public static Set instantiateFeature() {
-		Instantiation.arrow(coreGraphs.visibility, terminology, Language.language);
-		Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, terminology);
 
-		final Set idiom_to_languages = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+		final Set idiom_to_languages = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 				CellPlatformDomain.idiom_to_languages,
 				idiom,
 				idiom,
@@ -53,14 +53,14 @@ public class Terminology {
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,
 				coreSets.isContainer_FALSE,
-				Language.language,
-				Language.language,
+				CellEngineering.language,
+				CellEngineering.language,
 				coreSets.minCardinality_1,
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set idiom_to_idiomParts = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+		final Set idiom_to_idiomParts = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 				CellPlatformDomain.idiom_to_idiomParts,
 				idiom,
 				idiom,
@@ -76,7 +76,7 @@ public class Terminology {
 				coreSets.isContainer_FALSE
 		);
 
-		final Set abbreviation_to_languages = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+		final Set abbreviation_to_languages = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 				CellPlatformDomain.abbreviation_to_languages,
 				abbreviation,
 				abbreviation,
@@ -84,14 +84,14 @@ public class Terminology {
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,
 				coreSets.isContainer_FALSE,
-				Language.language,
-				Language.language,
+				CellEngineering.language,
+				CellEngineering.language,
 				coreSets.minCardinality_1,
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set wordDefinition_to_language = Instantiation.arrow(TimeConsciousEdge.timeConsciousEdge,
+		final Set wordDefinition_to_language = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 				CellPlatformDomain.wordDefinition_to_language,
 				wordDefinition,
 				wordDefinition,
@@ -99,97 +99,19 @@ public class Terminology {
 				coreSets.maxCardinality_n,
 				coreSets.isNavigable_FALSE,
 				coreSets.isContainer_FALSE,
-				Language.language,
-				Language.language,
-				coreSets.minCardinality_1,
-				coreSets.maxCardinality_1,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE
-		);
-		final Set semanticUnit_to_abstractWords = Instantiation.arrow(coreGraphs.edge,
-				CellPlatformDomain.semanticUnit_to_abstractWords,
-				semanticUnit,
-				semanticUnit,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_FALSE,
-				coreSets.isContainer_FALSE,
-				Language.word,
-				Language.abstractWord,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE
-		);
-		final Set semanticUnit_to_abbreviations = Instantiation.arrow(coreGraphs.edge,
-				CellPlatformDomain.semanticUnit_to_abbreviations,
-				semanticUnit,
-				semanticUnit,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE,
-				abbreviation,
-				abbreviation,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE
-		);
-		final Set semanticUnit_to_wordDefinitions = Instantiation.arrow(coreGraphs.edge,
-				CellPlatformDomain.semanticUnit_to_wordDefinitions,
-				semanticUnit,
-				semanticUnit,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_TRUE,
-				wordDefinition,
-				wordDefinition,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE
-		);
-		final Set semanticUnit_to_oppositeSemanticUnit = Instantiation.arrow(coreGraphs.edge,
-				CellPlatformDomain.semanticUnit_to_oppositeSemanticUnit,
-				semanticUnit,
-				semanticUnit,
-				coreSets.minCardinality_1,
-				coreSets.maxCardinality_1,
-				coreSets.isNavigable_FALSE,
-				coreSets.isContainer_FALSE,
-				CellPlatformDomain.oppositeSemanticUnit,
-				semanticUnit,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_1,
-				coreSets.isNavigable_TRUE,
-				coreSets.isContainer_FALSE
-		);
-		final Set semanticAtom_to_semanticUnit = Instantiation.arrow(coreGraphs.edge,
-				CellPlatformDomain.cell_to_semanticUnit,
-
-				Cell.cell,
-				Cell.cell,
-				coreSets.minCardinality_0,
-				coreSets.maxCardinality_n,
-				coreSets.isNavigable_FALSE,
-				coreSets.isContainer_FALSE,
-				semanticUnit,
-				semanticUnit,
+				CellEngineering.language,
+				CellEngineering.language,
 				coreSets.minCardinality_1,
 				coreSets.maxCardinality_1,
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
 
-		    Instantiation.arrow(coreGraphs.superSetReference, terminology, coreGraphs.vertex);
 			Instantiation.arrow(coreGraphs.superSetReference, idiom, Language.abstractWord);
 			Instantiation.arrow(coreGraphs.superSetReference, abbreviation, Language.abstractWord);
-			Instantiation.arrow(coreGraphs.superSetReference, semanticUnit, coreGraphs.vertex);
 			Instantiation.arrow(coreGraphs.superSetReference, wordDefinition, Language.languageElement);
 
-		return terminology;
+		return CellEngineering.terminology;
 	}
 
 }

@@ -57,7 +57,7 @@ public class VisibilityType {
      * 
      * @return
      *     possible object is
-     *     {@arrow SemanticIdType }
+     *     {@link SemanticIdType }
      *     
      */
     public SemanticIdType getSemanticIdentity() {
@@ -69,7 +69,7 @@ public class VisibilityType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow SemanticIdType }
+     *     {@link SemanticIdType }
      *     
      */
     public void setSemanticIdentity(SemanticIdType value) {
@@ -81,7 +81,7 @@ public class VisibilityType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getId() {
@@ -93,7 +93,7 @@ public class VisibilityType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setId(String value) {
@@ -105,7 +105,7 @@ public class VisibilityType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getSourceInstance() {
@@ -117,7 +117,7 @@ public class VisibilityType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setSourceInstance(String value) {
@@ -129,7 +129,7 @@ public class VisibilityType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getTargetInstance() {
@@ -141,7 +141,7 @@ public class VisibilityType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setTargetInstance(String value) {

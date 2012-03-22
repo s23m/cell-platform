@@ -46,7 +46,7 @@ public class EdgeTraceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getAbstractionInstance() {
@@ -58,7 +58,7 @@ public class EdgeTraceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setAbstractionInstance(String value) {
@@ -70,7 +70,7 @@ public class EdgeTraceType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getDetailInstance() {
@@ -82,7 +82,7 @@ public class EdgeTraceType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setDetailInstance(String value) {

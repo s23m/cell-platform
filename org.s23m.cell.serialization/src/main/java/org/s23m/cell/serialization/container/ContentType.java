@@ -57,7 +57,7 @@ public class ContentType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getContent() {
@@ -69,7 +69,7 @@ public class ContentType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setContent(String value) {
@@ -81,7 +81,7 @@ public class ContentType {
      * 
      * @return
      *     possible object is
-     *     {@arrow ContentEncodingType }
+     *     {@link ContentEncodingType }
      *     
      */
     public ContentEncodingType getContentEncoding() {
@@ -93,7 +93,7 @@ public class ContentType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow ContentEncodingType }
+     *     {@link ContentEncodingType }
      *     
      */
     public void setContentEncoding(ContentEncodingType value) {
@@ -105,7 +105,7 @@ public class ContentType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getId() {
@@ -117,7 +117,7 @@ public class ContentType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setId(String value) {
@@ -129,7 +129,7 @@ public class ContentType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getType() {
@@ -141,7 +141,7 @@ public class ContentType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setType(String value) {

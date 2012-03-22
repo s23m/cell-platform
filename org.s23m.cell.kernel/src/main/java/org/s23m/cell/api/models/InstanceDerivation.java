@@ -34,7 +34,7 @@ import org.s23m.cell.core.SemanticIdentityRegistry;
 import org.s23m.cell.impl.SemanticDomainCode;
 
 /**
- * {@arrow InstanceDerivation} implements all instantiation semantics related to DerivedInstances
+ * {@link InstanceDerivation} implements all instantiation semantics related to DerivedInstances
  * that must be enforced for all instances (instantiation level n, with n > 0)
  * 
  * The semantics enforced in InstanceDerivation apply to all use cases that involve model transformation and text generation

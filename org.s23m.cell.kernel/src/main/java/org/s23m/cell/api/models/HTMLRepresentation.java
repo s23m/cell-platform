@@ -32,7 +32,7 @@ import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.SemanticIdentityRegistry;
 
 /**
- * {@arrow HTMLRepresentation} implements all instantiation semantics related to HTMLRepresentation
+ * {@link HTMLRepresentation} implements all instantiation semantics related to HTMLRepresentation
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  * 
  * The semantics enforced in HTMLRepresentation apply to S23M istances.

@@ -31,19 +31,19 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@arrow Visualization} implements all semantics related to visualizing an container
+ * {@link Visualization} implements all semantics related to visualizing an container
  * that must be enforced for all Instances/artifacts (instantiation level n, with n > 0)
  * 
  * The semantics enforced in visualizedGraph provide the basis for modelling the of 1, 2, and 3 dimensional representations of S23M artifacts
  */
 public final class Visualization {
 
-	public static final Set graphVisualization = Root.cellengineering.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualizedGraph", "graph visualizations", S23MSemanticDomains.cellKernel));
+	public static final Set graphVisualization = Root.cellengineering.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualization", "graph visualizations", S23MSemanticDomains.cellKernel));
 
 	public static final Set visualizedGraph = graphVisualization.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("visualized graph", "visualized graphs", S23MSemanticDomains.cellKernel));
 	private static final Set maxC = visualizedGraph.addToValues(S23MSemanticDomains.maxCardinality_1);
@@ -80,7 +80,7 @@ public final class Visualization {
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set diagram_to_representation = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("diagram_to_representation", "diagram_to_representation", S23MSemanticDomains.cellKernel),
 			diagram,
@@ -95,7 +95,7 @@ public final class Visualization {
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 
 	public static final Set representation_to_x = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_x", "representation_to_x", S23MSemanticDomains.cellKernel),
@@ -111,7 +111,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_y = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_y", "representation_to_y", S23MSemanticDomains.cellKernel),
 			representation,
@@ -126,7 +126,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_z = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_z", "representation_to_z", S23MSemanticDomains.cellKernel),
 			representation,
@@ -141,7 +141,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_width = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_width", "representation_to_width", S23MSemanticDomains.cellKernel),
 			representation,
@@ -156,7 +156,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_height = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_height", "representation_to_height", S23MSemanticDomains.cellKernel),
 			representation,
@@ -171,7 +171,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_depth = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_depth", "representation_to_depth", S23MSemanticDomains.cellKernel),
 			representation,
@@ -186,7 +186,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set representation_to_representedInstance = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("representation_to_representedInstance", "representation_to_representedInstance", S23MSemanticDomains.cellKernel),
 			representation,
@@ -201,7 +201,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 	public static final Set visualizedGraph_to_graph = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("visualizedGraph_to_graph", "visualizedGraph_to_graph", S23MSemanticDomains.cellKernel),
 			visualizedGraph,
@@ -216,7 +216,7 @@ public final class Visualization {
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 
 	public static final Set symbol_to_semantic_identity = Instantiation.arrow(coreGraphs.edge,
 			Instantiation.addDisjunctSemanticIdentitySet("symbol_to_semantic_identity", "symbols_to_semantic_identities", S23MSemanticDomains.cellKernel),
@@ -232,7 +232,7 @@ public final class Visualization {
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
+			);
 
 	public static Set instantiateFeature() {
 

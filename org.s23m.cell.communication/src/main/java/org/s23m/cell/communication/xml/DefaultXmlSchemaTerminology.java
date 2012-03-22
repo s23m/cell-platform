@@ -50,7 +50,7 @@ public class DefaultXmlSchemaTerminology {
 	}
 	
 	/**
-	 * Returns a {@arrow XmlSchemaTerminology} which supplies the method name for each request  
+	 * Returns a {@link XmlSchemaTerminology} which supplies the method name for each request  
 	 */
 	public static XmlSchemaTerminology getInstance() {
 		return terminology;

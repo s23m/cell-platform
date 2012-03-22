@@ -55,7 +55,7 @@ public class SearchResultType {
      * 
      * @return
      *     possible object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public InstanceIdentityType getInstanceIdentity() {
@@ -67,7 +67,7 @@ public class SearchResultType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public void setInstanceIdentity(InstanceIdentityType value) {
@@ -79,7 +79,7 @@ public class SearchResultType {
      * 
      * @return
      *     possible object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public InstanceIdentityType getMetaInstanceIdentity() {
@@ -91,7 +91,7 @@ public class SearchResultType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public void setMetaInstanceIdentity(InstanceIdentityType value) {
@@ -103,7 +103,7 @@ public class SearchResultType {
      * 
      * @return
      *     possible object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public InstanceIdentityType getContainerIdentity() {
@@ -115,7 +115,7 @@ public class SearchResultType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow InstanceIdentityType }
+     *     {@link InstanceIdentityType }
      *     
      */
     public void setContainerIdentity(InstanceIdentityType value) {

@@ -69,7 +69,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getName() {
@@ -81,7 +81,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setName(String value) {
@@ -93,7 +93,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getPluralName() {
@@ -105,7 +105,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setPluralName(String value) {
@@ -117,7 +117,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getPayload() {
@@ -129,7 +129,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setPayload(String value) {
@@ -141,7 +141,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getTechnicalName() {
@@ -153,7 +153,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setTechnicalName(String value) {
@@ -165,7 +165,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getIdentifier() {
@@ -177,7 +177,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setIdentifier(String value) {
@@ -205,7 +205,7 @@ public class SemanticIdType {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getUniqueRepresentationReference() {
@@ -217,7 +217,7 @@ public class SemanticIdType {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setUniqueRepresentationReference(String value) {

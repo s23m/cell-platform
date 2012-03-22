@@ -41,7 +41,7 @@ import org.s23m.cell.core.Visibility;
 
 
 /**
- * {@arrow Query} provides access to the Sets and Properties of the S23M kernel
+ * {@link Query} provides access to the Sets and Properties of the S23M kernel
  * that constitute the basic S23M vocabulary.
  * 
  * Additionally F_SemanticStateOfInMemoryModel enables the creation of arrows between Sets,

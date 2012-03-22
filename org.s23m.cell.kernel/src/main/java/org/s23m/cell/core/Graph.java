@@ -1303,7 +1303,7 @@ public class Graph extends OrderedPair implements Set {
 		return this.filterInstances().extractPrevious(element);
 	}
 	/**
-	 * See {@arrow java.util.List#contains(Object)}
+	 * See {@link java.util.List#contains(Object)}
 	 */
 	@Override
 	public boolean containsSemanticMatch(final Set set) {

@@ -96,7 +96,7 @@ public class ArtefactContainer {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@arrow Content }
+     * {@link Content }
      * 
      * 
      */
@@ -125,7 +125,7 @@ public class ArtefactContainer {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@arrow SearchResult }
+     * {@link SearchResult }
      * 
      * 
      */
@@ -141,7 +141,7 @@ public class ArtefactContainer {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getContentType() {
@@ -153,7 +153,7 @@ public class ArtefactContainer {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setContentType(String value) {
@@ -165,7 +165,7 @@ public class ArtefactContainer {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getId() {
@@ -177,7 +177,7 @@ public class ArtefactContainer {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setId(String value) {
@@ -189,7 +189,7 @@ public class ArtefactContainer {
      * 
      * @return
      *     possible object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public String getTimeStamp() {
@@ -201,7 +201,7 @@ public class ArtefactContainer {
      * 
      * @param value
      *     allowed object is
-     *     {@arrow String }
+     *     {@link String }
      *     
      */
     public void setTimeStamp(String value) {

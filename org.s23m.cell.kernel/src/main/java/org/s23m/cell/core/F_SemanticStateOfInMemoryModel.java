@@ -34,7 +34,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
- * {@arrow F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
+ * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
  * that constitute the basic S23M vocabulary.
  * 
  * Additionally F_SemanticStateOfInMemoryModel enables the creation of arrows between Sets,

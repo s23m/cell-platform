@@ -28,7 +28,7 @@ package org.s23m.cell.core;
 import org.s23m.cell.Identity;
 
 /**
- * {@arrow XtensionIdentityFactory} is a temporary extension of the identity factory for Semantic Identities
+ * {@link XtensionIdentityFactory} is a temporary extension of the identity factory for Semantic Identities
  * that is in use until the initial S23M editor is live.
  */
 public class XtensionIdentityFactory {

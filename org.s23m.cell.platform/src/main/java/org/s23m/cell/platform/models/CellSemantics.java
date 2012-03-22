@@ -33,22 +33,22 @@ import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
 /**
- * {@arrow CellSemantics} implements all instantiation semantics related to the modelling of container state machines
+ * {@link CellSemantics} implements all instantiation semantics related to the modelling of container state machines
  * that must be enforced for all Instances/cells (instantiation level n, with n > 0)
  *
- * The semantics enforced in Cell provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
+ * The semantics enforced in CellEngineering provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
  */
 public final class CellSemantics {
 
 	//public static final Set S23MSemanticLifecycle = F_SemanticStateOfInMemoryModel.instantiateConcrete(Artifact.lifeCycle, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("S23M semantic lifecycle", "S23M semantic lifecycle", S23MSemanticDomains.S23M));
-	public static final Set s23mSemanticLifecycle = Root.cellengineering.addConcrete(Cell.lifeCycle, Instantiation.addDisjunctSemanticIdentitySet("S23M semantic lifecycle", "S23M semantic lifecycle", S23MSemanticDomains.cellKernel));
+	public static final Set s23mSemanticLifecycle = Root.cellengineering.addConcrete(TimeConsciousness.lifeCycle, Instantiation.addDisjunctSemanticIdentitySet("S23M semantic lifecycle", "S23M semantic lifecycle", S23MSemanticDomains.cellKernel));
 	// definition of the life cycle of the S23M Semantic State
-	public static final Set semanticDomainInitialized = s23mSemanticLifecycle.addConcrete(Cell.state, Instantiation.addDisjunctSemanticIdentitySet("semantic domain initialized", "semantic domain initialized", S23MSemanticDomains.cellKernel));
+	public static final Set semanticDomainInitialized = s23mSemanticLifecycle.addConcrete(TimeConsciousness.state, Instantiation.addDisjunctSemanticIdentitySet("semantic domain initialized", "semantic domain initialized", S23MSemanticDomains.cellKernel));
 
 	// the S23M semantics state machine, tied to the S23MSemanticLifecycle
 	//public static final Set S23MSemantics = F_SemanticStateOfInMemoryModel.instantiateConcrete(Artifact.artifact, F_SemanticStateOfInMemoryModel.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.S23M));
-	public static final Set s23mSemantics = Root.cellengineering.addConcrete(Cell.cell, Instantiation.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.cellKernel));
-	public static final Set s23mSemantics_to_lifecycle = Instantiation.arrow(Cell.cell_to_lifeCycle,
+	public static final Set s23mSemantics = Root.cellengineering.addConcrete(CellContent.cell, Instantiation.addDisjunctSemanticIdentitySet("S23M semantics", "S23M semantics", S23MSemanticDomains.cellKernel));
+	public static final Set s23mSemantics_to_lifecycle = Instantiation.arrow(TimeConsciousness.cell_to_lifeCycle,
 			Instantiation.addDisjunctSemanticIdentitySet("S23MSemantics_to_lifecycle", "S23MSemantics_to_lifecycle", S23MSemanticDomains.cellKernel),
 			s23mSemantics,
 			s23mSemantics,
@@ -56,7 +56,7 @@ public final class CellSemantics {
 			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE,
-			Cell.lifeCycle,
+			TimeConsciousness.lifeCycle,
 			s23mSemanticLifecycle,
 			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
@@ -69,15 +69,15 @@ public final class CellSemantics {
 		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, Root.models, S23MSemanticLifecycle);
 
 		// initialization of the S23M semantics state machine with the semanticDomainInitialized state
-		final Set state = Instantiation.arrow(Cell.cell_to_state,
+		final Set state = Instantiation.arrow(TimeConsciousness.cell_to_state,
 				Instantiation.addDisjunctSemanticIdentitySet("S23MSemantics_to_state", "S23MSemantics_to_state", S23MSemanticDomains.cellKernel),
-				Cell.cell,
+				CellContent.cell,
 				s23mSemantics,
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE,
-				Cell.state,
+				TimeConsciousness.state,
 				semanticDomainInitialized,
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
 				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
