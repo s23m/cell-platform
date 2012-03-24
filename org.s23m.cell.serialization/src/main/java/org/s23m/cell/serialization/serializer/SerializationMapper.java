@@ -98,8 +98,8 @@ public final class SerializationMapper {
 		final boolean isAnon = instance.identity().name().equals(ANON_NAME) ? true: false;
 		final Set metaSet = instance.category();
 		InstantiationSemantic type = null;
-		if (instance.isEqualToRepresentation(S23MSemanticDomains.infiniteSets) ||
-				instance.isEqualToRepresentation(S23MSemanticDomains.finiteSets)) {
+		if (instance.isEqualToRepresentation(S23MSemanticDomains.sandboxSemanticDomains) ||
+				instance.isEqualToRepresentation(S23MSemanticDomains.agentSemanticDomains)) {
 			type = InstantiationSemantic.INSTANTIATE_SEMANTIC_DOMAIN;
 		} else if (metaSet.isEqualToRepresentation(SemanticDomain.disjunctSemanticIdentitySet)) {
 			if (isAnon) {

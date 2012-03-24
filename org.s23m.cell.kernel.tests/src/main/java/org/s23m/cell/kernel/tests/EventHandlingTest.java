@@ -19,7 +19,8 @@ public class EventHandlingTest extends S23MTestCase {
 			addSubscriptions();
 
 			// Event #1 , triggered by "addEvent" in inMemorySets()
-			final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
+			//final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.agentSemanticDomains);
+			final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.sandboxSemanticDomains);
 
 			// Event #2 .. #5  , triggered by "addEvent" in inMemorySets : 1 new SemanticIdentity, 1 new Edge, and 2 new EdgeEnds
 			// Event #6  , triggered by "addEvent" in who.instanceSet : 1 new Edge

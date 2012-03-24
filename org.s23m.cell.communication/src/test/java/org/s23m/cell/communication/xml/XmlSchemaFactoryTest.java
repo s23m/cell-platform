@@ -61,7 +61,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	private static final String NAMESPACE_PREFIX = "xmlns:";
 
 	// TODO discover this automatically
-	private static final String OUR_NAMESPACE = "s23m";
+	private static final String OUR_NAMESPACE = "agentSemanticDomains";
 	
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {

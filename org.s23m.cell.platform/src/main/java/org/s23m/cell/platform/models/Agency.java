@@ -122,7 +122,7 @@ public class Agency {
 			S23MSemanticDomains.isContainer_FALSE
 	);
 
-	public static final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("S23M cell platform", "S23M cell platform");
+	public static final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
 	public static final Set development = org.s23m.cell.platform.api.Instantiation.addStage("development", "development", s23mCellPlatform);
 	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage("test", "test", s23mCellPlatform);
 	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage("production", "production", s23mCellPlatform);

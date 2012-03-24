@@ -35,7 +35,8 @@ import org.s23m.cell.core.Graph;
 public class CellPlatformDomain {
 
 	// GOMODEL cell platform DOMAIN
-	public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform", "cell platforms", S23MSemanticDomains.finiteSets);
+	public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform - JAVA", "cell platform - JAVA", S23MSemanticDomains.agentSemanticDomains);
+	//public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform", "cell platforms", Root.semanticdomains);
 	public static final Set world = Instantiation.addDisjunctSemanticIdentitySet("world", "set of worlds", cellPlatformDomain);
 	public static final Set legalEntity = Instantiation.addDisjunctSemanticIdentitySet("legal entity", "set of legal entities", cellPlatformDomain);
 	public static final Set organization = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, legalEntity);
@@ -107,6 +108,13 @@ public class CellPlatformDomain {
 	public static final Set transaction = Instantiation.addDisjunctSemanticIdentitySet("transaction", "set of transactions", cellPlatformDomain);
 	public static final Set baseline = Instantiation.addDisjunctSemanticIdentitySet("baseline", "set of baselines", cellPlatformDomain);
 	public static final Set transactions = Instantiation.addDisjunctSemanticIdentitySet("transactions", "set of transactions", cellPlatformDomain);
+	public static final Set time = Instantiation.addDisjunctSemanticIdentitySet("time", "set of time", cellPlatformDomain);
+	public static final Set cells = Instantiation.addDisjunctSemanticIdentitySet("cells", "set of cells", cellPlatformDomain);
+	public static final Set languages = Instantiation.addDisjunctSemanticIdentitySet("languages", "set of languages", cellPlatformDomain);
+	public static final Set licenses = Instantiation.addDisjunctSemanticIdentitySet("licenses", "set of licenses", cellPlatformDomain);
+	public static final Set organizations = Instantiation.addDisjunctSemanticIdentitySet("organizations", "set of organizations", cellPlatformDomain);
+	public static final Set terminologies = Instantiation.addDisjunctSemanticIdentitySet("terminologies", "set of terminologies", cellPlatformDomain);
+	public static final Set graphVisualizations = Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "set of graph visualizations", cellPlatformDomain);
 
 
 	public static final Set timeConsciousness = Instantiation.addDisjunctSemanticIdentitySet("time consciousness", "set of time consciousness", cellPlatformDomain);

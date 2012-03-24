@@ -34,7 +34,8 @@ public class EcoreEmulationTest extends S23MTestCase {
 
 	public void eclipseModellingFramework() {
 
-		EcoreDomain = Instantiation.addSemanticDomain("EcoreDomain", "EcoreDomain", S23MSemanticDomains.finiteSets);
+		//EcoreDomain = Instantiation.addSemanticDomain("EcoreDomain", "EcoreDomain", S23MSemanticDomains.agentSemanticDomains);
+		EcoreDomain = Instantiation.addSemanticDomain("EcoreDomain", "EcoreDomain", S23MSemanticDomains.sandboxSemanticDomains);
 		final Set ecore = Instantiation.addDisjunctSemanticIdentitySet("Ecore", "Ecore", EcoreDomain);
 		final Set eObject = Instantiation.addDisjunctSemanticIdentitySet("EObject", "EObjects", EcoreDomain);
 		final Set eModelElement = Instantiation.addDisjunctSemanticIdentitySet("EModelElement", "EModelElements", EcoreDomain);

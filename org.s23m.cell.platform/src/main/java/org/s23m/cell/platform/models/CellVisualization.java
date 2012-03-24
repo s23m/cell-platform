@@ -42,13 +42,6 @@ public class CellVisualization {
 
 	public static Set instantiateFeature() {
 
-		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, naryLogicalFunction);
-		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, logicalFunction);
-
-
-
-
-
 		return cellVisualization;
 	}
 

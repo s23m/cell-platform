@@ -44,6 +44,9 @@ public class Organization {
 	public static final Set user = CellEngineering.organization.addConcrete(SemanticDimension.who, CellPlatformDomain.user);
 	public static final Set role = CellEngineering.organization.addConcrete(SemanticDimension.who, CellPlatformDomain.role);
 	public static final Set languagePreference = user.addConcrete(SemanticDimension.what, CellPlatformDomain.languagePreference);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, CellEngineering.organization, SemanticDimension.who);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, user, SemanticDimension.who);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, role, SemanticDimension.who);
 
 	public static final Set user_to_roles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.user_to_roles,

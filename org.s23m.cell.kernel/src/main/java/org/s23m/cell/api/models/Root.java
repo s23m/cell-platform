@@ -42,7 +42,7 @@ public class Root {
 
 	public static final Set semanticdomains = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("semantic domains", "set of semantic domains", SemanticIdentityRegistry.semanticdomains.ordinal()));
 	public static final Set models = ((Graph)Root.root).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("models", "set of models", SemanticIdentityRegistry.models.ordinal()));
-	public static final Set cellengineering = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("cell engineering", "set of cell engineering", SemanticIdentityRegistry.cellengineering.ordinal()));
+	public static final Set cellengineering = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("cell engineering - JAVA", "cell engineering - JAVA", SemanticIdentityRegistry.cellengineering.ordinal()));
 	public static final Set agents = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("agents", "set of agents", SemanticIdentityRegistry.agents.ordinal()));
 	public static final Set sandbox = ((Graph)models).addConcrete(coreGraphs.vertex, identityFactory.createIdentityInKernel("sandbox", "set of sandbox", SemanticIdentityRegistry.sandbox.ordinal()));
 

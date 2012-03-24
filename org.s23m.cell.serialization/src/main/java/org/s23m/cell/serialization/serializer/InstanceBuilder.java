@@ -239,16 +239,16 @@ public class InstanceBuilder {
 
 	public static void decommssionInstances() {
 		//TODO: Kernel's decommission method does not work as intended
-		removeInstances(S23MSemanticDomains.infiniteSets, true);
-		removeInstances(S23MSemanticDomains.finiteSets, true);
+		removeInstances(S23MSemanticDomains.sandboxSemanticDomains, true);
+		removeInstances(S23MSemanticDomains.agentSemanticDomains, true);
 		removeInstances(Root.models, true);
 	}
 
 	public static void decommssionOutdatedOuterShellInstances() {
 		//TODO: Kernel's decommission method does not work as intended
 		removeInstances(Root.semanticdomains, true);
-		removeInstances(S23MSemanticDomains.infiniteSets, false);
-		removeInstances(S23MSemanticDomains.finiteSets, false);
+		removeInstances(S23MSemanticDomains.sandboxSemanticDomains, false);
+		removeInstances(S23MSemanticDomains.agentSemanticDomains, false);
 		removeInstances(Root.models, true);
 	}
 
@@ -277,8 +277,8 @@ public class InstanceBuilder {
 	}
 
 	public static boolean IsSemanticDomainTopInstances(final Set set) {
-		return set.identity().isEqualToRepresentation(S23MSemanticDomains.finiteSets.identity()) ||
-		set.identity().isEqualToRepresentation(S23MSemanticDomains.infiniteSets.identity());
+		return set.identity().isEqualToRepresentation(S23MSemanticDomains.agentSemanticDomains.identity()) ||
+		set.identity().isEqualToRepresentation(S23MSemanticDomains.sandboxSemanticDomains.identity());
 	}
 
 	public static boolean isSerializableInstance(final Set set) {

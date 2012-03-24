@@ -32,8 +32,8 @@ import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.Transaction;
-import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
@@ -76,7 +76,7 @@ public class Test {
 		Transaction.commitChangedSets();
 		changedSetsCount = org.s23m.cell.api.Query.changedSets().size();
 
-		final Set testDomain = org.s23m.cell.api.Instantiation.addSemanticDomain("test domain 3", "test domains 3", S23MSemanticDomains.finiteSets);
+		final Set testDomain = org.s23m.cell.api.Instantiation.addSemanticDomain("test domain 3", "test domains 3", S23MSemanticDomains.sandboxSemanticDomains);
 		final Set testInstance =  Root.models.addAbstract(coreGraphs.vertex, testDomain);
 		final Set vizSet = RepositoryStructure.graphVisualizations;
 		final Set idSet = org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet("container visualizedGraph", "container artifactVisualizations", testDomain);

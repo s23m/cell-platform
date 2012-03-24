@@ -35,41 +35,41 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 public class RepositoryStructure {
 
 	// STRUCTURE OF SEMANTIC DOMAIN REPOSITORY
-	public static final Set integers = Instantiation.addSemanticDomain("integers", "set of integers", S23MSemanticDomains.infiniteSets);
-	public static final Set rationals = Instantiation.addSemanticDomain("rationals", "set of rationals", S23MSemanticDomains.infiniteSets);
-	public static final Set reals = Instantiation.addSemanticDomain("reals", "set of reals", S23MSemanticDomains.infiniteSets);
-	public static final Set complex = Instantiation.addSemanticDomain("complex", "set of complex", S23MSemanticDomains.infiniteSets);
-	public static final Set dates = Instantiation.addSemanticDomain("dates", "set of dates", S23MSemanticDomains.infiniteSets);
-	public static final Set strings = Instantiation.addSemanticDomain("strings", "set of strings", S23MSemanticDomains.infiniteSets);
-	public static final Set htmlRepresentations = Instantiation.addSemanticDomain("htmlRepresentations", "set of htmlRepresentations", S23MSemanticDomains.finiteSets);
+	public static final Set integers = Instantiation.addSemanticDomain("integers", "set of integers", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set rationals = Instantiation.addSemanticDomain("rationals", "set of rationals", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set reals = Instantiation.addSemanticDomain("reals", "set of reals", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set complex = Instantiation.addSemanticDomain("complex", "set of complex", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set dates = Instantiation.addSemanticDomain("dates", "set of dates", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set strings = Instantiation.addSemanticDomain("strings", "set of strings", S23MSemanticDomains.sandboxSemanticDomains);
+	public static final Set htmlRepresentations = Instantiation.addSemanticDomain("htmlRepresentations", "set of htmlRepresentations", S23MSemanticDomains.sandboxSemanticDomains);
 
 	// STRUCTURE OF MODEL REPOSITORY
-	//public static final Set domainengineering = Root.models.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("domain engineering", "set of domain engineering", S23MSemanticDomains.finiteSets));
-	//public static final Set projectmanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("project management", "", S23MSemanticDomains.finiteSets));
-	//public static final Set productmanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product management", "", S23MSemanticDomains.finiteSets));
-	//public static final Set productlinemanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product line management", "", S23MSemanticDomains.finiteSets));
-	//public static final Set graphVisualizations = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "", S23MSemanticDomains.finiteSets));
-	public static final Set domainengineering = Root.sandbox.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("domain engineering", "set of domain engineering", S23MSemanticDomains.finiteSets));
-	public static final Set projectmanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("project management", "", S23MSemanticDomains.finiteSets));
-	public static final Set productmanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product management", "", S23MSemanticDomains.finiteSets));
-	public static final Set productlinemanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product line management", "", S23MSemanticDomains.finiteSets));
-	public static final Set graphVisualizations = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "", S23MSemanticDomains.finiteSets));
+	//public static final Set domainengineering = Root.models.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("domain engineering", "set of domain engineering", S23MSemanticDomains.agentSemanticDomains));
+	//public static final Set projectmanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("project management", "", S23MSemanticDomains.agentSemanticDomains));
+	//public static final Set productmanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product management", "", S23MSemanticDomains.agentSemanticDomains));
+	//public static final Set productlinemanagement = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product line management", "", S23MSemanticDomains.agentSemanticDomains));
+	//public static final Set graphVisualizations = Root.models.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set domainengineering = Root.sandbox.addConcrete(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("domain engineering", "set of domain engineering", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set projectmanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("project management", "", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set productmanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product management", "", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set productlinemanagement = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("product line management", "", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set graphVisualizations = Root.sandbox.addAbstract(coreGraphs.vertex, Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "", S23MSemanticDomains.sandboxSemanticDomains));
 
 	// TODO Fix up top level of instantiation to attach to sandbox or to agents!
-	public static final Set applicationengineering = Instantiation.instantiateConcrete(domainengineering, Instantiation.addDisjunctSemanticIdentitySet("application engineering", "", S23MSemanticDomains.finiteSets));
-	public static final Set applicationoperation = Instantiation.instantiateConcrete(applicationengineering, Instantiation.addDisjunctSemanticIdentitySet("application operation", "", S23MSemanticDomains.finiteSets));
-	//public static final Set applicationengineering = Root.sandbox.addConcrete(domainengineering, Instantiation.addDisjunctSemanticIdentitySet("application engineering", "", S23MSemanticDomains.finiteSets));
-	//public static final Set applicationoperation = Root.sandbox.addConcrete(applicationengineering, Instantiation.addDisjunctSemanticIdentitySet("application operation", "", S23MSemanticDomains.finiteSets));
+	public static final Set applicationengineering = Instantiation.instantiateConcrete(domainengineering, Instantiation.addDisjunctSemanticIdentitySet("application engineering", "", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set applicationoperation = Instantiation.instantiateConcrete(applicationengineering, Instantiation.addDisjunctSemanticIdentitySet("application operation", "", S23MSemanticDomains.sandboxSemanticDomains));
+	//public static final Set applicationengineering = Root.sandbox.addConcrete(domainengineering, Instantiation.addDisjunctSemanticIdentitySet("application engineering", "", S23MSemanticDomains.agentSemanticDomains));
+	//public static final Set applicationoperation = Root.sandbox.addConcrete(applicationengineering, Instantiation.addDisjunctSemanticIdentitySet("application operation", "", S23MSemanticDomains.agentSemanticDomains));
 	/*
-	public static final Set organization = productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("organization", "organizations", S23MSemanticDomains.finiteSets));
-	public static final Set system = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("system", "systems", S23MSemanticDomains.finiteSets));
-	public static final Set managedfeature = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("managed feature", "managed features", S23MSemanticDomains.finiteSets));
+	public static final Set organization = productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("organization", "organizations", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set system = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("system", "systems", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set managedfeature = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("managed feature", "managed features", S23MSemanticDomains.agentSemanticDomains));
 
-	public static final Set product = productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product", "products", S23MSemanticDomains.finiteSets));
-	public static final Set productfeedback = productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product feedback", "product feedbacks", S23MSemanticDomains.finiteSets));
-	public static final Set usecase = productmanagement.addConcrete(EnterpriseArchitecture.how, Instantiation.addDisjunctSemanticIdentitySet("use case", "use cases",  S23MSemanticDomains.finiteSets));
+	public static final Set product = productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product", "products", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set productfeedback = productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product feedback", "product feedbacks", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set usecase = productmanagement.addConcrete(EnterpriseArchitecture.how, Instantiation.addDisjunctSemanticIdentitySet("use case", "use cases",  S23MSemanticDomains.agentSemanticDomains));
 
-	public static final Set timebox = projectmanagement.addConcrete(EnterpriseArchitecture.when, Instantiation.addDisjunctSemanticIdentitySet("timebox", "timeboxes", S23MSemanticDomains.finiteSets));
+	public static final Set timebox = projectmanagement.addConcrete(EnterpriseArchitecture.when, Instantiation.addDisjunctSemanticIdentitySet("timebox", "timeboxes", S23MSemanticDomains.agentSemanticDomains));
 	 */
 	public static void instantiateFeature() {
 
@@ -77,8 +77,8 @@ public class RepositoryStructure {
 		//Instantiation.arrow(coreGraphs.visibility, Root.models, domainengineering);
 		Instantiation.arrow(coreGraphs.visibility, Root.sandbox, domainengineering);
 
-		Instantiation.arrow(coreGraphs.visibility, domainengineering, S23MSemanticDomains.finiteSets);
-		Instantiation.arrow(coreGraphs.visibility, projectmanagement, S23MSemanticDomains.finiteSets);
+		Instantiation.arrow(coreGraphs.visibility, domainengineering, S23MSemanticDomains.sandboxSemanticDomains);
+		Instantiation.arrow(coreGraphs.visibility, projectmanagement, S23MSemanticDomains.sandboxSemanticDomains);
 
 		Instantiation.arrow(coreGraphs.visibility, domainengineering, productlinemanagement);
 		Instantiation.arrow(coreGraphs.visibility, domainengineering, productmanagement);

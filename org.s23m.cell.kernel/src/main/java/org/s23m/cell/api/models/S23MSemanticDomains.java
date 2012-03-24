@@ -41,10 +41,10 @@ public class S23MSemanticDomains {
 
 	// STRUCTURE OF SEMANTIC DOMAIN REPOSITORY
 
-	public static final Set infiniteSets =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.infiniteSets()));
-	public static final Set finiteSets =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.finiteSets()));
+	public static final Set sandboxSemanticDomains =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.sandboxSemanticDomains()));
+	public static final Set agentSemanticDomains =  F_Instantiation.instantiateSemanticDomain(org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(xtensionIdentityFactory.agentSemanticDomains()));
 
-	public static final Set cellKernel= ((Graph)finiteSets).addAbstract(SemanticDomain.semanticdomain, xtensionIdentityFactory.cellKernel());
+	public static final Set cellKernel= ((Graph)agentSemanticDomains).addAbstract(SemanticDomain.semanticdomain, xtensionIdentityFactory.cellKernel());
 	public static final Set root = cellKernel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.root);
 	public static final Set semanticDomains = cellKernel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.semanticdomains);
 	public static final Set models = cellKernel.addConcrete(SemanticDomain.disjunctSemanticIdentitySet, Root.models);
@@ -253,11 +253,12 @@ public class S23MSemanticDomains {
 		// Instantiation level 2
 
 		// VISIBILITIES WITHIN THE SEMANTICDOMAINS REPOSITORY
-		Instantiation.arrow(coreGraphs.visibility, S23MSemanticDomains.finiteSets, S23MSemanticDomains.infiniteSets);
+		//Instantiation.arrow(coreGraphs.visibility, S23MSemanticDomains.agentSemanticDomains, S23MSemanticDomains.sandboxSemanticDomains);
+		Instantiation.arrow(coreGraphs.visibility, S23MSemanticDomains.sandboxSemanticDomains, S23MSemanticDomains.agentSemanticDomains);
 
 		// MODELS --> SEMANTICDOMAINS
-		Instantiation.arrow(coreGraphs.visibility, Root.models, S23MSemanticDomains.finiteSets);
-		Instantiation.arrow(coreGraphs.visibility, Root.models, S23MSemanticDomains.infiniteSets);
+		Instantiation.arrow(coreGraphs.visibility, Root.models, S23MSemanticDomains.agentSemanticDomains);
+		Instantiation.arrow(coreGraphs.visibility, Root.models, S23MSemanticDomains.sandboxSemanticDomains);
 
 		iqLogicValue.addElement(is_NOTAPPLICABLE);
 		iqLogicValue.addElement(is_FALSE);
@@ -315,8 +316,8 @@ public class S23MSemanticDomains {
 	}
 
 	private static void addS23MKernelElementsToInMemorySets() {
-		Graph.addSetToInMemorySets(infiniteSets);
-		Graph.addSetToInMemorySets(finiteSets);
+		Graph.addSetToInMemorySets(sandboxSemanticDomains);
+		Graph.addSetToInMemorySets(agentSemanticDomains);
 
 		Graph.addSetToInMemorySets(cellKernel) ;
 		Graph.addSetToInMemorySets(root);

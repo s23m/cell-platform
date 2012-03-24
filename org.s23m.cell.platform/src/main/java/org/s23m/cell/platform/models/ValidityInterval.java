@@ -29,7 +29,6 @@ import static org.s23m.cell.S23MKernel.coreSets;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.Root;
 
 
 public class ValidityInterval {
@@ -37,9 +36,7 @@ public class ValidityInterval {
 	public static final Set validityInterval = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validityInterval);
 	public static final Set validFromTimestamp = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validFromTimestamp);
 	public static final Set validUntilTimestamp = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.validUntilTimestamp);
-	/* TODO relocate validityIntervals & timestamps under agents/stages  */
-	public static final Set validityIntervals = Root.models.addAbstract(coreGraphs.vertex, CellPlatformDomain.validityIntervals);
-	public static final Set timestamps = Root.models.addAbstract(coreGraphs.vertex, CellPlatformDomain.timestamps);
+
 
 
 	public static final Set validityInterval_to_validFromTimestamp = Instantiation.arrow(coreGraphs.edge,
@@ -74,12 +71,12 @@ public class ValidityInterval {
 			coreSets.isContainer_FALSE
 	);
 
+	private static final Set s1 =	Instantiation.arrow(coreGraphs.superSetReference, validityInterval, coreGraphs.vertex);
+	private static final Set s2 =	Instantiation.arrow(coreGraphs.superSetReference, validFromTimestamp, coreGraphs.vertex);
+	private static final Set s3 =	Instantiation.arrow(coreGraphs.superSetReference, validUntilTimestamp, coreGraphs.vertex);
 
 	public static Set instantiateFeature() {
 
-		Instantiation.arrow(coreGraphs.superSetReference, validityInterval, coreGraphs.vertex);
-		Instantiation.arrow(coreGraphs.superSetReference, validFromTimestamp, coreGraphs.vertex);
-		Instantiation.arrow(coreGraphs.superSetReference, validUntilTimestamp, coreGraphs.vertex);
 
 		return validityInterval;
 	}

@@ -24,6 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.platform.api;
 
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
@@ -31,11 +32,14 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
+import org.s23m.cell.api.models2.Visualization;
 import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.F_InstantiationImpl;
 import org.s23m.cell.core.Graph;
 import org.s23m.cell.impl.SemanticDomainCode;
 import org.s23m.cell.platform.models.Agency;
+import org.s23m.cell.platform.models.CellEngineering;
+import org.s23m.cell.platform.models.CellPlatformDomain;
 
 public class Instantiation {
 
@@ -60,7 +64,7 @@ public class Instantiation {
 	}
 
 	public static Set addAgent(final String name, final String pluralName) {
-		final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, S23MSemanticDomains.finiteSets);
+		final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, S23MSemanticDomains.agentSemanticDomains);
 		return  F_Instantiation.instantiateConcrete(F_Instantiation.reuseSemanticIdentity(sd.identity()), Agency.agent);
 	}
 	public static Set addStage(final String name, final String pluralName, final Set semanticDomain) {
@@ -68,11 +72,15 @@ public class Instantiation {
 			final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, semanticDomain);
 			final Set t = Instantiation.toAgent(semanticDomain);
 			if (t.category().isEqualTo(Agency.agent)) {
-				return t.addConcrete(Agency.stage, sd);
+				final Set stage = t.addConcrete(Agency.stage, sd);
+				Instantiation.addDefaultContainers(stage);
+				return stage;
 			} else {
 				final Set s = Instantiation.toStage(semanticDomain);
 				if (s.category().isEqualTo(Agency.stage)) {
-					return s.addConcrete(Agency.stage, sd);
+					final Set stage = s.addConcrete(Agency.stage, sd);
+					Instantiation.addDefaultContainers(stage);
+					return stage;
 				}
 			}
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
@@ -84,6 +92,22 @@ public class Instantiation {
 				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 			}
 		}
+	}
+
+	private static Set addDefaultContainers(final Set stage) {
+		final Set time = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.timeConsciousness, stage, CellPlatformDomain.time);
+		final Set languages = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.language, stage, CellPlatformDomain.languages);
+		final Set licenses = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.licensing, stage, CellPlatformDomain.licenses);
+		// TODO fix up organisation model
+		//org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.organization, stage, CellPlatformDomain.organizations);
+		final Set terminologies = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.terminology, stage, CellPlatformDomain.terminologies);
+		final Set graphVisualizatons = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(Visualization.graphVisualization, stage, CellPlatformDomain.graphVisualizations);
+		final Set cells = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.cellContent, stage, CellPlatformDomain.cells);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, languages);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, time);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, terminologies);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, licenses);
+		return stage;
 	}
 
 	private static Set toSemanticDomain(final Set set) {

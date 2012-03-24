@@ -45,8 +45,8 @@ public enum XtensionSemanticIdentityRegistry {
 	/**
 	 * outer shells & cell platform
 	 */
-	infiniteSets,
-	finiteSets,
+	sandboxSemanticDomains,
+	agentSemanticDomains,
 	cellKernel,
 	agent,
 	person,

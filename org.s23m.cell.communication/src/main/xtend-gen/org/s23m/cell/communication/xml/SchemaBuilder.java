@@ -16,7 +16,7 @@ import org.s23m.cell.communication.xml.schema.Type;
 
 @SuppressWarnings("all")
 public class SchemaBuilder {
-  private static String S23M = "s23m";
+  private static String S23M = "agentSemanticDomains";
   
   private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
   

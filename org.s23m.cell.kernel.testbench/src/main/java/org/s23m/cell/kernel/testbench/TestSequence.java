@@ -42,7 +42,9 @@ public class TestSequence {
 
 	private static SemanticIdentityRegistry nameRegistry;
 	// just for the fun of it we create an instance of an edge
-	public static final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
+	//public static final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.agentSemanticDomains);
+	public static final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.sandboxSemanticDomains);
+
 	public static final Set whoToWho = arrow(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
 //			F_SemanticStateOfInMemoryModel.addAnonymousDisjunctSemanticIdentitySet(testDomain), EnterpriseArchitecture.who,
 			EnterpriseArchitecture.who, EnterpriseArchitecture.who,

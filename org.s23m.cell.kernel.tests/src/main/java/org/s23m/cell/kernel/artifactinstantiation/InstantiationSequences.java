@@ -46,7 +46,7 @@ public class InstantiationSequences {
 	private static InstantiationSequences instance;
 
 	// just for the fun of it we create an instance of an edge
-	public final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
+	public final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.sandboxSemanticDomains);
 
 	public final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.sandbox, testDomain);
 
