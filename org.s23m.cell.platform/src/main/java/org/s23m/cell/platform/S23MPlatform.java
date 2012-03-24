@@ -25,16 +25,11 @@
 
 package org.s23m.cell.platform;
 
-import static org.s23m.cell.core.F_Instantiation.identityFactory;
-
-import org.s23m.cell.Set;
 import org.s23m.cell.api.KernelSets;
-import org.s23m.cell.api.models.Root;
-import org.s23m.cell.api.models.SemanticDomain;
-import org.s23m.cell.api.models2.RepositoryStructure;
-import org.s23m.cell.api.models2.Visualization;
+import org.s23m.cell.api.ProperClasses;
+import org.s23m.cell.core.F_Instantiation;
+import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
 import org.s23m.cell.platform.models.CellPlatform;
-import org.s23m.cell.platform.models.CellPlatformDomain;
 
 
 /**
@@ -66,48 +61,29 @@ import org.s23m.cell.platform.models.CellPlatformDomain;
  */
 public class S23MPlatform {
 
-	/**
-	 * QUERIES
-	 */
-
-	public static final KernelSets coreSets = org.s23m.cell.S23MKernel.coreSets;
-	//public static final CoreGraphs coreGraphs = org.s23m.cell.G.coreGraphs;
-	private static boolean cellPlatformIsInitialized = false;
-
-
-	public static boolean semanticDomainIsInitialized() {
-		return org.s23m.cell.SemanticStateOfInMemoryModel.semanticDomainIsInitialized();
-	}
-	public static boolean cellKernelSemanticDomainIsInitialized() {
-		return org.s23m.cell.SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized();
-	}
-
-	public static boolean cellEditorIsLive() {
-		return org.s23m.cell.SemanticStateOfInMemoryModel.cellEditorIsLive();
-	}
-	public static boolean cellKernelIsInitialized() {
-		return org.s23m.cell.SemanticStateOfInMemoryModel.cellKernelIsInitialized();
-	}
-	public static boolean cellPlatformIsInitialized() {
-		return cellPlatformIsInitialized;
-	}
+	public static final KernelSets coreSets = new KernelSets(F_Instantiation.identityFactory);
+	public static final ProperClasses coreGraphs = new ProperClasses();
 
 	/**
 	 * COMMANDS
 	 */
 
+	public static void switchOnDebugMode() {
+		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.switchOnDebugMode();
+	}
+	public static void switchOffDebugMode() {
+		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.switchOffDebugMode();
+	}
 	public static void goLiveWithCellEditor() {
-		/**
-		 * TODO as needed depending on context, boot the repository & editor
-		 */
-		org.s23m.cell.S23MKernel.goLiveWithCellEditor();
+		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.goLiveWithCellEditor();
 	}
 	public static void completeCellKernelInitialization() {
 		org.s23m.cell.S23MKernel.completeCellKernelInitialization();
 	}
+
 	public static void completeCellPlatformInitialization() {
 		org.s23m.cell.S23MKernel.completeCellKernelInitialization();
-		if (!cellEditorIsLive()) {
+		if (!org.s23m.cell.SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			CellPlatform.instantiateFeature();
 		};
 		cellPlatformIsInitialized = true;
@@ -116,122 +92,9 @@ public class S23MPlatform {
 		completeCellPlatformInitialization();
 	}
 	public static void boot() {
-		Root.instantiateFeature();
-		SemanticDomain.instantiateFeature();
-		final int kernelComplexity = identityFactory.kernelComplexity();
-		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
-		goLiveWithCellEditor();
-		bootTemplate();
+		completeCellKernelInitialization();
 	}
-	public static Set raiseError(final Set semanticIdentity, final Set metaElement) {
-		return org.s23m.cell.api.Instantiation.raiseError(semanticIdentity, metaElement);
+	//public static final CoreGraphs coreGraphs = org.s23m.cell.G.coreGraphs;
+	private static boolean cellPlatformIsInitialized = false;
 	}
 
-	public static Set arrow(final Set metaElement,
-			final Set edgeIdentity,
-			final Set firstSemanticIdentity,
-			final Set firstOrderedPair,
-			final Set firstMinCardinality,
-			final Set firstMaxCardinality,
-			final Set firstIsNavigable,
-			final Set firstIsContainer,
-			final Set secondSemanticIdentity,
-			final Set secondOrderedPair,
-			final Set secondMinCardinality,
-			final Set secondMaxCardinality,
-			final Set secondIsNavigable,
-			final Set secondIsContainer
-	) {
-		return org.s23m.cell.api.Instantiation.arrow(metaElement,
-				edgeIdentity,
-				firstSemanticIdentity,
-				firstOrderedPair,
-				firstMinCardinality,
-				firstMaxCardinality,
-				firstIsNavigable,
-				firstIsContainer,
-				secondSemanticIdentity,
-				secondOrderedPair,
-				secondMinCardinality,
-				secondMaxCardinality,
-				secondIsNavigable,
-				secondIsContainer
-		);
-	}
-
-	public static Set arrow(final Set metaElement, final Set fromInstance, final Set toInstance) {
-		return org.s23m.cell.api.Instantiation.arrow(metaElement, fromInstance, toInstance);
-	}
-
-	public static Set instantiateConcrete(final Set metaElement, final Set semanticIdentity) {
-		return org.s23m.cell.api.Instantiation.instantiateConcrete(metaElement, semanticIdentity);
-	}
-	public static Set instantiateAbstract(final Set metaElement, final Set semanticIdentity) {
-		return org.s23m.cell.api.Instantiation.instantiateAbstract(metaElement, semanticIdentity);
-	}
-
-	public static Set addSemanticDomain(final String name, final String pluralName, final Set semanticDomain) {
-		return org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, semanticDomain);
-	}
-
-	public static Set addDisjunctSemanticIdentitySet(final String name, final String pluralName, final Set semanticDomain) {
-		return org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet(name, pluralName, semanticDomain);
-	}
-	public static Set addAnonymousDisjunctSemanticIdentitySet(final Set semanticDomain) {
-		return org.s23m.cell.api.Instantiation.addAnonymousDisjunctSemanticIdentitySet(semanticDomain);
-	}
-	public static Set addSemanticRole(final String name, final String pluralName, final Set semanticDomain, final Set referencedSemanticIdentity) {
-		return org.s23m.cell.api.Instantiation.addSemanticRole(name, pluralName, semanticDomain, referencedSemanticIdentity);
-	}
-	public static Set addAnonymousSemanticRole(final Set semanticDomain, final Set referencedSemanticIdentity) {
-		return org.s23m.cell.api.Instantiation.addAnonymousSemanticRole(semanticDomain, referencedSemanticIdentity);
-	}
-	public static Set addSemanticIdentitySet(final String name, final String pluralName, final Set semanticDomain) {
-		return org.s23m.cell.api.Instantiation.addSemanticIdentitySet(name, pluralName, semanticDomain);
-	}
-
-//	public static Set addElement(final Set set, final Set element) {
-//		return org.s23m.cell.G.addElement(set, element);
-//	}
-	//public static Set addToTransportContainer(final Set set) {
-	//	return org.s23m.cell.G.addToTransportContainer(set);
-	//}
-	//public static Set purgeTransportContainer() {
-	//	return org.s23m.cell.G.purgeTransportContainer();
-	//}
-	//public static Set transportContainer() {
-	//	return org.s23m.cell.G.transportContainer();
-	//}
-
-	public static Set graphVisualization(final Set set) {
-		for (final Set s : RepositoryStructure.graphVisualizations.filterPolymorphic(Visualization.graphVisualization)) {
-			final Set visualization_to_visualizedGraphs = s.filterPolymorphic(Visualization.visualizedGraph_to_graph);
-			if (!visualization_to_visualizedGraphs.isEmpty()
-				&& 	visualization_to_visualizedGraphs.to().isEqualTo(set)) {
-				return visualization_to_visualizedGraphs.from();
-			}
-		}
-		return coreSets.is_UNKNOWN;
-	}
-
-	public static Set defaultSymbol(final Set set) {
-		final Set containerOfSemanticIdentity = set.semanticIdentity().container();
-		final Set graphVisualization = graphVisualization(containerOfSemanticIdentity);
-		if (!graphVisualization.isEqualTo(coreSets.is_UNKNOWN)) {
-			final Set symbolArrows = graphVisualization.filterPolymorphic(Visualization.symbol_to_semantic_identity);
-			for (final Set symbolArrow: symbolArrows) {
-				if (symbolArrow.to().isEqualTo(set)
-						&& symbolArrow.fromEdgeEnd().isEqualTo(CellPlatformDomain.theDefault)) {
-					return symbolArrow.from();
-				}
-			}
-		}
-		if (set.container().isEqualTo(org.s23m.cell.api.Query.graph)) {
-			// terminate recursion
-			return set.properClass();
-		} else {
-			// recurse up the category tree
-			return defaultSymbol(set.category());
-		}
-	}
-}

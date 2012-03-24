@@ -148,6 +148,7 @@ public class TimeConsciousness {
 
 	public static final Set transaction = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.transaction);
 	public static final Set creationTimestamp = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.creationTimestamp);
+	/* TODO relocate transactions under agents/stages  */
 	public static final Set transactions = Root.models.addAbstract(coreGraphs.vertex, CellPlatformDomain.transactions);
 	private static final Set v3 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.timeConsciousness, CellEngineering.agency);
 

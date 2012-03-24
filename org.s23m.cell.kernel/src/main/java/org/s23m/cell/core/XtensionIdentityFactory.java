@@ -43,5 +43,8 @@ public class XtensionIdentityFactory {
 	public final Identity infiniteSets() {return F_Instantiation.identityFactory.createIdentityInKernel("infinite sets", "set of infinite sets", XtensionSemanticIdentityRegistry.infiniteSets.ordinal());}
 	public final Identity finiteSets() {return F_Instantiation.identityFactory.createIdentityInKernel("finite sets", "set of finite sets", XtensionSemanticIdentityRegistry.finiteSets.ordinal());}
 	public final Identity cellKernel() {return F_Instantiation.identityFactory.createIdentityInKernel("cell kernel", "cell kernel", XtensionSemanticIdentityRegistry.cellKernel.ordinal());}
+	public final Identity agent() {return F_Instantiation.identityFactory.createIdentityInKernel("agent", "agents", XtensionSemanticIdentityRegistry.agent.ordinal());}
+	public final Identity person() {return F_Instantiation.identityFactory.createIdentityInKernel("person", "people", XtensionSemanticIdentityRegistry.person.ordinal());}
+	public final Identity system() {return F_Instantiation.identityFactory.createIdentityInKernel("system", "systems", XtensionSemanticIdentityRegistry.system.ordinal());}
 
 }

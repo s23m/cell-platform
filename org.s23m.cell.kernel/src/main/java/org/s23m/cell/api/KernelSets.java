@@ -489,7 +489,6 @@ public final class KernelSets {
 
 
 		referencingSemanticRole = F_InstantiationImpl.createFunction(identityFactory.referencingSemanticRole(), orderedPair);
-
 	}
 
 }

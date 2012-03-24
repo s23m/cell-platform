@@ -28,6 +28,9 @@ package org.s23m.cell.platform.models;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.api.models.SemanticDomain;
+import org.s23m.cell.core.F_Instantiation;
+import org.s23m.cell.core.Graph;
 
 public class CellPlatformDomain {
 
@@ -38,9 +41,11 @@ public class CellPlatformDomain {
 	public static final Set organization = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, legalEntity);
 
 	public static final Set agency = Instantiation.addDisjunctSemanticIdentitySet("agency", "set of agency", cellPlatformDomain);
-	public static final Set agent = Instantiation.addDisjunctSemanticIdentitySet("agent", "agents", cellPlatformDomain);
-	public static final Set person = Instantiation.addSemanticRole("person", "people", cellPlatformDomain, agent);
-	public static final Set system = Instantiation.addSemanticRole("system", "systems", cellPlatformDomain, agent);
+	public static final Set agent = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.agent());
+	public static final Set person = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.person());
+	public static final Set system = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.system());
+	public static final Set stage = Instantiation.addDisjunctSemanticIdentitySet("stage", "stages", cellPlatformDomain);
+	public static final Set agent_to_stages = Instantiation.addDisjunctSemanticIdentitySet("agent_to_stages", "set of agent_to_stages", cellPlatformDomain);
 
 	public static final Set user = Instantiation.addSemanticRole("user", "users", cellPlatformDomain, agent);
 

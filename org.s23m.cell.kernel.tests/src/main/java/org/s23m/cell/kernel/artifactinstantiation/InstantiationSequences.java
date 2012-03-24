@@ -31,6 +31,8 @@ import static org.s23m.cell.api.Instantiation.addSemanticDomain;
 import static org.s23m.cell.api.Instantiation.arrow;
 
 import org.s23m.cell.Set;
+import org.s23m.cell.api.Instantiation;
+import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
 import org.s23m.cell.api.models2.RepositoryStructure;
@@ -45,6 +47,8 @@ public class InstantiationSequences {
 
 	// just for the fun of it we create an instance of an edge
 	public final Set testDomain = addSemanticDomain("test domain", "test domains", S23MSemanticDomains.finiteSets);
+
+	public final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.sandbox, testDomain);
 
 	public final Set whoToWho = arrow(coreGraphs.edge, addDisjunctSemanticIdentitySet("who to who", "set of who to who", testDomain),
 //			F_SemanticStateOfInMemoryModel.addAnonymousDisjunctSemanticIdentitySet(testDomain), EnterpriseArchitecture.who,

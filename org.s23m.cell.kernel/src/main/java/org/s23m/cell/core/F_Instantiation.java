@@ -30,6 +30,7 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import java.util.UUID;
 
 import org.s23m.cell.Identity;
+import org.s23m.cell.SemanticStateOfInMemoryModel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
@@ -56,7 +57,7 @@ public final class F_Instantiation {
 						(category.value(coreSets.maxCardinality).isEqualTo(coreSets.maxCardinality_2) &&  container.filterPolymorphic(category).size() < 2)
 						||
 						(category.value(coreSets.maxCardinality).isEqualTo(coreSets.maxCardinality_n))
-				) {
+						) {
 					final Vertex temp = new Vertex(container, semanticIdentity, category);
 					temp.addToValues(coreSets.isAbstract_FALSE);
 					return temp;
@@ -91,7 +92,7 @@ public final class F_Instantiation {
 						(category.value(coreSets.maxCardinality).isEqualTo(coreSets.maxCardinality_2) &&  container.filterPolymorphic(category).size() < 2)
 						||
 						(category.value(coreSets.maxCardinality).isEqualTo(coreSets.maxCardinality_n))
-				) {
+						) {
 					final Vertex temp = new Vertex(container, semanticIdentity, category);
 					temp.addToValues(coreSets.isAbstract_TRUE);
 					return temp;
@@ -132,7 +133,7 @@ public final class F_Instantiation {
 	public static Set addSuperSetReference(final Set subSet, final Set superSet, final Set category) {
 		if (   (subSet.hasVisibilityOf(superSet).isEqualTo(coreSets.is_TRUE))
 				|| (subSet.category().isEqualTo(superSet))
-		) {
+				) {
 			return F_InstantiationImpl.createSuperSetReference(subSet, superSet, category);
 		}
 		else {
@@ -144,7 +145,7 @@ public final class F_Instantiation {
 	public static Set reconstituteSuperSetReference(final Identity identity, final Set subSet, final Set superSet, final Set category) {
 		if (   (subSet.hasVisibilityOf(superSet).isEqualTo(coreSets.is_TRUE))
 				|| (subSet.category().isEqualTo(superSet))
-		) {
+				) {
 			return new SuperSetReference(identity, subSet, superSet, category);
 		}
 		else {
@@ -164,13 +165,63 @@ public final class F_Instantiation {
 			} else {
 				if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
 					final Vertex temp;
-					temp = new Vertex((Graph) Root.models, semanticIdentity, category);
+					if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
+						if (xtensionIdentityFactory.agent().isEqualTo(category.identity())
+								|| xtensionIdentityFactory.person().isEqualTo(category.identity())
+								|| xtensionIdentityFactory.system().isEqualTo(category.identity())
+								) {
+							temp = new Vertex((Graph) Root.agents, semanticIdentity, category);
+						} else {
+							temp = new Vertex((Graph) Root.sandbox, semanticIdentity, category);
+
+						}
+					}
+					else {
+						temp = new Vertex((Graph) Root.models, semanticIdentity, category);
+					}
 					temp.addToValues(coreSets.isAbstract_FALSE);
 					return temp;
 				} else {
 					return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 				}
 			}
+		}
+	}
+
+	public static Vertex instantiateConcrete(final Identity semanticIdentity, final Set stage, final Set category, final Set stageCategory, final Set agentCategory) {
+		if (stageCategory.isSuperSetOf(category).is_FALSE()
+				&& agentCategory.isSuperSetOf(category).is_FALSE()
+				&& SemanticDomain.semanticdomain.isSuperSetOf(category).is_FALSE()
+				&& SemanticStateOfInMemoryModel.semanticDomainIsInitialized()
+				) {
+			if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
+				final Vertex temp;
+				temp = new Vertex((Graph) stage, semanticIdentity, category) ;
+				temp.addToValues(coreSets.isAbstract_FALSE);
+				return temp;
+			} else {
+				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+			}
+		} else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+		}
+	}
+	public static Vertex instantiateAbstract(final Identity semanticIdentity, final Set stage, final Set category, final Set stageCategory, final Set agentCategory) {
+		if (stageCategory.isSuperSetOf(category).is_FALSE()
+				&& agentCategory.isSuperSetOf(category).is_FALSE()
+				&& SemanticDomain.semanticdomain.isSuperSetOf(category).is_FALSE()
+				&& SemanticStateOfInMemoryModel.semanticDomainIsInitialized()
+				) {
+			if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_TRUE)	) {
+				final Vertex temp;
+				temp = new Vertex((Graph) stage, semanticIdentity, category) ;
+				temp.addToValues(coreSets.isAbstract_TRUE);
+				return temp;
+			} else {
+				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+			}
+		} else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		}
 	}
 
@@ -185,7 +236,20 @@ public final class F_Instantiation {
 	public static Vertex instantiateAbstract(final Identity semanticIdentity, final Set category) {
 		if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
 			final Vertex temp;
-			temp = new Vertex((Graph) Root.models, semanticIdentity, category);
+			if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
+				if (xtensionIdentityFactory.agent().isEqualTo(category.identity())
+						|| xtensionIdentityFactory.person().isEqualTo(category.identity())
+						|| xtensionIdentityFactory.system().isEqualTo(category.identity())
+						) {
+					temp = new Vertex((Graph) Root.agents, semanticIdentity, category);
+				} else {
+					temp = new Vertex((Graph) Root.sandbox, semanticIdentity, category);
+
+				}
+			}
+			else {
+				temp = new Vertex((Graph) Root.models, semanticIdentity, category);
+			}
 			temp.addToValues(coreSets.isAbstract_TRUE);
 			return temp;
 		} else {
@@ -214,7 +278,7 @@ public final class F_Instantiation {
 			final Set secondMaxCardinality,
 			final Set secondIsNavigable,
 			final Set secondIsContainer
-	) {
+			) {
 		return ArrowConstraints.arrow(category,
 				identityFactory.anonymous(),
 				firstSemanticIdentity,
@@ -229,7 +293,7 @@ public final class F_Instantiation {
 				secondMaxCardinality,
 				secondIsNavigable,
 				secondIsContainer
-		);
+				);
 	}
 
 	public static Set arrow(final Set category,
@@ -246,7 +310,7 @@ public final class F_Instantiation {
 			final Set secondMaxCardinality,
 			final Set secondIsNavigable,
 			final Set secondIsContainer
-	) {
+			) {
 		return ArrowConstraints.arrow(category,
 				edgeIdentity,
 				firstSemanticIdentity,
@@ -261,7 +325,7 @@ public final class F_Instantiation {
 				secondMaxCardinality,
 				secondIsNavigable,
 				secondIsContainer
-		);
+				);
 	}
 
 	public static Set arrow(final Set category, final Set fromInstance, final Set toInstance) {
@@ -283,7 +347,7 @@ public final class F_Instantiation {
 			final Identity secondMaxCardinality,
 			final Identity secondIsNavigable,
 			final Identity secondIsContainer
-	) {
+			) {
 		return arrow(F_Query.getSetFromLocalMemory(category),
 				edgeIdentity,
 				firstSemanticIdentity,
@@ -298,7 +362,7 @@ public final class F_Instantiation {
 				F_Query.getSetFromLocalMemory(secondMaxCardinality),
 				F_Query.getSetFromLocalMemory(secondIsNavigable),
 				F_Query.getSetFromLocalMemory(secondIsContainer)
-		) ;
+				) ;
 	}
 
 	public static Set addSemanticRole(final String name, final String pluralName, final Set semanticDomain, final Set referencedSemanticIdentity) {

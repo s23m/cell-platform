@@ -47,6 +47,9 @@ public enum XtensionSemanticIdentityRegistry {
 	 */
 	infiniteSets,
 	finiteSets,
-	cellKernel
+	cellKernel,
+	agent,
+	person,
+	system,
 }
 

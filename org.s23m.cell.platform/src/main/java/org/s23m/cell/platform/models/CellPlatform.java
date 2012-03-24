@@ -27,12 +27,15 @@ package org.s23m.cell.platform.models;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
+import org.s23m.cell.platform.testfoundation.TestFoundation;
+
 public class CellPlatform {
 
 	public static void instantiateFeature() {
 		final int kernelComplexity = identityFactory.kernelComplexity();
 		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
 		CellEngineering.instantiateFeature();
+		Agency.instantiateFeature();
 		//CellEngineering.instantiateFeature();
 		// TODO Fix up S23MSemantics.instantiateFeature();
 		//ValidityInterval.instantiateFeature();
@@ -46,6 +49,8 @@ public class CellPlatform {
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
 
+		// Basis for test cases building on top of the foundation
+		TestFoundation.instantiateFeature();
 	}
 
 }
