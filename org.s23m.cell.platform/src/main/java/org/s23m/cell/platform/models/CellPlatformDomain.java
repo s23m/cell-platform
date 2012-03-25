@@ -36,26 +36,27 @@ public class CellPlatformDomain {
 
 	// GOMODEL cell platform DOMAIN
 	public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform - JAVA", "cell platform - JAVA", S23MSemanticDomains.agentSemanticDomains);
-	//public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform", "cell platforms", Root.semanticdomains);
 	public static final Set world = Instantiation.addDisjunctSemanticIdentitySet("world", "set of worlds", cellPlatformDomain);
 	public static final Set legalEntity = Instantiation.addDisjunctSemanticIdentitySet("legal entity", "set of legal entities", cellPlatformDomain);
+	//public static final Set organization = Instantiation.addDisjunctSemanticIdentitySet("organization", "set of organizations", cellPlatformDomain);
 	public static final Set organization = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, legalEntity);
 
 	public static final Set agency = Instantiation.addDisjunctSemanticIdentitySet("agency", "set of agency", cellPlatformDomain);
 	public static final Set agent = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.agent());
-	public static final Set person = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.person());
-	public static final Set system = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.system());
+	public static final Set nonLinearSystem = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.nonLinearSystem());
+	public static final Set linearSystem = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.linearSystem());
 	public static final Set stage = Instantiation.addDisjunctSemanticIdentitySet("stage", "stages", cellPlatformDomain);
 	public static final Set agent_to_stages = Instantiation.addDisjunctSemanticIdentitySet("agent_to_stages", "set of agent_to_stages", cellPlatformDomain);
 
 	public static final Set user = Instantiation.addSemanticRole("user", "users", cellPlatformDomain, agent);
 
+	public static final Set member = Instantiation.addSemanticRole("member", "members", cellPlatformDomain, agent);
 
 	public static final Set creator = Instantiation.addSemanticRole("creator", "creators", cellPlatformDomain, agent);
 	public static final Set role = Instantiation.addDisjunctSemanticIdentitySet("role", "roles", cellPlatformDomain);
 	public static final Set languagePreference = Instantiation.addDisjunctSemanticIdentitySet("language preference", "set of language preferences", cellPlatformDomain);
-	public static final Set parentOrganization = Instantiation.addSemanticRole("parent", "set of parents", cellPlatformDomain, organization);
-	public static final Set subOrganization = Instantiation.addSemanticRole("sub organization", "set of sub organizations", cellPlatformDomain, organization);
+	//public static final Set parentOrganization = Instantiation.addSemanticRole("parent", "set of parents", cellPlatformDomain, organization);
+	//public static final Set subOrganization = Instantiation.addSemanticRole("sub organization", "set of sub organizations", cellPlatformDomain, organization);
 	public static final Set parentRole = Instantiation.addSemanticRole("parent", "set of parents", cellPlatformDomain, role);
 	public static final Set includedRole = Instantiation.addSemanticRole("included role", "set of included roles", cellPlatformDomain, role);
 	public static final Set excludedRole = Instantiation.addSemanticRole("excluded role", "set of excluded roles", cellPlatformDomain, role);
@@ -114,7 +115,7 @@ public class CellPlatformDomain {
 	public static final Set licenses = Instantiation.addDisjunctSemanticIdentitySet("licenses", "set of licenses", cellPlatformDomain);
 	public static final Set organizations = Instantiation.addDisjunctSemanticIdentitySet("organizations", "set of organizations", cellPlatformDomain);
 	public static final Set terminologies = Instantiation.addDisjunctSemanticIdentitySet("terminologies", "set of terminologies", cellPlatformDomain);
-	public static final Set graphVisualizations = Instantiation.addDisjunctSemanticIdentitySet("graph visualizations", "set of graph visualizations", cellPlatformDomain);
+	public static final Set cellVisualizations = Instantiation.addDisjunctSemanticIdentitySet("cell visualizations", "set of cell visualizations", cellPlatformDomain);
 
 
 	public static final Set timeConsciousness = Instantiation.addDisjunctSemanticIdentitySet("time consciousness", "set of time consciousness", cellPlatformDomain);
@@ -129,15 +130,11 @@ public class CellPlatformDomain {
 	public static final Set transaction_to_creationTimestamp = Instantiation.addDisjunctSemanticIdentitySet("transaction to creation timestamp", "set of transaction to creation timestamps", cellPlatformDomain);
 	public static final Set transaction_to_creator = Instantiation.addDisjunctSemanticIdentitySet("transaction to creator", "set of transaction to creators", cellPlatformDomain);
 
-	public static final Set organization_to_user = Instantiation.addDisjunctSemanticIdentitySet("organization to user", "set of organizations to users", cellPlatformDomain);
+	public static final Set organization_to_members = Instantiation.addDisjunctSemanticIdentitySet("organization to member", "set of organizations to members", cellPlatformDomain);
 	public static final Set organization_to_roles = Instantiation.addDisjunctSemanticIdentitySet("organization to roles", "set of organizations to roles", cellPlatformDomain);
-	public static final Set organization_to_subOrganizations = Instantiation.addDisjunctSemanticIdentitySet("organization to sub organizations", "set of organizations to sub organizations", cellPlatformDomain);
-	public static final Set user_to_languagePreferences = Instantiation.addDisjunctSemanticIdentitySet("user to language preferences", "set of user to language preferences", cellPlatformDomain);
-	public static final Set user_to_roles = Instantiation.addDisjunctSemanticIdentitySet("user to roles", "set of user to roles", cellPlatformDomain);
+	public static final Set member_to_roles = Instantiation.addDisjunctSemanticIdentitySet("member to roles", "set of member to roles", cellPlatformDomain);
 	public static final Set role_to_includedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to included roles", "set of role to included roles", cellPlatformDomain);
 	public static final Set role_to_excludedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to excluded roles", "set of role to excluded roles", cellPlatformDomain);
-	public static final Set languagePreference_to_language = Instantiation.addDisjunctSemanticIdentitySet("language preference to language", "set of language preference to languages", cellPlatformDomain);
-
 
 	public static final Set language = Instantiation.addDisjunctSemanticIdentitySet("language", "languages", cellPlatformDomain);
 	public static final Set jargon = Instantiation.addDisjunctSemanticIdentitySet("jargon", "jargons", cellPlatformDomain);

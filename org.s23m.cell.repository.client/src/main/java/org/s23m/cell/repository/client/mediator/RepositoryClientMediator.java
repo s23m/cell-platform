@@ -58,7 +58,7 @@ public class RepositoryClientMediator {
 	}
 
 	private boolean isLocallyDeployed() {
-		// TODO remove the need for this system property
+		// TODO remove the need for this linearSystem property
 		return Boolean.valueOf(ConfigValues.getString("RepositoryClientServer.IS_LOCALLY_DEPLOYED")) ||
 				Boolean.valueOf(System.getProperty("S23M.development.local.database"));
 	}

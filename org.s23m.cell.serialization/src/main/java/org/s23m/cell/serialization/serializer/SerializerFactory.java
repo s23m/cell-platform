@@ -37,7 +37,7 @@ public class SerializerFactory {
 		if (type.equals(SerializationType.XML)) {
 			return new FileSystemSerializer();
 		} else {
-			throw new UnsupportedOperationException("Non file-system serializatio is not supported yet.");
+			throw new UnsupportedOperationException("Non file-linearSystem serializatio is not supported yet.");
 		}
 	}
 

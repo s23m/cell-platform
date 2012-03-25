@@ -167,8 +167,8 @@ public final class F_Instantiation {
 					final Vertex temp;
 					if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
 						if (xtensionIdentityFactory.agent().isEqualTo(category.identity())
-								|| xtensionIdentityFactory.person().isEqualTo(category.identity())
-								|| xtensionIdentityFactory.system().isEqualTo(category.identity())
+								|| xtensionIdentityFactory.nonLinearSystem().isEqualTo(category.identity())
+								|| xtensionIdentityFactory.linearSystem().isEqualTo(category.identity())
 								) {
 							temp = new Vertex((Graph) Root.agents, semanticIdentity, category);
 						} else {
@@ -238,8 +238,8 @@ public final class F_Instantiation {
 			final Vertex temp;
 			if (SemanticStateOfInMemoryModel.semanticDomainIsInitialized()) {
 				if (xtensionIdentityFactory.agent().isEqualTo(category.identity())
-						|| xtensionIdentityFactory.person().isEqualTo(category.identity())
-						|| xtensionIdentityFactory.system().isEqualTo(category.identity())
+						|| xtensionIdentityFactory.nonLinearSystem().isEqualTo(category.identity())
+						|| xtensionIdentityFactory.linearSystem().isEqualTo(category.identity())
 						) {
 					temp = new Vertex((Graph) Root.agents, semanticIdentity, category);
 				} else {

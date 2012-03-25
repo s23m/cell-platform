@@ -8,3 +8,4 @@ Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",org.junit4
 Bundle-ActivationPolicy: lazy
 Export-Package: org.s23m.cell.kernel.artifactinstantiation,
  org.s23m.cell.kernel.tests
+Import-Package: org.s23m.cell.platform

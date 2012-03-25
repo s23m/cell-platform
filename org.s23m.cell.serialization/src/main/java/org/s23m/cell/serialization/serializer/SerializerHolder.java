@@ -41,7 +41,7 @@ public class SerializerHolder {
 		if (type.equals(SerializationType.XML)) {
 			return SerializerInstance.XML_SERIALIZER;
 		} else {
-			throw new UnsupportedOperationException("Non file-system serializatio is not supported yet.");
+			throw new UnsupportedOperationException("Non file-linearSystem serializatio is not supported yet.");
 		}
 	}
 

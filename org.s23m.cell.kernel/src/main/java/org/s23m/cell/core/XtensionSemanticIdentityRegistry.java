@@ -49,7 +49,7 @@ public enum XtensionSemanticIdentityRegistry {
 	agentSemanticDomains,
 	cellKernel,
 	agent,
-	person,
-	system,
+	nonLinearSystem,
+	linearSystem,
 }
 

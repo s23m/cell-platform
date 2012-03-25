@@ -15,7 +15,7 @@ public class VisualisationExampleTest extends S23MTestCase {
 		final Set crm_product = instantiationSequences.crm_product;
 
 		final Set crm_viz = crm_aviz.addConcrete(Visualization.visualizedGraph,
-				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema graphVisualizations", testDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema cellVisualizations", testDomain));
 
 		final Set crm_viz_details = crm_aviz.addConcrete(Visualization.details,
 				Instantiation.addDisjunctSemanticIdentitySet("crm schema visualizedGraph | details", "crm schema visualizedGraph | details", testDomain));

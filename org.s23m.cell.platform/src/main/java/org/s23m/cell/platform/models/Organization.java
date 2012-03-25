@@ -36,22 +36,23 @@ import org.s23m.cell.api.models.Root;
 public class Organization {
 
 	// STRUCTURE OF MODEL REPOSITORY
-	//public static final Set legalEntity = Root.cellengineering.addConcrete(SemanticDimension.who, CellPlatformDomain.legalEntity);
-	//public static final Set organization = Root.cellengineering.addConcrete(SemanticDimension.who, CellPlatformDomain.organization);
-	//public static final Set person = Root.cellengineering.addConcrete(SemanticDimension.who, CellPlatformDomain.person);
-	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.semanticDimension);
+	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.organization);
+	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.timeConsciousness);
+	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, CellEngineering.organization, coreGraphs.vertex);
+	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.cellContent);
 
-	public static final Set user = CellEngineering.organization.addConcrete(SemanticDimension.who, CellPlatformDomain.user);
-	public static final Set role = CellEngineering.organization.addConcrete(SemanticDimension.who, CellPlatformDomain.role);
-	public static final Set languagePreference = user.addConcrete(SemanticDimension.what, CellPlatformDomain.languagePreference);
-	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, CellEngineering.organization, SemanticDimension.who);
-	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, user, SemanticDimension.who);
-	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, role, SemanticDimension.who);
 
-	public static final Set user_to_roles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
-			CellPlatformDomain.user_to_roles,
-			user,
-			user,
+	public static final Set member = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.member);
+	public static final Set role = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.role);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, member, TimeConsciousness.timeConsciousVertex);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, role, TimeConsciousness.timeConsciousVertex);
+	private static final Set v7 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, member);
+	private static final Set v8 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, role);
+
+	public static final Set member_to_roles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.member_to_roles,
+			member,
+			member,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -62,22 +63,8 @@ public class Organization {
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
-	);
-	public static final Set organization_to_subOrganizations = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
-			CellPlatformDomain.organization_to_subOrganizations,
-			CellPlatformDomain.parentOrganization,
-			CellEngineering.organization,
-			coreSets.minCardinality_0,
-			coreSets.maxCardinality_1,
-			coreSets.isNavigable_TRUE,
-			coreSets.isContainer_TRUE,
-			CellPlatformDomain.subOrganization,
-			CellEngineering.organization,
-			coreSets.minCardinality_0,
-			coreSets.maxCardinality_n,
-			coreSets.isNavigable_TRUE,
-			coreSets.isContainer_FALSE
-	);
+);
+
 	public static final Set role_to_includedRoles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.role_to_includedRoles,
 			CellPlatformDomain.parentRole,
@@ -108,25 +95,6 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.language);
-	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, user, CellEngineering.language);
-	public static final Set languagePreference_to_language = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
-			CellPlatformDomain.languagePreference_to_language,
-			languagePreference,
-			languagePreference,
-			coreSets.minCardinality_0,
-			coreSets.maxCardinality_n,
-			coreSets.isNavigable_FALSE,
-			coreSets.isContainer_FALSE,
-			CellEngineering.language,
-			CellEngineering.language,
-			coreSets.minCardinality_1,
-			coreSets.maxCardinality_1,
-			coreSets.isNavigable_TRUE,
-			coreSets.isContainer_FALSE
-	);
-
-	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.organization);
 
 	public static Set instantiateFeature() {
 

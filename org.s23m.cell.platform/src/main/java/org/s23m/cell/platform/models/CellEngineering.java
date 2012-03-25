@@ -44,6 +44,8 @@ public final class CellEngineering {
 	public static final Set agency = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.agency);
 	public static final Set jargon = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.jargon);
 	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, jargon, language);
+	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, jargon, language);
+
 	public static final Set timeConsciousness = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.timeConsciousness);
 
 	public static final Set licensing = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.licensing);
@@ -53,7 +55,7 @@ public final class CellEngineering {
 	public static final Set logicalExpression = Root.cellengineering.addAbstract(CellContent.cell, CellPlatformDomain.logicalExpression);
 	public static final Set representationStyleCategories = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.representationStyleCategories);
 	public static final Set semanticDimension = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.semanticDimension);
-	public static final Set organization = Root.cellengineering.addConcrete(SemanticDimension.who, CellPlatformDomain.organization);
+	public static final Set organization = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.organization);
 
 
 	static Set instantiateFeature() {

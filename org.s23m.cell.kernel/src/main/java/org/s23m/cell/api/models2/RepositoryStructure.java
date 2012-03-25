@@ -61,8 +61,8 @@ public class RepositoryStructure {
 	//public static final Set applicationengineering = Root.sandbox.addConcrete(domainengineering, Instantiation.addDisjunctSemanticIdentitySet("application engineering", "", S23MSemanticDomains.agentSemanticDomains));
 	//public static final Set applicationoperation = Root.sandbox.addConcrete(applicationengineering, Instantiation.addDisjunctSemanticIdentitySet("application operation", "", S23MSemanticDomains.agentSemanticDomains));
 	/*
-	public static final Set organization = productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("organization", "organizations", S23MSemanticDomains.agentSemanticDomains));
-	public static final Set system = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("system", "systems", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set sandbox_organization = productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("sandbox_organization", "organizations", S23MSemanticDomains.agentSemanticDomains));
+	public static final Set linearSystem = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("linearSystem", "systems", S23MSemanticDomains.agentSemanticDomains));
 	public static final Set managedfeature = productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("managed feature", "managed features", S23MSemanticDomains.agentSemanticDomains));
 
 	public static final Set product = productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product", "products", S23MSemanticDomains.agentSemanticDomains));
@@ -89,13 +89,13 @@ public class RepositoryStructure {
 		Instantiation.arrow(coreGraphs.visibility, applicationengineering, productlinemanagement);
 		Instantiation.arrow(coreGraphs.visibility, applicationengineering, domainengineering);
 
-		/*Instantiation.arrow(coreGraphs.visibility, organization, system);
-		Instantiation.arrow(coreGraphs.visibility, system, managedfeature);
+		/*Instantiation.arrow(coreGraphs.visibility, sandbox_organization, linearSystem);
+		Instantiation.arrow(coreGraphs.visibility, linearSystem, managedfeature);
 
 		Instantiation.arrow(coreGraphs.visibility, product, productfeedback);
 		Instantiation.arrow(coreGraphs.visibility, product, usecase);
-		Instantiation.arrow(coreGraphs.visibility, productfeedback, organization);
-		Instantiation.arrow(coreGraphs.visibility, usecase, organization);
+		Instantiation.arrow(coreGraphs.visibility, productfeedback, sandbox_organization);
+		Instantiation.arrow(coreGraphs.visibility, usecase, sandbox_organization);
 		Instantiation.arrow(coreGraphs.visibility, usecase, managedfeature);
 
 		Instantiation.arrow(coreGraphs.visibility, timebox, product);

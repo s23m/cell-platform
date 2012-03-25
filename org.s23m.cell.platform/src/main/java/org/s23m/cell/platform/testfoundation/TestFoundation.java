@@ -25,6 +25,7 @@
 
 package org.s23m.cell.platform.testfoundation;
 
+
 public class TestFoundation {
 
 	public static void instantiateFeature() {

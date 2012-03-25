@@ -38,14 +38,14 @@ public class Agency {
 
 	public static final Set agent = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.agent);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, agent, coreGraphs.vertex);
-	public static final Set person = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.person);
-	public static final Set system = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.system);
+	public static final Set nonLinearSystem = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.nonLinearSystem);
+	public static final Set linearSystem = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.linearSystem);
 	public static final Set stage = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.stage);
 	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, stage, agent);
 
 
-	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, person, agent);
-	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, system, agent);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, nonLinearSystem, agent);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, linearSystem, agent);
 	//private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.agency, CellEngineering.timeConsciousness);
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.agency, CellEngineering.language);
 	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.agency, CellEngineering.jargon);
@@ -121,11 +121,6 @@ public class Agency {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-
-	public static final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
-	public static final Set development = org.s23m.cell.platform.api.Instantiation.addStage("development", "development", s23mCellPlatform);
-	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage("test", "test", s23mCellPlatform);
-	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage("production", "production", s23mCellPlatform);
 
 	public static Set instantiateFeature() {
 		return CellEngineering.agency;

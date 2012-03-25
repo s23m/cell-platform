@@ -58,20 +58,20 @@ public final class EnterpriseArchitecture {
 	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, where, coreGraphs.vertex);
 	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, why, coreGraphs.vertex);
 
-	public static final Set organization = RepositoryStructure.productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("organization", "organizations", S23MSemanticDomains.sandboxSemanticDomains));
-	public static final Set system = RepositoryStructure.productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("system", "systems", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set sandbox_organization = RepositoryStructure.productlinemanagement.addConcrete(EnterpriseArchitecture.who, Instantiation.addDisjunctSemanticIdentitySet("sandbox sandbox_organization", "sandbox organizations", S23MSemanticDomains.sandboxSemanticDomains));
+	public static final Set system = RepositoryStructure.productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("linearSystem", "systems", S23MSemanticDomains.sandboxSemanticDomains));
 	public static final Set managedfeature = RepositoryStructure.productlinemanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("managed feature", "managed features", S23MSemanticDomains.sandboxSemanticDomains));
 	public static final Set product = RepositoryStructure.productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product", "products", S23MSemanticDomains.sandboxSemanticDomains));
 	public static final Set productfeedback = RepositoryStructure.productmanagement.addConcrete(EnterpriseArchitecture.what, Instantiation.addDisjunctSemanticIdentitySet("product feedback", "product feedbacks", S23MSemanticDomains.sandboxSemanticDomains));
 	public static final Set usecase = RepositoryStructure.productmanagement.addConcrete(EnterpriseArchitecture.how, Instantiation.addDisjunctSemanticIdentitySet("use case", "use cases",  S23MSemanticDomains.sandboxSemanticDomains));
 	public static final Set timebox = RepositoryStructure.projectmanagement.addConcrete(EnterpriseArchitecture.when, Instantiation.addDisjunctSemanticIdentitySet("timebox", "timeboxes", S23MSemanticDomains.sandboxSemanticDomains));
 
-	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, organization, system);
+	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, sandbox_organization, system);
 	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, system, managedfeature);
 	private static final Set v3 = Instantiation.arrow(coreGraphs.visibility, product, productfeedback);
 	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, product, usecase);
-	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, productfeedback, organization);
-	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, usecase, organization);
+	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, productfeedback, sandbox_organization);
+	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, usecase, sandbox_organization);
 	private static final Set v7 = Instantiation.arrow(coreGraphs.visibility, usecase, managedfeature);
 	private static final Set v8 = Instantiation.arrow(coreGraphs.visibility, timebox, product);
 

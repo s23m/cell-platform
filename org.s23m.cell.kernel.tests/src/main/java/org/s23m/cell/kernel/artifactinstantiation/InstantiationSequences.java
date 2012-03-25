@@ -81,7 +81,7 @@ public class InstantiationSequences {
 
 
 	public final Set crm_aviz = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization,
-			addDisjunctSemanticIdentitySet("crm schema container visualizedGraph", "crm schema container graphVisualizations", testDomain));
+			addDisjunctSemanticIdentitySet("crm schema container visualizedGraph", "crm schema container cellVisualizations", testDomain));
 
 	public Set crm_viz_structure_diag_product;
 
@@ -98,7 +98,7 @@ public class InstantiationSequences {
 
 	public void visualizationExample() {
 		final Set crm_viz = crm_aviz.addConcrete(Visualization.visualizedGraph,
-				addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema graphVisualizations", testDomain));
+				addDisjunctSemanticIdentitySet("crm schema visualizedGraph", "crm schema cellVisualizations", testDomain));
 
 		final Set crm_viz_details = crm_aviz.addConcrete(Visualization.details,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | details", "crm schema visualizedGraph | details", testDomain));

@@ -31,6 +31,7 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 	public void setUp() {
 		if (!kernelHasBooted) {
 			org.s23m.cell.S23MKernel.boot();
+			//org.s23m.cell.platform.S23MPlatform.bootTemplate();
 			instantiationSequences = InstantiationSequences.getInstance();
 			testData = new InstantiationData(instantiationSequences);
 

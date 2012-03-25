@@ -44,7 +44,7 @@ public class XtensionIdentityFactory {
 	public final Identity agentSemanticDomains() {return F_Instantiation.identityFactory.createIdentityInKernel("agent semantic domains", "agent semantic domains", XtensionSemanticIdentityRegistry.agentSemanticDomains.ordinal());}
 	public final Identity cellKernel() {return F_Instantiation.identityFactory.createIdentityInKernel("cell kernel - JAVA", "cell kernel - JAVA", XtensionSemanticIdentityRegistry.cellKernel.ordinal());}
 	public final Identity agent() {return F_Instantiation.identityFactory.createIdentityInKernel("agent", "agents", XtensionSemanticIdentityRegistry.agent.ordinal());}
-	public final Identity person() {return F_Instantiation.identityFactory.createIdentityInKernel("person", "people", XtensionSemanticIdentityRegistry.person.ordinal());}
-	public final Identity system() {return F_Instantiation.identityFactory.createIdentityInKernel("system", "systems", XtensionSemanticIdentityRegistry.system.ordinal());}
+	public final Identity nonLinearSystem() {return F_Instantiation.identityFactory.createIdentityInKernel("non-linear linearSystem", "non-linear systems", XtensionSemanticIdentityRegistry.nonLinearSystem.ordinal());}
+	public final Identity linearSystem() {return F_Instantiation.identityFactory.createIdentityInKernel("linear linearSystem", "linear systems", XtensionSemanticIdentityRegistry.linearSystem.ordinal());}
 
 }

@@ -76,7 +76,7 @@ public class KernelTestSequence {
 
 
 	public static final Set crm_aviz = RepositoryStructure.graphVisualizations.addConcrete(Visualization.graphVisualization,
-			Instantiation.addDisjunctSemanticIdentitySet("crm schema container visualizedGraph", "crm schema container graphVisualizations", testDomain));
+			Instantiation.addDisjunctSemanticIdentitySet("crm schema container visualizedGraph", "crm schema container cellVisualizations", testDomain));
 
 
 
