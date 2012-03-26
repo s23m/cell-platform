@@ -34,12 +34,22 @@ import org.s23m.cell.core.Graph;
 
 public class CellPlatformDomain {
 
-	// GOMODEL cell platform DOMAIN
 	public static final Set cellPlatformDomain = Instantiation.addSemanticDomain("cell platform - JAVA", "cell platform - JAVA", S23MSemanticDomains.agentSemanticDomains);
 	public static final Set world = Instantiation.addDisjunctSemanticIdentitySet("world", "set of worlds", cellPlatformDomain);
 	public static final Set legalEntity = Instantiation.addDisjunctSemanticIdentitySet("legal entity", "set of legal entities", cellPlatformDomain);
-	//public static final Set organization = Instantiation.addDisjunctSemanticIdentitySet("organization", "set of organizations", cellPlatformDomain);
 	public static final Set organization = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, legalEntity);
+
+	public static final Set privilege = Instantiation.addDisjunctSemanticIdentitySet("privilege", "privileges", cellPlatformDomain);
+	public static final Set find = Instantiation.addSemanticRole("find", "set of find", cellPlatformDomain, privilege);
+	public static final Set read = Instantiation.addSemanticRole("read", "set of read", cellPlatformDomain, privilege);
+	public static final Set add = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, privilege);
+	public static final Set modify = Instantiation.addSemanticRole("add", "set of add", cellPlatformDomain, privilege);
+	public static final Set execute = Instantiation.addSemanticRole("execute", "set of execute", cellPlatformDomain, privilege);
+	public static final Set superUser = Instantiation.addSemanticRole("super user", "set of super users", cellPlatformDomain, privilege);
+	public static final Set authorized = Instantiation.addDisjunctSemanticIdentitySet("authorized", "set of authorized", cellPlatformDomain);
+	public static final Set forbidden = Instantiation.addDisjunctSemanticIdentitySet("forbidden", "set of forbidden", cellPlatformDomain);
+	public static final Set accessGrant = Instantiation.addDisjunctSemanticIdentitySet("access grant", "set of access grants", cellPlatformDomain);
+	public static final Set accessRestriction = Instantiation.addDisjunctSemanticIdentitySet("access restriction", "set of access restrictions", cellPlatformDomain);
 
 	public static final Set agency = Instantiation.addDisjunctSemanticIdentitySet("agency", "set of agency", cellPlatformDomain);
 	public static final Set agent = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.agent());
@@ -62,16 +72,12 @@ public class CellPlatformDomain {
 	public static final Set original = Instantiation.addDisjunctSemanticIdentitySet("original", "originals", cellPlatformDomain);
 	public static final Set copy = Instantiation.addDisjunctSemanticIdentitySet("copy", "copies", cellPlatformDomain);
 
-
 	public static final Set user = Instantiation.addSemanticRole("user", "users", cellPlatformDomain, agent);
-
 	public static final Set member = Instantiation.addSemanticRole("member", "members", cellPlatformDomain, agent);
 
 	public static final Set creator = Instantiation.addSemanticRole("creator", "creators", cellPlatformDomain, agent);
 	public static final Set role = Instantiation.addDisjunctSemanticIdentitySet("role", "roles", cellPlatformDomain);
 	public static final Set languagePreference = Instantiation.addDisjunctSemanticIdentitySet("language preference", "set of language preferences", cellPlatformDomain);
-	//public static final Set parentOrganization = Instantiation.addSemanticRole("parent", "set of parents", cellPlatformDomain, organization);
-	//public static final Set subOrganization = Instantiation.addSemanticRole("sub organization", "set of sub organizations", cellPlatformDomain, organization);
 	public static final Set parentRole = Instantiation.addSemanticRole("parent", "set of parents", cellPlatformDomain, role);
 	public static final Set includedRole = Instantiation.addSemanticRole("included role", "set of included roles", cellPlatformDomain, role);
 	public static final Set excludedRole = Instantiation.addSemanticRole("excluded role", "set of excluded roles", cellPlatformDomain, role);
@@ -102,7 +108,6 @@ public class CellPlatformDomain {
 	public static final Set cell_to_producer = Instantiation.addDisjunctSemanticIdentitySet("cell to producer", "set of cell to producers", cellPlatformDomain);
 	public static final Set cell_to_consumers = Instantiation.addDisjunctSemanticIdentitySet("cell to consumers", "set of cell to consumers", cellPlatformDomain);
 
-
 	public static final Set transition = Instantiation.addDisjunctSemanticIdentitySet("transition", "transitions", cellPlatformDomain);
 	public static final Set source = Instantiation.addSemanticRole("source", "set of sources", cellPlatformDomain, state);
 	public static final Set target = Instantiation.addSemanticRole("target", "set of targets", cellPlatformDomain, state);
@@ -130,7 +135,6 @@ public class CellPlatformDomain {
 	public static final Set organizations = Instantiation.addDisjunctSemanticIdentitySet("organizations", "set of organizations", cellPlatformDomain);
 	public static final Set terminologies = Instantiation.addDisjunctSemanticIdentitySet("terminologies", "set of terminologies", cellPlatformDomain);
 	public static final Set cellVisualizations = Instantiation.addDisjunctSemanticIdentitySet("cell visualizations", "set of cell visualizations", cellPlatformDomain);
-
 
 	public static final Set timeConsciousness = Instantiation.addDisjunctSemanticIdentitySet("time consciousness", "set of time consciousness", cellPlatformDomain);
 	public static final Set timeConsciousVertex = Instantiation.addDisjunctSemanticIdentitySet("time conscious vertex", "set of time conscious verices", cellPlatformDomain);
@@ -243,7 +247,6 @@ public class CellPlatformDomain {
 
 	public static final Set theDefault = Instantiation.addDisjunctSemanticIdentitySet("default", "defaults", S23MSemanticDomains.cellKernel);
 	public static final Set icon = Instantiation.addDisjunctSemanticIdentitySet("icon", "icons", S23MSemanticDomains.cellKernel);
-
 
 	public static Set instantiateFeature() {
 

@@ -46,8 +46,28 @@ public class Organization {
 
 	public static final Set member = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.member);
 	public static final Set role = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.role);
+
+	// F-R-A-M-E-S access control paradigm
+	public static final Set privilege = CellEngineering.organization.addAbstract(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.privilege);
+	public static final Set find = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.find);
+	public static final Set read = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.read);
+	public static final Set add = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.add);
+	public static final Set modify = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.modify);
+	public static final Set execute = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.execute);
+	public static final Set superUser = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.superUser);
+
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, member, TimeConsciousness.timeConsciousVertex);
 	private static final Set s10 = Instantiation.arrow(coreGraphs.superSetReference, role, TimeConsciousness.timeConsciousVertex);
+
+	private static final Set s11 = Instantiation.arrow(coreGraphs.superSetReference, privilege, TimeConsciousness.timeConsciousVertex);
+	private static final Set s12 = Instantiation.arrow(coreGraphs.superSetReference, find, privilege);
+	private static final Set s13 = Instantiation.arrow(coreGraphs.superSetReference, read, privilege);
+	private static final Set s14 = Instantiation.arrow(coreGraphs.superSetReference, add, privilege);
+	private static final Set s15 = Instantiation.arrow(coreGraphs.superSetReference, modify, privilege);
+	private static final Set s16 = Instantiation.arrow(coreGraphs.superSetReference, execute, privilege);
+	private static final Set s17 = Instantiation.arrow(coreGraphs.superSetReference, superUser, privilege);
+
+
 	private static final Set v7 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, member);
 	private static final Set v8 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, role);
 	// cell content stuff below
@@ -112,6 +132,38 @@ public class Organization {
 			coreSets.isContainer_FALSE,
 			CellPlatformDomain.excludedRole,
 			role,
+			coreSets.minCardinality_0,
+			coreSets.maxCardinality_n,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
+
+	public static final Set accessGrant = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.accessGrant,
+			CellPlatformDomain.role,
+			role,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_TRUE,
+			CellPlatformDomain.authorized,
+			privilege,
+			coreSets.minCardinality_0,
+			coreSets.maxCardinality_n,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
+
+	public static final Set accessRestriction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.accessRestriction,
+			CellPlatformDomain.role,
+			role,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_TRUE,
+			CellPlatformDomain.forbidden,
+			privilege,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
