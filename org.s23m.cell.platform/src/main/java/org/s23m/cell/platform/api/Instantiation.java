@@ -67,17 +67,38 @@ public class Instantiation {
 		final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, S23MSemanticDomains.agentSemanticDomains);
 		return  F_Instantiation.instantiateConcrete(F_Instantiation.reuseSemanticIdentity(sd.identity()), Agency.agent);
 	}
-	public static Set addStage(final String name, final String pluralName, final Set semanticDomain) {
+
+	public static Set addAgent(final Set container, final String name, final String pluralName) {
+		if (SemanticDomain.semanticdomain.isSuperSetOf(container.category()).is_TRUE()) {
+			final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, container);
+			final Set parent = Instantiation.toAgent(container);
+			if (parent.category().isEqualTo(Agency.agent)) {
+				return ((Graph)parent).addConcrete(Agency.agent, F_Instantiation.reuseSemanticIdentity(sd.identity()));
+			} else {
+				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+			}
+		} else {
+			final Set parent = Instantiation.toSemanticDomain(container);
+			//if (sd.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
+			if (SemanticDomain.semanticdomain.isSuperSetOf(parent.category()).is_TRUE()) {
+				return Instantiation.addAgent(parent, name, pluralName);
+			} else {
+				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+			}
+		}
+	}
+
+	public static Set addStage(final Set container, final String name, final String pluralName) {
 		//if (semanticDomain.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
-		if (SemanticDomain.semanticdomain.isSuperSetOf(semanticDomain.category()).is_TRUE()) {
-			final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, semanticDomain);
-			final Set t = Instantiation.toAgent(semanticDomain);
+		if (SemanticDomain.semanticdomain.isSuperSetOf(container.category()).is_TRUE()) {
+			final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, container);
+			final Set t = Instantiation.toAgent(container);
 			if (t.category().isEqualTo(Agency.agent)) {
 				final Set stage = t.addConcrete(Agency.stage, sd);
 				Instantiation.addDefaultContainers(stage);
 				return stage;
 			} else {
-				final Set s = Instantiation.toStage(semanticDomain);
+				final Set s = Instantiation.toStage(container);
 				if (s.category().isEqualTo(Agency.stage)) {
 					final Set stage = s.addConcrete(Agency.stage, sd);
 					Instantiation.addDefaultContainers(stage);
@@ -86,10 +107,10 @@ public class Instantiation {
 			}
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		} else {
-			final Set sd = Instantiation.toSemanticDomain(semanticDomain);
+			final Set sd = Instantiation.toSemanticDomain(container);
 			//if (sd.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
 			if (SemanticDomain.semanticdomain.isSuperSetOf(sd.category()).is_TRUE()) {
-				return Instantiation.addStage(name, pluralName, sd);
+				return Instantiation.addStage(sd, name, pluralName);
 			} else {
 				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 			}
@@ -98,23 +119,22 @@ public class Instantiation {
 
 	private static Set addDefaultContainers(final Set stage) {
 		final Set time = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.timeConsciousness, stage, CellPlatformDomain.time);
+		final Set locations = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.location, stage, CellPlatformDomain.locations);
 		final Set languages = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.language, stage, CellPlatformDomain.languages);
-		final Set licenses = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.licensing, stage, CellPlatformDomain.licenses);
+		final Set contracts = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.legal, stage, CellPlatformDomain.contracts);
 		final Set terminologies = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.terminology, stage, CellPlatformDomain.terminologies);
 		final Set cellVisualizatons = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(Visualization.graphVisualization, stage, CellPlatformDomain.cellVisualizations);
-		// TODO fix up organisation model
-		final Set organizations = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.organization, stage, CellPlatformDomain.organizations);
-		final Set cells = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.cellContent, stage, CellPlatformDomain.cells);
+		final Set cells = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.organization, stage, CellPlatformDomain.cells);
 
-		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, organizations, time);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, languages);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, time);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, locations);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, terminologies);
-	    org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, licenses);
+	    org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, contracts);
 		return stage;
 	}
 
-	private static Set toSemanticDomain(final Set set) {
+	public static Set toSemanticDomain(final Set set) {
 		final Set r =  Query.inMemorySets().filterBySemanticIdentity(set).filterPolymorphic(SemanticDomain.semanticdomain);
 		if (r.size()== 1) {
 			return r.extractFirst();

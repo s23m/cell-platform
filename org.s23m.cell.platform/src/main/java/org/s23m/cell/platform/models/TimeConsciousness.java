@@ -137,7 +137,7 @@ public class TimeConsciousness {
 			ValidityInterval.validityInterval,
 			ValidityInterval.validityInterval,
 			coreSets.minCardinality_1,
-			coreSets.maxCardinality_1,
+			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);

@@ -35,24 +35,25 @@ import org.s23m.cell.api.Instantiation;
 public class RepresentationStyleCategories {
 
 	//public static final Set representationStyleCategories = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.representationStyleCategories);
-	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.representationStyleCategories, CellEngineering.cellContent);
+	//private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.representationStyleCategories, CellEngineering.cellContent);
+	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.representationStyleCategories, CellEngineering.organization);
 
-	public static final Set representationStyle = CellEngineering.representationStyleCategories.addAbstract(CellContent.cell, CellPlatformDomain.representationStyle);
-	public static final Set vertexRepresentationStyle = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.vertexRepresentationStyle);
-	public static final Set arrowRepresentationStyle = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.arrowRepresentationStyle);
-	public static final Set color = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.color);
-	public static final Set lineWidth = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.lineWidth);
-	public static final Set lineStyle = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.lineStyle);
-	public static final Set connectorSymbol = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.connectorSymbol);
-	public static final Set symbolBoundaryShape = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.symbolBoundaryShape);
-	public static final Set symbolImage = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.symbolImage);
-	public static final Set symbolIcon = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.symbolIcon);
-	public static final Set includesName = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.includesName);
-	public static final Set includesIcon = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.includesIcon);
-	public static final Set includesImage = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.includesImage);
-	public static final Set isBold = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.isBold);
-	public static final Set isInItalics = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.isInItalics);
-	public static final Set imageSize = CellEngineering.representationStyleCategories.addConcrete(CellContent.cell, CellPlatformDomain.imageSize);
+	public static final Set representationStyle = CellEngineering.representationStyleCategories.addAbstract(Organization.cell, CellPlatformDomain.representationStyle);
+	public static final Set vertexRepresentationStyle = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.vertexRepresentationStyle);
+	public static final Set arrowRepresentationStyle = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.arrowRepresentationStyle);
+	public static final Set color = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.color);
+	public static final Set lineWidth = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.lineWidth);
+	public static final Set lineStyle = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.lineStyle);
+	public static final Set connectorSymbol = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.connectorSymbol);
+	public static final Set symbolBoundaryShape = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.symbolBoundaryShape);
+	public static final Set symbolImage = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.symbolImage);
+	public static final Set symbolIcon = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.symbolIcon);
+	public static final Set includesName = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.includesName);
+	public static final Set includesIcon = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.includesIcon);
+	public static final Set includesImage = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.includesImage);
+	public static final Set isBold = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.isBold);
+	public static final Set isInItalics = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.isInItalics);
+	public static final Set imageSize = CellEngineering.representationStyleCategories.addConcrete(Organization.cell, CellPlatformDomain.imageSize);
 
 	public static final Set vertexRepresentationStyle_to_superset_representationStyle = Instantiation.arrow(coreGraphs.superSetReference, vertexRepresentationStyle, representationStyle);
 	public static final Set arrowRepresentationStyle_to_superset_representationStyle = Instantiation.arrow(coreGraphs.superSetReference, arrowRepresentationStyle, representationStyle);

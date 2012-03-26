@@ -44,8 +44,8 @@ public class CellPlatform {
 		TimeConsciousness.instantiateFeature();
 		Language.instantiateFeature();
 		Terminology.instantiateFeature();
-		SemanticDimension.instantiateFeature();
-		Licensing.instantiateFeature();
+		//SemanticDimension.instantiateFeature();
+		Legal.instantiateFeature();
 
 		Organization.instantiateFeature();
 		LogicalFunction.instantiateFeature();
@@ -53,9 +53,9 @@ public class CellPlatform {
 		RepresentationStyleCategories.instantiateFeature();
 
 		final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
-		final Set development = org.s23m.cell.platform.api.Instantiation.addStage("development", "development", s23mCellPlatform);
-		final Set testing = org.s23m.cell.platform.api.Instantiation.addStage("test", "test", s23mCellPlatform);
-		final Set production = org.s23m.cell.platform.api.Instantiation.addStage("production", "production", s23mCellPlatform);
+		final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
+		final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
+		final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
 
 		// Basis for test cases building on top of the foundation
 		TestFoundation.instantiateFeature();

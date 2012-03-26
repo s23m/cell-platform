@@ -32,18 +32,18 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 
 
-public class Licensing {
+public class Legal {
 
-	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.licensing, CellEngineering.timeConsciousness);
+	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.legal, CellEngineering.timeConsciousness);
 
-	public static final Set license = CellEngineering.licensing.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.license);
-	public static final Set legalEntity = CellEngineering.licensing.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.legalEntity);
-	public static final Set usageLicense = CellEngineering.licensing.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.usageLicense);;
+	public static final Set license = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.license);
+	public static final Set legalEntity = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.legalEntity);
+	public static final Set usageLicense = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.usageLicense);;
 
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, license, TimeConsciousness.timeConsciousVertex);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, usageLicense, TimeConsciousness.timeConsciousVertex);
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, legalEntity, TimeConsciousness.timeConsciousVertex);
-	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.licensing);
+	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.legal);
 	public static final Set legalEntity_to_usageLicense = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.legalEntity_to_usageLicense,
 			CellPlatformDomain.user,
@@ -111,6 +111,6 @@ public class Licensing {
 
 	public static Set instantiateFeature() {
 
-		return CellEngineering.licensing;
+		return CellEngineering.legal;
 	}
 }

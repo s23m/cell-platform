@@ -30,6 +30,7 @@ import static org.s23m.cell.S23MKernel.coreGraphs;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 
 /**
  * {@link CellEngineering} implements all instantiation semantics related to the modelling of container state machines
@@ -41,6 +42,8 @@ public final class CellEngineering {
 
 
 	public static final Set language = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.language);
+	public static final Set location = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.location);
+
 	public static final Set agency = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.agency);
 	public static final Set jargon = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.jargon);
 	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, jargon, language);
@@ -48,15 +51,50 @@ public final class CellEngineering {
 
 	public static final Set timeConsciousness = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.timeConsciousness);
 
-	public static final Set licensing = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.licensing);
+	public static final Set legal = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.legal);
 	public static final Set terminology = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.terminology);
-	public static final Set cellContent = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.cellContent);
+	//public static final Set cellContent = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.cellContent);
+	public static final Set organization = Root.cellengineering.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.organization);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, organization, TimeConsciousness.timeConsciousVertex);
 
-	public static final Set logicalExpression = Root.cellengineering.addAbstract(CellContent.cell, CellPlatformDomain.logicalExpression);
+	public static final Set logicalExpression = Root.cellengineering.addAbstract(Organization.cell, CellPlatformDomain.logicalExpression);
 	public static final Set representationStyleCategories = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.representationStyleCategories);
-	public static final Set semanticDimension = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.semanticDimension);
-	public static final Set organization = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.organization);
+	//public static final Set semanticDimension = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.semanticDimension);
+	//public static final Set organization = Root.cellengineering.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.organization);
+	//private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, organization, TimeConsciousness.timeConsciousVertex);
 
+
+	public static final Set collaboration = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.collaboration,
+			CellPlatformDomain.consumer,
+			organization,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.supplier,
+			organization,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set organization_to_location = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.organization_to_location,
+			CellPlatformDomain.organization,
+			organization,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.location,
+			location,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
 
 	static Set instantiateFeature() {
 

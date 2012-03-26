@@ -34,29 +34,30 @@ import org.s23m.cell.api.Instantiation;
 
 public class LogicalFunction {
 
-	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.logicalExpression, CellEngineering.cellContent);
+	//private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.logicalExpression, CellEngineering.cellContent);
+	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.logicalExpression, CellEngineering.organization);
 
 	//public static final Set logicalExpression = Root.cellengineering.addAbstract(CellContent.cell, CellPlatformDomain.logicalExpression);
-	public static final Set logicalFunction = CellEngineering.logicalExpression.addAbstract(CellContent.cell, CellPlatformDomain.logicalFunction);
-	public static final Set unaryLogicalFunction = CellEngineering.logicalExpression.addAbstract(CellContent.cell, CellPlatformDomain.unaryLogicalFunction);
-	public static final Set binaryLogicalFunction = CellEngineering.logicalExpression.addAbstract(CellContent.cell, CellPlatformDomain.binaryLogicalFunction);
-	public static final Set naryLogicalFunction = CellEngineering.logicalExpression.addAbstract(CellContent.cell, CellPlatformDomain.naryLogicalFunction);
+	public static final Set logicalFunction = CellEngineering.logicalExpression.addAbstract(Organization.cell, CellPlatformDomain.logicalFunction);
+	public static final Set unaryLogicalFunction = CellEngineering.logicalExpression.addAbstract(Organization.cell, CellPlatformDomain.unaryLogicalFunction);
+	public static final Set binaryLogicalFunction = CellEngineering.logicalExpression.addAbstract(Organization.cell, CellPlatformDomain.binaryLogicalFunction);
+	public static final Set naryLogicalFunction = CellEngineering.logicalExpression.addAbstract(Organization.cell, CellPlatformDomain.naryLogicalFunction);
 
-	public static final Set not = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.not);
-	public static final Set exist = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.exist);
-	public static final Set empty = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.empty);
+	public static final Set not = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.not);
+	public static final Set exist = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.exist);
+	public static final Set empty = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.empty);
 
-	public static final Set contains = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.contains);
-	public static final Set smaller = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.smaller);
-	public static final Set smallerEqual = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.smallerEqual);
-	public static final Set greater = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.greater);
-	public static final Set greaterEqual = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.greaterEqual);
+	public static final Set contains = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.contains);
+	public static final Set smaller = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.smaller);
+	public static final Set smallerEqual = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.smallerEqual);
+	public static final Set greater = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.greater);
+	public static final Set greaterEqual = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.greaterEqual);
 
-	public static final Set equal = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.equal);
-	public static final Set equalToRepresentation = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.equalToRepresentation);
-	public static final Set and = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.and);
-	public static final Set or = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.or);
-	public static final Set xor = CellEngineering.logicalExpression.addConcrete(CellContent.cell, CellPlatformDomain.xor);
+	public static final Set equal = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.equal);
+	public static final Set equalToRepresentation = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.equalToRepresentation);
+	public static final Set and = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.and);
+	public static final Set or = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.or);
+	public static final Set xor = CellEngineering.logicalExpression.addConcrete(Organization.cell, CellPlatformDomain.xor);
 
 
 	public static Set instantiateFeature() {

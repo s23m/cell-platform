@@ -31,15 +31,16 @@ public class AgencyTestFoundation {
 
 	public static Set instantiateFeature() {
 		final Set snowy = org.s23m.cell.platform.api.Instantiation.addAgent("Snowy", "set of Snowy");
-			org.s23m.cell.platform.api.Instantiation.addStage("dev1", "dev1s", snowy);
-			org.s23m.cell.platform.api.Instantiation.addStage("test1", "test1s", snowy);
-			org.s23m.cell.platform.api.Instantiation.addStage("prod1", "prod1s", snowy);
+		final Set dev1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "dev1", "dev1s");
+		final Set test1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "test1", "test1s");
+		final Set prod1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "prod1", "prod1s");
+		final Set snowySubA = org.s23m.cell.platform.api.Instantiation.addAgent(snowy, "Snowy Sub A", "set of Snowy Sub A");
+		final Set dev0 = org.s23m.cell.platform.api.Instantiation.addStage(snowySubA, "dev0", "dev0s");
 		final Set scruffy = org.s23m.cell.platform.api.Instantiation.addAgent("Scruffy", "set of Scruffy");
-			org.s23m.cell.platform.api.Instantiation.addStage("dev2", "dev2s", scruffy);
-			org.s23m.cell.platform.api.Instantiation.addStage("test2", "test2s", scruffy);
-			org.s23m.cell.platform.api.Instantiation.addStage("prod2", "prod2s", scruffy);
+		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "dev2", "dev2s");
+		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "test2", "test2s");
+		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "prod2", "prod2s");
 		final Set louise = org.s23m.cell.platform.api.Instantiation.addAgent("Louise", "set of Louise");
-
 		return snowy;
 	}
 }

@@ -46,7 +46,22 @@ public class CellPlatformDomain {
 	public static final Set nonLinearSystem = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.nonLinearSystem());
 	public static final Set linearSystem = ((Graph)cellPlatformDomain).addConcrete(SemanticDomain.disjunctSemanticIdentitySet, F_Instantiation.xtensionIdentityFactory.linearSystem());
 	public static final Set stage = Instantiation.addDisjunctSemanticIdentitySet("stage", "stages", cellPlatformDomain);
-	public static final Set agent_to_stages = Instantiation.addDisjunctSemanticIdentitySet("agent_to_stages", "set of agent_to_stages", cellPlatformDomain);
+	public static final Set collaboration = Instantiation.addDisjunctSemanticIdentitySet("collaboration", "collaborations", cellPlatformDomain);
+
+	public static final Set collaborationChannel = Instantiation.addDisjunctSemanticIdentitySet("collaboration channel", "collaboration channels", cellPlatformDomain);
+	public static final Set supplier = Instantiation.addDisjunctSemanticIdentitySet("supplier", "suppliers", cellPlatformDomain);
+	public static final Set consumer = Instantiation.addDisjunctSemanticIdentitySet("consumer", "consumers", cellPlatformDomain);
+
+	public static final Set location = Instantiation.addDisjunctSemanticIdentitySet("location", "locations", cellPlatformDomain);
+	public static final Set locations = Instantiation.addDisjunctSemanticIdentitySet("locations", "set of locations", cellPlatformDomain);
+	public static final Set organization_to_location = Instantiation.addDisjunctSemanticIdentitySet("organization_to_location", "set of organization_to_location", cellPlatformDomain);
+	public static final Set agent_to_location = Instantiation.addDisjunctSemanticIdentitySet("agent_to_location", "set of agent_to_location", cellPlatformDomain);
+
+
+	public static final Set replication = Instantiation.addDisjunctSemanticIdentitySet("replication", "replications", cellPlatformDomain);
+	public static final Set original = Instantiation.addDisjunctSemanticIdentitySet("original", "originals", cellPlatformDomain);
+	public static final Set copy = Instantiation.addDisjunctSemanticIdentitySet("copy", "copies", cellPlatformDomain);
+
 
 	public static final Set user = Instantiation.addSemanticRole("user", "users", cellPlatformDomain, agent);
 
@@ -62,9 +77,8 @@ public class CellPlatformDomain {
 	public static final Set excludedRole = Instantiation.addSemanticRole("excluded role", "set of excluded roles", cellPlatformDomain, role);
 	public static final Set disjunctRole = Instantiation.addSemanticRole("disjunct role", "set of disjunct roles", cellPlatformDomain, role);
 	public static final Set producer = Instantiation.addSemanticRole("producer", "producers", cellPlatformDomain, role);
-	public static final Set consumer = Instantiation.addSemanticRole("consumer", "consumers", cellPlatformDomain, role);
 
-	public static final Set licensing = Instantiation.addDisjunctSemanticIdentitySet("licensing", "set of licensing", cellPlatformDomain);
+	public static final Set legal = Instantiation.addDisjunctSemanticIdentitySet("legal", "set of legal", cellPlatformDomain);
 	public static final Set license = Instantiation.addDisjunctSemanticIdentitySet("license", "licenses", cellPlatformDomain);
 	public static final Set usageLicense = Instantiation.addDisjunctSemanticIdentitySet("usage license", "usage licenses", cellPlatformDomain);
 	public static final Set legalEntity_to_usageLicense = Instantiation.addDisjunctSemanticIdentitySet("legalEntity_to_usageLicense", "set of legalEntity_to_usageLicense", cellPlatformDomain);
@@ -112,7 +126,7 @@ public class CellPlatformDomain {
 	public static final Set time = Instantiation.addDisjunctSemanticIdentitySet("time", "set of time", cellPlatformDomain);
 	public static final Set cells = Instantiation.addDisjunctSemanticIdentitySet("cells", "set of cells", cellPlatformDomain);
 	public static final Set languages = Instantiation.addDisjunctSemanticIdentitySet("languages", "set of languages", cellPlatformDomain);
-	public static final Set licenses = Instantiation.addDisjunctSemanticIdentitySet("licenses", "set of licenses", cellPlatformDomain);
+	public static final Set contracts = Instantiation.addDisjunctSemanticIdentitySet("contracts", "set of contracts", cellPlatformDomain);
 	public static final Set organizations = Instantiation.addDisjunctSemanticIdentitySet("organizations", "set of organizations", cellPlatformDomain);
 	public static final Set terminologies = Instantiation.addDisjunctSemanticIdentitySet("terminologies", "set of terminologies", cellPlatformDomain);
 	public static final Set cellVisualizations = Instantiation.addDisjunctSemanticIdentitySet("cell visualizations", "set of cell visualizations", cellPlatformDomain);
@@ -132,7 +146,7 @@ public class CellPlatformDomain {
 
 	public static final Set organization_to_members = Instantiation.addDisjunctSemanticIdentitySet("organization to member", "set of organizations to members", cellPlatformDomain);
 	public static final Set organization_to_roles = Instantiation.addDisjunctSemanticIdentitySet("organization to roles", "set of organizations to roles", cellPlatformDomain);
-	public static final Set member_to_roles = Instantiation.addDisjunctSemanticIdentitySet("member to roles", "set of member to roles", cellPlatformDomain);
+	public static final Set agent_to_roles = Instantiation.addDisjunctSemanticIdentitySet("agent to roles", "set of agent to roles", cellPlatformDomain);
 	public static final Set role_to_includedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to included roles", "set of role to included roles", cellPlatformDomain);
 	public static final Set role_to_excludedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to excluded roles", "set of role to excluded roles", cellPlatformDomain);
 

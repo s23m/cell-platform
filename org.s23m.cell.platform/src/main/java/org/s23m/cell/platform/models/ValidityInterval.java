@@ -65,7 +65,7 @@ public class ValidityInterval {
 			coreSets.isContainer_FALSE,
 			validUntilTimestamp,
 			validUntilTimestamp,
-			coreSets.minCardinality_1,
+			coreSets.minCardinality_0,
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE

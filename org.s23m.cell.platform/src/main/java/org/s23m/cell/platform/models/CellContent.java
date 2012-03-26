@@ -25,13 +25,8 @@
 
 package org.s23m.cell.platform.models;
 
-import static org.s23m.cell.S23MKernel.coreGraphs;
-import static org.s23m.cell.S23MKernel.coreSets;
-
 import org.s23m.cell.Set;
-import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
-import org.s23m.cell.api.models.S23MSemanticDomains;
 
 /**
  * {@link CellContent} implements all instantiation semantics related to the modelling of container state machines
@@ -40,6 +35,8 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
  * The semantics enforced in CellEngineering provide the basis for modelling the dynamic evolution of the S23M instantiation semantics
  */
 public final class CellContent {
+
+	/*
 
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.cellContent);
 	private static final Set v7 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.cellContent, CellEngineering.language);
@@ -128,7 +125,7 @@ public final class CellContent {
 			coreSets.isNavigable_FALSE,
 			coreSets.isContainer_FALSE,
 			CellPlatformDomain.copyrightHolder,
-			Licensing.legalEntity,
+			Legal.legalEntity,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -145,7 +142,7 @@ public final class CellContent {
 			coreSets.isNavigable_FALSE,
 			coreSets.isContainer_FALSE,
 			CellPlatformDomain.availableLicense,
-			Licensing.license,
+			Legal.license,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -170,7 +167,7 @@ public final class CellContent {
 	);
 	private static final Set s9 = Instantiation.arrow(coreGraphs.superSetReference, cell_to_nativeLanguage, TimeConsciousness.timeConsciousEdge);
 
-
+*/
 	static Set instantiateFeature() {
 
 

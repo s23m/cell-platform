@@ -70,23 +70,6 @@ public class Agency {
 	public static final Set perspectiveV = perspective.addConcrete(coreGraphs.vertex, perspective);
 	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, perspectiveV, coreGraphs.vertex);
 
-	public static final Set agent_to_stages = Instantiation.arrow(coreGraphs.edge,
-			CellPlatformDomain.agent_to_stages,
-			agent,
-			agent,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.stage,
-			stage,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-
-
 	private static final Set v3 = Instantiation.arrow(coreGraphs.visibility, perspective, CellEngineering.language);
 	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, perspective, CellEngineering.jargon);
 
@@ -105,6 +88,21 @@ public class Agency {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
+	public static final Set replication = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.replication,
+			CellPlatformDomain.original,
+			agent,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.copy,
+			agent,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
 
 	public static final Set agent_to_nativeLanguage = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.agent_to_nativeLanguage,
@@ -118,6 +116,22 @@ public class Agency {
 			CellEngineering.language,
 			S23MSemanticDomains.minCardinality_1,
 			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set collaborationChannel = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.collaborationChannel,
+			CellPlatformDomain.supplier,
+			Agency.stage,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.consumer,
+			Agency.stage,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
