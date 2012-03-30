@@ -40,12 +40,12 @@ public class CellPlatformDomain {
 	public static final Set organization = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, legalEntity);
 
 	public static final Set privilege = Instantiation.addDisjunctSemanticIdentitySet("privilege", "privileges", cellPlatformDomain);
-	public static final Set find = Instantiation.addSemanticRole("find", "set of find", cellPlatformDomain, privilege);
-	public static final Set read = Instantiation.addSemanticRole("read", "set of read", cellPlatformDomain, privilege);
-	public static final Set add = Instantiation.addSemanticRole("organization", "organizations", cellPlatformDomain, privilege);
-	public static final Set modify = Instantiation.addSemanticRole("add", "set of add", cellPlatformDomain, privilege);
-	public static final Set execute = Instantiation.addSemanticRole("execute", "set of execute", cellPlatformDomain, privilege);
-	public static final Set superUser = Instantiation.addSemanticRole("super user", "set of super users", cellPlatformDomain, privilege);
+	public static final Set findPrivilege = Instantiation.addSemanticRole("find privilege", "set of find privileges", cellPlatformDomain, privilege);
+	public static final Set readPrivilege = Instantiation.addSemanticRole("read privilege", "set of read privileges", cellPlatformDomain, privilege);
+	public static final Set addPrivilege = Instantiation.addSemanticRole("add privilege", "add privileges", cellPlatformDomain, privilege);
+	public static final Set modifyPrivilege = Instantiation.addSemanticRole("modify privilege", "set of modify privileges", cellPlatformDomain, privilege);
+	public static final Set executePrivilege = Instantiation.addSemanticRole("execute privilege", "set of execute privileges", cellPlatformDomain, privilege);
+	public static final Set superUserPrivilege = Instantiation.addSemanticRole("super user privilege", "set of super user privileges", cellPlatformDomain, privilege);
 	public static final Set authorized = Instantiation.addDisjunctSemanticIdentitySet("authorized", "set of authorized", cellPlatformDomain);
 	public static final Set forbidden = Instantiation.addDisjunctSemanticIdentitySet("forbidden", "set of forbidden", cellPlatformDomain);
 	public static final Set accessGrant = Instantiation.addDisjunctSemanticIdentitySet("access grant", "set of access grants", cellPlatformDomain);
@@ -135,6 +135,7 @@ public class CellPlatformDomain {
 	public static final Set organizations = Instantiation.addDisjunctSemanticIdentitySet("organizations", "set of organizations", cellPlatformDomain);
 	public static final Set terminologies = Instantiation.addDisjunctSemanticIdentitySet("terminologies", "set of terminologies", cellPlatformDomain);
 	public static final Set cellVisualizations = Instantiation.addDisjunctSemanticIdentitySet("cell visualizations", "set of cell visualizations", cellPlatformDomain);
+	public static final Set formulas = Instantiation.addDisjunctSemanticIdentitySet("formulas", "set of formulas", cellPlatformDomain);
 
 	public static final Set timeConsciousness = Instantiation.addDisjunctSemanticIdentitySet("time consciousness", "set of time consciousness", cellPlatformDomain);
 	public static final Set timeConsciousVertex = Instantiation.addDisjunctSemanticIdentitySet("time conscious vertex", "set of time conscious verices", cellPlatformDomain);

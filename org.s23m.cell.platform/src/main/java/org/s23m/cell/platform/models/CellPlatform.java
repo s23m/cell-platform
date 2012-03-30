@@ -27,15 +27,9 @@ package org.s23m.cell.platform.models;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
-import org.s23m.cell.Set;
 import org.s23m.cell.platform.testfoundation.TestFoundation;
 
 public class CellPlatform {
-
-	public static final Set s23mCellPlatform = null;
-	public static final Set development = null;
-	public static final Set testing = null;
-	public static final Set production = null;
 
 	public static void instantiateFeature() {
 		int kernelComplexity = identityFactory.kernelComplexity();
@@ -54,11 +48,12 @@ public class CellPlatform {
 		LogicalFormula.instantiateFeature();
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
+		CellPlatformAgent.instantiateFeature();
 
-		final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
-		final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
-		final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
-		final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
+		//final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
+		//final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
+		//final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
+		//final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
 
 		kernelComplexity = identityFactory.kernelComplexity();
 		inMemoryComplexity = identityFactory.inMemoryComplexity();

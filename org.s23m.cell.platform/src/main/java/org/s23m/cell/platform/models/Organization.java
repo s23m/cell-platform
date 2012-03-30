@@ -47,23 +47,23 @@ public class Organization {
 
 	// F-R-A-M-E-S access control paradigm
 	public static final Set privilege = CellEngineering.organization.addAbstract(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.privilege);
-	public static final Set find = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.find);
-	public static final Set read = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.read);
-	public static final Set add = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.add);
-	public static final Set modify = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.modify);
-	public static final Set execute = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.execute);
-	public static final Set superUser = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.superUser);
+	public static final Set findPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.findPrivilege);
+	public static final Set readPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.readPrivilege);
+	public static final Set addPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.addPrivilege);
+	public static final Set modifyPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.modifyPrivilege);
+	public static final Set executePrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.executePrivilege);
+	public static final Set superUserPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.superUserPrivilege);
 
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, member, TimeConsciousness.timeConsciousVertex);
 	private static final Set s10 = Instantiation.arrow(coreGraphs.superSetReference, role, TimeConsciousness.timeConsciousVertex);
 
 	private static final Set s11 = Instantiation.arrow(coreGraphs.superSetReference, privilege, TimeConsciousness.timeConsciousVertex);
-	private static final Set s12 = Instantiation.arrow(coreGraphs.superSetReference, find, privilege);
-	private static final Set s13 = Instantiation.arrow(coreGraphs.superSetReference, read, privilege);
-	private static final Set s14 = Instantiation.arrow(coreGraphs.superSetReference, add, privilege);
-	private static final Set s15 = Instantiation.arrow(coreGraphs.superSetReference, modify, privilege);
-	private static final Set s16 = Instantiation.arrow(coreGraphs.superSetReference, execute, privilege);
-	private static final Set s17 = Instantiation.arrow(coreGraphs.superSetReference, superUser, privilege);
+	private static final Set s12 = Instantiation.arrow(coreGraphs.superSetReference, findPrivilege, privilege);
+	private static final Set s13 = Instantiation.arrow(coreGraphs.superSetReference, readPrivilege, privilege);
+	private static final Set s14 = Instantiation.arrow(coreGraphs.superSetReference, addPrivilege, privilege);
+	private static final Set s15 = Instantiation.arrow(coreGraphs.superSetReference, modifyPrivilege, privilege);
+	private static final Set s16 = Instantiation.arrow(coreGraphs.superSetReference, executePrivilege, privilege);
+	private static final Set s17 = Instantiation.arrow(coreGraphs.superSetReference, superUserPrivilege, privilege);
 
 
 	private static final Set v7 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, member);

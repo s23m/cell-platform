@@ -125,13 +125,20 @@ public class Instantiation {
 		final Set terminologies = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.terminology, stage, CellPlatformDomain.terminologies);
 		final Set cellVisualizatons = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(Visualization.graphVisualization, stage, CellPlatformDomain.cellVisualizations);
 		final Set cells = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.organization, stage, CellPlatformDomain.cells);
+		final Set formulas = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.formula, stage, CellPlatformDomain.formulas);
 
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, languages);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, time);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, locations);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, terminologies);
 	    org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, contracts);
-		return stage;
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, cells);
+	    org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, languages);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, time);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, locations);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, terminologies);
+	    org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, formulas, contracts);
+	    return stage;
 	}
 
 	public static Set toSemanticDomain(final Set set) {

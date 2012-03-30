@@ -112,7 +112,7 @@ public class InstantiationSequences {
 		final Set crm_viz_visibilities = crm_aviz.addConcrete(Visualization.visibilities,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | visibilities", "crm schema visualizedGraph | visibilities", testDomain));
 
-		// add diagram information
+		// addPrivilege diagram information
 		final Set crm_viz_structure_diag = crm_aviz.addConcrete(Visualization.diagram,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1", "crm schema visualizedGraph | structure diag 1", testDomain));
 		arrow(Visualization.visualizedAspect_to_diagram,
@@ -124,7 +124,7 @@ public class InstantiationSequences {
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 				);
 
-		// add representation information
+		// addPrivilege representation information
 		crm_viz_structure_diag_product = crm_aviz.addConcrete(Visualization.representation,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product", "crm schema visualizedGraph | structure diag 1 | product", testDomain));
 		arrow(Visualization.diagram_to_representation,
@@ -135,7 +135,7 @@ public class InstantiationSequences {
 				crm_viz_structure_diag_product,
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 				);
-		// add icon to representation
+		// addPrivilege icon to representation
 		final Set crm_viz_structure_diag_product_icon = crm_aviz.addConcrete(Visualization.symbol,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product icon", "crm schema visualizedGraph | structure diag 1 | product icon", testDomain));
 		crm_viz_structure_diag_product_icon.identity().setPayload("here goes the content of the icon file");
@@ -147,7 +147,7 @@ public class InstantiationSequences {
 				crm_viz_structure_diag_product.semanticIdentity(),
 				S23MSemanticDomains.minCardinality_NOTAPPLICABLE, S23MSemanticDomains.maxCardinality_NOTAPPLICABLE, S23MSemanticDomains.isNavigable_NOTAPPLICABLE, S23MSemanticDomains.isContainer_FALSE
 				);
-		// add coordinates to representation
+		// addPrivilege coordinates to representation
 		final Set crm_viz_structure_diag_product_x = crm_aviz.addConcrete(Visualization.x,
 				addDisjunctSemanticIdentitySet("crm schema visualizedGraph | structure diag 1 | product x", "crm schema visualizedGraph | structure diag 1 | product x", testDomain));
 		crm_viz_structure_diag_product_x.identity().setPayload("57");
@@ -245,7 +245,7 @@ public class InstantiationSequences {
 		}
 
 
-	// add icon to representation
+	// addPrivilege icon to representation
 		for (final Set s_to_si : graphVisualization.filterPolymorphic(Visualization.symbol_to_semantic_identity)) {
 			if (s_to_si.to().isEqualTo(semanticIdentity)
 					&& s_to_si.toEdgeEnd().isEqualTo(semanticIdentity) ) {

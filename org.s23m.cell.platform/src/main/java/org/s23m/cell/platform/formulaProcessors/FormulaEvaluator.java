@@ -1,7 +1,7 @@
 package org.s23m.cell.platform.formulaProcessors;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.platform.models.CellPlatform;
+import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.models.CellPlatformDomain;
 
 
@@ -57,6 +57,6 @@ public  class FormulaEvaluator {
 			+ CellPlatformDomain.openSquareBracket.identity().name()
 			+ this.subFormula.identity().name()
 			+ CellPlatformDomain.closeSquareBracket.identity().name()
-			, org.s23m.cell.platform.api.Instantiation.toSemanticDomain(CellPlatform.development));
+			, org.s23m.cell.platform.api.Instantiation.toSemanticDomain(CellPlatformAgent.development));
 	}
 }

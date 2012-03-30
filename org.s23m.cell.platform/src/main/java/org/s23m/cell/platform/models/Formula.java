@@ -30,7 +30,6 @@ import static org.s23m.cell.S23MKernel.coreSets;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.models.S23MSemanticDomains;
 
 
 public class Formula  {
@@ -38,15 +37,15 @@ public class Formula  {
 	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.formula, CellEngineering.organization);
 
 	public static final Set properSubFormula = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.properSubFormula);
-	public static final Set literal = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.literal);
-	private static final Set maxC = literal.addToValues(S23MSemanticDomains.maxCardinality_1);
+	//public static final Set literal = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.literal);
+	//private static final Set maxC = literal.addToValues(S23MSemanticDomains.maxCardinality_1);
 	public static final Set unaryFunction = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.unaryFunction);
 	public static final Set binaryFunction = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.binaryFunction);
 	public static final Set naryFunction = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.naryFunction);
 	public static final Set variable = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.variable);
 	public static final Set constant = CellEngineering.formula.addAbstract(Organization.cell, CellPlatformDomain.constant);
 
-	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, literal, Organization.cell);
+	//private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, literal, Organization.cell);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, properSubFormula, Organization.cell);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, unaryFunction, properSubFormula);
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, binaryFunction, properSubFormula);
@@ -54,7 +53,7 @@ public class Formula  {
 	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, variable, properSubFormula);
 	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, constant, properSubFormula);
 
-	public static final Set literal_to_properSubFormula = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	/*public static final Set literal_to_properSubFormula = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.literal_to_properSubFormula,
 			literal,
 			literal,
@@ -69,6 +68,7 @@ public class Formula  {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
+	*/
 	public static final Set unaryFunction_to_term = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.unaryFunction_to_term,
 			unaryFunction,

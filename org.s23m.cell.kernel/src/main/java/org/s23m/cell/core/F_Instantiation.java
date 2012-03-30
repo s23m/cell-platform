@@ -194,7 +194,7 @@ public final class F_Instantiation {
 				&& SemanticDomain.semanticdomain.isSuperSetOf(category).is_FALSE()
 				&& SemanticStateOfInMemoryModel.semanticDomainIsInitialized()
 				) {
-			if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
+			if (category.value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
 				final Vertex temp;
 				temp = new Vertex((Graph) stage, semanticIdentity, category) ;
 				temp.addToValues(coreSets.isAbstract_FALSE);

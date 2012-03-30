@@ -25,7 +25,10 @@
 package org.s23m.cell.platform.testfoundation;
 
 import org.s23m.cell.Set;
-
+import org.s23m.cell.platform.api.Instantiation;
+import org.s23m.cell.platform.models.CellEngineering;
+import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.models.LogicalFormula;
 
 public class AgencyTestFoundation {
 
@@ -41,6 +44,10 @@ public class AgencyTestFoundation {
 		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "test2", "test2s");
 		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "prod2", "prod2s");
 		final Set louise = org.s23m.cell.platform.api.Instantiation.addAgent("Louise", "set of Louise");
+		final Set lf1 = Instantiation.addDisjunctSemanticIdentitySet("logical formula 1", "logical formula 1", Instantiation.toSemanticDomain(dev1));
+		final Set formula1 = dev1.filter(CellEngineering.formula).extractFirst().addConcrete(CellEngineering.logicalFormula, lf1);
+		final Set literal1 = formula1.addConcrete(LogicalFormula.and, CellPlatformDomain.literal);
+
 		return snowy;
 	}
 }

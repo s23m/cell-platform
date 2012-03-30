@@ -55,8 +55,8 @@ public final class CellEngineering {
 	public static final Set organization = Root.cellengineering.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.organization);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, organization, TimeConsciousness.timeConsciousVertex);
 
-	public static final Set formula = Root.cellengineering.addAbstract(Organization.cell, CellPlatformDomain.formula);
-	public static final Set logicalFormula = Root.cellengineering.addAbstract(Organization.cell, CellPlatformDomain.logicalFormula);
+	public static final Set formula = Root.cellengineering.addConcrete(Organization.cell, CellPlatformDomain.formula);
+	public static final Set logicalFormula = Root.cellengineering.addConcrete(Organization.cell, CellPlatformDomain.logicalFormula);
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, formula, Organization.cell);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, logicalFormula, formula);
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, logicalFormula, formula);

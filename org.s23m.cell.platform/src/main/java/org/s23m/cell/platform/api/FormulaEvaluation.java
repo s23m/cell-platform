@@ -43,7 +43,7 @@ import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Not;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Or;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Xor;
 import org.s23m.cell.platform.models.CellEngineering;
-import org.s23m.cell.platform.models.CellPlatform;
+import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.models.CellPlatformDomain;
 import org.s23m.cell.platform.models.Formula;
 import org.s23m.cell.platform.models.LogicalFormula;
@@ -84,7 +84,7 @@ public class FormulaEvaluation {
 
 		if (CellEngineering.formula.isSuperSetOf(formula.category()).is_TRUE()) {
 			// fetch the proper subformula that constitutes the root of the formula
-			 subFormula = formula.filter(Formula.literal_to_properSubFormula).extractFirst().to();
+			 subFormula = formula.extractUniqueMatch(CellPlatformDomain.literal);
 		} else {
 			subFormula = formula;
 		}
@@ -200,7 +200,7 @@ public class FormulaEvaluation {
 				+ CellPlatformDomain.openSquareBracket.identity().name()
 				+ subFormula.container().identity().name()
 				+ CellPlatformDomain.closeSquareBracket.identity().name()
-				, org.s23m.cell.platform.api.Instantiation.toSemanticDomain(CellPlatform.development));
+				, org.s23m.cell.platform.api.Instantiation.toSemanticDomain(CellPlatformAgent.development));
 
 		return FormulaEvaluation.addSubFormula(subFormula.container(), subFormula.category(), si, terms, variables, constants);
 	}
