@@ -124,8 +124,8 @@ public class RepresentationStyleCategories {
 				coreSets.isContainer_FALSE
 		);
 
-		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, naryLogicalFunction);
-		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, logicalFunction);
+		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, naryFunction);
+		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, and, properSubFormula);
 
 
 

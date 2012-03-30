@@ -82,7 +82,8 @@ public class S23MKernel {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeCellKernelSemanticDomainInitialization();
 		if (!SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			Visualization.instantiateFeature();
-			//EnterpriseArchitecture.instantiateFeature();
+			SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
+			//The following is sandbox content
 			RepositoryStructure.instantiateFeature();
 			EnterpriseArchitecture.instantiateFeature();
 		}

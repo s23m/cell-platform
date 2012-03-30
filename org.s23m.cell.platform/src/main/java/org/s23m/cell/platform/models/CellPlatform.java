@@ -32,23 +32,26 @@ import org.s23m.cell.platform.testfoundation.TestFoundation;
 
 public class CellPlatform {
 
+	public static final Set s23mCellPlatform = null;
+	public static final Set development = null;
+	public static final Set testing = null;
+	public static final Set production = null;
+
 	public static void instantiateFeature() {
-		final int kernelComplexity = identityFactory.kernelComplexity();
-		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
+		int kernelComplexity = identityFactory.kernelComplexity();
+		int inMemoryComplexity = identityFactory.inMemoryComplexity();
 		CellEngineering.instantiateFeature();
 		Agency.instantiateFeature();
 
-		//CellEngineering.instantiateFeature();
 		// TODO Fix up S23MSemantics.instantiateFeature();
 		ValidityInterval.instantiateFeature();
 		TimeConsciousness.instantiateFeature();
 		Language.instantiateFeature();
 		Terminology.instantiateFeature();
-		//SemanticDimension.instantiateFeature();
 		Legal.instantiateFeature();
-
 		Organization.instantiateFeature();
-		LogicalFunction.instantiateFeature();
+		Formula.instantiateFeature();
+		LogicalFormula.instantiateFeature();
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
 
@@ -57,8 +60,11 @@ public class CellPlatform {
 		final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
 		final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
 
+		kernelComplexity = identityFactory.kernelComplexity();
+		inMemoryComplexity = identityFactory.inMemoryComplexity();
 		// Basis for test cases building on top of the foundation
 		TestFoundation.instantiateFeature();
+
 	}
 
 }

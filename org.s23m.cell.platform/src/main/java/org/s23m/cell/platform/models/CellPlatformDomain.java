@@ -188,11 +188,26 @@ public class CellPlatformDomain {
 	public static final Set semanticUnit_to_wordDefinitions = Instantiation.addDisjunctSemanticIdentitySet("semantic unit to word definitions", "set of semantic unit to word definitions", cellPlatformDomain);
 	public static final Set semanticUnit_to_oppositeSemanticUnit = Instantiation.addDisjunctSemanticIdentitySet("semantic unit to opposite semantic unit", "set of semantic unit to opposite semantic unit", cellPlatformDomain);
 
-	public static final Set logicalExpression = Instantiation.addDisjunctSemanticIdentitySet("logical expression", "set of logical expressions", cellPlatformDomain);
-	public static final Set logicalFunction = Instantiation.addDisjunctSemanticIdentitySet("logical function", "set of logical functions", cellPlatformDomain);
-	public static final Set unaryLogicalFunction = Instantiation.addDisjunctSemanticIdentitySet("unary logical function", "set of unary logical functions", cellPlatformDomain);
-	public static final Set binaryLogicalFunction = Instantiation.addDisjunctSemanticIdentitySet("binary logical function", "set of binary logical functions", cellPlatformDomain);
-	public static final Set naryLogicalFunction = Instantiation.addDisjunctSemanticIdentitySet("n-ary logical function", "set of n-ary logical functions", cellPlatformDomain);
+	public static final Set formula = Instantiation.addDisjunctSemanticIdentitySet("formula", "set of formulas", cellPlatformDomain);
+	public static final Set variable = Instantiation.addDisjunctSemanticIdentitySet("variable", "set of variables", cellPlatformDomain);
+	public static final Set constant = Instantiation.addDisjunctSemanticIdentitySet("constant", "set of constants", cellPlatformDomain);
+	public static final Set representation = Instantiation.addDisjunctSemanticIdentitySet("representation", "set of representations", cellPlatformDomain);
+	public static final Set variable_to_representation = Instantiation.addDisjunctSemanticIdentitySet("variable to representation", "set of variable to representation", cellPlatformDomain);
+	public static final Set constant_to_representation = Instantiation.addDisjunctSemanticIdentitySet("constant to representation", "set of constant to representation", cellPlatformDomain);
+	public static final Set evaluationOf = Instantiation.addDisjunctSemanticIdentitySet("evaluation of", "evaluation of", cellPlatformDomain);
+	public static final Set closeSquareBracket = Instantiation.addDisjunctSemanticIdentitySet(" ] ", " ] ", cellPlatformDomain);
+	public static final Set openSquareBracket = Instantiation.addDisjunctSemanticIdentitySet(" [ ", " [ ", cellPlatformDomain);
+
+
+	public static final Set logicalFormula = Instantiation.addDisjunctSemanticIdentitySet("logical formula", "set of logical formulas", cellPlatformDomain);
+
+	public static final Set literal = Instantiation.addDisjunctSemanticIdentitySet("literal", "set of literals", cellPlatformDomain);
+	public static final Set literalInstance = Instantiation.addDisjunctSemanticIdentitySet("literal instance", "set of literal instances", cellPlatformDomain);
+
+	public static final Set properSubFormula = Instantiation.addDisjunctSemanticIdentitySet("proper  subformula", "set of proper subformulas", cellPlatformDomain);
+	public static final Set unaryFunction = Instantiation.addDisjunctSemanticIdentitySet("unary function", "set of unary functions", cellPlatformDomain);
+	public static final Set binaryFunction = Instantiation.addDisjunctSemanticIdentitySet("binary function", "set of binary functions", cellPlatformDomain);
+	public static final Set naryFunction = Instantiation.addDisjunctSemanticIdentitySet("n-ary function", "set of n-ary functions", cellPlatformDomain);
 	public static final Set empty = Instantiation.addDisjunctSemanticIdentitySet("EMPTY", "set of EMPTYs", cellPlatformDomain);
 	public static final Set exist = Instantiation.addDisjunctSemanticIdentitySet("EXIST", "set of EXISTs", cellPlatformDomain);
 	public static final Set not = Instantiation.addDisjunctSemanticIdentitySet("NOT", "set of NOTs", cellPlatformDomain);
@@ -207,15 +222,22 @@ public class CellPlatformDomain {
 	public static final Set and = Instantiation.addDisjunctSemanticIdentitySet("AND", "set of ANDs", cellPlatformDomain);
 	public static final Set or = Instantiation.addDisjunctSemanticIdentitySet("OR", "set of ORs", cellPlatformDomain);
 	public static final Set xor = Instantiation.addDisjunctSemanticIdentitySet("EXCLUSIVE OR", "set of EXCLUSIVE ORs", cellPlatformDomain);
-	public static final Set operand = Instantiation.addDisjunctSemanticIdentitySet("operand", "set of operands", cellPlatformDomain);
+	public static final Set term = Instantiation.addDisjunctSemanticIdentitySet("term", "set of terms", cellPlatformDomain);
 
-	public static final Set binaryLogicalFunction_to_operands = Instantiation.addDisjunctSemanticIdentitySet("binary logical function to operands", "set of binary logical function to operands", cellPlatformDomain);
-	public static final Set and_to_operands = Instantiation.addDisjunctSemanticIdentitySet("AND to operands", "set of AND to operands", cellPlatformDomain);
-	public static final Set or_to_operands = Instantiation.addDisjunctSemanticIdentitySet("OR to operands", "set of OR to operands", cellPlatformDomain);
-	public static final Set xor_to_operands = Instantiation.addDisjunctSemanticIdentitySet("XOR to operands", "set of XOR to operands", cellPlatformDomain);
-	public static final Set not_to_operand = Instantiation.addDisjunctSemanticIdentitySet("NOT to operand", "set of NOT to operands", cellPlatformDomain);
-	public static final Set exist_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EXIST to operand", "set of EXIST to operands", cellPlatformDomain);
-	public static final Set empty_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EMPTY to operand", "set of EMPTY to operands", cellPlatformDomain);
+	public static final Set literal_to_properSubFormula = Instantiation.addDisjunctSemanticIdentitySet("literal to proper subformula", "set of literals to proper subformulas", cellPlatformDomain);
+	public static final Set binaryFunction_to_terms = Instantiation.addDisjunctSemanticIdentitySet("binary function to terms", "set of logical function to terms", cellPlatformDomain);
+	public static final Set naryFunction_to_terms = Instantiation.addDisjunctSemanticIdentitySet("nary function to terms", "set of nary functions to terms", cellPlatformDomain);
+	public static final Set unaryFunction_to_term = Instantiation.addDisjunctSemanticIdentitySet("unary function to term", "set of unary functions to term", cellPlatformDomain);
+	public static final Set literalInstance_to_properSubFormula = Instantiation.addDisjunctSemanticIdentitySet("literal to proper subformula", "set of literals to proper subformulas", cellPlatformDomain);
+	public static final Set binaryFunctionInstance_to_terms = Instantiation.addDisjunctSemanticIdentitySet("binary function to terms", "set of logical function to terms", cellPlatformDomain);
+	public static final Set naryFunctionInstance_to_terms = Instantiation.addDisjunctSemanticIdentitySet("nary function to terms", "set of nary functions to terms", cellPlatformDomain);
+	public static final Set unaryFunctionInstance_to_term = Instantiation.addDisjunctSemanticIdentitySet("unary function to term", "set of unary functions to term", cellPlatformDomain);
+
+
+	//public static final Set xor_to_operands = Instantiation.addDisjunctSemanticIdentitySet("XOR to operands", "set of XOR to operands", cellPlatformDomain);
+	//public static final Set not_to_operand = Instantiation.addDisjunctSemanticIdentitySet("NOT to term", "set of NOT to operands", cellPlatformDomain);
+	//public static final Set exist_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EXIST to term", "set of EXIST to operands", cellPlatformDomain);
+	//public static final Set empty_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EMPTY to term", "set of EMPTY to operands", cellPlatformDomain);
 
 	public static final Set cellVisualization = Instantiation.addDisjunctSemanticIdentitySet("cell visualization", "cell visualizations", cellPlatformDomain);
 	public static final Set representationStyleCategories = Instantiation.addDisjunctSemanticIdentitySet("representation style categories", "set of representation style categories", cellPlatformDomain);

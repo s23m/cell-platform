@@ -44,6 +44,10 @@ public final class F_InstantiationImpl {
 	public static Set createFunction(final Identity semanticIdentity, final Set category) {
 		return new OrderedSet(semanticIdentity, category);
 	}
+	public static Set createResultSet() {
+		return new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+	}
+
 	public static Set createFunction(final Identity semanticIdentity, final Set parameter, final Set category) {
 		final OrderedSet os = new OrderedSet(semanticIdentity, category);
 		os.add(parameter);
