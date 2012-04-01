@@ -48,6 +48,7 @@ public class CellPlatform {
 		LogicalFormula.instantiateFeature();
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
+		SessionHandling.instantiateFeature();
 		CellPlatformAgent.instantiateFeature();
 
 		//final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");

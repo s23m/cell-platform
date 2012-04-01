@@ -155,6 +155,11 @@ public class CellPlatformDomain {
 	public static final Set role_to_includedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to included roles", "set of role to included roles", cellPlatformDomain);
 	public static final Set role_to_excludedRoles = Instantiation.addDisjunctSemanticIdentitySet("role to excluded roles", "set of role to excluded roles", cellPlatformDomain);
 
+	public static final Set sessionHandling = Instantiation.addDisjunctSemanticIdentitySet("session handling", "set of session handling", cellPlatformDomain);
+	public static final Set session = Instantiation.addDisjunctSemanticIdentitySet("session", "set of sessions", cellPlatformDomain);
+	public static final Set sessions = Instantiation.addDisjunctSemanticIdentitySet("sessions", "sessions", cellPlatformDomain);
+
+
 	public static final Set language = Instantiation.addDisjunctSemanticIdentitySet("language", "languages", cellPlatformDomain);
 	public static final Set jargon = Instantiation.addDisjunctSemanticIdentitySet("jargon", "jargons", cellPlatformDomain);
 	public static final Set nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("native language", "native languages", cellPlatformDomain);
@@ -162,6 +167,13 @@ public class CellPlatformDomain {
 	public static final Set perspective_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("perspective_to_jargon", "set of perspective_to_jargon", cellPlatformDomain);
 	public static final Set agent_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("agent_to_nativeLanguage", "set of agent_to_nativeLanguage", cellPlatformDomain);
 	public static final Set cell_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell_to_nativeLanguage", "set of cell_to_nativeLanguage", cellPlatformDomain);
+
+	public static final Set s23mLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23m", "s23m", cellPlatformDomain);
+	public static final Set javaLanguage = Instantiation.addDisjunctSemanticIdentitySet("Java", "Java", cellPlatformDomain);
+	public static final Set sqlLanguage = Instantiation.addDisjunctSemanticIdentitySet("SQL", "SQL", cellPlatformDomain);
+	public static final Set englishLanguage = Instantiation.addDisjunctSemanticIdentitySet("English", "English", cellPlatformDomain);
+
+	public static final Set s23mNativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23mNativeLanguage", "s23mNativeLanguage", cellPlatformDomain);
 
 	public static final Set languageElement = Instantiation.addDisjunctSemanticIdentitySet("language element", "set of language elements", cellPlatformDomain);
 	public static final Set abstractWord = Instantiation.addDisjunctSemanticIdentitySet("abstract word", "set of abstract words", cellPlatformDomain);

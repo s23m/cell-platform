@@ -30,6 +30,7 @@ import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
+import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.models2.Visualization;
@@ -65,7 +66,9 @@ public class Instantiation {
 
 	public static Set addAgent(final String name, final String pluralName) {
 		final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, S23MSemanticDomains.agentSemanticDomains);
-		return  F_Instantiation.instantiateConcrete(F_Instantiation.reuseSemanticIdentity(sd.identity()), Agency.agent);
+		final Set agent =  F_Instantiation.instantiateConcrete(F_Instantiation.reuseSemanticIdentity(sd.identity()), Agency.agent);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, Root.agents, agent);
+		return  agent;
 	}
 
 	public static Set addAgent(final Set container, final String name, final String pluralName) {
@@ -95,13 +98,13 @@ public class Instantiation {
 			final Set t = Instantiation.toAgent(container);
 			if (t.category().isEqualTo(Agency.agent)) {
 				final Set stage = t.addConcrete(Agency.stage, sd);
-				Instantiation.addDefaultContainers(stage);
+				Instantiation.addDefaultContainers(stage, t);
 				return stage;
 			} else {
 				final Set s = Instantiation.toStage(container);
 				if (s.category().isEqualTo(Agency.stage)) {
 					final Set stage = s.addConcrete(Agency.stage, sd);
-					Instantiation.addDefaultContainers(stage);
+					Instantiation.addDefaultContainers(stage, s);
 					return stage;
 				}
 			}
@@ -117,7 +120,7 @@ public class Instantiation {
 		}
 	}
 
-	private static Set addDefaultContainers(final Set stage) {
+	private static Set addDefaultContainers(final Set stage, final Set container) {
 		final Set time = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.timeConsciousness, stage, CellPlatformDomain.time);
 		final Set locations = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.location, stage, CellPlatformDomain.locations);
 		final Set languages = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.language, stage, CellPlatformDomain.languages);
@@ -126,6 +129,10 @@ public class Instantiation {
 		final Set cellVisualizatons = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(Visualization.graphVisualization, stage, CellPlatformDomain.cellVisualizations);
 		final Set cells = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.organization, stage, CellPlatformDomain.cells);
 		final Set formulas = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.formula, stage, CellPlatformDomain.formulas);
+		final Set sessions = org.s23m.cell.platform.api.Instantiation.instantiateConcrete(CellEngineering.sessionHandling, stage, CellPlatformDomain.sessions);
+
+		//org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, container, stage);
+		//org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, stage, languages);
 
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, languages);
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, cells, time);

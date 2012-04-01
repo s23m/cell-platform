@@ -251,15 +251,15 @@ public class EcoreEmulationTest extends S23MTestCase {
 
 
 		ecoreERSchemaMM = RepositoryStructure.domainengineering.addConcrete(EClass,
-	    		Instantiation.addDisjunctSemanticIdentitySet("ecoreERSchema Metamodel", "ecoreERSchema Metamodel", EcoreDomain));
+	    		Instantiation.addDisjunctSemanticIdentitySet("ERSchema Metamodel", "ERSchema Metamodel", EcoreDomain));
 		ecoreERSchema = ecoreERSchemaMM.addConcrete(EClass,
-		   		Instantiation.addDisjunctSemanticIdentitySet("ecoreERSchema", "ecoreERSchema", EcoreDomain));
+		   		Instantiation.addDisjunctSemanticIdentitySet("ERSchema", "ERSchema", EcoreDomain));
 		ecoreEntity = ecoreERSchemaMM.addConcrete(EClass,
-		   		Instantiation.addDisjunctSemanticIdentitySet("ecoreEntity", "ecoreEntity", EcoreDomain));
+		   		Instantiation.addDisjunctSemanticIdentitySet("Entity", "Entity", EcoreDomain));
 		ecoreAttribute = ecoreERSchemaMM.addConcrete(EClass,
-		   		Instantiation.addDisjunctSemanticIdentitySet("ecoreAttribute", "ecoreAttribute", EcoreDomain));
+		   		Instantiation.addDisjunctSemanticIdentitySet("Attribute", "Attribute", EcoreDomain));
 		ecoreRelationship = ecoreERSchemaMM.addConcrete(EClass,
-		   		Instantiation.addDisjunctSemanticIdentitySet("ecoreRelationship", "ecoreRelationship", EcoreDomain));
+		   		Instantiation.addDisjunctSemanticIdentitySet("Relationship", "Relationship", EcoreDomain));
 
 		eReference_SchemaToEntities = refByContainment(ecoreERSchema, "Entities", ecoreEntity);
 		eReference_EntityToAttribute = refByContainment(ecoreEntity, "Attributes", ecoreAttribute);
@@ -392,76 +392,75 @@ public class EcoreEmulationTest extends S23MTestCase {
 		// model level
 		//final Set ecoreCrmM = F_SemanticStateOfInMemoryModel.instantiateConcrete(ecoreERSchemaMM, identityFactory.createIdentity("ecoreCRM Model"));
 		final Set ecoreCrmM = RepositoryStructure.applicationengineering.addConcrete(ecoreERSchemaMM,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreCRM Model", "ecoreCRM Model", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("CRM Model", "CRM Model", EcoreDomain));
 		final Set ecoreCrm = ecoreCrmM.addConcrete(ecoreERSchema,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreCRM", "ecoreCRM", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("CRM", "CRM", EcoreDomain));
 		final Set ecoreCustomer = ecoreCrmM.addConcrete(ecoreEntity,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreCustomer", "ecoreCustomer", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("Customer", "Customer", EcoreDomain));
 
 		final Set ecoreCustomers = refToManyParts(eReference_SchemaToEntities, ecoreCrm, "", ecoreCustomer);
 		final Set ecoreAddress = ecoreCrmM.addConcrete(ecoreAttribute,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreAddress", "ecoreAddress", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("Address", "Address", EcoreDomain));
 		final Set ecoreCustomerAttribute1 = refToOnePart(eReference_EntityToAttribute, ecoreCustomer, "", ecoreAddress);
 
 		final Set ecoreProduct = ecoreCrmM.addConcrete(ecoreEntity,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreProduct", "ecoreProduct", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("Product", "Product", EcoreDomain));
 		final Set ecoreProducts = refToManyParts(eReference_SchemaToEntities, ecoreCrm, "", ecoreProduct);
 		final Set ecorePrice = ecoreCrmM.addConcrete(ecoreAttribute,
-				Instantiation.addDisjunctSemanticIdentitySet("ecorePrice", "ecorePrice", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("Price", "Price", EcoreDomain));
 		final Set ecoreProductAttribute1 = refToOnePart(eReference_EntityToAttribute, ecoreProduct, "", ecorePrice);
 
 		final Set ecoreOrder = ecoreCrmM.addConcrete(ecoreEntity,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreOrder", "ecoreOrder", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("Order", "Order", EcoreDomain));
 		final Set ecoreOrders = refToManyParts(eReference_SchemaToEntities, ecoreCrm, "", ecoreOrder);
 		final Set ecoreReceivedDate = ecoreCrmM.addConcrete(ecoreAttribute,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreReceivedDate", "ecoreReceivedDate", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("ReceivedDate", "ReceivedDate", EcoreDomain));
 		final Set ecorePaidDate = ecoreCrmM.addConcrete(ecoreAttribute,
-				Instantiation.addDisjunctSemanticIdentitySet("ecorePaidDate", "ecorePaidDate", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("PaidDate", "PaidDate", EcoreDomain));
 		final Set ecoreOrderAttribute1 = refToOnePart(eReference_EntityToAttribute, ecoreOrder, "", ecoreReceivedDate);
 		final Set ecoreOrderAttribute2 = refToOnePart(eReference_EntityToAttribute, ecoreOrder, "", ecorePaidDate);
 
 		final Set ecoreOrderToCustomer = ecoreCrmM.addConcrete(ecoreRelationship,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreOrderToCustomer", "ecoreOrderToCustomer", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("OrderToCustomer", "OrderToCustomer", EcoreDomain));
 		final Set ecoreOrderToCustomerRel = refToManyParts(eReference_SchemaToRelationships, ecoreCrm, "", ecoreOrderToCustomer);
 		final Set ecoreOrderToCustomerSource = refToOne(eReference_RelationshipToSource, ecoreOrderToCustomer, "order", ecoreOrder);
 		final Set ecoreOrderToCustomerTarget = refToOne(eReference_RelationshipToTarget, ecoreOrderToCustomer, "customer", ecoreCustomer);
 
 		final Set ecoreOrderToProduct = ecoreCrmM.addConcrete(ecoreRelationship,
-				Instantiation.addDisjunctSemanticIdentitySet("ecoreOrderToProduct", "ecoreOrderToProduct", EcoreDomain));
+				Instantiation.addDisjunctSemanticIdentitySet("OrderToProduct", "OrderToProduct", EcoreDomain));
 		final Set ecoreOrderToProductRel = refToManyParts(eReference_SchemaToRelationships, ecoreCrm, "", ecoreOrderToProduct);
 		final Set ecoreOrderToProductSource = refToOne(eReference_RelationshipToSource, ecoreOrderToProduct, "order", ecoreOrder);
 		final Set ecoreOrderToProductTarget = refToOne(eReference_RelationshipToTarget, ecoreOrderToProduct, "product", ecoreProduct);
 
 		//instance level
-		//final Set ecoreCrmMSofismo = F_SemanticStateOfInMemoryModel.instantiateConcrete(ecoreCrmM, identityFactory.createIdentity("Sofismo Instance"));
-		final Set ecoreCrmMSofismo = RepositoryStructure.applicationoperation.addConcrete(ecoreCrmM,
-				Instantiation.addDisjunctSemanticIdentitySet("Sofismo Instance", "Sofismo Instance", EcoreDomain));
-		final Set ecoreCrmSofismo = ecoreCrmMSofismo.addConcrete(ecoreCrm,
-				Instantiation.addDisjunctSemanticIdentitySet("Sofismo", "Sofismo", EcoreDomain));
+		final Set ecoreCrmMIthankU = RepositoryStructure.applicationoperation.addConcrete(ecoreCrmM,
+				Instantiation.addDisjunctSemanticIdentitySet("I thank U Instance", "I thank U Instance", EcoreDomain));
+		final Set ecoreCrmIthankU = ecoreCrmMIthankU.addConcrete(ecoreCrm,
+				Instantiation.addDisjunctSemanticIdentitySet("I thank U", "I thank U", EcoreDomain));
 
-		final Set ecoreJoeBloggs = ecoreCrmMSofismo.addConcrete(ecoreCustomer,
+		final Set ecoreJoeBloggs = ecoreCrmMIthankU.addConcrete(ecoreCustomer,
 				Instantiation.addDisjunctSemanticIdentitySet("Joe Bloggs", "Joe Bloggs", EcoreDomain));
-		final Set ecoreSofismoCustomer1 = refToInstancePart(ecoreCustomers, ecoreCrmSofismo, "", ecoreJoeBloggs);
+		final Set ecoreIthankUCustomer1 = refToInstancePart(ecoreCustomers, ecoreCrmIthankU, "", ecoreJoeBloggs);
 
-		final Set ecoreLife = ecoreCrmMSofismo.addConcrete(ecoreProduct,
+		final Set ecoreLife = ecoreCrmMIthankU.addConcrete(ecoreProduct,
 				Instantiation.addDisjunctSemanticIdentitySet("BasicLifeInsurance", "BasicLifeInsurance", EcoreDomain));
-		final Set ecoreSofismoProduct1 = refToInstancePart(ecoreProducts, ecoreCrmSofismo, "", ecoreLife);
+		final Set ecoreIthankUProduct1 = refToInstancePart(ecoreProducts, ecoreCrmIthankU, "", ecoreLife);
 
-		final Set ecoreJoeBloggsLife = ecoreCrmMSofismo.addConcrete(ecoreOrder,
+		final Set ecoreJoeBloggsLife = ecoreCrmMIthankU.addConcrete(ecoreOrder,
 				Instantiation.addDisjunctSemanticIdentitySet("123456", "123456", EcoreDomain));
-		final Set ecoreSofismoOrder1 = refToInstancePart(ecoreOrders, ecoreCrmSofismo, "", ecoreJoeBloggsLife);
+		final Set ecoreIthankUOrder1 = refToInstancePart(ecoreOrders, ecoreCrmIthankU, "", ecoreJoeBloggsLife);
 
-		final Set ecoreLifeToJoeBoggs = ecoreCrmMSofismo.addConcrete(ecoreOrderToCustomer,
+		final Set ecoreLifeToJoeBoggs = ecoreCrmMIthankU.addConcrete(ecoreOrderToCustomer,
 				Instantiation.addDisjunctSemanticIdentitySet("123456--JoeBoggs", "123456--JoeBoggs", EcoreDomain));
-		final Set ecoreSofismoOrderToCustomerRel = refToInstancePart(ecoreOrderToCustomerRel, ecoreCrmSofismo, "", ecoreLifeToJoeBoggs);
-		final Set ecoreSofismoOrderToCustomerSource = refToInstance(ecoreOrderToCustomerSource, ecoreLifeToJoeBoggs, "", ecoreJoeBloggsLife);
-		final Set ecoreSofismoOrderToCustomerTarget = refToInstance(ecoreOrderToCustomerTarget, ecoreLifeToJoeBoggs, "", ecoreJoeBloggs);
+		final Set ecoreIthankUOrderToCustomerRel = refToInstancePart(ecoreOrderToCustomerRel, ecoreCrmIthankU, "", ecoreLifeToJoeBoggs);
+		final Set ecoreIthankUOrderToCustomerSource = refToInstance(ecoreOrderToCustomerSource, ecoreLifeToJoeBoggs, "", ecoreJoeBloggsLife);
+		final Set ecoreIthankUOrderToCustomerTarget = refToInstance(ecoreOrderToCustomerTarget, ecoreLifeToJoeBoggs, "", ecoreJoeBloggs);
 
-		final Set ecoreLifeToSofismoProduct1 = ecoreCrmMSofismo.addConcrete(ecoreOrderToProduct,
+		final Set ecoreLifeToIthankUProduct1 = ecoreCrmMIthankU.addConcrete(ecoreOrderToProduct,
 				Instantiation.addDisjunctSemanticIdentitySet("123456--BasicLifeInsurance", "123456--BasicLifeInsurance", EcoreDomain));
-		final Set ecoreSofismoOrderToProduct1Rel = refToInstancePart(ecoreOrderToProductRel, ecoreCrmSofismo, "", ecoreLifeToSofismoProduct1);
-		final Set ecoreSofismoOrderToCustomer1Source = refToInstance(ecoreOrderToProductSource, ecoreLifeToSofismoProduct1, "", ecoreJoeBloggsLife);
-		final Set ecoreSofismoOrderToCustomer1Target = refToInstance(ecoreOrderToProductTarget, ecoreLifeToSofismoProduct1, "", ecoreLife);
+		final Set ecoreIthankUOrderToProduct1Rel = refToInstancePart(ecoreOrderToProductRel, ecoreCrmIthankU, "", ecoreLifeToIthankUProduct1);
+		final Set ecoreIthankUOrderToCustomer1Source = refToInstance(ecoreOrderToProductSource, ecoreLifeToIthankUProduct1, "", ecoreJoeBloggsLife);
+		final Set ecoreIthankUOrderToCustomer1Target = refToInstance(ecoreOrderToProductTarget, ecoreLifeToIthankUProduct1, "", ecoreLife);
 
 	}
 

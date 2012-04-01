@@ -41,11 +41,16 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 public final class CellEngineering {
 
 	public static final Set language = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.language);
+	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, language, coreGraphs.vertex);
+
 	public static final Set location = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.location);
+	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, location, coreGraphs.vertex);
 
 	public static final Set agency = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.agency);
+	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, agency, coreGraphs.vertex);
+
 	public static final Set jargon = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.jargon);
-	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, jargon, language);
+	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, jargon, language);
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, jargon, language);
 
 	public static final Set timeConsciousness = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.timeConsciousness);
@@ -62,6 +67,10 @@ public final class CellEngineering {
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, logicalFormula, formula);
 
 	public static final Set representationStyleCategories = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.representationStyleCategories);
+
+	public static final Set sessionHandling = Root.cellengineering.addConcrete(Organization.cell, CellPlatformDomain.sessionHandling);
+	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, sessionHandling, Organization.cell);
+
 
 	public static final Set collaboration = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.collaboration,

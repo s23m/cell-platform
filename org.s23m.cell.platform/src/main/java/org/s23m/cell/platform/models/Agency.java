@@ -122,13 +122,13 @@ public class Agency {
 
 	public static final Set collaborationChannel = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.collaborationChannel,
-			CellPlatformDomain.supplier,
+			CellPlatformDomain.consumer,
 			Agency.stage,
 			S23MSemanticDomains.minCardinality_0,
 			S23MSemanticDomains.maxCardinality_n,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.consumer,
+			CellPlatformDomain.supplier,
 			Agency.stage,
 			S23MSemanticDomains.minCardinality_0,
 			S23MSemanticDomains.maxCardinality_n,
@@ -137,6 +137,8 @@ public class Agency {
 	);
 
 	public static Set instantiateFeature() {
+		agent.identity().makePartOfUniversalCellConcept();
+		stage.identity().makePartOfUniversalCellConcept();
 		return CellEngineering.agency;
 	}
 }
