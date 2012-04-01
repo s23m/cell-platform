@@ -72,6 +72,7 @@ public class F_SemanticStateOfInMemoryModel {
 	private static boolean semanticDomainIsInitialized = false;
 	private static boolean cellKernelSemanticDomainIsInitialized = false;
 	private static boolean cellEditorIsLive = false;
+
 	private static boolean isDebugModeOn = false;
 
 	public static boolean semanticDomainIsInitialized() {

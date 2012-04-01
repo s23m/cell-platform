@@ -30,6 +30,7 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 
 
 public class Legal {
@@ -37,6 +38,12 @@ public class Legal {
 	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.legal, CellEngineering.timeConsciousness);
 
 	public static final Set license = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.license);
+	public static final Set originalCode = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.originalCode);
+	private static final Set maxC1 = originalCode.addToValues(S23MSemanticDomains.maxCardinality_1);
+	public static final Set initialDevelopers = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.initialDeveloper);
+	public static final Set copyrightHolders = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.copyrightHolder);
+	public static final Set contributors = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.contributor);
+
 	public static final Set legalEntity = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.legalEntity);
 	public static final Set usageLicense = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.usageLicense);;
 

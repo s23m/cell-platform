@@ -62,6 +62,99 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isContainer_FALSE
 	);
 
+	public static final Set s23m_mozilla1dot1 = production.filter(CellEngineering.legal).extractFirst().addConcrete(Legal.license, CellPlatformDomain.mozilla1dot1);
+	public static final Set originalCode = s23m_mozilla1dot1.addConcrete(Legal.originalCode, CellPlatformDomain.s23mCellPlatformCode);
+	public static final Set initialDeveloper1 = s23m_mozilla1dot1.addConcrete(Legal.initialDevelopers, CellPlatformDomain.thes23mfoundation);
+	public static final Set initialDeveloper2 = s23m_mozilla1dot1.addConcrete(Legal.initialDevelopers, CellPlatformDomain.softmetaware);
+	public static final Set copyrightHolder1 = s23m_mozilla1dot1.addConcrete(Legal.copyrightHolders, CellPlatformDomain.thes23mfoundation);
+	public static final Set copyrightHolder2 = s23m_mozilla1dot1.addConcrete(Legal.copyrightHolders, CellPlatformDomain.softmetaware);
+	public static final Set contributor1 = s23m_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.jornbettin);
+	public static final Set contributor2 = s23m_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.andrewshewring);
+	public static final Set contributor3 = s23m_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.chulkim);
+	public static final Set contributor4 = s23m_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.xaverwiesmann);
+
+	public static final Set s23mCellPlatformOrg = production.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, s23mCellPlatform);
+	public static final Set s23m_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicense,
+			CellPlatformDomain.s23m_platform_license,
+			CellPlatformDomain.semanticUnit,
+			s23mCellPlatformOrg,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.availableLicense,
+			s23m_mozilla1dot1,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set s23mCellKernel = org.s23m.cell.platform.api.Instantiation.addAgent("cell kernel", "cell kernel");
+	public static final Set developmentK = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellKernel, "development", "development");
+	public static final Set testingK = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellKernel, "test", "test");
+	public static final Set productionK = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellKernel, "production", "production");
+
+	public static final Set s23m_kernel_mozilla1dot1 = productionK.filter(CellEngineering.legal).extractFirst().addConcrete(Legal.license, CellPlatformDomain.mozilla1dot1);
+	public static final Set originalCode2 = s23m_kernel_mozilla1dot1.addConcrete(Legal.originalCode, S23MSemanticDomains.cellKernel);
+	public static final Set initialDeveloper3 = s23m_kernel_mozilla1dot1.addConcrete(Legal.initialDevelopers, CellPlatformDomain.thes23mfoundation);
+	public static final Set initialDeveloper4 = s23m_kernel_mozilla1dot1.addConcrete(Legal.initialDevelopers, CellPlatformDomain.softmetaware);
+	public static final Set copyrightHolder3 = s23m_kernel_mozilla1dot1.addConcrete(Legal.copyrightHolders, CellPlatformDomain.thes23mfoundation);
+	public static final Set copyrightHolder4 = s23m_kernel_mozilla1dot1.addConcrete(Legal.copyrightHolders, CellPlatformDomain.softmetaware);
+	public static final Set contributor5 = s23m_kernel_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.jornbettin);
+	public static final Set contributor6 = s23m_kernel_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.andrewshewring);
+	public static final Set contributor7 = s23m_kernel_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.chulkim);
+	public static final Set contributor8 = s23m_kernel_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.xaverwiesmann);
+
+	public static final Set s23mCellKernelOrg = productionK.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, S23MSemanticDomains.cellKernel);
+	public static final Set s23mkernel_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicense,
+			CellPlatformDomain.s23m_kernel_license,
+			CellPlatformDomain.semanticUnit,
+			s23mCellKernelOrg,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.availableLicense,
+			s23m_kernel_mozilla1dot1,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set perspective_cellplatform_kernel = Instantiation.arrow(Agency.perspective,
+			CellPlatformDomain.perspective_cellplatform_kernel,
+			S23MSemanticDomains.from,
+			s23mCellPlatform,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.to,
+			s23mCellKernel,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set s23mKernelNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
+			CellPlatformDomain.s23mKernelNativeLanguage,
+			CellPlatformDomain.agent,
+			s23mCellKernel,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.nativeLanguage,
+			s23mLanguage,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
 	static Set instantiateFeature() {
 
 

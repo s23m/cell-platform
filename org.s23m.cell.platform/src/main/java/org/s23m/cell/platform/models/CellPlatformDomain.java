@@ -98,6 +98,52 @@ public class CellPlatformDomain {
 	public static final Set usageLicence_to_issuer = Instantiation.addDisjunctSemanticIdentitySet("usageLicence_to_issuer", "set of usageLicence_to_issuer", cellPlatformDomain);
 	public static final Set usageLicence_to_license = Instantiation.addDisjunctSemanticIdentitySet("usageLicence_to_license", "set of usageLicence_to_license", cellPlatformDomain);
 
+	public static final Set initialDeveloper = Instantiation.addDisjunctSemanticIdentitySet("initial developer", "initial developers", cellPlatformDomain);
+	public static final Set thes23mfoundation = Instantiation.addDisjunctSemanticIdentitySet("The S23M Foundation", "The S23M Foundation", cellPlatformDomain);
+	public static final Set softmetaware = Instantiation.addDisjunctSemanticIdentitySet("SoftMetaWare Limited, New Zealand", "SoftMetaWare Limited, New Zealand", cellPlatformDomain);
+	public static final Set perisoft = Instantiation.addDisjunctSemanticIdentitySet("Perisoft GmbH, Schweiz", "Perisoft GmbH, Schweiz", cellPlatformDomain);
+
+	public static final Set originalCode = Instantiation.addDisjunctSemanticIdentitySet("original code", "original codes", cellPlatformDomain);
+	public static final Set s23mCellPlatformCode = Instantiation.addDisjunctSemanticIdentitySet("S23M Cell Platform", "S23M Cell Platform", cellPlatformDomain);
+
+	public static final Set s23m_platform_license = Instantiation.addDisjunctSemanticIdentitySet("s23m_platform_license", "s23m_platform_license", cellPlatformDomain);
+	public static final Set s23m_kernel_license = Instantiation.addDisjunctSemanticIdentitySet("s23m_kernel_license", "s23m_kernel_license", cellPlatformDomain);
+
+	public static final Set mozilla1dot1 = Instantiation.addDisjunctSemanticIdentitySet("Mozilla 1.1", "Mozilla 1.1", cellPlatformDomain);
+	private static final String s = mozilla1dot1.identity().setPayload(
+		"***** BEGIN LICENSE BLOCK *****"
+		+ " * Version: MPL 1.1"
+		+ " *"
+		+ " * The contents of this file are subject to the Mozilla Public License Version"
+		+ " * 1.1 (the 'License'); you may not use this file except in compliance with"
+		+ " * the License. You may obtain a copy of the License at"
+		+ " * http://www.mozilla.org/MPL/"
+		+ " *"
+		+ " * Software distributed under the License is distributed on an 'AS IS' basis,"
+		+ " * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License"
+		+ " * for the specific language governing rights and limitations under the"
+		+ " * License."
+		+ " *"
+		+ " * The Original Code is <original code>"
+		+ " *"
+		+ " * The Initial Developer of the Original Code is"
+		+ " * <original developer>."
+		+ " * Portions created by the Initial Developer are"
+		+ " * Copyright (C) <valid from year> to <valid until year> <copyright holder>."
+		+ " * All Rights Reserved."
+		+ " *"
+		+ " * Contributor(s):"
+		+ " * <names of contributor>"
+		+ " * ***** END LICENSE BLOCK ***** ");
+
+	public static final Set contributor = Instantiation.addDisjunctSemanticIdentitySet("contributor", "contributors", cellPlatformDomain);
+	public static final Set jornbettin = Instantiation.addDisjunctSemanticIdentitySet("Jorn Bettin", "Jorn Bettin", cellPlatformDomain);
+	public static final Set andrewshewring = Instantiation.addDisjunctSemanticIdentitySet("Andrew Shewring", "Andrew Shewring", cellPlatformDomain);
+	public static final Set chulkim = Instantiation.addDisjunctSemanticIdentitySet("Chul Kim", "Chul Kim", cellPlatformDomain);
+	public static final Set xaverwiesmann = Instantiation.addDisjunctSemanticIdentitySet("Xaver Wiesmann", "Xaver Wiesmann", cellPlatformDomain);
+
+	public static final Set perspective_cellplatform_kernel = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_kernel", "perspective_cellplatform_kernel", cellPlatformDomain);
+
 	public static final Set lifeCycle = Instantiation.addDisjunctSemanticIdentitySet("life cycle", "life cycles", cellPlatformDomain);
 	public static final Set state = Instantiation.addDisjunctSemanticIdentitySet("state", "states", cellPlatformDomain);
 	public static final Set cellState = Instantiation.addSemanticRole("cell state", "cell states", cellPlatformDomain, state);
@@ -174,6 +220,7 @@ public class CellPlatformDomain {
 	public static final Set englishLanguage = Instantiation.addDisjunctSemanticIdentitySet("English", "English", cellPlatformDomain);
 
 	public static final Set s23mNativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23mNativeLanguage", "s23mNativeLanguage", cellPlatformDomain);
+	public static final Set s23mKernelNativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23mKernelNativeLanguage", "s23mKernelNativeLanguage", cellPlatformDomain);
 
 	public static final Set languageElement = Instantiation.addDisjunctSemanticIdentitySet("language element", "set of language elements", cellPlatformDomain);
 	public static final Set abstractWord = Instantiation.addDisjunctSemanticIdentitySet("abstract word", "set of abstract words", cellPlatformDomain);
