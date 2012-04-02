@@ -39,12 +39,14 @@ public final class CellPlatformAgent {
 	public static final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
 	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
 	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
-	public static final Set s23mLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.s23mLanguage);
+	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.cellMetaLanguage);
 	public static final Set javaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.javaLanguage);
 	public static final Set sqlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.sqlLanguage);
 	public static final Set englishLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.englishLanguage);
+	public static final Set deutschLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.deutschLanguage);
+	public static final Set koreanLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.koreanLanguage);
 
-	public static final Set	v1 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), s23mLanguage);
+	public static final Set	v1 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), cellMetaLanguage);
 
 	public static final Set s23mNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
 			CellPlatformDomain.s23mNativeLanguage,
@@ -55,7 +57,7 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.nativeLanguage,
-			s23mLanguage,
+			cellMetaLanguage,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
@@ -74,7 +76,7 @@ public final class CellPlatformAgent {
 	public static final Set contributor4 = s23m_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.xaverwiesmann);
 
 	public static final Set s23mCellPlatformOrg = production.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, s23mCellPlatform);
-	public static final Set s23m_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicense,
+	public static final Set s23m_platform_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicenses,
 			CellPlatformDomain.s23m_platform_license,
 			CellPlatformDomain.semanticUnit,
 			s23mCellPlatformOrg,
@@ -107,7 +109,7 @@ public final class CellPlatformAgent {
 	public static final Set contributor8 = s23m_kernel_mozilla1dot1.addConcrete(Legal.contributors, CellPlatformDomain.xaverwiesmann);
 
 	public static final Set s23mCellKernelOrg = productionK.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, S23MSemanticDomains.cellKernel);
-	public static final Set s23mkernel_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicense,
+	public static final Set s23mkernel_license = Instantiation.arrow(Organization.semanticUnit_to_availableLicenses,
 			CellPlatformDomain.s23m_kernel_license,
 			CellPlatformDomain.semanticUnit,
 			s23mCellKernelOrg,
@@ -148,7 +150,7 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.nativeLanguage,
-			s23mLanguage,
+			cellMetaLanguage,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,

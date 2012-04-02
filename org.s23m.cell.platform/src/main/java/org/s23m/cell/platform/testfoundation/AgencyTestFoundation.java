@@ -25,13 +25,16 @@
 package org.s23m.cell.platform.testfoundation;
 
 import org.s23m.cell.Set;
+import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.api.Instantiation;
+import org.s23m.cell.platform.impl.F_CellQueries;
 import org.s23m.cell.platform.models.Agency;
 import org.s23m.cell.platform.models.CellEngineering;
 import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.models.CellPlatformDomain;
 import org.s23m.cell.platform.models.LogicalFormula;
+import org.s23m.cell.platform.models.ValidityInterval;
 
 public class AgencyTestFoundation {
 
@@ -42,43 +45,43 @@ public class AgencyTestFoundation {
 		final Set prod = org.s23m.cell.platform.api.Instantiation.addStage(ithanku, "production", "set of production");
 		final Set ithanku1 = org.s23m.cell.platform.api.Instantiation.addAgent("i thank u #1", "set of i thank u #1");
 
-		final Set snowy = org.s23m.cell.platform.api.Instantiation.addAgent("Snowy", "set of Snowy");
-		final Set dev1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "dev1", "dev1s");
-		final Set test1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "test1", "test1s");
-		final Set prod1 = org.s23m.cell.platform.api.Instantiation.addStage(snowy, "prod1", "prod1s");
-		final Set snowySubA = org.s23m.cell.platform.api.Instantiation.addAgent(snowy, "Snowy Sub A", "set of Snowy Sub A");
-		final Set dev0 = org.s23m.cell.platform.api.Instantiation.addStage(snowySubA, "dev0", "dev0s");
-		final Set scruffy = org.s23m.cell.platform.api.Instantiation.addAgent("Scruffy", "set of Scruffy");
-		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "dev2", "dev2s");
-		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "test2", "test2s");
-		org.s23m.cell.platform.api.Instantiation.addStage(scruffy, "prod2", "prod2s");
-		final Set louise = org.s23m.cell.platform.api.Instantiation.addAgent("Louise", "set of Louise");
+		final Set ernst = org.s23m.cell.platform.api.Instantiation.addAgent("Ernst Zermelo", "Ernst Zermelo");
+		final Set dev1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "dev1", "dev1s");
+		final Set test1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "test1", "test1s");
+		final Set prod1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "prod1", "prod1s");
+		final Set ernstSmartApp = org.s23m.cell.platform.api.Instantiation.addAgent(ernst, "Ernst's smart shopping app", "Ernst's smart shopping app");
+		final Set dev0 = org.s23m.cell.platform.api.Instantiation.addStage(ernstSmartApp, "dev0", "dev0s");
+		final Set samuel = org.s23m.cell.platform.api.Instantiation.addAgent("Samuel Eilenberg", "Samuel Eilenberg");
+		org.s23m.cell.platform.api.Instantiation.addStage(samuel, "dev2", "dev2s");
+		org.s23m.cell.platform.api.Instantiation.addStage(samuel, "test2", "test2s");
+		org.s23m.cell.platform.api.Instantiation.addStage(samuel, "prod2", "prod2s");
+		final Set christopher = org.s23m.cell.platform.api.Instantiation.addAgent("Christopher Strachey", "Christopher Strachey");
 		final Set lf1 = Instantiation.addDisjunctSemanticIdentitySet("logical formula 1", "logical formula 1", Instantiation.toSemanticDomain(dev1));
 		final Set formula1 = dev1.filter(CellEngineering.formula).extractFirst().addConcrete(CellEngineering.logicalFormula, lf1);
 		final Set literal1 = formula1.addConcrete(LogicalFormula.and, CellPlatformDomain.literal);
 
 
-		final Set snowyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("snowyNativeLanguage", "snowyNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set snowyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ErnstNativeLanguage", "ErnstNativeLanguage", Instantiation.toSemanticDomain(dev1));
 		final Set snowyNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
 				snowyNativeLanguageSI,
 				CellPlatformDomain.agent,
-				snowy,
+				ernst,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
 				S23MSemanticDomains.isContainer_FALSE,
 				CellPlatformDomain.nativeLanguage,
-				CellPlatformAgent.englishLanguage,
+				CellPlatformAgent.deutschLanguage,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_snowy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_snowy_cellplatform", "perspective_snowy_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_snowy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Ernst_cellplatform", "perspective_Ernst_cellplatform", Instantiation.toSemanticDomain(dev));
 		final Set perspective_snowy_cellplatform = Instantiation.arrow(Agency.perspective,
 				perspective_snowy_cellplatformSI,
 				S23MSemanticDomains.from,
-				snowy,
+				ernst,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
@@ -90,11 +93,11 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set scruffyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("scruffyNativeLanguage", "scruffyNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set scruffyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("SamuelNativeLanguage", "SamuelNativeLanguage", Instantiation.toSemanticDomain(dev1));
 		final Set scruffyNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
 				scruffyNativeLanguageSI,
 				CellPlatformDomain.agent,
-				scruffy,
+				samuel,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
@@ -106,11 +109,11 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_scruffy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_scruffy_cellplatform", "perspective_scruffy_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_scruffy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Samuel_cellplatform", "perspective_Samuel_cellplatform", Instantiation.toSemanticDomain(dev));
 		final Set perspective_scruffy_cellplatform = Instantiation.arrow(Agency.perspective,
 				perspective_scruffy_cellplatformSI,
 				S23MSemanticDomains.from,
-				scruffy,
+				samuel,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
@@ -122,11 +125,11 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set louiseNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("louiseNativeLanguage", "louiseNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set louiseNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ChristopherNativeLanguage", "ChristopherNativeLanguage", Instantiation.toSemanticDomain(dev1));
 		final Set louiseNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
 				louiseNativeLanguageSI,
 				CellPlatformDomain.agent,
-				louise,
+				christopher,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
@@ -138,11 +141,11 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_louise_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_louise_cellplatform", "perspective_louise_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_louise_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Christopher_cellplatform", "perspective_Christopher_cellplatform", Instantiation.toSemanticDomain(dev));
 		final Set perspective_louise_cellplatform = Instantiation.arrow(Agency.perspective,
 				perspective_louise_cellplatformSI,
 				S23MSemanticDomains.from,
-				louise,
+				christopher,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_FALSE,
@@ -164,7 +167,7 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_FALSE,
 				S23MSemanticDomains.isContainer_FALSE,
 				CellPlatformDomain.nativeLanguage,
-				CellPlatformAgent.s23mLanguage,
+				CellPlatformAgent.cellMetaLanguage,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
 				S23MSemanticDomains.isNavigable_TRUE,
@@ -203,6 +206,11 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isContainer_FALSE
 		);
 
-		return snowy;
+		final Set kernelLicense = F_CellQueries.availableLicenses(Root.root).extractFirst();
+		final Set platformLicense = F_CellQueries.availableLicenses(CellEngineering.language).extractFirst();
+		final Set platformLicense2 = F_CellQueries.availableLicenses(ValidityInterval.validFromTimestamp).extractFirst();
+		final Set platformLicense3 = F_CellQueries.availableLicenses(CellEngineering.timeConsciousness).extractFirst();
+
+		return ernst;
 	}
 }

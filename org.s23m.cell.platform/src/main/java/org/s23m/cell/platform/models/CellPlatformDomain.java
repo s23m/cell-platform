@@ -91,7 +91,7 @@ public class CellPlatformDomain {
 	public static final Set copyrightHolder = Instantiation.addDisjunctSemanticIdentitySet("copyright holder", "copyright holders", cellPlatformDomain);
 	public static final Set semanticUnit_to_copyrightHolder = Instantiation.addDisjunctSemanticIdentitySet("semanticUnit_to_copyrightHolder", "set of semanticUnit_to_copyrightHolder", cellPlatformDomain);
 	public static final Set availableLicense = Instantiation.addDisjunctSemanticIdentitySet("available license", "available licenses", cellPlatformDomain);
-	public static final Set semanticUnit_to_availableLicense = Instantiation.addDisjunctSemanticIdentitySet("semanticUnit_to_availableLicense", "set of semanticUnit_to_availableLicense", cellPlatformDomain);
+	public static final Set semanticUnit_to_availableLicenses = Instantiation.addDisjunctSemanticIdentitySet("semanticUnit_to_availableLicenses", "set of semanticUnit_to_availableLicenses", cellPlatformDomain);
 	public static final Set usageLicence_to_vertex = Instantiation.addDisjunctSemanticIdentitySet("usageLicence_to_vertex", "set of usageLicence_to_vertex", cellPlatformDomain);
 	public static final Set licencedProduct = Instantiation.addDisjunctSemanticIdentitySet("licenced product", "licenced products", cellPlatformDomain);
 	public static final Set issuer = Instantiation.addDisjunctSemanticIdentitySet("issuer", "issuers", cellPlatformDomain);
@@ -129,7 +129,7 @@ public class CellPlatformDomain {
 		+ " * The Initial Developer of the Original Code is"
 		+ " * <original developer>."
 		+ " * Portions created by the Initial Developer are"
-		+ " * Copyright (C) <valid from year> to <valid until year> <copyright holder>."
+		+ " * Copyright (C) <from year> to <until year> <copyright holder>."
 		+ " * All Rights Reserved."
 		+ " *"
 		+ " * Contributor(s):"
@@ -214,10 +214,12 @@ public class CellPlatformDomain {
 	public static final Set agent_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("agent_to_nativeLanguage", "set of agent_to_nativeLanguage", cellPlatformDomain);
 	public static final Set cell_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell_to_nativeLanguage", "set of cell_to_nativeLanguage", cellPlatformDomain);
 
-	public static final Set s23mLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23m", "s23m", cellPlatformDomain);
+	public static final Set cellMetaLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell metalanguage", "cell metalanguage", cellPlatformDomain);
 	public static final Set javaLanguage = Instantiation.addDisjunctSemanticIdentitySet("Java", "Java", cellPlatformDomain);
 	public static final Set sqlLanguage = Instantiation.addDisjunctSemanticIdentitySet("SQL", "SQL", cellPlatformDomain);
 	public static final Set englishLanguage = Instantiation.addDisjunctSemanticIdentitySet("English", "English", cellPlatformDomain);
+	public static final Set deutschLanguage = Instantiation.addDisjunctSemanticIdentitySet("Deutsch", "Deutsch", cellPlatformDomain);
+	public static final Set koreanLanguage = Instantiation.addDisjunctSemanticIdentitySet("Korean", "Korean", cellPlatformDomain);
 
 	public static final Set s23mNativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23mNativeLanguage", "s23mNativeLanguage", cellPlatformDomain);
 	public static final Set s23mKernelNativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("s23mKernelNativeLanguage", "s23mKernelNativeLanguage", cellPlatformDomain);

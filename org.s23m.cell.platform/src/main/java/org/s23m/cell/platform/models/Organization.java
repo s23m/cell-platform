@@ -260,8 +260,8 @@ public class Organization {
 	);
 	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_copyrightHolder, TimeConsciousness.timeConsciousEdge);
 
-	public static final Set semanticUnit_to_availableLicense = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
-			CellPlatformDomain.semanticUnit_to_availableLicense,
+	public static final Set semanticUnit_to_availableLicenses = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.semanticUnit_to_availableLicenses,
 			CellPlatformDomain.semanticUnit,
 			cell,
 			coreSets.minCardinality_0,
