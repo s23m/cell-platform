@@ -51,11 +51,6 @@ public class CellPlatform {
 		SessionHandling.instantiateFeature();
 		CellPlatformAgent.instantiateFeature();
 
-		//final Set s23mCellPlatform = org.s23m.cell.platform.api.Instantiation.addAgent("cell platform", "cell platform");
-		//final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
-		//final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
-		//final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
-
 		kernelComplexity = identityFactory.kernelComplexity();
 		inMemoryComplexity = identityFactory.inMemoryComplexity();
 		// Basis for test cases building on top of the foundation

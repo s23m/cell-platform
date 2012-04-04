@@ -82,7 +82,6 @@ public class Instantiation {
 			}
 		} else {
 			final Set parent = Instantiation.toSemanticDomain(container);
-			//if (sd.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
 			if (SemanticDomain.semanticdomain.isSuperSetOf(parent.category()).is_TRUE()) {
 				return Instantiation.addAgent(parent, name, pluralName);
 			} else {
@@ -92,9 +91,8 @@ public class Instantiation {
 	}
 
 	public static Set addStage(final Set container, final String name, final String pluralName) {
-		//if (semanticDomain.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
 		if (SemanticDomain.semanticdomain.isSuperSetOf(container.category()).is_TRUE()) {
-			final Set sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, container);
+			 final Set	sd = org.s23m.cell.api.Instantiation.addSemanticDomain(name, pluralName, container);
 			final Set t = Instantiation.toAgent(container);
 			if (t.category().isEqualTo(Agency.agent)) {
 				final Set stage = t.addConcrete(Agency.stage, sd);
@@ -111,7 +109,6 @@ public class Instantiation {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		} else {
 			final Set sd = Instantiation.toSemanticDomain(container);
-			//if (sd.category().isSuperSetOf(SemanticDomain.semanticdomain).is_TRUE()) {
 			if (SemanticDomain.semanticdomain.isSuperSetOf(sd.category()).is_TRUE()) {
 				return Instantiation.addStage(sd, name, pluralName);
 			} else {

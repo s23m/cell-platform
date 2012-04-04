@@ -42,6 +42,7 @@ public class Language {
 	public static final Set word = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.word);
 	public static final Set whiteSpaceElement = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.whiteSpaceElement);
 	public static final Set sentenceSeparator = CellEngineering.language.addConcrete(coreGraphs.vertex, CellPlatformDomain.sentenceSeparator);
+	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, languageElement, coreGraphs.vertex);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, abstractWord, languageElement);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, wordSeparator, languageElement);
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, word, abstractWord);

@@ -520,6 +520,14 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(event);
 		Graph.addSetToInMemorySets(setMaintenanceCommand);
 
+		/**
+		 * prepare to reference CellPlatformDomain for translation of kernel and platform concepts
+		 */
+
+		orderedPair.identity().makePartOfUniversalCellConcept();
+		orderedSet.identity().makePartOfUniversalCellConcept();
+
+
 	}
 
 }

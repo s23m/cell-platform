@@ -214,7 +214,8 @@ public class CellPlatformDomain {
 	public static final Set agent_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("agent_to_nativeLanguage", "set of agent_to_nativeLanguage", cellPlatformDomain);
 	public static final Set cell_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell_to_nativeLanguage", "set of cell_to_nativeLanguage", cellPlatformDomain);
 
-	public static final Set cellMetaLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell metalanguage", "cell metalanguage", cellPlatformDomain);
+	public static final Set cellMetaLanguage = Instantiation.addSemanticIdentitySet("cell metalanguage", "cell metalanguage", cellPlatformDomain);
+
 	public static final Set javaLanguage = Instantiation.addDisjunctSemanticIdentitySet("Java", "Java", cellPlatformDomain);
 	public static final Set sqlLanguage = Instantiation.addDisjunctSemanticIdentitySet("SQL", "SQL", cellPlatformDomain);
 	public static final Set englishLanguage = Instantiation.addDisjunctSemanticIdentitySet("English", "English", cellPlatformDomain);
@@ -245,6 +246,7 @@ public class CellPlatformDomain {
 	public static final Set idiom_to_idiomParts = Instantiation.addDisjunctSemanticIdentitySet("idiom to idiom parts", "set of idiom to idiom parts", cellPlatformDomain);
 	public static final Set abbreviation_to_languages = Instantiation.addDisjunctSemanticIdentitySet("abbreviation to languages", "set of abbreviation to languages", cellPlatformDomain);
 	public static final Set wordDefinition_to_language = Instantiation.addDisjunctSemanticIdentitySet("word definition to language", "set of word definition to language", cellPlatformDomain);
+	public static final Set word_to_semanticUnit = Instantiation.addDisjunctSemanticIdentitySet("word to semantic unit", "set of word to semantic unit", cellPlatformDomain);
 	public static final Set semanticUnit_to_abstractWords = Instantiation.addDisjunctSemanticIdentitySet("semantic unit to abstract words", "set of semantic unit to abstract words", cellPlatformDomain);
 	public static final Set semanticUnit_to_abbreviations = Instantiation.addDisjunctSemanticIdentitySet("semantic unit to abbreviations", "set of semantic unit to abbreviations", cellPlatformDomain);
 	public static final Set semanticUnit_to_wordDefinitions = Instantiation.addDisjunctSemanticIdentitySet("semantic unit to word definitions", "set of semantic unit to word definitions", cellPlatformDomain);
@@ -294,12 +296,6 @@ public class CellPlatformDomain {
 	public static final Set binaryFunctionInstance_to_terms = Instantiation.addDisjunctSemanticIdentitySet("binary function to terms", "set of logical function to terms", cellPlatformDomain);
 	public static final Set naryFunctionInstance_to_terms = Instantiation.addDisjunctSemanticIdentitySet("nary function to terms", "set of nary functions to terms", cellPlatformDomain);
 	public static final Set unaryFunctionInstance_to_term = Instantiation.addDisjunctSemanticIdentitySet("unary function to term", "set of unary functions to term", cellPlatformDomain);
-
-
-	//public static final Set xor_to_operands = Instantiation.addDisjunctSemanticIdentitySet("XOR to operands", "set of XOR to operands", cellPlatformDomain);
-	//public static final Set not_to_operand = Instantiation.addDisjunctSemanticIdentitySet("NOT to term", "set of NOT to operands", cellPlatformDomain);
-	//public static final Set exist_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EXIST to term", "set of EXIST to operands", cellPlatformDomain);
-	//public static final Set empty_to_operand = Instantiation.addDisjunctSemanticIdentitySet("EMPTY to term", "set of EMPTY to operands", cellPlatformDomain);
 
 	public static final Set cellVisualization = Instantiation.addDisjunctSemanticIdentitySet("cell visualization", "cell visualizations", cellPlatformDomain);
 	public static final Set representationStyleCategories = Instantiation.addDisjunctSemanticIdentitySet("representation style categories", "set of representation style categories", cellPlatformDomain);

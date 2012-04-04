@@ -47,7 +47,7 @@ public class XmlSchemaTemplate {
   /**
    * Namespace-related constants
    */
-  private static String S23M = "agentSemanticDomains";
+  private static String S23M = "s23m";
   
   private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
   
@@ -531,7 +531,7 @@ public class XmlSchemaTemplate {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\u00AC\u00B4element(semanticIdentity, identityReferenceQualified)\u00AC\u00AA");
     _builder.newLine();
-    _builder.append("\u00AC\u00B4element(model, agentSemanticDomains(model))\u00AC\u00AA");
+    _builder.append("\u00AC\u00B4element(model, s23m(model))\u00AC\u00AA");
     _builder.newLine();
     _builder.append("\u00AC\u00B4element(category, identityReferenceQualified)\u00AC\u00AA");
     _builder.newLine();
@@ -549,7 +549,7 @@ public class XmlSchemaTemplate {
     _builder.newLine();
     _builder.append("\u00AC\u00B4element(to, identityReferenceQualified)\u00AC\u00AA");
     _builder.newLine();
-    _builder.append("\u00AC\u00B4element(function, agentSemanticDomains(function))\u00AC\u00AA");
+    _builder.append("\u00AC\u00B4element(function, s23m(function))\u00AC\u00AA");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -587,15 +587,15 @@ public class XmlSchemaTemplate {
     _builder.append("\u00AC\u00B4val semanticDomain = terminology.semanticDomain\u00AC\u00AA");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\u00AC\u00B4element(artifactSet, agentSemanticDomains(artifactSet))\u00AC\u00AA\t\t");
+    _builder.append("\u00AC\u00B4element(artifactSet, s23m(artifactSet))\u00AC\u00AA\t\t");
     _builder.newLine();
     _builder.append("\u00AC\u00B4complexType(artifactSet, asList(");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(agentSemanticDomains(model)),");
+    _builder.append("elementList(s23m(model)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(semanticDomain, agentSemanticDomains(semanticDomain))");
+    _builder.append("elementList(semanticDomain, s23m(semanticDomain))");
     _builder.newLine();
     _builder.append("))\u00AC\u00AA");
     _builder.newLine();
@@ -607,7 +607,7 @@ public class XmlSchemaTemplate {
     _builder.append("\u00AC\u00B4val container = terminology.container\u00AC\u00AA");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\u00AC\u00B4complexTypeWithExtension(model, agentSemanticDomains(graph))\u00AC\u00AA");
+    _builder.append("\u00AC\u00B4complexTypeWithExtension(model, s23m(graph))\u00AC\u00AA");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -620,22 +620,22 @@ public class XmlSchemaTemplate {
     _builder.append("element(isAbstract),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(vertex, agentSemanticDomains(vertex)),");
+    _builder.append("elementList(vertex, s23m(vertex)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(visibility, agentSemanticDomains(visibility)),");
+    _builder.append("elementList(visibility, s23m(visibility)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(edge, agentSemanticDomains(edge)),");
+    _builder.append("elementList(edge, s23m(edge)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(superSetReference, agentSemanticDomains(superSetReference)),");
+    _builder.append("elementList(superSetReference, s23m(superSetReference)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(command, agentSemanticDomains(command)),");
+    _builder.append("elementList(command, s23m(command)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(query, agentSemanticDomains(query))");
+    _builder.append("elementList(query, s23m(query))");
     _builder.newLine();
     _builder.append("))\u00AC\u00AA");
     _builder.newLine();
@@ -693,10 +693,10 @@ public class XmlSchemaTemplate {
     _builder.append("element(isAbstract),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("element(from, agentSemanticDomains(edgeEnd)),");
+    _builder.append("element(from, s23m(edgeEnd)),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("element(to, agentSemanticDomains(edgeEnd))");
+    _builder.append("element(to, s23m(edgeEnd))");
     _builder.newLine();
     _builder.append("))\u00AC\u00AA");
     _builder.newLine();
@@ -730,15 +730,15 @@ public class XmlSchemaTemplate {
     _builder.append("\u00AC\u00B4categoryComplexType(function, asList(");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(parameter, agentSemanticDomains(parameter))");
+    _builder.append("elementList(parameter, s23m(parameter))");
     _builder.newLine();
     _builder.append("))\u00AC\u00AA");
     _builder.newLine();
     _builder.append("\u00AC\u00B4categoryComplexType(parameter, Collections::emptyList)\u00AC\u00AA");
     _builder.newLine();
-    _builder.append("\u00AC\u00B4complexTypeWithExtension(command, agentSemanticDomains(function))\u00AC\u00AA");
+    _builder.append("\u00AC\u00B4complexTypeWithExtension(command, s23m(function))\u00AC\u00AA");
     _builder.newLine();
-    _builder.append("\u00AC\u00B4complexTypeWithExtension(query, agentSemanticDomains(function))\u00AC\u00AA");
+    _builder.append("\u00AC\u00B4complexTypeWithExtension(query, s23m(function))\u00AC\u00AA");
     _builder.newLine();
     return _builder;
   }
@@ -766,7 +766,7 @@ public class XmlSchemaTemplate {
     _builder.append("element(model),");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("elementList(identity, agentSemanticDomains(identity))");
+    _builder.append("elementList(identity, s23m(identity))");
     _builder.newLine();
     _builder.append("))\u00AC\u00AA");
     _builder.newLine();
@@ -774,7 +774,7 @@ public class XmlSchemaTemplate {
     _builder.append("\u00AC\u00B4complexType(identity, asList(");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("element(identifier, agentSemanticDomains(uuid)),");
+    _builder.append("element(identifier, s23m(uuid)),");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("element(name, XSD_STRING),");

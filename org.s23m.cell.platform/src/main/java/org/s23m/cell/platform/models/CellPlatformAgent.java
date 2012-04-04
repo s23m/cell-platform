@@ -25,7 +25,10 @@
 
 package org.s23m.cell.platform.models;
 
+import static org.s23m.cell.S23MKernel.coreGraphs;
+
 import org.s23m.cell.Set;
+import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.Instantiation;
@@ -39,9 +42,9 @@ public final class CellPlatformAgent {
 	public static final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
 	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
 	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
-	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.cellMetaLanguage);
-	public static final Set javaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.javaLanguage);
-	public static final Set sqlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.sqlLanguage);
+	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.cellMetaLanguage);
+	public static final Set javaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaLanguage);
+	public static final Set sqlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.sqlLanguage);
 	public static final Set englishLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.englishLanguage);
 	public static final Set deutschLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.deutschLanguage);
 	public static final Set koreanLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.koreanLanguage);
@@ -156,6 +159,78 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
+
+	private static final Set w1 = cellMetaLanguage.addConcrete(Language.word, S23MSemanticDomains.orderedPair);
+	private static final Set w2 = cellMetaLanguage.addConcrete(Language.word, S23MSemanticDomains.orderedSet);
+	private static final Set w3 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.graph);
+	private static final Set w4 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.vertex);
+	private static final Set w5 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.edge);
+	private static final Set w6 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.visibility);
+	private static final Set w7 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.superSetReference);
+
+	private static final Set w11 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedPair", "orderedPairs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w12 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedSet", "orderedSets", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w13 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("graph", "graphs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w14 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("vertex", "vertices", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w15 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("edge", "edges", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w16 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("visibility", "visibilities", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w17 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("superSetReference", "superSetReferences", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w11e = w11.addConcrete(Language.word, w1);
+	private static final Set w12e = w12.addConcrete(Language.word, w2);
+	private static final Set w13e = w13.addConcrete(Language.word, w3);
+	private static final Set w14e = w14.addConcrete(Language.word, w4);
+	private static final Set w15e = w15.addConcrete(Language.word, w5);
+	private static final Set w16e = w16.addConcrete(Language.word, w6);
+	private static final Set w17e = w17.addConcrete(Language.word, w7);
+
+	private static final Set w21 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("ordered pair", "ordered pairs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w22 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("ordered set", "ordered sets", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w23 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("graph", "graphs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w24 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("vertex", "vertices", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w25 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("edge", "edges", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w26 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("visibility", "visibilities", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w27 = englishLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("super set reference", "super set references", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w21e = w21.addConcrete(Language.word, w1);
+	private static final Set w22e = w22.addConcrete(Language.word, w2);
+	private static final Set w23e = w23.addConcrete(Language.word, w3);
+	private static final Set w24e = w24.addConcrete(Language.word, w4);
+	private static final Set w25e = w25.addConcrete(Language.word, w5);
+	private static final Set w26e = w26.addConcrete(Language.word, w6);
+	private static final Set w27e = w27.addConcrete(Language.word, w7);
+
+	// potentially useful visibilities
+	private static final Set v80 = Instantiation.arrow(coreGraphs.visibility, s23mCellPlatform, Instantiation.toSemanticDomain(s23mCellPlatform));
+	private static final Set v82 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, Instantiation.toSemanticDomain(s23mCellPlatform));
+
+	private static final Set w31 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("geordnetes Paar", "geordnete Paare", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w32 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("geordnete Menge", "geordnete Mengen", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w33 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("Graph", "Graphen", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w34 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("Knoten", "Knoten", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w35 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("Kante", "Kante", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w36 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("Sichtbarkeit", "Sichtbarkeiten", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w37 = deutschLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("Obermengenreferenz", "Obermengenreferenzen", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w31e = w31.addConcrete(Language.word, w1);
+	private static final Set w32e = w32.addConcrete(Language.word, w2);
+	private static final Set w33e = w33.addConcrete(Language.word, w3);
+	private static final Set w34e = w34.addConcrete(Language.word, w4);
+	private static final Set w35e = w35.addConcrete(Language.word, w5);
+	private static final Set w36e = w36.addConcrete(Language.word, w6);
+	private static final Set w37e = w37.addConcrete(Language.word, w7);
+
+	private static final Set w41 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w42 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w43 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w44 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w45 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w46 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w47 = koreanLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("*TO BE TRANSLATED*", "*TO BE TRANSLATED*", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w41e = w41.addConcrete(Language.word, w1);
+	private static final Set w42e = w42.addConcrete(Language.word, w2);
+	private static final Set w43e = w43.addConcrete(Language.word, w3);
+	private static final Set w44e = w44.addConcrete(Language.word, w4);
+	private static final Set w45e = w45.addConcrete(Language.word, w5);
+	private static final Set w46e = w46.addConcrete(Language.word, w6);
+	private static final Set w47e = w47.addConcrete(Language.word, w7);
 
 	static Set instantiateFeature() {
 

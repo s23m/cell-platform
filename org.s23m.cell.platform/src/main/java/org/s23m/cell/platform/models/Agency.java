@@ -41,7 +41,7 @@ public class Agency {
 	public static final Set nonLinearSystem = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.nonLinearSystem);
 	public static final Set linearSystem = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.linearSystem);
 	public static final Set stage = CellEngineering.agency.addConcrete(coreGraphs.vertex, CellPlatformDomain.stage);
-	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, stage, agent);
+	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, stage, coreGraphs.vertex);
 
 
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, nonLinearSystem, agent);

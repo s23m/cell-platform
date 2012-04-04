@@ -170,11 +170,13 @@ public class Organization {
 
 	/* *************** */
 
-	//public static final Set cell = CellEngineering.cellContent.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.cell);
 	public static final Set cell = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.cell);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, cell, TimeConsciousness.timeConsciousVertex);
 
 	// additional semantics
+	//private static final Set v87 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellPlatformDomain.cellPlatformDomain);
+	//private static final Set v88 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.language, CellPlatformDomain.cellPlatformDomain);
+
 	public static final Set semanticUnit_to_abstractWords = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
 			CellPlatformDomain.semanticUnit_to_abstractWords,
 			CellPlatformDomain.semanticUnit,
@@ -190,6 +192,7 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
+
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_abstractWords, TimeConsciousness.timeConsciousEdge);
 
 	public static final Set semanticUnit_to_abbreviations = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
