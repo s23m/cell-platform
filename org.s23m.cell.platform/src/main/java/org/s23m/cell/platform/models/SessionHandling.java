@@ -38,7 +38,6 @@ public class SessionHandling {
 	public static final Set session = CellEngineering.sessionHandling.addConcrete(Organization.cell, CellPlatformDomain.session);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, session, Organization.cell);
 
-
 	public static Set instantiateFeature() {
 		session.identity().makePartOfUniversalCellConcept();
 		return CellEngineering.sessionHandling;

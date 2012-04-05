@@ -24,16 +24,22 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.platform.testfoundation;
 
+import static org.s23m.cell.S23MKernel.coreGraphs;
+
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.platform.api.CellQueries;
 import org.s23m.cell.platform.api.Instantiation;
 import org.s23m.cell.platform.impl.F_CellQueries;
 import org.s23m.cell.platform.models.Agency;
 import org.s23m.cell.platform.models.CellEngineering;
 import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.models.Language;
 import org.s23m.cell.platform.models.LogicalFormula;
+import org.s23m.cell.platform.models.Organization;
+import org.s23m.cell.platform.models.SessionHandling;
 import org.s23m.cell.platform.models.ValidityInterval;
 
 public class AgencyTestFoundation {
@@ -61,9 +67,188 @@ public class AgencyTestFoundation {
 		final Set literal1 = formula1.addConcrete(LogicalFormula.and, CellPlatformDomain.literal);
 
 
-		final Set snowyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ErnstNativeLanguage", "ErnstNativeLanguage", Instantiation.toSemanticDomain(dev1));
-		final Set snowyNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
-				snowyNativeLanguageSI,
+		final Set english = dev.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformAgent.englishLanguage);
+		final Set deutsch = dev.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformAgent.deutschLanguage);
+		final Set cellMeta = dev.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformAgent.cellMetaLanguage);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst(), english);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst(), deutsch);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst(), cellMeta);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst().container(), english);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst().container(), deutsch);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.language).extractFirst().container(), cellMeta);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), english);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), deutsch);
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), cellMeta);
+
+
+		final Set goodCellSI = Instantiation.addDisjunctSemanticIdentitySet("good", "goods", Instantiation.toSemanticDomain(dev));
+		final Set good = Instantiation.addDisjunctSemanticIdentitySet("good", "goods", Instantiation.toSemanticDomain(dev));
+		final Set gut = Instantiation.addDisjunctSemanticIdentitySet("Gut", "Gueter", Instantiation.toSemanticDomain(dev));
+		final Set good1 = cellMeta.addConcrete(Language.word, good);
+		final Set good2 = english.addConcrete(Language.word, good);
+		final Set good3 = deutsch.addConcrete(Language.word, gut);
+		final Set good_cell = dev.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, goodCellSI);
+
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), good_cell);
+
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				good_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.cellMetaLanguage,
+				good1,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				good_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.englishLanguage,
+				good2,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				good_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.deutschLanguage,
+				good3,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+
+		final Set giverCellSI = Instantiation.addDisjunctSemanticIdentitySet("giver", "givers", Instantiation.toSemanticDomain(dev));
+		final Set giver = Instantiation.addDisjunctSemanticIdentitySet("giver", "givers", Instantiation.toSemanticDomain(dev));
+		final Set schenker = Instantiation.addDisjunctSemanticIdentitySet("Schenker", "Schenker", Instantiation.toSemanticDomain(dev));
+		final Set giver1 = cellMeta.addConcrete(Language.word, giver);
+		final Set giver2 = english.addConcrete(Language.word, giver);
+		final Set giver3 = deutsch.addConcrete(Language.word, schenker);
+		final Set giver_cell = dev.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, giverCellSI);
+
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), giver_cell);
+
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				giver_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.cellMetaLanguage,
+				giver1,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				giver_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.englishLanguage,
+				giver2,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				giver_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.deutschLanguage,
+				giver3,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+
+		final Set recipientCellSI = Instantiation.addDisjunctSemanticIdentitySet("recipient", "recipients", Instantiation.toSemanticDomain(dev));
+		final Set recipient = Instantiation.addDisjunctSemanticIdentitySet("recipient", "recipients", Instantiation.toSemanticDomain(dev));
+		final Set empfaenger = Instantiation.addDisjunctSemanticIdentitySet("Empfaenger", "Empfaenger", Instantiation.toSemanticDomain(dev));
+		final Set recipient1 = cellMeta.addConcrete(Language.word, recipient);
+		final Set recipient2 = english.addConcrete(Language.word, recipient);
+		final Set recipient3 = deutsch.addConcrete(Language.word, empfaenger);
+		final Set recipient_cell = dev.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, recipientCellSI);
+
+		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), recipient_cell);
+
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				recipient_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.cellMetaLanguage,
+				recipient1,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				recipient_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.englishLanguage,
+				recipient2,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+		Instantiation.arrow(Organization.semanticUnit_to_abstractWords,
+				S23MSemanticDomains.anonymous,
+				CellPlatformDomain.semanticUnit,
+				recipient_cell,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_FALSE,
+				S23MSemanticDomains.isContainer_FALSE,
+				CellPlatformAgent.deutschLanguage,
+				recipient3,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.is_NOTAPPLICABLE,
+				S23MSemanticDomains.isNavigable_TRUE,
+				S23MSemanticDomains.isContainer_FALSE);
+
+		final Set sessionSI = Instantiation.addDisjunctSemanticIdentitySet("example session", "example session", Instantiation.toSemanticDomain(dev));
+
+		final Set session = dev.filter(CellEngineering.sessionHandling).extractFirst().addConcrete(SessionHandling.session, sessionSI);
+
+
+
+		final Set ernstNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ErnstNativeLanguage", "ErnstNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set ernstNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
+				ernstNativeLanguageSI,
 				CellPlatformDomain.agent,
 				ernst,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -77,9 +262,9 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_snowy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Ernst_cellplatform", "perspective_Ernst_cellplatform", Instantiation.toSemanticDomain(dev));
-		final Set perspective_snowy_cellplatform = Instantiation.arrow(Agency.perspective,
-				perspective_snowy_cellplatformSI,
+		final Set perspective_ernst_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Ernst_cellplatform", "perspective_Ernst_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_ernst_cellplatform = Instantiation.arrow(Agency.perspective,
+				perspective_ernst_cellplatformSI,
 				S23MSemanticDomains.from,
 				ernst,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -93,9 +278,9 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set scruffyNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("SamuelNativeLanguage", "SamuelNativeLanguage", Instantiation.toSemanticDomain(dev1));
-		final Set scruffyNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
-				scruffyNativeLanguageSI,
+		final Set samuelNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("SamuelNativeLanguage", "SamuelNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set samuelNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
+				samuelNativeLanguageSI,
 				CellPlatformDomain.agent,
 				samuel,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -109,9 +294,9 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_scruffy_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Samuel_cellplatform", "perspective_Samuel_cellplatform", Instantiation.toSemanticDomain(dev));
-		final Set perspective_scruffy_cellplatform = Instantiation.arrow(Agency.perspective,
-				perspective_scruffy_cellplatformSI,
+		final Set perspective_samuel_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Samuel_cellplatform", "perspective_Samuel_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_samuel_cellplatform = Instantiation.arrow(Agency.perspective,
+				perspective_samuel_cellplatformSI,
 				S23MSemanticDomains.from,
 				samuel,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -125,9 +310,9 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set louiseNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ChristopherNativeLanguage", "ChristopherNativeLanguage", Instantiation.toSemanticDomain(dev1));
-		final Set louiseNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
-				louiseNativeLanguageSI,
+		final Set christopherNativeLanguageSI = Instantiation.addDisjunctSemanticIdentitySet("ChristopherNativeLanguage", "ChristopherNativeLanguage", Instantiation.toSemanticDomain(dev1));
+		final Set christopherNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
+				christopherNativeLanguageSI,
 				CellPlatformDomain.agent,
 				christopher,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -141,9 +326,9 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-		final Set perspective_louise_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Christopher_cellplatform", "perspective_Christopher_cellplatform", Instantiation.toSemanticDomain(dev));
-		final Set perspective_louise_cellplatform = Instantiation.arrow(Agency.perspective,
-				perspective_louise_cellplatformSI,
+		final Set perspective_christopher_cellplatformSI = Instantiation.addDisjunctSemanticIdentitySet("perspective_Christopher_cellplatform", "perspective_Christopher_cellplatform", Instantiation.toSemanticDomain(dev));
+		final Set perspective_christopher_cellplatform = Instantiation.arrow(Agency.perspective,
+				perspective_christopher_cellplatformSI,
 				S23MSemanticDomains.from,
 				christopher,
 				S23MSemanticDomains.is_NOTAPPLICABLE,
@@ -210,6 +395,11 @@ public class AgencyTestFoundation {
 		final Set platformLicense = F_CellQueries.availableLicenses(CellEngineering.language).extractFirst();
 		final Set platformLicense2 = F_CellQueries.availableLicenses(ValidityInterval.validFromTimestamp).extractFirst();
 		final Set platformLicense3 = F_CellQueries.availableLicenses(CellEngineering.timeConsciousness).extractFirst();
+
+		final String name_d = CellQueries.name(good_cell, deutsch);
+		final String name_e = CellQueries.name(good_cell, english);
+		final String name_c = CellQueries.name(good_cell, cellMeta);
+		final String pasted = name_d + " " + name_e + " " + name_c;
 
 		return ernst;
 	}

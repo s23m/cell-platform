@@ -44,7 +44,14 @@ public class CellQueries {
 	public static final Set usageLicense(final Set user, final Set product) {
 		return F_CellQueries.usageLicense(user, product);
 	}
-	public static final Set name(final Set cell, final Set session) {
-		return F_CellQueries.name(cell, session);
+	public static final String nameInAgentLanguage(final Set cell, final Set session) {
+		return F_CellQueries.nameInAgentLanguage(cell, session);
 	}
+
+	public static final String name(final Set cell, final Set language) {
+		return F_CellQueries.name(cell, language);
+	}
+
+
+
 }

@@ -633,7 +633,9 @@ public class Graph extends OrderedPair implements Set {
 
 	private Set getCategoryOfVisibility(final Graph target) {
 		if (	(this.container().isEqualTo(target.container()))
-				||	(this.isEqualTo(target.container())))	{
+				//				||	(this.isEqualTo(target.container())))	{
+				||	(this.isEqualTo(target.container()))
+				||	(this.category().identity().isPartOfUniversalCellConcept()))	{
 			return Visibility.visibility;
 		} else {
 			final Set viz = this.container().container().filterProperClass(coreGraphs.visibility);
