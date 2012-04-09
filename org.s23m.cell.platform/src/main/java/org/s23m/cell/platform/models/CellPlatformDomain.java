@@ -148,6 +148,7 @@ public class CellPlatformDomain {
 	public static final Set state = Instantiation.addDisjunctSemanticIdentitySet("state", "states", cellPlatformDomain);
 	public static final Set cellState = Instantiation.addSemanticRole("cell state", "cell states", cellPlatformDomain, state);
 	public static final Set cell = Instantiation.addDisjunctSemanticIdentitySet("cell", "cells", cellPlatformDomain);
+	public static final Set connection = Instantiation.addDisjunctSemanticIdentitySet("connection", "connections", cellPlatformDomain);
 	public static final Set cellContent = Instantiation.addDisjunctSemanticIdentitySet("cell content", "set of cell content", cellPlatformDomain);
 	public static final Set cell_to_validityInterval = Instantiation.addDisjunctSemanticIdentitySet("cell to validity interval", "set of cell to validity intervals", cellPlatformDomain);
 	public static final Set cell_to_transaction = Instantiation.addDisjunctSemanticIdentitySet("cell to transaction", "set of cell to transactions", cellPlatformDomain);

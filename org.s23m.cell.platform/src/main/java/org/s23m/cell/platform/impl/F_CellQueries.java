@@ -7,10 +7,13 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_InstantiationImpl;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.models.Agency;
+import org.s23m.cell.platform.models.CellEngineering;
 import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.models.Language;
 import org.s23m.cell.platform.models.Legal;
 import org.s23m.cell.platform.models.Organization;
+import org.s23m.cell.platform.models.Terminology;
 
 
 public  class F_CellQueries {
@@ -60,62 +63,282 @@ public  class F_CellQueries {
 			return cell;
 		} else {
 			if (cell.category().isEqualTo(cell)) {
-				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
-			} else {
+				return S23MSemanticDomains.is_NOTAPPLICABLE;
+				} else {
 				return F_CellQueries.agent(cell.container());
 			}
 		}
 	}
+	public static final Set isCell(final Set cell) {
+		if (Organization.cell.isSuperSetOf(cell.category()).is_TRUE()) {
+			return S23MSemanticDomains.is_TRUE;
+		} else {
+			if (cell.category().isEqualTo(cell)) {
+				return S23MSemanticDomains.is_FALSE;
+			} else {
+				return isCell(cell.category());
+			}
+		}
+	}
+
 	public static final Set stage(final Set cell) {
 		if (Agency.stage.isSuperSetOf(cell.category()).is_TRUE()) {
 			return cell;
 		} else {
 			if (cell.category().isEqualTo(cell)) {
-				return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+				return S23MSemanticDomains.is_NOTAPPLICABLE;
 			} else {
 				return F_CellQueries.stage(cell.container());
 			}
 		}
 	}
-
-	public static final String nameInAgentLanguage(final Set cell, final Set session) {
-		final Set agent = F_CellQueries.agent(session);
-		//final Set stage = F_CellQueries.stage(session);
+	private static final Set nativeLanguageContainer(final Set agent) {
 		final Set nativeLanguageContainer = agent.filter(Agency.agent_to_nativeLanguage);
-		final Set cellLanguageContainer = cell.filter(Organization.cell_to_nativeLanguage);
-		Set nativeLanguage = CellPlatformAgent.cellMetaLanguage;
-		Set cellLanguage = CellPlatformAgent.cellMetaLanguage;
 		if (nativeLanguageContainer.size() > 0) {
-			nativeLanguage = nativeLanguageContainer.extractFirst();
-		}
-		if (cellLanguageContainer.size() > 0) {
-			cellLanguage = cellLanguageContainer.extractFirst();
-		}
-		final Set nameContainerNative = cell.container().filter(Organization.semanticUnit_to_abstractWords).filterByLinkedToVia(nativeLanguage);
-		if (nameContainerNative.size() > 0) {
-			return nameContainerNative.extractFirst().to().identity().name();
+			return nativeLanguageContainer;
 		} else {
-			final Set nameContainerCell = cell.container().filter(Organization.semanticUnit_to_abstractWords).filterByLinkedToVia(cellLanguage);
-			if (nameContainerCell.size() > 0) {
-				return nameContainerCell.extractFirst().to().identity().name();
+			if (Agency.agent.isSuperSetOf(agent.container().category()).is_TRUE()) {
+				return F_CellQueries.nativeLanguageContainer(agent.container());
 			} else {
-				return null;
+				return CellPlatformAgent.cellMetaLanguage;
 			}
 		}
 	}
-	public static final String name(final Set cell, final Set language) {
-		final Set nameContainer = cell.container().filter(Organization.semanticUnit_to_abstractWords).filterByLinkedToVia(language);
-		if (nameContainer.size() > 0) {
-			return nameContainer.extractFirst().to().identity().name();
-		} else {
-			final Set nameContainerCell = cell.container().filter(Organization.semanticUnit_to_abstractWords).filterByLinkedToVia(CellPlatformAgent.cellMetaLanguage);
-			if (nameContainerCell.size() > 0) {
-				return nameContainerCell.extractFirst().to().identity().name();
+	public static final Set nativeLanguage(final Set agent) {
+		if (Agency.agent.isSuperSetOf(agent.category()).is_TRUE()) {
+			final Set nativeLanguageContainer = F_CellQueries.nativeLanguageContainer(agent);
+			if (nativeLanguageContainer.size() > 0) {
+				return nativeLanguageContainer.extractFirst();
 			} else {
-				return null;
+				if (Agency.agent.isSuperSetOf(agent.container().category()).is_TRUE()) {
+					return F_CellQueries.nativeLanguage(agent.container());
+				} else {
+					return CellPlatformAgent.cellMetaLanguage;
+				}
+			}
+		} else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+		}
+	}
+
+	public static final Set perspectiveLanguage(final Set perspective) {
+		final Set perspectiveLanguageContainerV = perspective.filter(Agency.perspectiveV);
+		if (perspectiveLanguageContainerV.size() > 0) {
+			final Set perspectiveLanguageContainer = perspectiveLanguageContainerV.extractFirst().filter(Agency.perspective_to_jargon).filterTo();
+			if (perspectiveLanguageContainer.size() > 0) {
+				return perspectiveLanguageContainer.extractFirst();
+			} else {
+				return F_CellQueries.nativeLanguage(perspective.from());
+			}
+		} else {
+			return F_CellQueries.nativeLanguage(perspective.from());
+		}
+	}
+
+	private static final Set cellLanguageContainer(final Set cell) {
+		final Set cellLanguageContainer = cell.filter(Organization.cell_to_nativeLanguage);
+		if (cellLanguageContainer.size() > 0) {
+			return cellLanguageContainer;
+		} else {
+			if (Agency.agent.isSuperSetOf(cell.container().category()).is_TRUE()) {
+				return F_CellQueries.nativeLanguageContainer(cell.container());
+			} else {
+				if (Organization.cell.isSuperSetOf(cell.container().category()).is_TRUE()) {
+					return F_CellQueries.cellLanguageContainer(cell.container());
+				} else {
+					return CellPlatformAgent.cellMetaLanguage;
+				}
+			}
+		}
+	}
+	public static final Set cellLanguage(final Set cell) {
+		if (Organization.cell.isSuperSetOf(cell.container().category()).is_TRUE()) {
+			final Set cellLanguageContainer = F_CellQueries.cellLanguageContainer(cell);
+			if (cellLanguageContainer.size() > 0) {
+				return cellLanguageContainer.extractFirst();
+			} else {
+				return cellLanguageContainer;
+			}
+		} else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+		}
+	}
+
+	public static final Set transformToSemanticUnit(final Set set) {
+		if (F_CellQueries.isCell(set).is_TRUE()) {
+			return set;
+		} else {
+			final Set semanticUnitContainer = set.container().filter(Organization.semanticUnit).filterBySemanticIdentity(set);
+			if (semanticUnitContainer.size() > 0) {
+				return semanticUnitContainer.extractFirst().to();
+			} else {
+				return S23MSemanticDomains.is_UNKNOWN;
 			}
 		}
 	}
 
+	public static final Set nameInCellLanguage(final Set cell) {
+		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
+		if (semanticUnit.is_UNKNOWN()) {
+			return semanticUnit;
+		} else {
+			final Set cellLanguage = F_CellQueries.cellLanguage(cell);
+			return F_CellQueries.nameOfSemanticUnit(semanticUnit, cellLanguage);
+		}
+	}
+
+	public static final Set nameInAgentLanguage(final Set cell, final Set session) {
+		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
+		if (semanticUnit.is_UNKNOWN()) {
+		final Set cellAgent = F_CellQueries.agent(cell);
+			if (cellAgent.is_NOTAPPLICABLE()) {
+				// Either the "cell engineering - JAVA" model or a semantic domain
+				final Set cellMetaLanguageNames = CellPlatformAgent.cellMetaLanguage.filterBySemanticIdentity(cell);
+				if (cellMetaLanguageNames.size() > 0) {
+					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
+					final Set agentLanguage =  F_CellQueries.nativeLanguage(F_CellQueries.agent(session));
+					final Set agentLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(agentLanguage).extractFirst();
+					final Set agentLanguageWordsInCellPlatform = agentLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
+					for (final Set word : agentLanguageWordsInCellPlatform) {
+						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
+							return word; // translated cell engineering concept
+						}
+					}
+					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into agent language
+				} else {
+					return cell.semanticIdentity(); // element of a semantic domain
+				}
+			} else {
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
+					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+				} else {
+					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+				}
+			}
+		} else {
+			final Set agent = F_CellQueries.agent(session);
+			final Set nativeLanguage = F_CellQueries.nativeLanguage(agent);
+			return F_CellQueries.nameOfSemanticUnit(semanticUnit, nativeLanguage);
+		}
+	}
+
+	public static final Set nameInPerspective(final Set cell, final Set perspective) {
+		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
+		if (semanticUnit.is_UNKNOWN()) {
+		final Set cellAgent = F_CellQueries.agent(cell);
+			if (cellAgent.is_NOTAPPLICABLE()) {
+				// Either the "cell engineering - JAVA" model or a semantic domain
+				final Set cellMetaLanguageNames = CellPlatformAgent.cellMetaLanguage.filterBySemanticIdentity(cell);
+				if (cellMetaLanguageNames.size() > 0) {
+					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
+					final Set perspectiveLanguage = F_CellQueries.perspectiveLanguage(perspective);
+					final Set agentLanguage = F_CellQueries.nativeLanguage(perspective.from());
+					final Set perpectiveLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(perspectiveLanguage).extractFirst();
+					final Set perspectiveLanguageWordsInCellPlatform = perpectiveLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
+					for (final Set word : perspectiveLanguageWordsInCellPlatform) {
+						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
+							return word; // translated cell engineering concept
+						}
+					}
+					final Set agentLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(agentLanguage).extractFirst();
+					final Set agentLanguageWordsInCellPlatform = agentLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
+					for (final Set word : agentLanguageWordsInCellPlatform) {
+						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
+							return word; // translated cell engineering concept
+						}
+					}
+					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into agent language
+				} else {
+					return cell.semanticIdentity(); // element of a semantic domain
+				}
+			} else {
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
+					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+				} else {
+					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+				}
+			}
+		} else {
+			final Set perspectiveLanguage = F_CellQueries.perspectiveLanguage(perspective);
+			final Set perspectiveWord = F_CellQueries.nameOfSemanticUnit(semanticUnit, perspectiveLanguage);
+			if (perspectiveWord.isEqualTo(S23MSemanticDomains.is_UNKNOWN)) {
+				final Set agent = perspective.from();
+				final Set nativeLanguage = F_CellQueries.nativeLanguage(agent);
+				return F_CellQueries.nameOfSemanticUnit(semanticUnit, nativeLanguage);
+			} else {
+				return perspectiveWord;
+			}
+		}
+	}
+
+	public static final Set name(final Set cell, final Set language) {
+		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
+		if (semanticUnit.is_UNKNOWN()) {
+
+			final Set cellAgent = F_CellQueries.agent(cell);
+			if (cellAgent.is_NOTAPPLICABLE()) {
+				// Either the "cell engineering - JAVA" model or a semantic domain
+				final Set cellMetaLanguageNames = CellPlatformAgent.cellMetaLanguage.filterBySemanticIdentity(cell);
+				if (cellMetaLanguageNames.size() > 0) {
+					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
+					final Set languageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(language).extractFirst();
+					final Set languageWordsInCellPlatform = languageInCellPlatform.filterPolymorphic(Language.abstractWord);
+					for (final Set word : languageWordsInCellPlatform) {
+						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
+							return word; // translated cell engineering concept
+						}
+					}
+					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into language
+				} else {
+					return cell.semanticIdentity(); // element of a semantic domain
+				}
+			} else {
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
+					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+				} else {
+					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+				}
+			}
+
+		} else {
+			return F_CellQueries.nameOfSemanticUnit(semanticUnit, language);
+		}
+	}
+
+	private static final Set nameOfSemanticUnit(final Set semanticUnit, final Set language) {
+		final Set nameContainer1 = semanticUnit.container().filterByLinkedFrom(semanticUnit).filter(Organization.semanticUnit_to_abstractWords).filterByLinkedToVia(language).filter(Language.word);
+		if (nameContainer1.size() > 0) {
+			return nameContainer1.extractFirst().to();
+		} else {
+			final Set nameContainer2 = semanticUnit.container().filterByLinkedFrom(semanticUnit).filter(Organization.semanticUnit_to_abstractWords).filterTo().filter(Language.word);
+			for (final Set word : nameContainer2) {
+				if (word.container().isEqualTo(language)) {
+					return word;
+				}
+			}
+			return S23MSemanticDomains.is_UNKNOWN;
+		}
+	}
+
+	public static final String nameAsString(final Set name) {
+		return name.identity().name();
+	}
+	public static final String pluralNameAsString(final Set name) {
+		return name.identity().pluralName();
+	}
+
+	public static final Set abbreviations(final Set name, final Set language) {
+		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(name);
+		if (semanticUnit.is_UNKNOWN()) {
+			return name.container().filterByLinkedFrom(name).filter(Organization.semanticUnit_to_abstractWords).filterTo().filter(Terminology.abbreviation); // empty set
+		} else {
+			final Set abbreviations = semanticUnit.container().filterByLinkedFrom(semanticUnit).filter(Organization.semanticUnit_to_abstractWords).filterTo().filter(Terminology.abbreviation);
+			Set result = F_InstantiationImpl.createResultSet();
+			for (final Set abbreviation : abbreviations) {
+				result = result.union(abbreviation.container().filterByLinkedFromAndTo(abbreviation, language).filterFrom());
+			}
+			return result;
+		}
+	}
 
 }
