@@ -49,6 +49,7 @@ public class CellPlatform {
 		CellVisualization.instantiateFeature();
 		RepresentationStyleCategories.instantiateFeature();
 		SessionHandling.instantiateFeature();
+		Location.instantiateFeature();
 		CellPlatformAgent.instantiateFeature();
 
 		kernelComplexity = identityFactory.kernelComplexity();

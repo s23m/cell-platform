@@ -25,6 +25,7 @@
 package org.s23m.cell.platform.models;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
@@ -34,9 +35,58 @@ import org.s23m.cell.api.models.Root;
 public class SessionHandling {
 
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.sessionHandling);
+	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.sessionHandling, CellEngineering.timeConsciousness);
 
 	public static final Set session = CellEngineering.sessionHandling.addConcrete(Organization.cell, CellPlatformDomain.session);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, session, Organization.cell);
+	public static final Set error = CellEngineering.sessionHandling.addConcrete(Organization.cell, CellPlatformDomain.error);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, error, Organization.cell);
+
+	public static final Set session_to_transaction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.session_to_transaction,
+			CellPlatformDomain.session,
+			session,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.transaction,
+			TimeConsciousness.transaction,
+			coreSets.minCardinality_0,
+			coreSets.maxCardinality_n,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
+	public static final Set session_to_error = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.session_to_error,
+			CellPlatformDomain.session,
+			session,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.error,
+			error,
+			coreSets.minCardinality_0,
+			coreSets.maxCardinality_n,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
+	public static final Set error_to_transaction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+			CellPlatformDomain.error_to_transaction,
+			CellPlatformDomain.error,
+			error,
+			coreSets.minCardinality_0,
+			coreSets.maxCardinality_n,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.transaction,
+			TimeConsciousness.transaction,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
 
 	public static Set instantiateFeature() {
 		session.identity().makePartOfUniversalCellConcept();

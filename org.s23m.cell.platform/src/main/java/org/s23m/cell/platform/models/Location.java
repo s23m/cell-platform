@@ -34,11 +34,26 @@ import org.s23m.cell.api.models.Root;
 
 public class Location {
 
-	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.location);
+	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.location);
+
+	public static final Set country = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.country);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, country, coreGraphs.vertex);
+	public static final Set city = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.city);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, city, coreGraphs.vertex);
+	public static final Set countryState = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.countryState);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, countryState, coreGraphs.vertex);
+	public static final Set street = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.street);
+	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, street, coreGraphs.vertex);
+	public static final Set postCode = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.postCode);
+	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, postCode, coreGraphs.vertex);
+	public static final Set latitude = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.latitude);
+	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, latitude, coreGraphs.vertex);
+	public static final Set longitude = CellEngineering.location.addConcrete(coreGraphs.vertex, CellPlatformDomain.longitude);
+	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, longitude, coreGraphs.vertex);
 
 	public static Set instantiateFeature() {
 
-		return CellEngineering.language;
+		return CellEngineering.location;
 	}
 
 }

@@ -64,8 +64,15 @@ public class CellPlatformDomain {
 
 	public static final Set location = Instantiation.addDisjunctSemanticIdentitySet("location", "locations", cellPlatformDomain);
 	public static final Set locations = Instantiation.addDisjunctSemanticIdentitySet("locations", "set of locations", cellPlatformDomain);
-	public static final Set organization_to_location = Instantiation.addDisjunctSemanticIdentitySet("organization_to_location", "set of organization_to_location", cellPlatformDomain);
-	public static final Set agent_to_location = Instantiation.addDisjunctSemanticIdentitySet("agent_to_location", "set of agent_to_location", cellPlatformDomain);
+	public static final Set organization_to_location = Instantiation.addDisjunctSemanticIdentitySet("organization to location", "set of organization to location", cellPlatformDomain);
+	public static final Set agent_to_location = Instantiation.addDisjunctSemanticIdentitySet("agent to location", "set of agent to location", cellPlatformDomain);
+	public static final Set country = Instantiation.addDisjunctSemanticIdentitySet("country", "countries", cellPlatformDomain);
+	public static final Set city = Instantiation.addDisjunctSemanticIdentitySet("city", "cities", cellPlatformDomain);
+	public static final Set countryState = Instantiation.addDisjunctSemanticIdentitySet("state", "states", cellPlatformDomain);
+	public static final Set street = Instantiation.addDisjunctSemanticIdentitySet("street", "streets", cellPlatformDomain);
+	public static final Set postCode = Instantiation.addDisjunctSemanticIdentitySet("post code", "post codes", cellPlatformDomain);
+	public static final Set latitude = Instantiation.addDisjunctSemanticIdentitySet("latitude", "set of latitude", cellPlatformDomain);
+	public static final Set longitude = Instantiation.addDisjunctSemanticIdentitySet("longitude", "set of longitude", cellPlatformDomain);
 
 
 	public static final Set replication = Instantiation.addDisjunctSemanticIdentitySet("replication", "replications", cellPlatformDomain);
@@ -204,6 +211,10 @@ public class CellPlatformDomain {
 
 	public static final Set sessionHandling = Instantiation.addDisjunctSemanticIdentitySet("session handling", "set of session handling", cellPlatformDomain);
 	public static final Set session = Instantiation.addDisjunctSemanticIdentitySet("session", "set of sessions", cellPlatformDomain);
+	public static final Set error = Instantiation.addDisjunctSemanticIdentitySet("error", "set of errors", cellPlatformDomain);
+	public static final Set session_to_error = Instantiation.addDisjunctSemanticIdentitySet("session to error", "set of session to error", cellPlatformDomain);
+	public static final Set session_to_transaction = Instantiation.addDisjunctSemanticIdentitySet("session to transaction", "set of session to transaction", cellPlatformDomain);
+	public static final Set error_to_transaction = Instantiation.addDisjunctSemanticIdentitySet("error to transaction", "set of error to transaction", cellPlatformDomain);
 	public static final Set sessions = Instantiation.addDisjunctSemanticIdentitySet("sessions", "sessions", cellPlatformDomain);
 
 
@@ -232,6 +243,8 @@ public class CellPlatformDomain {
 	public static final Set wordSeparator = Instantiation.addDisjunctSemanticIdentitySet("word separator", "set of word separators", cellPlatformDomain);
 	public static final Set whiteSpaceElement = Instantiation.addDisjunctSemanticIdentitySet("white space element", "set of white space elements", cellPlatformDomain);
 	public static final Set sentenceSeparator = Instantiation.addDisjunctSemanticIdentitySet("sentence separator", "set of sentence separators", cellPlatformDomain);
+	public static final Set toBeTranslated = Instantiation.addDisjunctSemanticIdentitySet("TO BE TRANSLATED", "TO BE TRANSLATED", cellPlatformDomain);
+
 
 	public static final Set terminology = Instantiation.addDisjunctSemanticIdentitySet("terminology", "set of terminologies", cellPlatformDomain);
 	public static final Set includedTerminology = Instantiation.addSemanticRole("included terminology", "set of included terminologies", cellPlatformDomain, terminology);

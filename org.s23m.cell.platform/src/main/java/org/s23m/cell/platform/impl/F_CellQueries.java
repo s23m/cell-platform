@@ -187,6 +187,20 @@ public  class F_CellQueries {
 		}
 	}
 
+	private static final Set nameInTargetLanguage(final Set cellMetaLanguageWord, final Set targetLanguage) {
+		final Set targetLanguageInCellPlatformContainer = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(targetLanguage);
+		if (targetLanguageInCellPlatformContainer.size() > 0) {
+			final Set targetLanguageInCellPlatform = targetLanguageInCellPlatformContainer.extractFirst();
+			final Set targetLanguageWordsInCellPlatform = targetLanguageInCellPlatform.filterPolymorphic(Language.word);
+			for (final Set word : targetLanguageWordsInCellPlatform) {
+				if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
+					return word; // translated cell engineering concept
+				}
+			}
+		}
+		return CellPlatformDomain.toBeTranslated;
+	}
+
 	public static final Set nameInAgentLanguage(final Set cell, final Set session) {
 		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
 		if (semanticUnit.is_UNKNOWN()) {
@@ -197,14 +211,7 @@ public  class F_CellQueries {
 				if (cellMetaLanguageNames.size() > 0) {
 					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
 					final Set agentLanguage =  F_CellQueries.nativeLanguage(F_CellQueries.agent(session));
-					final Set agentLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(agentLanguage).extractFirst();
-					final Set agentLanguageWordsInCellPlatform = agentLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
-					for (final Set word : agentLanguageWordsInCellPlatform) {
-						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
-							return word; // translated cell engineering concept
-						}
-					}
-					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into agent language
+					return F_CellQueries.nameInTargetLanguage(cellMetaLanguageWord, agentLanguage);
 				} else {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
@@ -212,7 +219,7 @@ public  class F_CellQueries {
 				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
 					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
 				} else {
-					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
 			}
 		} else {
@@ -232,22 +239,13 @@ public  class F_CellQueries {
 				if (cellMetaLanguageNames.size() > 0) {
 					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
 					final Set perspectiveLanguage = F_CellQueries.perspectiveLanguage(perspective);
-					final Set agentLanguage = F_CellQueries.nativeLanguage(perspective.from());
-					final Set perpectiveLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(perspectiveLanguage).extractFirst();
-					final Set perspectiveLanguageWordsInCellPlatform = perpectiveLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
-					for (final Set word : perspectiveLanguageWordsInCellPlatform) {
-						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
-							return word; // translated cell engineering concept
-						}
+					final Set perspectiveLanguageWord = F_CellQueries.nameInTargetLanguage(cellMetaLanguageWord, perspectiveLanguage);
+					if (!perspectiveLanguageWord.isEqualTo(CellPlatformDomain.toBeTranslated)) {
+						return perspectiveLanguageWord; // translated cell engineering concept
+					} else {
+						final Set agentLanguage = F_CellQueries.nativeLanguage(perspective.from());
+						return F_CellQueries.nameInTargetLanguage(cellMetaLanguageWord, agentLanguage);
 					}
-					final Set agentLanguageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(agentLanguage).extractFirst();
-					final Set agentLanguageWordsInCellPlatform = agentLanguageInCellPlatform.filterPolymorphic(Language.abstractWord);
-					for (final Set word : agentLanguageWordsInCellPlatform) {
-						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
-							return word; // translated cell engineering concept
-						}
-					}
-					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into agent language
 				} else {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
@@ -255,13 +253,13 @@ public  class F_CellQueries {
 				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
 					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
 				} else {
-					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
 			}
 		} else {
 			final Set perspectiveLanguage = F_CellQueries.perspectiveLanguage(perspective);
 			final Set perspectiveWord = F_CellQueries.nameOfSemanticUnit(semanticUnit, perspectiveLanguage);
-			if (perspectiveWord.isEqualTo(S23MSemanticDomains.is_UNKNOWN)) {
+			if (perspectiveWord.isEqualTo(CellPlatformDomain.toBeTranslated)) {
 				final Set agent = perspective.from();
 				final Set nativeLanguage = F_CellQueries.nativeLanguage(agent);
 				return F_CellQueries.nameOfSemanticUnit(semanticUnit, nativeLanguage);
@@ -274,21 +272,13 @@ public  class F_CellQueries {
 	public static final Set name(final Set cell, final Set language) {
 		final Set semanticUnit = F_CellQueries.transformToSemanticUnit(cell);
 		if (semanticUnit.is_UNKNOWN()) {
-
 			final Set cellAgent = F_CellQueries.agent(cell);
 			if (cellAgent.is_NOTAPPLICABLE()) {
 				// Either the "cell engineering - JAVA" model or a semantic domain
 				final Set cellMetaLanguageNames = CellPlatformAgent.cellMetaLanguage.filterBySemanticIdentity(cell);
 				if (cellMetaLanguageNames.size() > 0) {
 					final Set cellMetaLanguageWord = cellMetaLanguageNames.extractFirst();
-					final Set languageInCellPlatform = CellPlatformAgent.production.filter(CellEngineering.language).extractFirst().filterBySemanticIdentity(language).extractFirst();
-					final Set languageWordsInCellPlatform = languageInCellPlatform.filterPolymorphic(Language.abstractWord);
-					for (final Set word : languageWordsInCellPlatform) {
-						if (word.filterBySemanticIdentity(cellMetaLanguageWord).size() > 0) {
-							return word; // translated cell engineering concept
-						}
-					}
-					return S23MSemanticDomains.is_UNKNOWN; // cell engineering concept without translation into language
+					return F_CellQueries.nameInTargetLanguage(cellMetaLanguageWord, language);
 				} else {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
@@ -296,7 +286,7 @@ public  class F_CellQueries {
 				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
 					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
 				} else {
-					return S23MSemanticDomains.is_UNKNOWN; // an element of a regular agent model, lacking a corresponding semantic unit
+					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
 			}
 
@@ -316,7 +306,7 @@ public  class F_CellQueries {
 					return word;
 				}
 			}
-			return S23MSemanticDomains.is_UNKNOWN;
+			return CellPlatformDomain.toBeTranslated;
 		}
 	}
 
