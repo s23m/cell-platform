@@ -37,21 +37,21 @@ public class Legal {
 
 	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.legal, CellEngineering.timeConsciousness);
 
-	public static final Set license = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.license);
-	public static final Set originalCode = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.originalCode);
+	public static final Set license = CellEngineering.legal.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.license);
+	public static final Set originalCode = license.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.originalCode);
 	private static final Set maxC1 = originalCode.addToValues(S23MSemanticDomains.maxCardinality_1);
-	public static final Set initialDevelopers = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.initialDeveloper);
-	public static final Set copyrightHolders = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.copyrightHolder);
-	public static final Set contributors = license.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.contributor);
+	public static final Set initialDevelopers = license.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.initialDeveloper);
+	public static final Set copyrightHolders = license.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.copyrightHolder);
+	public static final Set contributors = license.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.contributor);
 
-	public static final Set legalEntity = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.legalEntity);
-	public static final Set usageLicense = CellEngineering.legal.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.usageLicense);;
+	public static final Set legalEntity = CellEngineering.legal.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.legalEntity);
+	public static final Set usageLicense = CellEngineering.legal.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.usageLicense);;
 
-	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, license, TimeConsciousness.timeConsciousVertex);
-	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, usageLicense, TimeConsciousness.timeConsciousVertex);
-	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, legalEntity, TimeConsciousness.timeConsciousVertex);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, license, TimeConsciousness.dynamicVertex);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, usageLicense, TimeConsciousness.dynamicVertex);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, legalEntity, TimeConsciousness.dynamicVertex);
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.legal);
-	public static final Set legalEntity_to_usageLicense = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set legalEntity_to_usageLicense = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.legalEntity_to_usageLicense,
 			CellPlatformDomain.user,
 			legalEntity,
@@ -66,7 +66,7 @@ public class Legal {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set usageLicense_to_license = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set usageLicense_to_license = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.usageLicence_to_license,
 			CellPlatformDomain.usageLicense,
 			usageLicense,
@@ -82,7 +82,7 @@ public class Legal {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set usageLicence_to_vertex = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set usageLicence_to_vertex = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.usageLicence_to_vertex,
 			usageLicense,
 			usageLicense,
@@ -98,7 +98,7 @@ public class Legal {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set usageLicence_to_issuer = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set usageLicence_to_issuer = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.usageLicence_to_issuer,
 			usageLicense,
 			usageLicense,

@@ -39,13 +39,13 @@ public class Terminology {
 	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.terminology, CellEngineering.language);
 	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.terminology, CellEngineering.timeConsciousness);
 
-	public static final Set idiom = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.idiom);
-	public static final Set abbreviation = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.abbreviation);
-	public static final Set wordDefinition = CellEngineering.terminology.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.wordDefinition);
+	public static final Set idiom = CellEngineering.terminology.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.idiom);
+	public static final Set abbreviation = CellEngineering.terminology.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.abbreviation);
+	public static final Set wordDefinition = CellEngineering.terminology.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.wordDefinition);
 
 	public static Set instantiateFeature() {
 
-		final Set idiom_to_languages = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set idiom_to_languages = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.idiom_to_languages,
 				idiom,
 				idiom,
@@ -60,7 +60,7 @@ public class Terminology {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set idiom_to_idiomParts = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set idiom_to_idiomParts = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.idiom_to_idiomParts,
 				idiom,
 				idiom,
@@ -76,7 +76,7 @@ public class Terminology {
 				coreSets.isContainer_FALSE
 		);
 
-		final Set abbreviation_to_languages = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set abbreviation_to_languages = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.abbreviation_to_languages,
 				abbreviation,
 				abbreviation,
@@ -91,7 +91,7 @@ public class Terminology {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set wordDefinition_to_language = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set wordDefinition_to_language = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.wordDefinition_to_language,
 				wordDefinition,
 				wordDefinition,

@@ -57,8 +57,8 @@ public final class CellEngineering {
 
 	public static final Set legal = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.legal);
 	public static final Set terminology = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.terminology);
-	public static final Set organization = Root.cellengineering.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.organization);
-	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, organization, TimeConsciousness.timeConsciousVertex);
+	public static final Set organization = Root.cellengineering.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.organization);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, organization, TimeConsciousness.dynamicVertex);
 
 	public static final Set formula = Root.cellengineering.addConcrete(Organization.cell, CellPlatformDomain.formula);
 	public static final Set logicalFormula = Root.cellengineering.addConcrete(Organization.cell, CellPlatformDomain.logicalFormula);
@@ -72,7 +72,7 @@ public final class CellEngineering {
 	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, sessionHandling, Organization.cell);
 
 
-	public static final Set collaboration = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set collaboration = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.collaboration,
 			CellPlatformDomain.consumer,
 			organization,
@@ -88,7 +88,7 @@ public final class CellEngineering {
 			S23MSemanticDomains.isContainer_FALSE
 	);
 
-	public static final Set organization_to_location = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set organization_to_location = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.organization_to_location,
 			CellPlatformDomain.organization,
 			organization,

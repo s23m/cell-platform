@@ -42,7 +42,7 @@ public class SessionHandling {
 	public static final Set error = CellEngineering.sessionHandling.addConcrete(Organization.cell, CellPlatformDomain.error);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, error, Organization.cell);
 
-	public static final Set session_to_transaction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set session_to_transaction = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.session_to_transaction,
 			CellPlatformDomain.session,
 			session,
@@ -57,7 +57,7 @@ public class SessionHandling {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set session_to_error = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set session_to_error = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.session_to_error,
 			CellPlatformDomain.session,
 			session,
@@ -72,7 +72,7 @@ public class SessionHandling {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set error_to_transaction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set error_to_transaction = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.error_to_transaction,
 			CellPlatformDomain.error,
 			error,

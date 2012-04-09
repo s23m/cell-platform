@@ -53,7 +53,7 @@ public class Formula  {
 	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, variable, properSubFormula);
 	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, constant, properSubFormula);
 
-	/*public static final Set literal_to_properSubFormula = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	/*public static final Set literal_to_properSubFormula = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.literal_to_properSubFormula,
 			literal,
 			literal,
@@ -69,7 +69,7 @@ public class Formula  {
 			coreSets.isContainer_FALSE
 	);
 	*/
-	public static final Set unaryFunction_to_term = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set unaryFunction_to_term = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.unaryFunction_to_term,
 			unaryFunction,
 			unaryFunction,
@@ -84,7 +84,7 @@ public class Formula  {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set binaryFunction_to_terms = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set binaryFunction_to_terms = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.binaryFunction_to_terms,
 			binaryFunction,
 			binaryFunction,
@@ -99,7 +99,7 @@ public class Formula  {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set naryFunction_to_terms = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set naryFunction_to_terms = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.naryFunction_to_terms,
 			naryFunction,
 			naryFunction,
@@ -114,7 +114,7 @@ public class Formula  {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set variable_to_representation = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set variable_to_representation = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.variable_to_representation,
 			variable,
 			variable,
@@ -129,7 +129,7 @@ public class Formula  {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set constant_to_representation = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set constant_to_representation = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.constant_to_representation,
 			constant,
 			constant,

@@ -63,7 +63,7 @@ public class RepresentationStyleCategories {
 
 		//F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, Artifact.artifact, representationStyleCategories);
 
-		final Set representationStyle_to_color = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set representationStyle_to_color = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.representationStyle_to_color,
 				representationStyle,
 				representationStyle,
@@ -78,7 +78,7 @@ public class RepresentationStyleCategories {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set representationStyle_to_lineWidth = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set representationStyle_to_lineWidth = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.representationStyle_to_lineWidth,
 				representationStyle,
 				representationStyle,
@@ -93,7 +93,7 @@ public class RepresentationStyleCategories {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set arrowRepresentationStyle_to_sourceConnectorSymbol = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set arrowRepresentationStyle_to_sourceConnectorSymbol = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.arrowRepresentationStyle_to_sourceConnectorSymbol,
 				arrowRepresentationStyle,
 				arrowRepresentationStyle,
@@ -108,7 +108,7 @@ public class RepresentationStyleCategories {
 				coreSets.isNavigable_TRUE,
 				coreSets.isContainer_FALSE
 		);
-		final Set arrowRepresentationStyle_to_targetConnectorSymbol = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+		final Set arrowRepresentationStyle_to_targetConnectorSymbol = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 				CellPlatformDomain.arrowRepresentationStyle_to_targetConnectorSymbol,
 				arrowRepresentationStyle,
 				arrowRepresentationStyle,

@@ -34,14 +34,14 @@ import org.s23m.cell.api.models.Root;
 
 public class TimeConsciousness {
 
-	public static final Set timeConsciousVertex = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.timeConsciousVertex);
+	public static final Set dynamicVertex = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.dynamicVertex);
 	public static final Set lifeCycle = CellEngineering.timeConsciousness.addConcrete(coreGraphs.vertex, CellPlatformDomain.lifeCycle);
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.timeConsciousness);
 	private static final Set v1 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.timeConsciousness, CellEngineering.agency);
 
 	public static final Set state = lifeCycle.addConcrete(coreGraphs.vertex, CellPlatformDomain.state);
 	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.timeConsciousness, TimeConsciousness.lifeCycle);
-	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, timeConsciousVertex, coreGraphs.vertex);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, dynamicVertex, coreGraphs.vertex);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, lifeCycle, coreGraphs.vertex);
 
 	public static final Set transition = Instantiation.arrow(coreGraphs.edge,
@@ -62,8 +62,8 @@ public class TimeConsciousness {
 
 	public static final Set cell_to_lifeCycle = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_lifeCycle,
-			TimeConsciousness.timeConsciousVertex,
-			TimeConsciousness.timeConsciousVertex,
+			TimeConsciousness.dynamicVertex,
+			TimeConsciousness.dynamicVertex,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_FALSE,
@@ -79,8 +79,8 @@ public class TimeConsciousness {
 	public static final Set cell_to_state = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_state,
 
-			TimeConsciousness.timeConsciousVertex,
-			TimeConsciousness.timeConsciousVertex,
+			TimeConsciousness.dynamicVertex,
+			TimeConsciousness.dynamicVertex,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_FALSE,
@@ -94,10 +94,10 @@ public class TimeConsciousness {
 	);
 
 
-	public static final Set timeConsciousEdge = Instantiation.arrow(coreGraphs.edge,
-			CellPlatformDomain.timeConsciousEdge,
-			timeConsciousVertex,
-			timeConsciousVertex,
+	public static final Set dynamicConnection = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.dynamicConnection,
+			dynamicVertex,
+			dynamicVertex,
 			coreSets.minCardinality_0,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -110,10 +110,10 @@ public class TimeConsciousness {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set timeConsciousEdge_to_validityInterval = Instantiation.arrow(coreGraphs.edge,
-			CellPlatformDomain.timeConsciousEdge_to_validityInterval,
-			timeConsciousEdge,
-			timeConsciousEdge,
+	public static final Set dynamicConnection_to_validityInterval = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.dynamicConnection_to_validityInterval,
+			dynamicConnection,
+			dynamicConnection,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -128,8 +128,8 @@ public class TimeConsciousness {
 
 	public static final Set cell_to_validityInterval = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_validityInterval,
-			TimeConsciousness.timeConsciousVertex,
-			TimeConsciousness.timeConsciousVertex,
+			TimeConsciousness.dynamicVertex,
+			TimeConsciousness.dynamicVertex,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -142,7 +142,7 @@ public class TimeConsciousness {
 			coreSets.isContainer_FALSE
 	);
 
-	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, timeConsciousEdge, coreGraphs.edge);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, dynamicConnection, coreGraphs.edge);
 
 	/* transactions */
 
@@ -185,10 +185,10 @@ public class TimeConsciousness {
 	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, transaction, coreGraphs.vertex);
 	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, creationTimestamp, coreGraphs.vertex);
 
-	public static final Set timeConsciousEdge_to_transaction = Instantiation.arrow(coreGraphs.edge,
-			CellPlatformDomain.timeConsciousEdge_to_transaction,
-			timeConsciousEdge,
-			timeConsciousEdge,
+	public static final Set dynamicConnection_to_transaction = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.dynamicConnection_to_transaction,
+			dynamicConnection,
+			dynamicConnection,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,
@@ -202,8 +202,8 @@ public class TimeConsciousness {
 	);
 	public static final Set cell_to_transaction = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.cell_to_transaction,
-			TimeConsciousness.timeConsciousVertex,
-			TimeConsciousness.timeConsciousVertex,
+			TimeConsciousness.dynamicVertex,
+			TimeConsciousness.dynamicVertex,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_n,
 			coreSets.isNavigable_TRUE,

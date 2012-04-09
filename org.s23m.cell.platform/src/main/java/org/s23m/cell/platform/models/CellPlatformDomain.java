@@ -192,10 +192,10 @@ public class CellPlatformDomain {
 	public static final Set formulas = Instantiation.addDisjunctSemanticIdentitySet("formulas", "set of formulas", cellPlatformDomain);
 
 	public static final Set timeConsciousness = Instantiation.addDisjunctSemanticIdentitySet("time consciousness", "set of time consciousness", cellPlatformDomain);
-	public static final Set timeConsciousVertex = Instantiation.addDisjunctSemanticIdentitySet("time conscious vertex", "set of time conscious verices", cellPlatformDomain);
-	public static final Set timeConsciousEdge = Instantiation.addDisjunctSemanticIdentitySet("time conscious edge", "set of time conscious edges", cellPlatformDomain);
-	public static final Set timeConsciousEdge_to_validityInterval = Instantiation.addDisjunctSemanticIdentitySet("time conscious edge to validity interval", "set of time conscious edges to validity intervals", cellPlatformDomain);
-	public static final Set timeConsciousEdge_to_transaction = Instantiation.addDisjunctSemanticIdentitySet("time conscious edge to transaction", "set of time conscious edge to transactions", cellPlatformDomain);
+	public static final Set dynamicVertex = Instantiation.addDisjunctSemanticIdentitySet("dynamic vertex", "set of dynamic vertices", cellPlatformDomain);
+	public static final Set dynamicConnection = Instantiation.addDisjunctSemanticIdentitySet("dynamic connection", "set of dynamic connections", cellPlatformDomain);
+	public static final Set dynamicConnection_to_validityInterval = Instantiation.addDisjunctSemanticIdentitySet("dynamic connection to validity interval", "set of dynamic connections to validity intervals", cellPlatformDomain);
+	public static final Set dynamicConnection_to_transaction = Instantiation.addDisjunctSemanticIdentitySet("dynamic connection to transaction", "set of dynamic connections to transactions", cellPlatformDomain);
 
 	public static final Set validityInterval_to_validFromTimestamp = Instantiation.addDisjunctSemanticIdentitySet("validity interval to valid from timestamp", "set of validity intervals to valid from timestamps", cellPlatformDomain);
 	public static final Set validityInterval_to_validUntilTimestamp = Instantiation.addDisjunctSemanticIdentitySet("validity interval to valid until timestamp", "set of validity intervals to valid until timestamps", cellPlatformDomain);

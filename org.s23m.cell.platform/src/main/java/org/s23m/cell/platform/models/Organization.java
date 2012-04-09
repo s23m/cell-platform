@@ -42,22 +42,22 @@ public class Organization {
 	private static final Set v5 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.location);
 	//private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, CellEngineering.organization, coreGraphs.vertex);
 
-	public static final Set member = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.member);
-	public static final Set role = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.role);
+	public static final Set member = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.member);
+	public static final Set role = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.role);
 
 	// F-R-A-M-E-S access control paradigm
-	public static final Set privilege = CellEngineering.organization.addAbstract(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.privilege);
-	public static final Set findPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.findPrivilege);
-	public static final Set readPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.readPrivilege);
-	public static final Set addPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.addPrivilege);
-	public static final Set modifyPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.modifyPrivilege);
-	public static final Set executePrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.executePrivilege);
-	public static final Set superUserPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.superUserPrivilege);
+	public static final Set privilege = CellEngineering.organization.addAbstract(TimeConsciousness.dynamicVertex, CellPlatformDomain.privilege);
+	public static final Set findPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.findPrivilege);
+	public static final Set readPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.readPrivilege);
+	public static final Set addPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.addPrivilege);
+	public static final Set modifyPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.modifyPrivilege);
+	public static final Set executePrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.executePrivilege);
+	public static final Set superUserPrivilege = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.superUserPrivilege);
 
-	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, member, TimeConsciousness.timeConsciousVertex);
-	private static final Set s10 = Instantiation.arrow(coreGraphs.superSetReference, role, TimeConsciousness.timeConsciousVertex);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, member, TimeConsciousness.dynamicVertex);
+	private static final Set s10 = Instantiation.arrow(coreGraphs.superSetReference, role, TimeConsciousness.dynamicVertex);
 
-	private static final Set s11 = Instantiation.arrow(coreGraphs.superSetReference, privilege, TimeConsciousness.timeConsciousVertex);
+	private static final Set s11 = Instantiation.arrow(coreGraphs.superSetReference, privilege, TimeConsciousness.dynamicVertex);
 	private static final Set s12 = Instantiation.arrow(coreGraphs.superSetReference, findPrivilege, privilege);
 	private static final Set s13 = Instantiation.arrow(coreGraphs.superSetReference, readPrivilege, privilege);
 	private static final Set s14 = Instantiation.arrow(coreGraphs.superSetReference, addPrivilege, privilege);
@@ -73,7 +73,7 @@ public class Organization {
 	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.terminology);
 	private static final Set v9 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.organization, CellEngineering.legal);
 
-	public static final Set agent_to_roles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set agent_to_roles = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.agent_to_roles,
 			CellPlatformDomain.agent,
 			member,
@@ -89,7 +89,7 @@ public class Organization {
 			coreSets.isContainer_FALSE
 );
 
-	public static final Set agent_to_location = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set agent_to_location = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.agent_to_location,
 			CellPlatformDomain.agent,
 			member,
@@ -105,7 +105,7 @@ public class Organization {
 			S23MSemanticDomains.isContainer_FALSE
 	);
 
-	public static final Set role_to_includedRoles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set role_to_includedRoles = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.role_to_includedRoles,
 			CellPlatformDomain.parentRole,
 			role,
@@ -120,7 +120,7 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	public static final Set role_to_excludedRoles = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set role_to_excludedRoles = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.role_to_excludedRoles,
 			CellPlatformDomain.disjunctRole,
 			role,
@@ -136,7 +136,7 @@ public class Organization {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set accessGrant = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set accessGrant = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.accessGrant,
 			CellPlatformDomain.role,
 			role,
@@ -152,7 +152,7 @@ public class Organization {
 			coreSets.isContainer_FALSE
 	);
 
-	public static final Set accessRestriction = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set accessRestriction = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.accessRestriction,
 			CellPlatformDomain.role,
 			role,
@@ -170,17 +170,17 @@ public class Organization {
 
 	/* *************** */
 
-	public static final Set cell = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.cell);
-	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, cell, TimeConsciousness.timeConsciousVertex);
+	public static final Set cell = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.cell);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, cell, TimeConsciousness.dynamicVertex);
 
-	public static final Set semanticUnit = CellEngineering.organization.addConcrete(TimeConsciousness.timeConsciousVertex, CellPlatformDomain.semanticUnit);
+	public static final Set semanticUnit = CellEngineering.organization.addConcrete(TimeConsciousness.dynamicVertex, CellPlatformDomain.semanticUnit);
 	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit, cell);
 
 	// additional semantics
 	//private static final Set v87 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellPlatformDomain.cellPlatformDomain);
 	//private static final Set v88 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.language, CellPlatformDomain.cellPlatformDomain);
 
-	public static final Set semanticUnit_to_abstractWords = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_abstractWords = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_abstractWords,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -195,9 +195,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_abstractWords, TimeConsciousness.timeConsciousEdge);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_abstractWords, TimeConsciousness.dynamicConnection);
 
-	public static final Set semanticUnit_to_abbreviations = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_abbreviations = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_abbreviations,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -212,9 +212,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_abbreviations, TimeConsciousness.timeConsciousEdge);
+	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_abbreviations, TimeConsciousness.dynamicConnection);
 
-	public static final Set semanticUnit_to_wordDefinitions = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_wordDefinitions = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_wordDefinitions,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -229,9 +229,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_wordDefinitions, TimeConsciousness.timeConsciousEdge);
+	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_wordDefinitions, TimeConsciousness.dynamicConnection);
 
-	public static final Set semanticUnit_to_oppositeSemanticUnit = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_oppositeSemanticUnit = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_oppositeSemanticUnit,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -246,9 +246,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_oppositeSemanticUnit, TimeConsciousness.timeConsciousEdge);
+	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_oppositeSemanticUnit, TimeConsciousness.dynamicConnection);
 
-	public static final Set semanticUnit_to_copyrightHolder = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_copyrightHolder = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_copyrightHolder,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -263,9 +263,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_copyrightHolder, TimeConsciousness.timeConsciousEdge);
+	private static final Set s7 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_copyrightHolder, TimeConsciousness.dynamicConnection);
 
-	public static final Set semanticUnit_to_availableLicenses = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set semanticUnit_to_availableLicenses = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.semanticUnit_to_availableLicenses,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -280,9 +280,9 @@ public class Organization {
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	private static final Set s8 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_copyrightHolder, TimeConsciousness.timeConsciousEdge);
+	private static final Set s8 = Instantiation.arrow(coreGraphs.superSetReference, semanticUnit_to_copyrightHolder, TimeConsciousness.dynamicConnection);
 
-	public static final Set cell_to_nativeLanguage = Instantiation.arrow(TimeConsciousness.timeConsciousEdge,
+	public static final Set cell_to_nativeLanguage = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.cell_to_nativeLanguage,
 			CellPlatformDomain.semanticUnit,
 			cell,
@@ -297,7 +297,7 @@ public class Organization {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	private static final Set s9 = Instantiation.arrow(coreGraphs.superSetReference, cell_to_nativeLanguage, TimeConsciousness.timeConsciousEdge);
+	private static final Set s9 = Instantiation.arrow(coreGraphs.superSetReference, cell_to_nativeLanguage, TimeConsciousness.dynamicConnection);
 
 
 	/* *************** */
