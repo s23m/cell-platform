@@ -2,6 +2,7 @@ package org.s23m.cell.communication.xml
 
 import org.s23m.cell.communication.xml.dom.CompositeNode
 import org.s23m.cell.communication.xml.dom.Node
+import org.s23m.cell.communication.xml.schema.ElementReference
 
 class SchemaRendering {
 	
@@ -22,7 +23,7 @@ class SchemaRendering {
 	def static dispatch render(Node node, int level) {
 		renderPrefix(node, level) + "/>"
 	}
-	
+		
 	def private static renderPrefix(Node node, int level) {
 		whitespace(level) + "<" + node.name + renderAttributes(node)
 	}

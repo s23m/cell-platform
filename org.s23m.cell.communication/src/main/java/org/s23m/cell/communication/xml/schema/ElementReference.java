@@ -33,12 +33,12 @@ public final class ElementReference extends AbstractLeafNode {
 	
 	/**
 	 * Cardinality (if not specified explicitly, the cardinality
-	 * of the referenced element will be used)
+	 * of the referenced element will be assumed, and not emitted in the output)
 	 */
 	private final Cardinality cardinality;
 	
 	public ElementReference(Element referencedElement) {
-		this(referencedElement, referencedElement.getCardinality());
+		this(referencedElement, null);
 	}
 	
 	public ElementReference(Element referencedElement, Cardinality cardinality) {
@@ -48,11 +48,16 @@ public final class ElementReference extends AbstractLeafNode {
 		this.cardinality = cardinality;
 		
 		final LinkedHashMap<String, String> attributes = getAttributes();
-		attributes.putAll(referencedElement.getAttributes());
+		//attributes.putAll(referencedElement.getAttributes());
+		
+		setAttribute("ref", referencedElement.getIdentifier());
 		
 		// replace attributes
-		Cardinality.removeFromAttributes(attributes);
-		cardinality.addToAttributes(attributes);
+		//Cardinality.removeFromAttributes(attributes);
+		
+		if (cardinality != null) {
+			cardinality.addToAttributes(attributes);
+		}
 	}
 
 	public Element getReferencedElement() {
