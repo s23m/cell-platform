@@ -24,16 +24,32 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.dom.WrapperNode;
 
 public final class Extension extends WrapperNode {
 	private final ComplexType base;
+	private final Sequence sequence;
 	
 	public Extension(ComplexType base, Sequence sequence) {
 		super(Constants.XML_SCHEMA_NAMESPACE, "extension", sequence);
 		this.base = base;
+		this.sequence = sequence;
 		
 		setAttribute("base", base.getIdentifier());
+	}
+	
+	@Override
+	public List<Node> getChildren() {
+		if (sequence.getChildren().isEmpty()) {
+			// omit sequence element for trivial extensions
+			return Collections.emptyList();
+		} else {
+			return super.getChildren();	
+		}
 	}
 	
 	public ComplexType getBase() {
