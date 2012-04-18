@@ -26,21 +26,24 @@ class SchemaBuilder {
 	Schema schema
 	
 	new((Schema)=>void initialiser) {
-		this.schema = schema(initialiser)
+		this.schema = new Schema()
+		initialiser.apply(schema)
 	}
 	
 	def getSchema() {
+		removeElementsWithoutReferences()
 		schema
 	}
 	
-	def private static schema((Schema)=>void initialiser) {
-		val result = new Schema()
-		initialiser.apply(result)
-		result
+	def private removeElementsWithoutReferences() {
+		// TODO - need to keep track of references
 	}
 	
 	def private <T extends Node> T store(T node) {
-		schema.children += node
+		if (!schema.children.contains(node)) {
+			// TODO we might be able to remove this check and then remove equals/hashCode methods			
+			schema.children += node
+		}
 		node
 	}
 	
@@ -75,11 +78,11 @@ class SchemaBuilder {
 	}
 	
 	def ElementReference element(Element referencedElement) {
-		store(new ElementReference(referencedElement))
+		new ElementReference(referencedElement)
 	}
 	
 	def ElementReference element(Element referencedElement, Cardinality cardinality) {
-		store(new ElementReference(referencedElement, cardinality))
+		new ElementReference(referencedElement, cardinality)
 	}
 	
 	/* Helpers used in creation of top-level nodes */

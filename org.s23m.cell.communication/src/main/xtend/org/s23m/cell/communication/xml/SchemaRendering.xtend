@@ -2,7 +2,6 @@ package org.s23m.cell.communication.xml
 
 import org.s23m.cell.communication.xml.dom.CompositeNode
 import org.s23m.cell.communication.xml.dom.Node
-import org.s23m.cell.communication.xml.schema.ElementReference
 
 class SchemaRendering {
 	
@@ -28,15 +27,19 @@ class SchemaRendering {
 	}
 		
 	def private static renderPrefix(Node node, int level) {
-		whitespace(level) + "<" + node.name + renderAttributes(node)
+		whitespace(level) + "<" + name(node) + renderAttributes(node)
 	}
 	
 	def private static renderSuffix(Node node, int level) {
-		whitespace(level) + "</" + node.name + ">"
+		whitespace(level) + "</" + name(node) + ">"
 	}
 	
 	def private static whitespace(int level) {
 		org::s23m::cell::communication::xml::StringUtils::repeat(level * INDENTATION, " ")
+	}
+	
+	def private static name(Node node) {
+		node.namespace.prefix + ":" + node.name
 	}
 	
 	def private static renderAttributes(Node node) {
@@ -51,9 +54,4 @@ class SchemaRendering {
 		}
 		builder.toString
 	}
-	
-	// TODO render LeafNode
-	// TODO render CompositeNode
-	// TODO render WrapperNode
-	// TODO render DataType (or can that we use toString?)
 }

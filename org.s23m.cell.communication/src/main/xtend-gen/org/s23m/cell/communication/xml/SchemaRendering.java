@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.dom.CompositeNode;
+import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 @SuppressWarnings("all")
@@ -61,7 +62,7 @@ public class SchemaRendering {
   private static String renderPrefix(final Node node, final int level) {
     String _whitespace = SchemaRendering.whitespace(level);
     String _operator_plus = StringExtensions.operator_plus(_whitespace, "<");
-    String _name = node.getName();
+    String _name = SchemaRendering.name(node);
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
     String _renderAttributes = SchemaRendering.renderAttributes(node);
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _renderAttributes);
@@ -71,7 +72,7 @@ public class SchemaRendering {
   private static String renderSuffix(final Node node, final int level) {
     String _whitespace = SchemaRendering.whitespace(level);
     String _operator_plus = StringExtensions.operator_plus(_whitespace, "</");
-    String _name = node.getName();
+    String _name = SchemaRendering.name(node);
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ">");
     return _operator_plus_2;
@@ -81,6 +82,15 @@ public class SchemaRendering {
     int _operator_multiply = IntegerExtensions.operator_multiply(level, SchemaRendering.INDENTATION);
     String _repeat = StringUtils.repeat(_operator_multiply, " ");
     return _repeat;
+  }
+  
+  private static String name(final Node node) {
+    Namespace _namespace = node.getNamespace();
+    String _prefix = _namespace.getPrefix();
+    String _operator_plus = StringExtensions.operator_plus(_prefix, ":");
+    String _name = node.getName();
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+    return _operator_plus_1;
   }
   
   private static String renderAttributes(final Node node) {

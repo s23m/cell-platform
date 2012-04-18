@@ -1,6 +1,7 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.List;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -33,30 +34,34 @@ public class SchemaBuilder {
   private Schema schema;
   
   public SchemaBuilder(final Procedure1<? super Schema> initialiser) {
-    Schema _schema = SchemaBuilder.schema(initialiser);
-    this.schema = _schema;
+      Schema _schema = new Schema();
+      this.schema = _schema;
+      initialiser.apply(this.schema);
   }
   
   public Schema getSchema() {
-    return this.schema;
-  }
-  
-  private static Schema schema(final Procedure1<? super Schema> initialiser) {
     Schema _xblockexpression = null;
     {
-      Schema _schema = new Schema();
-      final Schema result = _schema;
-      initialiser.apply(result);
-      _xblockexpression = (result);
+      this.removeElementsWithoutReferences();
+      _xblockexpression = (this.schema);
     }
     return _xblockexpression;
+  }
+  
+  private Object removeElementsWithoutReferences() {
+    return null;
   }
   
   private <T extends Node> T store(final T node) {
     T _xblockexpression = null;
     {
       List<Node> _children = this.schema.getChildren();
-      CollectionExtensions.<T>operator_add(_children, node);
+      boolean _contains = _children.contains(node);
+      boolean _operator_not = BooleanExtensions.operator_not(_contains);
+      if (_operator_not) {
+        List<Node> _children_1 = this.schema.getChildren();
+        CollectionExtensions.<T>operator_add(_children_1, node);
+      }
       _xblockexpression = (node);
     }
     return _xblockexpression;
@@ -115,14 +120,12 @@ public class SchemaBuilder {
   
   public ElementReference element(final Element referencedElement) {
     ElementReference _elementReference = new ElementReference(referencedElement);
-    ElementReference _store = this.<ElementReference>store(_elementReference);
-    return _store;
+    return _elementReference;
   }
   
   public ElementReference element(final Element referencedElement, final Cardinality cardinality) {
     ElementReference _elementReference = new ElementReference(referencedElement, cardinality);
-    ElementReference _store = this.<ElementReference>store(_elementReference);
-    return _store;
+    return _elementReference;
   }
   
   /**
