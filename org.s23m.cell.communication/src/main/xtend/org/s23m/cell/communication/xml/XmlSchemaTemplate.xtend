@@ -39,7 +39,9 @@ import org.s23m.cell.communication.xml.schema.ComplexType
 import org.s23m.cell.communication.xml.schema.SimpleType
 import org.s23m.cell.communication.xml.schema.DataType
 import org.s23m.cell.communication.xml.schema.Element
+import org.s23m.cell.communication.xml.schema.Schema
 
+// TODO remove fields
 class XmlSchemaTemplate {
 	
 	/* Schema constants */
@@ -122,9 +124,9 @@ class XmlSchemaTemplate {
 	}
 
 	// TODO finish
-	def createSchemaModel() {
+	def Schema createSchemaModel() {
 		
-		val schema = schema [
+		val builder = new SchemaBuilder([
 			attributes += newLinkedHashMap(
 				xmlns(XSD) -> XSD_SCHEMA,
 				xmlns(S23M) -> S23M_SCHEMA,
@@ -132,136 +134,128 @@ class XmlSchemaTemplate {
 				"elementFormDefault" -> "qualified",
 				"attributeFormDefault" -> "unqualified"
 			)
-			children.addAll(createReusedElements)
-		]
-		
-		
-		schema.attributes.toString
-	}
+		])
 	
-	// The target namespace is used during rendering of types and references
-	// TODO record links between elements and their references
-	def private List<Element> createReusedElements() {
-		val uuid = simpleType(uuid, DataType::STRING)
+		val uuid = builder.simpleType(uuid, DataType::STRING)
 		
-		val identityReference = complexType(identityReference, [
-			children += SchemaBuilder::element(terminology.uniqueRepresentationReference, uuid)
-			children += SchemaBuilder::element(terminology.identifier, uuid)
+		// TODO should we use the non-static variants in ALL cases, or just for top-level elements?
+		val identityReference = builder.complexType(identityReference, [
+			children += builder.element(terminology.uniqueRepresentationReference, uuid)
+			children += builder.element(terminology.identifier, uuid)
 		])
 				
-		val semanticIdentityElement = SchemaBuilder::element(semanticIdentity, identityReference)
+		val semanticIdentityElement = builder.element(semanticIdentity, identityReference)
 		
-		val isAbstractElement = SchemaBuilder::element(isAbstract, identityReference)
+		val isAbstractElement = builder.element(isAbstract, identityReference)
 		
-		val minCardinalityElement = SchemaBuilder::element(minCardinality, identityReference)
+		val minCardinalityElement = builder.element(minCardinality, identityReference)
 		
-		val maxCardinalityElement = SchemaBuilder::element(maxCardinality, identityReference)
+		val maxCardinalityElement = builder.element(maxCardinality, identityReference)
 		
-		val isContainerElement = SchemaBuilder::element(isContainer, identityReference)
+		val isContainerElement = builder.element(isContainer, identityReference)
 		
-		val isNavigableElement = SchemaBuilder::element(isNavigable, identityReference)
+		val isNavigableElement = builder.element(isNavigable, identityReference)
 		
-		val fromElement = SchemaBuilder::element(from, identityReference)
+		val fromElement = builder.element(from, identityReference)
 	
-		val toElement = SchemaBuilder::element(to, identityReference)
+		val toElement = builder.element(to, identityReference)
 		
-		val categoryElement = SchemaBuilder::element(category, identityReference)
+		val categoryElement = builder.element(category, identityReference)
 	
-		val categoryComplexType = complexType(category, [
+		val categoryComplexType = builder.complexType(category, [
 			children += semanticIdentityElement
 			children += categoryElement
 		])
 		
-		val vertexComplexType = complexType(vertex, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(maxCardinalityElement)
+		val vertexComplexType = builder.complexType(vertex, withExtension(categoryComplexType, [
+			children += builder.element(isAbstractElement)
+			children += builder.element(maxCardinalityElement)
 		]))
 		
-		val visibilityComplexType = complexType(visibility, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(fromElement)
-			children += SchemaBuilder::element(toElement)
+		val visibilityComplexType = builder.complexType(visibility, withExtension(categoryComplexType, [
+			children += builder.element(isAbstractElement)
+			children += builder.element(fromElement)
+			children += builder.element(toElement)
 		]))
 		
-		val superSetReferenceComplexType = complexType(superSetReference, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(fromElement)
-			children += SchemaBuilder::element(toElement)
+		val superSetReferenceComplexType = builder.complexType(superSetReference, withExtension(categoryComplexType, [
+			children += builder.element(isAbstractElement)
+			children += builder.element(fromElement)
+			children += builder.element(toElement)
 		]))
 		
-		val edgeEndComplexType = complexType(edgeEnd, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(minCardinalityElement)
-			children += SchemaBuilder::element(maxCardinalityElement)
-			children += SchemaBuilder::element(isContainerElement)
-			children += SchemaBuilder::element(isNavigableElement)
+		val edgeEndComplexType = builder.complexType(edgeEnd, withExtension(categoryComplexType, [
+			children += builder.element(isAbstractElement)
+			children += builder.element(minCardinalityElement)
+			children += builder.element(maxCardinalityElement)
+			children += builder.element(isContainerElement)
+			children += builder.element(isNavigableElement)
 		]))
 		
-		val edgeComplexType = complexType(edge, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(from, edgeEndComplexType)
-			children += SchemaBuilder::element(to, edgeEndComplexType)
+		val edgeComplexType = builder.complexType(edge, withExtension(categoryComplexType, [
+			children += builder.element(isAbstractElement)
+			children += builder.element(from, edgeEndComplexType)
+			children += builder.element(to, edgeEndComplexType)
 		]))
 		
 		/* Artifact functionality */
 
 		val parameter = terminology.parameter
 
-		val parameterComplexType = complexType(parameter, withExtension(categoryComplexType, []))
+		val parameterComplexType = builder.complexType(parameter, withExtension(categoryComplexType, []))
 		
-		val functionComplexType = complexType(function, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(parameter, parameterComplexType, Cardinality::ZERO_TO_MANY)
+		val functionComplexType = builder.complexType(function, withExtension(categoryComplexType, [
+			children += builder.element(parameter, parameterComplexType, Cardinality::ZERO_TO_MANY)
 		]))
 
-		val commandComplexType = complexType(command, withExtension(functionComplexType, [
+		val commandComplexType = builder.complexType(command, withExtension(functionComplexType, [
 		]))
 
-		val queryComplexType = complexType(query, withExtension(functionComplexType, [
+		val queryComplexType = builder.complexType(query, withExtension(functionComplexType, [
 			// TODO do we need to store the result?
 		]))
 
 		/* Encoding of model artifacts */
 	
-		val graphComplexType = complexType(graph, withExtension(categoryComplexType, [
-			children += SchemaBuilder::element(terminology.container, identityReference)
-			children += SchemaBuilder::element(isAbstractElement)
-			children += SchemaBuilder::element(vertex, vertexComplexType, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(visibility, visibilityComplexType, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(edge, edgeComplexType, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(superSetReference, superSetReferenceComplexType, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(command, commandComplexType, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
+		val graphComplexType = builder.complexType(graph, withExtension(categoryComplexType, [
+			children += builder.element(terminology.container, identityReference)
+			children += builder.element(isAbstractElement)
+			children += builder.element(vertex, vertexComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(visibility, visibilityComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(edge, edgeComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(superSetReference, superSetReferenceComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(command, commandComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
 		]))
 		
-		val modelComplexType = complexType(model, withExtension(graphComplexType, []))
+		val modelComplexType = builder.complexType(model, withExtension(graphComplexType, []))
 		
-		val modelElement = SchemaBuilder::element(model, modelComplexType)
+		val modelElement = builder.element(model, modelComplexType)
 		
-		val identityComplexType = complexType(terminology.identity, [
-			children += SchemaBuilder::element(terminology.identifier, uuid)
-			children += SchemaBuilder::element(terminology.name, DataType::STRING)
-			children += SchemaBuilder::element(terminology.pluralName, DataType::STRING)
-			children += SchemaBuilder::element(terminology.payload, DataType::STRING)
-			children += SchemaBuilder::element(terminology.technicalName, DataType::STRING)
+		val identityComplexType = builder.complexType(terminology.identity, [
+			children += builder.element(terminology.identifier, uuid)
+			children += builder.element(terminology.name, DataType::STRING)
+			children += builder.element(terminology.pluralName, DataType::STRING)
+			children += builder.element(terminology.payload, DataType::STRING)
+			children += builder.element(terminology.technicalName, DataType::STRING)
 		])
 
 		/* Encoding of semantic domain artifacts */
-		val semanticDomainComplexType = complexType(terminology.semanticDomain, [
-			children += SchemaBuilder::element(modelElement)
-			children += SchemaBuilder::element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
+		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, [
+			children += builder.element(modelElement)
+			children += builder.element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
 		])
 
-		val artifactSetComplexType = complexType(terminology.artifactSet, [
-			children += SchemaBuilder::element(modelElement, Cardinality::ZERO_TO_MANY)
-			children += SchemaBuilder::element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
+		val artifactSetComplexType = builder.complexType(terminology.artifactSet, [
+			children += builder.element(modelElement, Cardinality::ZERO_TO_MANY)
+			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
 		])
 		
 		/* Root element */
 		
-		val artifactSetElement = SchemaBuilder::element(terminology.artifactSet, artifactSetComplexType)
-	
-		newArrayList(
-		)
+		builder.element(terminology.artifactSet, artifactSetComplexType)
+		
+		builder.getSchema
 	}
 
 	def createSchema() '''
