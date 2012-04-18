@@ -13,11 +13,14 @@ class SchemaRendering {
 	}
 	
 	def static dispatch render(CompositeNode node, int level) '''
-		«renderPrefix(node, level)»>
-			«FOR n : node.children»
-				«render(n, level + 1)»
-			«ENDFOR»
+		«val children = node.children»
+		«renderPrefix(node, level)»«IF children.empty»/>
+		«ELSE»>
+		«FOR n : children»
+			«render(n, level + 1)»
+		«ENDFOR»
 		«renderSuffix(node, level)»
+		«ENDIF»
 	'''
 	
 	def static dispatch render(Node node, int level) {

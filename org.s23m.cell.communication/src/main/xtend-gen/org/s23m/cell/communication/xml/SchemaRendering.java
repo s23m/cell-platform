@@ -23,23 +23,32 @@ public class SchemaRendering {
   
   protected static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
+    List<Node> _children = node.getChildren();
+    final List<Node> children = _children;
+    _builder.newLineIfNotEmpty();
     String _renderPrefix = SchemaRendering.renderPrefix(node, level);
     _builder.append(_renderPrefix, "");
-    _builder.append(">");
-    _builder.newLineIfNotEmpty();
     {
-      List<Node> _children = node.getChildren();
-      for(final Node n : _children) {
-        _builder.append("\t");
-        int _operator_plus = IntegerExtensions.operator_plus(level, 1);
-        CharSequence _render = SchemaRendering.render(n, _operator_plus);
-        _builder.append(_render, "	");
+      boolean _isEmpty = children.isEmpty();
+      if (_isEmpty) {
+        _builder.append("/>");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append(">");
+        _builder.newLineIfNotEmpty();
+        {
+          for(final Node n : children) {
+            int _operator_plus = IntegerExtensions.operator_plus(level, 1);
+            CharSequence _render = SchemaRendering.render(n, _operator_plus);
+            _builder.append(_render, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        String _renderSuffix = SchemaRendering.renderSuffix(node, level);
+        _builder.append(_renderSuffix, "");
         _builder.newLineIfNotEmpty();
       }
     }
-    String _renderSuffix = SchemaRendering.renderSuffix(node, level);
-    _builder.append(_renderSuffix, "");
-    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
