@@ -30,7 +30,7 @@ class SchemaBuilder {
 		initialiser.apply(schema)
 	}
 	
-	def getSchema() {
+	def build() {
 		removeElementsWithoutReferences()
 		schema
 	}
@@ -85,6 +85,11 @@ class SchemaBuilder {
 	}
 	
 	/* Helpers used in creation of top-level nodes */
+	
+	def static withExtension(ComplexType base) {
+		// trivial extension
+		new Extension(base, new Sequence())
+	}
 	
 	def static withExtension(ComplexType base, (Sequence)=>void initialiser) {
 		new Extension(base, sequence(initialiser))

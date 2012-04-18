@@ -41,7 +41,7 @@ public class SchemaBuilder {
       initialiser.apply(this.schema);
   }
   
-  public Schema getSchema() {
+  public Schema build() {
     Schema _xblockexpression = null;
     {
       this.removeElementsWithoutReferences();
@@ -152,6 +152,12 @@ public class SchemaBuilder {
   /**
    * Helpers used in creation of top-level nodes
    */
+  public static Extension withExtension(final ComplexType base) {
+    Sequence _sequence = new Sequence();
+    Extension _extension = new Extension(base, _sequence);
+    return _extension;
+  }
+  
   public static Extension withExtension(final ComplexType base, final Procedure1<? super Sequence> initialiser) {
     Sequence _sequence = SchemaBuilder.sequence(initialiser);
     Extension _extension = new Extension(base, _sequence);

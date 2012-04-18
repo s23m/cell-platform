@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.Extensions;
 import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
@@ -67,13 +66,6 @@ public class XmlSchemaTemplate {
       String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "elementFormDefault=\"qualified\" ");
       String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "attributeFormDefault=\"unqualified\"");
       return _operator_plus_11;
-    }
-  }.apply();
-  
-  private static Namespace NS_S23M = new Function0<Namespace>() {
-    public Namespace apply() {
-      Namespace _namespace = new Namespace(XmlSchemaTemplate.S23M, XmlSchemaTemplate.S23M_SCHEMA);
-      return _namespace;
     }
   }.apply();
   
@@ -337,38 +329,26 @@ public class XmlSchemaTemplate {
       final ComplexType edgeComplexType = _complexType_6;
       String _parameter = this.terminology.parameter();
       final String parameter = _parameter;
-      final Procedure1<Sequence> _function_8 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-          }
-        };
-      Extension _withExtension_5 = SchemaBuilder.withExtension(categoryComplexType, _function_8);
+      Extension _withExtension_5 = SchemaBuilder.withExtension(categoryComplexType);
       ComplexType _complexType_7 = builder.complexType(parameter, _withExtension_5);
       final ComplexType parameterComplexType = _complexType_7;
-      final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
+      final Procedure1<Sequence> _function_8 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             List<Node> _children = it.getChildren();
             Element _element = builder.element(parameter, parameterComplexType, Cardinality.ZERO_TO_MANY);
             CollectionExtensions.<Element>operator_add(_children, _element);
           }
         };
-      Extension _withExtension_6 = SchemaBuilder.withExtension(categoryComplexType, _function_9);
+      Extension _withExtension_6 = SchemaBuilder.withExtension(categoryComplexType, _function_8);
       ComplexType _complexType_8 = builder.complexType(this.function, _withExtension_6);
       final ComplexType functionComplexType = _complexType_8;
-      final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-          }
-        };
-      Extension _withExtension_7 = SchemaBuilder.withExtension(functionComplexType, _function_10);
+      Extension _withExtension_7 = SchemaBuilder.withExtension(functionComplexType);
       ComplexType _complexType_9 = builder.complexType(this.command, _withExtension_7);
       final ComplexType commandComplexType = _complexType_9;
-      final Procedure1<Sequence> _function_11 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-          }
-        };
-      Extension _withExtension_8 = SchemaBuilder.withExtension(functionComplexType, _function_11);
+      Extension _withExtension_8 = SchemaBuilder.withExtension(functionComplexType);
       ComplexType _complexType_10 = builder.complexType(this.query, _withExtension_8);
       final ComplexType queryComplexType = _complexType_10;
-      final Procedure1<Sequence> _function_12 = new Procedure1<Sequence>() {
+      final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
@@ -399,20 +379,16 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_12);
+      Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_9);
       ComplexType _complexType_11 = builder.complexType(this.graph, _withExtension_9);
       final ComplexType graphComplexType = _complexType_11;
-      final Procedure1<Sequence> _function_13 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-          }
-        };
-      Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType, _function_13);
+      Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType);
       ComplexType _complexType_12 = builder.complexType(this.model, _withExtension_10);
       final ComplexType modelComplexType = _complexType_12;
       Element _element_9 = builder.element(this.model, modelComplexType);
       final Element modelElement = _element_9;
       String _identity = this.terminology.identity();
-      final Procedure1<Sequence> _function_14 = new Procedure1<Sequence>() {
+      final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
@@ -438,10 +414,10 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      ComplexType _complexType_13 = builder.complexType(_identity, _function_14);
+      ComplexType _complexType_13 = builder.complexType(_identity, _function_10);
       final ComplexType identityComplexType = _complexType_13;
       String _semanticDomain = this.terminology.semanticDomain();
-      final Procedure1<Sequence> _function_15 = new Procedure1<Sequence>() {
+      final Procedure1<Sequence> _function_11 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
@@ -454,10 +430,10 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      ComplexType _complexType_14 = builder.complexType(_semanticDomain, _function_15);
+      ComplexType _complexType_14 = builder.complexType(_semanticDomain, _function_11);
       final ComplexType semanticDomainComplexType = _complexType_14;
       String _artifactSet = this.terminology.artifactSet();
-      final Procedure1<Sequence> _function_16 = new Procedure1<Sequence>() {
+      final Procedure1<Sequence> _function_12 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
@@ -470,12 +446,12 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      ComplexType _complexType_15 = builder.complexType(_artifactSet, _function_16);
+      ComplexType _complexType_15 = builder.complexType(_artifactSet, _function_12);
       final ComplexType artifactSetComplexType = _complexType_15;
       String _artifactSet_1 = this.terminology.artifactSet();
       builder.element(_artifactSet_1, artifactSetComplexType);
-      Schema _schema = builder.getSchema();
-      _xblockexpression = (_schema);
+      Schema _build = builder.build();
+      _xblockexpression = (_build);
     }
     return _xblockexpression;
   }

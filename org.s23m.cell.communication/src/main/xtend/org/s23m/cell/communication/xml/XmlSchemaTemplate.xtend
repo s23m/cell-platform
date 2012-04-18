@@ -64,8 +64,6 @@ class XmlSchemaTemplate {
 									  'elementFormDefault="qualified" ' +
 									  'attributeFormDefault="unqualified"'
 
-	static Namespace NS_S23M = new Namespace(S23M, S23M_SCHEMA)
-
 	XmlSchemaTerminology terminology
 	
 	// reused elements
@@ -138,7 +136,6 @@ class XmlSchemaTemplate {
 	
 		val uuid = builder.simpleType(uuid, DataType::STRING)
 		
-		// TODO should we use the non-static variants in ALL cases, or just for top-level elements?
 		val identityReference = builder.complexType(identityReference, [
 			children += builder.element(terminology.uniqueRepresentationReference, uuid)
 			children += builder.element(terminology.identifier, uuid)
@@ -202,18 +199,15 @@ class XmlSchemaTemplate {
 
 		val parameter = terminology.parameter
 
-		val parameterComplexType = builder.complexType(parameter, withExtension(categoryComplexType, []))
+		val parameterComplexType = builder.complexType(parameter, withExtension(categoryComplexType))
 		
 		val functionComplexType = builder.complexType(function, withExtension(categoryComplexType, [
 			children += builder.element(parameter, parameterComplexType, Cardinality::ZERO_TO_MANY)
 		]))
 
-		val commandComplexType = builder.complexType(command, withExtension(functionComplexType, [
-		]))
+		val commandComplexType = builder.complexType(command, withExtension(functionComplexType))
 
-		val queryComplexType = builder.complexType(query, withExtension(functionComplexType, [
-			// TODO do we need to store the result?
-		]))
+		val queryComplexType = builder.complexType(query, withExtension(functionComplexType))
 
 		/* Encoding of model artifacts */
 	
@@ -228,7 +222,7 @@ class XmlSchemaTemplate {
 			children += builder.element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
 		]))
 		
-		val modelComplexType = builder.complexType(model, withExtension(graphComplexType, []))
+		val modelComplexType = builder.complexType(model, withExtension(graphComplexType))
 		
 		val modelElement = builder.element(model, modelComplexType)
 		
@@ -255,7 +249,7 @@ class XmlSchemaTemplate {
 		
 		builder.element(terminology.artifactSet, artifactSetComplexType)
 		
-		builder.getSchema
+		builder.build
 	}
 
 	def createSchema() '''
