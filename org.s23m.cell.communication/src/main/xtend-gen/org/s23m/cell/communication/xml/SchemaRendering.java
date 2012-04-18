@@ -6,48 +6,72 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.dom.CompositeNode;
 import org.s23m.cell.communication.xml.dom.Node;
 
 @SuppressWarnings("all")
 public class SchemaRendering {
-  protected static CharSequence _render(final CompositeNode node) {
+  private static int INDENTATION = 2;
+  
+  public static CharSequence render(final Node node) {
+    CharSequence _render = SchemaRendering.render(node, 0);
+    return _render;
+  }
+  
+  protected static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
-    String _name = node.getName();
-    _builder.append(_name, "");
-    _builder.append(" ");
-    String _renderAttributes = SchemaRendering.renderAttributes(node);
-    _builder.append(_renderAttributes, "");
+    String _renderPrefix = SchemaRendering.renderPrefix(node, level);
+    _builder.append(_renderPrefix, "");
     _builder.append(">");
     _builder.newLineIfNotEmpty();
     {
       List<Node> _children = node.getChildren();
       for(final Node n : _children) {
-        CharSequence _render = SchemaRendering.render(n);
-        _builder.append(_render, "");
+        _builder.append("\t");
+        int _operator_plus = IntegerExtensions.operator_plus(level, 1);
+        CharSequence _render = SchemaRendering.render(n, _operator_plus);
+        _builder.append(_render, "	");
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("</");
-    String _name_1 = node.getName();
-    _builder.append(_name_1, "");
-    _builder.append(">");
+    String _renderSuffix = SchemaRendering.renderSuffix(node, level);
+    _builder.append(_renderSuffix, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  protected static CharSequence _render(final Node node) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<");
+  protected static CharSequence _render(final Node node, final int level) {
+    String _renderPrefix = SchemaRendering.renderPrefix(node, level);
+    String _operator_plus = StringExtensions.operator_plus(_renderPrefix, "/>");
+    return _operator_plus;
+  }
+  
+  private static String renderPrefix(final Node node, final int level) {
+    String _whitespace = SchemaRendering.whitespace(level);
+    String _operator_plus = StringExtensions.operator_plus(_whitespace, "<");
     String _name = node.getName();
-    _builder.append(_name, "");
-    _builder.append(" ");
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
     String _renderAttributes = SchemaRendering.renderAttributes(node);
-    _builder.append(_renderAttributes, "");
-    _builder.append("/>");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _renderAttributes);
+    return _operator_plus_2;
+  }
+  
+  private static String renderSuffix(final Node node, final int level) {
+    String _whitespace = SchemaRendering.whitespace(level);
+    String _operator_plus = StringExtensions.operator_plus(_whitespace, "</");
+    String _name = node.getName();
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ">");
+    return _operator_plus_2;
+  }
+  
+  private static String whitespace(final int level) {
+    int _operator_multiply = IntegerExtensions.operator_multiply(level, SchemaRendering.INDENTATION);
+    String _repeat = StringUtils.repeat(_operator_multiply, " ");
+    return _repeat;
   }
   
   private static String renderAttributes(final Node node) {
@@ -57,31 +81,32 @@ public class SchemaRendering {
       final StringBuilder builder = _stringBuilder;
       Map<String,String> _attributes = node.getAttributes();
       Set<Entry<String,String>> _entrySet = _attributes.entrySet();
-      for (final Entry<String,String> entry : _entrySet) {
+      final Set<Entry<String,String>> entrySet = _entrySet;
+      for (final Entry<String,String> entry : entrySet) {
         {
+          builder.append(" ");
           String _key = entry.getKey();
           builder.append(_key);
           builder.append("=\"");
           String _value = entry.getValue();
           builder.append(_value);
-          builder.append("\" ");
+          builder.append("\"");
         }
       }
       String _string = builder.toString();
-      String _trim = _string.trim();
-      _xblockexpression = (_trim);
+      _xblockexpression = (_string);
     }
     return _xblockexpression;
   }
   
-  public static CharSequence render(final Node node) {
+  public static CharSequence render(final Node node, final int level) {
     if (node instanceof CompositeNode) {
-      return _render((CompositeNode)node);
+      return _render((CompositeNode)node, level);
     } else if (node != null) {
-      return _render(node);
+      return _render(node, level);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(node).toString());
+        Arrays.<Object>asList(node, level).toString());
     }
   }
 }
