@@ -36,14 +36,13 @@ class SchemaBuilder {
 	}
 	
 	def private removeElementsWithoutReferences() {
-		// TODO - need to keep track of references
+		val predicate = [Node it | it instanceof Element && (it as Element).references.empty]
+		val elements = schema.children.filter(predicate).toList
+		schema.children.removeAll(elements)
 	}
 	
 	def private <T extends Node> T store(T node) {
-		if (!schema.children.contains(node)) {
-			// TODO we might be able to remove this check and then remove equals/hashCode methods			
-			schema.children += node
-		}
+		schema.children += node
 		node
 	}
 	

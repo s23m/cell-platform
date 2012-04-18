@@ -47,15 +47,12 @@ public final class ElementReference extends AbstractLeafNode {
 		this.referencedElement.addReference(this);
 		this.cardinality = cardinality;
 		
-		final LinkedHashMap<String, String> attributes = getAttributes();
-		//attributes.putAll(referencedElement.getAttributes());
-		
 		setAttribute("ref", referencedElement.getIdentifier());
 		
-		// replace attributes
-		//Cardinality.removeFromAttributes(attributes);
-		
 		if (cardinality != null) {
+			final LinkedHashMap<String, String> attributes = getAttributes();
+			// replace attributes
+			Cardinality.removeFromAttributes(attributes);
 			cardinality.addToAttributes(attributes);
 		}
 	}

@@ -54,6 +54,10 @@ public final class Element extends AbstractLeafNode implements ReferenceableNode
 		references.add(elementReference);
 	}
 	
+	public List<ElementReference> getReferences() {
+		return references;
+	}
+	
 	public Namespace getTargetNamespace() {
 		return targetNamespace;
 	}

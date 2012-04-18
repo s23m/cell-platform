@@ -4,6 +4,8 @@ import java.util.List;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
@@ -48,20 +50,39 @@ public class SchemaBuilder {
     return _xblockexpression;
   }
   
-  private Object removeElementsWithoutReferences() {
-    return null;
+  private boolean removeElementsWithoutReferences() {
+    boolean _xblockexpression = false;
+    {
+      final Function1<Node,Boolean> _function = new Function1<Node,Boolean>() {
+          public Boolean apply(final Node it) {
+            boolean _operator_and = false;
+            if (!(it instanceof Element)) {
+              _operator_and = false;
+            } else {
+              List<ElementReference> _references = ((Element) it).getReferences();
+              boolean _isEmpty = _references.isEmpty();
+              _operator_and = BooleanExtensions.operator_and((it instanceof Element), _isEmpty);
+            }
+            return _operator_and;
+          }
+        };
+      final Function1<Node,Boolean> predicate = _function;
+      List<Node> _children = this.schema.getChildren();
+      Iterable<Node> _filter = IterableExtensions.<Node>filter(_children, predicate);
+      List<Node> _list = IterableExtensions.<Node>toList(_filter);
+      final List<Node> elements = _list;
+      List<Node> _children_1 = this.schema.getChildren();
+      boolean _removeAll = _children_1.removeAll(elements);
+      _xblockexpression = (_removeAll);
+    }
+    return _xblockexpression;
   }
   
   private <T extends Node> T store(final T node) {
     T _xblockexpression = null;
     {
       List<Node> _children = this.schema.getChildren();
-      boolean _contains = _children.contains(node);
-      boolean _operator_not = BooleanExtensions.operator_not(_contains);
-      if (_operator_not) {
-        List<Node> _children_1 = this.schema.getChildren();
-        CollectionExtensions.<T>operator_add(_children_1, node);
-      }
+      CollectionExtensions.<T>operator_add(_children, node);
       _xblockexpression = (node);
     }
     return _xblockexpression;
