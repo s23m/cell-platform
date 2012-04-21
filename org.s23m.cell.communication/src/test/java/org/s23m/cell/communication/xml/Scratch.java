@@ -7,8 +7,8 @@ public class Scratch {
 
 		XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
 		
-		XmlSchemaTemplate template = new XmlSchemaTemplate(terminology);
-		Schema schema = template.createSchemaModel();
+		XmlSchemaTemplate template = new XmlSchemaTemplate();
+		Schema schema = template.createSchemaModel(terminology);
 		
 		System.out.println("Template output:\n" + SchemaRendering.render(schema));
 		

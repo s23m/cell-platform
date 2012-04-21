@@ -32,6 +32,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.s23m.cell.communication.xml.schema.Schema;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -40,9 +41,10 @@ public class XmlSchemaFactory {
 	
 	public Document createSchema(final XmlSchemaTerminology terminology) {
 		try {
-			final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate(terminology);
+			final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate();
 			// generate schema from template
-			final CharSequence schemaText = schemaTemplate.createSchema();
+			final Schema schema = schemaTemplate.createSchemaModel(terminology);
+			final CharSequence schemaText = SchemaRendering.render(schema);
 			
 			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setNamespaceAware(true);

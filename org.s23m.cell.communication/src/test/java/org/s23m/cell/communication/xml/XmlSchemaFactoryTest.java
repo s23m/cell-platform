@@ -61,7 +61,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	private static final String NAMESPACE_PREFIX = "xmlns:";
 
 	// TODO discover this automatically
-	private static final String OUR_NAMESPACE = "agentSemanticDomains";
+	private static final String OUR_NAMESPACE = "s23m";
 	
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {
@@ -137,7 +137,8 @@ public class XmlSchemaFactoryTest extends TestCase {
 		
 		java.util.Set<String> names = retrieveAllElementNames();
 		List<String> qualifiedNames = Lists.transform(new ArrayList<String>(names), QUALIFY_NAME);
-		assertTrue("At least one type does not refer to a declared element", qualifiedNames.containsAll(ourDeclaredTypes));
+		
+		assertTrue("At least one type does not refer to a declared element.\nqualifiedNames: " + qualifiedNames + "\nourDeclaredTypes: " + ourDeclaredTypes, qualifiedNames.containsAll(ourDeclaredTypes));
 	}
 	
 	public void testOnlyXsdTypeInUseIsStringType() {
