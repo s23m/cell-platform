@@ -62,13 +62,16 @@ public class XmlSchemaFactory {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 	
-	// TODO support resolving schema for a specified jargon
+	/**
+	 * Retrieves a document based on a given terminology
+	 * 
+	 * TODO support jargons
+	 * @return
+	 */
 	public Document createHumanReadableSchema() {
-		// TODO replace by implementation which uses kernel sets to construct names
-		final XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
+		final CellXmlSchemaTerminology terminology = new CellXmlSchemaTerminology();
 		return createSchema(terminology);
 	}
 	
