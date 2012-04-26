@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.s23m.cell.S23MKernel;
+import org.s23m.cell.platform.S23MPlatform;
 
 import junit.framework.TestCase;
 
@@ -17,6 +18,7 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 		// prerequisite - must have been booted
 		if (terminology == null) {
 			S23MKernel.boot();
+			S23MPlatform.boot();
 			terminology = new CellXmlSchemaTerminology();	
 		}
 	}
@@ -37,10 +39,15 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 	
 	public void testSomeTerms() {
 		assertEquals("from", terminology.from());
+		assertEquals("category", terminology.category());
+		
 		// TODO add more
+		
 	}
 	
+	/*
 	public void testTermsHaveNoSpaces() {
 		// TODO
 	}
+	*/
 }

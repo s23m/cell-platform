@@ -1,8 +1,13 @@
 package org.s23m.cell.communication.xml;
 
 import org.s23m.cell.Identity;
+import org.s23m.cell.Set;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.IdentityFactory;
+import org.s23m.cell.platform.api.CellQueries;
+import org.s23m.cell.platform.models.CellPlatformAgent;
+import org.s23m.cell.platform.models.CellPlatformDomain;
 
 public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 
@@ -19,7 +24,13 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 
 	@Override
 	public String category() {
-		return nameOf(identityFactory.category());
+		// CellQueries.nameAsString(CellQueries.name(<concept>, <language>))
+		
+		final Set concept = S23MSemanticDomains.category;
+		final Set language = CellPlatformAgent.englishLanguage;
+		//final Set language = CellPlatformDomain.englishLanguage;
+		final Set name = CellQueries.name(concept, language);
+		return CellQueries.nameAsString(name);
 	}
 
 	@Override
