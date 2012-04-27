@@ -51,6 +51,7 @@ object GmodelBuild extends Build {
   ) aggregate (
     artifactpool,
     common,
+	communication,
     connector,
     editorSemanticdomain,
     hibernateosgi,
@@ -94,7 +95,17 @@ object GmodelBuild extends Build {
     file ("org.s23m.cell.connector"),
     settings = javaProjectSettings
   ) dependsOn (serialization)
-
+  
+  lazy val communication = Project(
+    "communication",
+    file ("org.s23m.cell.communication"),
+    settings = javaProjectSettings ++ Seq(
+	    libraryDependencies ++= Seq( JUnit ),
+		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
+		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
+	)
+  ) dependsOn (kernel, platform)
+  
   lazy val editorSemanticdomain = Project(
     "editor-semanticdomain",
     file ("org.s23m.cell.editor.semanticdomain"),
