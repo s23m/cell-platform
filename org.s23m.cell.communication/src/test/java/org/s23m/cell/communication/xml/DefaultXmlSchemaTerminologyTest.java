@@ -24,10 +24,13 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 public class DefaultXmlSchemaTerminologyTest extends TestCase {
 
+	@Test
 	public void testTerminology() {
 		XmlSchemaTerminology t = DefaultXmlSchemaTerminology.getInstance();
 		assertEquals("category", t.category());

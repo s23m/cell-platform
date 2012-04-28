@@ -99,9 +99,8 @@ object GmodelBuild extends Build {
   lazy val communication = Project(
     "communication",
     file ("org.s23m.cell.communication"),
-    settings = javaProjectSettings ++ Seq(
-	    libraryDependencies ++= Seq( JUnit ),
-		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
+    settings = javaTestProjectSettings ++ Seq(
+	    unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
 		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
 	)
   ) dependsOn (kernel, platform)

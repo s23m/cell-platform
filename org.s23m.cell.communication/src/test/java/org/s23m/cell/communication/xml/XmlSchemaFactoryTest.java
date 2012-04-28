@@ -35,6 +35,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
@@ -101,6 +102,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		document = factory.createSchema(terminology);
 	}
 	
+	@Test
 	public void testBasicStructure() throws TransformerFactoryConfigurationError, TransformerException {
 		NodeList rootList = document.getChildNodes();
 		assertEquals(1, rootList.getLength());
@@ -111,6 +113,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("Expected: " + kernelTypeNames + "\nActual: " + complexTypeNames, complexTypeNames.containsAll(kernelTypeNames));
 	}
 	
+	@Test
 	public void testAllTermsAreBeingUsed() {
 		java.util.Set<String> allTerms = DefaultXmlSchemaTerminology.getAllTerms();
 		
@@ -119,6 +122,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("Not all terms are being used", names.containsAll(allTerms));
 	}
 	
+	@Test
 	public void testAllDeclaredTypesReferToElements() {
 		Collection<Node> allElements = retrieveAllElements();
 		java.util.Set<String> ourDeclaredTypes = new HashSet<String>(allElements.size());
@@ -140,6 +144,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("At least one type does not refer to a declared element.\nqualifiedNames: " + qualifiedNames + "\nourDeclaredTypes: " + ourDeclaredTypes, qualifiedNames.containsAll(ourDeclaredTypes));
 	}
 	
+	@Test
 	public void testOnlyXsdTypeInUseIsStringType() {
 		List<Node> declaredNodes = retrieveAllDeclaredNodes();
 		String xsdNamespacePrefix = retrieveXsdNamespacePrefix();
@@ -158,6 +163,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testNoAttributesAreDeclared() {
 		List<Node> declaredNodes = retrieveAllDeclaredNodes();
 		for (Node node : declaredNodes) {
