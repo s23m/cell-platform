@@ -8,7 +8,7 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 
 	private String nameOf(Set concept) {
 		// TODO use language functionality when available
-		return concept.identity().name();
+		return concept.identity().name().replace(" ", "-");
 	}
 	
 	@Override
@@ -89,6 +89,12 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 		return nameOf(S23MSemanticDomains.isNavigable);
 	}
 
+	@Override
+	public String languageIdentifier() {
+		// TODO add to languages
+		return "languageIdentifier";
+	}
+	
 	@Override
 	public String maxCardinality() {
 		return nameOf(S23MSemanticDomains.maxCardinality);
@@ -177,4 +183,5 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	public String visibility() {
 		return nameOf(Query.visibility);
 	}
+
 }

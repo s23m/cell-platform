@@ -1,12 +1,12 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.dom.CompositeNode;
@@ -24,13 +24,13 @@ public class SchemaRendering {
   
   protected static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
-    List<Node> _children = node.getChildren();
-    final List<Node> children = _children;
+    Iterable<? extends Node> _children = node.getChildren();
+    final Iterable<? extends Node> children = _children;
     _builder.newLineIfNotEmpty();
     String _renderPrefix = SchemaRendering.renderPrefix(node, level);
     _builder.append(_renderPrefix, "");
     {
-      boolean _isEmpty = children.isEmpty();
+      boolean _isEmpty = IterableExtensions.isEmpty(children);
       if (_isEmpty) {
         _builder.append("/>");
         _builder.newLineIfNotEmpty();

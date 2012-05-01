@@ -33,7 +33,7 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 		
 	private Map<String, String> getTerms() {
 		final Map<String, String> result = new HashMap<String, String>();
-		final Method[] methods = XmlSchemaTerminology.class.getDeclaredMethods();
+		final Method[] methods = CLASS.getDeclaredMethods();
 		for (final Method method : methods) {
 			final String name = method.getName();
 			try {
@@ -48,7 +48,6 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 
 	@Test
 	public void testUniqueness() throws Exception {
-		final Map<String, String> terms = getTerms();
 		final Set<String> setOfTerms = new HashSet<String>();
 		for (final String key : terms.keySet()) {
 			final String term = terms.get(key);
@@ -69,8 +68,7 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 	public void testTermsHaveNoSpaces() {
 		for (final Map.Entry<String, String> entry : terms.entrySet()) {
 			final String term = entry.getValue();
-			// TODO re-enable
-			//assertFalse("Term " + term + " contains a space", term.contains(" "));
+			assertFalse("Term " + term + " contains a space", term.contains(" "));
 		}
 	}
 }
