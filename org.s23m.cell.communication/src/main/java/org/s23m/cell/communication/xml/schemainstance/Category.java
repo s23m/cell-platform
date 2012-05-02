@@ -24,9 +24,6 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
@@ -35,38 +32,36 @@ import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.DataType;
 import org.s23m.cell.communication.xml.schema.Element;
 
-import com.google.common.collect.Iterables;
+/*
+<xsd:element ref="s23m:semanticIdentity"/>
+<xsd:element ref="s23m:category"/>
+ */
+public class Category extends AbstractCompositeNode {
 
-// TODO generate this class from the schema instance (and reduce duplication)?
-public class ArtifactSet extends AbstractCompositeNode {
+	private final IdentityReference semanticIdentity;
 	
-	private final Element languageIdentifier;
+	private final IdentityReference category;	
 	
-	private final List<Model> modelList;
-	
-	private final List<SemanticDomain> semanticDomainList;
-	
-	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.artifactSet());
-		this.languageIdentifier = new Element(namespace, terminology.languageIdentifier(), DataType.STRING, Cardinality.EXACTLY_ONE);
-		this.modelList = new ArrayList<Model>();
-		this.semanticDomainList = new ArrayList<SemanticDomain>();
+	protected Category(Namespace namespace,
+			String name,
+			XmlSchemaTerminology terminology,
+			IdentityReference semanticIdentity,
+			IdentityReference category) {
+		
+		super(namespace, name);
+		this.semanticIdentity = semanticIdentity;
+		this.category = category;
 	}
 	
-	public Element getLanguageIdentifier() {
-		return languageIdentifier;
-	}
-	
-	public List<Model> getModelList() {
-		return modelList;
-	}
-	
-	public List<SemanticDomain> getSemanticDomainList() {
-		return semanticDomainList;
+	public Category(Namespace namespace, XmlSchemaTerminology terminology) {
+		// TODO add parameters
+		this(namespace, terminology.category(), terminology, null, null);
 	}
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		return Iterables.concat(modelList, semanticDomainList);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

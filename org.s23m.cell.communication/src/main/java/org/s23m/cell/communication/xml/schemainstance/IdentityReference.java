@@ -22,31 +22,30 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.dom;
+package org.s23m.cell.communication.xml.schemainstance;
 
-import java.util.Collections;
-import java.util.List;
-
-/**
- * A node containing a single child
+/*
+<xsd:element name="uniqueRepresentationReference" type="s23m:uuid"/>
+<xsd:element name="identifier" type="s23m:uuid"/>
  */
-public abstract class WrapperNode extends AbstractNode implements CompositeNode {
-	private final Node child;
+public class IdentityReference {
 	
-	private final List<Node> children;
+	// s23m:uuid
+	private final String uniqueRepresentationReference;
+	
+	// s23m:uuid
+	private final String identifier;
 
-	public WrapperNode(Namespace namespace, String name, Node child) {
-		super(namespace, name);
-		this.child = child;
-		this.children = Collections.singletonList(child);
+	public IdentityReference(String uniqueRepresentationReference, String identifier) {
+		this.uniqueRepresentationReference = uniqueRepresentationReference;
+		this.identifier = identifier;
+	}
+
+	public String getUniqueRepresentationReference() {
+		return uniqueRepresentationReference;
 	}
 	
-	@Override
-	public List<Node> getChildren() {
-		return children;
-	}
-	
-	public Node getChild() {
-		return child;
+	public String getIdentifier() {
+		return identifier;
 	}
 }

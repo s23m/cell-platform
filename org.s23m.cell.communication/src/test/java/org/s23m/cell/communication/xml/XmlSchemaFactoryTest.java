@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Cell.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * The S23M Foundation.
@@ -48,6 +48,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 // TODO test for maximum reuse (reusable elements whenever there are repeated (name, type) pairs)
 // TODO check that all types are qualified
@@ -99,7 +100,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		XmlSchemaFactory factory = new XmlSchemaFactory();
-		document = factory.createSchema(terminology);
+		document = factory.createSchemaAsDocument(terminology);
 	}
 	
 	@Test
@@ -119,7 +120,8 @@ public class XmlSchemaFactoryTest extends TestCase {
 		
 		java.util.Set<String> names = retrieveAllElementNames();
 		
-		assertTrue("Not all terms are being used", names.containsAll(allTerms));
+		java.util.Set<String> difference = Sets.difference(allTerms, names);
+		assertTrue("Not all terms are being used. Difference: " + difference, names.containsAll(allTerms));
 	}
 	
 	@Test

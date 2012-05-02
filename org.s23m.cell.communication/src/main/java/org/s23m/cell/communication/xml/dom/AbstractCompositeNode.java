@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Cell.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * The S23M Foundation.
@@ -24,20 +24,10 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.dom;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class AbstractCompositeNode extends AbstractNode implements CompositeNode {
-    private final List<Node> children;
-    
-    public AbstractCompositeNode(Namespace namespace, String name) {
-    	super(namespace, name);
-    	children = new ArrayList<Node>();
-	}
-    
-    @Override
-    public List<Node> getChildren() {
-    	return children;
-    }
-}
 
+	public AbstractCompositeNode(Namespace namespace, String name) {
+		super(namespace, name);
+	}
+
+}

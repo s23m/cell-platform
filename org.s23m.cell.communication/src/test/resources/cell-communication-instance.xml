@@ -1,0 +1,220 @@
+<!--
+ ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Cell.
+ *
+ * The Initial Developer of the Original Code is
+ * The S23M Foundation.
+ * Portions created by the Initial Developer are
+ * Copyright (C) 2012 The S23M Foundation.
+ * All Rights Reserved.
+ *
+ * Contributor(s):
+ * Andrew Shewring
+ ***** END LICENSE BLOCK ***** */
+ -->
+<s23m:artifactSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s23m="http://schemas.s23m.org/serialization/2012">
+	<s23m:languageIdentifier>ENGLISH</s23m:languageIdentifier>
+	<s23m:model>
+		<s23m:container>
+			<s23m:uniqueRepresentationReference>1</s23m:uniqueRepresentationReference>
+			<s23m:identifier>2</s23m:identifier>
+		</s23m:container>
+		<s23m:isAbstract>
+			<s23m:uniqueRepresentationReference>3</s23m:uniqueRepresentationReference>
+			<s23m:identifier>4</s23m:identifier>
+		</s23m:isAbstract>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:vertex>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>5</s23m:uniqueRepresentationReference>
+				<s23m:identifier>6</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>7</s23m:uniqueRepresentationReference>
+				<s23m:identifier>8</s23m:identifier>
+			</s23m:category>
+			
+			<s23m:isAbstract>
+				<s23m:uniqueRepresentationReference>9</s23m:uniqueRepresentationReference>
+				<s23m:identifier>10</s23m:identifier>
+			</s23m:isAbstract>
+			<s23m:maxCardinality>
+				<s23m:uniqueRepresentationReference>11</s23m:uniqueRepresentationReference>
+				<s23m:identifier>12</s23m:identifier>
+			</s23m:maxCardinality>
+		</s23m:vertex>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:visibility>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>13</s23m:uniqueRepresentationReference>
+				<s23m:identifier>14</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>15</s23m:uniqueRepresentationReference>
+				<s23m:identifier>16</s23m:identifier>
+			</s23m:category>			
+			
+			<s23m:isAbstract>
+				<s23m:uniqueRepresentationReference>17</s23m:uniqueRepresentationReference>
+				<s23m:identifier>18</s23m:identifier>
+			</s23m:isAbstract>
+			<s23m:from>
+				<s23m:uniqueRepresentationReference>19</s23m:uniqueRepresentationReference>
+				<s23m:identifier>20</s23m:identifier>
+			</s23m:from>
+			<s23m:to>
+				<s23m:uniqueRepresentationReference>21</s23m:uniqueRepresentationReference>
+				<s23m:identifier>22</s23m:identifier>
+			</s23m:to>
+		</s23m:visibility>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:edge>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
+				<s23m:identifier>24</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
+				<s23m:identifier>26</s23m:identifier>
+			</s23m:category>			
+			
+			<s23m:isAbstract>
+				<s23m:uniqueRepresentationReference>27</s23m:uniqueRepresentationReference>
+				<s23m:identifier>28</s23m:identifier>
+			</s23m:isAbstract>
+			<s23m:from>
+				<s23m:isAbstract>
+					<s23m:uniqueRepresentationReference>29</s23m:uniqueRepresentationReference>
+					<s23m:identifier>30</s23m:identifier>
+				</s23m:isAbstract>
+				<s23m:minCardinality>
+					<s23m:uniqueRepresentationReference>31</s23m:uniqueRepresentationReference>
+					<s23m:identifier>32</s23m:identifier>
+				</s23m:minCardinality>
+				<s23m:maxCardinality>
+					<s23m:uniqueRepresentationReference>33</s23m:uniqueRepresentationReference>
+					<s23m:identifier>34</s23m:identifier>
+				</s23m:maxCardinality>
+				<s23m:isContainer>
+					<s23m:uniqueRepresentationReference>35</s23m:uniqueRepresentationReference>
+					<s23m:identifier>36</s23m:identifier>
+				</s23m:isContainer>
+				<s23m:isNavigable>
+					<s23m:uniqueRepresentationReference>37</s23m:uniqueRepresentationReference>
+					<s23m:identifier>38</s23m:identifier>
+				</s23m:isNavigable>
+			</s23m:from>
+			<s23m:to>
+				<s23m:isAbstract>
+					<s23m:uniqueRepresentationReference>39</s23m:uniqueRepresentationReference>
+					<s23m:identifier>40</s23m:identifier>
+				</s23m:isAbstract>
+				<s23m:minCardinality>
+					<s23m:uniqueRepresentationReference>41</s23m:uniqueRepresentationReference>
+					<s23m:identifier>42</s23m:identifier>
+				</s23m:minCardinality>
+				<s23m:maxCardinality>
+					<s23m:uniqueRepresentationReference>43</s23m:uniqueRepresentationReference>
+					<s23m:identifier>44</s23m:identifier>
+				</s23m:maxCardinality>
+				<s23m:isContainer>
+					<s23m:uniqueRepresentationReference>45</s23m:uniqueRepresentationReference>
+					<s23m:identifier>46</s23m:identifier>
+				</s23m:isContainer>
+				<s23m:isNavigable>
+					<s23m:uniqueRepresentationReference>47</s23m:uniqueRepresentationReference>
+					<s23m:identifier>48</s23m:identifier>
+				</s23m:isNavigable>
+			</s23m:to>				
+		</s23m:edge>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:superSetReference>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>49</s23m:uniqueRepresentationReference>
+				<s23m:identifier>50</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>51</s23m:uniqueRepresentationReference>
+				<s23m:identifier>52</s23m:identifier>
+			</s23m:category>
+			
+			<s23m:isAbstract>
+				<s23m:uniqueRepresentationReference>53</s23m:uniqueRepresentationReference>
+				<s23m:identifier>54</s23m:identifier>
+			</s23m:isAbstract>
+			<s23m:from>
+				<s23m:uniqueRepresentationReference>55</s23m:uniqueRepresentationReference>
+				<s23m:identifier>56</s23m:identifier>
+			</s23m:from>
+			<s23m:to>
+				<s23m:uniqueRepresentationReference>57</s23m:uniqueRepresentationReference>
+				<s23m:identifier>58</s23m:identifier>
+			</s23m:to>				
+		</s23m:superSetReference>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:command>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>59</s23m:uniqueRepresentationReference>
+				<s23m:identifier>60</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>61</s23m:uniqueRepresentationReference>
+				<s23m:identifier>62</s23m:identifier>
+			</s23m:category>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:parameter>
+				<s23m:semanticIdentity>
+					<s23m:uniqueRepresentationReference>63</s23m:uniqueRepresentationReference>
+					<s23m:identifier>64</s23m:identifier>
+				</s23m:semanticIdentity>
+				<s23m:category>
+					<s23m:uniqueRepresentationReference>65</s23m:uniqueRepresentationReference>
+					<s23m:identifier>66</s23m:identifier>
+				</s23m:category>
+			</s23m:parameter>
+		</s23m:command>
+		
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:query>
+			<s23m:semanticIdentity>
+				<s23m:uniqueRepresentationReference>67</s23m:uniqueRepresentationReference>
+				<s23m:identifier>68</s23m:identifier>
+			</s23m:semanticIdentity>
+			<s23m:category>
+				<s23m:uniqueRepresentationReference>69</s23m:uniqueRepresentationReference>
+				<s23m:identifier>70</s23m:identifier>
+			</s23m:category>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:parameter>
+				<s23m:semanticIdentity>
+					<s23m:uniqueRepresentationReference>71</s23m:uniqueRepresentationReference>
+					<s23m:identifier>72</s23m:identifier>
+				</s23m:semanticIdentity>
+				<s23m:category>
+					<s23m:uniqueRepresentationReference>73</s23m:uniqueRepresentationReference>
+					<s23m:identifier>74</s23m:identifier>
+				</s23m:category>
+			</s23m:parameter>			
+		</s23m:query>
+	</s23m:model>
+	<!-- s23m:semanticDomain omitted -->
+</s23m:artifactSet>

@@ -22,31 +22,8 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.dom;
+package org.s23m.cell.communication.xml.schemainstance;
 
-import java.util.Collections;
-import java.util.List;
+public class StringElement {
 
-/**
- * A node containing a single child
- */
-public abstract class WrapperNode extends AbstractNode implements CompositeNode {
-	private final Node child;
-	
-	private final List<Node> children;
-
-	public WrapperNode(Namespace namespace, String name, Node child) {
-		super(namespace, name);
-		this.child = child;
-		this.children = Collections.singletonList(child);
-	}
-	
-	@Override
-	public List<Node> getChildren() {
-		return children;
-	}
-	
-	public Node getChild() {
-		return child;
-	}
 }

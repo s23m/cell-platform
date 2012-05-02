@@ -68,7 +68,7 @@ class XmlSchemaTemplate {
 		val superSetReference = terminology.superSetReference
 		val command = terminology.command
 		val query = terminology.query
-		val function = terminology.function		
+		val function = terminology.function
 		
 		val builder = new SchemaBuilder([
 			attributes += newLinkedHashMap(
@@ -83,8 +83,8 @@ class XmlSchemaTemplate {
 		val uuid = builder.simpleType(terminology.uuid, DataType::STRING)
 		
 		val identityReference = builder.complexType(terminology.identityReference, [
-			children += builder.element(terminology.uniqueRepresentationReference, uuid)
-			children += builder.element(terminology.identifier, uuid)
+			getChildren += builder.element(terminology.uniqueRepresentationReference, uuid)
+			getChildren += builder.element(terminology.identifier, uuid)
 		])
 				
 		val semanticIdentityElement = builder.element(semanticIdentity, identityReference)
@@ -185,8 +185,9 @@ class XmlSchemaTemplate {
 			children += builder.element(modelElement)
 			children += builder.element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
 		])
-
+		
 		val artifactSetComplexType = builder.complexType(terminology.artifactSet, [
+			children += builder.element(terminology.languageIdentifier, DataType::STRING)
 			children += builder.element(modelElement, Cardinality::ZERO_TO_MANY)
 			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
 		])

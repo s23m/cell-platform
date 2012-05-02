@@ -2,17 +2,20 @@ package org.s23m.cell.communication.xml
 
 import org.s23m.cell.communication.xml.dom.CompositeNode
 import org.s23m.cell.communication.xml.dom.Node
-import org.s23m.cell.communication.xml.StringUtils
+
+import static org.s23m.cell.communication.xml.SchemaRendering.*
+import org.s23m.cell.communication.xml.schema.Schema
 
 class SchemaRendering {
 	
 	static int INDENTATION = 2
 	
-	def static render(Node node) {
-		render(node, 0)
-	}
+	def static render(Schema node) '''
+		<?xml version="1.0" encoding="UTF-8"?>
+		«render(node, 0)»
+	'''
 	
-	def static dispatch render(CompositeNode node, int level) '''
+	def private static dispatch render(CompositeNode node, int level) '''
 		«val children = node.children»
 		«renderPrefix(node, level)»«IF children.empty»/>
 		«ELSE»>
@@ -23,7 +26,7 @@ class SchemaRendering {
 		«ENDIF»
 	'''
 	
-	def static dispatch render(Node node, int level) {
+	def private static dispatch render(Node node, int level) {
 		renderPrefix(node, level) + "/>"
 	}
 		

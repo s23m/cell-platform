@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Cell.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * The S23M Foundation.
@@ -31,36 +31,58 @@ import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
-import org.s23m.cell.communication.xml.schema.Schema;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import com.google.common.base.Charsets;
 
 // TODO add caching
 public class XmlSchemaFactory {
 	
-	public Document createSchema(final XmlSchemaTerminology terminology) {
-		try {
-			final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate();
-			// generate schema from template
-			final Schema schema = schemaTemplate.createSchemaModel(terminology);
-			final CharSequence schemaText = SchemaRendering.render(schema);
-			
-			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
+	private byte[] generateSchema(final XmlSchemaTerminology terminology) {
+		// generate schema from template
+		final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate();
+		final org.s23m.cell.communication.xml.schema.Schema schema = schemaTemplate.createSchemaModel(terminology);
+		final CharSequence schemaText = SchemaRendering.render(schema);
+		return schemaText.toString().getBytes(Charsets.UTF_8);
+	}
+	
+	public Document createSchemaAsDocument(final XmlSchemaTerminology terminology) {
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		//factory.setValidating(true);
+		factory.setNamespaceAware(true);
 
-			final DocumentBuilder builder = factory.newDocumentBuilder();
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+		
+			final byte[] schemaContents = generateSchema(terminology);
 			
-			final byte[] schemaContents = schemaText.toString().getBytes("UTF-8");
 			final InputStream stream = new ByteArrayInputStream(schemaContents);
 			// parse document from stream
 			return builder.parse(stream);
 		} catch (ParserConfigurationException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException("Could not create schema", e);
 		} catch (SAXException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException("Could not create schema", e);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new IllegalStateException("Could not create schema", e);
+		}
+	}
+	
+	public Schema createSchema(final XmlSchemaTerminology terminology) {
+		try {
+			final byte[] schemaContents = generateSchema(terminology);
+			
+			final SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+			final ByteArrayInputStream stream = new ByteArrayInputStream(schemaContents);
+			return schemaFactory.newSchema(new StreamSource(stream));
+		} catch (SAXException e) {
+			throw new IllegalStateException("Could not create schema", e);
 		}
 	}
 	
@@ -70,12 +92,12 @@ public class XmlSchemaFactory {
 	 * TODO support jargons
 	 * @return
 	 */
-	public Document createHumanReadableSchema() {
+	public Schema createHumanReadableSchema() {
 		final CellXmlSchemaTerminology terminology = new CellXmlSchemaTerminology();
 		return createSchema(terminology);
 	}
 	
-	public Document createMachineReadableSchema() {
+	public Schema createMachineReadableSchema() {
 		// TODO
 		return null;
 	}

@@ -12,17 +12,23 @@ import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.dom.CompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
+import org.s23m.cell.communication.xml.schema.Schema;
 
 @SuppressWarnings("all")
 public class SchemaRendering {
   private static int INDENTATION = 2;
   
-  public static CharSequence render(final Node node) {
+  public static CharSequence render(final Schema node) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    _builder.newLine();
     CharSequence _render = SchemaRendering.render(node, 0);
-    return _render;
+    _builder.append(_render, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
-  protected static CharSequence _render(final CompositeNode node, final int level) {
+  private static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
     Iterable<? extends Node> _children = node.getChildren();
     final Iterable<? extends Node> children = _children;
@@ -53,7 +59,7 @@ public class SchemaRendering {
     return _builder;
   }
   
-  protected static CharSequence _render(final Node node, final int level) {
+  private static CharSequence _render(final Node node, final int level) {
     String _renderPrefix = SchemaRendering.renderPrefix(node, level);
     String _operator_plus = StringExtensions.operator_plus(_renderPrefix, "/>");
     return _operator_plus;
@@ -118,7 +124,7 @@ public class SchemaRendering {
     return _xblockexpression;
   }
   
-  public static CharSequence render(final Node node, final int level) {
+  private static CharSequence render(final Node node, final int level) {
     if (node instanceof CompositeNode) {
       return _render((CompositeNode)node, level);
     } else if (node != null) {

@@ -348,12 +348,16 @@ public class XmlSchemaTemplate {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
-              ElementReference _element = builder.element(modelElement, Cardinality.ZERO_TO_MANY);
-              CollectionExtensions.<ElementReference>operator_add(_children, _element);
+              String _languageIdentifier = terminology.languageIdentifier();
+              Element _element = builder.element(_languageIdentifier, DataType.STRING);
+              CollectionExtensions.<Element>operator_add(_children, _element);
               List<Node> _children_1 = it.getChildren();
+              ElementReference _element_1 = builder.element(modelElement, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);
+              List<Node> _children_2 = it.getChildren();
               String _semanticDomain = terminology.semanticDomain();
-              Element _element_1 = builder.element(_semanticDomain, semanticDomainComplexType, Cardinality.ZERO_TO_MANY);
-              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
+              Element _element_2 = builder.element(_semanticDomain, semanticDomainComplexType, Cardinality.ZERO_TO_MANY);
+              CollectionExtensions.<Element>operator_add(_children_2, _element_2);
             }
           }
         };

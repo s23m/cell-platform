@@ -37,12 +37,12 @@ class SchemaBuilder {
 	
 	def private removeElementsWithoutReferences() {
 		val predicate = [Node it | it instanceof Element && (it as Element).references.empty]
-		val elements = schema.children.filter(predicate).toList
-		schema.children.removeAll(elements)
+		val elements = schema.getChildren.filter(predicate).toList
+		schema.getChildren.removeAll(elements)
 	}
 	
 	def private <T extends Node> T store(T node) {
-		schema.children += node
+		schema.getChildren += node
 		node
 	}
 	

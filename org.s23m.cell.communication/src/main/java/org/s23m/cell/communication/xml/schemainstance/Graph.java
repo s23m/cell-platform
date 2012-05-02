@@ -27,9 +27,27 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class Model extends Graph {
-
-	public Model(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.model(), terminology);
+/*
+<xsd:element name="container" type="s23m:identityReference"/>
+<xsd:element ref="s23m:isAbstract"/>
+<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
+<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
+ */
+public class Graph extends Category {
+	
+	private IdentityReference container;
+	
+	protected Graph(Namespace namespace, String name, XmlSchemaTerminology terminology) {
+		// TODO add parameters
+		super(namespace, name, terminology, null, null);
 	}
+	
+	public Graph(Namespace namespace, XmlSchemaTerminology terminology) {
+		this(namespace, terminology.graph(), terminology);
+	}
+	
 }

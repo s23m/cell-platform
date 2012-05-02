@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Cell.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * The S23M Foundation.
@@ -24,9 +24,9 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schema;
 
-import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
+import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
 
-public final class Sequence extends AbstractCompositeNode {
+public final class Sequence extends BasicCompositeNode {
 	
 	public Sequence() {
 		super(Constants.XML_SCHEMA_NAMESPACE, "sequence");
