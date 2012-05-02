@@ -32,7 +32,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import junit.framework.TestCase;
 
@@ -42,6 +41,8 @@ import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
 
+// TODO fix up root element - wrapper nodes can have a complexType child as in 
+// http://www.w3schools.com/schema/schema_example.asp
 public class XmlDocumentValidationTest extends TestCase {
 
 	public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
@@ -62,31 +63,8 @@ public class XmlDocumentValidationTest extends TestCase {
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		
 		URL resource = Resources.getResource("cell-communication-instance.xml");
-		//String instanceContents = Resources.toString(resource, Charsets.UTF_8);
 		byte[] byteArray = Resources.toByteArray(resource);
-		//InputSupplier<InputStreamReader> supplier = Resources.newReaderSupplier(resource, Charsets.UTF_8);
-		
 		Document document = builder.parse(new ByteArrayInputStream(byteArray));
 		
 	}
-	
-	// http://www.edankert.com/validate.html
-	/*
-	public static void main(String[] args) {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setValidating(false);
-		factory.setNamespaceAware(true);
-
-		SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-		schemaFactory.newSchema(new Source[] {new StreamSource("contacts.xsd")});
-		
-		factory.setSchema();
-
-		DocumentBuilder builder = factory.newDocumentBuilder();
-
-		builder.setErrorHandler(new SimpleErrorHandler());
-
-		Document document = builder.parse(new InputSource("document.xml"));
-	}
-	*/
 }

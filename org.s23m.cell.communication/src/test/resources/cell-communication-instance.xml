@@ -27,13 +27,22 @@
 <s23m:artifactSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s23m="http://schemas.s23m.org/serialization/2012">
 	<s23m:languageIdentifier>ENGLISH</s23m:languageIdentifier>
 	<s23m:model>
-		<s23m:container>
+		<s23m:semanticIdentity>
 			<s23m:uniqueRepresentationReference>1</s23m:uniqueRepresentationReference>
 			<s23m:identifier>2</s23m:identifier>
-		</s23m:container>
-		<s23m:isAbstract>
+		</s23m:semanticIdentity>
+		<s23m:category>
 			<s23m:uniqueRepresentationReference>3</s23m:uniqueRepresentationReference>
 			<s23m:identifier>4</s23m:identifier>
+		</s23m:category>
+		
+		<s23m:container>
+			<s23m:uniqueRepresentationReference>9</s23m:uniqueRepresentationReference>
+			<s23m:identifier>10</s23m:identifier>
+		</s23m:container>
+		<s23m:isAbstract>
+			<s23m:uniqueRepresentationReference>9</s23m:uniqueRepresentationReference>
+			<s23m:identifier>10</s23m:identifier>
 		</s23m:isAbstract>
 		
 		<!-- minOccurs="0" maxOccurs="unbounded" -->
@@ -91,13 +100,22 @@
 			<s23m:category>
 				<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
 				<s23m:identifier>26</s23m:identifier>
-			</s23m:category>			
+			</s23m:category>	
 			
 			<s23m:isAbstract>
 				<s23m:uniqueRepresentationReference>27</s23m:uniqueRepresentationReference>
 				<s23m:identifier>28</s23m:identifier>
 			</s23m:isAbstract>
 			<s23m:from>
+				<s23m:semanticIdentity>
+					<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
+					<s23m:identifier>24</s23m:identifier>
+				</s23m:semanticIdentity>
+				<s23m:category>
+					<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
+					<s23m:identifier>26</s23m:identifier>
+				</s23m:category>
+				
 				<s23m:isAbstract>
 					<s23m:uniqueRepresentationReference>29</s23m:uniqueRepresentationReference>
 					<s23m:identifier>30</s23m:identifier>
@@ -120,6 +138,15 @@
 				</s23m:isNavigable>
 			</s23m:from>
 			<s23m:to>
+				<s23m:semanticIdentity>
+					<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
+					<s23m:identifier>24</s23m:identifier>
+				</s23m:semanticIdentity>
+				<s23m:category>
+					<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
+					<s23m:identifier>26</s23m:identifier>
+				</s23m:category>			
+			
 				<s23m:isAbstract>
 					<s23m:uniqueRepresentationReference>39</s23m:uniqueRepresentationReference>
 					<s23m:identifier>40</s23m:identifier>
