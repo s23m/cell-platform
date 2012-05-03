@@ -69,8 +69,9 @@ class XmlSchemaTemplate {
 		val command = terminology.command
 		val query = terminology.query
 		val function = terminology.function
+		val artifactSet = terminology.artifactSet
 		
-		val builder = new SchemaBuilder([
+		val builder = new SchemaBuilder(artifactSet, [
 			attributes += newLinkedHashMap(
 				xmlns(XSD) -> XSD_SCHEMA,
 				xmlns(S23M) -> S23M_SCHEMA,
@@ -186,7 +187,7 @@ class XmlSchemaTemplate {
 			children += builder.element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
 		])
 		
-		val artifactSetComplexType = builder.complexType(terminology.artifactSet, [
+		val artifactSetComplexType = builder.complexType(artifactSet, [
 			children += builder.element(terminology.languageIdentifier, DataType::STRING)
 			children += builder.element(modelElement, Cardinality::ZERO_TO_MANY)
 			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
@@ -194,7 +195,7 @@ class XmlSchemaTemplate {
 		
 		/* Root element */
 		
-		builder.element(terminology.artifactSet, artifactSetComplexType)
+		builder.element(artifactSet, artifactSetComplexType)
 		
 		builder.build
 	}

@@ -25,13 +25,17 @@
 package org.s23m.cell.communication.xml;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
 
 import junit.framework.TestCase;
 
@@ -66,5 +70,14 @@ public class XmlDocumentValidationTest extends TestCase {
 		byte[] byteArray = Resources.toByteArray(resource);
 		Document document = builder.parse(new ByteArrayInputStream(byteArray));
 		
+		Source xmlFile = new StreamSource(new ByteArrayInputStream(byteArray));
+		
+		Validator validator = schema.newValidator();
+		try {
+		  validator.validate(xmlFile);
+		  System.out.println("Validation succeeded");
+		} catch (SAXException e) {
+		  System.out.println("Validation failed: " + e.getMessage());
+		}
 	}
 }

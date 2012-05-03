@@ -46,7 +46,9 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -173,6 +175,25 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	}
 	
+	@Test
+	public void testRootElementExists() {
+		Collection<Node> allElements = retrieveAllElements();
+		
+		Predicate<Node> rootElementPredicate = new Predicate<Node>() {
+			@Override
+			public boolean apply(Node input) {
+				String nameAttribute = getName(input);
+				boolean nameMatches = terminology.artifactSet().equals(nameAttribute);
+				String nodeTagName = input.getLocalName();
+				boolean nodeTagMatches = "element".equals(nodeTagName); 
+				return nameMatches && nodeTagMatches;
+			}
+		};
+		
+		Node found = Iterables.find(allElements, rootElementPredicate, null);
+		assertNotNull("The root element was not found", found);
+	}
+	
 	private String retrieveXsdStringType() {
 		return retrieveXsdNamespacePrefix() + ":" + XSD_STRING;
 	}
@@ -264,6 +285,16 @@ public class XmlSchemaFactoryTest extends TestCase {
 			result.add(nodeList.item(i));
 		}
 		return result;
+	}
+	
+	private String getName(Node elementNode) {
+		NamedNodeMap attributes = elementNode.getAttributes();
+		Node node = attributes.getNamedItem("name");
+		if (node == null) {
+			return null;
+		} else {
+			return node.getTextContent();
+		}
 	}
 	
 	private Node findNodeWithValue(NamedNodeMap map, String value) {

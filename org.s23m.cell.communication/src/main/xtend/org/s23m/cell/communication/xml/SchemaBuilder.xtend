@@ -25,7 +25,10 @@ class SchemaBuilder {
 	
 	Schema schema
 	
-	new((Schema)=>void initialiser) {
+	String rootElementName
+	
+	new(String rootElementName, (Schema)=>void initialiser) {
+		this.rootElementName = rootElementName
 		this.schema = new Schema()
 		initialiser.apply(schema)
 	}
@@ -36,7 +39,8 @@ class SchemaBuilder {
 	}
 	
 	def private removeElementsWithoutReferences() {
-		val predicate = [Node it | it instanceof Element && (it as Element).references.empty]
+		// always exclude the root element from removal
+		val predicate = [Node it | it instanceof Element && (it as Element).references.empty && (it as Element).nameAttribute != rootElementName]
 		val elements = schema.getChildren.filter(predicate).toList
 		schema.getChildren.removeAll(elements)
 	}
@@ -59,7 +63,7 @@ class SchemaBuilder {
 	}
 	
 	def element(String name, Type type) {
-		element(name, type, [])	
+		element(name, type, [])
 	}
 	
 	def element(String name, Type type, (Element)=>void initialiser) {

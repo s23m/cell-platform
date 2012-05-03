@@ -79,6 +79,8 @@ public class XmlSchemaTemplate {
       final String query = _query;
       String _function = terminology.function();
       final String function = _function;
+      String _artifactSet = terminology.artifactSet();
+      final String artifactSet = _artifactSet;
       final Procedure1<Schema> _function_1 = new Procedure1<Schema>() {
           public void apply(final Schema it) {
             LinkedHashMap<String,String> _attributes = it.getAttributes();
@@ -93,7 +95,7 @@ public class XmlSchemaTemplate {
             Extensions.<String, String>operator_add(_attributes, _newLinkedHashMap);
           }
         };
-      SchemaBuilder _schemaBuilder = new SchemaBuilder(_function_1);
+      SchemaBuilder _schemaBuilder = new SchemaBuilder(artifactSet, _function_1);
       final SchemaBuilder builder = _schemaBuilder;
       String _uuid = terminology.uuid();
       SimpleType _simpleType = builder.simpleType(_uuid, DataType.STRING);
@@ -343,7 +345,6 @@ public class XmlSchemaTemplate {
         };
       ComplexType _complexType_14 = builder.complexType(_semanticDomain, _function_12);
       final ComplexType semanticDomainComplexType = _complexType_14;
-      String _artifactSet = terminology.artifactSet();
       final Procedure1<Sequence> _function_13 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
@@ -361,10 +362,9 @@ public class XmlSchemaTemplate {
             }
           }
         };
-      ComplexType _complexType_15 = builder.complexType(_artifactSet, _function_13);
+      ComplexType _complexType_15 = builder.complexType(artifactSet, _function_13);
       final ComplexType artifactSetComplexType = _complexType_15;
-      String _artifactSet_1 = terminology.artifactSet();
-      builder.element(_artifactSet_1, artifactSetComplexType);
+      builder.element(artifactSet, artifactSetComplexType);
       Schema _build = builder.build();
       _xblockexpression = (_build);
     }
