@@ -46,13 +46,11 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-// TODO test for maximum reuse (reusable elements whenever there are repeated (name, type) pairs)
 // TODO check that all types are qualified
 // TODO check that all type names are unique
 // TODO check children of complexTypes (make sure elements are wrapped in a sequence)

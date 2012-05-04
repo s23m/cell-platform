@@ -24,22 +24,35 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.dom.AbstractLeafNode;
+import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class StringElement extends AbstractLeafNode {
-	
-	private final String value;
+/*
+	<!-- minOccurs="0" maxOccurs="unbounded" -->
+	<s23m:vertex>
+		<s23m:semanticIdentity>
+			<s23m:uniqueRepresentationReference>5</s23m:uniqueRepresentationReference>
+			<s23m:identifier>6</s23m:identifier>
+		</s23m:semanticIdentity>
+		<s23m:category>
+			<s23m:uniqueRepresentationReference>7</s23m:uniqueRepresentationReference>
+			<s23m:identifier>8</s23m:identifier>
+		</s23m:category>
+		
+		<s23m:isAbstract>
+			<s23m:uniqueRepresentationReference>9</s23m:uniqueRepresentationReference>
+			<s23m:identifier>10</s23m:identifier>
+		</s23m:isAbstract>
+		<s23m:maxCardinality>
+			<s23m:uniqueRepresentationReference>11</s23m:uniqueRepresentationReference>
+			<s23m:identifier>12</s23m:identifier>
+		</s23m:maxCardinality>
+	</s23m:vertex>
+ */
+public class Vertex extends BasicCompositeNode {
 
-	public StringElement(Namespace namespace, String name, String value) {
+	public Vertex(Namespace namespace, String name) {
 		super(namespace, name);
-		this.value = value;
 	}
-	
-	/**
-	 * Text content
-	 */
-	public String getText() {
-		return value;
-	}
+
 }

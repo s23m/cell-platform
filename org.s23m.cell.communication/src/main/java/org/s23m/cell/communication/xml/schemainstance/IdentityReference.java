@@ -24,28 +24,40 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-/*
-<xsd:element name="uniqueRepresentationReference" type="s23m:uuid"/>
-<xsd:element name="identifier" type="s23m:uuid"/>
- */
-public class IdentityReference {
-	
-	// s23m:uuid
-	private final String uniqueRepresentationReference;
-	
-	// s23m:uuid
-	private final String identifier;
+import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
+import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
-	public IdentityReference(String uniqueRepresentationReference, String identifier) {
-		this.uniqueRepresentationReference = uniqueRepresentationReference;
-		this.identifier = identifier;
+import com.google.common.collect.ImmutableList;
+
+/*
+<s23m:[name]>
+	<s23m:uniqueRepresentationReference>[uniqueRepresentationReference]</s23m:uniqueRepresentationReference>
+	<s23m:identifier>[identifier]</s23m:identifier>
+</s23m:[name]>
+*/
+public class IdentityReference extends AbstractCompositeNode {
+	
+	private final StringElement uniqueRepresentationReference;
+	
+	private final StringElement identifier;
+
+	public IdentityReference(Namespace namespace, String name, String uniqueRepresentationReference, String identifier) {
+		super(namespace, name);
+		this.uniqueRepresentationReference = new StringElement(namespace, "uniqueRepresentationReference", uniqueRepresentationReference);
+		this.identifier = new StringElement(namespace, "identifier", identifier);
 	}
 
-	public String getUniqueRepresentationReference() {
+	public StringElement getUniqueRepresentationReference() {
 		return uniqueRepresentationReference;
 	}
 	
-	public String getIdentifier() {
+	public StringElement getIdentifier() {
 		return identifier;
+	}
+
+	@Override
+	public Iterable<? extends Node> getChildren() {
+		return ImmutableList.of(uniqueRepresentationReference, identifier);
 	}
 }

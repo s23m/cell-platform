@@ -31,29 +31,27 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
-import org.s23m.cell.communication.xml.schema.Cardinality;
-import org.s23m.cell.communication.xml.schema.DataType;
-import org.s23m.cell.communication.xml.schema.Element;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 // TODO generate this class from the schema instance (and reduce duplication)?
 public class ArtifactSet extends AbstractCompositeNode {
 	
-	private final Element languageIdentifier;
+	private final StringElement languageIdentifier;
 	
 	private final List<Model> modelList;
 	
 	private final List<SemanticDomain> semanticDomainList;
 	
-	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology) {
+	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
 		super(namespace, terminology.artifactSet());
-		this.languageIdentifier = new Element(namespace, terminology.languageIdentifier(), DataType.STRING, Cardinality.EXACTLY_ONE);
+		this.languageIdentifier = new StringElement(namespace, terminology.languageIdentifier(), languageIdentifier);
 		this.modelList = new ArrayList<Model>();
 		this.semanticDomainList = new ArrayList<SemanticDomain>();
 	}
 	
-	public Element getLanguageIdentifier() {
+	public StringElement getLanguageIdentifier() {
 		return languageIdentifier;
 	}
 	
@@ -67,6 +65,6 @@ public class ArtifactSet extends AbstractCompositeNode {
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		return Iterables.concat(modelList, semanticDomainList);
+		return Iterables.concat(ImmutableList.of(languageIdentifier), modelList, semanticDomainList);
 	}
 }

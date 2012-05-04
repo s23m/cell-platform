@@ -24,44 +24,40 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
-import org.s23m.cell.communication.xml.schema.Cardinality;
-import org.s23m.cell.communication.xml.schema.DataType;
-import org.s23m.cell.communication.xml.schema.Element;
 
-/*
-<xsd:element ref="s23m:semanticIdentity"/>
-<xsd:element ref="s23m:category"/>
- */
+import com.google.common.collect.ImmutableList;
+
 public class Category extends AbstractCompositeNode {
 
-	private final IdentityReference semanticIdentity;
+	private IdentityReference semanticIdentity;
 	
-	private final IdentityReference category;	
+	private IdentityReference category;	
 	
-	protected Category(Namespace namespace,
-			String name,
-			XmlSchemaTerminology terminology,
-			IdentityReference semanticIdentity,
-			IdentityReference category) {
-		
+	protected Category(Namespace namespace, String name) {
 		super(namespace, name);
+	}
+
+	public IdentityReference getSemanticIdentity() {
+		return semanticIdentity;
+	}
+	
+	public void setSemanticIdentity(IdentityReference semanticIdentity) {
 		this.semanticIdentity = semanticIdentity;
+	}
+	
+	public IdentityReference getCategory() {
+		return category;
+	}
+	
+	public void setCategory(IdentityReference category) {
 		this.category = category;
 	}
 	
-	public Category(Namespace namespace, XmlSchemaTerminology terminology) {
-		// TODO add parameters
-		this(namespace, terminology.category(), terminology, null, null);
-	}
-
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of(semanticIdentity, category);
 	}
-
 }

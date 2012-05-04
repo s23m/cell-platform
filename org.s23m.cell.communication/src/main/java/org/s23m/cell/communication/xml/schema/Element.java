@@ -78,9 +78,4 @@ public final class Element extends AbstractLeafNode implements ReferenceableNode
 	public String getIdentifier() {
 		return createQualifiedName(targetNamespace, name);
 	}
-
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + " (" + name + ")";
-	}
 }

@@ -24,30 +24,95 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.s23m.cell.communication.xml.dom.Namespace;
+import java.util.List;
 
-/*
-<xsd:element name="container" type="s23m:identityReference"/>
-<xsd:element ref="s23m:isAbstract"/>
-<xsd:element name="vertex" type="s23m:vertex" minOccurs="0" maxOccurs="unbounded"/>
-<xsd:element name="visibility" type="s23m:visibility" minOccurs="0" maxOccurs="unbounded"/>
-<xsd:element name="edge" type="s23m:edge" minOccurs="0" maxOccurs="unbounded"/>
-<xsd:element name="superSetReference" type="s23m:superSetReference" minOccurs="0" maxOccurs="unbounded"/>            
-<xsd:element name="command" type="s23m:command" minOccurs="0" maxOccurs="unbounded"/>
-<xsd:element name="query" type="s23m:query" minOccurs="0" maxOccurs="unbounded"/>
- */
+import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 public class Graph extends Category {
-	
+		
 	private IdentityReference container;
 	
-	protected Graph(Namespace namespace, String name, XmlSchemaTerminology terminology) {
-		// TODO add parameters
-		super(namespace, name, terminology, null, null);
+	private IdentityReference isAbstract;
+	
+	private final List<Vertex> vertexList;
+	
+	private final List<Edge> edgeList;
+	
+	private final List<Command> commandList;
+	
+	private final List<Query> queryList;
+	
+	protected Graph(Namespace namespace, String name) {
+		super(namespace, name);
+		this.vertexList = Lists.newArrayList();
+		this.edgeList = Lists.newArrayList();
+		this.commandList = Lists.newArrayList();
+		this.queryList = Lists.newArrayList();
+	}
+
+	public IdentityReference getContainer() {
+		return container;
+	}
+
+	public void setContainer(IdentityReference container) {
+		this.container = container;
+	}
+
+	public IdentityReference getIsAbstract() {
+		return isAbstract;
+	}
+
+	public void setIsAbstract(IdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
 	}
 	
-	public Graph(Namespace namespace, XmlSchemaTerminology terminology) {
-		this(namespace, terminology.graph(), terminology);
+	public List<Vertex> getVertexList() {
+		return vertexList;
 	}
 	
+	public void addVertex(Vertex vertex) {
+		vertexList.add(vertex);
+	}
+	
+	public List<Edge> getEdgeList() {
+		return edgeList;
+	}
+	
+	public void addEdge(Edge edge) {
+		edgeList.add(edge);
+	}
+	
+	public List<Command> getCommandList() {
+		return commandList;
+	}
+
+	public void addCommand(Command command) {
+		commandList.add(command);
+	}
+	
+	public List<Query> getQueryList() {
+		return queryList;
+	}
+
+	public void addQuery(Query query) {
+		queryList.add(query);
+	}
+
+	@Override
+	public Iterable<? extends Node> getChildren() {
+		final Iterable<? extends Node> categoryChildren = super.getChildren();
+		final Iterable<? extends Node> scalarValues = ImmutableList.of(container, isAbstract);
+		final Iterable<? extends Node> listValues = Iterables.concat(
+				vertexList,
+				edgeList,
+				commandList,
+				queryList
+		);
+		return Iterables.concat(categoryChildren, scalarValues,	listValues);
+	}
 }

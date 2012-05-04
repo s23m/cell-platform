@@ -30,6 +30,6 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 public class Model extends Graph {
 
 	public Model(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.model(), terminology);
+		super(namespace, terminology.model());
 	}
 }
