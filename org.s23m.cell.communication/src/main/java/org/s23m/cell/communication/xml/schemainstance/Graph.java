@@ -26,6 +26,7 @@ package org.s23m.cell.communication.xml.schemainstance;
 
 import java.util.List;
 
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
@@ -46,7 +47,11 @@ public class Graph extends Category {
 	private final List<Command> commandList;
 	
 	private final List<Query> queryList;
-	
+
+	public Graph(Namespace namespace, XmlSchemaTerminology terminology) {
+		this(namespace, terminology.graph());
+	}
+
 	protected Graph(Namespace namespace, String name) {
 		super(namespace, name);
 		this.vertexList = Lists.newArrayList();

@@ -24,6 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
@@ -38,8 +39,8 @@ public class Edge extends Category {
 	
 	private EdgeEnd to;
 	
-	public Edge(Namespace namespace, String name) {
-		super(namespace, name);
+	public Edge(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.edge());
 	}
 
 	@Override

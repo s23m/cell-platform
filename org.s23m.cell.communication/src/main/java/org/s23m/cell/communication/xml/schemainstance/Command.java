@@ -24,38 +24,26 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
+import java.util.List;
+
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
-/*
-	<!-- minOccurs="0" maxOccurs="unbounded" -->
-	<s23m:command>
-		<s23m:semanticIdentity>
-			<s23m:uniqueRepresentationReference>59</s23m:uniqueRepresentationReference>
-			<s23m:identifier>60</s23m:identifier>
-		</s23m:semanticIdentity>
-		<s23m:category>
-			<s23m:uniqueRepresentationReference>61</s23m:uniqueRepresentationReference>
-			<s23m:identifier>62</s23m:identifier>
-		</s23m:category>
-		
-		<!-- minOccurs="0" maxOccurs="unbounded" -->
-		<s23m:parameter>
-			<s23m:semanticIdentity>
-				<s23m:uniqueRepresentationReference>63</s23m:uniqueRepresentationReference>
-				<s23m:identifier>64</s23m:identifier>
-			</s23m:semanticIdentity>
-			<s23m:category>
-				<s23m:uniqueRepresentationReference>65</s23m:uniqueRepresentationReference>
-				<s23m:identifier>66</s23m:identifier>
-			</s23m:category>
-		</s23m:parameter>
-	</s23m:command>
- */
-public class Command extends BasicCompositeNode {
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
-	public Command(Namespace namespace, String name) {
-		super(namespace, name);
+public class Command extends Category {
+	
+	private final List<Parameter> parameterList;
+
+	public Command(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.command());
+		parameterList = Lists.newArrayList();
 	}
-
+	
+	@Override
+	public Iterable<? extends Node> getChildren() {
+		return Iterables.concat(super.getChildren(), parameterList);
+	}
 }

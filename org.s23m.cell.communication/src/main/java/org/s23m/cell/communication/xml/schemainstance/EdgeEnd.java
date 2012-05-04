@@ -24,6 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
@@ -66,8 +67,8 @@ public class EdgeEnd extends Category {
 	
 	private IdentityReference isNavigable;
 
-	public EdgeEnd(Namespace namespace, String name) {
-		super(namespace, name);
+	public EdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.edgeEnd());
 	}
 
 	public IdentityReference getIsAbstract() {
