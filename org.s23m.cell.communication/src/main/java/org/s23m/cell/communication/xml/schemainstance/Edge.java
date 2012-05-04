@@ -24,93 +24,30 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
-/*
-	<!-- minOccurs="0" maxOccurs="unbounded" -->
-	<s23m:edge>
-		<s23m:semanticIdentity>
-			<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
-			<s23m:identifier>24</s23m:identifier>
-		</s23m:semanticIdentity>
-		<s23m:category>
-			<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
-			<s23m:identifier>26</s23m:identifier>
-		</s23m:category>	
-		
-		<s23m:isAbstract>
-			<s23m:uniqueRepresentationReference>27</s23m:uniqueRepresentationReference>
-			<s23m:identifier>28</s23m:identifier>
-		</s23m:isAbstract>
-		<s23m:from>
-			<s23m:semanticIdentity>
-				<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
-				<s23m:identifier>24</s23m:identifier>
-			</s23m:semanticIdentity>
-			<s23m:category>
-				<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
-				<s23m:identifier>26</s23m:identifier>
-			</s23m:category>
-			
-			<s23m:isAbstract>
-				<s23m:uniqueRepresentationReference>29</s23m:uniqueRepresentationReference>
-				<s23m:identifier>30</s23m:identifier>
-			</s23m:isAbstract>
-			<s23m:minCardinality>
-				<s23m:uniqueRepresentationReference>31</s23m:uniqueRepresentationReference>
-				<s23m:identifier>32</s23m:identifier>
-			</s23m:minCardinality>
-			<s23m:maxCardinality>
-				<s23m:uniqueRepresentationReference>33</s23m:uniqueRepresentationReference>
-				<s23m:identifier>34</s23m:identifier>
-			</s23m:maxCardinality>
-			<s23m:isContainer>
-				<s23m:uniqueRepresentationReference>35</s23m:uniqueRepresentationReference>
-				<s23m:identifier>36</s23m:identifier>
-			</s23m:isContainer>
-			<s23m:isNavigable>
-				<s23m:uniqueRepresentationReference>37</s23m:uniqueRepresentationReference>
-				<s23m:identifier>38</s23m:identifier>
-			</s23m:isNavigable>
-		</s23m:from>
-		<s23m:to>
-			<s23m:semanticIdentity>
-				<s23m:uniqueRepresentationReference>23</s23m:uniqueRepresentationReference>
-				<s23m:identifier>24</s23m:identifier>
-			</s23m:semanticIdentity>
-			<s23m:category>
-				<s23m:uniqueRepresentationReference>25</s23m:uniqueRepresentationReference>
-				<s23m:identifier>26</s23m:identifier>
-			</s23m:category>			
-		
-			<s23m:isAbstract>
-				<s23m:uniqueRepresentationReference>39</s23m:uniqueRepresentationReference>
-				<s23m:identifier>40</s23m:identifier>
-			</s23m:isAbstract>
-			<s23m:minCardinality>
-				<s23m:uniqueRepresentationReference>41</s23m:uniqueRepresentationReference>
-				<s23m:identifier>42</s23m:identifier>
-			</s23m:minCardinality>
-			<s23m:maxCardinality>
-				<s23m:uniqueRepresentationReference>43</s23m:uniqueRepresentationReference>
-				<s23m:identifier>44</s23m:identifier>
-			</s23m:maxCardinality>
-			<s23m:isContainer>
-				<s23m:uniqueRepresentationReference>45</s23m:uniqueRepresentationReference>
-				<s23m:identifier>46</s23m:identifier>
-			</s23m:isContainer>
-			<s23m:isNavigable>
-				<s23m:uniqueRepresentationReference>47</s23m:uniqueRepresentationReference>
-				<s23m:identifier>48</s23m:identifier>
-			</s23m:isNavigable>
-		</s23m:to>				
-	</s23m:edge>
- */
-public class Edge extends BasicCompositeNode {
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
+public class Edge extends Category {
+	
+	private IdentityReference isAbstract;
+	
+	private EdgeEnd from;
+	
+	private EdgeEnd to;
+	
 	public Edge(Namespace namespace, String name) {
 		super(namespace, name);
+	}
+
+	@Override
+	public Iterable<? extends Node> getChildren() {
+		return Iterables.concat(
+				super.getChildren(),
+				ImmutableList.of(isAbstract, from, to)
+		);
 	}
 
 }

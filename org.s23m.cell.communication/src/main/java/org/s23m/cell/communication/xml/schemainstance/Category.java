@@ -30,7 +30,7 @@ import org.s23m.cell.communication.xml.dom.Node;
 
 import com.google.common.collect.ImmutableList;
 
-public class Category extends AbstractCompositeNode {
+public abstract class Category extends AbstractCompositeNode {
 
 	private IdentityReference semanticIdentity;
 	
