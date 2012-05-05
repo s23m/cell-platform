@@ -3,7 +3,6 @@ package org.s23m.cell.communication.xml
 import org.s23m.cell.communication.xml.dom.CompositeNode
 import org.s23m.cell.communication.xml.dom.Node
 
-import static org.s23m.cell.communication.xml.SchemaRendering.*
 import org.s23m.cell.communication.xml.schema.Schema
 
 class XmlRendering {
