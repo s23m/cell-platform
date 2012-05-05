@@ -24,6 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
@@ -42,10 +43,10 @@ public class IdentityReference extends AbstractCompositeNode {
 	
 	private final StringElement identifier;
 
-	public IdentityReference(Namespace namespace, String name, String uniqueRepresentationReference, String identifier) {
+	public IdentityReference(Namespace namespace, String name, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
 		super(namespace, name);
-		this.uniqueRepresentationReference = new StringElement(namespace, "uniqueRepresentationReference", uniqueRepresentationReference);
-		this.identifier = new StringElement(namespace, "identifier", identifier);
+		this.uniqueRepresentationReference = new StringElement(namespace, terminology.uniqueRepresentationReference(), uniqueRepresentationReference);
+		this.identifier = new StringElement(namespace, terminology.identifier(), identifier);
 	}
 
 	public StringElement getUniqueRepresentationReference() {

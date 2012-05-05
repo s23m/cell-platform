@@ -29,32 +29,7 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
-/*
-	<s23m:[name]>
-		<s23m:isAbstract>
-			<s23m:uniqueRepresentationReference>29</s23m:uniqueRepresentationReference>
-			<s23m:identifier>30</s23m:identifier>
-		</s23m:isAbstract>
-		<s23m:minCardinality>
-			<s23m:uniqueRepresentationReference>31</s23m:uniqueRepresentationReference>
-			<s23m:identifier>32</s23m:identifier>
-		</s23m:minCardinality>
-		<s23m:maxCardinality>
-			<s23m:uniqueRepresentationReference>33</s23m:uniqueRepresentationReference>
-			<s23m:identifier>34</s23m:identifier>
-		</s23m:maxCardinality>
-		<s23m:isContainer>
-			<s23m:uniqueRepresentationReference>35</s23m:uniqueRepresentationReference>
-			<s23m:identifier>36</s23m:identifier>
-		</s23m:isContainer>
-		<s23m:isNavigable>
-			<s23m:uniqueRepresentationReference>37</s23m:uniqueRepresentationReference>
-			<s23m:identifier>38</s23m:identifier>
-		</s23m:isNavigable>
-	</s23m:[name]>
- */
 public class EdgeEnd extends Category {
 	
 	private IdentityReference isAbstract;
@@ -112,15 +87,13 @@ public class EdgeEnd extends Category {
 	}
 
 	@Override
-	public Iterable<? extends Node> getChildren() {
-		final Iterable<? extends Node> categoryChildren = super.getChildren();
-		final Iterable<? extends Node> scalarValues = ImmutableList.of(
+	protected Iterable<? extends Node> getLocalChildren() {
+		return ImmutableList.of(
 				isAbstract,
 				minCardinality,
 				maxCardinality,
 				isContainer,
 				isNavigable
 		);
-		return Iterables.concat(categoryChildren, scalarValues);
 	}
 }

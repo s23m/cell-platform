@@ -24,40 +24,32 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
+import java.util.List;
+
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
-public class Vertex extends Category {
+public abstract class Function extends Category {
 
-	private IdentityReference isAbstract;
+	private final List<Parameter> parameterList;
+
+	protected Function(Namespace namespace, String name) {
+		super(namespace, name);
+		parameterList = Lists.newArrayList();		
+	}
 	
-	private IdentityReference maxCardinality;
+	public List<Parameter> getParameterList() {
+		return parameterList;
+	}
 	
-	public Vertex(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.vertex());
-	}
-
-	public IdentityReference getIsAbstract() {
-		return isAbstract;
-	}
-
-	public void setIsAbstract(IdentityReference isAbstract) {
-		this.isAbstract = isAbstract;
-	}
-
-	public IdentityReference getMaxCardinality() {
-		return maxCardinality;
-	}
-
-	public void setMaxCardinality(IdentityReference maxCardinality) {
-		this.maxCardinality = maxCardinality;
+	public void addParameter(Parameter parameter) {
+		parameterList.add(parameter);
 	}
 
 	@Override
 	protected Iterable<? extends Node> getLocalChildren() {
-		return ImmutableList.of(isAbstract, maxCardinality);
+		return parameterList;
 	}
 }

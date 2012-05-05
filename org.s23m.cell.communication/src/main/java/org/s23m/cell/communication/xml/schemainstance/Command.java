@@ -24,26 +24,12 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import java.util.List;
-
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.dom.Node;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-public class Command extends Category {
-	
-	private final List<Parameter> parameterList;
+public class Command extends Function {
 
 	public Command(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.command());
-		parameterList = Lists.newArrayList();
-	}
-	
-	@Override
-	public Iterable<? extends Node> getChildren() {
-		return Iterables.concat(super.getChildren(), parameterList);
 	}
 }

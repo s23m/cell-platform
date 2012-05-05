@@ -24,39 +24,50 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
-import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
-/*
-	<!-- minOccurs="0" maxOccurs="unbounded" -->
-	<s23m:visibility>
-		<s23m:semanticIdentity>
-			<s23m:uniqueRepresentationReference>13</s23m:uniqueRepresentationReference>
-			<s23m:identifier>14</s23m:identifier>
-		</s23m:semanticIdentity>
-		<s23m:category>
-			<s23m:uniqueRepresentationReference>15</s23m:uniqueRepresentationReference>
-			<s23m:identifier>16</s23m:identifier>
-		</s23m:category>			
-		
-		<s23m:isAbstract>
-			<s23m:uniqueRepresentationReference>17</s23m:uniqueRepresentationReference>
-			<s23m:identifier>18</s23m:identifier>
-		</s23m:isAbstract>
-		<s23m:from>
-			<s23m:uniqueRepresentationReference>19</s23m:uniqueRepresentationReference>
-			<s23m:identifier>20</s23m:identifier>
-		</s23m:from>
-		<s23m:to>
-			<s23m:uniqueRepresentationReference>21</s23m:uniqueRepresentationReference>
-			<s23m:identifier>22</s23m:identifier>
-		</s23m:to>
-	</s23m:visibility>
- */
-public class Visibility extends BasicCompositeNode {
+import com.google.common.collect.ImmutableList;
 
-	public Visibility(Namespace namespace, String name) {
-		super(namespace, name);
+public class Visibility extends Category {
+	
+	private IdentityReference isAbstract;
+	
+	private IdentityReference from;
+	
+	private IdentityReference to;
+	
+	public Visibility(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.visibility());
 	}
 
+	public IdentityReference getIsAbstract() {
+		return isAbstract;
+	}
+
+	public void setIsAbstract(IdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
+	}
+
+	public IdentityReference getFrom() {
+		return from;
+	}
+
+	public void setFrom(IdentityReference from) {
+		this.from = from;
+	}
+
+	public IdentityReference getTo() {
+		return to;
+	}
+
+	public void setTo(IdentityReference to) {
+		this.to = to;
+	}
+	
+	@Override
+	protected Iterable<? extends Node> getLocalChildren() {
+		return ImmutableList.of(isAbstract, from, to);
+	}
 }

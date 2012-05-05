@@ -29,7 +29,6 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 public class Edge extends Category {
 	
@@ -43,12 +42,32 @@ public class Edge extends Category {
 		super(namespace, terminology.edge());
 	}
 
-	@Override
-	public Iterable<? extends Node> getChildren() {
-		return Iterables.concat(
-				super.getChildren(),
-				ImmutableList.of(isAbstract, from, to)
-		);
+	public IdentityReference getIsAbstract() {
+		return isAbstract;
 	}
 
+	public void setIsAbstract(IdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
+	}
+
+	public EdgeEnd getFrom() {
+		return from;
+	}
+
+	public void setFrom(EdgeEnd from) {
+		this.from = from;
+	}
+
+	public EdgeEnd getTo() {
+		return to;
+	}
+
+	public void setTo(EdgeEnd to) {
+		this.to = to;
+	}
+
+	@Override
+	protected Iterable<? extends Node> getLocalChildren() {
+		return ImmutableList.of(isAbstract, from, to);
+	}
 }

@@ -29,6 +29,7 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 public abstract class Category extends AbstractCompositeNode {
 
@@ -57,7 +58,12 @@ public abstract class Category extends AbstractCompositeNode {
 	}
 	
 	@Override
-	public Iterable<? extends Node> getChildren() {
-		return ImmutableList.of(semanticIdentity, category);
+	public final Iterable<? extends Node> getChildren() {
+		return Iterables.concat(
+				ImmutableList.of(semanticIdentity, category),
+				getLocalChildren()
+		);
 	}
+	
+	protected abstract Iterable<? extends Node> getLocalChildren();
 }

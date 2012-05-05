@@ -24,8 +24,11 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.schemainstance;
 
+import java.util.Collections;
+
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.dom.Node;
 
 public class Parameter extends Category {
 
@@ -33,4 +36,8 @@ public class Parameter extends Category {
 		super(namespace, terminology.parameter());
 	}
 
+	@Override
+	protected Iterable<? extends Node> getLocalChildren() {
+		return Collections.emptyList();
+	}
 }
