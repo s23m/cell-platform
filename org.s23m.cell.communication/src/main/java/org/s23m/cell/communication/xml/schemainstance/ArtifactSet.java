@@ -59,8 +59,16 @@ public class ArtifactSet extends AbstractCompositeNode {
 		return modelList;
 	}
 	
+	public void addModel(Model model) {
+		modelList.add(model);
+	}
+	
 	public List<SemanticDomain> getSemanticDomainList() {
 		return semanticDomainList;
+	}
+	
+	public void addSemanticDomain(SemanticDomain semanticDomain) {
+		semanticDomainList.add(semanticDomain);
 	}
 
 	@Override

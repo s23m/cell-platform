@@ -35,7 +35,7 @@ public class AbstractType extends WrapperNode implements Type {
 	private final Namespace targetNamespace;
 	
 	public AbstractType(Namespace targetNamespace, String name, String nameAttribute, Node child) {
-		super(Constants.XML_SCHEMA_NAMESPACE, name, child);
+		super(SchemaConstants.XML_SCHEMA_NAMESPACE, name, child);
 		this.targetNamespace = targetNamespace;
 		this.nameAttribute = nameAttribute;
 

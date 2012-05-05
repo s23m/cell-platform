@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.Extensions;
+import org.s23m.cell.communication.xml.InstanceConstants;
 import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Node;
@@ -19,25 +20,12 @@ import org.s23m.cell.communication.xml.schema.Element;
 import org.s23m.cell.communication.xml.schema.ElementReference;
 import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
+import org.s23m.cell.communication.xml.schema.SchemaConstants;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.SimpleType;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {
-  /**
-   * Schema constants
-   */
-  private static String XSD = "xsd";
-  
-  private static String XSD_SCHEMA = "http://www.w3.org/2001/XMLSchema";
-  
-  /**
-   * Namespace-related constants
-   */
-  private static String S23M = "s23m";
-  
-  private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
-  
   public Schema createSchemaModel(final XmlSchemaTerminology terminology) {
     Schema _xblockexpression = null;
     {
@@ -84,11 +72,11 @@ public class XmlSchemaTemplate {
       final Procedure1<Schema> _function_1 = new Procedure1<Schema>() {
           public void apply(final Schema it) {
             LinkedHashMap<String,String> _attributes = it.getAttributes();
-            String _xmlns = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.XSD);
-            Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, XmlSchemaTemplate.XSD_SCHEMA);
-            String _xmlns_1 = XmlSchemaTemplate.xmlns(XmlSchemaTemplate.S23M);
-            Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_xmlns_1, XmlSchemaTemplate.S23M_SCHEMA);
-            Pair<String,String> _operator_mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo("targetNamespace", XmlSchemaTemplate.S23M_SCHEMA);
+            String _xmlns = XmlSchemaTemplate.xmlns(SchemaConstants.XML_SCHEMA_PREFIX);
+            Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, SchemaConstants.XML_SCHEMA_URI);
+            String _xmlns_1 = XmlSchemaTemplate.xmlns(InstanceConstants.S23M);
+            Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_xmlns_1, InstanceConstants.S23M_SCHEMA);
+            Pair<String,String> _operator_mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo("targetNamespace", InstanceConstants.S23M_SCHEMA);
             Pair<String,String> _operator_mappedTo_3 = ObjectExtensions.<String, String>operator_mappedTo("elementFormDefault", "qualified");
             Pair<String,String> _operator_mappedTo_4 = ObjectExtensions.<String, String>operator_mappedTo("attributeFormDefault", "unqualified");
             LinkedHashMap<String,String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2, _operator_mappedTo_3, _operator_mappedTo_4);

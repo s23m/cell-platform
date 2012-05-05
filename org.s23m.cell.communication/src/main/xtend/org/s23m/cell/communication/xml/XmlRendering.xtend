@@ -6,7 +6,7 @@ import org.s23m.cell.communication.xml.dom.Node
 import static org.s23m.cell.communication.xml.SchemaRendering.*
 import org.s23m.cell.communication.xml.schema.Schema
 
-class SchemaRendering {
+class XmlRendering {
 	
 	static int INDENTATION = 2
 	

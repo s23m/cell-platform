@@ -3,12 +3,11 @@ package org.s23m.cell.communication.xml;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.Constants;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
@@ -23,17 +22,6 @@ import org.s23m.cell.communication.xml.schema.Type;
 
 @SuppressWarnings("all")
 public class SchemaBuilder {
-  private static String S23M = "s23m";
-  
-  private static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
-  
-  private static Namespace NS_S23M = new Function0<Namespace>() {
-    public Namespace apply() {
-      Namespace _namespace = new Namespace(SchemaBuilder.S23M, SchemaBuilder.S23M_SCHEMA);
-      return _namespace;
-    }
-  }.apply();
-  
   private Schema schema;
   
   private String rootElementName;
@@ -101,20 +89,20 @@ public class SchemaBuilder {
   }
   
   public SimpleType simpleType(final String nameAttribute, final DataType restrictionDataType) {
-    SimpleType _simpleType = new SimpleType(SchemaBuilder.NS_S23M, nameAttribute, restrictionDataType);
+    SimpleType _simpleType = new SimpleType(Constants.NS_S23M, nameAttribute, restrictionDataType);
     SimpleType _store = this.<SimpleType>store(_simpleType);
     return _store;
   }
   
   public ComplexType complexType(final String name, final Procedure1<? super Sequence> initialiser) {
     Sequence _sequence = SchemaBuilder.sequence(initialiser);
-    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, _sequence);
+    ComplexType _complexType = new ComplexType(Constants.NS_S23M, name, _sequence);
     ComplexType _store = this.<ComplexType>store(_complexType);
     return _store;
   }
   
   public ComplexType complexType(final String name, final Extension ext) {
-    ComplexType _complexType = new ComplexType(SchemaBuilder.NS_S23M, name, ext);
+    ComplexType _complexType = new ComplexType(Constants.NS_S23M, name, ext);
     ComplexType _store = this.<ComplexType>store(_complexType);
     return _store;
   }
@@ -134,7 +122,7 @@ public class SchemaBuilder {
   }
   
   public Element element(final String name, final Type type, final Cardinality cardinality) {
-    Element _element = new Element(SchemaBuilder.NS_S23M, name, type, cardinality);
+    Element _element = new Element(Constants.NS_S23M, name, type, cardinality);
     Element _store = this.<Element>store(_element);
     return _store;
   }
@@ -142,7 +130,7 @@ public class SchemaBuilder {
   public Element element(final String name, final Type type, final Cardinality cardinality, final Procedure1<? super Element> initialiser) {
     Element _xblockexpression = null;
     {
-      Element _element = new Element(SchemaBuilder.NS_S23M, name, type, cardinality);
+      Element _element = new Element(Constants.NS_S23M, name, type, cardinality);
       final Element result = _element;
       initialiser.apply(result);
       Element _store = this.<Element>store(result);

@@ -35,7 +35,7 @@ public final class Extension extends WrapperNode {
 	private final Sequence sequence;
 	
 	public Extension(ComplexType base, Sequence sequence) {
-		super(Constants.XML_SCHEMA_NAMESPACE, "extension", sequence);
+		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "extension", sequence);
 		this.base = base;
 		this.sequence = sequence;
 		

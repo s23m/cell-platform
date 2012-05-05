@@ -29,6 +29,6 @@ import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
 public final class Sequence extends BasicCompositeNode {
 	
 	public Sequence() {
-		super(Constants.XML_SCHEMA_NAMESPACE, "sequence");
+		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "sequence");
 	}
 }

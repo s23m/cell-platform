@@ -1,27 +1,20 @@
 package org.s23m.cell.communication.xml
 
-import org.s23m.cell.communication.xml.dom.Namespace
+import org.s23m.cell.communication.xml.dom.Node
 import org.s23m.cell.communication.xml.schema.Cardinality
+import org.s23m.cell.communication.xml.schema.ComplexType
+import org.s23m.cell.communication.xml.schema.DataType
 import org.s23m.cell.communication.xml.schema.Element
+import org.s23m.cell.communication.xml.schema.ElementReference
+import org.s23m.cell.communication.xml.schema.Extension
 import org.s23m.cell.communication.xml.schema.Schema
 import org.s23m.cell.communication.xml.schema.Sequence
-
-import static org.s23m.cell.communication.xml.SchemaBuilder.*
-import org.s23m.cell.communication.xml.schema.Type
-import org.s23m.cell.communication.xml.schema.ComplexType
-import org.s23m.cell.communication.xml.schema.Extension
-import org.s23m.cell.communication.xml.schema.ElementReference
 import org.s23m.cell.communication.xml.schema.SimpleType
-import org.s23m.cell.communication.xml.schema.DataType
-import org.s23m.cell.communication.xml.dom.Node
+import org.s23m.cell.communication.xml.schema.Type
+
+import static org.s23m.cell.communication.xml.Constants.*
 
 class SchemaBuilder {
-	
-	static String S23M = "s23m"
-	
-	static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
-	
-	static Namespace NS_S23M = new Namespace(S23M, S23M_SCHEMA)
 	
 	Schema schema
 	

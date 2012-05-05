@@ -26,9 +26,9 @@ package org.s23m.cell.communication.xml.schema;
 
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class Constants {
+public class SchemaConstants {
 
-	private Constants() {}
+	private SchemaConstants() {}
 	
 	public static final String XML_SCHEMA_PREFIX = "xsd";
 	

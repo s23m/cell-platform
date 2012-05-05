@@ -29,6 +29,6 @@ import org.s23m.cell.communication.xml.dom.WrapperNode;
 final class ComplexContent extends WrapperNode {
 	
 	public ComplexContent(Extension extension) {
-		super(Constants.XML_SCHEMA_NAMESPACE, "complexContent", extension);
+		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "complexContent", extension);
 	}
 }

@@ -11,7 +11,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Cell.
+ * The Original Code is S23M.
  *
  * The Initial Developer of the Original Code is
  * The S23M Foundation.
@@ -25,29 +25,19 @@
 package org.s23m.cell.communication.xml
 
 import static java.util.Arrays.*
+import static org.s23m.cell.communication.xml.schema.SchemaConstants.*
+import static org.s23m.cell.communication.xml.InstanceConstants.*
+
 import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
 import static extension java.lang.String.*
-
 import static extension org.s23m.cell.communication.xml.Extensions.*
-
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
+
 import org.s23m.cell.communication.xml.schema.Cardinality
 import org.s23m.cell.communication.xml.schema.DataType
 import org.s23m.cell.communication.xml.schema.Schema
 
 class XmlSchemaTemplate {
-	
-	/* Schema constants */
-	
-	static String XSD = "xsd"
-	
-	static String XSD_SCHEMA = "http://www.w3.org/2001/XMLSchema"
-	
-	/* Namespace-related constants */
-	
-	static String S23M = "s23m"
-	
-	static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012"
 	
 	def Schema createSchemaModel(XmlSchemaTerminology terminology) {
 		val semanticIdentity = terminology.semanticIdentity
@@ -73,7 +63,7 @@ class XmlSchemaTemplate {
 		
 		val builder = new SchemaBuilder(artifactSet, [
 			attributes += newLinkedHashMap(
-				xmlns(XSD) -> XSD_SCHEMA,
+				xmlns(XML_SCHEMA_PREFIX) -> XML_SCHEMA_URI,
 				xmlns(S23M) -> S23M_SCHEMA,
 				"targetNamespace" -> S23M_SCHEMA,
 				"elementFormDefault" -> "qualified",
