@@ -25,13 +25,10 @@
 package org.s23m.cell.communication.xml;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -39,8 +36,8 @@ import javax.xml.validation.Validator;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
 import org.s23m.cell.S23MKernel;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
@@ -48,9 +45,9 @@ import com.google.common.io.Resources;
 // TODO fix up root element - wrapper nodes can have a complexType child as in 
 // http://www.w3schools.com/schema/schema_example.asp
 public class XmlDocumentValidationTest extends TestCase {
-
-	public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
-		
+	
+	@Test
+	public void testExampleInstanceValidatesAgainstGeneratedSchema() throws Exception {
 		S23MKernel.boot();
 		
 		XmlSchemaFactory xmlSchemaFactory = new XmlSchemaFactory();
@@ -64,20 +61,16 @@ public class XmlDocumentValidationTest extends TestCase {
 		
 		// load document
 		
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		
 		URL resource = Resources.getResource("cell-communication-instance.xml");
 		byte[] byteArray = Resources.toByteArray(resource);
-		Document document = builder.parse(new ByteArrayInputStream(byteArray));
 		
 		Source xmlFile = new StreamSource(new ByteArrayInputStream(byteArray));
 		
 		Validator validator = schema.newValidator();
 		try {
 		  validator.validate(xmlFile);
-		  System.out.println("Validation succeeded");
 		} catch (SAXException e) {
-		  System.out.println("Validation failed: " + e.getMessage());
+		  fail("Validation failed: " + e.getMessage());
 		}
 	}
 }
