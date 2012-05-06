@@ -38,26 +38,31 @@ class InstanceBuilder {
 	def model((Model)=>void initialiser) {
 		val result = new Model(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def vertex((Vertex)=>void initialiser) {
 		val result = new Vertex(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def visibility((Visibility)=>void initialiser) {
 		val result = new Visibility(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def edge((Edge)=>void initialiser) {
 		val result = new Edge(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def edgeEnd((EdgeEnd)=>void initialiser) {
 		val result = new EdgeEnd(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def identityReference(String name, String uniqueRepresentationReference, String identifier) {
@@ -67,11 +72,13 @@ class InstanceBuilder {
 	def superSetReference((SuperSetReference)=>void initialiser) {
 		val result = new SuperSetReference(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 	
 	def command((Command)=>void initialiser) {
 		val result = new Command(namespace, terminology)
 		initialiser.apply(result)
+		result
 	}
 
 	def query((Query)=>void initialiser) {
