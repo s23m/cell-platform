@@ -12,7 +12,7 @@ import org.s23m.cell.communication.xml.schema.Sequence
 import org.s23m.cell.communication.xml.schema.SimpleType
 import org.s23m.cell.communication.xml.schema.Type
 
-import static org.s23m.cell.communication.xml.InstanceConstants.*
+import static org.s23m.cell.communication.xml.NamespaceConstants.*
 
 class SchemaBuilder {
 	

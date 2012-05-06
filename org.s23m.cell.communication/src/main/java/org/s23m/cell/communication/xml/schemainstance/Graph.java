@@ -109,7 +109,7 @@ public class Graph extends Category {
 	}
 
 	@Override
-	protected Iterable<? extends Node> getLocalChildren() {
+	protected Iterable<? extends Node> getAdditionalChildren() {
 		final Iterable<? extends Node> scalarValues = ImmutableList.of(container, isAbstract);
 		final Iterable<? extends Node> listValues = Iterables.concat(
 				vertexList,

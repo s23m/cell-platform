@@ -7,7 +7,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.s23m.cell.communication.xml.InstanceConstants;
+import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
@@ -89,20 +89,20 @@ public class SchemaBuilder {
   }
   
   public SimpleType simpleType(final String nameAttribute, final DataType restrictionDataType) {
-    SimpleType _simpleType = new SimpleType(InstanceConstants.NS_S23M, nameAttribute, restrictionDataType);
+    SimpleType _simpleType = new SimpleType(NamespaceConstants.NS_S23M, nameAttribute, restrictionDataType);
     SimpleType _store = this.<SimpleType>store(_simpleType);
     return _store;
   }
   
   public ComplexType complexType(final String name, final Procedure1<? super Sequence> initialiser) {
     Sequence _sequence = SchemaBuilder.sequence(initialiser);
-    ComplexType _complexType = new ComplexType(InstanceConstants.NS_S23M, name, _sequence);
+    ComplexType _complexType = new ComplexType(NamespaceConstants.NS_S23M, name, _sequence);
     ComplexType _store = this.<ComplexType>store(_complexType);
     return _store;
   }
   
   public ComplexType complexType(final String name, final Extension ext) {
-    ComplexType _complexType = new ComplexType(InstanceConstants.NS_S23M, name, ext);
+    ComplexType _complexType = new ComplexType(NamespaceConstants.NS_S23M, name, ext);
     ComplexType _store = this.<ComplexType>store(_complexType);
     return _store;
   }
@@ -122,7 +122,7 @@ public class SchemaBuilder {
   }
   
   public Element element(final String name, final Type type, final Cardinality cardinality) {
-    Element _element = new Element(InstanceConstants.NS_S23M, name, type, cardinality);
+    Element _element = new Element(NamespaceConstants.NS_S23M, name, type, cardinality);
     Element _store = this.<Element>store(_element);
     return _store;
   }
@@ -130,7 +130,7 @@ public class SchemaBuilder {
   public Element element(final String name, final Type type, final Cardinality cardinality, final Procedure1<? super Element> initialiser) {
     Element _xblockexpression = null;
     {
-      Element _element = new Element(InstanceConstants.NS_S23M, name, type, cardinality);
+      Element _element = new Element(NamespaceConstants.NS_S23M, name, type, cardinality);
       final Element result = _element;
       initialiser.apply(result);
       Element _store = this.<Element>store(result);

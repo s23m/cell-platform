@@ -57,7 +57,7 @@ public class Vertex extends Category {
 	}
 
 	@Override
-	protected Iterable<? extends Node> getLocalChildren() {
+	protected Iterable<? extends Node> getAdditionalChildren() {
 		return ImmutableList.of(isAbstract, maxCardinality);
 	}
 }

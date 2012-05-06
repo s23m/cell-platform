@@ -31,6 +31,10 @@ class InstanceBuilder {
 		initialiser.apply(artifactSet)
 	}
 	
+	def build() {
+		artifactSet
+	}
+	
 	def model((Model)=>void initialiser) {
 		val result = new Model(namespace, terminology)
 		initialiser.apply(result)

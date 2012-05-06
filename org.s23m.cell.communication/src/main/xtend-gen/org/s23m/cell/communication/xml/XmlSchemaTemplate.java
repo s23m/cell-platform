@@ -7,9 +7,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.s23m.cell.communication.xml.Extensions;
-import org.s23m.cell.communication.xml.InstanceConstants;
+import org.s23m.cell.communication.xml.NamespaceConstants;
+import org.s23m.cell.communication.xml.NamespaceExtensions;
+import org.s23m.cell.communication.xml.OperatorExtensions;
 import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Node;
@@ -20,9 +20,9 @@ import org.s23m.cell.communication.xml.schema.Element;
 import org.s23m.cell.communication.xml.schema.ElementReference;
 import org.s23m.cell.communication.xml.schema.Extension;
 import org.s23m.cell.communication.xml.schema.Schema;
-import org.s23m.cell.communication.xml.schema.SchemaConstants;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.SimpleType;
+import org.s23m.cell.communication.xml.schema.XmlSchemaConstants;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {
@@ -72,15 +72,15 @@ public class XmlSchemaTemplate {
       final Procedure1<Schema> _function_1 = new Procedure1<Schema>() {
           public void apply(final Schema it) {
             LinkedHashMap<String,String> _attributes = it.getAttributes();
-            String _xmlns = XmlSchemaTemplate.xmlns(SchemaConstants.XML_SCHEMA_PREFIX);
-            Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, SchemaConstants.XML_SCHEMA_URI);
-            String _xmlns_1 = XmlSchemaTemplate.xmlns(InstanceConstants.S23M);
-            Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_xmlns_1, InstanceConstants.S23M_SCHEMA);
-            Pair<String,String> _operator_mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo("targetNamespace", InstanceConstants.S23M_SCHEMA);
+            String _xmlns = NamespaceExtensions.xmlns(XmlSchemaConstants.XML_SCHEMA_PREFIX);
+            Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_xmlns, XmlSchemaConstants.XML_SCHEMA_URI);
+            String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
+            Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo(_xmlns_1, NamespaceConstants.S23M_SCHEMA);
+            Pair<String,String> _operator_mappedTo_2 = ObjectExtensions.<String, String>operator_mappedTo("targetNamespace", NamespaceConstants.S23M_SCHEMA);
             Pair<String,String> _operator_mappedTo_3 = ObjectExtensions.<String, String>operator_mappedTo("elementFormDefault", "qualified");
             Pair<String,String> _operator_mappedTo_4 = ObjectExtensions.<String, String>operator_mappedTo("attributeFormDefault", "unqualified");
             LinkedHashMap<String,String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2, _operator_mappedTo_3, _operator_mappedTo_4);
-            Extensions.<String, String>operator_add(_attributes, _newLinkedHashMap);
+            OperatorExtensions.<String, String>operator_add(_attributes, _newLinkedHashMap);
           }
         };
       SchemaBuilder _schemaBuilder = new SchemaBuilder(artifactSet, _function_1);
@@ -357,16 +357,5 @@ public class XmlSchemaTemplate {
       _xblockexpression = (_build);
     }
     return _xblockexpression;
-  }
-  
-  private static String xmlns(final String name) {
-    String _qualifiedName = XmlSchemaTemplate.qualifiedName("xmlns", name);
-    return _qualifiedName;
-  }
-  
-  private static String qualifiedName(final String namespacePrefix, final String name) {
-    String _operator_plus = StringExtensions.operator_plus(namespacePrefix, ":");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
-    return _operator_plus_1;
   }
 }

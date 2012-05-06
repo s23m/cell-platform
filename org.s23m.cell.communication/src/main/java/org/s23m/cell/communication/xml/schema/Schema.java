@@ -29,6 +29,6 @@ import org.s23m.cell.communication.xml.dom.BasicCompositeNode;
 public final class Schema extends BasicCompositeNode {
 	
 	public Schema() {
-		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "schema");
+		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, "schema");
 	}
 }

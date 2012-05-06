@@ -61,9 +61,9 @@ public abstract class Category extends AbstractCompositeNode {
 	public final Iterable<? extends Node> getChildren() {
 		return Iterables.concat(
 				ImmutableList.of(semanticIdentity, category),
-				getLocalChildren()
+				getAdditionalChildren()
 		);
 	}
 	
-	protected abstract Iterable<? extends Node> getLocalChildren();
+	protected abstract Iterable<? extends Node> getAdditionalChildren();
 }

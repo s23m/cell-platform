@@ -29,7 +29,7 @@ import org.s23m.cell.communication.xml.dom.AbstractNode;
 final class Restriction extends AbstractNode {
 	
 	public Restriction(DataType base) {
-		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "restriction");
+		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, "restriction");
 
 		setAttribute("base", base.getQualifiedName());
 	}

@@ -25,12 +25,11 @@
 package org.s23m.cell.communication.xml
 
 import static java.util.Arrays.*
-import static org.s23m.cell.communication.xml.schema.SchemaConstants.*
-import static org.s23m.cell.communication.xml.InstanceConstants.*
+import static org.s23m.cell.communication.xml.schema.XmlSchemaConstants.*
+import static org.s23m.cell.communication.xml.NamespaceConstants.*
 
-import static extension org.eclipse.xtext.xbase.lib.IterableExtensions.*
-import static extension java.lang.String.*
-import static extension org.s23m.cell.communication.xml.Extensions.*
+import static extension org.s23m.cell.communication.xml.NamespaceExtensions.*
+import static extension org.s23m.cell.communication.xml.OperatorExtensions.*
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
 
 import org.s23m.cell.communication.xml.schema.Cardinality
@@ -188,13 +187,5 @@ class XmlSchemaTemplate {
 		builder.element(artifactSet, artifactSetComplexType)
 		
 		builder.build
-	}
-	
-	def private static String xmlns(String name) {
-		qualifiedName("xmlns", name)
-	}
-	
-	def private static String qualifiedName(String namespacePrefix, String name) {
-		namespacePrefix + ":" + name
 	}
 }

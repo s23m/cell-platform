@@ -27,7 +27,6 @@ package org.s23m.cell.communication.xml;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -42,8 +41,6 @@ import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
 
-// TODO fix up root element - wrapper nodes can have a complexType child as in 
-// http://www.w3schools.com/schema/schema_example.asp
 public class XmlDocumentValidationTest extends TestCase {
 	
 	@Test

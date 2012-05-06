@@ -38,7 +38,7 @@ public final class Element extends AbstractLeafNode implements ReferenceableNode
 	private final List<ElementReference> references;
 	
 	public Element(Namespace targetNamespace, String name, Type type, Cardinality cardinality) {
-		super(SchemaConstants.XML_SCHEMA_NAMESPACE, "element");
+		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, "element");
 		this.targetNamespace = targetNamespace;
 		this.name = name;
 		this.type = type;

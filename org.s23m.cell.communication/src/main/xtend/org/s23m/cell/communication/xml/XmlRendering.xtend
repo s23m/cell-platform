@@ -4,13 +4,23 @@ import org.s23m.cell.communication.xml.dom.CompositeNode
 import org.s23m.cell.communication.xml.dom.Node
 
 import org.s23m.cell.communication.xml.schema.Schema
+import org.s23m.cell.communication.xml.schemainstance.ArtifactSet
+import org.s23m.cell.communication.xml.schemainstance.StringElement
+
+import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 
 class XmlRendering {
 	
 	static int INDENTATION = 2
+	static String PREAMBLE = '<?xml version="1.0" encoding="UTF-8"?>'
 	
 	def static render(Schema node) '''
-		<?xml version="1.0" encoding="UTF-8"?>
+		«PREAMBLE»
+		«render(node, 0)»
+	'''
+	
+	def static render(ArtifactSet node) '''
+		«PREAMBLE»
 		«render(node, 0)»
 	'''
 	
@@ -25,6 +35,10 @@ class XmlRendering {
 		«ENDIF»
 	'''
 	
+	def private static dispatch render(StringElement node, int level) {
+		renderPrefix(node, level) + ">" + node.text + renderSuffix(node)
+	}
+	
 	def private static dispatch render(Node node, int level) {
 		renderPrefix(node, level) + "/>"
 	}
@@ -34,7 +48,11 @@ class XmlRendering {
 	}
 	
 	def private static renderSuffix(Node node, int level) {
-		whitespace(level) + "</" + name(node) + ">"
+		whitespace(level) + renderSuffix(node)
+	}
+	
+	def private static renderSuffix(Node node) {
+		"</" + name(node) + ">"
 	}
 	
 	def private static whitespace(int level) {
@@ -42,7 +60,7 @@ class XmlRendering {
 	}
 	
 	def private static name(Node node) {
-		node.namespace.prefix + ":" + node.name
+		qualifiedName(node.namespace.prefix, node.name)
 	}
 	
 	def private static renderAttributes(Node node) {

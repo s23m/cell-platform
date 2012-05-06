@@ -34,7 +34,7 @@ public class DataType extends AbstractNode implements Type {
 	public static final DataType STRING = new DataType("string");
 
 	private DataType(String name) {
-		super(SchemaConstants.XML_SCHEMA_NAMESPACE, name);
+		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, name);
 	}
 
 	@Override

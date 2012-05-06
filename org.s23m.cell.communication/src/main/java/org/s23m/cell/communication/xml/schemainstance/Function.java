@@ -49,7 +49,7 @@ public abstract class Function extends Category {
 	}
 
 	@Override
-	protected Iterable<? extends Node> getLocalChildren() {
+	protected Iterable<? extends Node> getAdditionalChildren() {
 		return parameterList;
 	}
 }
