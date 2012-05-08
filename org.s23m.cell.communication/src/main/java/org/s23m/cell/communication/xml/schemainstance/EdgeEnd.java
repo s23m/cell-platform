@@ -32,57 +32,57 @@ import com.google.common.collect.ImmutableList;
 
 public class EdgeEnd extends Category {
 	
-	private IdentityReference isAbstract;
+	private IsAbstract isAbstract;
 	
-	private IdentityReference minCardinality;
+	private MinimumCardinality minCardinality;
 	
-	private IdentityReference maxCardinality;
+	private MaximumCardinality maxCardinality;
 	
-	private IdentityReference isContainer;
+	private IsContainer isContainer;
 	
-	private IdentityReference isNavigable;
+	private IsNavigable isNavigable;
 
 	public EdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.edgeEnd());
 	}
 
-	public IdentityReference getIsAbstract() {
+	public IsAbstract getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IdentityReference isAbstract) {
+	public void setIsAbstract(IsAbstract isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 
-	public IdentityReference getMinCardinality() {
+	public MinimumCardinality getMinCardinality() {
 		return minCardinality;
 	}
 
-	public void setMinCardinality(IdentityReference minCardinality) {
+	public void setMinCardinality(MinimumCardinality minCardinality) {
 		this.minCardinality = minCardinality;
 	}
 
-	public IdentityReference getMaxCardinality() {
+	public MaximumCardinality getMaxCardinality() {
 		return maxCardinality;
 	}
 
-	public void setMaxCardinality(IdentityReference maxCardinality) {
+	public void setMaxCardinality(MaximumCardinality maxCardinality) {
 		this.maxCardinality = maxCardinality;
 	}
 
-	public IdentityReference getIsContainer() {
+	public IsContainer getIsContainer() {
 		return isContainer;
 	}
 
-	public void setIsContainer(IdentityReference isContainer) {
+	public void setIsContainer(IsContainer isContainer) {
 		this.isContainer = isContainer;
 	}
 
-	public IdentityReference getIsNavigable() {
+	public IsNavigable getIsNavigable() {
 		return isNavigable;
 	}
 
-	public void setIsNavigable(IdentityReference isNavigable) {
+	public void setIsNavigable(IsNavigable isNavigable) {
 		this.isNavigable = isNavigable;
 	}
 

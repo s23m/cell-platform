@@ -33,27 +33,27 @@ import com.google.common.collect.Iterables;
 
 public abstract class Category extends AbstractCompositeNode {
 
-	private IdentityReference semanticIdentity;
+	private SemanticIdentity semanticIdentity;
 	
-	private IdentityReference category;	
+	private CategoryIdentityReference category;	
 	
 	protected Category(Namespace namespace, String name) {
 		super(namespace, name);
 	}
 
-	public IdentityReference getSemanticIdentity() {
+	public SemanticIdentity getSemanticIdentity() {
 		return semanticIdentity;
 	}
 	
-	public void setSemanticIdentity(IdentityReference semanticIdentity) {
+	public void setSemanticIdentity(SemanticIdentity semanticIdentity) {
 		this.semanticIdentity = semanticIdentity;
 	}
 	
-	public IdentityReference getCategory() {
+	public CategoryIdentityReference getCategory() {
 		return category;
 	}
 	
-	public void setCategory(IdentityReference category) {
+	public void setCategory(CategoryIdentityReference category) {
 		this.category = category;
 	}
 	

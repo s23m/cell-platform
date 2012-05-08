@@ -10,7 +10,10 @@ import org.s23m.cell.communication.xml.schemainstance.Vertex
 import org.s23m.cell.communication.xml.schemainstance.Visibility
 import org.s23m.cell.communication.xml.schemainstance.Query
 import org.s23m.cell.communication.xml.schemainstance.EdgeEnd
-import org.s23m.cell.communication.xml.schemainstance.IdentityReference
+import org.s23m.cell.communication.xml.schemainstance.SemanticIdentity
+import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.Container
+import org.s23m.cell.communication.xml.schemainstance.IsAbstract
 
 class InstanceBuilder {
 	
@@ -35,8 +38,19 @@ class InstanceBuilder {
 		artifactSet
 	}
 	
-	def model((Model)=>void initialiser) {
+	// TODO store as ArtifactSet child
+	// TODO consider using Pairs of Strings as arguments? Obscures real dependencies
+	def model(SemanticIdentity semanticIdentity,
+			  CategoryIdentityReference category,
+			  Container container,
+			  IsAbstract isAbstract,
+			  (Model)=>void initialiser) {
 		val result = new Model(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setContainer(container)
+		result.setIsAbstract(isAbstract)
+		
 		initialiser.apply(result)
 		result
 	}
@@ -65,10 +79,6 @@ class InstanceBuilder {
 		result
 	}
 	
-	def identityReference(String name, String uniqueRepresentationReference, String identifier) {
-		new IdentityReference(namespace, terminology, name, uniqueRepresentationReference, identifier)
-	}
-	
 	def superSetReference((SuperSetReference)=>void initialiser) {
 		val result = new SuperSetReference(namespace, terminology)
 		initialiser.apply(result)
@@ -85,4 +95,20 @@ class InstanceBuilder {
 		val result = new Query(namespace, terminology)
 		initialiser.apply(result)
 	}
+	
+	def semanticIdentity(String uniqueRepresentationReference, String identifier) {
+		new SemanticIdentity(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def category(String uniqueRepresentationReference, String identifier) {
+		new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def container(String uniqueRepresentationReference, String identifier) {
+		new Container(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def isAbstract(String uniqueRepresentationReference, String identifier) {
+		new IsAbstract(namespace, terminology, uniqueRepresentationReference, identifier)
+	}		
 }

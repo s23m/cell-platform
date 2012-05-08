@@ -37,7 +37,7 @@ import com.google.common.collect.ImmutableList;
 	<s23m:identifier>[identifier]</s23m:identifier>
 </s23m:[name]>
 */
-public class IdentityReference extends AbstractCompositeNode {
+public abstract class IdentityReference extends AbstractCompositeNode {
 	
 	private final StringElement uniqueRepresentationReference;
 	

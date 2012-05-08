@@ -15,13 +15,11 @@ class InstanceBuilderTest {
 		]);
 		
 		// TODO finish creating object graph
-		
-		val model = builder.model([
-			// TODO remove need for redundant terminology calls (add to DSL) 
-			semanticIdentity = builder.identityReference(terminology.semanticIdentity, "1", "2")
-			category = builder.identityReference(terminology.category, "3", "4")
-			container = builder.identityReference(terminology.container, "5", "6")
-			isAbstract = builder.identityReference(terminology.abstract, "7", "8")
+		val model = builder.model(
+			builder.semanticIdentity("1", "2"),
+			builder.category("3", "4"),
+			builder.container("5", "6"),
+			builder.isAbstract("7", "8"), [
 			
 			
 		])

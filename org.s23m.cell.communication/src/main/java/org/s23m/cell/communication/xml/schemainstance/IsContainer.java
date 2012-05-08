@@ -26,48 +26,11 @@ package org.s23m.cell.communication.xml.schemainstance;
 
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.dom.Node;
 
-import com.google.common.collect.ImmutableList;
+public class IsContainer extends IdentityReference {
 
-public class Edge extends Category {
-	
-	private IsAbstract isAbstract;
-	
-	private EdgeEnd from;
-	
-	private EdgeEnd to;
-	
-	public Edge(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.edge());
+	public IsContainer(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+		super(namespace, terminology, terminology.isContainer(), uniqueRepresentationReference, identifier);
 	}
 
-	public IsAbstract getIsAbstract() {
-		return isAbstract;
-	}
-
-	public void setIsAbstract(IsAbstract isAbstract) {
-		this.isAbstract = isAbstract;
-	}
-
-	public EdgeEnd getFrom() {
-		return from;
-	}
-
-	public void setFrom(EdgeEnd from) {
-		this.from = from;
-	}
-
-	public EdgeEnd getTo() {
-		return to;
-	}
-
-	public void setTo(EdgeEnd to) {
-		this.to = to;
-	}
-
-	@Override
-	protected Iterable<? extends Node> getAdditionalChildren() {
-		return ImmutableList.of(isAbstract, from, to);
-	}
 }
