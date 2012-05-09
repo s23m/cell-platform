@@ -1,6 +1,8 @@
 package org.s23m.cell.communication.xml;
 
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.s23m.cell.communication.xml.NamespaceConstants;
+import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.schemainstance.ArtifactSet;
@@ -9,11 +11,14 @@ import org.s23m.cell.communication.xml.schemainstance.Command;
 import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Edge;
 import org.s23m.cell.communication.xml.schemainstance.EdgeEnd;
+import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.MaximumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Model;
 import org.s23m.cell.communication.xml.schemainstance.Query;
 import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.SuperSetReference;
+import org.s23m.cell.communication.xml.schemainstance.ToIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.schemainstance.Visibility;
 
@@ -25,19 +30,22 @@ public class InstanceBuilder {
   
   private XmlSchemaTerminology terminology;
   
-  public InstanceBuilder(final Namespace namespace, final XmlSchemaTerminology terminology, final String languageIdentifier, final Procedure1<? super ArtifactSet> initialiser) {
+  public InstanceBuilder(final Namespace namespace, final XmlSchemaTerminology terminology, final String languageIdentifier) {
       this.namespace = namespace;
       this.terminology = terminology;
       ArtifactSet _artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier);
       this.artifactSet = _artifactSet;
-      initialiser.apply(this.artifactSet);
+      String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
+      this.artifactSet.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
+      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M_SCHEMA);
+      this.artifactSet.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA);
   }
   
   public ArtifactSet build() {
     return this.artifactSet;
   }
   
-  public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract, final Procedure1<? super Model> initialiser) {
+  public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
     Model _xblockexpression = null;
     {
       Model _model = new Model(this.namespace, this.terminology);
@@ -46,29 +54,36 @@ public class InstanceBuilder {
       result.setCategory(category);
       result.setContainer(container);
       result.setIsAbstract(isAbstract);
-      initialiser.apply(result);
+      this.artifactSet.addModel(result);
       _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  public Vertex vertex(final Procedure1<? super Vertex> initialiser) {
+  public Vertex vertex(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MaximumCardinalityIdentityReference maxCardinality) {
     Vertex _xblockexpression = null;
     {
       Vertex _vertex = new Vertex(this.namespace, this.terminology);
       final Vertex result = _vertex;
-      initialiser.apply(result);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setMaxCardinality(maxCardinality);
       _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  public Visibility visibility(final Procedure1<? super Visibility> initialiser) {
+  public Visibility visibility(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
     Visibility _xblockexpression = null;
     {
       Visibility _visibility = new Visibility(this.namespace, this.terminology);
       final Visibility result = _visibility;
-      initialiser.apply(result);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
       _xblockexpression = (result);
     }
     return _xblockexpression;
@@ -142,5 +157,20 @@ public class InstanceBuilder {
   public IsAbstractIdentityReference isAbstract(final String uniqueRepresentationReference, final String identifier) {
     IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
     return _isAbstractIdentityReference;
+  }
+  
+  public FromIdentityReference from(final String uniqueRepresentationReference, final String identifier) {
+    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _fromIdentityReference;
+  }
+  
+  public ToIdentityReference to(final String uniqueRepresentationReference, final String identifier) {
+    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _toIdentityReference;
+  }
+  
+  public MaximumCardinalityIdentityReference maxCardinality(final String uniqueRepresentationReference, final String identifier) {
+    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _maximumCardinalityIdentityReference;
   }
 }

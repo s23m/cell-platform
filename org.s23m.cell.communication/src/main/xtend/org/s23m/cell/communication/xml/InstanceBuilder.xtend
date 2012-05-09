@@ -14,6 +14,12 @@ import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.MaximumCardinalityIdentityReference
+
+import static org.s23m.cell.communication.xml.NamespaceConstants.*
+import static org.s23m.cell.communication.xml.NamespaceExtensions.*
+import org.s23m.cell.communication.xml.schemainstance.ToIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference
 
 class InstanceBuilder {
 	
@@ -25,45 +31,60 @@ class InstanceBuilder {
 		
 	new(Namespace namespace,
 		XmlSchemaTerminology terminology,
-		String languageIdentifier,
-		(ArtifactSet)=>void initialiser) {
+		String languageIdentifier) {
 		
 		this.namespace = namespace
 		this.terminology = terminology
+		
 		this.artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier)
-		initialiser.apply(artifactSet)
+		this.artifactSet.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
+		this.artifactSet.setAttribute(xmlns(S23M_SCHEMA), S23M_SCHEMA)
 	}
 	
 	def build() {
 		artifactSet
 	}
 	
-	// TODO store as ArtifactSet child
 	// TODO consider using Pairs of Strings as arguments? Obscures real dependencies
 	def model(SemanticIdentityIdentityReference semanticIdentity,
 			  CategoryIdentityReference category,
 			  ContainerIdentityReference container,
-			  IsAbstractIdentityReference isAbstract,
-			  (Model)=>void initialiser) {
+			  IsAbstractIdentityReference isAbstract) {
 		val result = new Model(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
 		result.setContainer(container)
 		result.setIsAbstract(isAbstract)
 		
-		initialiser.apply(result)
+		artifactSet.addModel(result)
+		
 		result
 	}
 	
-	def vertex((Vertex)=>void initialiser) {
+	def vertex(SemanticIdentityIdentityReference semanticIdentity,
+			   CategoryIdentityReference category,
+			   IsAbstractIdentityReference isAbstract,
+			   MaximumCardinalityIdentityReference maxCardinality) {
+		
 		val result = new Vertex(namespace, terminology)
-		initialiser.apply(result)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setMaxCardinality(maxCardinality)
 		result
 	}
 	
-	def visibility((Visibility)=>void initialiser) {
+	def visibility(SemanticIdentityIdentityReference semanticIdentity,
+			   CategoryIdentityReference category,
+			   IsAbstractIdentityReference isAbstract,
+			   FromIdentityReference from,
+			   ToIdentityReference to) {
 		val result = new Visibility(namespace, terminology)
-		initialiser.apply(result)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
 		result
 	}
 	
@@ -110,5 +131,17 @@ class InstanceBuilder {
 	
 	def isAbstract(String uniqueRepresentationReference, String identifier) {
 		new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
-	}		
+	}
+	
+	def from(String uniqueRepresentationReference, String identifier) {
+		new FromIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def to(String uniqueRepresentationReference, String identifier) {
+		new ToIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def maxCardinality(String uniqueRepresentationReference, String identifier) {
+		new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
 }

@@ -34,7 +34,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-public class Graph extends Category {
+public abstract class Graph extends Category {
 		
 	private ContainerIdentityReference container;
 	
@@ -43,6 +43,10 @@ public class Graph extends Category {
 	private final List<Vertex> vertexList;
 	
 	private final List<Edge> edgeList;
+	
+	private final List<Visibility> visibilityList;
+	
+	private final List<SuperSetReference> superSetReferenceList;
 	
 	private final List<Command> commandList;
 	
@@ -56,6 +60,8 @@ public class Graph extends Category {
 		super(namespace, name);
 		this.vertexList = Lists.newArrayList();
 		this.edgeList = Lists.newArrayList();
+		this.visibilityList = Lists.newArrayList();
+		this.superSetReferenceList = Lists.newArrayList();
 		this.commandList = Lists.newArrayList();
 		this.queryList = Lists.newArrayList();
 	}
@@ -92,6 +98,22 @@ public class Graph extends Category {
 		edgeList.add(edge);
 	}
 	
+	public List<Visibility> getVisibilityList() {
+		return visibilityList;
+	}
+
+	public void addVisibility(Visibility visibility) {
+		visibilityList.add(visibility);
+	}
+	
+	public List<SuperSetReference> getSuperSetReferenceList() {
+		return superSetReferenceList;
+	}
+
+	public void addSuperSetReference(SuperSetReference superSetReference) {
+		superSetReferenceList.add(superSetReference);
+	}
+	
 	public List<Command> getCommandList() {
 		return commandList;
 	}
@@ -109,11 +131,14 @@ public class Graph extends Category {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	protected Iterable<? extends Node> getAdditionalChildren() {
 		final Iterable<? extends Node> scalarValues = ImmutableList.of(container, isAbstract);
 		final Iterable<? extends Node> listValues = Iterables.concat(
 				vertexList,
 				edgeList,
+				visibilityList,
+				superSetReferenceList,
 				commandList,
 				queryList
 		);
