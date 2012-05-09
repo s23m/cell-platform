@@ -6,13 +6,13 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Command;
-import org.s23m.cell.communication.xml.schemainstance.Container;
+import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Edge;
 import org.s23m.cell.communication.xml.schemainstance.EdgeEnd;
-import org.s23m.cell.communication.xml.schemainstance.IsAbstract;
+import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Model;
 import org.s23m.cell.communication.xml.schemainstance.Query;
-import org.s23m.cell.communication.xml.schemainstance.SemanticIdentity;
+import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.schemainstance.Visibility;
@@ -37,7 +37,7 @@ public class InstanceBuilder {
     return this.artifactSet;
   }
   
-  public Model model(final SemanticIdentity semanticIdentity, final CategoryIdentityReference category, final Container container, final IsAbstract isAbstract, final Procedure1<? super Model> initialiser) {
+  public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract, final Procedure1<? super Model> initialiser) {
     Model _xblockexpression = null;
     {
       Model _model = new Model(this.namespace, this.terminology);
@@ -124,9 +124,9 @@ public class InstanceBuilder {
       initialiser.apply(result);
   }
   
-  public SemanticIdentity semanticIdentity(final String uniqueRepresentationReference, final String identifier) {
-    SemanticIdentity _semanticIdentity = new SemanticIdentity(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
-    return _semanticIdentity;
+  public SemanticIdentityIdentityReference semanticIdentity(final String uniqueRepresentationReference, final String identifier) {
+    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _semanticIdentityIdentityReference;
   }
   
   public CategoryIdentityReference category(final String uniqueRepresentationReference, final String identifier) {
@@ -134,13 +134,13 @@ public class InstanceBuilder {
     return _categoryIdentityReference;
   }
   
-  public Container container(final String uniqueRepresentationReference, final String identifier) {
-    Container _container = new Container(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
-    return _container;
+  public ContainerIdentityReference container(final String uniqueRepresentationReference, final String identifier) {
+    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _containerIdentityReference;
   }
   
-  public IsAbstract isAbstract(final String uniqueRepresentationReference, final String identifier) {
-    IsAbstract _isAbstract = new IsAbstract(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
-    return _isAbstract;
+  public IsAbstractIdentityReference isAbstract(final String uniqueRepresentationReference, final String identifier) {
+    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
+    return _isAbstractIdentityReference;
   }
 }

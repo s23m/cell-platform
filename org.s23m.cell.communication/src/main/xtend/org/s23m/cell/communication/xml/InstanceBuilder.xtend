@@ -10,10 +10,10 @@ import org.s23m.cell.communication.xml.schemainstance.Vertex
 import org.s23m.cell.communication.xml.schemainstance.Visibility
 import org.s23m.cell.communication.xml.schemainstance.Query
 import org.s23m.cell.communication.xml.schemainstance.EdgeEnd
-import org.s23m.cell.communication.xml.schemainstance.SemanticIdentity
 import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference
-import org.s23m.cell.communication.xml.schemainstance.Container
-import org.s23m.cell.communication.xml.schemainstance.IsAbstract
+import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference
 
 class InstanceBuilder {
 	
@@ -40,10 +40,10 @@ class InstanceBuilder {
 	
 	// TODO store as ArtifactSet child
 	// TODO consider using Pairs of Strings as arguments? Obscures real dependencies
-	def model(SemanticIdentity semanticIdentity,
+	def model(SemanticIdentityIdentityReference semanticIdentity,
 			  CategoryIdentityReference category,
-			  Container container,
-			  IsAbstract isAbstract,
+			  ContainerIdentityReference container,
+			  IsAbstractIdentityReference isAbstract,
 			  (Model)=>void initialiser) {
 		val result = new Model(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
@@ -97,7 +97,7 @@ class InstanceBuilder {
 	}
 	
 	def semanticIdentity(String uniqueRepresentationReference, String identifier) {
-		new SemanticIdentity(namespace, terminology, uniqueRepresentationReference, identifier)
+		new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
 	}
 	
 	def category(String uniqueRepresentationReference, String identifier) {
@@ -105,10 +105,10 @@ class InstanceBuilder {
 	}
 	
 	def container(String uniqueRepresentationReference, String identifier) {
-		new Container(namespace, terminology, uniqueRepresentationReference, identifier)
+		new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
 	}
 	
 	def isAbstract(String uniqueRepresentationReference, String identifier) {
-		new IsAbstract(namespace, terminology, uniqueRepresentationReference, identifier)
+		new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
 	}		
 }

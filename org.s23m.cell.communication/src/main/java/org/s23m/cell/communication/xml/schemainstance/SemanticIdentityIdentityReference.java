@@ -27,10 +27,10 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class IsContainer extends IdentityReference {
+public class SemanticIdentityIdentityReference extends IdentityReference {
 
-	public IsContainer(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.isContainer(), uniqueRepresentationReference, identifier);
+	public SemanticIdentityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+		super(namespace, terminology, terminology.semanticIdentity(), uniqueRepresentationReference, identifier);
 	}
 
 }

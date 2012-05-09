@@ -4,6 +4,7 @@ import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 
 class InstanceBuilderTest {
+	
 	def static void main(String[] args) {
 		// construct the same basic example as in cell-communication-instance.xml
 		val s23m = NamespaceConstants::NS_S23M

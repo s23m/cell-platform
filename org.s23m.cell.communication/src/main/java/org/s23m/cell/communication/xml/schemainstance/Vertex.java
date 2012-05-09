@@ -32,27 +32,27 @@ import com.google.common.collect.ImmutableList;
 
 public class Vertex extends Category {
 
-	private IsAbstract isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
-	private MaximumCardinality maxCardinality;
+	private MaximumCardinalityIdentityReference maxCardinality;
 	
 	public Vertex(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.vertex());
 	}
 
-	public IsAbstract getIsAbstract() {
+	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstract isAbstract) {
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 
-	public MaximumCardinality getMaxCardinality() {
+	public MaximumCardinalityIdentityReference getMaxCardinality() {
 		return maxCardinality;
 	}
 
-	public void setMaxCardinality(MaximumCardinality maxCardinality) {
+	public void setMaxCardinality(MaximumCardinalityIdentityReference maxCardinality) {
 		this.maxCardinality = maxCardinality;
 	}
 

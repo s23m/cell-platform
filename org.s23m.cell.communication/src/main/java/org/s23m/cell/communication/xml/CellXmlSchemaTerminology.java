@@ -120,12 +120,12 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	}
 	
 	@Override
-	public String maxCardinality() {
+	public String maximumCardinality() {
 		return nameOf(S23MSemanticDomains.maxCardinality);
 	}
 
 	@Override
-	public String minCardinality() {
+	public String minimumCardinality() {
 		return nameOf(S23MSemanticDomains.minCardinality);
 	}
 

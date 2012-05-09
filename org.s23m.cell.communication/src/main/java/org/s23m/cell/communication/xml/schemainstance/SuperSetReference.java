@@ -32,37 +32,37 @@ import com.google.common.collect.ImmutableList;
 
 public class SuperSetReference extends Category {
 
-	private IsAbstract isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
-	private From from;
+	private FromIdentityReference from;
 	
-	private To to;
+	private ToIdentityReference to;
 	
 	public SuperSetReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.superSetReference());
 	}
 
-	public IsAbstract getIsAbstract() {
+	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstract isAbstract) {
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 
-	public From getFrom() {
+	public FromIdentityReference getFrom() {
 		return from;
 	}
 
-	public void setFrom(From from) {
+	public void setFrom(FromIdentityReference from) {
 		this.from = from;
 	}
 
-	public To getTo() {
+	public ToIdentityReference getTo() {
 		return to;
 	}
 
-	public void setTo(To to) {
+	public void setTo(ToIdentityReference to) {
 		this.to = to;
 	}
 	

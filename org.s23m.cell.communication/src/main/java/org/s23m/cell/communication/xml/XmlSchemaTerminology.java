@@ -41,8 +41,8 @@ public interface XmlSchemaTerminology {
 	String isContainer();
 	String isNavigable();
 	String languageIdentifier();
-	String maxCardinality();
-	String minCardinality();
+	String maximumCardinality();
+	String minimumCardinality();
 	String model();
 	String name();
 	String parameter();

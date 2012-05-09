@@ -36,9 +36,9 @@ import com.google.common.collect.Lists;
 
 public class Graph extends Category {
 		
-	private Container container;
+	private ContainerIdentityReference container;
 	
-	private IsAbstract isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
 	private final List<Vertex> vertexList;
 	
@@ -60,19 +60,19 @@ public class Graph extends Category {
 		this.queryList = Lists.newArrayList();
 	}
 
-	public Container getContainer() {
+	public ContainerIdentityReference getContainer() {
 		return container;
 	}
 
-	public void setContainer(Container container) {
+	public void setContainer(ContainerIdentityReference container) {
 		this.container = container;
 	}
 
-	public IsAbstract getIsAbstract() {
+	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstract isAbstract) {
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 	

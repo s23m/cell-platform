@@ -37,10 +37,10 @@ public class XmlSchemaTemplate {
       final String category = _category;
       String _isAbstract = terminology.isAbstract();
       final String isAbstract = _isAbstract;
-      String _maxCardinality = terminology.maxCardinality();
-      final String maxCardinality = _maxCardinality;
-      String _minCardinality = terminology.minCardinality();
-      final String minCardinality = _minCardinality;
+      String _maximumCardinality = terminology.maximumCardinality();
+      final String maxCardinality = _maximumCardinality;
+      String _minimumCardinality = terminology.minimumCardinality();
+      final String minCardinality = _minimumCardinality;
       String _isContainer = terminology.isContainer();
       final String isContainer = _isContainer;
       String _isNavigable = terminology.isNavigable();

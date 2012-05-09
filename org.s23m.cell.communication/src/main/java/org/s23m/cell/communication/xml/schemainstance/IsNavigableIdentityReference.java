@@ -27,9 +27,9 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class IsNavigable extends IdentityReference {
+public class IsNavigableIdentityReference extends IdentityReference {
 
-	public IsNavigable(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+	public IsNavigableIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
 		super(namespace, terminology, terminology.isNavigable(), uniqueRepresentationReference, identifier);
 	}
 

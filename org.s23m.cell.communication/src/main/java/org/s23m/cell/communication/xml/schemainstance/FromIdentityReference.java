@@ -27,10 +27,10 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class To extends IdentityReference {
+public class FromIdentityReference extends IdentityReference {
 
-	public To(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.to(), uniqueRepresentationReference, identifier);
+	public FromIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+		super(namespace, terminology, terminology.from(), uniqueRepresentationReference, identifier);
 	}
 
 }

@@ -32,7 +32,7 @@ import com.google.common.collect.ImmutableList;
 
 public class Edge extends Category {
 	
-	private IsAbstract isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
 	private EdgeEnd from;
 	
@@ -42,11 +42,11 @@ public class Edge extends Category {
 		super(namespace, terminology.edge());
 	}
 
-	public IsAbstract getIsAbstract() {
+	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstract isAbstract) {
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 

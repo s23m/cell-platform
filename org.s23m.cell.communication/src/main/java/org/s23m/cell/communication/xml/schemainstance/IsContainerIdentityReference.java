@@ -27,10 +27,10 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class IsAbstract extends IdentityReference {
+public class IsContainerIdentityReference extends IdentityReference {
 
-	public IsAbstract(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.isAbstract(), uniqueRepresentationReference, identifier);
+	public IsContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+		super(namespace, terminology, terminology.isContainer(), uniqueRepresentationReference, identifier);
 	}
 
 }

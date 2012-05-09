@@ -32,57 +32,57 @@ import com.google.common.collect.ImmutableList;
 
 public class EdgeEnd extends Category {
 	
-	private IsAbstract isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
-	private MinimumCardinality minCardinality;
+	private MinimumCardinalityIdentityReference minCardinality;
 	
-	private MaximumCardinality maxCardinality;
+	private MaximumCardinalityIdentityReference maxCardinality;
 	
-	private IsContainer isContainer;
+	private IsContainerIdentityReference isContainer;
 	
-	private IsNavigable isNavigable;
+	private IsNavigableIdentityReference isNavigable;
 
 	public EdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.edgeEnd());
 	}
 
-	public IsAbstract getIsAbstract() {
+	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstract isAbstract) {
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
 		this.isAbstract = isAbstract;
 	}
 
-	public MinimumCardinality getMinCardinality() {
+	public MinimumCardinalityIdentityReference getMinCardinality() {
 		return minCardinality;
 	}
 
-	public void setMinCardinality(MinimumCardinality minCardinality) {
+	public void setMinCardinality(MinimumCardinalityIdentityReference minCardinality) {
 		this.minCardinality = minCardinality;
 	}
 
-	public MaximumCardinality getMaxCardinality() {
+	public MaximumCardinalityIdentityReference getMaxCardinality() {
 		return maxCardinality;
 	}
 
-	public void setMaxCardinality(MaximumCardinality maxCardinality) {
+	public void setMaxCardinality(MaximumCardinalityIdentityReference maxCardinality) {
 		this.maxCardinality = maxCardinality;
 	}
 
-	public IsContainer getIsContainer() {
+	public IsContainerIdentityReference getIsContainer() {
 		return isContainer;
 	}
 
-	public void setIsContainer(IsContainer isContainer) {
+	public void setIsContainer(IsContainerIdentityReference isContainer) {
 		this.isContainer = isContainer;
 	}
 
-	public IsNavigable getIsNavigable() {
+	public IsNavigableIdentityReference getIsNavigable() {
 		return isNavigable;
 	}
 
-	public void setIsNavigable(IsNavigable isNavigable) {
+	public void setIsNavigable(IsNavigableIdentityReference isNavigable) {
 		this.isNavigable = isNavigable;
 	}
 

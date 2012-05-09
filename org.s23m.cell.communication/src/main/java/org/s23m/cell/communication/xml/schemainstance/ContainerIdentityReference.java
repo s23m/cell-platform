@@ -27,9 +27,9 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class Container extends IdentityReference {
+public class ContainerIdentityReference extends IdentityReference {
 
-	public Container(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+	public ContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
 		super(namespace, terminology, terminology.container(), uniqueRepresentationReference, identifier);
 	}
 }

@@ -12,10 +12,10 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.Container;
-import org.s23m.cell.communication.xml.schemainstance.IsAbstract;
+import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Model;
-import org.s23m.cell.communication.xml.schemainstance.SemanticIdentity;
+import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
 
 @SuppressWarnings("all")
 public class InstanceBuilderTest {
@@ -36,10 +36,10 @@ public class InstanceBuilderTest {
         };
       InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, languageIdentifier, _function);
       final InstanceBuilder builder = _instanceBuilder;
-      SemanticIdentity _semanticIdentity = builder.semanticIdentity("1", "2");
+      SemanticIdentityIdentityReference _semanticIdentity = builder.semanticIdentity("1", "2");
       CategoryIdentityReference _category = builder.category("3", "4");
-      Container _container = builder.container("5", "6");
-      IsAbstract _isAbstract = builder.isAbstract("7", "8");
+      ContainerIdentityReference _container = builder.container("5", "6");
+      IsAbstractIdentityReference _isAbstract = builder.isAbstract("7", "8");
       final Procedure1<Model> _function_1 = new Procedure1<Model>() {
           public void apply(final Model it) {
           }

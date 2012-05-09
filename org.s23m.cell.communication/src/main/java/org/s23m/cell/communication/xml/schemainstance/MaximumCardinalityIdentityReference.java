@@ -27,10 +27,10 @@ package org.s23m.cell.communication.xml.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 
-public class MaximumCardinality extends IdentityReference {
+public class MaximumCardinalityIdentityReference extends IdentityReference {
 
-	public MaximumCardinality(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.maxCardinality(), uniqueRepresentationReference, identifier);
+	public MaximumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
+		super(namespace, terminology, terminology.maximumCardinality(), uniqueRepresentationReference, identifier);
 	}
 
 }

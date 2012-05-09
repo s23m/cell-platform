@@ -43,8 +43,8 @@ class XmlSchemaTemplate {
 		val model = terminology.model
 		val category = terminology.category
 		val isAbstract = terminology.isAbstract
-		val maxCardinality = terminology.maxCardinality
-		val minCardinality = terminology.minCardinality
+		val maxCardinality = terminology.maximumCardinality
+		val minCardinality = terminology.minimumCardinality
 		val isContainer = terminology.isContainer
 		val isNavigable = terminology.isNavigable
 		val from = terminology.from
