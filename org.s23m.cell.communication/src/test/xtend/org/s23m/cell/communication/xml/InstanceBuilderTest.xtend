@@ -8,7 +8,7 @@ class InstanceBuilderTest {
 		// construct the same basic example as in cell-communication-instance.xml
 		val s23m = NamespaceConstants::NS_S23M
 		val terminology = DefaultXmlSchemaTerminology::getInstance()
-		val languageIdentifier = "ENGLISH";
+		val languageIdentifier = "ENGLISH"
 		val builder = new InstanceBuilder(s23m, terminology, languageIdentifier, [
 			setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
 			setAttribute(xmlns(S23M_SCHEMA), S23M_SCHEMA)
@@ -21,13 +21,11 @@ class InstanceBuilderTest {
 			builder.container("5", "6"),
 			builder.isAbstract("7", "8"), [
 			
-			
 		])
 		
-		val result = builder.build();
-		val xml = XmlRendering::render(result).toString();
+		val result = builder.build()
+		val xml = XmlRendering::render(result).toString()
 		
-		println("xml: " + xml);
-		null
+		println("xml: " + xml)
 	}
 }
