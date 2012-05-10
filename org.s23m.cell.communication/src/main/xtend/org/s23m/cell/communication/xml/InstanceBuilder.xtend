@@ -20,6 +20,9 @@ import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.communication.xml.schemainstance.ToIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.MinimumCardinalityIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.IsContainerIdentityReference
+import org.s23m.cell.communication.xml.schemainstance.IsNavigableIdentityReference
 
 class InstanceBuilder {
 	
@@ -38,7 +41,7 @@ class InstanceBuilder {
 		
 		this.artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier)
 		this.artifactSet.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
-		this.artifactSet.setAttribute(xmlns(S23M_SCHEMA), S23M_SCHEMA)
+		this.artifactSet.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
 	}
 	
 	def build() {
@@ -47,9 +50,10 @@ class InstanceBuilder {
 	
 	// TODO consider using Pairs of Strings as arguments? Obscures real dependencies
 	def model(SemanticIdentityIdentityReference semanticIdentity,
-			  CategoryIdentityReference category,
-			  ContainerIdentityReference container,
-			  IsAbstractIdentityReference isAbstract) {
+			CategoryIdentityReference category,
+			ContainerIdentityReference container,
+			IsAbstractIdentityReference isAbstract) {
+
 		val result = new Model(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
@@ -62,9 +66,9 @@ class InstanceBuilder {
 	}
 	
 	def vertex(SemanticIdentityIdentityReference semanticIdentity,
-			   CategoryIdentityReference category,
-			   IsAbstractIdentityReference isAbstract,
-			   MaximumCardinalityIdentityReference maxCardinality) {
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			MaximumCardinalityIdentityReference maxCardinality) {
 		
 		val result = new Vertex(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
@@ -75,10 +79,11 @@ class InstanceBuilder {
 	}
 	
 	def visibility(SemanticIdentityIdentityReference semanticIdentity,
-			   CategoryIdentityReference category,
-			   IsAbstractIdentityReference isAbstract,
-			   FromIdentityReference from,
-			   ToIdentityReference to) {
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			FromIdentityReference from,
+			ToIdentityReference to) {
+				
 		val result = new Visibility(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
@@ -88,33 +93,61 @@ class InstanceBuilder {
 		result
 	}
 	
-	def edge((Edge)=>void initialiser) {
+	def edge(SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			EdgeEnd from,
+			EdgeEnd to) {
+		
 		val result = new Edge(namespace, terminology)
-		initialiser.apply(result)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
 		result
 	}
 	
-	def edgeEnd((EdgeEnd)=>void initialiser) {
+	def edgeEnd(SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			MinimumCardinalityIdentityReference minCardinality,
+			MaximumCardinalityIdentityReference maxCardinality,
+			IsContainerIdentityReference isContainer,
+			IsNavigableIdentityReference isNavigable) {
+		
 		val result = new EdgeEnd(namespace, terminology)
-		initialiser.apply(result)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setMinCardinality(minCardinality)
+		result.setMaxCardinality(maxCardinality)
+		result.setIsContainer(isContainer)
+		result.setIsNavigable(isNavigable)
 		result
 	}
 	
-	def superSetReference((SuperSetReference)=>void initialiser) {
+	def superSetReference(SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			FromIdentityReference from,
+			ToIdentityReference to) {
+
 		val result = new SuperSetReference(namespace, terminology)
-		initialiser.apply(result)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
 		result
 	}
 	
-	def command((Command)=>void initialiser) {
-		val result = new Command(namespace, terminology)
-		initialiser.apply(result)
-		result
+	def command() {
+		new Command(namespace, terminology)
 	}
 
-	def query((Query)=>void initialiser) {
-		val result = new Query(namespace, terminology)
-		initialiser.apply(result)
+	def query() {
+		new Query(namespace, terminology)
 	}
 	
 	def semanticIdentity(String uniqueRepresentationReference, String identifier) {

@@ -1,6 +1,5 @@
 package org.s23m.cell.communication.xml;
 
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -13,7 +12,10 @@ import org.s23m.cell.communication.xml.schemainstance.Edge;
 import org.s23m.cell.communication.xml.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.IsContainerIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.IsNavigableIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.MaximumCardinalityIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.MinimumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.schemainstance.Model;
 import org.s23m.cell.communication.xml.schemainstance.Query;
 import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
@@ -37,8 +39,8 @@ public class InstanceBuilder {
       this.artifactSet = _artifactSet;
       String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
       this.artifactSet.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
-      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M_SCHEMA);
-      this.artifactSet.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA);
+      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
+      this.artifactSet.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
   }
   
   public ArtifactSet build() {
@@ -89,54 +91,61 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
-  public Edge edge(final Procedure1<? super Edge> initialiser) {
+  public Edge edge(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final EdgeEnd from, final EdgeEnd to) {
     Edge _xblockexpression = null;
     {
       Edge _edge = new Edge(this.namespace, this.terminology);
       final Edge result = _edge;
-      initialiser.apply(result);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
       _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  public EdgeEnd edgeEnd(final Procedure1<? super EdgeEnd> initialiser) {
+  public EdgeEnd edgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
     EdgeEnd _xblockexpression = null;
     {
       EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology);
       final EdgeEnd result = _edgeEnd;
-      initialiser.apply(result);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setMinCardinality(minCardinality);
+      result.setMaxCardinality(maxCardinality);
+      result.setIsContainer(isContainer);
+      result.setIsNavigable(isNavigable);
       _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  public SuperSetReference superSetReference(final Procedure1<? super SuperSetReference> initialiser) {
+  public SuperSetReference superSetReference(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
     SuperSetReference _xblockexpression = null;
     {
       SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology);
       final SuperSetReference result = _superSetReference;
-      initialiser.apply(result);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
       _xblockexpression = (result);
     }
     return _xblockexpression;
   }
   
-  public Command command(final Procedure1<? super Command> initialiser) {
-    Command _xblockexpression = null;
-    {
-      Command _command = new Command(this.namespace, this.terminology);
-      final Command result = _command;
-      initialiser.apply(result);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+  public Command command() {
+    Command _command = new Command(this.namespace, this.terminology);
+    return _command;
   }
   
-  public void query(final Procedure1<? super Query> initialiser) {
-      Query _query = new Query(this.namespace, this.terminology);
-      final Query result = _query;
-      initialiser.apply(result);
+  public Query query() {
+    Query _query = new Query(this.namespace, this.terminology);
+    return _query;
   }
   
   public SemanticIdentityIdentityReference semanticIdentity(final String uniqueRepresentationReference, final String identifier) {

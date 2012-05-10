@@ -8,13 +8,13 @@ public class NamespaceConstants {
   /**
    * Schema
    */
-  public static String S23M = "s23m";
+  public static String S23M = "s";
   
-  public static String S23M_SCHEMA = "http://schemas.s23m.org/serialization/2012";
+  public static String S23M_SCHEMA_URI = "http://schemas.s23m.org/serialization/2012";
   
   public static Namespace NS_S23M = new Function0<Namespace>() {
     public Namespace apply() {
-      Namespace _namespace = new Namespace(NamespaceConstants.S23M, NamespaceConstants.S23M_SCHEMA);
+      Namespace _namespace = new Namespace(NamespaceConstants.S23M, NamespaceConstants.S23M_SCHEMA_URI);
       return _namespace;
     }
   }.apply();

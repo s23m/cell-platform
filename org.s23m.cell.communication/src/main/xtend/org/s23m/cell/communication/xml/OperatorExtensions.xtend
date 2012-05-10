@@ -1,50 +1,64 @@
 package org.s23m.cell.communication.xml
 
-import java.util.LinkedHashMap
-import org.eclipse.xtext.xbase.lib.Pair
+import org.s23m.cell.communication.xml.schemainstance.ArtifactSet
 import org.s23m.cell.communication.xml.schemainstance.Command
 import org.s23m.cell.communication.xml.schemainstance.Edge
-import org.s23m.cell.communication.xml.schemainstance.Query
-import org.s23m.cell.communication.xml.schemainstance.Vertex
 import org.s23m.cell.communication.xml.schemainstance.Model
-import org.s23m.cell.communication.xml.schemainstance.Visibility
+import org.s23m.cell.communication.xml.schemainstance.Parameter
+import org.s23m.cell.communication.xml.schemainstance.Query
+import org.s23m.cell.communication.xml.schemainstance.SemanticDomain
 import org.s23m.cell.communication.xml.schemainstance.SuperSetReference
+import org.s23m.cell.communication.xml.schemainstance.Vertex
+import org.s23m.cell.communication.xml.schemainstance.Visibility
 
 /**
- * Contains syntactic sugar for operations so that we do not
- * need to pollute the domain model with foreign types
+ * Syntactic sugar for operations
  */
 class OperatorExtensions {
 	
-	def static <A, B> operator_add(LinkedHashMap<A, B> map, Pair<A, B> pair) {
-		map.put(pair.key, pair.value)
+	/* ArtifactSet */
+	
+	def static operator_add(ArtifactSet a, Model m) {
+		a.addModel(m)
 	}
 	
-	def static <A, B> operator_add(LinkedHashMap<A, B> map, LinkedHashMap<A, B> additions) {
-		map.putAll(additions)
+	def static operator_add(ArtifactSet a, SemanticDomain s) {
+		a.addSemanticDomain(s)
 	}
 	
-	def static void operator_add(Model m, Vertex v) {
+	/* Model */
+	
+	def static operator_add(Model m, Vertex v) {
 		m.addVertex(v)
 	}
 	
-	def static void operator_add(Model m, Edge e) {
+	def static operator_add(Model m, Edge e) {
 		m.addEdge(e)
 	}
 	
-	def static void operator_add(Model m, Command c) {
+	def static operator_add(Model m, Command c) {
 		m.addCommand(c)
 	}
 	
-	def static void operator_add(Model m, Query q) {
+	def static operator_add(Model m, Query q) {
 		m.addQuery(q)
 	}
 	
-	def static void operator_add(Model m, Visibility v) {
+	def static operator_add(Model m, Visibility v) {
 		m.addVisibility(v)
 	}
 	
-	def static void operator_add(Model m, SuperSetReference s) {
+	def static operator_add(Model m, SuperSetReference s) {
 		m.addSuperSetReference(s)
+	}
+	
+	/* Function */
+	
+	def static operator_add(Command c, Parameter p) {
+		c.addParameter(p)
+	}
+	
+	def static operator_add(Query q, Parameter p) {
+		q.addParameter(p)
 	}
 }

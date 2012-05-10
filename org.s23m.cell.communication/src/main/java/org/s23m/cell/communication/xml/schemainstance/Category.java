@@ -60,8 +60,8 @@ public abstract class Category extends AbstractCompositeNode {
 	@Override
 	public final Iterable<? extends Node> getChildren() {
 		return Iterables.concat(
-				ImmutableList.of(semanticIdentity, category),
-				getAdditionalChildren()
+			ImmutableList.of(semanticIdentity, category),
+			getAdditionalChildren()
 		);
 	}
 	

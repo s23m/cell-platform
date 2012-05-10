@@ -73,6 +73,10 @@ public class ArtifactSet extends AbstractCompositeNode {
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		return Iterables.concat(ImmutableList.of(languageIdentifier), modelList, semanticDomainList);
+		return Iterables.concat(
+			ImmutableList.of(languageIdentifier),
+			modelList,
+			semanticDomainList
+		);
 	}
 }

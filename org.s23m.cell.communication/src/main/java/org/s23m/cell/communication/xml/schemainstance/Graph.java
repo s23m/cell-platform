@@ -52,7 +52,7 @@ public abstract class Graph extends Category {
 	
 	private final List<Query> queryList;
 
-	public Graph(Namespace namespace, XmlSchemaTerminology terminology) {
+	protected Graph(Namespace namespace, XmlSchemaTerminology terminology) {
 		this(namespace, terminology.graph());
 	}
 
@@ -133,15 +133,14 @@ public abstract class Graph extends Category {
 	@Override
 	@SuppressWarnings("unchecked")
 	protected Iterable<? extends Node> getAdditionalChildren() {
-		final Iterable<? extends Node> scalarValues = ImmutableList.of(container, isAbstract);
-		final Iterable<? extends Node> listValues = Iterables.concat(
-				vertexList,
-				edgeList,
-				visibilityList,
-				superSetReferenceList,
-				commandList,
-				queryList
+		return Iterables.concat(
+			ImmutableList.of(container, isAbstract),
+			vertexList,
+			edgeList,
+			visibilityList,
+			superSetReferenceList,
+			commandList,
+			queryList
 		);
-		return Iterables.concat(scalarValues, listValues);
 	}
 }

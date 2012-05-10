@@ -24,17 +24,15 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml
 
-import static java.util.Arrays.*
-import static org.s23m.cell.communication.xml.schema.XmlSchemaConstants.*
-import static org.s23m.cell.communication.xml.NamespaceConstants.*
+import org.s23m.cell.communication.xml.schema.Schema
 
-import static extension org.s23m.cell.communication.xml.NamespaceExtensions.*
+import static java.util.Arrays.*
+import static org.s23m.cell.communication.xml.NamespaceConstants.*
+import static org.s23m.cell.communication.xml.schema.Cardinality.*
+import static org.s23m.cell.communication.xml.schema.DataType.*
+
 import static extension org.s23m.cell.communication.xml.OperatorExtensions.*
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
-
-import org.s23m.cell.communication.xml.schema.Cardinality
-import org.s23m.cell.communication.xml.schema.DataType
-import org.s23m.cell.communication.xml.schema.Schema
 
 class XmlSchemaTemplate {
 	
@@ -60,21 +58,13 @@ class XmlSchemaTemplate {
 		val function = terminology.function
 		val artifactSet = terminology.artifactSet
 		
-		val builder = new SchemaBuilder(artifactSet, [
-			attributes += newLinkedHashMap(
-				xmlns(XML_SCHEMA_PREFIX) -> XML_SCHEMA_URI,
-				xmlns(S23M) -> S23M_SCHEMA,
-				"targetNamespace" -> S23M_SCHEMA,
-				"elementFormDefault" -> "qualified",
-				"attributeFormDefault" -> "unqualified"
-			)
-		])
+		val builder = new SchemaBuilder(artifactSet)
 	
-		val uuid = builder.simpleType(terminology.uuid, DataType::STRING)
+		val uuid = builder.simpleType(terminology.uuid, STRING)
 		
 		val identityReference = builder.complexType(terminology.identityReference, [
-			getChildren += builder.element(terminology.uniqueRepresentationReference, uuid)
-			getChildren += builder.element(terminology.identifier, uuid)
+			children += builder.element(terminology.uniqueRepresentationReference, uuid)
+			children += builder.element(terminology.identifier, uuid)
 		])
 				
 		val semanticIdentityElement = builder.element(semanticIdentity, identityReference)
@@ -138,7 +128,7 @@ class XmlSchemaTemplate {
 		val parameterComplexType = builder.complexType(parameter, withExtension(categoryComplexType))
 		
 		val functionComplexType = builder.complexType(function, withExtension(categoryComplexType, [
-			children += builder.element(parameter, parameterComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(parameter, parameterComplexType, ZERO_TO_MANY)
 		]))
 
 		val commandComplexType = builder.complexType(command, withExtension(functionComplexType))
@@ -150,12 +140,12 @@ class XmlSchemaTemplate {
 		val graphComplexType = builder.complexType(graph, withExtension(categoryComplexType, [
 			children += builder.element(terminology.container, identityReference)
 			children += builder.element(isAbstractElement)
-			children += builder.element(vertex, vertexComplexType, Cardinality::ZERO_TO_MANY)
-			children += builder.element(visibility, visibilityComplexType, Cardinality::ZERO_TO_MANY)
-			children += builder.element(edge, edgeComplexType, Cardinality::ZERO_TO_MANY)
-			children += builder.element(superSetReference, superSetReferenceComplexType, Cardinality::ZERO_TO_MANY)
-			children += builder.element(command, commandComplexType, Cardinality::ZERO_TO_MANY)
-			children += builder.element(query, queryComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(vertex, vertexComplexType, ZERO_TO_MANY)
+			children += builder.element(visibility, visibilityComplexType, ZERO_TO_MANY)
+			children += builder.element(edge, edgeComplexType, ZERO_TO_MANY)
+			children += builder.element(superSetReference, superSetReferenceComplexType, ZERO_TO_MANY)
+			children += builder.element(command, commandComplexType, ZERO_TO_MANY)
+			children += builder.element(query, queryComplexType, ZERO_TO_MANY)
 		]))
 		
 		val modelComplexType = builder.complexType(model, withExtension(graphComplexType))
@@ -164,22 +154,22 @@ class XmlSchemaTemplate {
 		
 		val identityComplexType = builder.complexType(terminology.identity, [
 			children += builder.element(terminology.identifier, uuid)
-			children += builder.element(terminology.name, DataType::STRING)
-			children += builder.element(terminology.pluralName, DataType::STRING)
-			children += builder.element(terminology.payload, DataType::STRING)
-			children += builder.element(terminology.technicalName, DataType::STRING)
+			children += builder.element(terminology.name, STRING)
+			children += builder.element(terminology.pluralName, STRING)
+			children += builder.element(terminology.payload, STRING)
+			children += builder.element(terminology.technicalName, STRING)
 		])
 
 		/* Encoding of semantic domain artifacts */
 		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, [
 			children += builder.element(modelElement)
-			children += builder.element(terminology.identity, identityComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(terminology.identity, identityComplexType, ZERO_TO_MANY)
 		])
 		
 		val artifactSetComplexType = builder.complexType(artifactSet, [
-			children += builder.element(terminology.languageIdentifier, DataType::STRING)
-			children += builder.element(modelElement, Cardinality::ZERO_TO_MANY)
-			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, Cardinality::ZERO_TO_MANY)
+			children += builder.element(terminology.languageIdentifier, STRING)
+			children += builder.element(modelElement, ZERO_TO_MANY)
+			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, ZERO_TO_MANY)
 		])
 		
 		/* Root element */

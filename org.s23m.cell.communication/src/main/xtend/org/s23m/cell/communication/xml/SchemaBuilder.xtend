@@ -12,6 +12,8 @@ import org.s23m.cell.communication.xml.schema.Sequence
 import org.s23m.cell.communication.xml.schema.SimpleType
 import org.s23m.cell.communication.xml.schema.Type
 
+import static org.s23m.cell.communication.xml.schema.XmlSchemaConstants.*
+import static extension org.s23m.cell.communication.xml.NamespaceExtensions.*
 import static org.s23m.cell.communication.xml.NamespaceConstants.*
 
 class SchemaBuilder {
@@ -20,10 +22,14 @@ class SchemaBuilder {
 	
 	String rootElementName
 	
-	new(String rootElementName, (Schema)=>void initialiser) {
+	new(String rootElementName) {
 		this.rootElementName = rootElementName
 		this.schema = new Schema()
-		initialiser.apply(schema)
+		this.schema.setAttribute(xmlns(XML_SCHEMA_PREFIX), XML_SCHEMA_URI)
+		this.schema.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
+		this.schema.setAttribute("targetNamespace", S23M_SCHEMA_URI)
+		this.schema.setAttribute("elementFormDefault", "qualified")
+		this.schema.setAttribute("attributeFormDefault", "unqualified")
 	}
 	
 	def build() {
@@ -92,7 +98,7 @@ class SchemaBuilder {
 		new Extension(base, sequence(initialiser))
 	}
 	
-	def static sequence((Sequence)=>void initialiser) {
+	def private static sequence((Sequence)=>void initialiser) {
 		val result = new Sequence()
 		initialiser.apply(result)
 		result

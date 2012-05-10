@@ -8,6 +8,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.NamespaceConstants;
+import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.dom.Node;
 import org.s23m.cell.communication.xml.schema.Cardinality;
 import org.s23m.cell.communication.xml.schema.ComplexType;
@@ -19,6 +20,7 @@ import org.s23m.cell.communication.xml.schema.Schema;
 import org.s23m.cell.communication.xml.schema.Sequence;
 import org.s23m.cell.communication.xml.schema.SimpleType;
 import org.s23m.cell.communication.xml.schema.Type;
+import org.s23m.cell.communication.xml.schema.XmlSchemaConstants;
 
 @SuppressWarnings("all")
 public class SchemaBuilder {
@@ -26,11 +28,17 @@ public class SchemaBuilder {
   
   private String rootElementName;
   
-  public SchemaBuilder(final String rootElementName, final Procedure1<? super Schema> initialiser) {
+  public SchemaBuilder(final String rootElementName) {
       this.rootElementName = rootElementName;
       Schema _schema = new Schema();
       this.schema = _schema;
-      initialiser.apply(this.schema);
+      String _xmlns = NamespaceExtensions.xmlns(XmlSchemaConstants.XML_SCHEMA_PREFIX);
+      this.schema.setAttribute(_xmlns, XmlSchemaConstants.XML_SCHEMA_URI);
+      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
+      this.schema.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
+      this.schema.setAttribute("targetNamespace", NamespaceConstants.S23M_SCHEMA_URI);
+      this.schema.setAttribute("elementFormDefault", "qualified");
+      this.schema.setAttribute("attributeFormDefault", "unqualified");
   }
   
   public Schema build() {
@@ -164,7 +172,7 @@ public class SchemaBuilder {
     return _extension;
   }
   
-  public static Sequence sequence(final Procedure1<? super Sequence> initialiser) {
+  private static Sequence sequence(final Procedure1<? super Sequence> initialiser) {
     Sequence _xblockexpression = null;
     {
       Sequence _sequence = new Sequence();

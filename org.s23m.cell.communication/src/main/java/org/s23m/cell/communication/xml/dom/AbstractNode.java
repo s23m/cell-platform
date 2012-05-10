@@ -52,14 +52,6 @@ public abstract class AbstractNode implements Node {
 		return createQualifiedName(namespace, name);
 	}
 
-	public void setAttribute(String key, String value) {
-		this.attributes.put(key, value);
-	}
-
-	public void updateCardinality(Cardinality cardinality) {
-		cardinality.addToAttributes(attributes);
-	}
-
 	public Namespace getNamespace() {
 		return namespace;
 	}
@@ -68,6 +60,14 @@ public abstract class AbstractNode implements Node {
 		return attributes;
 	}
 	
+	public void setAttribute(String key, String value) {
+		this.attributes.put(key, value);
+	}
+
+	public void updateCardinality(Cardinality cardinality) {
+		cardinality.addToAttributes(attributes);
+	}
+
 	public String getName() {
 		return name;
 	}
