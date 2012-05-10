@@ -26,7 +26,6 @@ package org.s23m.cell.communication.xml.schemainstance;
 
 import java.util.List;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
 import org.s23m.cell.communication.xml.dom.Node;
 
@@ -36,9 +35,9 @@ import com.google.common.collect.Lists;
 
 public abstract class Graph extends Category {
 		
-	private ContainerIdentityReference container;
+	private final ContainerIdentityReference container;
 	
-	private IsAbstractIdentityReference isAbstract;
+	private final IsAbstractIdentityReference isAbstract;
 	
 	private final List<Vertex> vertexList;
 	
@@ -52,12 +51,17 @@ public abstract class Graph extends Category {
 	
 	private final List<Query> queryList;
 
-	protected Graph(Namespace namespace, XmlSchemaTerminology terminology) {
-		this(namespace, terminology.graph());
-	}
-
-	protected Graph(Namespace namespace, String name) {
-		super(namespace, name);
+	protected Graph(Namespace namespace,
+			String name,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			ContainerIdentityReference container,
+			IsAbstractIdentityReference isAbstract) {
+		
+		super(namespace, name, semanticIdentity, category);
+		this.container = container;
+		this.isAbstract = isAbstract;
+		
 		this.vertexList = Lists.newArrayList();
 		this.edgeList = Lists.newArrayList();
 		this.visibilityList = Lists.newArrayList();
@@ -70,18 +74,10 @@ public abstract class Graph extends Category {
 		return container;
 	}
 
-	public void setContainer(ContainerIdentityReference container) {
-		this.container = container;
-	}
-
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
-		this.isAbstract = isAbstract;
-	}
-	
 	public List<Vertex> getVertexList() {
 		return vertexList;
 	}

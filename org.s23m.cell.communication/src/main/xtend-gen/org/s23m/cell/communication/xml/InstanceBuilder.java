@@ -50,12 +50,8 @@ public class InstanceBuilder {
   public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
     Model _xblockexpression = null;
     {
-      Model _model = new Model(this.namespace, this.terminology);
+      Model _model = new Model(this.namespace, this.terminology, semanticIdentity, category, container, isAbstract);
       final Model result = _model;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setContainer(container);
-      result.setIsAbstract(isAbstract);
       this.artifactSet.addModel(result);
       _xblockexpression = (result);
     }
@@ -63,88 +59,37 @@ public class InstanceBuilder {
   }
   
   public Vertex vertex(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MaximumCardinalityIdentityReference maxCardinality) {
-    Vertex _xblockexpression = null;
-    {
-      Vertex _vertex = new Vertex(this.namespace, this.terminology);
-      final Vertex result = _vertex;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setIsAbstract(isAbstract);
-      result.setMaxCardinality(maxCardinality);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+    Vertex _vertex = new Vertex(this.namespace, this.terminology, semanticIdentity, category, isAbstract, maxCardinality);
+    return _vertex;
   }
   
   public Visibility visibility(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
-    Visibility _xblockexpression = null;
-    {
-      Visibility _visibility = new Visibility(this.namespace, this.terminology);
-      final Visibility result = _visibility;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setIsAbstract(isAbstract);
-      result.setFrom(from);
-      result.setTo(to);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+    Visibility _visibility = new Visibility(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
+    return _visibility;
   }
   
   public Edge edge(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final EdgeEnd from, final EdgeEnd to) {
-    Edge _xblockexpression = null;
-    {
-      Edge _edge = new Edge(this.namespace, this.terminology);
-      final Edge result = _edge;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setIsAbstract(isAbstract);
-      result.setFrom(from);
-      result.setTo(to);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+    Edge _edge = new Edge(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
+    return _edge;
   }
   
   public EdgeEnd edgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
-    EdgeEnd _xblockexpression = null;
-    {
-      EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology);
-      final EdgeEnd result = _edgeEnd;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setIsAbstract(isAbstract);
-      result.setMinCardinality(minCardinality);
-      result.setMaxCardinality(maxCardinality);
-      result.setIsContainer(isContainer);
-      result.setIsNavigable(isNavigable);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+    EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
+    return _edgeEnd;
   }
   
   public SuperSetReference superSetReference(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
-    SuperSetReference _xblockexpression = null;
-    {
-      SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology);
-      final SuperSetReference result = _superSetReference;
-      result.setSemanticIdentity(semanticIdentity);
-      result.setCategory(category);
-      result.setIsAbstract(isAbstract);
-      result.setFrom(from);
-      result.setTo(to);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+    SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
+    return _superSetReference;
   }
   
-  public Command command() {
-    Command _command = new Command(this.namespace, this.terminology);
+  public Command command(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
+    Command _command = new Command(this.namespace, this.terminology, semanticIdentity, category);
     return _command;
   }
   
-  public Query query() {
-    Query _query = new Query(this.namespace, this.terminology);
+  public Query query(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
+    Query _query = new Query(this.namespace, this.terminology, semanticIdentity, category);
     return _query;
   }
   

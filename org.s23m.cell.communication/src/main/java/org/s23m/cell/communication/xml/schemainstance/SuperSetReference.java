@@ -32,40 +32,38 @@ import com.google.common.collect.ImmutableList;
 
 public class SuperSetReference extends Category {
 
-	private IsAbstractIdentityReference isAbstract;
+	private final IsAbstractIdentityReference isAbstract;
 	
-	private FromIdentityReference from;
+	private final FromIdentityReference from;
 	
-	private ToIdentityReference to;
+	private final ToIdentityReference to;
 	
-	public SuperSetReference(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.superSetReference());
+	public SuperSetReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			FromIdentityReference from,
+			ToIdentityReference to) {
+		
+		super(namespace, terminology.superSetReference(), semanticIdentity, category);
+		this.isAbstract = isAbstract;
+		this.from = from;
+		this.to = to;
 	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
-		this.isAbstract = isAbstract;
-	}
-
 	public FromIdentityReference getFrom() {
 		return from;
-	}
-
-	public void setFrom(FromIdentityReference from) {
-		this.from = from;
 	}
 
 	public ToIdentityReference getTo() {
 		return to;
 	}
 
-	public void setTo(ToIdentityReference to) {
-		this.to = to;
-	}
-	
 	@Override
 	protected Iterable<? extends Node> getAdditionalChildren() {
 		return ImmutableList.of(isAbstract, from, to);

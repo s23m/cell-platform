@@ -42,24 +42,29 @@ public class EdgeEnd extends Category {
 	
 	private IsNavigableIdentityReference isNavigable;
 
-	public EdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.edgeEnd());
+	public EdgeEnd(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			MinimumCardinalityIdentityReference minCardinality,
+			MaximumCardinalityIdentityReference maxCardinality,
+			IsContainerIdentityReference isContainer,
+			IsNavigableIdentityReference isNavigable) {
+		super(namespace, terminology.edgeEnd(), semanticIdentity, category);
+		this.isAbstract = isAbstract;
+		this.minCardinality = minCardinality;
+		this.maxCardinality = maxCardinality;
+		this.isContainer = isContainer;
+		this.isNavigable = isNavigable;
 	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
 
-	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
-		this.isAbstract = isAbstract;
-	}
-
 	public MinimumCardinalityIdentityReference getMinCardinality() {
 		return minCardinality;
-	}
-
-	public void setMinCardinality(MinimumCardinalityIdentityReference minCardinality) {
-		this.minCardinality = minCardinality;
 	}
 
 	public MaximumCardinalityIdentityReference getMaxCardinality() {

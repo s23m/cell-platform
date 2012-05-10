@@ -29,7 +29,11 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 
 public class Command extends Function {
 
-	public Command(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.command());
+	public Command(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category) {
+		
+		super(namespace, terminology.command(), semanticIdentity, category);
 	}
 }

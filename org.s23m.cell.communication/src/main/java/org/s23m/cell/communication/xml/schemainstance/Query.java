@@ -29,7 +29,11 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 
 public class Query extends Function {
 
-	public Query(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.query());
+	public Query(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category) {
+		
+		super(namespace, terminology.query(), semanticIdentity, category);
 	}
 }

@@ -29,7 +29,13 @@ import org.s23m.cell.communication.xml.dom.Namespace;
 
 public class Model extends Graph {
 
-	public Model(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.model());
+	public Model(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			ContainerIdentityReference container,
+			IsAbstractIdentityReference isAbstract) {
+		
+		super(namespace, terminology.model(), semanticIdentity, category, container, isAbstract);
 	}
 }
