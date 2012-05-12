@@ -135,7 +135,7 @@ public final class SuperSetReference extends Arrow  {
 			if (isExternal().is_TRUE()) {
 				return "(" + from().identity().name() + " -S-> "
 						+ to().visualRecognitionText() + ")."
-						+ container().visualRecognitionText() ;
+						+ container().visualRecognitionText();
 			} else {
 				return "(" + from().identity().name() + " -S-> "
 						+ to().identity().name() + ")."

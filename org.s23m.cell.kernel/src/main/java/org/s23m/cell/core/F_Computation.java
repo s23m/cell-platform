@@ -36,7 +36,7 @@ public class F_Computation {
 	public static	Set walkDownThenRight(final Set location, final VisitorFunction visitorFunction) {
 		final Set content = location.filterInstances();
 		for (final Set element : content) {
-			walkDownThenRight(element, visitorFunction) ;
+			walkDownThenRight(element, visitorFunction);
 		}
 		return visitorFunction.compute(location);
 	}
@@ -45,7 +45,7 @@ public class F_Computation {
 		final Set content = location.filterInstances();
 		Set element = content.extractLast();
 		for (int i = 0; i < content.size()  ; i++) {
-			walkDownThenLeft(element, visitorFunction) ;
+			walkDownThenLeft(element, visitorFunction);
 			element = content.extractPrevious(element);
 		}
 		return visitorFunction.compute(location);
@@ -56,7 +56,7 @@ public class F_Computation {
 		for (final Set element : content) {
 			visitorFunction.compute(element);
 		}
-		walkRightThenDown(location, visitorFunction) ;
+		walkRightThenDown(location, visitorFunction);
 		return visitorFunction.compute(location);
 	}
 	public static	Set walkLeftThenDown(final Set location, final VisitorFunction visitorFunction) {
@@ -67,7 +67,7 @@ public class F_Computation {
 			element = content.extractPrevious(element);
 			visitorFunction.compute(element);
 		}
-		walkLeftThenDown(location, visitorFunction) ;
+		walkLeftThenDown(location, visitorFunction);
 		return visitorFunction.compute(location);
 	}
 }

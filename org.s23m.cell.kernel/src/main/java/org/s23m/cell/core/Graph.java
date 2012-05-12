@@ -147,7 +147,7 @@ public class Graph extends OrderedPair implements Set {
 			if (this.orderedPairCategory().isEqualTo(coreSets.semanticErr)) {return ((Graph) S23MSemanticDomains.semanticErr);}
 			if (this.orderedPairCategory().isEqualTo(coreSets.kernelDefect)) {return ((Graph) S23MSemanticDomains.kernelDefect);}
 		}
-		return ((Graph) category);
+		return (Graph) category;
 	}
 
 	@Override
@@ -263,13 +263,13 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		return commands;
 	}
+
 	@Override
 	public Set executableCommands() {
 		this.ensureInitializedOrderedSets();
 		this.ensureInitializedExecutableFunctions();
 		return executableCommands;
 	}
-
 
 	@Override
 	public Set addToCommands(final Set anElement) {
@@ -283,7 +283,6 @@ public class Graph extends OrderedPair implements Set {
 		}
 		return coreSets.successful;
 	}
-
 
 	@Override
 	public Set removeFromCommands(final Set anElement) {
@@ -299,6 +298,7 @@ public class Graph extends OrderedPair implements Set {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_GraphGraphCantBeModified.identity(), coreSets.semanticErr);
 		}
 	}
+
 	@Override
 	public Set queries() {
 		this.ensureInitializedOrderedSets();
@@ -1368,7 +1368,7 @@ public class Graph extends OrderedPair implements Set {
 	public 	Set walkDownThenRight(final VisitorFunction visitorFunction) {
 		final Set content = this.filterInstances();
 		for (final Set element : content) {
-			element.walkDownThenRight(visitorFunction) ;
+			element.walkDownThenRight(visitorFunction);
 		}
 		return visitorFunction.compute(this);
 	}
@@ -1378,7 +1378,7 @@ public class Graph extends OrderedPair implements Set {
 		final Set content = this.filterInstances();
 		Set element = content.extractLast();
 		for (int i = 0; i < content.size()  ; i++) {
-			element.walkDownThenLeft(visitorFunction) ;
+			element.walkDownThenLeft(visitorFunction);
 			element = content.extractPrevious(element);
 		}
 		return visitorFunction.compute(this);
@@ -1390,7 +1390,7 @@ public class Graph extends OrderedPair implements Set {
 		for (final Set element : content) {
 			visitorFunction.compute(element);
 		}
-		return this.walkRightThenDown(visitorFunction) ;
+		return this.walkRightThenDown(visitorFunction);
 	}
 	@Override
 	public 	Set walkLeftThenDown(final VisitorFunction visitorFunction) {
@@ -1401,7 +1401,7 @@ public class Graph extends OrderedPair implements Set {
 			element = content.extractPrevious(element);
 			visitorFunction.compute(element);
 		}
-		this.walkLeftThenDown(visitorFunction) ;
+		this.walkLeftThenDown(visitorFunction);
 		return visitorFunction.compute(this);
 	}
 }

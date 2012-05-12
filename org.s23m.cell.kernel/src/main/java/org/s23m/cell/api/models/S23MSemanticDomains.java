@@ -319,7 +319,7 @@ public class S23MSemanticDomains {
 		Graph.addSetToInMemorySets(sandboxSemanticDomains);
 		Graph.addSetToInMemorySets(agentSemanticDomains);
 
-		Graph.addSetToInMemorySets(cellKernel) ;
+		Graph.addSetToInMemorySets(cellKernel);
 		Graph.addSetToInMemorySets(root);
 		Graph.addSetToInMemorySets(semanticDomains);
 		Graph.addSetToInMemorySets(models);
@@ -329,7 +329,7 @@ public class S23MSemanticDomains {
 
 		Graph.addSetToInMemorySets(semanticIdentitySet);
 		Graph.addSetToInMemorySets(semanticRole);
-		Graph.addSetToInMemorySets(disjunctSemanticIdentitySet) ;
+		Graph.addSetToInMemorySets(disjunctSemanticIdentitySet);
 		Graph.addSetToInMemorySets(variantDisjunctSemanticIdentitySet);
 		Graph.addSetToInMemorySets(equivalenceClass);
 		Graph.addSetToInMemorySets(element);

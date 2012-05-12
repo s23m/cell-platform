@@ -138,7 +138,7 @@ public class Query {
 	}
 
 	public static Set findGraphVisualization(final Set set) {
-		return findUniqueFromSet(Visualization.visualizedGraph_to_graph, set) ;
+		return findUniqueFromSet(Visualization.visualizedGraph_to_graph, set);
 	}
 
 	public static Set findSet(final String uniqueRepresentationReference) {

@@ -67,7 +67,7 @@ public interface Identity {
 	 * @param concept
 	 * @return whether the provided {@link Identity} concept is equal to this one
 	 */
-	boolean isEqualTo(Identity concept) ;
+	boolean isEqualTo(Identity concept);
 	/**
 	 * Indicates whether the provided {@link Identity} representation
 	 * <code>concept</code> is equal to this one
@@ -75,7 +75,7 @@ public interface Identity {
 	 * @param concept
 	 * @return whether the provided {@link Identity} representation is equal to this one
 	 */
-	boolean isEqualToRepresentation(Identity representation) ;
+	boolean isEqualToRepresentation(Identity representation);
 
 	/**
 	 * Indicates whether the Identity is part of the S23M kernel.

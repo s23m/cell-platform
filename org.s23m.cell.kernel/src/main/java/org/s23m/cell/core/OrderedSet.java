@@ -293,7 +293,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set extractUniqueMatch(final Set set) {
-		return extractUniqueMatch(set.identity()) ;
+		return extractUniqueMatch(set.identity());
 	}
 
 	@Override
@@ -701,7 +701,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		Set result = S23MSemanticDomains.is_FALSE;
 		for (final Set element : this) {
 			if (setSemantics.containsSemanticMatch(element)) {
-				result = result.and(setSemantics.extractUniqueMatch(element.semanticIdentity())).isEqualTo(element.semanticIdentity(), equivalenceClass) ;
+				result = result.and(setSemantics.extractUniqueMatch(element.semanticIdentity())).isEqualTo(element.semanticIdentity(), equivalenceClass);
 			}
 		}
 		return result;

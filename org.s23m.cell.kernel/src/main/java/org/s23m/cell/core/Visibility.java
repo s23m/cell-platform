@@ -110,11 +110,11 @@ public final class Visibility extends Arrow  {
 			if (this.isExternal().is_TRUE()) {
 				return "(" + this.from().identity().name()
 						+ " -V-> " + this.to().visualRecognitionText() + ")."
-						+ this.container().visualRecognitionText() ;
+						+ this.container().visualRecognitionText();
 			} else {
 				return "(" + this.from().identity().name()
 						+ " -V-> " + this.to().identity().name()
-						+ ")." + this.container().visualRecognitionText() ;
+						+ ")." + this.container().visualRecognitionText();
 			}
 		}
 	}

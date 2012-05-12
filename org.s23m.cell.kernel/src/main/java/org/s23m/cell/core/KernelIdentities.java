@@ -33,67 +33,67 @@ import org.s23m.cell.Identity;
  */
 public interface KernelIdentities {
 
-	Identity addAbstract() ;
-	Identity addConcrete() ;
-	Identity addElement() ;
-	Identity addToValues() ;
-	Identity addToVariables() ;
-	Identity allowableEdgeCategories() ;
+	Identity addAbstract();
+	Identity addConcrete();
+	Identity addElement();
+	Identity addToValues();
+	Identity addToVariables();
+	Identity allowableEdgeCategories();
 	Identity anonymous();
 
 	Identity booleanValue();
 
-	Identity category() ;
-	Identity command() ;
-	Identity commandFunction() ;
-	Identity complement() ;
+	Identity category();
+	Identity command();
+	Identity commandFunction();
+	Identity complement();
 	Identity completion();
 	Identity completion_successful();
-	Identity container() ;
-	Identity containerCategory() ;
-	Identity contains() ;
-	Identity containsAll() ;
-	Identity containsEdgeFromOrTo() ;
+	Identity container();
+	Identity containerCategory();
+	Identity contains();
+	Identity containsAll();
+	Identity containsEdgeFromOrTo();
 
-	Identity decommission() ;
-	Identity directSuperSetOf() ;
+	Identity decommission();
+	Identity directSuperSetOf();
 
 	Identity edge();
 	Identity edgeEnd();
-	Identity edgeEnds() ;
+	Identity edgeEnds();
 	Identity edgeTrace();
 	Identity elementAdded();
 	Identity elementRemoved();
-	Identity elementsOfSemanticIdentitySet() ;
+	Identity elementsOfSemanticIdentitySet();
 	Identity event();
 	Identity extractFirst();
 	Identity extractSecond();
 	Identity extractLast();
 	Identity extractUniqueMatch();
 
-	Identity filter() ;
-	Identity filterProperClass() ;
-	Identity filterInstances() ;
-	Identity filterArrows() ;
-	Identity filterPolymorphic() ;
+	Identity filter();
+	Identity filterProperClass();
+	Identity filterInstances();
+	Identity filterArrows();
+	Identity filterPolymorphic();
 	Identity properClass();
-	Identity properClassCommandFunction() ;
-	Identity properClassQueryFunction() ;
-	Identity from() ;
-	Identity fromEdgeEnd() ;
-	Identity function() ;
+	Identity properClassCommandFunction();
+	Identity properClassQueryFunction();
+	Identity from();
+	Identity fromEdgeEnd();
+	Identity function();
 
-	Identity get() ;
+	Identity get();
 	Identity graph();
 
-	Identity hasVisibilityOf() ;
+	Identity hasVisibilityOf();
 
 	Identity identifier();
-	Identity identity() ;
-	Identity indexOf() ;
-	Identity instantiateAbstract() ;
-	Identity instantiateConcrete() ;
-	Identity intersection() ;
+	Identity identity();
+	Identity indexOf();
+	Identity instantiateAbstract();
+	Identity instantiateConcrete();
+	Identity intersection();
 	Identity iqLogicValue();
 	Identity is_FALSE();
 	Identity is_NOTAPPLICABLE();
@@ -102,34 +102,34 @@ public interface KernelIdentities {
 	Identity isAbstract();
 	Identity isAbstract_FALSE();
 	Identity isAbstract_TRUE();
-	Identity isAnArrow() ;
-	Identity isASemanticIdentity() ;
+	Identity isAnArrow();
+	Identity isASemanticIdentity();
 	Identity isContainer();
 	Identity isContainer_FALSE();
 	Identity isContainer_NOTAPPLICABLE();
 	Identity isContainer_TRUE();
 	Identity isContainer_UNKNOWN();
-	Identity isElementOf() ;
-	Identity isEmpty() ;
-	Identity isEqualTo() ;
-	Identity isExternal() ;
-	Identity isInformation() ;
-	Identity isLocalSuperSetOf() ;
+	Identity isElementOf();
+	Identity isEmpty();
+	Identity isEqualTo();
+	Identity isExternal();
+	Identity isInformation();
+	Identity isLocalSuperSetOf();
 	Identity isNavigable();
 	Identity isNavigable_FALSE();
 	Identity isNavigable_NOTAPPLICABLE();
 	Identity isNavigable_TRUE();
 	Identity isNavigable_UNKNOWN();
-	Identity isSuperSetOf() ;
+	Identity isSuperSetOf();
 
 	Identity kernelDefect();
 	Identity kernelDefect_KernelHasReachedAnIllegalState();
 
-	Identity lastIndexOf() ;
+	Identity lastIndexOf();
 	Identity arrow();
-	Identity listIterator() ;
-	Identity listIteratorInt() ;
-	Identity localRootSuperSetOf() ;
+	Identity listIterator();
+	Identity listIteratorInt();
+	Identity localRootSuperSetOf();
 
 	Identity maxCardinality();
 	Identity maxCardinality_0();
@@ -152,15 +152,15 @@ public interface KernelIdentities {
 	Identity orderedPair();
 	Identity orderedSet();
 
-	Identity parameter() ;
+	Identity parameter();
 	Identity pluralName();
 
-	Identity query() ;
-	Identity queryFunction() ;
+	Identity query();
+	Identity queryFunction();
 
-	Identity removeElement() ;
-	Identity removeFromValues() ;
-	Identity removeFromVariables() ;
+	Identity removeElement();
+	Identity removeFromValues();
+	Identity removeFromVariables();
 
 	Identity semanticDomain();
 	Identity semanticErr();
@@ -198,26 +198,26 @@ public interface KernelIdentities {
 	Identity semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance();
 	Identity semanticErr_ValueIsNotAssigned();
 	Identity semanticErr_VariableCantBeRemovedCategoryStillHasInstances();
-	Identity setMaintenanceCommand() ;
-	Identity setValue() ;
-	Identity size() ;
-	Identity subGraph() ;
+	Identity setMaintenanceCommand();
+	Identity setValue();
+	Identity size();
+	Identity subGraph();
 	Identity superSetReference();
 
-	Identity target() ;
+	Identity target();
 	Identity technicalName();
 	Identity to();
-	Identity toArray() ;
-	Identity toArrayInstance() ;
-	Identity toEdgeEnd() ;
+	Identity toArray();
+	Identity toArrayInstance();
+	Identity toEdgeEnd();
 
-	Identity union() ;
+	Identity union();
 
-	Identity value() ;
-	Identity values() ;
-	Identity variables() ;
+	Identity value();
+	Identity values();
+	Identity variables();
 	Identity vertex();
 	Identity visibility();
-	Identity visibleInstancesForSubGraph() ;
+	Identity visibleInstancesForSubGraph();
 
 }

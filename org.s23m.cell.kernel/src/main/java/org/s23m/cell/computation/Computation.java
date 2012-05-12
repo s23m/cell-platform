@@ -29,8 +29,8 @@ import org.s23m.cell.api.VisitorFunction;
 
 public interface Computation {
 	Set initializeWalk(final VisitorFunction visitorFunction);
-	Set walkDownThenRight(final VisitorFunction visitorFunction) ;
-	Set walkDownThenLeft(final VisitorFunction visitorFunction) ;
-	Set walkRightThenDown(final VisitorFunction visitorFunction) ;
+	Set walkDownThenRight(final VisitorFunction visitorFunction);
+	Set walkDownThenLeft(final VisitorFunction visitorFunction);
+	Set walkRightThenDown(final VisitorFunction visitorFunction);
 	Set walkLeftThenDown(final VisitorFunction visitorFunction);
 }

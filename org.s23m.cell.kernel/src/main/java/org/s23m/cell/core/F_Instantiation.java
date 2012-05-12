@@ -196,7 +196,7 @@ public final class F_Instantiation {
 				) {
 			if (category.value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)	) {
 				final Vertex temp;
-				temp = new Vertex((Graph) stage, semanticIdentity, category) ;
+				temp = new Vertex((Graph) stage, semanticIdentity, category);
 				temp.addToValues(coreSets.isAbstract_FALSE);
 				return temp;
 			} else {
@@ -214,7 +214,7 @@ public final class F_Instantiation {
 				) {
 			if ((category).value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_TRUE)	) {
 				final Vertex temp;
-				temp = new Vertex((Graph) stage, semanticIdentity, category) ;
+				temp = new Vertex((Graph) stage, semanticIdentity, category);
 				temp.addToValues(coreSets.isAbstract_TRUE);
 				return temp;
 			} else {
@@ -362,7 +362,7 @@ public final class F_Instantiation {
 				F_Query.getSetFromLocalMemory(secondMaxCardinality),
 				F_Query.getSetFromLocalMemory(secondIsNavigable),
 				F_Query.getSetFromLocalMemory(secondIsContainer)
-				) ;
+				);
 	}
 
 	public static Set addSemanticRole(final String name, final String pluralName, final Set semanticDomain, final Set referencedSemanticIdentity) {

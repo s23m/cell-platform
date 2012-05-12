@@ -137,20 +137,20 @@ public final class KernelSets {
 	public final Set command;
 	public final Set commandFunction;
 	public final Set properClassCommandFunction;
-	public final Set query ;
-	public final Set queryFunction ;
-	public final Set properClassQueryFunction ;
+	public final Set query;
+	public final Set queryFunction;
+	public final Set properClassQueryFunction;
 
 	/**
 	 * OrderedPair queries
 	 */
 
-	//public final Set ;
-	public final Set identity ;
-	public final Set isEqualTo ;
+	//public final Set;
+	public final Set identity;
+	public final Set isEqualTo;
 	public final Set semanticIdentity;
 
-	//public final Set isInformation ;
+	//public final Set isInformation;
 	/**
 	 * OrderedSet commands
 	 */
@@ -163,44 +163,44 @@ public final class KernelSets {
 	 * OrderedSet queries
 	 */
 
-	public final Set contains ;
-	public final Set containsAll ;
-	public final Set get ;
-	public final Set indexOf ;
-	public final Set isEmpty ;
-	public final Set lastIndexOf ;
-	public final Set listIterator ;
-	public final Set listIteratorInt ;
-	public final Set size ;
-	public final Set toArray ;
-	public final Set toArrayInstance ;
+	public final Set contains;
+	public final Set containsAll;
+	public final Set get;
+	public final Set indexOf;
+	public final Set isEmpty;
+	public final Set lastIndexOf;
+	public final Set listIterator;
+	public final Set listIteratorInt;
+	public final Set size;
+	public final Set toArray;
+	public final Set toArrayInstance;
 	public final Set indexOfIdentifier;
 
 	/**
 	 * Graph commands
 	 */
 
-	public final Set addAbstract ;
-	public final Set addConcrete ;
-	public final Set addAbstractSubGraph ;
-	public final Set isASemanticIdentity ;
-	public final Set addToVariables ;
-	public final Set addToValues ;
-	public final Set decommission ;
-	public final Set instantiateAbstract ;
-	public final Set instantiateConcrete ;
-	public final Set removeFromVariables ;
-	public final Set removeFromValues ;
-	public final Set setValue ;
+	public final Set addAbstract;
+	public final Set addConcrete;
+	public final Set addAbstractSubGraph;
+	public final Set isASemanticIdentity;
+	public final Set addToVariables;
+	public final Set addToValues;
+	public final Set decommission;
+	public final Set instantiateAbstract;
+	public final Set instantiateConcrete;
+	public final Set removeFromVariables;
+	public final Set removeFromValues;
+	public final Set setValue;
 
 	/**
 	 * SemanticIdntity commands
 	 */
 
-	public final Set addElement ;
-	public final Set removeElement ;
+	public final Set addElement;
+	public final Set removeElement;
 
-	public final Set setMaintenanceCommand ;
+	public final Set setMaintenanceCommand;
 
 	/**
 	 * SemanticIdntity queries
@@ -210,37 +210,37 @@ public final class KernelSets {
 	 * Graph, Vertex, EdgeEnd queries
 	 */
 
-	public final Set container ;
-	public final Set filter ;
-	public final Set containsEdgeFromOrTo ;
+	public final Set container;
+	public final Set filter;
+	public final Set containsEdgeFromOrTo;
 	public final Set filterProperClass;
-	public final Set hasVisibilityOf ;
-	public final Set filterInstances ;
-	public final Set isSuperSetOf ;
-	public final Set isLocalSuperSetOf ;
-	public final Set filterArrows ;
-	public final Set localRootSuperSetOf ;
-	public final Set directSuperSetOf ;
-	public final Set category ;
-	public final Set containerCategory ;
-	public final Set variables ;
-	public final Set value ;
-	public final Set values ;
-	public final Set visibleInstancesForSubGraph ;
+	public final Set hasVisibilityOf;
+	public final Set filterInstances;
+	public final Set isSuperSetOf;
+	public final Set isLocalSuperSetOf;
+	public final Set filterArrows;
+	public final Set localRootSuperSetOf;
+	public final Set directSuperSetOf;
+	public final Set category;
+	public final Set containerCategory;
+	public final Set variables;
+	public final Set value;
+	public final Set values;
+	public final Set visibleInstancesForSubGraph;
 	public final Set allowableEdgeCategories;
 	public final Set filterPolymorphic;
-	public final Set queries ;
-	public final Set commands ;
-	public final Set executableQueries ;
-	public final Set executableCommands ;
+	public final Set queries;
+	public final Set commands;
+	public final Set executableQueries;
+	public final Set executableCommands;
 
 
 	/**
 	 * Arrow queries
 	 */
 
-	public final Set from ;
-	public final Set isExternal ;
+	public final Set from;
+	public final Set isExternal;
 	public final Set to;
 
 	/**
@@ -248,8 +248,8 @@ public final class KernelSets {
 	 */
 
 	public final Set edgeEnds;
-	public final Set fromEdgeEnd ;
-	public final Set toEdgeEnd ;
+	public final Set fromEdgeEnd;
+	public final Set toEdgeEnd;
 
 
 	public final Set name;
@@ -385,66 +385,66 @@ public final class KernelSets {
 		commandFunction = F_InstantiationImpl.createFunction(identityFactory.commandFunction(), command);
 		properClassCommandFunction = F_InstantiationImpl.createFunction(identityFactory.properClassCommandFunction(), command);
 
-		query = F_InstantiationImpl.createFunction(identityFactory.query(), function) ;
-		queryFunction = F_InstantiationImpl.createOrderedPair(identityFactory.queryFunction(), query) ;
-		properClassQueryFunction = F_InstantiationImpl.createOrderedPair(identityFactory.properClassQueryFunction(), query) ;
+		query = F_InstantiationImpl.createFunction(identityFactory.query(), function);
+		queryFunction = F_InstantiationImpl.createOrderedPair(identityFactory.queryFunction(), query);
+		properClassQueryFunction = F_InstantiationImpl.createOrderedPair(identityFactory.properClassQueryFunction(), query);
 
 		/**
 		 * OrderedPair queries
 		 */
-		identity = F_InstantiationImpl.createFunction(identityFactory.identity(), properClassQueryFunction) ;
-		isEqualTo = F_InstantiationImpl.createFunction(identityFactory.isEqualTo(), properClassQueryFunction) ;
+		identity = F_InstantiationImpl.createFunction(identityFactory.identity(), properClassQueryFunction);
+		isEqualTo = F_InstantiationImpl.createFunction(identityFactory.isEqualTo(), properClassQueryFunction);
 		semanticIdentity = F_InstantiationImpl.createFunction(identityFactory.filterPolymorphic(), properClassQueryFunction);
-		isASemanticIdentity = F_InstantiationImpl.createFunction(identityFactory.isASemanticIdentity(), properClassCommandFunction) ;
+		isASemanticIdentity = F_InstantiationImpl.createFunction(identityFactory.isASemanticIdentity(), properClassCommandFunction);
 		isInformation = F_InstantiationImpl.createFunction(identityFactory.isInformation(), query);
 
 		/**
 		 * OrderedSet commands
 		 */
-		union = F_InstantiationImpl.createFunction(identityFactory.union(), properClassCommandFunction) ;
-		intersection = F_InstantiationImpl.createFunction(identityFactory.intersection(), properClassCommandFunction) ;
-		complement = F_InstantiationImpl.createFunction(identityFactory.complement(), properClassCommandFunction) ;
+		union = F_InstantiationImpl.createFunction(identityFactory.union(), properClassCommandFunction);
+		intersection = F_InstantiationImpl.createFunction(identityFactory.intersection(), properClassCommandFunction);
+		complement = F_InstantiationImpl.createFunction(identityFactory.complement(), properClassCommandFunction);
 
 		/**
 		 * OrderedSet queries
 		 */
-		contains = F_InstantiationImpl.createFunction(identityFactory.contains(), properClassQueryFunction) ;
-		containsAll = F_InstantiationImpl.createFunction(identityFactory.containsAll(), properClassQueryFunction) ;
-		get = F_InstantiationImpl.createFunction(identityFactory.get(), properClassQueryFunction) ;
-		indexOf = F_InstantiationImpl.createFunction(identityFactory.indexOf(), properClassQueryFunction) ;
-		isEmpty = F_InstantiationImpl.createFunction(identityFactory.isEmpty(), properClassQueryFunction) ;
-		lastIndexOf = F_InstantiationImpl.createFunction(identityFactory.lastIndexOf(), properClassQueryFunction) ;
-		listIterator = F_InstantiationImpl.createFunction(identityFactory.listIterator(), properClassQueryFunction) ;
-		listIteratorInt = F_InstantiationImpl.createFunction(identityFactory.listIteratorInt(), properClassQueryFunction) ;
-		size = F_InstantiationImpl.createFunction(identityFactory.size(), properClassQueryFunction) ;
-		toArray = F_InstantiationImpl.createFunction(identityFactory.toArray(), properClassQueryFunction) ;
-		toArrayInstance = F_InstantiationImpl.createFunction(identityFactory.toArrayInstance(), properClassQueryFunction) ;
-		indexOfIdentifier = F_InstantiationImpl.createFunction(identityFactory.indexOfIdentifier(), properClassQueryFunction) ;
+		contains = F_InstantiationImpl.createFunction(identityFactory.contains(), properClassQueryFunction);
+		containsAll = F_InstantiationImpl.createFunction(identityFactory.containsAll(), properClassQueryFunction);
+		get = F_InstantiationImpl.createFunction(identityFactory.get(), properClassQueryFunction);
+		indexOf = F_InstantiationImpl.createFunction(identityFactory.indexOf(), properClassQueryFunction);
+		isEmpty = F_InstantiationImpl.createFunction(identityFactory.isEmpty(), properClassQueryFunction);
+		lastIndexOf = F_InstantiationImpl.createFunction(identityFactory.lastIndexOf(), properClassQueryFunction);
+		listIterator = F_InstantiationImpl.createFunction(identityFactory.listIterator(), properClassQueryFunction);
+		listIteratorInt = F_InstantiationImpl.createFunction(identityFactory.listIteratorInt(), properClassQueryFunction);
+		size = F_InstantiationImpl.createFunction(identityFactory.size(), properClassQueryFunction);
+		toArray = F_InstantiationImpl.createFunction(identityFactory.toArray(), properClassQueryFunction);
+		toArrayInstance = F_InstantiationImpl.createFunction(identityFactory.toArrayInstance(), properClassQueryFunction);
+		indexOfIdentifier = F_InstantiationImpl.createFunction(identityFactory.indexOfIdentifier(), properClassQueryFunction);
 
 		/**
 		 * SemanticIdentity commands
 		 */
-		addElement = F_InstantiationImpl.createFunction(identityFactory.addElement(), commandFunction) ;
-		removeElement = F_InstantiationImpl.createFunction(identityFactory.removeElement(), commandFunction) ;
+		addElement = F_InstantiationImpl.createFunction(identityFactory.addElement(), commandFunction);
+		removeElement = F_InstantiationImpl.createFunction(identityFactory.removeElement(), commandFunction);
 
-		setMaintenanceCommand = F_InstantiationImpl.createFunction(identityFactory.setMaintenanceCommand(), commandFunction) ;
+		setMaintenanceCommand = F_InstantiationImpl.createFunction(identityFactory.setMaintenanceCommand(), commandFunction);
 
-		isElementOf = F_InstantiationImpl.createFunction(identityFactory.isElementOf(), queryFunction) ;
+		isElementOf = F_InstantiationImpl.createFunction(identityFactory.isElementOf(), queryFunction);
 
 		/**
 		 * Graph commands
 		 */
-		addAbstract = F_InstantiationImpl.createFunction(identityFactory.addAbstract(), properClassCommandFunction) ;
-		addConcrete = F_InstantiationImpl.createFunction(identityFactory.addConcrete(), properClassCommandFunction) ;
-		addAbstractSubGraph = F_InstantiationImpl.createFunction(identityFactory.isAnArrow(), properClassCommandFunction) ;
-		addToVariables = F_InstantiationImpl.createFunction(identityFactory.addToVariables(), properClassCommandFunction) ;
-		addToValues = F_InstantiationImpl.createFunction(identityFactory.addToValues(), properClassCommandFunction) ;
-		decommission = F_InstantiationImpl.createFunction(identityFactory.decommission(), properClassCommandFunction) ;
-		instantiateAbstract = F_InstantiationImpl.createFunction(identityFactory.instantiateAbstract(), properClassCommandFunction) ;
-		instantiateConcrete = F_InstantiationImpl.createFunction(identityFactory.instantiateConcrete(), properClassCommandFunction) ;
-		removeFromVariables = F_InstantiationImpl.createFunction(identityFactory.removeFromVariables(), properClassCommandFunction) ;
-		removeFromValues = F_InstantiationImpl.createFunction(identityFactory.removeFromValues(), properClassCommandFunction) ;
-		setValue = F_InstantiationImpl.createFunction(identityFactory.setValue(), properClassCommandFunction) ;
+		addAbstract = F_InstantiationImpl.createFunction(identityFactory.addAbstract(), properClassCommandFunction);
+		addConcrete = F_InstantiationImpl.createFunction(identityFactory.addConcrete(), properClassCommandFunction);
+		addAbstractSubGraph = F_InstantiationImpl.createFunction(identityFactory.isAnArrow(), properClassCommandFunction);
+		addToVariables = F_InstantiationImpl.createFunction(identityFactory.addToVariables(), properClassCommandFunction);
+		addToValues = F_InstantiationImpl.createFunction(identityFactory.addToValues(), properClassCommandFunction);
+		decommission = F_InstantiationImpl.createFunction(identityFactory.decommission(), properClassCommandFunction);
+		instantiateAbstract = F_InstantiationImpl.createFunction(identityFactory.instantiateAbstract(), properClassCommandFunction);
+		instantiateConcrete = F_InstantiationImpl.createFunction(identityFactory.instantiateConcrete(), properClassCommandFunction);
+		removeFromVariables = F_InstantiationImpl.createFunction(identityFactory.removeFromVariables(), properClassCommandFunction);
+		removeFromValues = F_InstantiationImpl.createFunction(identityFactory.removeFromValues(), properClassCommandFunction);
+		setValue = F_InstantiationImpl.createFunction(identityFactory.setValue(), properClassCommandFunction);
 		/**
 		 * Graph queries
 		 */

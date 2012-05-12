@@ -105,7 +105,7 @@ public class Reconstitution {
 				secondMaxCardinality,
 				secondIsNavigable,
 				secondIsContainer
-		) ;
+		);
 	}
 
 	public static Set testDeserialisationPrerequisites(final Set set) {

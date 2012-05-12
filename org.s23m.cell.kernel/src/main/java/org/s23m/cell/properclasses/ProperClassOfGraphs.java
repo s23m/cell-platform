@@ -73,7 +73,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 	Set addToVariables(Set set);
 	Set allowableEdgeCategories(Set OrderedPair);
-	Set and( Set b) ;
+	Set and( Set b);
 	/**
 	 * assignNewName(newName)
 	 * assigns a new name to a semantic identity
@@ -244,15 +244,15 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 	Set hasVisibilityOf(Set target);
 
-	Set includesValue( Set value, Set equivalenceClass) ;
+	Set includesValue( Set value, Set equivalenceClass);
 
 	Set intersection(Set set);
 
-	boolean is_FALSE() ;
-	boolean is_NOTAPPLICABLE() ;
-	boolean is_TRUE() ;
+	boolean is_FALSE();
+	boolean is_NOTAPPLICABLE();
+	boolean is_TRUE();
 
-	boolean is_UNKNOWN() ;
+	boolean is_UNKNOWN();
 
 	/**
 	 * isDecommissioned.isEqualTo(is_TRUE)
@@ -267,7 +267,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 
 	Set isEqualTo(Set set, Set equivalenceClass);
 
-	Set isInformation() ;
+	Set isInformation();
 
 	/**
 	 * Indicates whether this {@link Set} is a local generalization of
@@ -287,7 +287,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * and that the container has not been instantiated by a client 	 *
 	 */
 	Set isNewInstance();
-	Set isQuality() ;
+	Set isQuality();
 	/**
 	 * Retrieves the generalization of a {@link Set}
 	 * 
@@ -303,8 +303,8 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * @return the root generalization {@link Set}
 	 */
 	Set localRootSuperSetOf(Set orderedPair);
-	Set not() ;
-	Set or( Set b) ;
+	Set not();
+	Set or( Set b);
 
 	Set queries();
 	Set removeFromCommands(Set anElement);
@@ -313,7 +313,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 
 	Set unionOfconnectingArrows( Set instance);
 	/**
-	 * Return the value associated with isInformation variable from this {@link Set}
+	 * Return the value associated with the supplied variable from this {@link Set}
 	 */
 	Set value(Set variable);
 	/**

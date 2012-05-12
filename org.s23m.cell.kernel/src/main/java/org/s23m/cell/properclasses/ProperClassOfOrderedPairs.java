@@ -36,9 +36,9 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 */
 
 	/**
-	 * Each {@link Set} has a <i>isInformation</i> that acts as the classification mechanism
+	 * Each {@link Set} has a <i>category</i> that acts as the classification mechanism
 	 * 
-	 * @return the isInformation
+	 * @return the category
 	 */
 	Set category();
 
@@ -50,7 +50,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	Set properClass();
 
 
-	String fullVisualRecognitionText() ;
+	String fullVisualRecognitionText();
 
 	/**
 	 * Each {@link Set} has a {@link Identity} that relates to a unique semantic unit (or concept)
@@ -62,6 +62,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	Set isAnArrow();
 
 	boolean isASemanticIdentity();
+
 	/**
 	 * Equality of concepts is established via equality of underlying SemanticIdentities
 	 * 
@@ -72,6 +73,7 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 * @return whether this {@link Set} is equal to the <code>orderedPair</code> concept
 	 */
 	boolean isEqualTo(Set orderedPair);
+
 	/**
 	 * Equality of representations is established via equality of underlying uniqueRepresentationReferences
 	 * 
@@ -82,13 +84,16 @@ public interface ProperClassOfOrderedPairs extends ProperClassOfGraphs, ProperCl
 	 * @return whether this {@link Set} is equal to the <code>orderedPair</code> representation
 	 */
 	boolean isEqualToRepresentation(Set orderedPair);
-	String localVisualRecognitionText() ;
+
+	String localVisualRecognitionText();
+
 	/**
 	 * Each {@link Artefact} has a {@link Semantic Identity} artefact that relates to a unique semantic unit (or concept)
 	 * 
 	 * @return the semantic identity
 	 */
 	Set semanticIdentity();
-	String visualRecognitionText() ;
+
+	String visualRecognitionText();
 
 }
