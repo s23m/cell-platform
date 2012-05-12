@@ -1,5 +1,9 @@
 package org.s23m.cell.communication.xml;
 
+import java.util.UUID;
+import org.s23m.cell.Identity;
+import org.s23m.cell.Set;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -93,9 +97,40 @@ public class InstanceBuilder {
     return _query;
   }
   
+  public SemanticIdentityIdentityReference semanticIdentity(final Set set) {
+    SemanticIdentityIdentityReference _xblockexpression = null;
+    {
+      Identity _identity = set.identity();
+      final Identity identity = _identity;
+      UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
+      String _uuid = this.uuid(_uniqueRepresentationReference);
+      UUID _identifier = identity.identifier();
+      String _uuid_1 = this.uuid(_identifier);
+      SemanticIdentityIdentityReference _semanticIdentity = this.semanticIdentity(_uuid, _uuid_1);
+      _xblockexpression = (_semanticIdentity);
+    }
+    return _xblockexpression;
+  }
+  
   public SemanticIdentityIdentityReference semanticIdentity(final String uniqueRepresentationReference, final String identifier) {
     SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
     return _semanticIdentityIdentityReference;
+  }
+  
+  public CategoryIdentityReference category(final Set set) {
+    CategoryIdentityReference _xblockexpression = null;
+    {
+      Set _category = set.category();
+      Identity _identity = _category.identity();
+      final Identity identity = _identity;
+      UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
+      String _uuid = this.uuid(_uniqueRepresentationReference);
+      UUID _identifier = identity.identifier();
+      String _uuid_1 = this.uuid(_identifier);
+      CategoryIdentityReference _category_1 = this.category(_uuid, _uuid_1);
+      _xblockexpression = (_category_1);
+    }
+    return _xblockexpression;
   }
   
   public CategoryIdentityReference category(final String uniqueRepresentationReference, final String identifier) {
@@ -103,9 +138,42 @@ public class InstanceBuilder {
     return _categoryIdentityReference;
   }
   
+  public ContainerIdentityReference container(final Set set) {
+    ContainerIdentityReference _xblockexpression = null;
+    {
+      Set _container = set.container();
+      Identity _identity = _container.identity();
+      final Identity identity = _identity;
+      UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
+      String _uuid = this.uuid(_uniqueRepresentationReference);
+      UUID _identifier = identity.identifier();
+      String _uuid_1 = this.uuid(_identifier);
+      ContainerIdentityReference _container_1 = this.container(_uuid, _uuid_1);
+      _xblockexpression = (_container_1);
+    }
+    return _xblockexpression;
+  }
+  
   public ContainerIdentityReference container(final String uniqueRepresentationReference, final String identifier) {
     ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
     return _containerIdentityReference;
+  }
+  
+  public IsAbstractIdentityReference isAbstract(final Set set) {
+    IsAbstractIdentityReference _xblockexpression = null;
+    {
+      Set _value = set.value(S23MSemanticDomains.isAbstract);
+      final Set isAbstractValue = _value;
+      Identity _identity = isAbstractValue.identity();
+      final Identity identity = _identity;
+      UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
+      String _uuid = this.uuid(_uniqueRepresentationReference);
+      UUID _identifier = identity.identifier();
+      String _uuid_1 = this.uuid(_identifier);
+      IsAbstractIdentityReference _isAbstract = this.isAbstract(_uuid, _uuid_1);
+      _xblockexpression = (_isAbstract);
+    }
+    return _xblockexpression;
   }
   
   public IsAbstractIdentityReference isAbstract(final String uniqueRepresentationReference, final String identifier) {
@@ -126,5 +194,10 @@ public class InstanceBuilder {
   public MaximumCardinalityIdentityReference maxCardinality(final String uniqueRepresentationReference, final String identifier) {
     MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, uniqueRepresentationReference, identifier);
     return _maximumCardinalityIdentityReference;
+  }
+  
+  private String uuid(final UUID uuid) {
+    String _string = uuid.toString();
+    return _string;
   }
 }

@@ -1,5 +1,9 @@
 package org.s23m.cell.communication.xml
 
+import java.util.UUID
+
+import org.s23m.cell.Identity
+
 import org.s23m.cell.communication.xml.dom.Namespace
 import org.s23m.cell.communication.xml.schemainstance.ArtifactSet
 import org.s23m.cell.communication.xml.schemainstance.Command
@@ -15,14 +19,16 @@ import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityRe
 import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.MaximumCardinalityIdentityReference
-
-import static org.s23m.cell.communication.xml.NamespaceConstants.*
-import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.communication.xml.schemainstance.ToIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.MinimumCardinalityIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.IsContainerIdentityReference
 import org.s23m.cell.communication.xml.schemainstance.IsNavigableIdentityReference
+
+import static org.s23m.cell.communication.xml.NamespaceConstants.*
+import static org.s23m.cell.communication.xml.NamespaceExtensions.*
+import org.s23m.cell.Set
+import org.s23m.cell.api.models.S23MSemanticDomains
 
 class InstanceBuilder {
 	
@@ -160,16 +166,37 @@ class InstanceBuilder {
 		new Query(namespace, terminology, semanticIdentity, category)
 	}
 	
+	def semanticIdentity(Set set) {
+		val identity = set.identity
+		semanticIdentity(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+	}
+	
 	def semanticIdentity(String uniqueRepresentationReference, String identifier) {
 		new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def category(Set set) {
+		val identity = set.category.identity
+		category(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
 	}
 	
 	def category(String uniqueRepresentationReference, String identifier) {
 		new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
 	}
 	
+	def container(Set set) {
+		val identity = set.container.identity
+		container(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+	}
+	
 	def container(String uniqueRepresentationReference, String identifier) {
 		new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def isAbstract(Set set) {
+		val isAbstractValue = set.value(S23MSemanticDomains::isAbstract)
+		val identity = isAbstractValue.identity
+		isAbstract(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
 	}
 	
 	def isAbstract(String uniqueRepresentationReference, String identifier) {
@@ -186,5 +213,9 @@ class InstanceBuilder {
 	
 	def maxCardinality(String uniqueRepresentationReference, String identifier) {
 		new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	}
+	
+	def private String uuid(UUID uuid) {
+		uuid.toString
 	}
 }

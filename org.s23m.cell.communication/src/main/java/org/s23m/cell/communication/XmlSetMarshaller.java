@@ -25,11 +25,29 @@
 package org.s23m.cell.communication;
 
 import org.s23m.cell.Set;
+import org.s23m.cell.communication.xml.InstanceBuilder;
+import org.s23m.cell.communication.xml.XmlRendering;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
+import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.Model;
+import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
 import org.w3c.dom.Document;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<Document> {
 
+	private final Namespace namespace;
+	
+	private final XmlSchemaTerminology terminology;
+		
+	public XmlSetMarshaller(Namespace namespace, XmlSchemaTerminology terminology) {
+		this.namespace = namespace;
+		this.terminology = terminology;
+	}		
+	
 	/*
 	 * Implementation:
 	 * -> for processing exactly one instance, use the filter() operations:
@@ -50,7 +68,12 @@ public class XmlSetMarshaller implements SetMarshaller<Document> {
 	 * Need to make at least 2 passes along the containment tree to resolve all references.
 	 */
 	@Override
-	public Document serialise(Set input) throws SetMarshallingException {
+	public Document serialise(Set instance) throws SetMarshallingException {
+		for (final Set containedInstance : instance.filterInstances()) {
+			processInstance(containedInstance);
+		}
+		
+		
 		// TODO
 		
 		// create an ArtifactSet-builder, like we did for the schema builder
@@ -60,6 +83,22 @@ public class XmlSetMarshaller implements SetMarshaller<Document> {
 		
 			
 		return null;
+	}
+	
+	// TODO: need to process instances recursively
+	private void processInstance(final Set containedInstance) {
+		String languageIdentifier = "ENGLISH";
+		InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
+		
+		SemanticIdentityIdentityReference semanticIdentity = builder.semanticIdentity(containedInstance);
+		CategoryIdentityReference category = builder.category(containedInstance);
+		ContainerIdentityReference container = builder.container(containedInstance);
+		IsAbstractIdentityReference isAbstract = builder.isAbstract(containedInstance);
+		
+		Model model = builder.model(semanticIdentity, category, container, isAbstract);
+		
+		//String rendered = XmlRendering.render(builder.build()).toString();
+		//System.out.println("rendered: " + rendered);
 	}
 
 	@Override

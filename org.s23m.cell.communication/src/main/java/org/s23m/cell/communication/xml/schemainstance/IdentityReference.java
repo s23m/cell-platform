@@ -43,7 +43,7 @@ public abstract class IdentityReference extends AbstractCompositeNode {
 	
 	private final StringElement identifier;
 
-	public IdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String name, String uniqueRepresentationReference, String identifier) {
+	protected IdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String name, String uniqueRepresentationReference, String identifier) {
 		super(namespace, name);
 		this.uniqueRepresentationReference = new StringElement(namespace, terminology.uniqueRepresentationReference(), uniqueRepresentationReference);
 		this.identifier = new StringElement(namespace, terminology.identifier(), identifier);
