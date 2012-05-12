@@ -25,19 +25,22 @@
 package org.s23m.cell.communication;
 
 import org.s23m.cell.Set;
+import org.s23m.cell.api.Query;
+import org.s23m.cell.api.models.S23MSemanticDomains;
+
 import org.s23m.cell.communication.xml.InstanceBuilder;
 import org.s23m.cell.communication.xml.XmlRendering;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.schemainstance.Command;
+import org.s23m.cell.communication.xml.schemainstance.Edge;
 import org.s23m.cell.communication.xml.schemainstance.Model;
-import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
-import org.w3c.dom.Document;
+import org.s23m.cell.communication.xml.schemainstance.SuperSetReference;
+import org.s23m.cell.communication.xml.schemainstance.Vertex;
+import org.s23m.cell.communication.xml.schemainstance.Visibility;
 
 // TODO add a constructor accepting the Schema to use and validate against
-public class XmlSetMarshaller implements SetMarshaller<Document> {
+public class XmlSetMarshaller implements SetMarshaller<String> {
 
 	private final Namespace namespace;
 	
@@ -68,41 +71,63 @@ public class XmlSetMarshaller implements SetMarshaller<Document> {
 	 * Need to make at least 2 passes along the containment tree to resolve all references.
 	 */
 	@Override
-	public Document serialise(Set instance) throws SetMarshallingException {
-		for (final Set containedInstance : instance.filterInstances()) {
-			processInstance(containedInstance);
-		}
-		
-		
-		// TODO
-		
-		// create an ArtifactSet-builder, like we did for the schema builder
-		// we can populate the different "aspects" of the artifactSet using similar code to the HTML visualisation
-		
-		// this method only needs to serialise a single artefact with its "keys" (UUIDs for category, container, etc)
-		
-			
-		return null;
-	}
-	
-	// TODO: need to process instances recursively
-	private void processInstance(final Set containedInstance) {
+	public String serialise(Set instance) throws SetMarshallingException {
 		String languageIdentifier = "ENGLISH";
 		InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
 		
-		SemanticIdentityIdentityReference semanticIdentity = builder.semanticIdentity(containedInstance);
-		CategoryIdentityReference category = builder.category(containedInstance);
-		ContainerIdentityReference container = builder.container(containedInstance);
-		IsAbstractIdentityReference isAbstract = builder.isAbstract(containedInstance);
+		for (final Set containedInstance : instance.filterInstances()) {
+			processInstance(builder, containedInstance);
+		}
 		
-		Model model = builder.model(semanticIdentity, category, container, isAbstract);
+		return XmlRendering.render(builder.build()).toString();
+	}
+	
+	// TODO: need to process instances recursively
+	// TODO include the Edge Ends from each Edge via toEdgeEnd() and fromEdgeEnd()
+	private Model processInstance(InstanceBuilder builder, Set instance) {
+		Model model = builder.model(instance);
 		
-		//String rendered = XmlRendering.render(builder.build()).toString();
-		//System.out.println("rendered: " + rendered);
+		// process Vertex list
+		for (Set vertexInstance : instance.filterProperClass(Query.vertex)) {
+			Vertex vertex = builder.vertex(vertexInstance);
+			model.addVertex(vertex);
+		}
+		
+		// process Edge list
+		for (Set edgeInstance : instance.filterProperClass(Query.edge)) {
+			Edge edge = builder.edge(edgeInstance);
+			model.addEdge(edge);
+		}
+		
+		// process Visibility list
+		for (Set visibilityInstance : instance.filterProperClass(Query.visibility)) {
+			Visibility visibility = builder.visibility(visibilityInstance);
+			model.addVisibility(visibility);
+		}
+		
+		// process SuperSetReference list
+		for (Set superSetReferenceInstance : instance.filterProperClass(Query.superSetReference)) {
+			SuperSetReference superSetReference = builder.superSetReference(superSetReferenceInstance);
+			model.addSuperSetReference(superSetReference);
+		}
+		
+		// process Command list
+		for (Set commandInstance : instance.filter(S23MSemanticDomains.command)) {
+			Command command = builder.command(commandInstance);
+			model.addCommand(command);
+		}
+		
+		// process Query list
+		for (Set queryInstance : instance.filter(S23MSemanticDomains.query)) {
+			org.s23m.cell.communication.xml.schemainstance.Query query = builder.query(queryInstance);
+			model.addQuery(query);
+		}
+		
+		return model;
 	}
 
 	@Override
-	public Set deserialise(Document input) throws SetMarshallingException {
+	public Set deserialise(String input) throws SetMarshallingException {
 		// TODO Auto-generated method stub
 		return null;
 	}

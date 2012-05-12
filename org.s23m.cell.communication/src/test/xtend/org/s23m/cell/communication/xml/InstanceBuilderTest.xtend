@@ -15,25 +15,25 @@ class InstanceBuilderTest {
 		
 		// TODO finish creating object graph
 		val model = builder.model(
-			builder.semanticIdentity("1", "2"),
-			builder.category("3", "4"),
-			builder.container("5", "6"),
-			builder.isAbstract("7", "8")
+			builder.semanticIdentity("1" -> "2"),
+			builder.category("3" -> "4"),
+			builder.container("5" -> "6"),
+			builder.isAbstract("7" -> "8")
 		)
 		
 		model += builder.vertex(
-			builder.semanticIdentity("1", "2"),
-			builder.category("3", "4"),
-			builder.isAbstract("9", "10"),
-			builder.maxCardinality("11", "12")
+			builder.semanticIdentity("1" -> "2"),
+			builder.category("3" -> "4"),
+			builder.isAbstract("9" -> "10"),
+			builder.maxCardinality("11" -> "12")
 		)
 		
 		model += builder.visibility(
-			builder.semanticIdentity("1", "2"),
-			builder.category("3", "4"),
-			builder.isAbstract("9", "10"),
-			builder.from("3", "4"),
-			builder.to("1", "2")
+			builder.semanticIdentity("1" -> "2"),
+			builder.category("3" -> "4"),
+			builder.isAbstract("9" -> "10"),
+			builder.from("3" -> "4"),
+			builder.to("1" -> "2")
 		)
 		
 		

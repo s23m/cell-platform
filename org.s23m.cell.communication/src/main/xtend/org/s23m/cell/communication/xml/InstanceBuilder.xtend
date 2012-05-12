@@ -29,6 +29,7 @@ import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
+import org.eclipse.xtext.xbase.lib.Pair
 
 class InstanceBuilder {
 	
@@ -52,6 +53,14 @@ class InstanceBuilder {
 		artifactSet
 	}
 	
+	def model(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val container = container(set)
+		val isAbstract = isAbstract(set)
+		model(semanticIdentity, category, container, isAbstract)
+	}
+	
 	def model(SemanticIdentityIdentityReference semanticIdentity,
 			CategoryIdentityReference category,
 			ContainerIdentityReference container,
@@ -71,6 +80,14 @@ class InstanceBuilder {
 		result
 	}
 	
+	def vertex(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val maxCardinality = maxCardinality(set)
+		vertex(semanticIdentity, category, isAbstract, maxCardinality)
+	}
+	
 	def vertex(SemanticIdentityIdentityReference semanticIdentity,
 			CategoryIdentityReference category,
 			IsAbstractIdentityReference isAbstract,
@@ -84,6 +101,15 @@ class InstanceBuilder {
 			isAbstract,
 			maxCardinality
 		)
+	}
+	
+	def visibility(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val from = from(set.from)
+		val to = to(set.to)
+		visibility(semanticIdentity, category, isAbstract, from, to)
 	}
 	
 	def visibility(SemanticIdentityIdentityReference semanticIdentity,
@@ -103,6 +129,15 @@ class InstanceBuilder {
 		)
 	}
 	
+	def edge(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val from = edgeEnd(set.fromEdgeEnd)
+		val to = edgeEnd(set.toEdgeEnd)
+		edge(semanticIdentity, category, isAbstract, from, to)
+	}
+		
 	def edge(SemanticIdentityIdentityReference semanticIdentity,
 			CategoryIdentityReference category,
 			IsAbstractIdentityReference isAbstract,
@@ -117,6 +152,26 @@ class InstanceBuilder {
 			isAbstract,
 			from,
 			to
+		)
+	}
+	
+	def edgeEnd(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val minCardinality = minCardinality(set)
+		val maxCardinality = maxCardinality(set)
+		val isContainer = isContainer(set)
+		val isNavigable = isNavigable(set)
+				
+		edgeEnd(
+			semanticIdentity,
+			category,
+			isAbstract,
+			minCardinality,
+			maxCardinality,
+			isContainer,
+			isNavigable
 		)
 	}
 	
@@ -141,6 +196,15 @@ class InstanceBuilder {
 		)
 	}
 	
+	def superSetReference(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val from = from(set.from)
+		val to = to(set.to)
+		superSetReference(semanticIdentity, category, isAbstract, from, to)
+	}
+	
 	def superSetReference(SemanticIdentityIdentityReference semanticIdentity,
 			CategoryIdentityReference category,
 			IsAbstractIdentityReference isAbstract,
@@ -158,61 +222,124 @@ class InstanceBuilder {
 		)
 	}
 	
+	def command(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		command(semanticIdentity, category)
+	}
+	
 	def command(SemanticIdentityIdentityReference semanticIdentity,	CategoryIdentityReference category) {
 		new Command(namespace, terminology, semanticIdentity, category)
 	}
-
+	
+	def query(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		query(semanticIdentity, category)
+	}
+	
 	def query(SemanticIdentityIdentityReference semanticIdentity, CategoryIdentityReference category) {
 		new Query(namespace, terminology, semanticIdentity, category)
 	}
 	
 	def semanticIdentity(Set set) {
 		val identity = set.identity
-		semanticIdentity(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+		semanticIdentity(identityPair(identity))
 	}
 	
-	def semanticIdentity(String uniqueRepresentationReference, String identifier) {
-		new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def semanticIdentity(Pair<String, String> pair) {
+		new SemanticIdentityIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def category(Set set) {
 		val identity = set.category.identity
-		category(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+		category(identityPair(identity))
 	}
 	
-	def category(String uniqueRepresentationReference, String identifier) {
-		new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def category(Pair<String, String> pair) {
+		new CategoryIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def container(Set set) {
 		val identity = set.container.identity
-		container(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+		container(identityPair(identity))
 	}
 	
-	def container(String uniqueRepresentationReference, String identifier) {
-		new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def container(Pair<String, String> pair) {
+		new ContainerIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def isAbstract(Set set) {
-		val isAbstractValue = set.value(S23MSemanticDomains::isAbstract)
-		val identity = isAbstractValue.identity
-		isAbstract(uuid(identity.uniqueRepresentationReference), uuid(identity.identifier))
+		val pair = valueIdentityPair(set, S23MSemanticDomains::isAbstract)
+		isAbstract(pair)
 	}
 	
-	def isAbstract(String uniqueRepresentationReference, String identifier) {
-		new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def isAbstract(Pair<String, String> pair) {
+		new IsAbstractIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
-	def from(String uniqueRepresentationReference, String identifier) {
-		new FromIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def from(Set set) {
+		val identity = set.identity
+		from(identityPair(identity))
 	}
 	
-	def to(String uniqueRepresentationReference, String identifier) {
-		new ToIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def from(Pair<String, String> pair) {
+		new FromIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
-	def maxCardinality(String uniqueRepresentationReference, String identifier) {
-		new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier)
+	def to(Set set) {
+		val identity = set.identity
+		to(identityPair(identity))
+	}
+	
+	def to(Pair<String, String> pair) {
+		new ToIdentityReference(namespace, terminology, pair.key, pair.value)
+	}
+	
+	def maxCardinality(Set set) {
+		val pair = valueIdentityPair(set, S23MSemanticDomains::maxCardinality)
+		maxCardinality(pair)
+	}
+	
+	def maxCardinality(Pair<String, String> pair) {
+		new MaximumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
+	}
+	
+	def minCardinality(Set set) {
+		val pair = valueIdentityPair(set, S23MSemanticDomains::minCardinality)
+		minCardinality(pair)
+	}
+	
+	def minCardinality(Pair<String, String> pair) {
+		new MinimumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
+	}
+	
+	def isContainer(Set set) {
+		val pair = valueIdentityPair(set, S23MSemanticDomains::isContainer)
+		isContainer(pair)
+	}
+	
+	def isContainer(Pair<String, String> pair) {
+		new IsContainerIdentityReference(namespace, terminology, pair.key, pair.value)
+	}
+	
+	def isNavigable(Set set) {
+		val pair = valueIdentityPair(set, S23MSemanticDomains::isNavigable)
+		isNavigable(pair)
+	}
+	
+	def isNavigable(Pair<String, String> pair) {
+		new IsNavigableIdentityReference(namespace, terminology, pair.key, pair.value)
+	}
+	
+	def private valueIdentityPair(Set set, Set variable) {
+		val retrievedValue = set.value(variable)
+		val identity = retrievedValue.identity
+		identityPair(identity)
+	}
+	
+	def private Pair<String, String> identityPair(Identity identity) {
+		uuid(identity.uniqueRepresentationReference) -> uuid(identity.identifier)
 	}
 	
 	def private String uuid(UUID uuid) {
