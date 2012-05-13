@@ -28,18 +28,26 @@ import org.s23m.cell.communication.xml.model.dom.AbstractLeafNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class StringElement extends AbstractLeafNode {
-	
-	private final String value;
 
-	public StringElement(Namespace namespace, String name, String value) {
-		super(namespace, name);
-		this.value = value;
-	}
-	
 	/**
 	 * Text content
 	 */
+	private String text;
+
+	public StringElement(Namespace namespace, String name, String value) {
+		super(namespace, name);
+		this.text = value;
+	}
+
+	public StringElement(Namespace namespace, String name) {
+		super(namespace, name);
+	}
+	
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	public String getText() {
-		return value;
+		return text;
 	}
 }

@@ -38,7 +38,7 @@ import com.google.common.collect.Iterables;
 // TODO generate this class from the schema instance (and reduce duplication)?
 public class ArtifactSet extends AbstractCompositeNode {
 	
-	private final StringElement languageIdentifier;
+	private StringElement languageIdentifier;
 	
 	private final List<Model> modelList;
 	
@@ -49,6 +49,10 @@ public class ArtifactSet extends AbstractCompositeNode {
 		this.languageIdentifier = new StringElement(namespace, terminology.languageIdentifier(), languageIdentifier);
 		this.modelList = new ArrayList<Model>();
 		this.semanticDomainList = new ArrayList<SemanticDomain>();
+	}
+
+	public void setLanguageIdentifier(StringElement languageIdentifier) {
+		this.languageIdentifier = languageIdentifier;		
 	}
 	
 	public StringElement getLanguageIdentifier() {

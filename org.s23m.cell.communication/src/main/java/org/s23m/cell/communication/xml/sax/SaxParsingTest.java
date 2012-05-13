@@ -35,6 +35,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 
 import org.s23m.cell.communication.xml.DefaultXmlSchemaTerminology;
+import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.XmlSchemaFactory;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.xml.sax.SAXException;
@@ -58,7 +59,7 @@ public class SaxParsingTest {
 			URL resource = Resources.getResource("cell-communication-instance.xml");
 			byte[] byteArray = Resources.toByteArray(resource);
 			InputStream is = new ByteArrayInputStream(byteArray);
-			saxParser.parse(is, new ArtifactSetElementHandler());
+			saxParser.parse(is, new ArtifactSetElementHandler(NamespaceConstants.NS_S23M, terminology, "ENGLISH"));
 	    }
 	    catch(ParserConfigurationException e1) {
 	    	e1.printStackTrace();
