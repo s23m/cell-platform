@@ -10,12 +10,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.StringUtils;
-import org.s23m.cell.communication.xml.dom.CompositeNode;
-import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.dom.Node;
-import org.s23m.cell.communication.xml.schema.Schema;
-import org.s23m.cell.communication.xml.schemainstance.ArtifactSet;
-import org.s23m.cell.communication.xml.schemainstance.StringElement;
+import org.s23m.cell.communication.xml.model.dom.CompositeNode;
+import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.dom.Node;
+import org.s23m.cell.communication.xml.model.schema.Schema;
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
 
 @SuppressWarnings("all")
 public class XmlRendering {

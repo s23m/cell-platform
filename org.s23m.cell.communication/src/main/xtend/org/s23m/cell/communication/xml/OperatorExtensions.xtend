@@ -1,15 +1,15 @@
 package org.s23m.cell.communication.xml
 
-import org.s23m.cell.communication.xml.schemainstance.ArtifactSet
-import org.s23m.cell.communication.xml.schemainstance.Command
-import org.s23m.cell.communication.xml.schemainstance.Edge
-import org.s23m.cell.communication.xml.schemainstance.Model
-import org.s23m.cell.communication.xml.schemainstance.Parameter
-import org.s23m.cell.communication.xml.schemainstance.Query
-import org.s23m.cell.communication.xml.schemainstance.SemanticDomain
-import org.s23m.cell.communication.xml.schemainstance.SuperSetReference
-import org.s23m.cell.communication.xml.schemainstance.Vertex
-import org.s23m.cell.communication.xml.schemainstance.Visibility
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet
+import org.s23m.cell.communication.xml.model.schemainstance.Command
+import org.s23m.cell.communication.xml.model.schemainstance.Edge
+import org.s23m.cell.communication.xml.model.schemainstance.Model
+import org.s23m.cell.communication.xml.model.schemainstance.Parameter
+import org.s23m.cell.communication.xml.model.schemainstance.Query
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain
+import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference
+import org.s23m.cell.communication.xml.model.schemainstance.Vertex
+import org.s23m.cell.communication.xml.model.schemainstance.Visibility
 
 /**
  * Syntactic sugar for operations

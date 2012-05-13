@@ -1,7 +1,7 @@
 package org.s23m.cell.communication.xml;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.s23m.cell.communication.xml.dom.Namespace;
+import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 @SuppressWarnings("all")
 public class NamespaceConstants {

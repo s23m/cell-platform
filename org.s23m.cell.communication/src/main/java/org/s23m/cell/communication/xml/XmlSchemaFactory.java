@@ -46,7 +46,7 @@ public class XmlSchemaFactory {
 	private byte[] generateSchema(final XmlSchemaTerminology terminology) {
 		// generate schema from template
 		final XmlSchemaTemplate schemaTemplate = new XmlSchemaTemplate();
-		final org.s23m.cell.communication.xml.schema.Schema schema = schemaTemplate.createSchemaModel(terminology);
+		final org.s23m.cell.communication.xml.model.schema.Schema schema = schemaTemplate.createSchemaModel(terminology);
 		final CharSequence schemaText = XmlRendering.render(schema);
 		return schemaText.toString().getBytes(Charsets.UTF_8);
 	}

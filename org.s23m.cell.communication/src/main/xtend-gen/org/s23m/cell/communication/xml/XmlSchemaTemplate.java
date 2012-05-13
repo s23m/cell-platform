@@ -5,16 +5,16 @@ import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.SchemaBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.s23m.cell.communication.xml.dom.Node;
-import org.s23m.cell.communication.xml.schema.Cardinality;
-import org.s23m.cell.communication.xml.schema.ComplexType;
-import org.s23m.cell.communication.xml.schema.DataType;
-import org.s23m.cell.communication.xml.schema.Element;
-import org.s23m.cell.communication.xml.schema.ElementReference;
-import org.s23m.cell.communication.xml.schema.Extension;
-import org.s23m.cell.communication.xml.schema.Schema;
-import org.s23m.cell.communication.xml.schema.Sequence;
-import org.s23m.cell.communication.xml.schema.SimpleType;
+import org.s23m.cell.communication.xml.model.dom.Node;
+import org.s23m.cell.communication.xml.model.schema.Cardinality;
+import org.s23m.cell.communication.xml.model.schema.ComplexType;
+import org.s23m.cell.communication.xml.model.schema.DataType;
+import org.s23m.cell.communication.xml.model.schema.Element;
+import org.s23m.cell.communication.xml.model.schema.ElementReference;
+import org.s23m.cell.communication.xml.model.schema.Extension;
+import org.s23m.cell.communication.xml.model.schema.Schema;
+import org.s23m.cell.communication.xml.model.schema.Sequence;
+import org.s23m.cell.communication.xml.model.schema.SimpleType;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {

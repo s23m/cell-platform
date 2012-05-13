@@ -10,18 +10,18 @@ import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.OperatorExtensions;
 import org.s23m.cell.communication.xml.XmlRendering;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.s23m.cell.communication.xml.dom.Namespace;
-import org.s23m.cell.communication.xml.schemainstance.ArtifactSet;
-import org.s23m.cell.communication.xml.schemainstance.CategoryIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.ContainerIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.FromIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.IsAbstractIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.MaximumCardinalityIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.Model;
-import org.s23m.cell.communication.xml.schemainstance.SemanticIdentityIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.ToIdentityReference;
-import org.s23m.cell.communication.xml.schemainstance.Vertex;
-import org.s23m.cell.communication.xml.schemainstance.Visibility;
+import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.CategoryIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
+import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
 @SuppressWarnings("all")
 public class InstanceBuilderTest {

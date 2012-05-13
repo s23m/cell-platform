@@ -1,11 +1,11 @@
 package org.s23m.cell.communication.xml
 
-import org.s23m.cell.communication.xml.dom.CompositeNode
-import org.s23m.cell.communication.xml.dom.Node
+import org.s23m.cell.communication.xml.model.dom.CompositeNode
+import org.s23m.cell.communication.xml.model.dom.Node
 
-import org.s23m.cell.communication.xml.schema.Schema
-import org.s23m.cell.communication.xml.schemainstance.ArtifactSet
-import org.s23m.cell.communication.xml.schemainstance.StringElement
+import org.s23m.cell.communication.xml.model.schema.Schema
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet
+import org.s23m.cell.communication.xml.model.schemainstance.StringElement
 
 import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 

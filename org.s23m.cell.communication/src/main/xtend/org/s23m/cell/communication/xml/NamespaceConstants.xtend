@@ -1,6 +1,6 @@
 package org.s23m.cell.communication.xml
 
-import org.s23m.cell.communication.xml.dom.Namespace
+import org.s23m.cell.communication.xml.model.dom.Namespace
 
 class NamespaceConstants {
 	
