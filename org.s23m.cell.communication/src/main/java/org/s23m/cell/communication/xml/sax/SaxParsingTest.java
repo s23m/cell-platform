@@ -32,7 +32,11 @@ import java.net.URL;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.validation.Schema;
 
+import org.s23m.cell.communication.xml.DefaultXmlSchemaTerminology;
+import org.s23m.cell.communication.xml.XmlSchemaFactory;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
@@ -40,8 +44,14 @@ import com.google.common.io.Resources;
 public class SaxParsingTest {
 
 	public static void main(String[] args) {
+		XmlSchemaFactory schemaFactory = new XmlSchemaFactory();
+		XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
+		Schema schema = schemaFactory.createSchema(terminology);
+		
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-	    factory.setValidating(true);
+		factory.setNamespaceAware(true);
+		// http://tutorials.jenkov.com/java-xml/sax-schema-validation.html
+		factory.setSchema(schema);
 	    try {
 	        SAXParser saxParser = factory.newSAXParser();
 

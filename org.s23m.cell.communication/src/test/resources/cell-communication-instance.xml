@@ -60,10 +60,10 @@
 				<s23m:uniqueRepresentationReference>9</s23m:uniqueRepresentationReference>
 				<s23m:identifier>10</s23m:identifier>
 			</s23m:isAbstract>
-			<s23m:maxCardinality>
+			<s23m:maximumCardinality>
 				<s23m:uniqueRepresentationReference>11</s23m:uniqueRepresentationReference>
 				<s23m:identifier>12</s23m:identifier>
-			</s23m:maxCardinality>
+			</s23m:maximumCardinality>
 		</s23m:vertex>
 		
 		<!-- minOccurs="0" maxOccurs="unbounded" -->
@@ -120,14 +120,14 @@
 					<s23m:uniqueRepresentationReference>29</s23m:uniqueRepresentationReference>
 					<s23m:identifier>30</s23m:identifier>
 				</s23m:isAbstract>
-				<s23m:minCardinality>
+				<s23m:minimumCardinality>
 					<s23m:uniqueRepresentationReference>31</s23m:uniqueRepresentationReference>
 					<s23m:identifier>32</s23m:identifier>
-				</s23m:minCardinality>
-				<s23m:maxCardinality>
+				</s23m:minimumCardinality>
+				<s23m:maximumCardinality>
 					<s23m:uniqueRepresentationReference>33</s23m:uniqueRepresentationReference>
 					<s23m:identifier>34</s23m:identifier>
-				</s23m:maxCardinality>
+				</s23m:maximumCardinality>
 				<s23m:isContainer>
 					<s23m:uniqueRepresentationReference>35</s23m:uniqueRepresentationReference>
 					<s23m:identifier>36</s23m:identifier>
@@ -151,14 +151,14 @@
 					<s23m:uniqueRepresentationReference>39</s23m:uniqueRepresentationReference>
 					<s23m:identifier>40</s23m:identifier>
 				</s23m:isAbstract>
-				<s23m:minCardinality>
+				<s23m:minimumCardinality>
 					<s23m:uniqueRepresentationReference>41</s23m:uniqueRepresentationReference>
 					<s23m:identifier>42</s23m:identifier>
-				</s23m:minCardinality>
-				<s23m:maxCardinality>
+				</s23m:minimumCardinality>
+				<s23m:maximumCardinality>
 					<s23m:uniqueRepresentationReference>43</s23m:uniqueRepresentationReference>
 					<s23m:identifier>44</s23m:identifier>
-				</s23m:maxCardinality>
+				</s23m:maximumCardinality>
 				<s23m:isContainer>
 					<s23m:uniqueRepresentationReference>45</s23m:uniqueRepresentationReference>
 					<s23m:identifier>46</s23m:identifier>
