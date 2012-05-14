@@ -26,8 +26,7 @@ package org.s23m.cell.platform.formulaProcessors.informationqualitylogic;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.InformationQualityLogic;
-import org.s23m.cell.core.F_InstantiationImpl;
-import org.s23m.cell.core.OrderedSet;
+import org.s23m.cell.api.SetAlgebra;
 import org.s23m.cell.platform.api.FormulaEvaluation;
 import org.s23m.cell.platform.formulaProcessors.FormulaEvaluator;
 
@@ -43,30 +42,22 @@ public class And extends FormulaEvaluator {
 
 	@Override
 	public Set evaluate() {
-		final OrderedSet termsForImmediateEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
-		final OrderedSet termsForRecursiveEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
+		Set termsForImmediateEvaluation = SetAlgebra.anEmptySet();
+		Set termsForRecursiveEvaluation = SetAlgebra.anEmptySet();
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation.addElement(term); }
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
 			else {
-				termsForImmediateEvaluation.addElement(term);
-			}
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
 		}
 
-		switch (arity) {
-        case NARY:
-        	if (termsForImmediateEvaluation.size() == terms.size()) {
-        		return InformationQualityLogic.and(this.terms);
-        	} else {
-        	final Set evaluatedFunction = InformationQualityLogic.and(termsForImmediateEvaluation);
-        	termsForRecursiveEvaluation.addElement(evaluatedFunction);
-        	return FormulaEvaluation.addSubFormula(subFormula.container(), subFormula.category(), this.generateSemanticIdentityForEvaluationResult(), termsForRecursiveEvaluation, variables, constants);
-        	}
-        default:
-    		return this.subFormula;
-		}
-
+    	if (termsForImmediateEvaluation.size() == terms.size()) {
+    		return InformationQualityLogic.and(this.terms);
+    	} else {
+	    	final Set evaluatedFunction = InformationQualityLogic.and(termsForImmediateEvaluation);
+	    	termsForRecursiveEvaluation.union(evaluatedFunction.wrapInOrderedSet());
+	    	return FormulaEvaluation.addSubFormula(subFormula.container(), subFormula.category(), this.generateSemanticIdentityForEvaluationResult(), termsForRecursiveEvaluation, variables, constants);
+	   	}
 	}
-
 }

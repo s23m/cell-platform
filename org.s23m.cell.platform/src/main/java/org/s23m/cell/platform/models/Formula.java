@@ -30,6 +30,7 @@ import static org.s23m.cell.S23MKernel.coreSets;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 
 
 public class Formula  {
@@ -53,22 +54,57 @@ public class Formula  {
 	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, variable, properSubFormula);
 	private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, constant, properSubFormula);
 
-	/*public static final Set literal_to_properSubFormula = Instantiation.arrow(TimeConsciousness.dynamicConnection,
-			CellPlatformDomain.literal_to_properSubFormula,
-			literal,
-			literal,
+	private static final Set v90 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.formula.container(), CellPlatformDomain.cellPlatformDomain);
+	private static final Set v91 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.formula, CellPlatformDomain.cellPlatformDomain);
+
+	public static final Set binaryFunction_to_isAssociative = Instantiation.arrow(TimeConsciousness.dynamicConnection,
+			CellPlatformDomain.binaryFunction_to_isAssociative,
+			binaryFunction,
+			binaryFunction,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_FALSE,
-			coreSets.isContainer_TRUE,
-			CellPlatformDomain.properSubFormula,
-			properSubFormula,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.isAssociative,
+			CellPlatformDomain.isAssociative,
 			coreSets.minCardinality_1,
 			coreSets.maxCardinality_1,
 			coreSets.isNavigable_TRUE,
 			coreSets.isContainer_FALSE
 	);
-	*/
+	public static final Set identityElement = binaryFunction.addConcrete(Organization.cell, CellPlatformDomain.identityElement);
+	private static final Set identityElementMax = identityElement.addToValues(S23MSemanticDomains.maxCardinality_1);
+
+	public static final Set binaryFunction_to_isCommutative = Instantiation.arrow(TimeConsciousness.dynamicConnection,
+			CellPlatformDomain.binaryFunction_to_isAssociative,
+			binaryFunction,
+			binaryFunction,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_FALSE,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.isCommutative,
+			CellPlatformDomain.isCommutative,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
+	public static final Set binaryFunction_to_hasInverseElements = Instantiation.arrow(TimeConsciousness.dynamicConnection,
+			CellPlatformDomain.binaryFunction_to_hasInverseElements,
+			binaryFunction,
+			binaryFunction,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_FALSE,
+			coreSets.isContainer_FALSE,
+			CellPlatformDomain.hasInverseElements,
+			CellPlatformDomain.hasInverseElements,
+			coreSets.minCardinality_1,
+			coreSets.maxCardinality_1,
+			coreSets.isNavigable_TRUE,
+			coreSets.isContainer_FALSE
+	);
 	public static final Set unaryFunction_to_term = Instantiation.arrow(TimeConsciousness.dynamicConnection,
 			CellPlatformDomain.unaryFunction_to_term,
 			unaryFunction,

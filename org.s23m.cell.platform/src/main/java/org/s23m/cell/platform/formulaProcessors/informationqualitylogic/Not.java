@@ -28,7 +28,6 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.InformationQualityLogic;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_InstantiationImpl;
-import org.s23m.cell.core.OrderedSet;
 import org.s23m.cell.platform.formulaProcessors.FormulaEvaluator;
 
 public class Not extends FormulaEvaluator {
@@ -43,15 +42,14 @@ public class Not extends FormulaEvaluator {
 
 	@Override
 	public Set evaluate() {
-		final OrderedSet termsForImmediateEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
-		final OrderedSet termsForRecursiveEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
+		Set termsForImmediateEvaluation = F_InstantiationImpl.createResultSet();
+		Set termsForRecursiveEvaluation = F_InstantiationImpl.createResultSet();
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation.addElement(term); }
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));}
 			else {
-				termsForImmediateEvaluation.addElement(term);
-			}
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));}
 		}
 
 		switch (arity) {

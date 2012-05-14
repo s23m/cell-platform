@@ -25,8 +25,7 @@
 package org.s23m.cell.platform.formulaProcessors.informationqualitylogic;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.core.F_InstantiationImpl;
-import org.s23m.cell.core.OrderedSet;
+import org.s23m.cell.api.SetAlgebra;
 import org.s23m.cell.platform.formulaProcessors.FormulaEvaluator;
 
 public class EqualsToRepresentation extends FormulaEvaluator {
@@ -41,31 +40,22 @@ public class EqualsToRepresentation extends FormulaEvaluator {
 
 	@Override
 	public Set evaluate() {
-		final OrderedSet termsForImmediateEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
-		final OrderedSet termsForRecursiveEvaluation = (OrderedSet) F_InstantiationImpl.createResultSet();
+		Set termsForImmediateEvaluation = SetAlgebra.anEmptySet();
+		Set termsForRecursiveEvaluation = SetAlgebra.anEmptySet();
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation.addElement(term); }
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
 			else {
-				termsForImmediateEvaluation.addElement(term);
-			}
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
 		}
 		// TODO implement !
-		switch (arity) {
-        case NARY:
-    		final OrderedSet remainder = (OrderedSet) F_InstantiationImpl.createResultSet();
-			boolean first = true;
-    		for (final Set term : terms) {
-    			if (!first) {remainder.addElement(term);}
-				first = false;
-    		}
-       		return this.subFormula;
-
-        default:
-    		return this.subFormula;
+		final Set remainder = SetAlgebra.anEmptySet();
+		boolean first = true;
+		for (final Set term : terms) {
+			if (!first) {remainder.union(term.wrapInOrderedSet());}
+			first = false;
 		}
-
+   		return this.subFormula;
 	}
-
 }

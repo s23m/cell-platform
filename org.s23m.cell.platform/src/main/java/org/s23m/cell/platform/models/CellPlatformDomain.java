@@ -283,8 +283,17 @@ public class CellPlatformDomain {
 	public static final Set literalInstance = Instantiation.addDisjunctSemanticIdentitySet("literal instance", "set of literal instances", cellPlatformDomain);
 
 	public static final Set properSubFormula = Instantiation.addDisjunctSemanticIdentitySet("proper  subformula", "set of proper subformulas", cellPlatformDomain);
+	public static final Set domain = Instantiation.addDisjunctSemanticIdentitySet("domain", "set of domains", cellPlatformDomain);
 	public static final Set unaryFunction = Instantiation.addDisjunctSemanticIdentitySet("unary function", "set of unary functions", cellPlatformDomain);
 	public static final Set binaryFunction = Instantiation.addDisjunctSemanticIdentitySet("binary function", "set of binary functions", cellPlatformDomain);
+	public static final Set isAssociative = Instantiation.addDisjunctSemanticIdentitySet("is associative", "is associative", cellPlatformDomain);
+	public static final Set binaryFunction_to_isAssociative = Instantiation.addDisjunctSemanticIdentitySet("binary function to is associative", "binary function to is associative", cellPlatformDomain);
+	public static final Set identityElement = Instantiation.addDisjunctSemanticIdentitySet("identity element", "identity element", cellPlatformDomain);
+	public static final Set isCommutative = Instantiation.addDisjunctSemanticIdentitySet("is commutative", "is commutative", cellPlatformDomain);
+	public static final Set isDistributive = Instantiation.addDisjunctSemanticIdentitySet("is distributive", "is distributive", cellPlatformDomain);
+	public static final Set binaryFunction_to_isCommutative = Instantiation.addDisjunctSemanticIdentitySet("binary function to is commutative", "binary function to is commutative", cellPlatformDomain);
+	public static final Set hasInverseElements = Instantiation.addDisjunctSemanticIdentitySet("has inverse elements", "has inverse elements", cellPlatformDomain);
+	public static final Set binaryFunction_to_hasInverseElements = Instantiation.addDisjunctSemanticIdentitySet("binary function to has inverse elements", "binary function to has inverse elements", cellPlatformDomain);
 	public static final Set naryFunction = Instantiation.addDisjunctSemanticIdentitySet("n-ary function", "set of n-ary functions", cellPlatformDomain);
 	public static final Set empty = Instantiation.addDisjunctSemanticIdentitySet("EMPTY", "set of EMPTYs", cellPlatformDomain);
 	public static final Set exist = Instantiation.addDisjunctSemanticIdentitySet("EXIST", "set of EXISTs", cellPlatformDomain);
@@ -349,6 +358,16 @@ public class CellPlatformDomain {
 
 		transaction.addElement(creationTimestamp);
 		transaction.addElement(creator);
+
+		isAssociative.addElement(S23MSemanticDomains.is_TRUE);
+		isAssociative.addElement(S23MSemanticDomains.is_FALSE);
+		isCommutative.addElement(S23MSemanticDomains.is_TRUE);
+		isCommutative.addElement(S23MSemanticDomains.is_FALSE);
+		hasInverseElements.addElement(S23MSemanticDomains.is_TRUE);
+		hasInverseElements.addElement(S23MSemanticDomains.is_FALSE);
+		isDistributive.addElement(S23MSemanticDomains.is_TRUE);
+		isDistributive.addElement(S23MSemanticDomains.is_FALSE);
+
 
 		return cellPlatformDomain;
 	}
