@@ -32,10 +32,15 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.CategoryIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Identifier;
+import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
+import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -109,7 +114,15 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			stack.push(new ContainerIdentityReference(namespace, terminology));
 		} else if (localName.equals(terminology.isAbstract())) {
 			stack.push(new IsAbstractIdentityReference(namespace, terminology));
-		}		
+		} else if (localName.equals(terminology.semanticIdentity())) {
+			stack.push(new SemanticIdentityIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.category())) {
+			stack.push(new CategoryIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.uniqueRepresentationReference())) {
+			stack.push(new UniqueRepresentationReference(namespace, terminology));
+		} else if (localName.equals(terminology.identifier())) {
+			stack.push(new Identifier(namespace, terminology));
+		}
 		
 		// TODO handle each element type - need a stack to keep track of outstanding elements
 		
@@ -123,8 +136,17 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		
 		Node tmp = null;
 		// TODO remove condition once we implement rules for all elements
-		if (ImmutableList.of(terminology.artifactSet(), terminology.languageIdentifier(), terminology.model(), terminology.container(), terminology.isAbstract()).contains(localName))
+		if (ImmutableList.of(terminology.artifactSet(),
+				terminology.languageIdentifier(),
+				terminology.model(),
+				terminology.container(),
+				terminology.isAbstract(),
+				terminology.semanticIdentity(),
+				terminology.category(),
+				terminology.uniqueRepresentationReference(),
+				terminology.identifier()).contains(localName)) {
 			tmp = stack.pop();
+		}
 
 		if (localName.equals(terminology.artifactSet())) {
 			result = (ArtifactSet) tmp;
@@ -137,13 +159,38 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			((ArtifactSet) top).addModel((Model) tmp);
 		} else if (localName.equals(terminology.container())) {
 			Node top = stack.peek();
+			ContainerIdentityReference identityReference = (ContainerIdentityReference) tmp;
 			if (top instanceof Model) {
-				((Model) top).setContainer((ContainerIdentityReference) tmp);
+				((Model) top).setContainer(identityReference);
 			}
 		} else if (localName.equals(terminology.isAbstract())) {
 			Node top = stack.peek();
 			if (top instanceof Model) {
 				((Model) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.semanticIdentity())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).setSemanticIdentity((SemanticIdentityIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.category())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).setCategory((CategoryIdentityReference) tmp);
+			}			
+		} else if (localName.equals(terminology.uniqueRepresentationReference())) {
+			final UniqueRepresentationReference reference = (UniqueRepresentationReference) tmp;
+			reference.setText(textContent);
+			Node top = stack.peek();
+			if (top instanceof IdentityReference) {
+				((IdentityReference) top).setUniqueRepresentationReference(reference);
+			}
+		} else if (localName.equals(terminology.identifier())) {
+			final Identifier identifier = (Identifier) tmp;
+			identifier.setText(textContent);
+			Node top = stack.peek();
+			if (top instanceof IdentityReference) {
+				((IdentityReference) top).setIdentifier(identifier);
 			}
 		}
 		
