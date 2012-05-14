@@ -32,5 +32,4 @@ public class MaximumCardinalityIdentityReference extends IdentityReference {
 	public MaximumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.maximumCardinality());
 	}
-
 }

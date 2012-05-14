@@ -32,5 +32,4 @@ public class SemanticDomain extends BasicCompositeNode {
 	public SemanticDomain(Namespace namespace, String name) {
 		super(namespace, name);
 	}
-
 }

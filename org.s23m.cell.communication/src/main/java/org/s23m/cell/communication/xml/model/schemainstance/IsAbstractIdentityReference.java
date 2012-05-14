@@ -32,5 +32,4 @@ public class IsAbstractIdentityReference extends IdentityReference {
 	public IsAbstractIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.isAbstract());
 	}
-
 }

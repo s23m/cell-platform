@@ -32,5 +32,4 @@ public class ToIdentityReference extends IdentityReference {
 	public ToIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.to());
 	}
-
 }

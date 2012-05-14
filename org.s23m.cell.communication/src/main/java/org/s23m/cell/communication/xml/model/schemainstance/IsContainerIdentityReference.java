@@ -32,5 +32,4 @@ public class IsContainerIdentityReference extends IdentityReference {
 	public IsContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.isContainer());
 	}
-
 }

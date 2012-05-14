@@ -32,5 +32,4 @@ public class IsNavigableIdentityReference extends IdentityReference {
 	public IsNavigableIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.isNavigable());
 	}
-
 }

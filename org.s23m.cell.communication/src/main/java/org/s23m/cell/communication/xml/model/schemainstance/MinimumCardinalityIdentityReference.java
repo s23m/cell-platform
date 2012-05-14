@@ -32,5 +32,4 @@ public class MinimumCardinalityIdentityReference extends IdentityReference {
 	public MinimumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.minimumCardinality());
 	}
-
 }

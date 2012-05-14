@@ -32,5 +32,4 @@ public class SemanticIdentityIdentityReference extends IdentityReference {
 	public SemanticIdentityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.semanticIdentity());
 	}
-
 }

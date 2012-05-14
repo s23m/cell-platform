@@ -33,12 +33,15 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.google.common.collect.ImmutableList;
 
 /*
  * http://onjava.com/pub/a/onjava/2002/06/26/xml.html?page=2
@@ -61,6 +64,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 
 // TODO instead of if-else chain, we could have an index of "handlers" for each element type, used in both startElement and endElement
+// TODO use a "cursor" pointing to the current top-level element being processed, to avoid instanceof checks
 public class ArtifactSetElementHandler extends DefaultHandler {
 	
 	private final InstanceBuilder builder;
@@ -103,8 +107,9 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			stack.push(new Model(namespace, terminology));
 		} else if (localName.equals(terminology.container())) {
 			stack.push(new ContainerIdentityReference(namespace, terminology));
-		}
-		
+		} else if (localName.equals(terminology.isAbstract())) {
+			stack.push(new IsAbstractIdentityReference(namespace, terminology));
+		}		
 		
 		// TODO handle each element type - need a stack to keep track of outstanding elements
 		
@@ -118,7 +123,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		
 		Node tmp = null;
 		// TODO remove condition once we implement rules for all elements
-		if (localName.equals(terminology.artifactSet()) || localName.equals(terminology.languageIdentifier()) || localName.equals(terminology.model()))
+		if (ImmutableList.of(terminology.artifactSet(), terminology.languageIdentifier(), terminology.model(), terminology.container(), terminology.isAbstract()).contains(localName))
 			tmp = stack.pop();
 
 		if (localName.equals(terminology.artifactSet())) {
@@ -128,8 +133,18 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			languageIdentifier.setText(textContent);
 			((ArtifactSet) stack.peek()).setLanguageIdentifier(languageIdentifier);
 		} else if (localName.equals(terminology.model())) {
-			Node peek = stack.peek();
-			System.out.println("peek: " + peek);
+			Node top = stack.peek();
+			((ArtifactSet) top).addModel((Model) tmp);
+		} else if (localName.equals(terminology.container())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).setContainer((ContainerIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.isAbstract())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			}
 		}
 		
 		System.out.println("endElement: " + localName + ", " + qName);
