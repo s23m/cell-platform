@@ -22,7 +22,6 @@
  * Contributor(s):
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
-
 package org.s23m.cell.properclasses;
 
 import org.s23m.cell.Set;
@@ -73,7 +72,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 	Set addToVariables(Set set);
 	Set allowableEdgeCategories(Set OrderedPair);
-	Set and( Set b);
+	Set and(Set b);
 	/**
 	 * assignNewName(newName)
 	 * assigns a new name to a semantic identity
@@ -304,22 +303,26 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 */
 	Set localRootSuperSetOf(Set orderedPair);
 	Set not();
-	Set or( Set b);
+	Set or(Set b);
 
 	Set queries();
 	Set removeFromCommands(Set anElement);
 	Set removeFromQueries(Set anElement);
 	Set union(Set set);
+	Set wrapInOrderedSet();
 
 	Set unionOfconnectingArrows( Set instance);
+
 	/**
 	 * Return the value associated with the supplied variable from this {@link Set}
 	 */
 	Set value(Set variable);
+
 	/**
 	 * Return the set of values from this {@link Set}
 	 */
 	Set values();
+
 	/**
 	 * Return contained variables from this {@link Set}
 	 */

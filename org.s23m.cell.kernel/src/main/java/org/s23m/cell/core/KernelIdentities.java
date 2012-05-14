@@ -22,7 +22,6 @@
  * Contributor(s):
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
-
 package org.s23m.cell.core;
 
 import org.s23m.cell.Identity;
