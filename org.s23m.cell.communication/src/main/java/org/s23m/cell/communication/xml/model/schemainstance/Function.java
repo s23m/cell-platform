@@ -35,11 +35,8 @@ public abstract class Function extends Category {
 
 	private final List<Parameter> parameterList;
 
-	protected Function(Namespace namespace,
-			String name,
-			SemanticIdentityIdentityReference semanticIdentity,
-			CategoryIdentityReference category) {
-		super(namespace, name, semanticIdentity, category);
+	protected Function(Namespace namespace, String name) {
+		super(namespace, name);
 		parameterList = Lists.newArrayList();		
 	}
 	

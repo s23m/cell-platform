@@ -36,7 +36,6 @@ class InstanceBuilderTest {
 			builder.to("1" -> "2")
 		)
 		
-		
 		val result = builder.build()
 		val xml = XmlRendering::render(result).toString()
 		

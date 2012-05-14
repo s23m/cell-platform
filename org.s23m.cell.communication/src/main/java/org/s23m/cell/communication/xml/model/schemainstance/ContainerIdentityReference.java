@@ -29,7 +29,7 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class ContainerIdentityReference extends IdentityReference {
 
-	public ContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.container(), uniqueRepresentationReference, identifier);
+	public ContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.container());
 	}
 }

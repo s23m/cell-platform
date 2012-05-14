@@ -24,7 +24,6 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schemainstance;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
@@ -39,22 +38,28 @@ import com.google.common.collect.ImmutableList;
 */
 public abstract class IdentityReference extends AbstractCompositeNode {
 	
-	private final StringElement uniqueRepresentationReference;
+	private UniqueRepresentationReference uniqueRepresentationReference;
 	
-	private final StringElement identifier;
+	private Identifier identifier;
 
-	protected IdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String name, String uniqueRepresentationReference, String identifier) {
+	protected IdentityReference(Namespace namespace, String name) {
 		super(namespace, name);
-		this.uniqueRepresentationReference = new StringElement(namespace, terminology.uniqueRepresentationReference(), uniqueRepresentationReference);
-		this.identifier = new StringElement(namespace, terminology.identifier(), identifier);
 	}
 
-	public StringElement getUniqueRepresentationReference() {
+	public UniqueRepresentationReference getUniqueRepresentationReference() {
 		return uniqueRepresentationReference;
 	}
 	
-	public StringElement getIdentifier() {
+	public void setUniqueRepresentationReference(UniqueRepresentationReference uniqueRepresentationReference) {
+		this.uniqueRepresentationReference = uniqueRepresentationReference;
+	}
+	
+	public Identifier getIdentifier() {
 		return identifier;
+	}
+	
+	public void setIdentifier(Identifier identifier) {
+		this.identifier = identifier;
 	}
 
 	@Override

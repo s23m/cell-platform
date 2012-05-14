@@ -30,6 +30,9 @@ import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.eclipse.xtext.xbase.lib.Pair
+import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference
+import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference
+import org.s23m.cell.communication.xml.model.schemainstance.Identifier
 
 class InstanceBuilder {
 	
@@ -68,12 +71,13 @@ class InstanceBuilder {
 
 		val result = new Model(
 			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			container,
-			isAbstract
+			terminology
 		)
+		
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setContainer(container)
+		result.setIsAbstract(isAbstract)
 		
 		artifactSet.addModel(result)
 		
@@ -93,14 +97,12 @@ class InstanceBuilder {
 			IsAbstractIdentityReference isAbstract,
 			MaximumCardinalityIdentityReference maxCardinality) {
 		
-		new Vertex(
-			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			isAbstract,
-			maxCardinality
-		)
+		val result = new Vertex(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setMaxCardinality(maxCardinality)
+		result
 	}
 	
 	def visibility(Set set) {
@@ -117,16 +119,13 @@ class InstanceBuilder {
 			IsAbstractIdentityReference isAbstract,
 			FromIdentityReference from,
 			ToIdentityReference to) {
-				
-		new Visibility(
-			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			isAbstract,
-			from,
-			to
-		)
+		val result = new Visibility(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
+		result
 	}
 	
 	def edge(Set set) {
@@ -144,15 +143,15 @@ class InstanceBuilder {
 			EdgeEnd from,
 			EdgeEnd to) {
 		
-		new Edge(
+		val result = new Edge(
 			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			isAbstract,
-			from,
-			to
-		)
+			terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
+		result
 	}
 	
 	def edgeEnd(Set set) {
@@ -183,17 +182,15 @@ class InstanceBuilder {
 			IsContainerIdentityReference isContainer,
 			IsNavigableIdentityReference isNavigable) {
 		
-		new EdgeEnd(
-			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			isAbstract,
-			minCardinality,
-			maxCardinality,
-			isContainer,
-			isNavigable
-		)
+		val result = new EdgeEnd(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setMinCardinality(minCardinality)
+		result.setMaxCardinality(maxCardinality)
+		result.setIsContainer(isContainer)
+		result.setIsNavigable(isNavigable)
+		result
 	}
 	
 	def superSetReference(Set set) {
@@ -211,15 +208,13 @@ class InstanceBuilder {
 			FromIdentityReference from,
 			ToIdentityReference to) {
 
-		new SuperSetReference(
-			namespace,
-			terminology,
-			semanticIdentity,
-			category,
-			isAbstract,
-			from,
-			to
-		)
+		val result = new SuperSetReference(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result.setIsAbstract(isAbstract)
+		result.setFrom(from)
+		result.setTo(to)
+		result
 	}
 	
 	def command(Set set) {
@@ -229,7 +224,10 @@ class InstanceBuilder {
 	}
 	
 	def command(SemanticIdentityIdentityReference semanticIdentity,	CategoryIdentityReference category) {
-		new Command(namespace, terminology, semanticIdentity, category)
+		val result = new Command(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result
 	}
 	
 	def query(Set set) {
@@ -239,7 +237,10 @@ class InstanceBuilder {
 	}
 	
 	def query(SemanticIdentityIdentityReference semanticIdentity, CategoryIdentityReference category) {
-		new Query(namespace, terminology, semanticIdentity, category)
+		val result = new Query(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result
 	}
 	
 	def semanticIdentity(Set set) {
@@ -248,7 +249,7 @@ class InstanceBuilder {
 	}
 	
 	def semanticIdentity(Pair<String, String> pair) {
-		new SemanticIdentityIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new SemanticIdentityIdentityReference(namespace, terminology), pair)
 	}
 	
 	def category(Set set) {
@@ -257,7 +258,7 @@ class InstanceBuilder {
 	}
 	
 	def category(Pair<String, String> pair) {
-		new CategoryIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new CategoryIdentityReference(namespace, terminology), pair)
 	}
 	
 	def container(Set set) {
@@ -266,7 +267,7 @@ class InstanceBuilder {
 	}
 	
 	def container(Pair<String, String> pair) {
-		new ContainerIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new ContainerIdentityReference(namespace, terminology), pair)
 	}
 	
 	def isAbstract(Set set) {
@@ -275,7 +276,7 @@ class InstanceBuilder {
 	}
 	
 	def isAbstract(Pair<String, String> pair) {
-		new IsAbstractIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new IsAbstractIdentityReference(namespace, terminology), pair)
 	}
 	
 	def from(Set set) {
@@ -284,7 +285,7 @@ class InstanceBuilder {
 	}
 	
 	def from(Pair<String, String> pair) {
-		new FromIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new FromIdentityReference(namespace, terminology), pair)
 	}
 	
 	def to(Set set) {
@@ -293,7 +294,7 @@ class InstanceBuilder {
 	}
 	
 	def to(Pair<String, String> pair) {
-		new ToIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new ToIdentityReference(namespace, terminology), pair)
 	}
 	
 	def maxCardinality(Set set) {
@@ -302,7 +303,7 @@ class InstanceBuilder {
 	}
 	
 	def maxCardinality(Pair<String, String> pair) {
-		new MaximumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new MaximumCardinalityIdentityReference(namespace, terminology), pair)
 	}
 	
 	def minCardinality(Set set) {
@@ -311,7 +312,7 @@ class InstanceBuilder {
 	}
 	
 	def minCardinality(Pair<String, String> pair) {
-		new MinimumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new MinimumCardinalityIdentityReference(namespace, terminology), pair)
 	}
 	
 	def isContainer(Set set) {
@@ -320,7 +321,7 @@ class InstanceBuilder {
 	}
 	
 	def isContainer(Pair<String, String> pair) {
-		new IsContainerIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new IsContainerIdentityReference(namespace, terminology), pair)
 	}
 	
 	def isNavigable(Set set) {
@@ -329,7 +330,17 @@ class InstanceBuilder {
 	}
 	
 	def isNavigable(Pair<String, String> pair) {
-		new IsNavigableIdentityReference(namespace, terminology, pair.key, pair.value)
+		initialise(new IsNavigableIdentityReference(namespace, terminology), pair)
+	}
+	
+	def private <T extends IdentityReference> initialise(T identityReference, Pair<String, String> pair) {
+		val urr = new UniqueRepresentationReference(namespace, terminology)
+		urr.setText(pair.key)
+		identityReference.setUniqueRepresentationReference(urr)
+		val identifier = new Identifier(namespace, terminology)
+		identifier.setText(pair.value)
+		identityReference.setIdentifier(identifier)
+		identityReference
 	}
 	
 	def private valueIdentityPair(Set set, Set variable) {

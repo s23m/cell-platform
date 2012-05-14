@@ -32,11 +32,8 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 
 public class Parameter extends Category {
 
-	public Parameter(Namespace namespace,
-			XmlSchemaTerminology terminology,
-			SemanticIdentityIdentityReference semanticIdentity,
-			CategoryIdentityReference category) {
-		super(namespace, terminology.parameter(), semanticIdentity, category);
+	public Parameter(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.parameter());
 	}
 
 	@Override

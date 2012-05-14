@@ -29,8 +29,8 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class FromIdentityReference extends IdentityReference {
 
-	public FromIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.from(), uniqueRepresentationReference, identifier);
+	public FromIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.from());
 	}
 
 }

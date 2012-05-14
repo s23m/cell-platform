@@ -35,9 +35,9 @@ import com.google.common.collect.Lists;
 
 public abstract class Graph extends Category {
 		
-	private final ContainerIdentityReference container;
+	private ContainerIdentityReference container;
 	
-	private final IsAbstractIdentityReference isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
 	private final List<Vertex> vertexList;
 	
@@ -51,16 +51,8 @@ public abstract class Graph extends Category {
 	
 	private final List<Query> queryList;
 
-	protected Graph(Namespace namespace,
-			String name,
-			SemanticIdentityIdentityReference semanticIdentity,
-			CategoryIdentityReference category,
-			ContainerIdentityReference container,
-			IsAbstractIdentityReference isAbstract) {
-		
-		super(namespace, name, semanticIdentity, category);
-		this.container = container;
-		this.isAbstract = isAbstract;
+	protected Graph(Namespace namespace, String name) {
+		super(namespace, name);
 		
 		this.vertexList = Lists.newArrayList();
 		this.edgeList = Lists.newArrayList();
@@ -73,9 +65,17 @@ public abstract class Graph extends Category {
 	public ContainerIdentityReference getContainer() {
 		return container;
 	}
+	
+	public void setContainer(ContainerIdentityReference container) {
+		this.container = container;
+	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
+	}
+	
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
 	}
 
 	public List<Vertex> getVertexList() {

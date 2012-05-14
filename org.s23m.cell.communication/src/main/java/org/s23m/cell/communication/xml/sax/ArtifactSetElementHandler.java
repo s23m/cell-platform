@@ -32,6 +32,8 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -97,6 +99,10 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			stack.push(builder.build());
 		} else if (localName.equals(terminology.languageIdentifier())) {
 			stack.push(new StringElement(namespace, localName));
+		} else if (localName.equals(terminology.model())) {
+			stack.push(new Model(namespace, terminology));
+		} else if (localName.equals(terminology.container())) {
+			stack.push(new ContainerIdentityReference(namespace, terminology));
 		}
 		
 		
@@ -112,15 +118,18 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		
 		Node tmp = null;
 		// TODO remove condition once we implement rules for all elements
-		if (localName.equals(terminology.artifactSet()) || localName.equals(terminology.languageIdentifier()))
+		if (localName.equals(terminology.artifactSet()) || localName.equals(terminology.languageIdentifier()) || localName.equals(terminology.model()))
 			tmp = stack.pop();
 
 		if (localName.equals(terminology.artifactSet())) {
 			result = (ArtifactSet) tmp;
 		} else if (localName.equals(terminology.languageIdentifier())) {
-			StringElement languageIdentifier = (StringElement) tmp;
+			final StringElement languageIdentifier = (StringElement) tmp;
 			languageIdentifier.setText(textContent);
 			((ArtifactSet) stack.peek()).setLanguageIdentifier(languageIdentifier);
+		} else if (localName.equals(terminology.model())) {
+			Node peek = stack.peek();
+			System.out.println("peek: " + peek);
 		}
 		
 		System.out.println("endElement: " + localName + ", " + qName);

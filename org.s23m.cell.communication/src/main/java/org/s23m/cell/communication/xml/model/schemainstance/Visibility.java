@@ -32,36 +32,38 @@ import com.google.common.collect.ImmutableList;
 
 public class Visibility extends Category {
 	
-	private final IsAbstractIdentityReference isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
-	private final FromIdentityReference from;
+	private FromIdentityReference from;
 	
-	private final ToIdentityReference to;
+	private ToIdentityReference to;
 	
-	public Visibility(Namespace namespace,
-			XmlSchemaTerminology terminology,
-			SemanticIdentityIdentityReference semanticIdentity,
-			CategoryIdentityReference category,
-			IsAbstractIdentityReference isAbstract,
-			FromIdentityReference from,
-			ToIdentityReference to) {
-		
-		super(namespace, terminology.visibility(), semanticIdentity, category);
-		this.isAbstract = isAbstract;
-		this.from = from;
-		this.to = to;
+	public Visibility(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.visibility());
 	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
+	
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
+	}
 
 	public FromIdentityReference getFrom() {
 		return from;
 	}
+	
+	public void setFrom(FromIdentityReference from) {
+		this.from = from;
+	}
 
 	public ToIdentityReference getTo() {
 		return to;
+	}
+	
+	public void setTo(ToIdentityReference to) {
+		this.to = to;
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityRef
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Identifier;
+import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
@@ -27,6 +29,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
@@ -73,8 +76,12 @@ public class InstanceBuilder {
   public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
     Model _xblockexpression = null;
     {
-      Model _model = new Model(this.namespace, this.terminology, semanticIdentity, category, container, isAbstract);
+      Model _model = new Model(this.namespace, this.terminology);
       final Model result = _model;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setContainer(container);
+      result.setIsAbstract(isAbstract);
       this.artifactSet.addModel(result);
       _xblockexpression = (result);
     }
@@ -99,8 +106,17 @@ public class InstanceBuilder {
   }
   
   public Vertex vertex(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MaximumCardinalityIdentityReference maxCardinality) {
-    Vertex _vertex = new Vertex(this.namespace, this.terminology, semanticIdentity, category, isAbstract, maxCardinality);
-    return _vertex;
+    Vertex _xblockexpression = null;
+    {
+      Vertex _vertex = new Vertex(this.namespace, this.terminology);
+      final Vertex result = _vertex;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setMaxCardinality(maxCardinality);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public Visibility visibility(final Set set) {
@@ -125,8 +141,18 @@ public class InstanceBuilder {
   }
   
   public Visibility visibility(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
-    Visibility _visibility = new Visibility(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
-    return _visibility;
+    Visibility _xblockexpression = null;
+    {
+      Visibility _visibility = new Visibility(this.namespace, this.terminology);
+      final Visibility result = _visibility;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public Edge edge(final Set set) {
@@ -151,8 +177,18 @@ public class InstanceBuilder {
   }
   
   public Edge edge(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final EdgeEnd from, final EdgeEnd to) {
-    Edge _edge = new Edge(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
-    return _edge;
+    Edge _xblockexpression = null;
+    {
+      Edge _edge = new Edge(this.namespace, this.terminology);
+      final Edge result = _edge;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public EdgeEnd edgeEnd(final Set set) {
@@ -179,8 +215,20 @@ public class InstanceBuilder {
   }
   
   public EdgeEnd edgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
-    EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
-    return _edgeEnd;
+    EdgeEnd _xblockexpression = null;
+    {
+      EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology);
+      final EdgeEnd result = _edgeEnd;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setMinCardinality(minCardinality);
+      result.setMaxCardinality(maxCardinality);
+      result.setIsContainer(isContainer);
+      result.setIsNavigable(isNavigable);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public SuperSetReference superSetReference(final Set set) {
@@ -205,8 +253,18 @@ public class InstanceBuilder {
   }
   
   public SuperSetReference superSetReference(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
-    SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology, semanticIdentity, category, isAbstract, from, to);
-    return _superSetReference;
+    SuperSetReference _xblockexpression = null;
+    {
+      SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology);
+      final SuperSetReference result = _superSetReference;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setIsAbstract(isAbstract);
+      result.setFrom(from);
+      result.setTo(to);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public Command command(final Set set) {
@@ -223,8 +281,15 @@ public class InstanceBuilder {
   }
   
   public Command command(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
-    Command _command = new Command(this.namespace, this.terminology, semanticIdentity, category);
-    return _command;
+    Command _xblockexpression = null;
+    {
+      Command _command = new Command(this.namespace, this.terminology);
+      final Command result = _command;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public Query query(final Set set) {
@@ -241,8 +306,15 @@ public class InstanceBuilder {
   }
   
   public Query query(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
-    Query _query = new Query(this.namespace, this.terminology, semanticIdentity, category);
-    return _query;
+    Query _xblockexpression = null;
+    {
+      Query _query = new Query(this.namespace, this.terminology);
+      final Query result = _query;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   public SemanticIdentityIdentityReference semanticIdentity(final Set set) {
@@ -258,10 +330,9 @@ public class InstanceBuilder {
   }
   
   public SemanticIdentityIdentityReference semanticIdentity(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _semanticIdentityIdentityReference;
+    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology);
+    SemanticIdentityIdentityReference _initialise = this.<SemanticIdentityIdentityReference>initialise(_semanticIdentityIdentityReference, pair);
+    return _initialise;
   }
   
   public CategoryIdentityReference category(final Set set) {
@@ -278,10 +349,9 @@ public class InstanceBuilder {
   }
   
   public CategoryIdentityReference category(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _categoryIdentityReference;
+    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology);
+    CategoryIdentityReference _initialise = this.<CategoryIdentityReference>initialise(_categoryIdentityReference, pair);
+    return _initialise;
   }
   
   public ContainerIdentityReference container(final Set set) {
@@ -298,10 +368,9 @@ public class InstanceBuilder {
   }
   
   public ContainerIdentityReference container(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _containerIdentityReference;
+    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology);
+    ContainerIdentityReference _initialise = this.<ContainerIdentityReference>initialise(_containerIdentityReference, pair);
+    return _initialise;
   }
   
   public IsAbstractIdentityReference isAbstract(final Set set) {
@@ -316,10 +385,9 @@ public class InstanceBuilder {
   }
   
   public IsAbstractIdentityReference isAbstract(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _isAbstractIdentityReference;
+    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology);
+    IsAbstractIdentityReference _initialise = this.<IsAbstractIdentityReference>initialise(_isAbstractIdentityReference, pair);
+    return _initialise;
   }
   
   public FromIdentityReference from(final Set set) {
@@ -335,10 +403,9 @@ public class InstanceBuilder {
   }
   
   public FromIdentityReference from(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _fromIdentityReference;
+    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology);
+    FromIdentityReference _initialise = this.<FromIdentityReference>initialise(_fromIdentityReference, pair);
+    return _initialise;
   }
   
   public ToIdentityReference to(final Set set) {
@@ -354,10 +421,9 @@ public class InstanceBuilder {
   }
   
   public ToIdentityReference to(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _toIdentityReference;
+    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology);
+    ToIdentityReference _initialise = this.<ToIdentityReference>initialise(_toIdentityReference, pair);
+    return _initialise;
   }
   
   public MaximumCardinalityIdentityReference maxCardinality(final Set set) {
@@ -372,10 +438,9 @@ public class InstanceBuilder {
   }
   
   public MaximumCardinalityIdentityReference maxCardinality(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _maximumCardinalityIdentityReference;
+    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology);
+    MaximumCardinalityIdentityReference _initialise = this.<MaximumCardinalityIdentityReference>initialise(_maximumCardinalityIdentityReference, pair);
+    return _initialise;
   }
   
   public MinimumCardinalityIdentityReference minCardinality(final Set set) {
@@ -390,10 +455,9 @@ public class InstanceBuilder {
   }
   
   public MinimumCardinalityIdentityReference minCardinality(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _minimumCardinalityIdentityReference;
+    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology);
+    MinimumCardinalityIdentityReference _initialise = this.<MinimumCardinalityIdentityReference>initialise(_minimumCardinalityIdentityReference, pair);
+    return _initialise;
   }
   
   public IsContainerIdentityReference isContainer(final Set set) {
@@ -408,10 +472,9 @@ public class InstanceBuilder {
   }
   
   public IsContainerIdentityReference isContainer(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _isContainerIdentityReference;
+    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology);
+    IsContainerIdentityReference _initialise = this.<IsContainerIdentityReference>initialise(_isContainerIdentityReference, pair);
+    return _initialise;
   }
   
   public IsNavigableIdentityReference isNavigable(final Set set) {
@@ -426,10 +489,27 @@ public class InstanceBuilder {
   }
   
   public IsNavigableIdentityReference isNavigable(final Pair<String,String> pair) {
-    String _key = pair.getKey();
-    String _value = pair.getValue();
-    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, _key, _value);
-    return _isNavigableIdentityReference;
+    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology);
+    IsNavigableIdentityReference _initialise = this.<IsNavigableIdentityReference>initialise(_isNavigableIdentityReference, pair);
+    return _initialise;
+  }
+  
+  private <T extends IdentityReference> T initialise(final T identityReference, final Pair<String,String> pair) {
+    T _xblockexpression = null;
+    {
+      UniqueRepresentationReference _uniqueRepresentationReference = new UniqueRepresentationReference(this.namespace, this.terminology);
+      final UniqueRepresentationReference urr = _uniqueRepresentationReference;
+      String _key = pair.getKey();
+      urr.setText(_key);
+      identityReference.setUniqueRepresentationReference(urr);
+      Identifier _identifier = new Identifier(this.namespace, this.terminology);
+      final Identifier identifier = _identifier;
+      String _value = pair.getValue();
+      identifier.setText(_value);
+      identityReference.setIdentifier(identifier);
+      _xblockexpression = (identityReference);
+    }
+    return _xblockexpression;
   }
   
   private Pair<String,String> valueIdentityPair(final Set set, final Set variable) {

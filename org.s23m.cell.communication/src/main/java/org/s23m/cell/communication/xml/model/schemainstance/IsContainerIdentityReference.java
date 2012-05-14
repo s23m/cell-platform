@@ -29,8 +29,8 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class IsContainerIdentityReference extends IdentityReference {
 
-	public IsContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.isContainer(), uniqueRepresentationReference, identifier);
+	public IsContainerIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.isContainer());
 	}
 
 }

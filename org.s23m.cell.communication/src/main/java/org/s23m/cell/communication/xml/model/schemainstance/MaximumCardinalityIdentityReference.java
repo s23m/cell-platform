@@ -29,8 +29,8 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class MaximumCardinalityIdentityReference extends IdentityReference {
 
-	public MaximumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology, String uniqueRepresentationReference, String identifier) {
-		super(namespace, terminology, terminology.maximumCardinality(), uniqueRepresentationReference, identifier);
+	public MaximumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.maximumCardinality());
 	}
 
 }

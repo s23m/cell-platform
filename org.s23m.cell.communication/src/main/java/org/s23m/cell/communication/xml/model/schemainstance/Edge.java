@@ -32,43 +32,42 @@ import com.google.common.collect.ImmutableList;
 
 public class Edge extends Category {
 	
-	private final IsAbstractIdentityReference isAbstract;
+	private IsAbstractIdentityReference isAbstract;
 	
-	private final EdgeEnd from;
+	private EdgeEnd from;
 	
-	private final EdgeEnd to;
+	private EdgeEnd to;
 	
-	private final Iterable<? extends Node> additionalChildren;
-
-	public Edge(Namespace namespace,
-			XmlSchemaTerminology terminology,
-			SemanticIdentityIdentityReference semanticIdentity,
-			CategoryIdentityReference category,
-			IsAbstractIdentityReference isAbstract,
-			EdgeEnd from,
-			EdgeEnd to) {
-		
-		super(namespace, terminology.edge(), semanticIdentity, category);
-		this.isAbstract = isAbstract;
-		this.from = from;
-		this.to = to;
-		this.additionalChildren = ImmutableList.of(isAbstract, from, to);
+	public Edge(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.edge());
 	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
 		return isAbstract;
 	}
+	
+	public void setIsAbstract(IsAbstractIdentityReference isAbstract) {
+		this.isAbstract = isAbstract;
+	}
 
 	public EdgeEnd getFrom() {
 		return from;
 	}
-
+	
+	public void setFrom(EdgeEnd from) {
+		this.from = from;
+	}
+	
 	public EdgeEnd getTo() {
 		return to;
+	}
+	
+	public void setTo(EdgeEnd to) {
+		this.to = to;
 	}
 
 	@Override
 	protected Iterable<? extends Node> getAdditionalChildren() {
-		return additionalChildren;
+		return ImmutableList.of(isAbstract, from, to);
 	}
 }
