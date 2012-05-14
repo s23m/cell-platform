@@ -331,4 +331,6 @@ public class IdentityFactory implements KernelIdentities {
 	public final 	Identity visibility() {return createIdentityInKernel("visibility" , "visibilitis", SemanticIdentityRegistry.visibility.ordinal());}
 	public final	Identity visibleInstancesForSubGraph() {return createIdentityInKernel("visibleInstancesForSubGraph" , "visibleInstancesForSubGraph", SemanticIdentityRegistry.visibleInstancesForSubGraph.ordinal());}
 
+	public final	Identity wrapInOrderedSet() {return createIdentityInKernel("wrapInOrderedSet" , "wrapInOrderedSet", SemanticIdentityRegistry.wrapInOrderedSet.ordinal());}
+
 }

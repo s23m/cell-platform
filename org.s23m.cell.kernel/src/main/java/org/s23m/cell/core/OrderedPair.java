@@ -33,8 +33,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Query;
@@ -110,30 +110,30 @@ public class OrderedPair implements Set {
 
 	protected boolean isProperClass() {
 		return isEqualTo(Query.vertex) ||
-		isEqualTo(Query.visibility) ||
-		isEqualTo(Query.edge) ||
-		isEqualTo(Query.superSetReference) ||
-		isEqualTo(Query.arrow) ||
-		isEqualTo(Query.orderedSet) ||
-		isEqualTo(Query.graph) ||
-		isEqualTo(coreSets.orderedPair);
+				isEqualTo(Query.visibility) ||
+				isEqualTo(Query.edge) ||
+				isEqualTo(Query.superSetReference) ||
+				isEqualTo(Query.arrow) ||
+				isEqualTo(Query.orderedSet) ||
+				isEqualTo(Query.graph) ||
+				isEqualTo(coreSets.orderedPair);
 	}
 
 	protected boolean isArrow() {
 		return isEqualTo(Query.visibility) ||
-		isEqualTo(Query.edge) ||
-		isEqualTo(Query.superSetReference) ||
-		isEqualTo(Query.arrow);
+				isEqualTo(Query.edge) ||
+				isEqualTo(Query.superSetReference) ||
+				isEqualTo(Query.arrow);
 	}
 
 	public Set isAnArrow() {
 		final boolean isAnArrow = properClass().isEqualTo(Query.visibility)
-		|| properClass().isEqualTo(Query.edge)
-		|| properClass().isEqualTo(Query.superSetReference);
+				|| properClass().isEqualTo(Query.edge)
+				|| properClass().isEqualTo(Query.superSetReference);
 
 		final boolean isAProperClass = isEqualTo(Query.visibility)
-		|| isEqualTo(Query.edge)
-		|| isEqualTo(Query.superSetReference);
+				|| isEqualTo(Query.edge)
+				|| isEqualTo(Query.superSetReference);
 
 		if (isAnArrow && !isAProperClass) {
 			return S23MSemanticDomains.is_TRUE;
@@ -462,7 +462,7 @@ public class OrderedPair implements Set {
 					|| this.category().isEqualTo(S23MSemanticDomains.disjunctSemanticIdentitySet)
 					|| this.category().isEqualTo(S23MSemanticDomains.semanticRole)
 					|| this.category().isEqualTo(S23MSemanticDomains.variantDisjunctSemanticIdentitySet)
-			) {
+					) {
 				return true;
 			}
 		}
@@ -787,6 +787,10 @@ public class OrderedPair implements Set {
 	}
 
 	public Set setMaintenanceCommand() {
+		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+	}
+
+	public Set wrapInOrderedSet() {
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 	}
 }

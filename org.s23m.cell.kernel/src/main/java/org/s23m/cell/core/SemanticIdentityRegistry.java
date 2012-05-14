@@ -407,6 +407,8 @@ public enum SemanticIdentityRegistry {
 	setMaintenanceCommand,
 	agents,
 	sandbox,
+	wrapInOrderedSet,
+
 
 }
 

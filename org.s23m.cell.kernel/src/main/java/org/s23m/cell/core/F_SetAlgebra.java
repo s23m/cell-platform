@@ -62,7 +62,14 @@ public final class F_SetAlgebra {
 		}
 		return result;
 	}
-
+	public static Set wrapInOrderedSet(final Set set) {
+		final OrderedSet result = ((OrderedSet) F_InstantiationImpl.createResultSet());
+		result.add(set);
+		return result;
+	}
+	public static Set anEmptySet() {
+		return F_InstantiationImpl.createResultSet();
+	}
 	public static Set complement(final Set set1, final Set set2) {
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);

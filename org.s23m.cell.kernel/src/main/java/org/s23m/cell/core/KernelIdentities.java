@@ -212,6 +212,8 @@ public interface KernelIdentities {
 	Identity toEdgeEnd();
 
 	Identity union();
+	Identity wrapInOrderedSet();
+
 
 	Identity value();
 	Identity values();

@@ -81,6 +81,7 @@ public class Query {
 	public static Set edgeEnd = edgeEnd();
 
 	public static Set edge = edge();
+
 	public static Set changedSets() {
 		return F_Query.changedSets();
 	}
