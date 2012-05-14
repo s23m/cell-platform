@@ -65,8 +65,6 @@ public class Graph extends OrderedPair implements Set {
 	private OrderedSet executableCommands;
 	private OrderedSet executableQueries;
 
-
-
 	/* modification state */
 	private boolean containsDecommissionedSets;
 	private boolean containsNewSets;
@@ -77,13 +75,14 @@ public class Graph extends OrderedPair implements Set {
 	private boolean hasNewName;
 	private boolean hasNewPluralName;
 
-
 	protected Graph(final Identity semanticIdentity, final Set categoryOfElement) {
 		super(semanticIdentity, categoryOfElement);
 	}
+
 	protected Graph(final Identity semanticIdentity) {
 		super(semanticIdentity);
 	}
+
 	private Graph() {
 		super(identityFactory.graph());
 		this.addToValues(coreSets.orderedPair);
@@ -105,6 +104,7 @@ public class Graph extends OrderedPair implements Set {
 		this.hasNewPayload = false;
 		this.hasDecommissionedPayload = false;
 	}
+
 	public static void addSetToInMemorySets(final Set e) {
 		if (!F_SemanticStateOfInMemoryModel.isDebugModeOn()) {
 			Graph.inMemorySets.add(e);
@@ -128,9 +128,11 @@ public class Graph extends OrderedPair implements Set {
 		}
 
 	}
+
 	public static void addSetToChangedSets(final Set e) {
 		Graph.changedSets.add(e);
 	}
+
 	@Override
 	public String toString() {
 		return this.localVisualRecognitionText();
@@ -155,6 +157,7 @@ public class Graph extends OrderedPair implements Set {
 		this.ensureInitializedOrderedSets();
 		return variables;
 	}
+
 	@Override
 	public Set addToVariables(final Set set) {
 		this.ensureInitializedOrderedSets();
@@ -1395,9 +1398,8 @@ public class Graph extends OrderedPair implements Set {
 		for (final Set element : content) {
 			visitorFunction.compute(element);
 		}
-		return this.walkRightThenDown(visitorFunction) ;
+		return this.walkRightThenDown(visitorFunction);
 	}
-	
 	@Override
 	public Set walkLeftThenDown(final VisitorFunction visitorFunction) {
 		final Set content = this.filterInstances();
@@ -1407,7 +1409,7 @@ public class Graph extends OrderedPair implements Set {
 			element = content.extractPrevious(element);
 			visitorFunction.compute(element);
 		}
-		this.walkLeftThenDown(visitorFunction) ;
+		this.walkLeftThenDown(visitorFunction);
 		return visitorFunction.compute(this);
 	}
 }
