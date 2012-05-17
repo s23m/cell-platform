@@ -34,6 +34,7 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.model.schemainstance.Category;
 import org.s23m.cell.communication.xml.model.schemainstance.CategoryIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Command;
 import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
@@ -47,6 +48,8 @@ import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityR
 import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
+import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
@@ -169,6 +172,12 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			stack.push(new IsNavigableIdentityReference(namespace, terminology));
 		} else if (localName.equals(terminology.superSetReference())) {
 			stack.push(new SuperSetReference(namespace, terminology));
+		} else if (localName.equals(terminology.command())) {
+			stack.push(new Command(namespace, terminology));
+		} else if (localName.equals(terminology.query())) {
+			stack.push(new Query(namespace, terminology));
+		} else if (localName.equals(terminology.parameter())) {
+			stack.push(new Parameter(namespace, terminology));
 		}
 		
 		// TODO handle each element type - need a stack to keep track of outstanding elements
@@ -181,29 +190,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		// pop stack and add to 'parent' element, which is next on the stack
 		// important to pop stack first, then peek at top element!
 		
-		Node tmp = null;
-		// TODO remove condition once we implement rules for all elements
-		if (ImmutableList.of(terminology.artifactSet(),
-				terminology.languageIdentifier(),
-				terminology.model(),
-				terminology.container(),
-				terminology.isAbstract(),
-				terminology.semanticIdentity(),
-				terminology.category(),
-				terminology.uniqueRepresentationReference(),
-				terminology.identifier(),
-				terminology.vertex(),
-				terminology.maximumCardinality(),
-				terminology.visibility(),
-				terminology.edge(),
-				terminology.from(),
-				terminology.to(),
-				terminology.minimumCardinality(),
-				terminology.isContainer(),
-				terminology.isNavigable(),
-				terminology.superSetReference()).contains(localName)) {
-			tmp = stack.pop();
-		}
+		Node tmp = stack.pop();
 
 		if (localName.equals(terminology.artifactSet())) {
 			result = (ArtifactSet) tmp;
@@ -320,6 +307,23 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			Node top = stack.peek();
 			if (top instanceof Model) {
 				((Model) top).addSuperSetReference((SuperSetReference) tmp);
+			}
+		} else if (localName.equals(terminology.command())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).addCommand((Command) tmp);
+			}
+		} else if (localName.equals(terminology.query())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).addQuery((Query) tmp);
+			}
+		} else if (localName.equals(terminology.parameter())) {
+			Node top = stack.peek();
+			if (top instanceof Command) {
+				((Command) top).addParameter((Parameter) tmp);
+			} else if (top instanceof Query) {
+				((Query) top).addParameter((Parameter) tmp);
 			}
 		} else {
 			if (!stack.isEmpty()) {
