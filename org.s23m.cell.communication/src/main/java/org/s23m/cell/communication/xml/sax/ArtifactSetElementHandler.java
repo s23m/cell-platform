@@ -32,15 +32,28 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.Category;
 import org.s23m.cell.communication.xml.model.schemainstance.CategoryIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Edge;
+import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
+import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Graph;
 import org.s23m.cell.communication.xml.model.schemainstance.Identifier;
 import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.IsContainerIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
+import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
+import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
+import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -122,6 +135,40 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			stack.push(new UniqueRepresentationReference(namespace, terminology));
 		} else if (localName.equals(terminology.identifier())) {
 			stack.push(new Identifier(namespace, terminology));
+		} else if (localName.equals(terminology.vertex())) {
+			stack.push(new Vertex(namespace, terminology));
+		} else if (localName.equals(terminology.maximumCardinality())) {
+			stack.push(new MaximumCardinalityIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.visibility())) {
+			stack.push(new Visibility(namespace, terminology));
+		} else if (localName.equals(terminology.edge())) {
+			stack.push(new Edge(namespace, terminology));
+		} else if (localName.equals(terminology.from())) {
+			System.out.println("Current stack: " + stack);
+			// TODO problem with ambiguity - which "from" are we talking about?
+			Node top = stack.peek();
+			if (top instanceof Visibility || top instanceof SuperSetReference) {
+				stack.push(new FromIdentityReference(namespace, terminology));
+			} else if (top instanceof Edge) {
+				stack.push(new EdgeEnd(namespace, terminology));
+			}
+		} else if (localName.equals(terminology.to())) {
+			System.out.println("Current stack: " + stack);
+			// TODO problem with ambiguity - which "to" are we talking about?
+			Node top = stack.peek();
+			if (top instanceof Visibility || top instanceof SuperSetReference) {
+				stack.push(new ToIdentityReference(namespace, terminology));
+			} else if (top instanceof Edge) {
+				stack.push(new EdgeEnd(namespace, terminology));
+			}
+		} else if (localName.equals(terminology.minimumCardinality())) {
+			stack.push(new MinimumCardinalityIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.isContainer())) {
+			stack.push(new IsContainerIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.isNavigable())) {
+			stack.push(new IsNavigableIdentityReference(namespace, terminology));
+		} else if (localName.equals(terminology.superSetReference())) {
+			stack.push(new SuperSetReference(namespace, terminology));
 		}
 		
 		// TODO handle each element type - need a stack to keep track of outstanding elements
@@ -144,7 +191,17 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 				terminology.semanticIdentity(),
 				terminology.category(),
 				terminology.uniqueRepresentationReference(),
-				terminology.identifier()).contains(localName)) {
+				terminology.identifier(),
+				terminology.vertex(),
+				terminology.maximumCardinality(),
+				terminology.visibility(),
+				terminology.edge(),
+				terminology.from(),
+				terminology.to(),
+				terminology.minimumCardinality(),
+				terminology.isContainer(),
+				terminology.isNavigable(),
+				terminology.superSetReference()).contains(localName)) {
 			tmp = stack.pop();
 		}
 
@@ -156,27 +213,39 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			((ArtifactSet) stack.peek()).setLanguageIdentifier(languageIdentifier);
 		} else if (localName.equals(terminology.model())) {
 			Node top = stack.peek();
-			((ArtifactSet) top).addModel((Model) tmp);
+			if (top instanceof ArtifactSet) {
+				((ArtifactSet) top).addModel((Model) tmp);	
+			}
 		} else if (localName.equals(terminology.container())) {
 			Node top = stack.peek();
 			ContainerIdentityReference identityReference = (ContainerIdentityReference) tmp;
-			if (top instanceof Model) {
-				((Model) top).setContainer(identityReference);
+			if (top instanceof Graph) {
+				((Graph) top).setContainer(identityReference);
 			}
 		} else if (localName.equals(terminology.isAbstract())) {
 			Node top = stack.peek();
-			if (top instanceof Model) {
-				((Model) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			if (top instanceof Graph) {
+				((Graph) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			} else if (top instanceof Vertex) {
+				((Vertex) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			} else if (top instanceof Visibility) {
+				((Visibility) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			} else if (top instanceof Edge) {
+				((Edge) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			} else if (top instanceof SuperSetReference) {
+				((SuperSetReference) top).setIsAbstract((IsAbstractIdentityReference) tmp);
+			} else if (top instanceof EdgeEnd) {
+				((EdgeEnd) top).setIsAbstract((IsAbstractIdentityReference) tmp);
 			}
 		} else if (localName.equals(terminology.semanticIdentity())) {
 			Node top = stack.peek();
-			if (top instanceof Model) {
-				((Model) top).setSemanticIdentity((SemanticIdentityIdentityReference) tmp);
+			if (top instanceof Category) {
+				((Category) top).setSemanticIdentity((SemanticIdentityIdentityReference) tmp);
 			}
 		} else if (localName.equals(terminology.category())) {
 			Node top = stack.peek();
-			if (top instanceof Model) {
-				((Model) top).setCategory((CategoryIdentityReference) tmp);
+			if (top instanceof Category) {
+				((Category) top).setCategory((CategoryIdentityReference) tmp);
 			}			
 		} else if (localName.equals(terminology.uniqueRepresentationReference())) {
 			final UniqueRepresentationReference reference = (UniqueRepresentationReference) tmp;
@@ -191,6 +260,70 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 			Node top = stack.peek();
 			if (top instanceof IdentityReference) {
 				((IdentityReference) top).setIdentifier(identifier);
+			}
+		} else if (localName.equals(terminology.vertex())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).addVertex((Vertex) tmp);
+			}
+		} else if (localName.equals(terminology.maximumCardinality())) {
+			Node top = stack.peek();
+			if (top instanceof Vertex) {
+				((Vertex) top).setMaxCardinality((MaximumCardinalityIdentityReference) tmp);
+			} else if (top instanceof EdgeEnd) {
+				((EdgeEnd) top).setMaxCardinality((MaximumCardinalityIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.visibility())) {
+			Node top = stack.peek();
+			if (top instanceof Visibility) {
+				((Model) top).addVisibility((Visibility) tmp);
+			}
+		} else if (localName.equals(terminology.edge())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).addEdge((Edge) tmp);
+			}
+		} else if (localName.equals(terminology.from())) {
+			Node top = stack.peek();
+			if (top instanceof Visibility) {
+				((Visibility) top).setFrom((FromIdentityReference) tmp);
+			} else if (top instanceof SuperSetReference) {
+				((SuperSetReference) top).setFrom((FromIdentityReference) tmp);
+			} else if (top instanceof Edge) {
+				((Edge) top).setFrom((EdgeEnd) tmp);
+			}
+		} else if (localName.equals(terminology.to())) {
+			Node top = stack.peek();
+			if (top instanceof Visibility) {
+				((Visibility) top).setTo((ToIdentityReference) tmp);
+			} else if (top instanceof SuperSetReference) {
+				((SuperSetReference) top).setTo((ToIdentityReference) tmp);
+			} else if (top instanceof Edge) {
+				((Edge) top).setTo((EdgeEnd) tmp);
+			}
+		} else if (localName.equals(terminology.minimumCardinality())) {
+			Node top = stack.peek();
+			if (top instanceof EdgeEnd) {
+				((EdgeEnd) top).setMinCardinality((MinimumCardinalityIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.isContainer())) {
+			Node top = stack.peek();
+			if (top instanceof EdgeEnd) {
+				((EdgeEnd) top).setIsContainer((IsContainerIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.isNavigable())) {
+			Node top = stack.peek();
+			if (top instanceof EdgeEnd) {
+				((EdgeEnd) top).setIsNavigable((IsNavigableIdentityReference) tmp);
+			}
+		} else if (localName.equals(terminology.superSetReference())) {
+			Node top = stack.peek();
+			if (top instanceof Model) {
+				((Model) top).addSuperSetReference((SuperSetReference) tmp);
+			}
+		} else {
+			if (!stack.isEmpty()) {
+				System.out.println("Ignored element. Top of stack: " + stack.peek());
 			}
 		}
 		
