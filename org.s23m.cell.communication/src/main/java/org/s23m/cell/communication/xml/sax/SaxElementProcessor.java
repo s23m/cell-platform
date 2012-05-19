@@ -4,9 +4,16 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 
-public interface SaxElementHandler<T extends Node> {
+public interface SaxElementProcessor<T extends Node> {
 
-	T startElement(Namespace namespace, XmlSchemaTerminology terminology);
+	/**
+	 * Creates the element
+	 */
+	T startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top);
 	
+	/**
+	 * Associates the element with its parent after it (together with any children)
+	 * has been created
+	 */
 	void endElement(Node removed, Node top, String textContent);
 }
