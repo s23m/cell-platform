@@ -41,7 +41,7 @@ public class FromProcessor implements SaxElementProcessor<Node> {
 		if (top instanceof Visibility || top instanceof SuperSetReference) {
 			return new FromIdentityReference(namespace, terminology);
 		} else if (top instanceof Edge) {
-			return new EdgeEnd(namespace, terminology);
+			return EdgeEnd.fromEdgeEnd(namespace, terminology);
 		} else {
 			throw new IllegalStateException("From element could not be created for outer element " + top);
 		}

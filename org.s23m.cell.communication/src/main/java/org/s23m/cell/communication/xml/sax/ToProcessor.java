@@ -41,7 +41,7 @@ public class ToProcessor implements SaxElementProcessor<Node> {
 		if (top instanceof Visibility || top instanceof SuperSetReference) {
 			return new ToIdentityReference(namespace, terminology);
 		} else if (top instanceof Edge) {
-			return new EdgeEnd(namespace, terminology);
+			return EdgeEnd.toEdgeEnd(namespace, terminology);
 		} else {
 			throw new IllegalStateException("To element could not be created for outer element " + top);
 		}

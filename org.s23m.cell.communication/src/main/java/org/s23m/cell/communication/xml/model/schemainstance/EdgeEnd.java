@@ -42,8 +42,16 @@ public class EdgeEnd extends Category {
 	
 	private IsNavigableIdentityReference isNavigable;
 
-	public EdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.edgeEnd());
+	public static EdgeEnd fromEdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
+		return new EdgeEnd(namespace, terminology.from());
+	}
+	
+	public static EdgeEnd toEdgeEnd(Namespace namespace, XmlSchemaTerminology terminology) {
+		return new EdgeEnd(namespace, terminology.to());
+	}
+	
+	private EdgeEnd(Namespace namespace, String name) {
+		super(namespace, name);
 	}
 
 	public IsAbstractIdentityReference getIsAbstract() {
@@ -89,11 +97,11 @@ public class EdgeEnd extends Category {
 	@Override
 	protected Iterable<? extends Node> getAdditionalChildren() {
 		return ImmutableList.of(
-				isAbstract,
-				minCardinality,
-				maxCardinality,
-				isContainer,
-				isNavigable
+			isAbstract,
+			minCardinality,
+			maxCardinality,
+			isContainer,
+			isNavigable
 		);
 	}
 }

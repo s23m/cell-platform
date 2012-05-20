@@ -69,7 +69,6 @@ class RoundTrippingTest extends TestCase {
 		val languageIdentifier = "ENGLISH"
 		val builder = new InstanceBuilder(s23m, terminology, languageIdentifier);
 		
-		// TODO finish creating object graph
 		val model = builder.model(
 			builder.semanticIdentity(id -> id),
 			builder.category(id -> id),
@@ -85,6 +84,57 @@ class RoundTrippingTest extends TestCase {
 		)
 		
 		model += builder.visibility(
+			builder.semanticIdentity(id -> id),
+			builder.category(id -> id),
+			builder.isAbstract(id -> id),
+			builder.from(id -> id),
+			builder.to(id -> id)
+		)
+		
+		model += builder.edge(
+			builder.semanticIdentity(id -> id),
+			builder.category(id -> id),
+			builder.isAbstract(id -> id),
+			/* from */
+			builder.fromEdgeEnd(
+				builder.semanticIdentity(id -> id),
+				builder.category(id -> id),
+				builder.isAbstract(id -> id),
+				builder.minCardinality(id -> id),
+				builder.maxCardinality(id -> id),
+				builder.isContainer(id -> id),
+				builder.isNavigable(id -> id)
+			),
+			/* to */
+			builder.toEdgeEnd(
+				builder.semanticIdentity(id -> id),
+				builder.category(id -> id),
+				builder.isAbstract(id -> id),
+				builder.minCardinality(id -> id),
+				builder.maxCardinality(id -> id),
+				builder.isContainer(id -> id),
+				builder.isNavigable(id -> id)
+			)
+		)
+		
+		model += builder.command(
+			builder.semanticIdentity(id -> id),
+			builder.category(id -> id)
+		)
+		
+		val query = builder.query(
+			builder.semanticIdentity(id -> id),
+			builder.category(id -> id)
+		)
+		
+		query.addParameter(builder.parameter(
+			builder.semanticIdentity(id -> id),
+			builder.category(id -> id)
+		))
+		
+		model += query
+		
+		model += builder.superSetReference(
 			builder.semanticIdentity(id -> id),
 			builder.category(id -> id),
 			builder.isAbstract(id -> id),

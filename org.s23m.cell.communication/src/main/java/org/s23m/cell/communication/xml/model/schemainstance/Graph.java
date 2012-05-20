@@ -132,8 +132,8 @@ public abstract class Graph extends Category {
 		return Iterables.concat(
 			ImmutableList.of(container, isAbstract),
 			vertexList,
-			edgeList,
 			visibilityList,
+			edgeList,
 			superSetReferenceList,
 			commandList,
 			queryList

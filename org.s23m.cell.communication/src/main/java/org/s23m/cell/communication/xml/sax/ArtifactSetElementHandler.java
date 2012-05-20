@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.s23m.cell.communication.xml.InstanceBuilder;
-import org.s23m.cell.communication.xml.XmlRendering;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
@@ -73,27 +72,27 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		
 		processors = new ImmutableMap.Builder<String, SaxElementProcessor<?>>()
 	        .put(terminology.artifactSet(), new ArtifactSetProcessor(builder))
-	        .put(terminology.languageIdentifier(), new LanguageIdentifierProcessor())
-	        .put(terminology.model(), new ModelProcessor())
-	        .put(terminology.container(), new ContainerIdentityReferenceProcessor())
-	        .put(terminology.isAbstract(), new IsAbstractIdentityReferenceProcessor())
-	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())
 	        .put(terminology.category(), new CategoryIdentityReferenceProcessor())
-	        .put(terminology.uniqueRepresentationReference(), new UniqueRepresentationReferenceProcessor())
-	        .put(terminology.identifier(), new IdentifierProcessor())
-	        .put(terminology.vertex(), new VertexProcessor())
-	        .put(terminology.maximumCardinality(), new MaximumCardinalityIdentityReferenceProcessor())
-	        .put(terminology.visibility(), new VisibilityProcessor())
+	        .put(terminology.command(), new CommandProcessor())
+	        .put(terminology.container(), new ContainerIdentityReferenceProcessor())
 	        .put(terminology.edge(), new EdgeProcessor())
 	        .put(terminology.from(), new FromProcessor())
-	        .put(terminology.to(), new ToProcessor())
-	        .put(terminology.minimumCardinality(), new MinimumCardinalityIdentityReferenceProcessor())
+	        .put(terminology.identifier(), new IdentifierProcessor())
+	        .put(terminology.isAbstract(), new IsAbstractIdentityReferenceProcessor())
 	        .put(terminology.isContainer(), new IsContainerIdentityReferenceProcessor())
 	        .put(terminology.isNavigable(), new IsNavigableIdentityReferenceProcessor())
-	        .put(terminology.superSetReference(), new SuperSetReferenceProcessor())
+	        .put(terminology.languageIdentifier(), new LanguageIdentifierProcessor())
+	        .put(terminology.maximumCardinality(), new MaximumCardinalityIdentityReferenceProcessor())
+	        .put(terminology.minimumCardinality(), new MinimumCardinalityIdentityReferenceProcessor())
+	        .put(terminology.model(), new ModelProcessor())
 	        .put(terminology.parameter(), new ParameterProcessor())
-	        .put(terminology.command(), new CommandProcessor())
 	        .put(terminology.query(), new QueryProcessor())
+	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())
+	        .put(terminology.superSetReference(), new SuperSetReferenceProcessor())
+	        .put(terminology.to(), new ToProcessor())
+	        .put(terminology.uniqueRepresentationReference(), new UniqueRepresentationReferenceProcessor())
+	        .put(terminology.vertex(), new VertexProcessor())
+	        .put(terminology.visibility(), new VisibilityProcessor())
 	        .build();
 	}
 	
@@ -135,7 +134,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 
 	@Override
 	public void error(SAXParseException e) throws SAXException {
-		System.out.println("error: " + e);
+		throw new IllegalStateException("Error during de-serialisation", e);
 	}
 
 	@Override

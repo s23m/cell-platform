@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.Pair
 import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference
 import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference
 import org.s23m.cell.communication.xml.model.schemainstance.Identifier
+import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 
 class InstanceBuilder {
 	
@@ -132,8 +133,8 @@ class InstanceBuilder {
 		val semanticIdentity = semanticIdentity(set)
 		val category = category(set)
 		val isAbstract = isAbstract(set)
-		val from = edgeEnd(set.fromEdgeEnd)
-		val to = edgeEnd(set.toEdgeEnd)
+		val from = fromEdgeEnd(set.fromEdgeEnd)
+		val to = toEdgeEnd(set.toEdgeEnd)
 		edge(semanticIdentity, category, isAbstract, from, to)
 	}
 		
@@ -155,7 +156,7 @@ class InstanceBuilder {
 		result
 	}
 	
-	def edgeEnd(Set set) {
+	def toEdgeEnd(Set set) {
 		val semanticIdentity = semanticIdentity(set)
 		val category = category(set)
 		val isAbstract = isAbstract(set)
@@ -164,7 +165,7 @@ class InstanceBuilder {
 		val isContainer = isContainer(set)
 		val isNavigable = isNavigable(set)
 				
-		edgeEnd(
+		toEdgeEnd(
 			semanticIdentity,
 			category,
 			isAbstract,
@@ -175,7 +176,27 @@ class InstanceBuilder {
 		)
 	}
 	
-	def edgeEnd(SemanticIdentityIdentityReference semanticIdentity,
+	def fromEdgeEnd(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val isAbstract = isAbstract(set)
+		val minCardinality = minCardinality(set)
+		val maxCardinality = maxCardinality(set)
+		val isContainer = isContainer(set)
+		val isNavigable = isNavigable(set)
+				
+		fromEdgeEnd(
+			semanticIdentity,
+			category,
+			isAbstract,
+			minCardinality,
+			maxCardinality,
+			isContainer,
+			isNavigable
+		)
+	}
+	
+	def toEdgeEnd(SemanticIdentityIdentityReference semanticIdentity,
 			CategoryIdentityReference category,
 			IsAbstractIdentityReference isAbstract,
 			MinimumCardinalityIdentityReference minCardinality,
@@ -183,7 +204,47 @@ class InstanceBuilder {
 			IsContainerIdentityReference isContainer,
 			IsNavigableIdentityReference isNavigable) {
 		
-		val result = new EdgeEnd(namespace, terminology)
+		initialise(
+			EdgeEnd::toEdgeEnd(namespace, terminology),
+			semanticIdentity,
+			category,
+			isAbstract,
+			minCardinality,
+			maxCardinality,
+			isContainer,
+			isNavigable
+		)		
+	}	
+	
+	def fromEdgeEnd(SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			MinimumCardinalityIdentityReference minCardinality,
+			MaximumCardinalityIdentityReference maxCardinality,
+			IsContainerIdentityReference isContainer,
+			IsNavigableIdentityReference isNavigable) {
+		
+		initialise(
+			EdgeEnd::fromEdgeEnd(namespace, terminology),
+			semanticIdentity,
+			category,
+			isAbstract,
+			minCardinality,
+			maxCardinality,
+			isContainer,
+			isNavigable
+		)		
+	}
+	
+	def private initialise(EdgeEnd result,
+			SemanticIdentityIdentityReference semanticIdentity,
+			CategoryIdentityReference category,
+			IsAbstractIdentityReference isAbstract,
+			MinimumCardinalityIdentityReference minCardinality,
+			MaximumCardinalityIdentityReference maxCardinality,
+			IsContainerIdentityReference isContainer,
+			IsNavigableIdentityReference isNavigable) {
+		
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
 		result.setIsAbstract(isAbstract)
@@ -191,7 +252,7 @@ class InstanceBuilder {
 		result.setMaxCardinality(maxCardinality)
 		result.setIsContainer(isContainer)
 		result.setIsNavigable(isNavigable)
-		result
+		result	
 	}
 	
 	def superSetReference(Set set) {
@@ -239,6 +300,13 @@ class InstanceBuilder {
 	
 	def query(SemanticIdentityIdentityReference semanticIdentity, CategoryIdentityReference category) {
 		val result = new Query(namespace, terminology)
+		result.setSemanticIdentity(semanticIdentity)
+		result.setCategory(category)
+		result
+	}
+	
+	def parameter(SemanticIdentityIdentityReference semanticIdentity, CategoryIdentityReference category) {
+		val result = new Parameter(namespace, terminology)
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
 		result
@@ -333,7 +401,7 @@ class InstanceBuilder {
 	def isNavigable(Pair<String, String> pair) {
 		initialise(new IsNavigableIdentityReference(namespace, terminology), pair)
 	}
-	
+
 	def private <T extends IdentityReference> initialise(T identityReference, Pair<String, String> pair) {
 		val urr = new UniqueRepresentationReference(namespace, terminology)
 		urr.setText(pair.key)

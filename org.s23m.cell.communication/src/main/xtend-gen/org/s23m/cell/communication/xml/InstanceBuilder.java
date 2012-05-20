@@ -25,6 +25,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityR
 import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
@@ -165,11 +166,11 @@ public class InstanceBuilder {
       IsAbstractIdentityReference _isAbstract = this.isAbstract(set);
       final IsAbstractIdentityReference isAbstract = _isAbstract;
       Set _fromEdgeEnd = set.fromEdgeEnd();
-      EdgeEnd _edgeEnd = this.edgeEnd(_fromEdgeEnd);
-      final EdgeEnd from = _edgeEnd;
-      Set _edgeEnd_1 = set.toEdgeEnd();
-      EdgeEnd _edgeEnd_2 = this.edgeEnd(_edgeEnd_1);
-      final EdgeEnd to = _edgeEnd_2;
+      EdgeEnd _fromEdgeEnd_1 = this.fromEdgeEnd(_fromEdgeEnd);
+      final EdgeEnd from = _fromEdgeEnd_1;
+      Set _edgeEnd = set.toEdgeEnd();
+      EdgeEnd _edgeEnd_1 = this.toEdgeEnd(_edgeEnd);
+      final EdgeEnd to = _edgeEnd_1;
       Edge _edge = this.edge(semanticIdentity, category, isAbstract, from, to);
       _xblockexpression = (_edge);
     }
@@ -191,7 +192,7 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
-  public EdgeEnd edgeEnd(final Set set) {
+  public EdgeEnd toEdgeEnd(final Set set) {
     EdgeEnd _xblockexpression = null;
     {
       SemanticIdentityIdentityReference _semanticIdentity = this.semanticIdentity(set);
@@ -208,17 +209,50 @@ public class InstanceBuilder {
       final IsContainerIdentityReference isContainer = _isContainer;
       IsNavigableIdentityReference _isNavigable = this.isNavigable(set);
       final IsNavigableIdentityReference isNavigable = _isNavigable;
-      EdgeEnd _edgeEnd = this.edgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
+      EdgeEnd _edgeEnd = this.toEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
       _xblockexpression = (_edgeEnd);
     }
     return _xblockexpression;
   }
   
-  public EdgeEnd edgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
+  public EdgeEnd fromEdgeEnd(final Set set) {
     EdgeEnd _xblockexpression = null;
     {
-      EdgeEnd _edgeEnd = new EdgeEnd(this.namespace, this.terminology);
-      final EdgeEnd result = _edgeEnd;
+      SemanticIdentityIdentityReference _semanticIdentity = this.semanticIdentity(set);
+      final SemanticIdentityIdentityReference semanticIdentity = _semanticIdentity;
+      CategoryIdentityReference _category = this.category(set);
+      final CategoryIdentityReference category = _category;
+      IsAbstractIdentityReference _isAbstract = this.isAbstract(set);
+      final IsAbstractIdentityReference isAbstract = _isAbstract;
+      MinimumCardinalityIdentityReference _minCardinality = this.minCardinality(set);
+      final MinimumCardinalityIdentityReference minCardinality = _minCardinality;
+      MaximumCardinalityIdentityReference _maxCardinality = this.maxCardinality(set);
+      final MaximumCardinalityIdentityReference maxCardinality = _maxCardinality;
+      IsContainerIdentityReference _isContainer = this.isContainer(set);
+      final IsContainerIdentityReference isContainer = _isContainer;
+      IsNavigableIdentityReference _isNavigable = this.isNavigable(set);
+      final IsNavigableIdentityReference isNavigable = _isNavigable;
+      EdgeEnd _fromEdgeEnd = this.fromEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
+      _xblockexpression = (_fromEdgeEnd);
+    }
+    return _xblockexpression;
+  }
+  
+  public EdgeEnd toEdgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
+    EdgeEnd _edgeEnd = EdgeEnd.toEdgeEnd(this.namespace, this.terminology);
+    EdgeEnd _initialise = this.initialise(_edgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
+    return _initialise;
+  }
+  
+  public EdgeEnd fromEdgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
+    EdgeEnd _fromEdgeEnd = EdgeEnd.fromEdgeEnd(this.namespace, this.terminology);
+    EdgeEnd _initialise = this.initialise(_fromEdgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
+    return _initialise;
+  }
+  
+  private EdgeEnd initialise(final EdgeEnd result, final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
+    EdgeEnd _xblockexpression = null;
+    {
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setIsAbstract(isAbstract);
@@ -310,6 +344,18 @@ public class InstanceBuilder {
     {
       Query _query = new Query(this.namespace, this.terminology);
       final Query result = _query;
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
+  public Parameter parameter(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
+    Parameter _xblockexpression = null;
+    {
+      Parameter _parameter = new Parameter(this.namespace, this.terminology);
+      final Parameter result = _parameter;
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       _xblockexpression = (result);
