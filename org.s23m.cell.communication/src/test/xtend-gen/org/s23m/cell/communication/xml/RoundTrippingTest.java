@@ -53,18 +53,13 @@ public class RoundTrippingTest extends TestCase {
   public void testSerialisationRoundTrip() {
       ArtifactSet _createInstanceModel = this.createInstanceModel();
       final ArtifactSet model = _createInstanceModel;
-      CharSequence _render = XmlRendering.render(model);
-      String _string = _render.toString();
-      final String xml = _string;
+      String _render = XmlRendering.render(model);
+      final String xml = _render;
       ArtifactSet _deserialise = this.deserialise(xml);
       final ArtifactSet deserialised = _deserialise;
-      CharSequence _render_1 = XmlRendering.render(model);
-      String _string_1 = _render_1.toString();
-      final String renderedModel = _string_1;
-      CharSequence _render_2 = XmlRendering.render(deserialised);
-      String _string_2 = _render_2.toString();
-      final String renderedDeserialisedModel = _string_2;
-      Assert.assertEquals(renderedModel, renderedDeserialisedModel);
+      String _render_1 = XmlRendering.render(deserialised);
+      final String renderedDeserialisedModel = _render_1;
+      Assert.assertEquals(xml, renderedDeserialisedModel);
   }
   
   private ArtifactSet deserialise(final String xml) {

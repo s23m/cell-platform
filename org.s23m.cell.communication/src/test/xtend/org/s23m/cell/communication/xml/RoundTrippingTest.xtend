@@ -24,16 +24,15 @@ class RoundTrippingTest extends TestCase {
 		val model = createInstanceModel()
 		
 		// Serialise as XML
-		val xml = XmlRendering::render(model).toString()
+		val xml = XmlRendering::render(model)
 		
-		// De-serialise this
+		// De-serialise it
 		val deserialised = deserialise(xml)
 		
 		// Render the original in-memory model and compare it with de-serialised version
-		val renderedModel = XmlRendering::render(model).toString
-		val renderedDeserialisedModel = XmlRendering::render(deserialised).toString
+		val renderedDeserialisedModel = XmlRendering::render(deserialised)
 		
-		assertEquals(renderedModel, renderedDeserialisedModel)
+		assertEquals(xml, renderedDeserialisedModel)
 	}
 	
 	def private ArtifactSet deserialise(String xml) {

@@ -23,17 +23,19 @@ public class XmlRendering {
   
   private static String PREAMBLE = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   
-  public static CharSequence render(final Schema node) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append(XmlRendering.PREAMBLE, "");
-    _builder.newLineIfNotEmpty();
-    CharSequence _render = XmlRendering.render(node, 0);
-    _builder.append(_render, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
+  public static String render(final Schema node) {
+    CharSequence _doRender = XmlRendering.doRender(node);
+    String _string = _doRender.toString();
+    return _string;
   }
   
-  public static CharSequence render(final ArtifactSet node) {
+  public static String render(final ArtifactSet node) {
+    CharSequence _doRender = XmlRendering.doRender(node);
+    String _string = _doRender.toString();
+    return _string;
+  }
+  
+  private static CharSequence doRender(final CompositeNode node) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(XmlRendering.PREAMBLE, "");
     _builder.newLineIfNotEmpty();

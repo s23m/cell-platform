@@ -14,12 +14,15 @@ class XmlRendering {
 	static int INDENTATION = 2
 	static String PREAMBLE = '<?xml version="1.0" encoding="UTF-8"?>'
 	
-	def static render(Schema node) '''
-		«PREAMBLE»
-		«render(node, 0)»
-	'''
+	def static render(Schema node) {
+		doRender(node).toString
+	}
 	
-	def static render(ArtifactSet node) '''
+	def static render(ArtifactSet node) {
+		doRender(node).toString
+	}
+	
+	def private static doRender(CompositeNode node) '''
 		«PREAMBLE»
 		«render(node, 0)»
 	'''

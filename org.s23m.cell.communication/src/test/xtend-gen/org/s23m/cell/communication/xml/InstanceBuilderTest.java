@@ -66,7 +66,7 @@ public class InstanceBuilderTest {
       OperatorExtensions.operator_add(model, _visibility);
       ArtifactSet _build = builder.build();
       final ArtifactSet result = _build;
-      CharSequence _render = XmlRendering.render(result);
+      String _render = XmlRendering.render(result);
       String _string = _render.toString();
       final String xml = _string;
       String _operator_plus = StringExtensions.operator_plus("xml: ", xml);
