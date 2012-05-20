@@ -47,6 +47,7 @@ import com.google.common.collect.ImmutableMap;
  * the last event occurred. It provides useful methods such as getLineNumber()
  * and getColumnNumber()"
  */
+// TODO change schema to use attributes for 'scalar' values
 // TODO use a "cursor" pointing to the current top-level element being processed, to avoid instanceof checks
 public class ArtifactSetElementHandler extends DefaultHandler {
 	
@@ -95,6 +96,10 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.query(), new QueryProcessor())
 	        .build();
 	}
+	
+	public ArtifactSet getResult() {
+		return result;
+	}
 
 	@Override
 	public void startDocument() throws SAXException {
@@ -102,17 +107,13 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println("result: " + XmlRendering.render(result));
 	}
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		final Node top = stack.isEmpty() ? null : stack.peek();
 		final SaxElementProcessor<?> processor = processors.get(localName);
-		if (processor == null) {
-			throw new IllegalStateException("No processor was defined for '" + localName + "'");
-		}
-		Node element = processor.startElement(namespace, terminology, top);
+		final Node element = processor.startElement(namespace, terminology, top);
 		stack.push(element);
 	}
 

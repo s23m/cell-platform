@@ -145,7 +145,8 @@ class InstanceBuilder {
 		
 		val result = new Edge(
 			namespace,
-			terminology)
+			terminology
+		)
 		result.setSemanticIdentity(semanticIdentity)
 		result.setCategory(category)
 		result.setIsAbstract(isAbstract)

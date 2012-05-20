@@ -39,7 +39,7 @@ public class VisibilityProcessor implements SaxElementProcessor<Visibility> {
 
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
-		if (top instanceof Visibility) {
+		if (top instanceof Model) {
 			((Model) top).addVisibility((Visibility) removed);
 		}
 	}
