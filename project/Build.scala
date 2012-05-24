@@ -103,7 +103,7 @@ object GmodelBuild extends Build {
 	    unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
 		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
 	)
-  ) dependsOn (kernel, platform)
+  ) dependsOn (kernel, kernelTests, platform)
   
   lazy val editorSemanticdomain = Project(
     "editor-semanticdomain",
