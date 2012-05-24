@@ -62,7 +62,8 @@ public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final String NAMESPACE_PREFIX = "xmlns:";
 
-	private static final String LOCAL_NAMESPACE = "s23m";
+	// TODO determine this by looking at the schema root element
+	private static final String LOCAL_NAMESPACE_PREFIX = "s";
 	
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {
@@ -72,7 +73,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final Function<String, String> QUALIFY_NAME = new Function<String, String>() {
 		public String apply(String input) {
-			return LOCAL_NAMESPACE + ":" + input;
+			return LOCAL_NAMESPACE_PREFIX + ":" + input;
 		}
 	};
 	
