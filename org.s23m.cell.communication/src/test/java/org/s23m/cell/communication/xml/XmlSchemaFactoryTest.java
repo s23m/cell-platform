@@ -51,11 +51,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-// TODO check that all types are qualified
-// TODO check that all type names are unique
 // TODO check children of complexTypes (make sure elements are wrapped in a sequence)
 // TODO check that all XSD nodes (complexTypes, simpleTypes, elements, etc.) use the XSD namespace
-// TODO check isAbstract usage
 public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final String XML_SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
@@ -193,6 +190,20 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertNotNull("The root element was not found", found);
 	}
 	
+	@Test
+	public void testComplexTypeNamesAreUnique() {
+		Collection<Node> complexTypeNodes = retrieveAllElementsWithTagName("complexType");
+		assertFalse(complexTypeNodes.isEmpty());
+		Collection<String> complexTypeNames = Collections2.transform(complexTypeNodes, new Function<Node, String>() {
+			public String apply(Node input) {
+				return getNameAttribute(input);
+			}
+		});
+		assertFalse(complexTypeNames.contains(null));
+		
+		assertEquals(complexTypeNames.size(), new HashSet<String>(complexTypeNames).size());
+	}
+	
 	private String retrieveXsdStringType() {
 		return retrieveXsdNamespacePrefix() + ":" + XSD_STRING;
 	}
@@ -201,19 +212,38 @@ public class XmlSchemaFactoryTest extends TestCase {
 		Collection<Node> allElements = retrieveAllElements();
 		java.util.Set<String> names = new HashSet<String>(allElements.size());
 		for (Node elementNode : allElements) {
-			NamedNodeMap attributes = elementNode.getAttributes();
-			Node nameNode = attributes.getNamedItem("name");
-			if (nameNode != null) {
-				names.add(nameNode.getNodeValue());
+			String nameAttribute = getNameAttribute(elementNode);
+			if (nameAttribute != null) {
+				names.add(nameAttribute);
 			}
 		}
 		return names;
+	}
+	
+	private String getNameAttribute(Node node) {
+		NamedNodeMap attributes = node.getAttributes();
+		Node nameNode = attributes.getNamedItem("name");
+		if (nameNode != null) {
+			return nameNode.getNodeValue();
+		} else {
+			return null;
+		}
 	}
 	
 	private Collection<Node> retrieveAllElements() {
 		Collection<Node> result = Collections2.filter(retrieveAllDeclaredNodes(), IS_ELEMENT);
 		assertFalse(result.isEmpty());
 		return result;
+	}
+	
+	private Collection<Node> retrieveAllElementsWithTagName(final String tagName) {
+		Collection<Node> allElements = retrieveAllElements();
+		return Collections2.filter(allElements, new Predicate<Node>() {
+			public boolean apply(Node input) {
+				String localName = input.getLocalName();
+				return localName.equals(tagName);
+			}
+		}); 
 	}
 	
 	private List<Node> retrieveAllDeclaredNodes() {
@@ -228,7 +258,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		for (int i = 0; i < list.getLength(); i++) {
 			// get child node
 			Node childNode = list.item(i);
-			seen.add(childNode);
+			
 			// visit child node
 			List<Node> allChildren = retrieveAllChildren(childNode);
 			seen.addAll(allChildren);
