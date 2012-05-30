@@ -39,6 +39,7 @@ import org.junit.Test;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
+import org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -54,12 +55,11 @@ import com.google.common.collect.Sets;
 
 public class XmlSchemaFactoryTest extends TestCase {
 	
-	private static final String XML_SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
+	private static final String XML_SCHEMA_NAMESPACE = XmlSchemaConstants.XML_SCHEMA_URI;
 	
 	private static final String NAMESPACE_PREFIX = "xmlns:";
 
-	// TODO determine this by looking at the schema root element
-	private static final String LOCAL_NAMESPACE_PREFIX = "s";
+	private static final String LOCAL_NAMESPACE_PREFIX = NamespaceConstants.S23M;
 	
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {
