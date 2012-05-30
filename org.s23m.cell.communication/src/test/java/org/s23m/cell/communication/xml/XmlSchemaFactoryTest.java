@@ -46,13 +46,12 @@ import org.w3c.dom.NodeList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-// TODO check children of complexTypes (make sure elements are wrapped in a sequence)
-// TODO check that all XSD nodes (complexTypes, simpleTypes, elements, etc.) use the XSD namespace
 public class XmlSchemaFactoryTest extends TestCase {
 	
 	private static final String XML_SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
@@ -65,6 +64,19 @@ public class XmlSchemaFactoryTest extends TestCase {
 	private static final Predicate<Node> IS_ELEMENT = new Predicate<Node>() {
 		public boolean apply(Node input) {
 			return Node.ELEMENT_NODE == input.getNodeType();
+		}
+	};
+	
+	private static final Predicate<Node> ELEMENT_OR_ATTRIBUTE = new Predicate<Node>() {
+		public boolean apply(Node input) {
+			String tagName = input.getLocalName();
+			return "element".equals(tagName) || "attribute".equals(tagName);
+		}
+	};
+	
+	private static final Predicate<Node> HAS_XSD_NAMESPACE = new Predicate<Node>() {
+		public boolean apply(Node input) {
+			return input.getNamespaceURI().equals(XML_SCHEMA_NAMESPACE);
 		}
 	};
 	
@@ -192,7 +204,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	
 	@Test
 	public void testComplexTypeNamesAreUnique() {
-		Collection<Node> complexTypeNodes = retrieveAllElementsWithTagName("complexType");
+		Collection<Node> complexTypeNodes = getComplexTypeElements();
 		assertFalse(complexTypeNodes.isEmpty());
 		Collection<String> complexTypeNames = Collections2.transform(complexTypeNodes, new Function<Node, String>() {
 			public String apply(Node input) {
@@ -202,6 +214,65 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertFalse(complexTypeNames.contains(null));
 		
 		assertEquals(complexTypeNames.size(), new HashSet<String>(complexTypeNames).size());
+	}
+	
+	@Test
+	public void testComplexTypeChildren() {
+		Collection<Node> elements = getComplexTypeElements();
+		
+		for (Node node: elements) {
+			Node firstChild = findFirstNonTextChildNode(node);
+			String tagName = firstChild.getLocalName();
+			if ("sequence".equals(tagName)) {
+				Collection<Node> children = retrieveAllElementChildren(firstChild);
+				checkNodesAreElementsOrAttributes(children);
+			} else if ("complexContent".equals(tagName)) {
+				// check extension child
+				Node extension = findFirstNonTextChildNode(firstChild);
+				assertEquals("extension", extension.getLocalName());
+				
+				if (extension.hasChildNodes()) {
+					// check its child is a sequence
+					Node sequence = findFirstNonTextChildNode(extension);
+					assertEquals("sequence", sequence.getLocalName());
+					
+					// check sequence children
+					Collection<Node> sequenceChildren = retrieveAllElementChildren(sequence);
+					checkNodesAreElementsOrAttributes(sequenceChildren);	
+				}
+			} else {
+				fail("First child of complexType element is invalid: " + firstChild);
+			}
+		}
+	}
+	
+	@Test
+	public void testXsdNodeNamespaceIsUsedConsistently() {
+		// check that all XSD nodes (complexTypes, simpleTypes, elements) use the XSD namespace
+		Collection<Node> complexTypeElements = getComplexTypeElements();
+		Collection<Node> simpleTypeElements = retrieveAllElementsByTagName("simpleType");
+		Collection<Node> elementElements = retrieveAllElementsByTagName("element");
+		
+		Iterable<Node> allElements = Iterables.concat(complexTypeElements, simpleTypeElements, elementElements);
+		Iterable<Node> violations = Iterables.filter(allElements, Predicates.not(HAS_XSD_NAMESPACE));
+		assertFalse(violations.iterator().hasNext());
+	}
+	
+	private void checkNodesAreElementsOrAttributes(Collection<Node> children) {
+		Collection<Node> invalid = Collections2.filter(children, Predicates.not(ELEMENT_OR_ATTRIBUTE));
+		assertTrue("Non-element or non-attributes are present: " + invalid, invalid.isEmpty());
+	}
+
+	private Node findFirstNonTextChildNode(Node node) {
+		return Iterables.find(retrieveAllChildren(node), new Predicate<Node>() {
+			public boolean apply(Node input) {
+				return input.getNodeType() != Node.TEXT_NODE;
+			}
+		});
+	}
+
+	private Collection<Node> getComplexTypeElements() {
+		return retrieveAllElementsByTagName("complexType");
 	}
 	
 	private String retrieveXsdStringType() {
@@ -236,7 +307,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 		return result;
 	}
 	
-	private Collection<Node> retrieveAllElementsWithTagName(final String tagName) {
+	private Collection<Node> retrieveAllElementsByTagName(final String tagName) {
 		Collection<Node> allElements = retrieveAllElements();
 		return Collections2.filter(allElements, new Predicate<Node>() {
 			public boolean apply(Node input) {
@@ -250,14 +321,20 @@ public class XmlSchemaFactoryTest extends TestCase {
 		return retrieveAllChildren(document);
 	}
 	
+	private Collection<Node> retrieveAllElementChildren(Node node) {
+		List<Node> children = retrieveAllChildren(node);
+		return Collections2.filter(children, IS_ELEMENT);
+	}
+	
 	private List<Node> retrieveAllChildren(Node node) {
 		// get all child nodes
 		List<Node> seen = new ArrayList<Node>();
 		NodeList list = node.getChildNodes();
-		seen.add(node);
 		for (int i = 0; i < list.getLength(); i++) {
 			// get child node
 			Node childNode = list.item(i);
+			
+			seen.add(childNode);
 			
 			// visit child node
 			List<Node> allChildren = retrieveAllChildren(childNode);
