@@ -30,9 +30,9 @@ import org.s23m.cell.communication.xml.model.dom.AbstractLeafNode;
 public class Attribute extends AbstractLeafNode {
 
 	private final String name;
-	private final Type type;
+	private final SimpleType type;
 
-	public Attribute(String name, Type type) {
+	public Attribute(String name, SimpleType type) {
 		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, "attribute");
 		this.name = name;
 		this.type = type;
@@ -46,7 +46,7 @@ public class Attribute extends AbstractLeafNode {
 		return name;
 	}
 	
-	public Type getType() {
+	public SimpleType getType() {
 		return type;
 	}
 }

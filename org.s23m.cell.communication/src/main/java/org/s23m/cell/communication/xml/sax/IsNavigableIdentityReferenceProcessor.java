@@ -30,12 +30,16 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
 
-public class IsNavigableIdentityReferenceProcessor implements SaxElementProcessor<IsNavigableIdentityReference> {
+public class IsNavigableIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<IsNavigableIdentityReference> {
 
 	@Override
-	public IsNavigableIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new IsNavigableIdentityReference(namespace, terminology);
+	protected IsNavigableIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new IsNavigableIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
+
 
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {

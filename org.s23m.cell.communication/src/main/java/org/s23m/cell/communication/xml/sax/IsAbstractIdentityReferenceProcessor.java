@@ -35,13 +35,16 @@ import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
-public class IsAbstractIdentityReferenceProcessor implements SaxElementProcessor<IsAbstractIdentityReference> {
+public class IsAbstractIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<IsAbstractIdentityReference> {
 
 	@Override
-	public IsAbstractIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new IsAbstractIdentityReference(namespace, terminology);
+	protected IsAbstractIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
-
+	
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Graph) {
@@ -58,5 +61,4 @@ public class IsAbstractIdentityReferenceProcessor implements SaxElementProcessor
 			((EdgeEnd) top).setIsAbstract((IsAbstractIdentityReference) removed);
 		}
 	}
-
 }

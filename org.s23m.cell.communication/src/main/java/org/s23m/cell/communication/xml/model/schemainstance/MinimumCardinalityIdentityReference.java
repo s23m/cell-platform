@@ -29,7 +29,10 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class MinimumCardinalityIdentityReference extends IdentityReference {
 
-	public MinimumCardinalityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.minimumCardinality());
+	public MinimumCardinalityIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		super(namespace, terminology, terminology.minimumCardinality(), uniqueRepresentationReference, identifier);
 	}
 }

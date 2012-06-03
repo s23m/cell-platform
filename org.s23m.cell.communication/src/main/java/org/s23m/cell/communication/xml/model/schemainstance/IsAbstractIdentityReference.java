@@ -29,7 +29,10 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class IsAbstractIdentityReference extends IdentityReference {
 
-	public IsAbstractIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.isAbstract());
+	public IsAbstractIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		super(namespace, terminology, terminology.isAbstract(), uniqueRepresentationReference, identifier);
 	}
 }

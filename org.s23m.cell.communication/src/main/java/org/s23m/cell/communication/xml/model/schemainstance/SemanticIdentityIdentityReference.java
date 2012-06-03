@@ -29,7 +29,10 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class SemanticIdentityIdentityReference extends IdentityReference {
 
-	public SemanticIdentityIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.semanticIdentity());
+	public SemanticIdentityIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		super(namespace, terminology, terminology.semanticIdentity(), uniqueRepresentationReference, identifier);
 	}
 }

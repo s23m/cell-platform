@@ -6,13 +6,16 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Category;
 import org.s23m.cell.communication.xml.model.schemainstance.CategoryIdentityReference;
 
-public class CategoryIdentityReferenceProcessor implements SaxElementProcessor<CategoryIdentityReference> {
+public class CategoryIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<CategoryIdentityReference> {
 
 	@Override
-	public CategoryIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new CategoryIdentityReference(namespace, terminology);
+	protected CategoryIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
-
+	
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Category) {

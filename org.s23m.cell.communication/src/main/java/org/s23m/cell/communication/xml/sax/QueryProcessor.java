@@ -29,11 +29,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
+import org.xml.sax.Attributes;
 
 public class QueryProcessor implements SaxElementProcessor<Query> {
 
 	@Override
-	public Query startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Query startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Query(namespace, terminology);
 	}
 

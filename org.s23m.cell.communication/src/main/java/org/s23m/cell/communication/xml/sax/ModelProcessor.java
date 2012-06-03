@@ -29,11 +29,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.xml.sax.Attributes;
 
 public class ModelProcessor implements SaxElementProcessor<Model> {
 
 	@Override
-	public Model startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Model startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Model(namespace, terminology);
 	}
 

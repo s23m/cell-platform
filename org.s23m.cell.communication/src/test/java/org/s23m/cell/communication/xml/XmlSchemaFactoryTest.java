@@ -67,6 +67,13 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	};
 	
+	private static final Predicate<Node> ATTRIBUTE = new Predicate<Node>() {
+		public boolean apply(Node input) {
+			String tagName = input.getLocalName();
+			return "attribute".equals(tagName);
+		}
+	};
+	
 	private static final Predicate<Node> ELEMENT_OR_ATTRIBUTE = new Predicate<Node>() {
 		public boolean apply(Node input) {
 			String tagName = input.getLocalName();
@@ -241,7 +248,9 @@ public class XmlSchemaFactoryTest extends TestCase {
 					checkNodesAreElementsOrAttributes(sequenceChildren);	
 				}
 			} else {
-				fail("First child of complexType element is invalid: " + firstChild);
+				// ensure that all children are attributes (good enough for our purposes)
+				Collection<Node> children = retrieveAllElementChildren(firstChild);
+				checkNodesAreAttributes(children);
 			}
 		}
 	}
@@ -256,6 +265,11 @@ public class XmlSchemaFactoryTest extends TestCase {
 		Iterable<Node> allElements = Iterables.concat(complexTypeElements, simpleTypeElements, elementElements);
 		Iterable<Node> violations = Iterables.filter(allElements, Predicates.not(HAS_XSD_NAMESPACE));
 		assertFalse(violations.iterator().hasNext());
+	}
+
+	private void checkNodesAreAttributes(Collection<Node> children) {
+		Collection<Node> invalid = Collections2.filter(children, Predicates.not(ATTRIBUTE));
+		assertTrue("Non-element or non-attributes are present: " + invalid, invalid.isEmpty());
 	}
 	
 	private void checkNodesAreElementsOrAttributes(Collection<Node> children) {

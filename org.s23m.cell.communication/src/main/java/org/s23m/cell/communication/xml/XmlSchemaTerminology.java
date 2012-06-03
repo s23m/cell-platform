@@ -26,17 +26,11 @@ package org.s23m.cell.communication.xml;
 
 public interface XmlSchemaTerminology {
 	String artifactSet();
-	String category();
 	String command();
 	String container();
 	String edge();
-	String edgeEnd();
 	String from();
-	String function();
-	String graph();
 	String identifier();
-	String identity();
-	String identityReference();
 	String isAbstract();
 	String isContainer();
 	String isNavigable();
@@ -44,18 +38,28 @@ public interface XmlSchemaTerminology {
 	String maximumCardinality();
 	String minimumCardinality();
 	String model();
-	String name();
 	String parameter();
-	String payload();
-	String pluralName();
 	String query();
 	String semanticDomain();
 	String semanticIdentity();
 	String superSetReference();
-	String technicalName();
 	String to();
 	String uniqueRepresentationReference();
-	String uuid();
 	String vertex();
 	String visibility();
+	
+	// TODO incorporate these into instance domain model
+	String identity();
+	String name();
+	String payload();
+	String pluralName();
+	String technicalName();
+	
+	/* Schema-only concepts */
+	String category();
+	String edgeEnd();
+	String function();
+	String graph();
+	String identityReference();
+	String uuid();
 }

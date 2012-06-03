@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.model.dom.Node;
+import org.s23m.cell.communication.xml.model.schema.Attribute;
 import org.s23m.cell.communication.xml.model.schema.Cardinality;
 import org.s23m.cell.communication.xml.model.schema.ComplexType;
 import org.s23m.cell.communication.xml.model.schema.DataType;
@@ -113,6 +114,17 @@ public class SchemaBuilder {
     ComplexType _complexType = new ComplexType(NamespaceConstants.NS_S23M, name, ext);
     ComplexType _store = this.<ComplexType>store(_complexType);
     return _store;
+  }
+  
+  public ComplexType complexType(final String name, final List<Attribute> attributes) {
+    ComplexType _complexType = new ComplexType(NamespaceConstants.NS_S23M, name, attributes);
+    ComplexType _store = this.<ComplexType>store(_complexType);
+    return _store;
+  }
+  
+  public Attribute attribute(final String name, final SimpleType type) {
+    Attribute _attribute = new Attribute(name, type);
+    return _attribute;
   }
   
   public Element element(final String name, final Type type) {

@@ -24,11 +24,9 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schemainstance;
 
-import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
+import org.s23m.cell.communication.xml.model.dom.AbstractLeafNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
-import org.s23m.cell.communication.xml.model.dom.Node;
-
-import com.google.common.collect.ImmutableList;
 
 /*
 <s23m:[name]>
@@ -36,34 +34,30 @@ import com.google.common.collect.ImmutableList;
 	<s23m:identifier>[identifier]</s23m:identifier>
 </s23m:[name]>
 */
-public abstract class IdentityReference extends AbstractCompositeNode {
+public abstract class IdentityReference extends AbstractLeafNode {
 	
-	private UniqueRepresentationReference uniqueRepresentationReference;
+	private final String uniqueRepresentationReference;
 	
-	private Identifier identifier;
+	private final String identifier;
 
-	protected IdentityReference(Namespace namespace, String name) {
+	protected IdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String name,
+			String uniqueRepresentationReference,
+			String identifier) {
 		super(namespace, name);
+		this.uniqueRepresentationReference = uniqueRepresentationReference;
+		this.identifier = identifier;
+		
+		setAttribute(terminology.uniqueRepresentationReference(), uniqueRepresentationReference);
+		setAttribute(terminology.identifier(), identifier);
 	}
 
-	public UniqueRepresentationReference getUniqueRepresentationReference() {
+	public String getUniqueRepresentationReference() {
 		return uniqueRepresentationReference;
 	}
 	
-	public void setUniqueRepresentationReference(UniqueRepresentationReference uniqueRepresentationReference) {
-		this.uniqueRepresentationReference = uniqueRepresentationReference;
-	}
-	
-	public Identifier getIdentifier() {
+	public String getIdentifier() {
 		return identifier;
-	}
-	
-	public void setIdentifier(Identifier identifier) {
-		this.identifier = identifier;
-	}
-
-	@Override
-	public Iterable<? extends Node> getChildren() {
-		return ImmutableList.of(uniqueRepresentationReference, identifier);
 	}
 }

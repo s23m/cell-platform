@@ -29,11 +29,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.xml.sax.Attributes;
 
 public class EdgeProcessor implements SaxElementProcessor<Edge> {
 
 	@Override
-	public Edge startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Edge startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Edge(namespace, terminology);
 	}
 

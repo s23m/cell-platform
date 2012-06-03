@@ -30,11 +30,12 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Command;
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
+import org.xml.sax.Attributes;
 
 public class ParameterProcessor implements SaxElementProcessor<Parameter> {
 
 	@Override
-	public Parameter startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Parameter startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Parameter(namespace, terminology);
 	}
 

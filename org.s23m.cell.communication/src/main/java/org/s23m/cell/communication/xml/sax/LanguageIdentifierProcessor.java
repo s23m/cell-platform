@@ -29,11 +29,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
+import org.xml.sax.Attributes;
 
 public class LanguageIdentifierProcessor implements SaxElementProcessor<StringElement> {
 
 	@Override
-	public StringElement startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public StringElement startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new StringElement(namespace, terminology.languageIdentifier());
 	}
 

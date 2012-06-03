@@ -62,32 +62,22 @@ class XmlSchemaTemplate {
 	
 		val uuid = builder.simpleType(terminology.uuid, STRING)
 		
-		val identityReference = builder.complexType(terminology.identityReference, [
-			children += builder.element(terminology.uniqueRepresentationReference, uuid)
-			children += builder.element(terminology.identifier, uuid)
-		])
-				
-		val semanticIdentityElement = builder.element(semanticIdentity, identityReference)
+		val identityReference = builder.complexType(terminology.identityReference, asList(
+			builder.attribute(terminology.uniqueRepresentationReference, uuid),
+			builder.attribute(terminology.identifier, uuid)
+		))
 		
 		val isAbstractElement = builder.element(isAbstract, identityReference)
 		
-		val minCardinalityElement = builder.element(minCardinality, identityReference)
-		
 		val maxCardinalityElement = builder.element(maxCardinality, identityReference)
-		
-		val isContainerElement = builder.element(isContainer, identityReference)
-		
-		val isNavigableElement = builder.element(isNavigable, identityReference)
 		
 		val fromElement = builder.element(from, identityReference)
 	
 		val toElement = builder.element(to, identityReference)
 		
-		val categoryElement = builder.element(category, identityReference)
-	
 		val categoryComplexType = builder.complexType(category, [
-			children += semanticIdentityElement
-			children += categoryElement
+			children += builder.element(semanticIdentity, identityReference)
+			children += builder.element(category, identityReference)
 		])
 		
 		val vertexComplexType = builder.complexType(vertex, withExtension(categoryComplexType, [
@@ -109,10 +99,10 @@ class XmlSchemaTemplate {
 		
 		val edgeEndComplexType = builder.complexType(edgeEnd, withExtension(categoryComplexType, [
 			children += builder.element(isAbstractElement)
-			children += builder.element(minCardinalityElement)
+			children += builder.element(minCardinality, identityReference)		
 			children += builder.element(maxCardinalityElement)
-			children += builder.element(isContainerElement)
-			children += builder.element(isNavigableElement)
+			children += builder.element(isContainer, identityReference)
+			children += builder.element(isNavigable, identityReference)		
 		]))
 		
 		val edgeComplexType = builder.complexType(edge, withExtension(categoryComplexType, [

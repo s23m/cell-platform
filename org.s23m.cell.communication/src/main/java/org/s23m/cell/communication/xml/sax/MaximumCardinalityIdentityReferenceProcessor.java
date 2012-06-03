@@ -31,11 +31,14 @@ import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 
-public class MaximumCardinalityIdentityReferenceProcessor implements SaxElementProcessor<MaximumCardinalityIdentityReference> {
+public class MaximumCardinalityIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<MaximumCardinalityIdentityReference> {
 
 	@Override
-	public MaximumCardinalityIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new MaximumCardinalityIdentityReference(namespace, terminology);
+	protected MaximumCardinalityIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
 
 	@Override

@@ -5,11 +5,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
+import org.xml.sax.Attributes;
 
 public class VertexProcessor implements SaxElementProcessor<Vertex> {
 
 	@Override
-	public Vertex startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Vertex startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Vertex(namespace, terminology);
 	}
 

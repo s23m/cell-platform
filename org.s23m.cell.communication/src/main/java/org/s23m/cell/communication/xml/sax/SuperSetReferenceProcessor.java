@@ -5,11 +5,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
+import org.xml.sax.Attributes;
 
 public class SuperSetReferenceProcessor implements SaxElementProcessor<SuperSetReference> {
 
 	@Override
-	public SuperSetReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public SuperSetReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new SuperSetReference(namespace, terminology);
 	}
 

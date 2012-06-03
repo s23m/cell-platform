@@ -45,9 +45,15 @@ import com.google.common.collect.ImmutableMap;
  * acts like a cursor, pointing to the position in the XML document where
  * the last event occurred. It provides useful methods such as getLineNumber()
  * and getColumnNumber()"
- */
-// TODO change schema to use attributes for 'scalar' values
-// TODO use a "cursor" pointing to the current top-level element being processed, to avoid instanceof checks
+ * 
+ * TODO change schema to use attributes for 'scalar' values
+ * 
+ * TODO use a "cursor" pointing to the current top-level element being processed,
+ * to avoid instanceof checks. Would need a state machine to be defined. See
+ * http://www.jamesh.id.au/articles/libxml-sax/libxml-sax.html
+ * 
+ * TODO accumulate warnings and errors inside a suitable data structure
+ */ 
 public class ArtifactSetElementHandler extends DefaultHandler {
 	
 	private final InstanceBuilder builder;
@@ -77,7 +83,6 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.container(), new ContainerIdentityReferenceProcessor())
 	        .put(terminology.edge(), new EdgeProcessor())
 	        .put(terminology.from(), new FromProcessor())
-	        .put(terminology.identifier(), new IdentifierProcessor())
 	        .put(terminology.isAbstract(), new IsAbstractIdentityReferenceProcessor())
 	        .put(terminology.isContainer(), new IsContainerIdentityReferenceProcessor())
 	        .put(terminology.isNavigable(), new IsNavigableIdentityReferenceProcessor())
@@ -90,7 +95,6 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())
 	        .put(terminology.superSetReference(), new SuperSetReferenceProcessor())
 	        .put(terminology.to(), new ToProcessor())
-	        .put(terminology.uniqueRepresentationReference(), new UniqueRepresentationReferenceProcessor())
 	        .put(terminology.vertex(), new VertexProcessor())
 	        .put(terminology.visibility(), new VisibilityProcessor())
 	        .build();
@@ -108,11 +112,12 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {
 	}
 
+	// TODO pass attributes on to SaxElementProcessors
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		final Node top = stack.isEmpty() ? null : stack.peek();
 		final SaxElementProcessor<?> processor = processors.get(localName);
-		final Node element = processor.startElement(namespace, terminology, top);
+		final Node element = processor.startElement(namespace, terminology, top, attributes);
 		stack.push(element);
 	}
 
@@ -132,6 +137,11 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 		textContent = new String(ch, start, length);
 	}
 
+	@Override
+	public void warning(SAXParseException arg0) throws SAXException {
+		super.warning(arg0);
+	}
+	
 	@Override
 	public void error(SAXParseException e) throws SAXException {
 		throw new IllegalStateException("Error during de-serialisation", e);

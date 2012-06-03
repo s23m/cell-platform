@@ -30,11 +30,14 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityIdentityReference;
 
-public class MinimumCardinalityIdentityReferenceProcessor implements SaxElementProcessor<MinimumCardinalityIdentityReference> {
+public class MinimumCardinalityIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<MinimumCardinalityIdentityReference> {
 
 	@Override
-	public MinimumCardinalityIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new MinimumCardinalityIdentityReference(namespace, terminology);
+	protected MinimumCardinalityIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new MinimumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
 
 	@Override

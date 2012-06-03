@@ -35,6 +35,10 @@ public abstract class BasicCompositeNode extends AbstractCompositeNode {
     	children = new ArrayList<Node>();
 	}
     
+    protected void addChild(Node child) {
+    	children.add(child);
+    }
+    
     @Override
     public List<Node> getChildren() {
     	return children;

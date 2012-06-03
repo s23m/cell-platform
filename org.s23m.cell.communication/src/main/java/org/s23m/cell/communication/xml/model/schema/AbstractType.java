@@ -24,21 +24,28 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schema;
 
+import org.s23m.cell.communication.xml.model.dom.BasicCompositeNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
-import org.s23m.cell.communication.xml.model.dom.WrapperNode;
 
-public class AbstractType extends WrapperNode implements Type {
+public abstract class AbstractType extends BasicCompositeNode implements Type {
 
 	private final String nameAttribute;
 	
 	private final Namespace targetNamespace;
 	
+	/**
+	 * Constructor for the case where the type has a single child 
+	 */
 	public AbstractType(Namespace targetNamespace, String name, String nameAttribute, Node child) {
-		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, name, child);
+		this(targetNamespace, name, nameAttribute);
+		addChild(child);
+	}
+
+	public AbstractType(Namespace targetNamespace, String name, String nameAttribute) {
+		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, name);
 		this.targetNamespace = targetNamespace;
 		this.nameAttribute = nameAttribute;
-
 		setAttribute("name", nameAttribute);
 	}
 

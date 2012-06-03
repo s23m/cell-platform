@@ -30,11 +30,14 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Category;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 
-public class SemanticIdentityIdentityReferenceProcessor	implements SaxElementProcessor<SemanticIdentityIdentityReference> {
+public class SemanticIdentityIdentityReferenceProcessor	extends AbstractIdentityReferenceProcessor<SemanticIdentityIdentityReference> {
 
 	@Override
-	public SemanticIdentityIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new SemanticIdentityIdentityReference(namespace, terminology);
+	protected SemanticIdentityIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
 
 	@Override

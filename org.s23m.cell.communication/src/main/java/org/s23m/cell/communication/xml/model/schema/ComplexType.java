@@ -24,13 +24,17 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schema;
 
+import java.util.List;
+
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 
 public final class ComplexType extends AbstractType {
 	
+	private static final String NAME = "complexType";
+	
 	private ComplexType(Node child, String nameAttribute, Namespace targetNamespace) {
-		super(targetNamespace, "complexType", nameAttribute, child);
+		super(targetNamespace, NAME, nameAttribute, child);
 	}
 	
 	public ComplexType(Namespace targetNamespace, String name, Sequence child) {
@@ -39,5 +43,12 @@ public final class ComplexType extends AbstractType {
 	
 	public ComplexType(Namespace targetNamespace, String name, Extension extension) {
 		this(new ComplexContent(extension), name, targetNamespace);
+	}
+	
+	public ComplexType(Namespace targetNamespace, String nameAttribute, List<Attribute> attributes) {
+		super(targetNamespace, NAME, nameAttribute);
+		for (Attribute attribute: attributes) {
+			addChild(attribute);
+		}
 	}
 }

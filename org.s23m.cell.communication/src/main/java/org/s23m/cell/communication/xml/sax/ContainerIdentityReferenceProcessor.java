@@ -6,13 +6,16 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Graph;
 
-public class ContainerIdentityReferenceProcessor implements SaxElementProcessor<ContainerIdentityReference> {
+public class ContainerIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<ContainerIdentityReference> {
 
 	@Override
-	public ContainerIdentityReference startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
-		return new ContainerIdentityReference(namespace, terminology);
+	protected ContainerIdentityReference createIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		return new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 	}
-
+	
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
 		ContainerIdentityReference identityReference = (ContainerIdentityReference) removed;
@@ -20,5 +23,4 @@ public class ContainerIdentityReferenceProcessor implements SaxElementProcessor<
 			((Graph) top).setContainer(identityReference);
 		}
 	}
-
 }

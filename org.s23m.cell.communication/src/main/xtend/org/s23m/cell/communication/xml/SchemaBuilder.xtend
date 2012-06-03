@@ -15,6 +15,8 @@ import org.s23m.cell.communication.xml.model.schema.Type
 import static org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants.*
 import static extension org.s23m.cell.communication.xml.NamespaceExtensions.*
 import static org.s23m.cell.communication.xml.NamespaceConstants.*
+import org.s23m.cell.communication.xml.model.schema.Attribute
+import java.util.List
 
 class SchemaBuilder {
 	
@@ -59,6 +61,14 @@ class SchemaBuilder {
 	
 	def complexType(String name, Extension ext) {
 		store(new ComplexType(NS_S23M, name, ext))
+	}
+	
+	def complexType(String name, List<Attribute> attributes) {
+		store(new ComplexType(NS_S23M, name, attributes))
+	}
+	
+	def attribute(String name, SimpleType type) {
+		new Attribute(name, type)
 	}
 	
 	def element(String name, Type type) {

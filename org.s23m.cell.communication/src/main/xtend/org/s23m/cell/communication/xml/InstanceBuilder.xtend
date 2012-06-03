@@ -31,8 +31,6 @@ import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.eclipse.xtext.xbase.lib.Pair
 import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference
-import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference
-import org.s23m.cell.communication.xml.model.schemainstance.Identifier
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 
 class InstanceBuilder {
@@ -318,7 +316,7 @@ class InstanceBuilder {
 	}
 	
 	def semanticIdentity(Pair<String, String> pair) {
-		initialise(new SemanticIdentityIdentityReference(namespace, terminology), pair)
+		new SemanticIdentityIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def category(Set set) {
@@ -327,7 +325,7 @@ class InstanceBuilder {
 	}
 	
 	def category(Pair<String, String> pair) {
-		initialise(new CategoryIdentityReference(namespace, terminology), pair)
+		new CategoryIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def container(Set set) {
@@ -336,7 +334,7 @@ class InstanceBuilder {
 	}
 	
 	def container(Pair<String, String> pair) {
-		initialise(new ContainerIdentityReference(namespace, terminology), pair)
+		new ContainerIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def isAbstract(Set set) {
@@ -345,7 +343,7 @@ class InstanceBuilder {
 	}
 	
 	def isAbstract(Pair<String, String> pair) {
-		initialise(new IsAbstractIdentityReference(namespace, terminology), pair)
+		new IsAbstractIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def from(Set set) {
@@ -354,7 +352,7 @@ class InstanceBuilder {
 	}
 	
 	def from(Pair<String, String> pair) {
-		initialise(new FromIdentityReference(namespace, terminology), pair)
+		new FromIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def to(Set set) {
@@ -363,7 +361,7 @@ class InstanceBuilder {
 	}
 	
 	def to(Pair<String, String> pair) {
-		initialise(new ToIdentityReference(namespace, terminology), pair)
+		new ToIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def maxCardinality(Set set) {
@@ -372,7 +370,7 @@ class InstanceBuilder {
 	}
 	
 	def maxCardinality(Pair<String, String> pair) {
-		initialise(new MaximumCardinalityIdentityReference(namespace, terminology), pair)
+		new MaximumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def minCardinality(Set set) {
@@ -381,7 +379,7 @@ class InstanceBuilder {
 	}
 	
 	def minCardinality(Pair<String, String> pair) {
-		initialise(new MinimumCardinalityIdentityReference(namespace, terminology), pair)
+		new MinimumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def isContainer(Set set) {
@@ -390,7 +388,7 @@ class InstanceBuilder {
 	}
 	
 	def isContainer(Pair<String, String> pair) {
-		initialise(new IsContainerIdentityReference(namespace, terminology), pair)
+		new IsContainerIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 	
 	def isNavigable(Set set) {
@@ -399,19 +397,9 @@ class InstanceBuilder {
 	}
 	
 	def isNavigable(Pair<String, String> pair) {
-		initialise(new IsNavigableIdentityReference(namespace, terminology), pair)
+		new IsNavigableIdentityReference(namespace, terminology, pair.key, pair.value)
 	}
 
-	def private <T extends IdentityReference> initialise(T identityReference, Pair<String, String> pair) {
-		val urr = new UniqueRepresentationReference(namespace, terminology)
-		urr.setText(pair.key)
-		identityReference.setUniqueRepresentationReference(urr)
-		val identifier = new Identifier(namespace, terminology)
-		identifier.setText(pair.value)
-		identityReference.setIdentifier(identifier)
-		identityReference
-	}
-	
 	def private valueIdentityPair(Set set, Set variable) {
 		val retrievedValue = set.value(variable)
 		val identity = retrievedValue.identity

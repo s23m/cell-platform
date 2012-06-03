@@ -32,14 +32,17 @@ import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
+import org.xml.sax.Attributes;
 
-public class FromProcessor implements SaxElementProcessor<Node> {
+public class FromProcessor extends AbstractAttributeAwareProcessor<Node> {
 
 	@Override
-	public Node startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Node startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		// ambiguity - which "from" are we talking about?
 		if (top instanceof Visibility || top instanceof SuperSetReference) {
-			return new FromIdentityReference(namespace, terminology);
+			final String uniqueRepresentationReference = getUniqueRepresentationReferenceAttribute(attributes, terminology);
+			final String identifier = getIdentifierAttribute(attributes, terminology);
+			return new FromIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
 		} else if (top instanceof Edge) {
 			return EdgeEnd.fromEdgeEnd(namespace, terminology);
 		} else {

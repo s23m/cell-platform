@@ -46,17 +46,15 @@
 	<xsd:element name="function" type="s23m:function"/>
 
 	<xsd:complexType name="identityReference">
-		<xsd:sequence>
-			<xsd:element name="uniqueRepresentationReference" type="s23m:uuid"/>
-			<xsd:element name="identifier" type="s23m:uuid"/>
-		</xsd:sequence>		
+		<xsd:attribute name="uniqueRepresentationReference" type="s23m:uuid" use="required"/>
+		<xsd:attribute name="identifier" type="s23m:uuid" use="required"/>		
 	</xsd:complexType>
 
 	<xsd:complexType name="category">
 		<xsd:sequence>
 			<xsd:element ref="s23m:semanticIdentity"/>
 			<xsd:element ref="s23m:category"/>
-		</xsd:sequence>		
+		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:simpleType name="uuid">
@@ -196,6 +194,7 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
+	<!-- TODO change elements to attributes -->
 	<xsd:complexType name="identity">
 		<xsd:sequence>
 			<xsd:element name="identifier" type="s23m:uuid"/>

@@ -17,8 +17,6 @@ import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityRef
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
-import org.s23m.cell.communication.xml.model.schemainstance.Identifier;
-import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
@@ -30,7 +28,6 @@ import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
-import org.s23m.cell.communication.xml.model.schemainstance.UniqueRepresentationReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
@@ -376,9 +373,10 @@ public class InstanceBuilder {
   }
   
   public SemanticIdentityIdentityReference semanticIdentity(final Pair<String,String> pair) {
-    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology);
-    SemanticIdentityIdentityReference _initialise = this.<SemanticIdentityIdentityReference>initialise(_semanticIdentityIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _semanticIdentityIdentityReference;
   }
   
   public CategoryIdentityReference category(final Set set) {
@@ -395,9 +393,10 @@ public class InstanceBuilder {
   }
   
   public CategoryIdentityReference category(final Pair<String,String> pair) {
-    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology);
-    CategoryIdentityReference _initialise = this.<CategoryIdentityReference>initialise(_categoryIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _categoryIdentityReference;
   }
   
   public ContainerIdentityReference container(final Set set) {
@@ -414,9 +413,10 @@ public class InstanceBuilder {
   }
   
   public ContainerIdentityReference container(final Pair<String,String> pair) {
-    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology);
-    ContainerIdentityReference _initialise = this.<ContainerIdentityReference>initialise(_containerIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _containerIdentityReference;
   }
   
   public IsAbstractIdentityReference isAbstract(final Set set) {
@@ -431,9 +431,10 @@ public class InstanceBuilder {
   }
   
   public IsAbstractIdentityReference isAbstract(final Pair<String,String> pair) {
-    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology);
-    IsAbstractIdentityReference _initialise = this.<IsAbstractIdentityReference>initialise(_isAbstractIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _isAbstractIdentityReference;
   }
   
   public FromIdentityReference from(final Set set) {
@@ -449,9 +450,10 @@ public class InstanceBuilder {
   }
   
   public FromIdentityReference from(final Pair<String,String> pair) {
-    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology);
-    FromIdentityReference _initialise = this.<FromIdentityReference>initialise(_fromIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _fromIdentityReference;
   }
   
   public ToIdentityReference to(final Set set) {
@@ -467,9 +469,10 @@ public class InstanceBuilder {
   }
   
   public ToIdentityReference to(final Pair<String,String> pair) {
-    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology);
-    ToIdentityReference _initialise = this.<ToIdentityReference>initialise(_toIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _toIdentityReference;
   }
   
   public MaximumCardinalityIdentityReference maxCardinality(final Set set) {
@@ -484,9 +487,10 @@ public class InstanceBuilder {
   }
   
   public MaximumCardinalityIdentityReference maxCardinality(final Pair<String,String> pair) {
-    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology);
-    MaximumCardinalityIdentityReference _initialise = this.<MaximumCardinalityIdentityReference>initialise(_maximumCardinalityIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _maximumCardinalityIdentityReference;
   }
   
   public MinimumCardinalityIdentityReference minCardinality(final Set set) {
@@ -501,9 +505,10 @@ public class InstanceBuilder {
   }
   
   public MinimumCardinalityIdentityReference minCardinality(final Pair<String,String> pair) {
-    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology);
-    MinimumCardinalityIdentityReference _initialise = this.<MinimumCardinalityIdentityReference>initialise(_minimumCardinalityIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _minimumCardinalityIdentityReference;
   }
   
   public IsContainerIdentityReference isContainer(final Set set) {
@@ -518,9 +523,10 @@ public class InstanceBuilder {
   }
   
   public IsContainerIdentityReference isContainer(final Pair<String,String> pair) {
-    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology);
-    IsContainerIdentityReference _initialise = this.<IsContainerIdentityReference>initialise(_isContainerIdentityReference, pair);
-    return _initialise;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _isContainerIdentityReference;
   }
   
   public IsNavigableIdentityReference isNavigable(final Set set) {
@@ -535,27 +541,10 @@ public class InstanceBuilder {
   }
   
   public IsNavigableIdentityReference isNavigable(final Pair<String,String> pair) {
-    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology);
-    IsNavigableIdentityReference _initialise = this.<IsNavigableIdentityReference>initialise(_isNavigableIdentityReference, pair);
-    return _initialise;
-  }
-  
-  private <T extends IdentityReference> T initialise(final T identityReference, final Pair<String,String> pair) {
-    T _xblockexpression = null;
-    {
-      UniqueRepresentationReference _uniqueRepresentationReference = new UniqueRepresentationReference(this.namespace, this.terminology);
-      final UniqueRepresentationReference urr = _uniqueRepresentationReference;
-      String _key = pair.getKey();
-      urr.setText(_key);
-      identityReference.setUniqueRepresentationReference(urr);
-      Identifier _identifier = new Identifier(this.namespace, this.terminology);
-      final Identifier identifier = _identifier;
-      String _value = pair.getValue();
-      identifier.setText(_value);
-      identityReference.setIdentifier(identifier);
-      _xblockexpression = (identityReference);
-    }
-    return _xblockexpression;
+    String _key = pair.getKey();
+    String _value = pair.getValue();
+    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, _key, _value);
+    return _isNavigableIdentityReference;
   }
   
   private Pair<String,String> valueIdentityPair(final Set set, final Set variable) {

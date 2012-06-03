@@ -29,7 +29,10 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 
 public class IsNavigableIdentityReference extends IdentityReference {
 
-	public IsNavigableIdentityReference(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.isNavigable());
+	public IsNavigableIdentityReference(Namespace namespace,
+			XmlSchemaTerminology terminology,
+			String uniqueRepresentationReference,
+			String identifier) {
+		super(namespace, terminology, terminology.isNavigable(), uniqueRepresentationReference, identifier);
 	}
 }

@@ -29,11 +29,12 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
+import org.xml.sax.Attributes;
 
 public class VisibilityProcessor implements SaxElementProcessor<Visibility> {
 
 	@Override
-	public Visibility startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public Visibility startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return new Visibility(namespace, terminology);
 	}
 

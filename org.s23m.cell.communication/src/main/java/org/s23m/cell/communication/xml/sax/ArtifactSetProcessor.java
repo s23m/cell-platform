@@ -29,6 +29,7 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.xml.sax.Attributes;
 
 public class ArtifactSetProcessor implements SaxElementProcessor<ArtifactSet> {
 	
@@ -39,7 +40,7 @@ public class ArtifactSetProcessor implements SaxElementProcessor<ArtifactSet> {
 	}
 
 	@Override
-	public ArtifactSet startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top) {
+	public ArtifactSet startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
 		return builder.build();
 	}
 
