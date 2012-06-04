@@ -194,14 +194,13 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<!-- TODO change elements to attributes -->
 	<xsd:complexType name="identity">
+		<xsd:attribute name="identifier" type="s23m:uuid"/>
+		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="pluralName" type="xsd:string"/>
+		<xsd:attribute name="technicalName" type="xsd:string"/>		
 		<xsd:sequence>
-			<xsd:element name="identifier" type="s23m:uuid"/>
-			<xsd:element name="name" type="xsd:string"/>
-			<xsd:element name="pluralName" type="xsd:string"/>
 			<xsd:element name="payload" type="xsd:string"/>
-			<xsd:element name="technicalName" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

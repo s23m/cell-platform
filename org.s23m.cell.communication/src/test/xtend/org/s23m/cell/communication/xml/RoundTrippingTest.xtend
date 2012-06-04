@@ -37,27 +37,24 @@ class RoundTrippingTest extends TestCase {
 	
 	def private ArtifactSet deserialise(String xml) {
 		val schemaFactory = new XmlSchemaFactory()
-		val terminology = DefaultXmlSchemaTerminology::getInstance()
+		val terminology = DefaultXmlSchemaTerminology::getInstance
 		val schema = schemaFactory.createSchema(terminology)
 		
-		val factory = SAXParserFactory::newInstance()
+		val factory = SAXParserFactory::newInstance
 		factory.setNamespaceAware(true)
 		// http://tutorials.jenkov.com/java-xml/sax-schema-validation.html
 		factory.setSchema(schema)
 	    try {
-	        val saxParser = factory.newSAXParser()
+	        val saxParser = factory.newSAXParser
 			val is = new ByteArrayInputStream(xml.getBytes(Charsets::UTF_8))
 			val handler = new ArtifactSetElementHandler(NS_S23M, terminology, "ENGLISH")
 			saxParser.parse(is, handler)
 			handler.result
-	    }
-	    catch(ParserConfigurationException e1) {
+	    } catch(ParserConfigurationException e1) {
 	    	throw new IllegalStateException("De-serialisation failed", e1)
-	    }
-	    catch(SAXException e1) {
+	    } catch(SAXException e1) {
 	    	throw new IllegalStateException("De-serialisation failed", e1)
-	    }
-	    catch(IOException e) {
+	    } catch(IOException e) {
 	    	throw new IllegalStateException("De-serialisation failed", e)
 	    }
 	}

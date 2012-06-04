@@ -30,7 +30,6 @@ import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.eclipse.xtext.xbase.lib.Pair
-import org.s23m.cell.communication.xml.model.schemainstance.IdentityReference
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 
 class InstanceBuilder {

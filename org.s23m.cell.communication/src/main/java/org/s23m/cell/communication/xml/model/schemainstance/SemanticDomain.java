@@ -24,12 +24,48 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schemainstance;
 
-import org.s23m.cell.communication.xml.model.dom.BasicCompositeNode;
-import org.s23m.cell.communication.xml.model.dom.Namespace;
+import java.util.List;
 
-public class SemanticDomain extends BasicCompositeNode {
+import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
+import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.dom.Node;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+public class SemanticDomain extends AbstractCompositeNode {
+	
+	private Model model;
+	
+	private final List<Identity> identityList;
 
 	public SemanticDomain(Namespace namespace, String name) {
 		super(namespace, name);
+		this.identityList = Lists.newArrayList();
+	}
+	
+	public void setModel(Model model) {
+		this.model = model;
+	}
+	
+	public Model getModel() {
+		return model;
+	}
+	
+	public void addIdentity(Identity identity) {
+		identityList.add(identity);
+	}
+	
+	public List<Identity> getIdentityList() {
+		return identityList;
+	}
+
+	@Override
+	public Iterable<? extends Node> getChildren() {
+		return Iterables.concat(
+			ImmutableList.of(model),
+			identityList	
+		);
 	}
 }
