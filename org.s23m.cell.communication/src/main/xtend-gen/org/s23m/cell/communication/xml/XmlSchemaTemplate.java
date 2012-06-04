@@ -252,33 +252,24 @@ public class XmlSchemaTemplate {
       Element _element_4 = builder.element(model, modelComplexType);
       final Element modelElement = _element_4;
       String _identity = terminology.identity();
+      String _identifier_1 = terminology.identifier();
+      Attribute _attribute_2 = builder.attribute(_identifier_1, uuid);
+      String _name = terminology.name();
+      Attribute _attribute_3 = builder.attribute(_name, uuid);
+      String _pluralName = terminology.pluralName();
+      Attribute _attribute_4 = builder.attribute(_pluralName, uuid);
+      String _technicalName = terminology.technicalName();
+      Attribute _attribute_5 = builder.attribute(_technicalName, uuid);
+      List<Attribute> _asList_1 = Arrays.<Attribute>asList(_attribute_2, _attribute_3, _attribute_4, _attribute_5);
       final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
-            {
-              List<Node> _children = it.getChildren();
-              String _identifier = terminology.identifier();
-              Element _element = builder.element(_identifier, uuid);
-              CollectionExtensions.<Element>operator_add(_children, _element);
-              List<Node> _children_1 = it.getChildren();
-              String _name = terminology.name();
-              Element _element_1 = builder.element(_name, DataType.STRING);
-              CollectionExtensions.<Element>operator_add(_children_1, _element_1);
-              List<Node> _children_2 = it.getChildren();
-              String _pluralName = terminology.pluralName();
-              Element _element_2 = builder.element(_pluralName, DataType.STRING);
-              CollectionExtensions.<Element>operator_add(_children_2, _element_2);
-              List<Node> _children_3 = it.getChildren();
-              String _payload = terminology.payload();
-              Element _element_3 = builder.element(_payload, DataType.STRING);
-              CollectionExtensions.<Element>operator_add(_children_3, _element_3);
-              List<Node> _children_4 = it.getChildren();
-              String _technicalName = terminology.technicalName();
-              Element _element_4 = builder.element(_technicalName, DataType.STRING);
-              CollectionExtensions.<Element>operator_add(_children_4, _element_4);
-            }
+            List<Node> _children = it.getChildren();
+            String _payload = terminology.payload();
+            Element _element = builder.element(_payload, DataType.STRING);
+            CollectionExtensions.<Element>operator_add(_children, _element);
           }
         };
-      ComplexType _complexType_13 = builder.complexType(_identity, _function_9);
+      ComplexType _complexType_13 = builder.complexType(_identity, _asList_1, _function_9);
       final ComplexType identityComplexType = _complexType_13;
       String _semanticDomain = terminology.semanticDomain();
       final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {

@@ -142,13 +142,17 @@ class XmlSchemaTemplate {
 		
 		val modelElement = builder.element(model, modelComplexType)
 		
-		val identityComplexType = builder.complexType(terminology.identity, [
-			children += builder.element(terminology.identifier, uuid)
-			children += builder.element(terminology.name, STRING)
-			children += builder.element(terminology.pluralName, STRING)
-			children += builder.element(terminology.payload, STRING)
-			children += builder.element(terminology.technicalName, STRING)
-		])
+		val identityComplexType = builder.complexType(terminology.identity,
+			asList(
+				builder.attribute(terminology.identifier, uuid),
+				// TODO encode as xsd:string instead 
+				builder.attribute(terminology.name, uuid),
+				builder.attribute(terminology.pluralName, uuid),			
+				builder.attribute(terminology.technicalName, uuid)
+			), [
+				children += builder.element(terminology.payload, STRING)
+			]
+		)
 
 		/* Encoding of semantic domain artifacts */
 		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, [

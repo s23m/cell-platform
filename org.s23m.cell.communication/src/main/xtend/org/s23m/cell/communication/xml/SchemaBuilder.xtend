@@ -67,6 +67,10 @@ class SchemaBuilder {
 		store(new ComplexType(NS_S23M, name, attributes))
 	}
 	
+	def complexType(String name, List<Attribute> attributes, (Sequence)=>void initialiser) {
+		store(new ComplexType(NS_S23M, name, attributes, sequence(initialiser)))
+	}
+	
 	def attribute(String name, SimpleType type) {
 		new Attribute(name, type)
 	}

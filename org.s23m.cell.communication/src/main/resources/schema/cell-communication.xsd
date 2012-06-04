@@ -195,12 +195,12 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="identity">
+		<xsd:sequence>
+			<xsd:element name="payload" type="xsd:string"/>
+		</xsd:sequence>
 		<xsd:attribute name="identifier" type="s23m:uuid"/>
 		<xsd:attribute name="name" type="xsd:string"/>
 		<xsd:attribute name="pluralName" type="xsd:string"/>
 		<xsd:attribute name="technicalName" type="xsd:string"/>		
-		<xsd:sequence>
-			<xsd:element name="payload" type="xsd:string"/>
-		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

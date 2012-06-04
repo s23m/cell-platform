@@ -51,4 +51,12 @@ public final class ComplexType extends AbstractType {
 			addChild(attribute);
 		}
 	}
+	
+	public ComplexType(Namespace targetNamespace, String nameAttribute, List<Attribute> attributes, Sequence sequence) {
+		super(targetNamespace, NAME, nameAttribute);
+		addChild(sequence);
+		for (Attribute attribute: attributes) {
+			addChild(attribute);
+		}
+	}
 }

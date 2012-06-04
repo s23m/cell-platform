@@ -83,6 +83,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.container(), new ContainerIdentityReferenceProcessor())
 	        .put(terminology.edge(), new EdgeProcessor())
 	        .put(terminology.from(), new FromProcessor())
+	        .put(terminology.identity(), new IdentityProcessor())
 	        .put(terminology.isAbstract(), new IsAbstractIdentityReferenceProcessor())
 	        .put(terminology.isContainer(), new IsContainerIdentityReferenceProcessor())
 	        .put(terminology.isNavigable(), new IsNavigableIdentityReferenceProcessor())

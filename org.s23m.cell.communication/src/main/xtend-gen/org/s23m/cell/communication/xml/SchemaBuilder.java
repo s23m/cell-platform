@@ -122,6 +122,13 @@ public class SchemaBuilder {
     return _store;
   }
   
+  public ComplexType complexType(final String name, final List<Attribute> attributes, final Procedure1<? super Sequence> initialiser) {
+    Sequence _sequence = SchemaBuilder.sequence(initialiser);
+    ComplexType _complexType = new ComplexType(NamespaceConstants.NS_S23M, name, attributes, _sequence);
+    ComplexType _store = this.<ComplexType>store(_complexType);
+    return _store;
+  }
+  
   public Attribute attribute(final String name, final SimpleType type) {
     Attribute _attribute = new Attribute(name, type);
     return _attribute;

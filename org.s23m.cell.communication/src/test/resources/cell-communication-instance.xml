@@ -114,5 +114,18 @@
 			</s23m:parameter>			
 		</s23m:query>
 	</s23m:model>
-	<!-- s23m:semanticDomain omitted -->
+	
+	<s23m:semanticDomain>
+		<s23m:model>
+			<s23m:semanticIdentity uniqueRepresentationReference="1" identifier="2"/>
+			<s23m:category uniqueRepresentationReference="3" identifier="4"/>
+			
+			<s23m:container uniqueRepresentationReference="5" identifier="6"/>
+			<s23m:isAbstract uniqueRepresentationReference="7" identifier="8"/>
+		</s23m:model>
+		<!-- minOccurs="0" maxOccurs="unbounded" -->
+		<s23m:identity identifier="identifier" name="name" pluralName="pluralName" technicalName="technicalName">
+			<s23m:payload>Some text</s23m:payload>
+		</s23m:identity>
+	</s23m:semanticDomain>
 </s23m:artifactSet>
