@@ -27,7 +27,6 @@ package org.s23m.cell.platform;
 
 import org.s23m.cell.api.KernelSets;
 import org.s23m.cell.api.ProperClasses;
-import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
 import org.s23m.cell.platform.models.CellPlatform;
 
@@ -61,8 +60,8 @@ import org.s23m.cell.platform.models.CellPlatform;
  */
 public class S23MPlatform {
 
-	public static final KernelSets coreSets = new KernelSets(F_Instantiation.identityFactory);
-	public static final ProperClasses coreGraphs = new ProperClasses();
+	//public static final KernelSets coreSets = new KernelSets(F_Instantiation.identityFactory);
+	//public static final ProperClasses coreGraphs = new ProperClasses();
 
 	/**
 	 * COMMANDS
@@ -88,13 +87,18 @@ public class S23MPlatform {
 		};
 		cellPlatformIsInitialized = true;
 	}
-	public static void bootTemplate() {
-		completeCellPlatformInitialization();
-	}
+	//public static void bootTemplate() {
+	//	completeCellPlatformInitialization();
+	//}
 	public static void boot() {
-		completeCellKernelInitialization();
+		completeCellPlatformInitialization();
+		//completeCellKernelInitialization();
 	}
 	//public static final CoreGraphs coreGraphs = org.s23m.cell.G.coreGraphs;
 	private static boolean cellPlatformIsInitialized = false;
-	}
+
+	public static final KernelSets coreSets = org.s23m.cell.S23MKernel.coreSets;
+	public static final ProperClasses coreGraphs = org.s23m.cell.S23MKernel.coreGraphs;
+
+}
 

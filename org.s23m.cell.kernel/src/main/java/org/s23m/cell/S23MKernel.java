@@ -92,4 +92,5 @@ public class S23MKernel {
 	public static void boot() {
 		completeCellKernelInitialization();
 	}
+
 }

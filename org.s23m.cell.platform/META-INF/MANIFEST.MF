@@ -9,5 +9,6 @@ Import-Package: org.s23m.cell,
  org.s23m.cell.impl
 Export-Package: org.s23m.cell.platform,
  org.s23m.cell.platform.api,
- org.s23m.cell.platform.models
+ org.s23m.cell.platform.models,
+ org.s23m.cell.platform.testfoundation
 Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0"

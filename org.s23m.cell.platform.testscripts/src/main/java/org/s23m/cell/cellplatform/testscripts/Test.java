@@ -47,7 +47,7 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		org.s23m.cell.platform.S23MPlatform.bootTemplate();
+		org.s23m.cell.platform.S23MPlatform.boot();
 		int kernelComplexity = identityFactory.kernelComplexity();
 		int inMemoryComplexity = identityFactory.inMemoryComplexity();
 		int inMemorySetCount = org.s23m.cell.api.Query.inMemorySets().size();

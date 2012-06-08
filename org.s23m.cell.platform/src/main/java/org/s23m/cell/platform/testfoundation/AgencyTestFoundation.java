@@ -44,8 +44,12 @@ import org.s23m.cell.platform.models.ValidityInterval;
 
 public class AgencyTestFoundation {
 
+	public static Set ithanku;
+	public static Set object_cell;
+
+
 	public static Set instantiateFeature() {
-		final Set ithanku = org.s23m.cell.platform.api.Instantiation.addAgent("i thank u", "set of i thank u");
+		ithanku = org.s23m.cell.platform.api.Instantiation.addAgent("i thank u", "set of i thank u");
 		final Set dev = org.s23m.cell.platform.api.Instantiation.addStage(ithanku, "development", "set of development");
 		final Set test = org.s23m.cell.platform.api.Instantiation.addStage(ithanku, "test", "set of test");
 		final Set prod = org.s23m.cell.platform.api.Instantiation.addStage(ithanku, "production", "set of production");
@@ -87,7 +91,7 @@ public class AgencyTestFoundation {
 		final Set object1 = cellMeta.addConcrete(Language.word, object);
 		final Set object2 = english.addConcrete(Language.word, object);
 		final Set object3 = deutsch.addConcrete(Language.word, gegenstand);
-		final Set object_cell = dev.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, objectCellSI);
+		object_cell = dev.filter(CellEngineering.organization).extractFirst().addConcrete(Organization.cell, objectCellSI);
 
 		org.s23m.cell.platform.api.Instantiation.arrow(coreGraphs.visibility, dev.filter(CellEngineering.organization).extractFirst(), object_cell);
 
