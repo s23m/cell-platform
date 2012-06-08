@@ -91,7 +91,9 @@ public class S23MPlatform {
 	//	completeCellPlatformInitialization();
 	//}
 	public static void boot() {
-		completeCellPlatformInitialization();
+		if (!cellPlatformIsInitialized) {
+			completeCellPlatformInitialization();
+		}
 		//completeCellKernelInitialization();
 	}
 	//public static final CoreGraphs coreGraphs = org.s23m.cell.G.coreGraphs;
