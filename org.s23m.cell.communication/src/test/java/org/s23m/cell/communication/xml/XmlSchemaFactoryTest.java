@@ -40,6 +40,7 @@ import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants;
+import org.s23m.cell.platform.S23MPlatform;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -105,7 +106,7 @@ public class XmlSchemaFactoryTest extends TestCase {
 	private Document document;
 	
 	public XmlSchemaFactoryTest() {
-		S23MKernel.boot();
+		S23MPlatform.boot();
 		
 		kernelTypes = Arrays.asList(Query.edge, Query.graph, Query.vertex, Query.visibility);
 		
