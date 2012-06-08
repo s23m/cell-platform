@@ -22,14 +22,12 @@
  * Contributor(s):
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
-
 package org.s23m.cell.platform;
 
 import org.s23m.cell.api.KernelSets;
 import org.s23m.cell.api.ProperClasses;
 import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
 import org.s23m.cell.platform.models.CellPlatform;
-
 
 /**
  * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel
@@ -56,12 +54,13 @@ import org.s23m.cell.platform.models.CellPlatform;
  * 		to invoke the raiseError and arrow methods in the kernel.
  *
  * All extensions must use F_SemanticStateOfInMemoryModel's CoreSets and KernelOrderedSets.
- *
  */
 public class S23MPlatform {
 
-	//public static final KernelSets coreSets = new KernelSets(F_Instantiation.identityFactory);
-	//public static final ProperClasses coreGraphs = new ProperClasses();
+	private static boolean cellPlatformIsInitialized = false;
+
+	public static final KernelSets coreSets = org.s23m.cell.S23MKernel.coreSets;
+	public static final ProperClasses coreGraphs = org.s23m.cell.S23MKernel.coreGraphs;
 
 	/**
 	 * COMMANDS
@@ -84,23 +83,13 @@ public class S23MPlatform {
 		org.s23m.cell.S23MKernel.completeCellKernelInitialization();
 		if (!org.s23m.cell.SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			CellPlatform.instantiateFeature();
-		};
+		}
 		cellPlatformIsInitialized = true;
 	}
-	//public static void bootTemplate() {
-	//	completeCellPlatformInitialization();
-	//}
+
 	public static void boot() {
 		if (!cellPlatformIsInitialized) {
 			completeCellPlatformInitialization();
 		}
-		//completeCellKernelInitialization();
 	}
-	//public static final CoreGraphs coreGraphs = org.s23m.cell.G.coreGraphs;
-	private static boolean cellPlatformIsInitialized = false;
-
-	public static final KernelSets coreSets = org.s23m.cell.S23MKernel.coreSets;
-	public static final ProperClasses coreGraphs = org.s23m.cell.S23MKernel.coreGraphs;
-
 }
-
