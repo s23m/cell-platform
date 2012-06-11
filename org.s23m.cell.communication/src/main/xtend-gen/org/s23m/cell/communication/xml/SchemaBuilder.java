@@ -129,8 +129,13 @@ public class SchemaBuilder {
     return _store;
   }
   
-  public Attribute attribute(final String name, final SimpleType type) {
-    Attribute _attribute = new Attribute(name, type);
+  public Attribute mandatoryAttribute(final String name, final SimpleType type) {
+    Attribute _attribute = new Attribute(name, type, true);
+    return _attribute;
+  }
+  
+  public Attribute optionalAttribute(final String name, final SimpleType type) {
+    Attribute _attribute = new Attribute(name, type, false);
     return _attribute;
   }
   

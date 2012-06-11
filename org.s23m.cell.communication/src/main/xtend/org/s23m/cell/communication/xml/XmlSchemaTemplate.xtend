@@ -63,8 +63,8 @@ class XmlSchemaTemplate {
 		val uuid = builder.simpleType(terminology.uuid, STRING)
 		
 		val identityReference = builder.complexType(terminology.identityReference, asList(
-			builder.attribute(terminology.uniqueRepresentationReference, uuid),
-			builder.attribute(terminology.identifier, uuid)
+			builder.mandatoryAttribute(terminology.uniqueRepresentationReference, uuid),
+			builder.mandatoryAttribute(terminology.identifier, uuid)
 		))
 		
 		val isAbstractElement = builder.element(isAbstract, identityReference)
@@ -144,11 +144,11 @@ class XmlSchemaTemplate {
 		
 		val identityComplexType = builder.complexType(terminology.identity,
 			asList(
-				builder.attribute(terminology.identifier, uuid),
+				builder.mandatoryAttribute(terminology.identifier, uuid),
 				// TODO encode as xsd:string instead 
-				builder.attribute(terminology.name, uuid),
-				builder.attribute(terminology.pluralName, uuid),			
-				builder.attribute(terminology.technicalName, uuid)
+				builder.mandatoryAttribute(terminology.name, uuid),
+				builder.mandatoryAttribute(terminology.pluralName, uuid),			
+				builder.mandatoryAttribute(terminology.technicalName, uuid)
 			), [
 				children += builder.element(terminology.payload, STRING)
 			]

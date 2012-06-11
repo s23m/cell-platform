@@ -32,14 +32,16 @@ public class Attribute extends AbstractLeafNode {
 	private final String name;
 	private final SimpleType type;
 
-	public Attribute(String name, SimpleType type) {
+	public Attribute(String name, SimpleType type, boolean mandatory) {
 		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, "attribute");
 		this.name = name;
 		this.type = type;
 		
 		setAttribute("name", name);
 		setAttribute("type", type.getIdentifier());
-		setAttribute("use", "required");
+		if (mandatory) {
+			setAttribute("use", "required");
+		}
 	}
 
 	public String getNameAttribute() {

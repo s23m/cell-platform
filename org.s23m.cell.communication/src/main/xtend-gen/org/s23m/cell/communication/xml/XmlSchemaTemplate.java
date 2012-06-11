@@ -70,10 +70,10 @@ public class XmlSchemaTemplate {
       final SimpleType uuid = _simpleType;
       String _identityReference = terminology.identityReference();
       String _uniqueRepresentationReference = terminology.uniqueRepresentationReference();
-      Attribute _attribute = builder.attribute(_uniqueRepresentationReference, uuid);
+      Attribute _mandatoryAttribute = builder.mandatoryAttribute(_uniqueRepresentationReference, uuid);
       String _identifier = terminology.identifier();
-      Attribute _attribute_1 = builder.attribute(_identifier, uuid);
-      List<Attribute> _asList = Arrays.<Attribute>asList(_attribute, _attribute_1);
+      Attribute _mandatoryAttribute_1 = builder.mandatoryAttribute(_identifier, uuid);
+      List<Attribute> _asList = Arrays.<Attribute>asList(_mandatoryAttribute, _mandatoryAttribute_1);
       ComplexType _complexType = builder.complexType(_identityReference, _asList);
       final ComplexType identityReference = _complexType;
       Element _element = builder.element(isAbstract, identityReference);
@@ -253,14 +253,14 @@ public class XmlSchemaTemplate {
       final Element modelElement = _element_4;
       String _identity = terminology.identity();
       String _identifier_1 = terminology.identifier();
-      Attribute _attribute_2 = builder.attribute(_identifier_1, uuid);
+      Attribute _mandatoryAttribute_2 = builder.mandatoryAttribute(_identifier_1, uuid);
       String _name = terminology.name();
-      Attribute _attribute_3 = builder.attribute(_name, uuid);
+      Attribute _mandatoryAttribute_3 = builder.mandatoryAttribute(_name, uuid);
       String _pluralName = terminology.pluralName();
-      Attribute _attribute_4 = builder.attribute(_pluralName, uuid);
+      Attribute _mandatoryAttribute_4 = builder.mandatoryAttribute(_pluralName, uuid);
       String _technicalName = terminology.technicalName();
-      Attribute _attribute_5 = builder.attribute(_technicalName, uuid);
-      List<Attribute> _asList_1 = Arrays.<Attribute>asList(_attribute_2, _attribute_3, _attribute_4, _attribute_5);
+      Attribute _mandatoryAttribute_5 = builder.mandatoryAttribute(_technicalName, uuid);
+      List<Attribute> _asList_1 = Arrays.<Attribute>asList(_mandatoryAttribute_2, _mandatoryAttribute_3, _mandatoryAttribute_4, _mandatoryAttribute_5);
       final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             List<Node> _children = it.getChildren();

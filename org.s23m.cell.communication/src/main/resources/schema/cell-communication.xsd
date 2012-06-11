@@ -46,8 +46,9 @@
 	<xsd:element name="function" type="s23m:function"/>
 
 	<xsd:complexType name="identityReference">
+		<xsd:attribute name="name" type="xsd:string"/>
 		<xsd:attribute name="uniqueRepresentationReference" type="s23m:uuid" use="required"/>
-		<xsd:attribute name="identifier" type="s23m:uuid" use="required"/>		
+		<xsd:attribute name="identifier" type="s23m:uuid" use="required"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="category">

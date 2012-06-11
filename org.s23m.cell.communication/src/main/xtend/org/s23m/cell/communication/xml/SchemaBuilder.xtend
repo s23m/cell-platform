@@ -71,8 +71,12 @@ class SchemaBuilder {
 		store(new ComplexType(NS_S23M, name, attributes, sequence(initialiser)))
 	}
 	
-	def attribute(String name, SimpleType type) {
-		new Attribute(name, type)
+	def mandatoryAttribute(String name, SimpleType type) {
+		new Attribute(name, type, true)
+	}
+	
+	def optionalAttribute(String name, SimpleType type) {
+		new Attribute(name, type, false)
 	}
 	
 	def element(String name, Type type) {
