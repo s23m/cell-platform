@@ -9,7 +9,7 @@ import org.s23m.cell.communication.xml.model.schema.ElementReference
 import org.s23m.cell.communication.xml.model.schema.Extension
 import org.s23m.cell.communication.xml.model.schema.Schema
 import org.s23m.cell.communication.xml.model.schema.Sequence
-import org.s23m.cell.communication.xml.model.schema.SimpleType
+import org.s23m.cell.communication.xml.model.schema.ConstrainedSimpleType
 import org.s23m.cell.communication.xml.model.schema.Type
 
 import static org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants.*
@@ -17,6 +17,7 @@ import static extension org.s23m.cell.communication.xml.NamespaceExtensions.*
 import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import org.s23m.cell.communication.xml.model.schema.Attribute
 import java.util.List
+import org.s23m.cell.communication.xml.model.schema.SimpleType
 
 class SchemaBuilder {
 	
@@ -52,7 +53,7 @@ class SchemaBuilder {
 	}
 	
 	def simpleType(String nameAttribute, DataType restrictionDataType) {
-		store(new SimpleType(NS_S23M, nameAttribute, restrictionDataType))
+		store(new org.s23m.cell.communication.xml.model.schema.ConstrainedSimpleType(NS_S23M, nameAttribute, restrictionDataType))
 	}
 		
 	def complexType(String name, (Sequence)=>void initialiser) {

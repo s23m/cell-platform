@@ -13,6 +13,7 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schema.Attribute;
 import org.s23m.cell.communication.xml.model.schema.Cardinality;
 import org.s23m.cell.communication.xml.model.schema.ComplexType;
+import org.s23m.cell.communication.xml.model.schema.ConstrainedSimpleType;
 import org.s23m.cell.communication.xml.model.schema.DataType;
 import org.s23m.cell.communication.xml.model.schema.Element;
 import org.s23m.cell.communication.xml.model.schema.ElementReference;
@@ -97,9 +98,9 @@ public class SchemaBuilder {
     return _xblockexpression;
   }
   
-  public SimpleType simpleType(final String nameAttribute, final DataType restrictionDataType) {
-    SimpleType _simpleType = new SimpleType(NamespaceConstants.NS_S23M, nameAttribute, restrictionDataType);
-    SimpleType _store = this.<SimpleType>store(_simpleType);
+  public ConstrainedSimpleType simpleType(final String nameAttribute, final DataType restrictionDataType) {
+    ConstrainedSimpleType _constrainedSimpleType = new ConstrainedSimpleType(NamespaceConstants.NS_S23M, nameAttribute, restrictionDataType);
+    ConstrainedSimpleType _store = this.<ConstrainedSimpleType>store(_constrainedSimpleType);
     return _store;
   }
   

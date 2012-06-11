@@ -10,13 +10,13 @@ import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schema.Attribute;
 import org.s23m.cell.communication.xml.model.schema.Cardinality;
 import org.s23m.cell.communication.xml.model.schema.ComplexType;
+import org.s23m.cell.communication.xml.model.schema.ConstrainedSimpleType;
 import org.s23m.cell.communication.xml.model.schema.DataType;
 import org.s23m.cell.communication.xml.model.schema.Element;
 import org.s23m.cell.communication.xml.model.schema.ElementReference;
 import org.s23m.cell.communication.xml.model.schema.Extension;
 import org.s23m.cell.communication.xml.model.schema.Schema;
 import org.s23m.cell.communication.xml.model.schema.Sequence;
-import org.s23m.cell.communication.xml.model.schema.SimpleType;
 
 @SuppressWarnings("all")
 public class XmlSchemaTemplate {
@@ -66,14 +66,16 @@ public class XmlSchemaTemplate {
       SchemaBuilder _schemaBuilder = new SchemaBuilder(artifactSet);
       final SchemaBuilder builder = _schemaBuilder;
       String _uuid = terminology.uuid();
-      SimpleType _simpleType = builder.simpleType(_uuid, DataType.STRING);
-      final SimpleType uuid = _simpleType;
+      ConstrainedSimpleType _simpleType = builder.simpleType(_uuid, DataType.STRING);
+      final ConstrainedSimpleType uuid = _simpleType;
       String _identityReference = terminology.identityReference();
+      String _name = terminology.name();
+      Attribute _optionalAttribute = builder.optionalAttribute(_name, DataType.STRING);
       String _uniqueRepresentationReference = terminology.uniqueRepresentationReference();
       Attribute _mandatoryAttribute = builder.mandatoryAttribute(_uniqueRepresentationReference, uuid);
       String _identifier = terminology.identifier();
       Attribute _mandatoryAttribute_1 = builder.mandatoryAttribute(_identifier, uuid);
-      List<Attribute> _asList = Arrays.<Attribute>asList(_mandatoryAttribute, _mandatoryAttribute_1);
+      List<Attribute> _asList = Arrays.<Attribute>asList(_optionalAttribute, _mandatoryAttribute, _mandatoryAttribute_1);
       ComplexType _complexType = builder.complexType(_identityReference, _asList);
       final ComplexType identityReference = _complexType;
       Element _element = builder.element(isAbstract, identityReference);
@@ -254,12 +256,12 @@ public class XmlSchemaTemplate {
       String _identity = terminology.identity();
       String _identifier_1 = terminology.identifier();
       Attribute _mandatoryAttribute_2 = builder.mandatoryAttribute(_identifier_1, uuid);
-      String _name = terminology.name();
-      Attribute _mandatoryAttribute_3 = builder.mandatoryAttribute(_name, uuid);
+      String _name_1 = terminology.name();
+      Attribute _mandatoryAttribute_3 = builder.mandatoryAttribute(_name_1, DataType.STRING);
       String _pluralName = terminology.pluralName();
-      Attribute _mandatoryAttribute_4 = builder.mandatoryAttribute(_pluralName, uuid);
+      Attribute _mandatoryAttribute_4 = builder.mandatoryAttribute(_pluralName, DataType.STRING);
       String _technicalName = terminology.technicalName();
-      Attribute _mandatoryAttribute_5 = builder.mandatoryAttribute(_technicalName, uuid);
+      Attribute _mandatoryAttribute_5 = builder.mandatoryAttribute(_technicalName, DataType.STRING);
       List<Attribute> _asList_1 = Arrays.<Attribute>asList(_mandatoryAttribute_2, _mandatoryAttribute_3, _mandatoryAttribute_4, _mandatoryAttribute_5);
       final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {

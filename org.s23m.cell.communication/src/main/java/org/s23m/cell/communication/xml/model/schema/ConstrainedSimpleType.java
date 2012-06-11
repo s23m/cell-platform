@@ -24,21 +24,11 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schema;
 
-import org.s23m.cell.communication.xml.model.dom.AbstractNode;
+import org.s23m.cell.communication.xml.model.dom.Namespace;
 
-/**
- * Used for built-in data types only
- */
-public class DataType extends AbstractNode implements SimpleType {
-	
-	public static final DataType STRING = new DataType("string");
+public class ConstrainedSimpleType extends AbstractType implements SimpleType {
 
-	private DataType(String name) {
-		super(XmlSchemaConstants.XML_SCHEMA_NAMESPACE, name);
-	}
-
-	@Override
-	public String getIdentifier() {
-		return createQualifiedName(getNamespace(), getName());
+	public ConstrainedSimpleType(Namespace targetNamespace, String nameAttribute, DataType restrictionDataType) {
+		super(targetNamespace, "simpleType", nameAttribute, new Restriction(restrictionDataType));
 	}
 }
