@@ -32,7 +32,8 @@ public class FromIdentityReference extends IdentityReference {
 	public FromIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.from(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.from(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

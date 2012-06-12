@@ -32,7 +32,8 @@ public class CategoryIdentityReference extends IdentityReference {
 	public CategoryIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.category(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.category(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

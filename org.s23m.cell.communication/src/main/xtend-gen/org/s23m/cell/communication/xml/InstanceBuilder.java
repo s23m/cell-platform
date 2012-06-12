@@ -6,6 +6,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.communication.xml.IdentityTriple;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -33,6 +34,8 @@ import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
 @SuppressWarnings("all")
 public class InstanceBuilder {
+  private boolean showNames = true;
+  
   private ArtifactSet artifactSet;
   
   private Namespace namespace;
@@ -372,68 +375,68 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
+  @Deprecated
   public SemanticIdentityIdentityReference semanticIdentity(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, _key, _value);
+    SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _semanticIdentityIdentityReference;
   }
   
   public CategoryIdentityReference category(final Set set) {
     CategoryIdentityReference _xblockexpression = null;
     {
-      Set _category = set.category();
-      Identity _identity = _category.identity();
-      final Identity identity = _identity;
-      Pair<String,String> _identityPair = this.identityPair(identity);
-      CategoryIdentityReference _category_1 = this.category(_identityPair);
-      _xblockexpression = (_category_1);
+      IdentityTriple _identityTriple = this.identityTriple(set);
+      final IdentityTriple identityTriple = _identityTriple;
+      CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_categoryIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public CategoryIdentityReference category(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, _key, _value);
+    CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _categoryIdentityReference;
   }
   
   public ContainerIdentityReference container(final Set set) {
     ContainerIdentityReference _xblockexpression = null;
     {
-      Set _container = set.container();
-      Identity _identity = _container.identity();
-      final Identity identity = _identity;
-      Pair<String,String> _identityPair = this.identityPair(identity);
-      ContainerIdentityReference _container_1 = this.container(_identityPair);
-      _xblockexpression = (_container_1);
+      IdentityTriple _identityTriple = this.identityTriple(set);
+      final IdentityTriple identityTriple = _identityTriple;
+      ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_containerIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public ContainerIdentityReference container(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, _key, _value);
+    ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _containerIdentityReference;
   }
   
   public IsAbstractIdentityReference isAbstract(final Set set) {
     IsAbstractIdentityReference _xblockexpression = null;
     {
-      Pair<String,String> _valueIdentityPair = this.valueIdentityPair(set, S23MSemanticDomains.isAbstract);
-      final Pair<String,String> pair = _valueIdentityPair;
-      IsAbstractIdentityReference _isAbstract = this.isAbstract(pair);
-      _xblockexpression = (_isAbstract);
+      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isAbstract);
+      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_isAbstractIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public IsAbstractIdentityReference isAbstract(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, _key, _value);
+    IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _isAbstractIdentityReference;
   }
   
@@ -441,18 +444,19 @@ public class InstanceBuilder {
     FromIdentityReference _xblockexpression = null;
     {
       Identity _identity = set.identity();
-      final Identity identity = _identity;
-      Pair<String,String> _identityPair = this.identityPair(identity);
-      FromIdentityReference _from = this.from(_identityPair);
-      _xblockexpression = (_from);
+      IdentityTriple _identityTriple = this.identityTriple(_identity);
+      final IdentityTriple identityTriple = _identityTriple;
+      FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_fromIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public FromIdentityReference from(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, _key, _value);
+    FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _fromIdentityReference;
   }
   
@@ -460,93 +464,99 @@ public class InstanceBuilder {
     ToIdentityReference _xblockexpression = null;
     {
       Identity _identity = set.identity();
-      final Identity identity = _identity;
-      Pair<String,String> _identityPair = this.identityPair(identity);
-      ToIdentityReference _to = this.to(_identityPair);
-      _xblockexpression = (_to);
+      IdentityTriple _identityTriple = this.identityTriple(_identity);
+      final IdentityTriple identityTriple = _identityTriple;
+      ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_toIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public ToIdentityReference to(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, _key, _value);
+    ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _toIdentityReference;
   }
   
   public MaximumCardinalityIdentityReference maxCardinality(final Set set) {
     MaximumCardinalityIdentityReference _xblockexpression = null;
     {
-      Pair<String,String> _valueIdentityPair = this.valueIdentityPair(set, S23MSemanticDomains.maxCardinality);
-      final Pair<String,String> pair = _valueIdentityPair;
-      MaximumCardinalityIdentityReference _maxCardinality = this.maxCardinality(pair);
-      _xblockexpression = (_maxCardinality);
+      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.maxCardinality);
+      final IdentityTriple identityTriple = _valueIdentityTriple;
+      MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_maximumCardinalityIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public MaximumCardinalityIdentityReference maxCardinality(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
+    MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _maximumCardinalityIdentityReference;
   }
   
   public MinimumCardinalityIdentityReference minCardinality(final Set set) {
     MinimumCardinalityIdentityReference _xblockexpression = null;
     {
-      Pair<String,String> _valueIdentityPair = this.valueIdentityPair(set, S23MSemanticDomains.minCardinality);
-      final Pair<String,String> pair = _valueIdentityPair;
-      MinimumCardinalityIdentityReference _minCardinality = this.minCardinality(pair);
-      _xblockexpression = (_minCardinality);
+      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.minCardinality);
+      final IdentityTriple identityTriple = _valueIdentityTriple;
+      MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_minimumCardinalityIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public MinimumCardinalityIdentityReference minCardinality(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value);
+    MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _minimumCardinalityIdentityReference;
   }
   
   public IsContainerIdentityReference isContainer(final Set set) {
     IsContainerIdentityReference _xblockexpression = null;
     {
-      Pair<String,String> _valueIdentityPair = this.valueIdentityPair(set, S23MSemanticDomains.isContainer);
-      final Pair<String,String> pair = _valueIdentityPair;
-      IsContainerIdentityReference _isContainer = this.isContainer(pair);
-      _xblockexpression = (_isContainer);
+      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isContainer);
+      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_isContainerIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public IsContainerIdentityReference isContainer(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, _key, _value);
+    IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _isContainerIdentityReference;
   }
   
   public IsNavigableIdentityReference isNavigable(final Set set) {
     IsNavigableIdentityReference _xblockexpression = null;
     {
-      Pair<String,String> _valueIdentityPair = this.valueIdentityPair(set, S23MSemanticDomains.isNavigable);
-      final Pair<String,String> pair = _valueIdentityPair;
-      IsNavigableIdentityReference _isNavigable = this.isNavigable(pair);
-      _xblockexpression = (_isNavigable);
+      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isNavigable);
+      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
+      _xblockexpression = (_isNavigableIdentityReference);
     }
     return _xblockexpression;
   }
   
+  @Deprecated
   public IsNavigableIdentityReference isNavigable(final Pair<String,String> pair) {
     String _key = pair.getKey();
     String _value = pair.getValue();
-    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, _key, _value);
+    IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, _key, _value, null);
     return _isNavigableIdentityReference;
   }
   
+  @Deprecated
   private Pair<String,String> valueIdentityPair(final Set set, final Set variable) {
     Pair<String,String> _xblockexpression = null;
     {
@@ -560,6 +570,50 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
+  private IdentityTriple valueIdentityTriple(final Set set, final Set variable) {
+    IdentityTriple _xblockexpression = null;
+    {
+      Set _value = set.value(variable);
+      final Set retrievedValue = _value;
+      Identity _identity = retrievedValue.identity();
+      final Identity identity = _identity;
+      IdentityTriple _identityTriple = this.identityTriple(identity);
+      _xblockexpression = (_identityTriple);
+    }
+    return _xblockexpression;
+  }
+  
+  private IdentityTriple identityTriple(final Set set) {
+    Set _category = set.category();
+    Identity _identity = _category.identity();
+    IdentityTriple _identityTriple = this.identityTriple(_identity);
+    return _identityTriple;
+  }
+  
+  private IdentityTriple identityTriple(final Identity identity) {
+    IdentityTriple _xblockexpression = null;
+    {
+      UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
+      String _uuid = this.uuid(_uniqueRepresentationReference);
+      final String uniqueRepresentationReference = _uuid;
+      UUID _identifier = identity.identifier();
+      String _uuid_1 = this.uuid(_identifier);
+      final String identifier = _uuid_1;
+      String _xifexpression = null;
+      if (this.showNames) {
+        String _name = identity.name();
+        _xifexpression = _name;
+      } else {
+        _xifexpression = null;
+      }
+      final String nameAttribute = _xifexpression;
+      IdentityTriple _identityTriple = new IdentityTriple(uniqueRepresentationReference, identifier, nameAttribute);
+      _xblockexpression = (_identityTriple);
+    }
+    return _xblockexpression;
+  }
+  
+  @Deprecated
   private Pair<String,String> identityPair(final Identity identity) {
     UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
     String _uuid = this.uuid(_uniqueRepresentationReference);

@@ -32,7 +32,8 @@ public class ContainerIdentityReference extends IdentityReference {
 	public ContainerIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.container(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.container(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

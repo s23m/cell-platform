@@ -37,7 +37,7 @@ public class DefaultXmlSchemaTerminology {
 				throws Throwable {
 			return method.getName();
 		}
-	}; 
+	};
 	
 	private static final XmlSchemaTerminology terminology = (XmlSchemaTerminology) Proxy.newProxyInstance(
 		XmlSchemaTerminology.class.getClassLoader(),

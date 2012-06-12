@@ -36,7 +36,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import junit.framework.TestCase;
 
 import org.junit.Test;
-import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants;

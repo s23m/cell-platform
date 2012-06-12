@@ -37,7 +37,7 @@ public class MinimumCardinalityIdentityReferenceProcessor extends AbstractIdenti
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new MinimumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new MinimumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 
 	@Override

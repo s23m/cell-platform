@@ -32,7 +32,8 @@ public class MinimumCardinalityIdentityReference extends IdentityReference {
 	public MinimumCardinalityIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.minimumCardinality(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.minimumCardinality(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

@@ -32,7 +32,8 @@ public class SemanticIdentityIdentityReference extends IdentityReference {
 	public SemanticIdentityIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.semanticIdentity(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.semanticIdentity(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

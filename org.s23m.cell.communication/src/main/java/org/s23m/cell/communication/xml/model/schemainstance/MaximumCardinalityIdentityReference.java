@@ -32,7 +32,8 @@ public class MaximumCardinalityIdentityReference extends IdentityReference {
 	public MaximumCardinalityIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.maximumCardinality(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.maximumCardinality(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

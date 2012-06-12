@@ -32,7 +32,8 @@ public class IsAbstractIdentityReference extends IdentityReference {
 	public IsAbstractIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.isAbstract(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.isAbstract(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

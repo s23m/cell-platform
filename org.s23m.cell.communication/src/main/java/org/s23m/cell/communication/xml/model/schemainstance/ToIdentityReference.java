@@ -32,7 +32,8 @@ public class ToIdentityReference extends IdentityReference {
 	public ToIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.to(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.to(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }

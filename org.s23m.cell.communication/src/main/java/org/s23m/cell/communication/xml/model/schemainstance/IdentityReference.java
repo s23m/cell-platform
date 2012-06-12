@@ -39,25 +39,37 @@ public abstract class IdentityReference extends AbstractLeafNode {
 	private final String uniqueRepresentationReference;
 	
 	private final String identifier;
-
+	
+	private final String nameAttribute;
+	
 	protected IdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String name,
 			String uniqueRepresentationReference,
-			String identifier) {
+			String identifier,
+			String nameAttribute) {
 		super(namespace, name);
 		this.uniqueRepresentationReference = uniqueRepresentationReference;
 		this.identifier = identifier;
+		this.nameAttribute = nameAttribute;
 		
 		setAttribute(terminology.uniqueRepresentationReference(), uniqueRepresentationReference);
 		setAttribute(terminology.identifier(), identifier);
+		
+		if (nameAttribute != null) {
+			setAttribute(terminology.name(), nameAttribute);	
+		}
 	}
-
+	
 	public String getUniqueRepresentationReference() {
 		return uniqueRepresentationReference;
 	}
 	
 	public String getIdentifier() {
 		return identifier;
+	}
+	
+	public String getNameAttribute() {
+		return nameAttribute;
 	}
 }

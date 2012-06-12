@@ -9,7 +9,6 @@ import org.s23m.cell.communication.xml.model.schema.ElementReference
 import org.s23m.cell.communication.xml.model.schema.Extension
 import org.s23m.cell.communication.xml.model.schema.Schema
 import org.s23m.cell.communication.xml.model.schema.Sequence
-import org.s23m.cell.communication.xml.model.schema.ConstrainedSimpleType
 import org.s23m.cell.communication.xml.model.schema.Type
 
 import static org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants.*

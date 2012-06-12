@@ -13,7 +13,7 @@ public class ContainerIdentityReferenceProcessor extends AbstractIdentityReferen
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new ContainerIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 	
 	@Override

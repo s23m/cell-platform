@@ -38,7 +38,7 @@ public class MaximumCardinalityIdentityReferenceProcessor extends AbstractIdenti
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new MaximumCardinalityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 
 	@Override

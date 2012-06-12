@@ -37,7 +37,7 @@ public class SemanticIdentityIdentityReferenceProcessor	extends AbstractIdentity
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new SemanticIdentityIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 
 	@Override

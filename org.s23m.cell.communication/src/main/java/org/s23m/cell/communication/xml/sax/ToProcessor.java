@@ -42,7 +42,7 @@ public class ToProcessor extends AbstractAttributeAwareProcessor<Node> {
 		if (top instanceof Visibility || top instanceof SuperSetReference) {
 			final String uniqueRepresentationReference = getUniqueRepresentationReferenceAttribute(attributes, terminology);
 			final String identifier = getIdentifierAttribute(attributes, terminology);
-			return new ToIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+			return new ToIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 		} else if (top instanceof Edge) {
 			return EdgeEnd.toEdgeEnd(namespace, terminology);
 		} else {

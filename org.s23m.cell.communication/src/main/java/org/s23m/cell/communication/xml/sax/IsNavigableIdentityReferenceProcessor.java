@@ -37,7 +37,7 @@ public class IsNavigableIdentityReferenceProcessor extends AbstractIdentityRefer
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new IsNavigableIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new IsNavigableIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 
 

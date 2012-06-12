@@ -13,7 +13,7 @@ public class CategoryIdentityReferenceProcessor extends AbstractIdentityReferenc
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new CategoryIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 	
 	@Override

@@ -1,13 +1,9 @@
 package org.s23m.cell.communication.xml;
 
-import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.communication.SetMarshallingException;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 import org.s23m.cell.platform.api.CellQueries;
-import org.s23m.cell.platform.models.CellEngineering;
 import org.s23m.cell.platform.models.CellPlatformAgent;
-import org.s23m.cell.platform.models.CellPlatformDomain;
 import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 
 public class Scratch {

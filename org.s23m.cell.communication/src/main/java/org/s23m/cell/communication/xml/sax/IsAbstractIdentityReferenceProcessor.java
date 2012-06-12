@@ -42,7 +42,7 @@ public class IsAbstractIdentityReferenceProcessor extends AbstractIdentityRefere
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier);
+		return new IsAbstractIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
 	
 	@Override

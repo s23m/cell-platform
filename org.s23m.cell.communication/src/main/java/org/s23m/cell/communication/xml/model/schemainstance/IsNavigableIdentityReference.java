@@ -32,7 +32,8 @@ public class IsNavigableIdentityReference extends IdentityReference {
 	public IsNavigableIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		super(namespace, terminology, terminology.isNavigable(), uniqueRepresentationReference, identifier);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.isNavigable(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
 }
