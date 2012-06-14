@@ -31,19 +31,18 @@ import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 
 class InstanceBuilder {
 	
-	// TODO base this on the XmlSchemaTerminology chosen
-	boolean showNames = false
-	
 	ArtifactSet artifactSet
 	
 	Namespace namespace
 	
 	XmlSchemaTerminology terminology
+	
+	boolean populateIdentityNameAttributes
 		
 	new(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
-		
 		this.namespace = namespace
 		this.terminology = terminology
+		this.populateIdentityNameAttributes = !terminology.machineEncoding
 		
 		this.artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier)
 		this.artifactSet.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
@@ -428,7 +427,7 @@ class InstanceBuilder {
 		val identity = set.identity
 		val uniqueRepresentationReference = uuid(identity.uniqueRepresentationReference)
 		val identifier = uuid(identity.identifier)
-		val nameAttribute = if (showNames) identity.name() else null
+		val nameAttribute = if (populateIdentityNameAttributes) identity.name() else null
 		new IdentityTriple(uniqueRepresentationReference, identifier, nameAttribute)
 	}
 	

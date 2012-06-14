@@ -36,11 +36,13 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 		final Method[] methods = CLASS.getDeclaredMethods();
 		for (final Method method : methods) {
 			final String name = method.getName();
-			try {
-				final String term = (String) method.invoke(terminology);
-				result.put(name, term);
-			} catch (Exception e) {
-				throw new RuntimeException("Problem invoking method " + method + ": ", e);
+			if (!name.equals(DefaultXmlSchemaTerminology.IS_MACHINE_READABLE_METHOD)) {
+				try {
+					final String term = (String) method.invoke(terminology);
+					result.put(name, term);
+				} catch (Exception e) {
+					throw new RuntimeException("Problem invoking method " + method + ": ", e);
+				}
 			}
 		}
 		return result;

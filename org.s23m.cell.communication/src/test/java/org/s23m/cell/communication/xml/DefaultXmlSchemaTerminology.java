@@ -31,11 +31,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DefaultXmlSchemaTerminology {
+	
+	public static final String IS_MACHINE_READABLE_METHOD = "isMachineEncoding";
 
 	private static final InvocationHandler invocationHandler = new InvocationHandler() {
 		public Object invoke(Object proxy, Method method, Object[] args)
 				throws Throwable {
-			return method.getName();
+			final String methodName = method.getName();
+			if (methodName.equals(IS_MACHINE_READABLE_METHOD)) {
+				// hide name attribute on identifierReference elements
+				return true;
+			} else {
+				return methodName;
+			}
 		}
 	};
 	
@@ -60,12 +68,15 @@ public class DefaultXmlSchemaTerminology {
 		Method[] methods = XmlSchemaTerminology.class.getMethods();
 		Set<String> result = new HashSet<String>();
 		for (Method method : methods) {
-			try {
-				Object o = invocationHandler.invoke(terminology, method, new Object[0]);
-				String term = (String) o;
-				result.add(term);
-			} catch (Throwable e) {
-				throw new RuntimeException(e);
+			final String methodName = method.getName();
+			if (!methodName.equals(IS_MACHINE_READABLE_METHOD)) {
+				try {
+					Object o = invocationHandler.invoke(terminology, method, new Object[0]);
+					String term = (String) o;
+					result.add(term);
+				} catch (Throwable e) {
+					throw new RuntimeException(e);
+				}
 			}
 		}
 		return result;

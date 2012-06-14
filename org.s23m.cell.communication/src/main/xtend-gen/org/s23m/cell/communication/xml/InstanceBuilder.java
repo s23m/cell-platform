@@ -1,6 +1,7 @@
 package org.s23m.cell.communication.xml;
 
 import java.util.UUID;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
@@ -32,17 +33,20 @@ import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
 @SuppressWarnings("all")
 public class InstanceBuilder {
-  private boolean showNames = false;
-  
   private ArtifactSet artifactSet;
   
   private Namespace namespace;
   
   private XmlSchemaTerminology terminology;
   
+  private boolean populateIdentityNameAttributes;
+  
   public InstanceBuilder(final Namespace namespace, final XmlSchemaTerminology terminology, final String languageIdentifier) {
       this.namespace = namespace;
       this.terminology = terminology;
+      boolean _isMachineEncoding = terminology.isMachineEncoding();
+      boolean _operator_not = BooleanExtensions.operator_not(_isMachineEncoding);
+      this.populateIdentityNameAttributes = _operator_not;
       ArtifactSet _artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier);
       this.artifactSet = _artifactSet;
       String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
@@ -496,7 +500,7 @@ public class InstanceBuilder {
       String _uuid_1 = this.uuid(_identifier);
       final String identifier = _uuid_1;
       String _xifexpression = null;
-      if (this.showNames) {
+      if (this.populateIdentityNameAttributes) {
         String _name = identity.name();
         _xifexpression = _name;
       } else {

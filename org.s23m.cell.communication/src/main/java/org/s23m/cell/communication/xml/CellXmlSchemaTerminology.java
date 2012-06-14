@@ -30,6 +30,11 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 
 public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 
+	@Override
+	public boolean isMachineEncoding() {
+		return false;
+	}
+
 	private String nameOf(Set concept) {
 		// TODO use language functionality when available
 		return concept.identity().name().replace(" ", "-");

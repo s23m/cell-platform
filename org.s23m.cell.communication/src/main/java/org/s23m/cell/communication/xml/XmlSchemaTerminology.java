@@ -25,6 +25,8 @@
 package org.s23m.cell.communication.xml;
 
 public interface XmlSchemaTerminology {
+	boolean isMachineEncoding();
+	
 	String artifactSet();
 	String command();
 	String container();
