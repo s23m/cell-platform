@@ -13,10 +13,22 @@ import com.google.common.base.Charsets
 import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static extension org.s23m.cell.communication.xml.OperatorExtensions.*
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet
+import org.s23m.cell.api.Query
+import org.s23m.cell.platform.S23MPlatform
+import org.s23m.cell.Set
+import org.s23m.cell.Identity
+import java.util.UUID
 
 class RoundTrippingTest extends TestCase {
 	
-	private static int counter = 1
+	private Identity identity = createIdentity()
+	
+	private Set set
+	
+	override setUp() {
+		S23MPlatform::boot()
+		set = createSet()
+	}
 	
 	@Test
 	def void testSerialisationRoundTrip() {
@@ -66,85 +78,96 @@ class RoundTrippingTest extends TestCase {
 		val builder = new InstanceBuilder(s23m, terminology, languageIdentifier);
 		
 		val model = builder.model(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id),
-			builder.container(id -> id),
-			builder.isAbstract(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.container(set),
+			builder.isAbstract(set)
 		)
 		
 		model += builder.vertex(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id),
-			builder.isAbstract(id -> id),
-			builder.maxCardinality(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.isAbstract(set),
+			builder.maxCardinality(set)
 		)
 		
 		model += builder.visibility(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id),
-			builder.isAbstract(id -> id),
-			builder.from(id -> id),
-			builder.to(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.isAbstract(set),
+			builder.from(set),
+			builder.to(set)
 		)
 		
 		model += builder.edge(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id),
-			builder.isAbstract(id -> id),
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.isAbstract(set),
 			/* from */
 			builder.fromEdgeEnd(
-				builder.semanticIdentity(id -> id),
-				builder.category(id -> id),
-				builder.isAbstract(id -> id),
-				builder.minCardinality(id -> id),
-				builder.maxCardinality(id -> id),
-				builder.isContainer(id -> id),
-				builder.isNavigable(id -> id)
+				builder.semanticIdentity(set),
+				builder.category(set),
+				builder.isAbstract(set),
+				builder.minCardinality(set),
+				builder.maxCardinality(set),
+				builder.isContainer(set),
+				builder.isNavigable(set)
 			),
 			/* to */
 			builder.toEdgeEnd(
-				builder.semanticIdentity(id -> id),
-				builder.category(id -> id),
-				builder.isAbstract(id -> id),
-				builder.minCardinality(id -> id),
-				builder.maxCardinality(id -> id),
-				builder.isContainer(id -> id),
-				builder.isNavigable(id -> id)
+				builder.semanticIdentity(set),
+				builder.category(set),
+				builder.isAbstract(set),
+				builder.minCardinality(set),
+				builder.maxCardinality(set),
+				builder.isContainer(set),
+				builder.isNavigable(set)
 			)
 		)
 		
 		model += builder.command(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set)
 		)
 		
 		val query = builder.query(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set)
 		)
 		
 		query.addParameter(builder.parameter(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set)
 		))
 		
 		model += query
 		
 		model += builder.superSetReference(
-			builder.semanticIdentity(id -> id),
-			builder.category(id -> id),
-			builder.isAbstract(id -> id),
-			builder.from(id -> id),
-			builder.to(id -> id)
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.isAbstract(set),
+			builder.from(set),
+			builder.to(set)
 		)
 		
 		builder.build()
 	}
 	
-	def private String id() {
-		val result = counter
-		counter = counter + 1
-		result.toString
+	def private createSet() {
+		val identityHandler = new IdempotentMethodInvocationHandler(identity)
+		val categoryHandler = new IdempotentMethodInvocationHandler(Query::vertex)
+		val valueHandler = new IdempotentMethodInvocationHandler(Query::vertex)
+		val handlers = newHashMap(
+			new MethodDescriptor("identity") -> identityHandler,
+			new MethodDescriptor("category") -> categoryHandler,
+			new MethodDescriptor("value", typeof(Set)) -> valueHandler
+		)
+		GenericFactory::createInstance(typeof(Set), handlers)
 	}
 	
+	def private createIdentity() {
+		val identifier = UUID::randomUUID()
+		val uniqueRepresentationReference = UUID::randomUUID()
+		new MockIdentity(identifier, uniqueRepresentationReference)
+	}	
 }

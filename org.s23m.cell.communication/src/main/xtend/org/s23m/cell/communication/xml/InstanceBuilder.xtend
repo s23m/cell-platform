@@ -2,8 +2,6 @@ package org.s23m.cell.communication.xml
 
 import java.util.UUID
 
-import org.s23m.cell.Identity
-
 import org.s23m.cell.communication.xml.model.dom.Namespace
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet
 import org.s23m.cell.communication.xml.model.schemainstance.Command
@@ -29,13 +27,12 @@ import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
-import org.eclipse.xtext.xbase.lib.Pair
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 
 class InstanceBuilder {
 	
 	// TODO base this on the XmlSchemaTerminology chosen
-	boolean showNames = true
+	boolean showNames = false
 	
 	ArtifactSet artifactSet
 	
@@ -313,18 +310,8 @@ class InstanceBuilder {
 	}
 	
 	def semanticIdentity(Set set) {
-		val identity = set.identity
-		semanticIdentity(identityPair(identity))
-	}
-
-	@Deprecated	
-	def semanticIdentity(Pair<String, String> pair) {
-		new SemanticIdentityIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-	
-	def category(Set set) {
-		val identityTriple = identityTriple(set)
-		new CategoryIdentityReference(
+		val identityTriple = identityTriple(set.category)
+		new SemanticIdentityIdentityReference(
 			namespace,
 			terminology,
 			identityTriple.uniqueRepresentationReference,
@@ -333,9 +320,15 @@ class InstanceBuilder {
 		)
 	}
 	
-	@Deprecated
-	def category(Pair<String, String> pair) {
-		new CategoryIdentityReference(namespace, terminology, pair.key, pair.value, null)
+	def category(Set set) {
+		val identityTriple = identityTriple(set.category)
+		new CategoryIdentityReference(
+			namespace,
+			terminology,
+			identityTriple.uniqueRepresentationReference,
+			identityTriple.identifier,
+			identityTriple.nameAttribute
+		)
 	}
 	
 	def container(Set set) {
@@ -349,11 +342,6 @@ class InstanceBuilder {
 		)
 	}
 	
-	@Deprecated
-	def container(Pair<String, String> pair) {
-		new ContainerIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-	
 	def isAbstract(Set set) {
 		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::isAbstract)
 		new IsAbstractIdentityReference(
@@ -365,13 +353,8 @@ class InstanceBuilder {
 		)
 	}
 	
-	@Deprecated
-	def isAbstract(Pair<String, String> pair) {
-		new IsAbstractIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-	
 	def from(Set set) {
-		val identityTriple = identityTriple(set.identity)
+		val identityTriple = identityTriple(set)
 		new FromIdentityReference(
 			namespace,
 			terminology,
@@ -380,14 +363,9 @@ class InstanceBuilder {
 			identityTriple.nameAttribute
 		)
 	}
-
-	@Deprecated	
-	def from(Pair<String, String> pair) {
-		new FromIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
 	
 	def to(Set set) {
-		val identityTriple = identityTriple(set.identity)
+		val identityTriple = identityTriple(set)
 		new ToIdentityReference(
 			namespace,
 			terminology,
@@ -395,11 +373,6 @@ class InstanceBuilder {
 			identityTriple.identifier,
 			identityTriple.nameAttribute
 		)
-	}
-	
-	@Deprecated	
-	def to(Pair<String, String> pair) {
-		new ToIdentityReference(namespace, terminology, pair.key, pair.value, null)
 	}
 	
 	def maxCardinality(Set set) {
@@ -413,11 +386,6 @@ class InstanceBuilder {
 		)
 	}
 	
-	@Deprecated
-	def maxCardinality(Pair<String, String> pair) {
-		new MaximumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-	
 	def minCardinality(Set set) {
 		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::minCardinality)
 		new MinimumCardinalityIdentityReference(
@@ -427,11 +395,6 @@ class InstanceBuilder {
 			identityTriple.identifier,
 			identityTriple.nameAttribute
 		)
-	}
-	
-	@Deprecated	
-	def minCardinality(Pair<String, String> pair) {
-		new MinimumCardinalityIdentityReference(namespace, terminology, pair.key, pair.value, null)
 	}
 	
 	def isContainer(Set set) {
@@ -445,11 +408,6 @@ class InstanceBuilder {
 		)
 	}
 	
-	@Deprecated	
-	def isContainer(Pair<String, String> pair) {
-		new IsContainerIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-	
 	def isNavigable(Set set) {
 		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::isNavigable)
 		new IsNavigableIdentityReference(
@@ -461,38 +419,17 @@ class InstanceBuilder {
 		)		
 	}
 	
-	@Deprecated	
-	def isNavigable(Pair<String, String> pair) {
-		new IsNavigableIdentityReference(namespace, terminology, pair.key, pair.value, null)
-	}
-
-	@Deprecated
-	def private valueIdentityPair(Set set, Set variable) {
-		val retrievedValue = set.value(variable)
-		val identity = retrievedValue.identity
-		identityPair(identity)
-	}
-	
 	def private valueIdentityTriple(Set set, Set variable) {
 		val retrievedValue = set.value(variable)
-		val identity = retrievedValue.identity
-		identityTriple(identity)
+		identityTriple(retrievedValue)
 	}
 	
 	def private identityTriple(Set set) {
-		identityTriple(set.category.identity)
-	}
-	
-	def private identityTriple(Identity identity) {
+		val identity = set.identity
 		val uniqueRepresentationReference = uuid(identity.uniqueRepresentationReference)
 		val identifier = uuid(identity.identifier)
 		val nameAttribute = if (showNames) identity.name() else null
 		new IdentityTriple(uniqueRepresentationReference, identifier, nameAttribute)
-	}
-	
-	@Deprecated
-	def private Pair<String, String> identityPair(Identity identity) {
-		uuid(identity.uniqueRepresentationReference) -> uuid(identity.identifier)
 	}
 	
 	def private String uuid(UUID uuid) {
