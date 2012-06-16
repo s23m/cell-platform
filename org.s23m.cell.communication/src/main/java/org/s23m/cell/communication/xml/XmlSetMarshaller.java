@@ -62,7 +62,9 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 * 
 	 * Later on:
 	 * 1) serialisation of all sets contained within a top-level agent (recursively)
-	 * 2) processing all changed sets within a transaction, all of which should be related to one agent (instantiation API needs to be agent-aware: multiple transactions open at once, and every transaction relates to exactly one agent)
+	 * 2) processing all changed sets within a transaction, all of which should be related to one agent
+	 * (instantiation API needs to be agent-aware: multiple transactions open at once, and every transaction
+	 * relates to exactly one agent)
 	 * 
 	 * Test case:
 	 * -> processing all semantic domains of an agent and the all models of an agent.
@@ -70,6 +72,7 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 */
 	@Override
 	public String serialise(Set instance) throws SetMarshallingException {
+		// TODO use sets as shown in Scratch.java
 		String languageIdentifier = "ENGLISH";
 		InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
 		
