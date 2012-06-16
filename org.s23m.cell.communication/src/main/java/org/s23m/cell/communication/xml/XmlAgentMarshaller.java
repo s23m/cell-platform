@@ -33,9 +33,17 @@ public class XmlAgentMarshaller implements SetMarshaller<String> {
 	/*
 	 * Algorithms:
 	 * 
-	 * A) Partitioning into disconnected subgraphs [connected subgraphs]
+	 * A) Partitioning into disconnected subgraphs [connected subgraphs].
+	 * 
+	 * 	An algorithm similar to this one http://en.wikipedia.org/wiki/Flood%5Ffill should do the job.
+	 * 	Starting with one vertex V in model M, and building up an ordered set C1 of all the other vertices 
+	 * 	which can be reached from the starting point, and of course including V in C1. Then applying the same
+	 * 	technique (recursion) to the complement of C1 in M to calculate C2. Then, as long as there still is a
+	 * 	non-empty complement, calculating further Ci.
+	 * 
 	 * B) Dependency analysis of a connected subgraph. Need the sequence of vertices
 	 * in dependency order [http://en.wikipedia.org/wiki/Topological_sorting] 
+	 * 
 	 * 
 	 * 1. filter all the vertices that don't have any visibilities attached
 	 *  (the content of these vertices can be serialised first). These are 
