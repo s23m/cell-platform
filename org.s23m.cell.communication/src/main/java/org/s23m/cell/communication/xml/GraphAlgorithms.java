@@ -41,8 +41,8 @@ public class GraphAlgorithms {
 	 *  
 	 * See http://en.wikipedia.org/wiki/Topological_sorting
 	 */
-	public static Set topologicalVisibilitySort(Set orderedSet) {
-		if (orderedSet.category().isEqualTo(Query.orderedSet)) {
+	public static Set topologicalVisibilitySort(Set connectedSubgraph) {
+		if (connectedSubgraph.category().isEqualTo(Query.orderedSet)) {
 			// error
 			return Instantiation.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance, coreSets.semanticErr);
 		} else {
@@ -50,9 +50,9 @@ public class GraphAlgorithms {
 			// TODO how do we create an empty orderedSet?
 			ArrayList<Set> L = new ArrayList<Set>();
 			
-			Set allEdges = orderedSet.filterArrows();
+			Set allEdges = connectedSubgraph.filterArrows();
 			
-			Set allNodes = orderedSet.filter(Query.vertex);
+			Set allNodes = connectedSubgraph.filter(Query.vertex);
 			Set nodesWithIncomingVisibilityEdges = allNodes.filterByLinkedToVia(Query.visibility);
 			
 			// S <- Set of all nodes with no incoming visibility edges
