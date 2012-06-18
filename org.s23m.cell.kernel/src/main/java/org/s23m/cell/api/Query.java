@@ -168,7 +168,8 @@ public class Query {
 	public static Set isLoadedInLocalMemory(final Set set) {
 		if (Query.inMemorySets().containsRepresentation(set)) {
 			return S23MKernel.coreSets.is_TRUE;
-		} else {return S23MKernel.coreSets.is_FALSE;
+		} else {
+			return S23MKernel.coreSets.is_FALSE;
 		}
 	}
 
