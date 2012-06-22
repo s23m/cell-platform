@@ -34,49 +34,6 @@ import java.util.Iterator;
  */
 public class TopologicalSortExample {
 
-	static class Vertex {
-		public final String name;
-		public final HashSet<Edge> incomingEdges;
-		public final HashSet<Edge> outgoingEdges;
-
-		public Vertex(String name) {
-			this.name = name;
-			incomingEdges = new HashSet<Edge>();
-			outgoingEdges = new HashSet<Edge>();
-		}
-
-		public Vertex addEdge(Vertex node) {
-			Edge e = new Edge(this, node);
-			outgoingEdges.add(e);
-			node.incomingEdges.add(e);
-			return this;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-	}
-
-	static class Edge {
-		public final Vertex from;
-		public final Vertex to;
-
-		public Edge(Vertex from, Vertex to) {
-			this.from = from;
-			this.to = to;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (!(obj instanceof Edge)) {
-				return false;
-			}
-			Edge e = (Edge) obj;
-			return e.from == from && e.to == to;
-		}
-	}
-
 	public static void main(String[] args) {
 		Vertex seven = new Vertex("7");
 		Vertex five = new Vertex("5");
