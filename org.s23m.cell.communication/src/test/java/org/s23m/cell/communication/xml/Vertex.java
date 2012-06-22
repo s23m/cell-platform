@@ -26,7 +26,6 @@ package org.s23m.cell.communication.xml;
 
 import java.util.HashSet;
 
-// TODO define equals and hashCode
 class Vertex {
 	public final String name;
 	public final HashSet<Edge> incomingEdges;
@@ -43,6 +42,43 @@ class Vertex {
 		outgoingEdges.add(e);
 		node.incomingEdges.add(e);
 		return this;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((incomingEdges == null) ? 0 : incomingEdges.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result	+ ((outgoingEdges == null) ? 0 : outgoingEdges.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vertex other = (Vertex) obj;
+		if (incomingEdges == null) {
+			if (other.incomingEdges != null)
+				return false;
+		} else if (!incomingEdges.equals(other.incomingEdges))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (outgoingEdges == null) {
+			if (other.outgoingEdges != null)
+				return false;
+		} else if (!outgoingEdges.equals(other.outgoingEdges))
+			return false;
+		return true;
 	}
 
 	@Override

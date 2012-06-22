@@ -46,7 +46,7 @@ public class WeaklyConnectedComponentExample {
 		Set<Vertex> unvisitedVertices = new HashSet<Vertex>();
 		for (Vertex v : graph.getVertices()) {
 			unvisitedVertices.add(v);
-		}
+		}		
 
         while (!unvisitedVertices.isEmpty()) {
             DirectedGraph weaklyConnectedComponent = new DirectedGraph();
@@ -60,7 +60,7 @@ public class WeaklyConnectedComponentExample {
 
             while (!queue.isEmpty()) {
             	Vertex currentVertex = queue.remove();
-            	// iterate through reachable neighbours (via outgoing edges)
+            	// iterate through adjacent neighbours (via outgoing edges)
                 Set<Edge> neighbours = currentVertex.outgoingEdges;
 
                 for (Edge outgoingEdge : neighbours) {
@@ -77,33 +77,34 @@ public class WeaklyConnectedComponentExample {
 
         // print result
         System.out.println("Number of weakly connected components: " + result.size());
+        
         System.out.println("Output:\n" + result);
 	}
 
 	private static DirectedGraph createGraph() {
-		Vertex seven = new Vertex("7");
-		Vertex five = new Vertex("5");
-		Vertex three = new Vertex("3");
-		Vertex eleven = new Vertex("11");
-		Vertex eight = new Vertex("8");
+		Vertex one = new Vertex("1");
 		Vertex two = new Vertex("2");
-		Vertex nine = new Vertex("9");
-		Vertex ten = new Vertex("10");
-		seven.addEdge(eleven).addEdge(eight);
-		five.addEdge(eleven);
-		three.addEdge(eight).addEdge(ten);
-		eleven.addEdge(two).addEdge(nine).addEdge(ten);
-		eight.addEdge(nine).addEdge(ten);
+		Vertex three = new Vertex("3");
+		Vertex four = new Vertex("4");
+		Vertex five = new Vertex("5");
+		Vertex six = new Vertex("6");
+		Vertex seven = new Vertex("7");
+		Vertex eight = new Vertex("8");
+		one.addEdge(five).addEdge(six);
+		four.addEdge(five);
+		three.addEdge(six).addEdge(eight);
+		five.addEdge(two).addEdge(seven).addEdge(eight);
+		six.addEdge(seven).addEdge(eight);
 		
 		Set<Vertex> vertices = ImmutableSet.of(
-			seven,
-			five,
+			one,
+			four,
 			three,
-			eleven,
-			eight,
+			five,
+			six,
 			two,
-			nine,
-			ten 	
+			seven,
+			eight 	
 		);
 		
 		return new DirectedGraph(vertices);
