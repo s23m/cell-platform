@@ -22,7 +22,7 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.util.UUID;
 

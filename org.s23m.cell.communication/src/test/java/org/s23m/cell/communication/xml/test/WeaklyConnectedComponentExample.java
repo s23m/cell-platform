@@ -22,7 +22,7 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,59 +33,52 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 
-public class ConnectedComponentExample {
-
+public class WeaklyConnectedComponentExample {
+	
 	public static void main(String[] args) {
 		DirectedGraph graph = createGraph();
-
+		
 		System.out.println("Input:\n" + graph);
-
+		
 		List<DirectedGraph> result = new ArrayList<DirectedGraph>();
-
+		
 		// all vertices are initially unvisited
 		Set<Vertex> unvisitedVertices = new HashSet<Vertex>();
 		for (Vertex v : graph.getVertices()) {
 			unvisitedVertices.add(v);
-		}
+		}		
 
-		while (!unvisitedVertices.isEmpty()) {
-			DirectedGraph connectedComponent = new DirectedGraph();
-			// pick the next available unvisited vertex
-			Vertex root = unvisitedVertices.iterator().next();
-			unvisitedVertices.remove(root);
-			connectedComponent.addVertex(root);
+        while (!unvisitedVertices.isEmpty()) {
+            DirectedGraph weaklyConnectedComponent = new DirectedGraph();
+            // pick the next available unvisited vertex
+            Vertex root = unvisitedVertices.iterator().next();
+            unvisitedVertices.remove(root);
+            weaklyConnectedComponent.addVertex(root);
 
-			Queue<Vertex> queue = new LinkedList<Vertex>();
-			queue.add(root);
+            Queue<Vertex> queue = new LinkedList<Vertex>();
+            queue.add(root);
 
-			while (!queue.isEmpty()) {
-				Vertex currentVertex = queue.remove();
-				// iterate through adjacent neighbours (via outgoing and incoming edges)
-				for (Edge outgoingEdge : currentVertex.outgoingEdges) {
-					Vertex neighbor = outgoingEdge.to;
-					if (unvisitedVertices.contains(neighbor)) {
-						queue.add(neighbor);
-						unvisitedVertices.remove(neighbor);
-						connectedComponent.addVertex(neighbor);
-					}
-				}
-				for (Edge incomingEdge : currentVertex.incomingEdges) {
-					Vertex neighbor = incomingEdge.from;
-					if (unvisitedVertices.contains(neighbor)) {
-						queue.add(neighbor);
-						unvisitedVertices.remove(neighbor);
-						connectedComponent.addVertex(neighbor);
-					}
-				}
-				
-			}
-			result.add(connectedComponent);
-		}
+            while (!queue.isEmpty()) {
+            	Vertex currentVertex = queue.remove();
+            	// iterate through adjacent neighbours (via outgoing edges)
+                Set<Edge> neighbours = currentVertex.outgoingEdges;
 
-		// print result
-		System.out.println("Number of connected components: " + result.size());
+                for (Edge outgoingEdge : neighbours) {
+                    Vertex neighbor = outgoingEdge.to;
+                    if (unvisitedVertices.contains(neighbor)) {
+                        queue.add(neighbor);
+                        unvisitedVertices.remove(neighbor);
+                        weaklyConnectedComponent.addVertex(neighbor);
+                    }
+                }
+            }
+            result.add(weaklyConnectedComponent);
+        }
 
-		System.out.println("Output:\n" + result);
+        // print result
+        System.out.println("Number of weakly connected components: " + result.size());
+        
+        System.out.println("Output:\n" + result);
 	}
 
 	private static DirectedGraph createGraph() {
@@ -102,10 +95,18 @@ public class ConnectedComponentExample {
 		three.addEdge(six).addEdge(eight);
 		five.addEdge(two).addEdge(seven).addEdge(eight);
 		six.addEdge(seven).addEdge(eight);
-
-		Set<Vertex> vertices = ImmutableSet.of(one, four, three, five, six,
-				two, seven, eight);
-
+		
+		Set<Vertex> vertices = ImmutableSet.of(
+			one,
+			four,
+			three,
+			five,
+			six,
+			two,
+			seven,
+			eight 	
+		);
+		
 		return new DirectedGraph(vertices);
 	}
 }

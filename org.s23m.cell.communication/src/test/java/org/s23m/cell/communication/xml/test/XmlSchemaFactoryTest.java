@@ -22,7 +22,7 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +38,9 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
+import org.s23m.cell.communication.xml.NamespaceConstants;
+import org.s23m.cell.communication.xml.XmlSchemaFactory;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.schema.XmlSchemaConstants;
 import org.s23m.cell.platform.S23MPlatform;
 import org.w3c.dom.Document;

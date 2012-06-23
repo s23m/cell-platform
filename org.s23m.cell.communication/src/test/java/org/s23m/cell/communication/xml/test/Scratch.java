@@ -1,7 +1,10 @@
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.communication.SetMarshallingException;
+import org.s23m.cell.communication.xml.NamespaceConstants;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
+import org.s23m.cell.communication.xml.XmlSetMarshaller;
 import org.s23m.cell.platform.api.CellQueries;
 import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;

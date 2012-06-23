@@ -22,7 +22,7 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -37,6 +37,8 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.s23m.cell.S23MKernel;
+import org.s23m.cell.communication.xml.XmlSchemaFactory;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;

@@ -1,4 +1,4 @@
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -10,6 +10,8 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.s23m.cell.S23MKernel;
+import org.s23m.cell.communication.xml.CellXmlSchemaTerminology;
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.platform.S23MPlatform;
 
 public class CellXmlSchemaTerminologyTest extends TestCase {

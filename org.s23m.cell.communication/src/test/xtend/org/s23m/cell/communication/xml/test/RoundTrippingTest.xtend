@@ -1,4 +1,4 @@
-package org.s23m.cell.communication.xml
+package org.s23m.cell.communication.xml.test
 
 import junit.framework.TestCase
 import org.junit.Test
@@ -18,6 +18,11 @@ import org.s23m.cell.platform.S23MPlatform
 import org.s23m.cell.Set
 import org.s23m.cell.Identity
 import java.util.UUID
+import org.s23m.cell.communication.xml.test.MethodDescriptor
+import org.s23m.cell.communication.xml.test.MockIdentity
+import org.s23m.cell.communication.xml.XmlRendering
+import org.s23m.cell.communication.xml.XmlSchemaFactory
+import org.s23m.cell.communication.xml.InstanceBuilder
 
 class RoundTrippingTest extends TestCase {
 	
@@ -72,7 +77,7 @@ class RoundTrippingTest extends TestCase {
 	}
 	
 	def private createInstanceModel() {
-		val s23m = NamespaceConstants::NS_S23M
+		val s23m = NS_S23M
 		val terminology = DefaultXmlSchemaTerminology::getInstance()
 		val languageIdentifier = "ENGLISH"
 		val builder = new InstanceBuilder(s23m, terminology, languageIdentifier);

@@ -22,18 +22,10 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
-import org.junit.Test;
+import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
-
-public class DefaultXmlSchemaTerminologyTest extends TestCase {
-
-	@Test
-	public void testTerminology() {
-		XmlSchemaTerminology t = DefaultXmlSchemaTerminology.getInstance();
-		assertEquals("category", t.category());
-		assertEquals("superSetReference", t.superSetReference());
-	}
+public interface MethodInvocationHandler {
+	Object invoke(Object proxy, Method method, Object[] args);
 }

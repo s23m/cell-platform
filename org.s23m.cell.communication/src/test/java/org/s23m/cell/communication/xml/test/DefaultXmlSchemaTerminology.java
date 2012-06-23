@@ -22,13 +22,15 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml;
+package org.s23m.cell.communication.xml.test;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 
 public class DefaultXmlSchemaTerminology {
 	
