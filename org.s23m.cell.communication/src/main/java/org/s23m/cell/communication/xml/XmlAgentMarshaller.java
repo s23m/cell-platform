@@ -33,7 +33,7 @@ public class XmlAgentMarshaller implements SetMarshaller<String> {
 	/*
 	 * Algorithms:
 	 * 
-	 * A) Partitioning into disconnected subgraphs [connected subgraphs].
+	 * A) Partitioning into disconnected subgraphs [each one a connected di-graph].
 	 * 
 	 * 	An algorithm similar to this one http://en.wikipedia.org/wiki/Flood%5Ffill should do the job.
 	 * 	Starting with one vertex V in model M, and building up an ordered set C1 of all the other vertices 

@@ -113,5 +113,39 @@ public class GraphAlgorithms {
 		}
 	}
 	
+	/**
+	 * Partitions a model into independent parts, based on its visibility arrows.
+	 * 
+	 * This is equivalent to determining the set of weakly connected components in
+	 * a directed graph.
+	 * 
+	 * See http://mathworld.wolfram.com/WeaklyConnectedComponent.html
+	 * 
+	 * 1. filter all the vertices that don't have any visibilities attached
+	 *  (the content of these vertices can be serialised first). These are 
+	 *  the "independent vertices" iVertices
+	 *  [look at edge-ends]
+	 *  
+	 * 2. If the model is called M, define C as the complement of iVertices in M
+	 * 
+	 * 3. Analyse C and partition C into as many disconnected subgraphs of
+	 *  vertices (connected via visibilities) as possible. The result will be
+	 *  subsets C1, .... Cn, with n >= 1
+	 * 
+	 * 4. Each Ci above is a directed acyclic graph consisting of vertices and
+	 *  visibilities. We need to serialise the root first and then the next level down
+	 *  from the root.
+	 *  
+	 */
+	public static Set partitionModelByVisibilityArrows(Set model) {
+		Set allEdges = model.filterArrows();
+		Set allVertices = model.filter(Query.vertex);
+
+		Set nodesIncidentToVisibilityEdges = allVertices.filterByLinkedToVia(Query.visibility);
+		Set independentVertices = allVertices.complement(nodesIncidentToVisibilityEdges);
+		
+		return null;
+	}
+	
 }
 
