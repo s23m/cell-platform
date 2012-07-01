@@ -27,6 +27,7 @@ package org.s23m.cell.communication.xml;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.communication.SetMarshaller;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
@@ -77,15 +78,23 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 		InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
 		
 		for (final Set containedInstance : instance.filterInstances()) {
-			processInstance(builder, containedInstance);
+			addModel(builder, containedInstance);
+		}
+		
+		for (final Set semanticDomain: instance.filterPolymorphic(SemanticDomain.semanticdomain)) {
+			addSemanticDomain(builder, semanticDomain);
 		}
 		
 		return XmlRendering.render(builder.build()).toString();
 	}
 	
+	private void addSemanticDomain(InstanceBuilder builder, Set semanticDomain) {
+		// TODO
+	}
+
 	// TODO: need to process instances recursively
 	// TODO include the Edge Ends from each Edge via toEdgeEnd() and fromEdgeEnd()
-	private Model processInstance(InstanceBuilder builder, Set instance) {
+	private Model addModel(InstanceBuilder builder, Set instance) {
 		Model model = builder.model(instance);
 		
 		// process Vertex list
