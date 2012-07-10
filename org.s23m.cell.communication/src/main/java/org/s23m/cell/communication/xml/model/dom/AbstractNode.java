@@ -30,7 +30,7 @@ import org.s23m.cell.communication.xml.model.schema.Cardinality;
 
 public abstract class AbstractNode implements Node {
 	/* Declared namespace */
-	private final Namespace namespace;
+	protected final Namespace namespace;
     
 	/* Tag name */
 	private final String name;

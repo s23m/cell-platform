@@ -33,10 +33,12 @@ import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.schemainstance.Command;
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
+import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
+import org.s23m.cell.platform.api.Instantiation;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<String> {
@@ -60,7 +62,6 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 * Test case:
 	 * -> should be able to convert the set of models and the set of semantic domains to the XML format.
 	 * 
-	 * 
 	 * Later on:
 	 * 1) serialisation of all sets contained within a top-level agent (recursively)
 	 * 2) processing all changed sets within a transaction, all of which should be related to one agent
@@ -70,18 +71,21 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 * Test case:
 	 * -> processing all semantic domains of an agent and the all models of an agent.
 	 * Need to make at least 2 passes along the containment tree to resolve all references.
+	 * 
+	 * 
 	 */
 	@Override
-	public String serialise(Set instance) throws SetMarshallingException {
+	public String serialise(Set graph) throws SetMarshallingException {
 		// TODO use sets as shown in Scratch.java
 		String languageIdentifier = "ENGLISH";
-		InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
+		final InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
 		
-		for (final Set containedInstance : instance.filterInstances()) {
+		for (final Set containedInstance : graph.filterInstances()) {
 			addModel(builder, containedInstance);
 		}
 		
-		for (final Set semanticDomain: instance.filterPolymorphic(SemanticDomain.semanticdomain)) {
+		final Set containedSemanticDomains = Instantiation.toSemanticDomain(graph).filterPolymorphic(SemanticDomain.semanticdomain);
+		for (final Set semanticDomain : containedSemanticDomains) {
 			addSemanticDomain(builder, semanticDomain);
 		}
 		
@@ -89,11 +93,14 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	}
 	
 	private void addSemanticDomain(InstanceBuilder builder, Set semanticDomain) {
-		// TODO
+		org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain result = builder.semanticDomain();
+		Set orderedSetOfSemanticIdentities = semanticDomain.filterPolymorphic(SemanticDomain.semanticIdentity);
+		for (Set semanticIdentitySet: orderedSetOfSemanticIdentities) {
+			Identity identity = builder.identity(semanticIdentitySet);
+			result.addIdentity(identity);	
+		}
 	}
 
-	// TODO: need to process instances recursively
-	// TODO include the Edge Ends from each Edge via toEdgeEnd() and fromEdgeEnd()
 	private Model addModel(InstanceBuilder builder, Set instance) {
 		Model model = builder.model(instance);
 		

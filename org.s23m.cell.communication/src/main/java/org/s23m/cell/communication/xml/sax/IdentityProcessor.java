@@ -31,7 +31,9 @@ public class IdentityProcessor implements SaxElementProcessor<Identity> {
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Identity) {
-			((Identity) top).setPayload((StringElement) removed);
+			StringElement removedElement = (StringElement) removed;
+			String removedElementContents = removedElement.getText();
+			((Identity) top).setPayload(removedElementContents);
 		}
 	}
 

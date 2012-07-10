@@ -1,5 +1,7 @@
 package org.s23m.cell.communication.xml.model.schemainstance;
 
+import java.util.Collections;
+
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
@@ -58,16 +60,20 @@ public class Identity extends AbstractCompositeNode {
 		setAttribute(terminology.technicalName(), technicalName);
 	}
 	
-	public StringElement getPayload() {
-		return payload;
+	public String getPayload() {
+		return payload.getText();
 	}
 
-	public void setPayload(StringElement payload) {
-		this.payload = payload;
+	public void setPayload(String payloadContents) {
+		this.payload = new StringElement(namespace, terminology.payload(), payloadContents);
 	}
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		return ImmutableList.of(payload);
+		if (payload.hasText()) {
+			return ImmutableList.of(payload);	
+		} else {
+			return Collections.emptyList();
+		}
 	}
 }

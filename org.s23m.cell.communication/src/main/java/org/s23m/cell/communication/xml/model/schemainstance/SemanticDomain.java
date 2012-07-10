@@ -26,6 +26,7 @@ package org.s23m.cell.communication.xml.model.schemainstance;
 
 import java.util.List;
 
+import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
@@ -40,8 +41,8 @@ public class SemanticDomain extends AbstractCompositeNode {
 	
 	private final List<Identity> identityList;
 
-	public SemanticDomain(Namespace namespace, String name) {
-		super(namespace, name);
+	public SemanticDomain(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.semanticDomain());
 		this.identityList = Lists.newArrayList();
 	}
 	
@@ -63,8 +64,9 @@ public class SemanticDomain extends AbstractCompositeNode {
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
+		// TODO uncomment lines below once model is populated 
 		return Iterables.concat(
-			ImmutableList.of(model),
+			//ImmutableList.of(model),
 			identityList	
 		);
 	}

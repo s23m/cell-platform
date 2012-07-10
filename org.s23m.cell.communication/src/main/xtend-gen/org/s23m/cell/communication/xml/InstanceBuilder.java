@@ -2,7 +2,6 @@ package org.s23m.cell.communication.xml;
 
 import java.util.UUID;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.communication.xml.IdentityTriple;
@@ -17,6 +16,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.ContainerIdentityRef
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
 import org.s23m.cell.communication.xml.model.schemainstance.FromIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
@@ -25,6 +25,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityId
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
@@ -59,6 +60,9 @@ public class InstanceBuilder {
     return this.artifactSet;
   }
   
+  /**
+   * Model
+   */
   public Model model(final Set set) {
     Model _xblockexpression = null;
     {
@@ -477,6 +481,43 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
+  /**
+   * Semantic Domain
+   */
+  public SemanticDomain semanticDomain() {
+    SemanticDomain _xblockexpression = null;
+    {
+      SemanticDomain _semanticDomain = new SemanticDomain(this.namespace, this.terminology);
+      final SemanticDomain result = _semanticDomain;
+      this.artifactSet.addSemanticDomain(result);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
+  public Identity identity(final Set set) {
+    Identity _xblockexpression = null;
+    {
+      Identity _identity = new Identity(this.namespace, this.terminology);
+      final Identity result = _identity;
+      org.s23m.cell.Identity _identity_1 = set.identity();
+      final org.s23m.cell.Identity identity = _identity_1;
+      UUID _identifier = identity.identifier();
+      String _string = _identifier.toString();
+      result.setIdentifier(_string);
+      String _name = identity.name();
+      result.setName(_name);
+      String _pluralName = identity.pluralName();
+      result.setPluralName(_pluralName);
+      String _technicalName = identity.technicalName();
+      result.setTechnicalName(_technicalName);
+      String _payload = identity.payload();
+      result.setPayload(_payload);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
   private IdentityTriple valueIdentityTriple(final Set set, final Set variable) {
     IdentityTriple _xblockexpression = null;
     {
@@ -491,8 +532,8 @@ public class InstanceBuilder {
   private IdentityTriple identityTriple(final Set set) {
     IdentityTriple _xblockexpression = null;
     {
-      Identity _identity = set.identity();
-      final Identity identity = _identity;
+      org.s23m.cell.Identity _identity = set.identity();
+      final org.s23m.cell.Identity identity = _identity;
       UUID _uniqueRepresentationReference = identity.uniqueRepresentationReference();
       String _uuid = this.uuid(_uniqueRepresentationReference);
       final String uniqueRepresentationReference = _uuid;

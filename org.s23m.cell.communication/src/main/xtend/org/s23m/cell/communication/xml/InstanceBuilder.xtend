@@ -28,6 +28,8 @@ import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain
+import org.s23m.cell.communication.xml.model.schemainstance.Identity
 
 class InstanceBuilder {
 	
@@ -52,6 +54,8 @@ class InstanceBuilder {
 	def build() {
 		artifactSet
 	}
+	
+	/* Model */
 	
 	def model(Set set) {
 		val semanticIdentity = semanticIdentity(set)
@@ -416,6 +420,25 @@ class InstanceBuilder {
 			identityTriple.identifier,
 			identityTriple.nameAttribute
 		)		
+	}
+	
+	/* Semantic Domain */
+	
+	def semanticDomain() {
+		val result = new SemanticDomain(namespace, terminology)
+		artifactSet.addSemanticDomain(result)
+		result
+	}
+	
+	def identity(Set set) {
+		val result = new Identity(namespace, terminology)
+		val identity = set.identity()
+		result.setIdentifier(identity.identifier.toString)
+		result.setName(identity.name)
+		result.setPluralName(identity.pluralName)
+		result.setTechnicalName(identity.technicalName)
+		result.setPayload(identity.payload)
+		result
 	}
 	
 	def private valueIdentityTriple(Set set, Set variable) {
