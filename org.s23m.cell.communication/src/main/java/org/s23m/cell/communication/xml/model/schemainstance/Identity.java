@@ -12,7 +12,7 @@ import com.google.common.collect.ImmutableList;
 public class Identity extends AbstractCompositeNode {
 	
 	private String identifier;
-	private String name;
+	private String nameAttribute;
 	private String pluralName;
 	private String technicalName;
 	private StringElement payload;
@@ -33,13 +33,13 @@ public class Identity extends AbstractCompositeNode {
 		setAttribute(terminology.identifier(), identifier);
 	}
 
-	public String getName() {
-		return name;
+	public String getNameAttribute() {
+		return nameAttribute;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-		setAttribute(terminology.name(), name);
+	public void setNameAttribute(String nameAttribute) {
+		this.nameAttribute = nameAttribute;
+		setAttribute(terminology.name(), nameAttribute);
 	}
 
 	public String getPluralName() {

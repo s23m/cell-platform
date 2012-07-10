@@ -22,7 +22,7 @@ public class IdentityProcessor implements SaxElementProcessor<Identity> {
 		
 		final Identity identity = new Identity(namespace, terminology);
 		identity.setIdentifier(identifier);
-		identity.setName(name);
+		identity.setNameAttribute(name);
 		identity.setPluralName(pluralName);
 		identity.setTechnicalName(technicalName);
 		return identity;

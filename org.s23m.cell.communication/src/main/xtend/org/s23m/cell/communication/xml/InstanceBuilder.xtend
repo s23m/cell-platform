@@ -434,7 +434,7 @@ class InstanceBuilder {
 		val result = new Identity(namespace, terminology)
 		val identity = set.identity()
 		result.setIdentifier(identity.identifier.toString)
-		result.setName(identity.name)
+		result.setNameAttribute(identity.name)
 		result.setPluralName(identity.pluralName)
 		result.setTechnicalName(identity.technicalName)
 		result.setPayload(identity.payload)

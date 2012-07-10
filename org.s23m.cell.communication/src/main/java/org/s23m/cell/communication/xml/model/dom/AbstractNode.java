@@ -68,7 +68,7 @@ public abstract class AbstractNode implements Node {
 		cardinality.addToAttributes(attributes);
 	}
 
-	public String getName() {
+	public final String getName() {
 		return name;
 	}
 }

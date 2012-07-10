@@ -506,7 +506,7 @@ public class InstanceBuilder {
       String _string = _identifier.toString();
       result.setIdentifier(_string);
       String _name = identity.name();
-      result.setName(_name);
+      result.setNameAttribute(_name);
       String _pluralName = identity.pluralName();
       result.setPluralName(_pluralName);
       String _technicalName = identity.technicalName();
