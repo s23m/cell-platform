@@ -42,13 +42,13 @@ public class ArtifactSet extends AbstractCompositeNode {
 	
 	private final List<Model> modelList;
 	
-	private final List<SemanticDomain> semanticDomainList;
+	private final List<SemanticDomainNode> semanticDomainList;
 	
 	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
 		super(namespace, terminology.artifactSet());
 		this.languageIdentifier = new StringElement(namespace, terminology.languageIdentifier(), languageIdentifier);
 		this.modelList = new ArrayList<Model>();
-		this.semanticDomainList = new ArrayList<SemanticDomain>();
+		this.semanticDomainList = new ArrayList<SemanticDomainNode>();
 	}
 
 	public void setLanguageIdentifier(StringElement languageIdentifier) {
@@ -67,11 +67,11 @@ public class ArtifactSet extends AbstractCompositeNode {
 		modelList.add(model);
 	}
 	
-	public List<SemanticDomain> getSemanticDomainList() {
+	public List<SemanticDomainNode> getSemanticDomainList() {
 		return semanticDomainList;
 	}
 	
-	public void addSemanticDomain(SemanticDomain semanticDomain) {
+	public void addSemanticDomain(SemanticDomainNode semanticDomain) {
 		semanticDomainList.add(semanticDomain);
 	}
 

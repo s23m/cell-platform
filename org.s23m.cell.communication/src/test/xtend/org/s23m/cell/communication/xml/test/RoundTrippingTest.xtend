@@ -38,10 +38,10 @@ class RoundTrippingTest extends TestCase {
 	@Test
 	def void testSerialisationRoundTrip() {
 		// Create in-memory model
-		val model = createInstanceModel()
+		val artifactSetModel = createInstanceModel()
 		
 		// Serialise as XML
-		val xml = XmlRendering::render(model)
+		val xml = XmlRendering::render(artifactSetModel)
 		
 		// De-serialise it
 		val deserialised = deserialise(xml)
@@ -81,6 +81,8 @@ class RoundTrippingTest extends TestCase {
 		val terminology = DefaultXmlSchemaTerminology::getInstance()
 		val languageIdentifier = "ENGLISH"
 		val builder = new InstanceBuilder(s23m, terminology, languageIdentifier);
+		
+		val result = builder.artifactSet
 		
 		val model = builder.model(
 			builder.semanticIdentity(set),
@@ -155,7 +157,8 @@ class RoundTrippingTest extends TestCase {
 			builder.to(set)
 		)
 		
-		builder.build()
+		result.addModel(model)
+		result
 	}
 	
 	def private createSet() {

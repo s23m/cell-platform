@@ -35,13 +35,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-public class SemanticDomain extends AbstractCompositeNode {
+public class SemanticDomainNode extends AbstractCompositeNode {
 	
 	private Model model;
 	
 	private final List<Identity> identityList;
 
-	public SemanticDomain(Namespace namespace, XmlSchemaTerminology terminology) {
+	public SemanticDomainNode(Namespace namespace, XmlSchemaTerminology terminology) {
 		super(namespace, terminology.semanticDomain());
 		this.identityList = Lists.newArrayList();
 	}
@@ -64,9 +64,8 @@ public class SemanticDomain extends AbstractCompositeNode {
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
-		// TODO uncomment lines below once model is populated 
 		return Iterables.concat(
-			//ImmutableList.of(model),
+			ImmutableList.of(model),
 			identityList	
 		);
 	}

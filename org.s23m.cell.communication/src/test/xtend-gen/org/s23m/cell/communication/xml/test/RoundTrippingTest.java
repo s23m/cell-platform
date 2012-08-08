@@ -75,8 +75,8 @@ public class RoundTrippingTest extends TestCase {
   @Test
   public void testSerialisationRoundTrip() {
       ArtifactSet _createInstanceModel = this.createInstanceModel();
-      final ArtifactSet model = _createInstanceModel;
-      String _render = XmlRendering.render(model);
+      final ArtifactSet artifactSetModel = _createInstanceModel;
+      String _render = XmlRendering.render(artifactSetModel);
       final String xml = _render;
       ArtifactSet _deserialise = this.deserialise(xml);
       final ArtifactSet deserialised = _deserialise;
@@ -145,6 +145,8 @@ public class RoundTrippingTest extends TestCase {
       final String languageIdentifier = "ENGLISH";
       InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, languageIdentifier);
       final InstanceBuilder builder = _instanceBuilder;
+      ArtifactSet _artifactSet = builder.artifactSet();
+      final ArtifactSet result = _artifactSet;
       SemanticIdentityIdentityReference _semanticIdentity = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category = builder.category(this.set);
       ContainerIdentityReference _container = builder.container(this.set);
@@ -205,8 +207,8 @@ public class RoundTrippingTest extends TestCase {
       ToIdentityReference _to_1 = builder.to(this.set);
       SuperSetReference _superSetReference = builder.superSetReference(_semanticIdentity_9, _category_9, _isAbstract_6, _from_1, _to_1);
       OperatorExtensions.operator_add(model, _superSetReference);
-      ArtifactSet _build = builder.build();
-      _xblockexpression = (_build);
+      result.addModel(model);
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }

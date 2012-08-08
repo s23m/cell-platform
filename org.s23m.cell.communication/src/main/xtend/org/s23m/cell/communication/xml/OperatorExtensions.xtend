@@ -6,7 +6,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Edge
 import org.s23m.cell.communication.xml.model.schemainstance.Model
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 import org.s23m.cell.communication.xml.model.schemainstance.Query
-import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility
@@ -22,7 +22,7 @@ class OperatorExtensions {
 		a.addModel(m)
 	}
 	
-	def static operator_add(ArtifactSet a, SemanticDomain s) {
+	def static operator_add(ArtifactSet a, org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode s) {
 		a.addSemanticDomain(s)
 	}
 	

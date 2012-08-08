@@ -25,7 +25,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityId
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
-import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
@@ -34,7 +34,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
 @SuppressWarnings("all")
 public class InstanceBuilder {
-  private ArtifactSet artifactSet;
+  private String languageIdentifier;
   
   private Namespace namespace;
   
@@ -48,16 +48,20 @@ public class InstanceBuilder {
       boolean _isMachineEncoding = terminology.isMachineEncoding();
       boolean _operator_not = BooleanExtensions.operator_not(_isMachineEncoding);
       this.populateIdentityNameAttributes = _operator_not;
-      ArtifactSet _artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier);
-      this.artifactSet = _artifactSet;
-      String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
-      this.artifactSet.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
-      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
-      this.artifactSet.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
   }
   
-  public ArtifactSet build() {
-    return this.artifactSet;
+  public ArtifactSet artifactSet() {
+    ArtifactSet _xblockexpression = null;
+    {
+      ArtifactSet _artifactSet = new ArtifactSet(this.namespace, this.terminology, this.languageIdentifier);
+      final ArtifactSet result = _artifactSet;
+      String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
+      result.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
+      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
+      result.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
   }
   
   /**
@@ -89,7 +93,6 @@ public class InstanceBuilder {
       result.setCategory(category);
       result.setContainer(container);
       result.setIsAbstract(isAbstract);
-      this.artifactSet.addModel(result);
       _xblockexpression = (result);
     }
     return _xblockexpression;
@@ -484,15 +487,9 @@ public class InstanceBuilder {
   /**
    * Semantic Domain
    */
-  public SemanticDomain semanticDomain() {
-    SemanticDomain _xblockexpression = null;
-    {
-      SemanticDomain _semanticDomain = new SemanticDomain(this.namespace, this.terminology);
-      final SemanticDomain result = _semanticDomain;
-      this.artifactSet.addSemanticDomain(result);
-      _xblockexpression = (result);
-    }
-    return _xblockexpression;
+  public SemanticDomainNode semanticDomain() {
+    SemanticDomainNode _semanticDomainNode = new SemanticDomainNode(this.namespace, this.terminology);
+    return _semanticDomainNode;
   }
   
   public Identity identity(final Set set) {

@@ -24,21 +24,26 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml;
 
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
+import org.s23m.cell.api.KernelSets;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.communication.SetMarshaller;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 import org.s23m.cell.communication.xml.model.schemainstance.Command;
 import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 import org.s23m.cell.platform.api.Instantiation;
+import org.s23m.cell.platform.models.Agency;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<String> {
@@ -72,82 +77,108 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 * -> processing all semantic domains of an agent and the all models of an agent.
 	 * Need to make at least 2 passes along the containment tree to resolve all references.
 	 * 
-	 * 
+	 * Sets must be serialised in the right order:
+	 * - identities
+	 * - semantic domains and semantic identities (which can only be reconstituted with appropriate identities)
+	 * - models (which can only be reconstituted with appropriate semantic domains)
 	 */
 	@Override
 	public String serialise(Set graph) throws SetMarshallingException {
 		// TODO use sets as shown in Scratch.java
 		String languageIdentifier = "ENGLISH";
 		final InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
+		final ArtifactSet artifactSet = builder.artifactSet();
 		
 		for (final Set containedInstance : graph.filterInstances()) {
-			addModel(builder, containedInstance);
+			Model model = serialiseModel(builder, containedInstance);
+			artifactSet.addModel(model);
 		}
 		
 		final Set containedSemanticDomains = Instantiation.toSemanticDomain(graph).filterPolymorphic(SemanticDomain.semanticdomain);
 		for (final Set semanticDomain : containedSemanticDomains) {
-			addSemanticDomain(builder, semanticDomain);
+			artifactSet.addSemanticDomain(serialiseSemanticDomain(builder, semanticDomain));
 		}
 		
-		return XmlRendering.render(builder.build()).toString();
+		return XmlRendering.render(artifactSet).toString();
 	}
 	
-	private void addSemanticDomain(InstanceBuilder builder, Set semanticDomain) {
-		org.s23m.cell.communication.xml.model.schemainstance.SemanticDomain result = builder.semanticDomain();
+	@Override
+	public Set deserialise(String input) throws SetMarshallingException {
+		// TODO
+	    
+		return null;
+	}
+
+	private Model serialiseModel(InstanceBuilder builder, Set model) {
+		if (toBoolean(Agency.agent.isSuperSetOf(model.category())) || toBoolean(Agency.stage.isSuperSetOf(model.category()))) {
+			// cover potential polymorphic extensions of Agent and Stage (these could become a variability)
+			
+			// TODO how does this apply in the case of models? 
+			//serialiseSemanticDomain(builder, Instantiation.toSemanticDomain(model));
+		}
+		Model structure = serialiseStructure(builder, model);
+		return structure;
+	}
+
+	private SemanticDomainNode serialiseSemanticDomain(InstanceBuilder builder, Set semanticDomain) {
+		final SemanticDomainNode result = builder.semanticDomain(); 
+		
+		// serialise identities
 		Set orderedSetOfSemanticIdentities = semanticDomain.filterPolymorphic(SemanticDomain.semanticIdentity);
 		for (Set semanticIdentitySet: orderedSetOfSemanticIdentities) {
 			Identity identity = builder.identity(semanticIdentitySet);
 			result.addIdentity(identity);	
 		}
+		
+		final Model model = serialiseStructure(builder, semanticDomain);
+		result.setModel(model);
+		return result;
 	}
 
-	private Model addModel(InstanceBuilder builder, Set instance) {
-		Model model = builder.model(instance);
+	private Model serialiseStructure(InstanceBuilder builder, Set model) {
+		final Model result = builder.model(model);
 		
 		// process Vertex list
-		for (Set vertexInstance : instance.filterProperClass(Query.vertex)) {
+		for (Set vertexInstance : model.filterProperClass(Query.vertex)) {
 			Vertex vertex = builder.vertex(vertexInstance);
-			model.addVertex(vertex);
+			result.addVertex(vertex);
 		}
 		
 		// process Edge list
-		for (Set edgeInstance : instance.filterProperClass(Query.edge)) {
+		for (Set edgeInstance : model.filterProperClass(Query.edge)) {
 			Edge edge = builder.edge(edgeInstance);
-			model.addEdge(edge);
+			result.addEdge(edge);
 		}
 		
 		// process Visibility list
-		for (Set visibilityInstance : instance.filterProperClass(Query.visibility)) {
+		for (Set visibilityInstance : model.filterProperClass(Query.visibility)) {
 			Visibility visibility = builder.visibility(visibilityInstance);
-			model.addVisibility(visibility);
+			result.addVisibility(visibility);
 		}
 		
 		// process SuperSetReference list
-		for (Set superSetReferenceInstance : instance.filterProperClass(Query.superSetReference)) {
+		for (Set superSetReferenceInstance : model.filterProperClass(Query.superSetReference)) {
 			SuperSetReference superSetReference = builder.superSetReference(superSetReferenceInstance);
-			model.addSuperSetReference(superSetReference);
+			result.addSuperSetReference(superSetReference);
 		}
 		
 		// process Command list
-		for (Set commandInstance : instance.filter(S23MSemanticDomains.command)) {
+		for (Set commandInstance : model.filter(S23MSemanticDomains.command)) {
 			Command command = builder.command(commandInstance);
-			model.addCommand(command);
+			result.addCommand(command);
 		}
 		
 		// process Query list
-		for (Set queryInstance : instance.filter(S23MSemanticDomains.query)) {
+		for (Set queryInstance : model.filter(S23MSemanticDomains.query)) {
 			org.s23m.cell.communication.xml.model.schemainstance.Query query = builder.query(queryInstance);
-			model.addQuery(query);
+			result.addQuery(query);
 		}
 		
-		return model;
+		return result;
 	}
-
-	@Override
-	public Set deserialise(String input) throws SetMarshallingException {
-		
-	    
-		return null;
+	
+	private boolean toBoolean(Set set) {
+		return set.isEqualTo(S23MKernel.coreSets.is_TRUE);
 	}
 
 }
