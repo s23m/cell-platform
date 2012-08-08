@@ -24,9 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml;
 
-import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.KernelSets;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
@@ -110,7 +108,7 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	}
 
 	private Model serialiseModel(InstanceBuilder builder, Set model) {
-		if (toBoolean(Agency.agent.isSuperSetOf(model.category())) || toBoolean(Agency.stage.isSuperSetOf(model.category()))) {
+		if (isSuperSetOf(Agency.agent, model.category()) || isSuperSetOf(Agency.stage, model.category())) {
 			// cover potential polymorphic extensions of Agent and Stage (these could become a variability)
 			
 			// TODO how does this apply in the case of models? 
@@ -177,8 +175,7 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 		return result;
 	}
 	
-	private boolean toBoolean(Set set) {
-		return set.isEqualTo(S23MKernel.coreSets.is_TRUE);
+	private boolean isSuperSetOf(Set set, Set candidateSuperSet) {
+		return set.isSuperSetOf(candidateSuperSet).isEqualTo(S23MSemanticDomains.is_TRUE);
 	}
-
 }
