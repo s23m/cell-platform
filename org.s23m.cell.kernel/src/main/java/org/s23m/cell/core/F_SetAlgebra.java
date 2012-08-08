@@ -124,14 +124,12 @@ public final class F_SetAlgebra {
 	}
 
 	private static Set transformToOrderedSet(final Set set) {
-		if(set.properClass().isEqualTo(S23MSemanticDomains.orderedSet)) {
+		if (set.properClass().isEqualTo(S23MSemanticDomains.orderedSet)) {
 			return set;
+		} else if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE)) {
+			return transformSemanticIdentitySetToOrderedSet(set);
 		} else {
-			if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE)) {
-				return transformSemanticIdentitySetToOrderedSet(set);
-			} else {
-				return set.filterInstances();
-			}
+			return set.filterInstances();
 		}
 	}
 
