@@ -28,10 +28,12 @@ import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode
+import org.s23m.cell.communication.xml.model.schemainstance.Identity
 
 class InstanceBuilder {
 	
-	ArtifactSet artifactSet
+	String languageIdentifier	
 	
 	Namespace namespace
 	
@@ -42,16 +44,17 @@ class InstanceBuilder {
 	new(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
 		this.namespace = namespace
 		this.terminology = terminology
-		this.populateIdentityNameAttributes = !terminology.machineEncoding
-		
-		this.artifactSet = new ArtifactSet(namespace, terminology, languageIdentifier)
-		this.artifactSet.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
-		this.artifactSet.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
+		this.populateIdentityNameAttributes = !terminology.machineEncoding		
 	}
 	
-	def build() {
-		artifactSet
+	def artifactSet() {
+		val result = new ArtifactSet(namespace, terminology, languageIdentifier)
+		result.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
+		result.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
+		result
 	}
+	
+	/* Model */
 	
 	def model(Set set) {
 		val semanticIdentity = semanticIdentity(set)
@@ -75,9 +78,7 @@ class InstanceBuilder {
 		result.setCategory(category)
 		result.setContainer(container)
 		result.setIsAbstract(isAbstract)
-		
-		artifactSet.addModel(result)
-		
+			
 		result
 	}
 	
@@ -416,6 +417,23 @@ class InstanceBuilder {
 			identityTriple.identifier,
 			identityTriple.nameAttribute
 		)		
+	}
+	
+	/* Semantic Domain */
+	
+	def semanticDomain() {
+		new org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode(namespace, terminology)
+	}
+	
+	def identity(Set set) {
+		val result = new Identity(namespace, terminology)
+		val identity = set.identity()
+		result.setIdentifier(identity.identifier.toString)
+		result.setNameAttribute(identity.name)
+		result.setPluralName(identity.pluralName)
+		result.setTechnicalName(identity.technicalName)
+		result.setPayload(identity.payload)
+		result
 	}
 	
 	def private valueIdentityTriple(Set set, Set variable) {

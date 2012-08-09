@@ -41,7 +41,7 @@ public class ArtifactSetProcessor implements SaxElementProcessor<ArtifactSet> {
 
 	@Override
 	public ArtifactSet startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
-		return builder.build();
+		return builder.artifactSet();
 	}
 
 	@Override

@@ -43,6 +43,10 @@ public class StringElement extends AbstractLeafNode {
 		super(namespace, name);
 	}
 	
+	public boolean hasText() {
+		return text != null;
+	}
+	
 	public void setText(String text) {
 		this.text = text;
 	}

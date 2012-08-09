@@ -26,11 +26,11 @@ package org.s23m.cell.communication.xml;
 
 import static org.s23m.cell.S23MKernel.coreSets;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
+import org.s23m.cell.api.SetAlgebra;
 import org.s23m.cell.platform.api.Instantiation;
 
 public class GraphAlgorithms {
@@ -47,8 +47,7 @@ public class GraphAlgorithms {
 			return Instantiation.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance, coreSets.semanticErr);
 		} else {
 			// L <- Empty list that will contain the sorted elements
-			// TODO how do we create an empty orderedSet?
-			ArrayList<Set> L = new ArrayList<Set>();
+			Set L = SetAlgebra.anEmptySet();
 			
 			Set allEdges = connectedSubgraph.filterArrows();
 			
@@ -68,7 +67,7 @@ public class GraphAlgorithms {
 				Set n = listOfS.remove(listOfS.size() - 1);
 				
 				// insert n into L
-				L.add(n);
+				L = L.union(n);
 				// TODO use union operation
 
 				// for each node m with an edge e from n to m do
@@ -106,10 +105,7 @@ public class GraphAlgorithms {
 						+ Arrays.toString(L.toArray()));
 			}
 			*/
-			
-			// TODO need to turn List<Set> into OrderedSet
-			// return L;
-			return null;
+			return L;
 		}
 	}
 	
