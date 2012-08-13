@@ -22,7 +22,7 @@
  * Contributor(s):
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.computation;
+package org.s23m.cell.api.computation;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.VisitorFunction;

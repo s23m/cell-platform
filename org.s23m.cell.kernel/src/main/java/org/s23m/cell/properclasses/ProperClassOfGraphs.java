@@ -26,7 +26,7 @@ package org.s23m.cell.properclasses;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
-import org.s23m.cell.computation.Computation;
+import org.s23m.cell.api.computation.Computation;
 
 public interface ProperClassOfGraphs extends EventListener, Computation {
 
