@@ -49,53 +49,27 @@ object GmodelBuild extends Build {
     file ("."),
     settings = buildSettings
   ) aggregate (
-    artifactpool,
-    common,
-	communication,
-    connector,
-    editorSemanticdomain,
-    hibernateosgi,
-    objectpool,
+    communication,
     kernel,
     kernelTestbench,
-    repository,
-    repositoryClient,
-    serialization,
     platform,
     platformTestscripts,
-    statistics,
-    generator,
-
-    artifactpoolTests,
     kernelTests
+	
+	//artifactpool,
+    //common,
+	//connector,
+    //editorSemanticdomain,
+    //hibernateosgi,
+    //objectpool,
+    //repository,
+    //repositoryClient,
+    //serialization,
+    //statistics,
+    //generator,
+	//artifactpoolTests
   )
 
-  lazy val artifactpool = Project(
-    "artifactpool",
-    file ("org.s23m.cell.artifactpool"),
-    settings = javaProjectSettings
-  )
-  
-  lazy val artifactpoolTests = Project(
-    "artifactpool-tests",
-    file ("org.s23m.cell.artifactpool.tests"),
-    settings = javaTestProjectSettings ++ Seq(
-    	libraryDependencies ++= Seq( JUnit )
-    )
-  ) dependsOn(artifactpool)
-  
-  lazy val common = Project(
-    "common",
-    file ("org.s23m.cell.common"),
-    settings = javaProjectSettings
-  )
-
-  lazy val connector = Project(
-    "connector",
-    file ("org.s23m.cell.connector"),
-    settings = javaProjectSettings
-  ) dependsOn (serialization)
-  
   lazy val communication = Project(
     "communication",
     file ("org.s23m.cell.communication"),
@@ -104,40 +78,6 @@ object GmodelBuild extends Build {
 		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
 	)
   ) dependsOn (kernel, kernelTests, platform)
-  
-  lazy val editorSemanticdomain = Project(
-    "editor-semanticdomain",
-    file ("org.s23m.cell.editor.semanticdomain"),
-    settings = {
-      buildSettings ++
-	  WebPlugin.webSettings ++
-	  VaadinPlugin.vaadinSettings ++
-	  Seq(
-	    libraryDependencies ++= Seq(Vaadin, Jetty),
-        // see https://github.com/harrah/xsbt/wiki/Library-Management
-        unmanagedJars in Compile <++= baseDirectory map { base =>
-		  val dir = base / "src" / "main" / "webapp" / "WEB-INF" / "lib"
-		  val customJars = (dir ** "*.jar")
-		  customJars.classpath
-        },
-        
-        //port := 8080,
-        VaadinPlugin.vaadinWidgetSet := "org.s23m.cell.editor.semanticdomain.widgetset.editorWidgetset"
-      )
-    }
-  ) dependsOn (kernel, repositoryClient, serialization, common, platform)
-
-  lazy val hibernateosgi = Project(
-    "hibernateosgi",
-    file("org.s23m.cell.hibernateosgi"),
-    settings = javaProjectSettings ++ Packaging.defaultSettings
-  )
-
-  lazy val objectpool = Project(
-    "objectpool",
-    file ("org.s23m.cell.objectpool"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel)
 
   lazy val kernel = Project(
     "kernel",
@@ -164,6 +104,86 @@ object GmodelBuild extends Build {
     settings = javaProjectSettings
   ) dependsOn (kernel)
 
+  lazy val platform = Project(
+    "platform",
+    file ("org.s23m.cell.platform"),
+    settings = javaProjectSettings
+  ) dependsOn (kernel)
+
+  lazy val platformTestscripts = Project(
+    "platform-testscripts",
+    file ("org.s23m.cell.platform.testscripts"),
+    settings = javaProjectSettings
+  ) dependsOn (kernel, kernelTests, kernelTestbench, platform)
+
+  /*
+
+  lazy val artifactpool = Project(
+    "artifactpool",
+    file ("org.s23m.cell.artifactpool"),
+    settings = javaProjectSettings
+  )
+  
+  lazy val artifactpoolTests = Project(
+    "artifactpool-tests",
+    file ("org.s23m.cell.artifactpool.tests"),
+    settings = javaTestProjectSettings ++ Seq(
+    	libraryDependencies ++= Seq( JUnit )
+    )
+  ) dependsOn(artifactpool)
+  
+  lazy val common = Project(
+    "common",
+    file ("org.s23m.cell.common"),
+    settings = javaProjectSettings
+  )
+
+  lazy val connector = Project(
+    "connector",
+    file ("org.s23m.cell.connector"),
+    settings = javaProjectSettings
+  ) dependsOn (serialization)
+    
+  lazy val editorSemanticdomain = Project(
+    "editor-semanticdomain",
+    file ("org.s23m.cell.editor.semanticdomain"),
+    settings = {
+      buildSettings ++
+	  WebPlugin.webSettings ++
+	  VaadinPlugin.vaadinSettings ++
+	  Seq(
+	    libraryDependencies ++= Seq(Vaadin, Jetty),
+        // see https://github.com/harrah/xsbt/wiki/Library-Management
+        unmanagedJars in Compile <++= baseDirectory map { base =>
+		  val dir = base / "src" / "main" / "webapp" / "WEB-INF" / "lib"
+		  val customJars = (dir ** "*.jar")
+		  customJars.classpath
+        },
+        
+        //port := 8080,
+        VaadinPlugin.vaadinWidgetSet := "org.s23m.cell.editor.semanticdomain.widgetset.editorWidgetset"
+      )
+    }
+  ) dependsOn (kernel, repositoryClient, serialization, common, platform)
+
+  lazy val generator = Project(
+    "generator",
+    file ("org.s23m.cell.generator"),
+    settings = javaProjectSettings
+  ) dependsOn (kernel)
+
+  lazy val hibernateosgi = Project(
+    "hibernateosgi",
+    file("org.s23m.cell.hibernateosgi"),
+    settings = javaProjectSettings ++ Packaging.defaultSettings
+  )
+
+  lazy val objectpool = Project(
+    "objectpool",
+    file ("org.s23m.cell.objectpool"),
+    settings = javaProjectSettings
+  ) dependsOn (kernel)
+
   lazy val repository = Project(
     "repository",
     file ("org.s23m.cell.repository"),
@@ -182,28 +202,11 @@ object GmodelBuild extends Build {
     settings = javaProjectSettings
   ) dependsOn (kernel, statistics)
 
-  lazy val platform = Project(
-    "platform",
-    file ("org.s23m.cell.platform"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel)
-
-  lazy val platformTestscripts = Project(
-    "platform-testscripts",
-    file ("org.s23m.cell.platform.testscripts"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel, kernelTests, kernelTestbench, platform)
-
   lazy val statistics = Project(
     "statistics",
     file ("org.s23m.cell.statistics"),
     settings = javaProjectSettings
   )
 
-  lazy val generator = Project(
-    "generator",
-    file ("org.s23m.cell.generator"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel)
-
+  */  
 }
