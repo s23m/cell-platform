@@ -31,6 +31,7 @@ import java.util.List;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.SetAlgebra;
+import org.s23m.cell.core.F_SetAlgebra;
 import org.s23m.cell.platform.api.Instantiation;
 
 public class GraphAlgorithms {
@@ -67,7 +68,7 @@ public class GraphAlgorithms {
 				Set n = listOfS.remove(listOfS.size() - 1);
 				
 				// insert n into L
-				L = L.union(n);
+				L = F_SetAlgebra.addElementToOrderedSet(L, n);
 				// TODO use union operation
 
 				// for each node m with an edge e from n to m do
