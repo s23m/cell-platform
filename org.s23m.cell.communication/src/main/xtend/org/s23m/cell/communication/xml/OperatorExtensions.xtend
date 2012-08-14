@@ -6,7 +6,6 @@ import org.s23m.cell.communication.xml.model.schemainstance.Edge
 import org.s23m.cell.communication.xml.model.schemainstance.Model
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 import org.s23m.cell.communication.xml.model.schemainstance.Query
-import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility

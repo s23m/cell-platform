@@ -24,6 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml;
 
+// TODO integrate with multi-lingual support being built 
 public interface XmlSchemaTerminology {
 	boolean isMachineEncoding();
 	
@@ -36,7 +37,7 @@ public interface XmlSchemaTerminology {
 	String isAbstract();
 	String isContainer();
 	String isNavigable();
-	String languageIdentifier();
+	String language();
 	String maximumCardinality();
 	String minimumCardinality();
 	String model();

@@ -67,7 +67,7 @@
 	
 	<xsd:complexType name="artifactSet">
 		<xsd:sequence>
-			<xsd:element name="languageIdentifier" type="xsd:string">
+			<xsd:element name="language" type="s23m:identityReference"/>
 			<xsd:element ref="s23m:model" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="semanticDomain" type="s23m:semanticDomain" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>

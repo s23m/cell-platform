@@ -119,9 +119,9 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	}
 
 	@Override
-	public String languageIdentifier() {
+	public String language() {
 		// TODO add to languages
-		return "languageIdentifier";
+		return "language";
 	}
 	
 	@Override
@@ -212,5 +212,4 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	public String visibility() {
 		return nameOf(Query.visibility);
 	}
-
 }

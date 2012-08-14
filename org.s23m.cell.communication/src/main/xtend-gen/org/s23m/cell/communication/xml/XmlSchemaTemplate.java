@@ -289,13 +289,15 @@ public class XmlSchemaTemplate {
         };
       ComplexType _complexType_14 = builder.complexType(_semanticDomain, _function_10);
       final ComplexType semanticDomainComplexType = _complexType_14;
+      String _language = terminology.language();
+      Element _element_5 = builder.element(_language, identityReference);
+      final Element languageElement = _element_5;
       final Procedure1<Sequence> _function_11 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             {
               List<Node> _children = it.getChildren();
-              String _languageIdentifier = terminology.languageIdentifier();
-              Element _element = builder.element(_languageIdentifier, DataType.STRING);
-              CollectionExtensions.<Element>operator_add(_children, _element);
+              ElementReference _element = builder.element(languageElement);
+              CollectionExtensions.<ElementReference>operator_add(_children, _element);
               List<Node> _children_1 = it.getChildren();
               ElementReference _element_1 = builder.element(modelElement, Cardinality.ZERO_TO_MANY);
               CollectionExtensions.<ElementReference>operator_add(_children_1, _element_1);

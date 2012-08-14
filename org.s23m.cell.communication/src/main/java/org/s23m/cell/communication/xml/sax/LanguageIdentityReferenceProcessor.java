@@ -27,23 +27,23 @@ package org.s23m.cell.communication.xml.sax;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
-import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
-import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
+import org.s23m.cell.communication.xml.model.schemainstance.LanguageIdentityReference;
 
-public class IsNavigableIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<IsNavigableIdentityReference> {
+public class LanguageIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<LanguageIdentityReference> {
 
 	@Override
-	protected IsNavigableIdentityReference createIdentityReference(Namespace namespace,
+	protected LanguageIdentityReference createIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
 			String identifier) {
-		return new IsNavigableIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
+		return new LanguageIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
 	}
-
+	
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
-		if (top instanceof EdgeEnd) {
-			((EdgeEnd) top).setIsNavigable((IsNavigableIdentityReference) removed);
+		if (top instanceof ArtifactSet) {
+			((ArtifactSet) top).setLanguage((LanguageIdentityReference) removed);
 		}
 	}
 

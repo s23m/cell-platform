@@ -28,12 +28,12 @@ import static org.s23m.cell.communication.xml.NamespaceExtensions.*
 import org.s23m.cell.Set
 import org.s23m.cell.api.models.S23MSemanticDomains
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
-import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode
 import org.s23m.cell.communication.xml.model.schemainstance.Identity
+import org.s23m.cell.communication.xml.model.schemainstance.LanguageIdentityReference
 
 class InstanceBuilder {
 	
-	String languageIdentifier	
+	Set chosenLanguage	
 	
 	Namespace namespace
 	
@@ -41,14 +41,16 @@ class InstanceBuilder {
 	
 	boolean populateIdentityNameAttributes
 		
-	new(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
+	new(Namespace namespace, XmlSchemaTerminology terminology, Set chosenLanguage) {
 		this.namespace = namespace
 		this.terminology = terminology
-		this.populateIdentityNameAttributes = !terminology.machineEncoding		
+		this.chosenLanguage = chosenLanguage
+		this.populateIdentityNameAttributes = !terminology.machineEncoding	
 	}
 	
 	def artifactSet() {
-		val result = new ArtifactSet(namespace, terminology, languageIdentifier)
+		val languageReference = language(chosenLanguage)
+		val result = new ArtifactSet(namespace, terminology, languageReference)
 		result.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
 		result.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
 		result
@@ -310,7 +312,7 @@ class InstanceBuilder {
 	}
 	
 	def semanticIdentity(Set set) {
-		val identityTriple = identityTriple(set.category)
+		val identityTriple = identityReference(set.category)
 		new SemanticIdentityIdentityReference(
 			namespace,
 			terminology,
@@ -321,7 +323,7 @@ class InstanceBuilder {
 	}
 	
 	def category(Set set) {
-		val identityTriple = identityTriple(set.category)
+		val identityTriple = identityReference(set.category)
 		new CategoryIdentityReference(
 			namespace,
 			terminology,
@@ -332,7 +334,7 @@ class InstanceBuilder {
 	}
 	
 	def container(Set set) {
-		val identityTriple = identityTriple(set)
+		val identityTriple = identityReference(set)
 		new ContainerIdentityReference(
 			namespace,
 			terminology,
@@ -343,7 +345,7 @@ class InstanceBuilder {
 	}
 	
 	def isAbstract(Set set) {
-		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::isAbstract)
+		val identityTriple = valueIdentityReference(set, S23MSemanticDomains::isAbstract)
 		new IsAbstractIdentityReference(
 			namespace,
 			terminology,
@@ -354,7 +356,7 @@ class InstanceBuilder {
 	}
 	
 	def from(Set set) {
-		val identityTriple = identityTriple(set)
+		val identityTriple = identityReference(set)
 		new FromIdentityReference(
 			namespace,
 			terminology,
@@ -365,7 +367,7 @@ class InstanceBuilder {
 	}
 	
 	def to(Set set) {
-		val identityTriple = identityTriple(set)
+		val identityTriple = identityReference(set)
 		new ToIdentityReference(
 			namespace,
 			terminology,
@@ -375,8 +377,19 @@ class InstanceBuilder {
 		)
 	}
 	
+	def language(Set set) {
+		val ref = identityReference(set)
+		new LanguageIdentityReference(
+			namespace,
+			terminology,
+			ref.uniqueRepresentationReference,
+			ref.identifier,
+			ref.nameAttribute
+		)
+	}
+	
 	def maxCardinality(Set set) {
-		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::maxCardinality)
+		val identityTriple = valueIdentityReference(set, S23MSemanticDomains::maxCardinality)
 		new MaximumCardinalityIdentityReference(
 			namespace,
 			terminology,
@@ -387,7 +400,7 @@ class InstanceBuilder {
 	}
 	
 	def minCardinality(Set set) {
-		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::minCardinality)
+		val identityTriple = valueIdentityReference(set, S23MSemanticDomains::minCardinality)
 		new MinimumCardinalityIdentityReference(
 			namespace,
 			terminology,
@@ -398,7 +411,7 @@ class InstanceBuilder {
 	}
 	
 	def isContainer(Set set) {
-		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::isContainer)
+		val identityTriple = valueIdentityReference(set, S23MSemanticDomains::isContainer)
 		new IsContainerIdentityReference(
 			namespace,
 			terminology,
@@ -409,7 +422,7 @@ class InstanceBuilder {
 	}
 	
 	def isNavigable(Set set) {
-		val identityTriple = valueIdentityTriple(set, S23MSemanticDomains::isNavigable)
+		val identityTriple = valueIdentityReference(set, S23MSemanticDomains::isNavigable)
 		new IsNavigableIdentityReference(
 			namespace,
 			terminology,
@@ -436,17 +449,17 @@ class InstanceBuilder {
 		result
 	}
 	
-	def private valueIdentityTriple(Set set, Set variable) {
+	def private valueIdentityReference(Set set, Set variable) {
 		val retrievedValue = set.value(variable)
-		identityTriple(retrievedValue)
+		identityReference(retrievedValue)
 	}
 	
-	def private identityTriple(Set set) {
+	def private identityReference(Set set) {
 		val identity = set.identity
 		val uniqueRepresentationReference = uuid(identity.uniqueRepresentationReference)
 		val identifier = uuid(identity.identifier)
 		val nameAttribute = if (populateIdentityNameAttributes) identity.name() else null
-		new IdentityTriple(uniqueRepresentationReference, identifier, nameAttribute)
+		new IdentityReferenceAttributes(uniqueRepresentationReference, identifier, nameAttribute)
 	}
 	
 	def private String uuid(UUID uuid) {

@@ -4,7 +4,7 @@ import java.util.UUID;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
-import org.s23m.cell.communication.xml.IdentityTriple;
+import org.s23m.cell.communication.xml.IdentityReferenceAttributes;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -20,6 +20,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.IsAbstractIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsContainerIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.LanguageIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.MaximumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.MinimumCardinalityIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
@@ -34,7 +35,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 
 @SuppressWarnings("all")
 public class InstanceBuilder {
-  private String languageIdentifier;
+  private Set chosenLanguage;
   
   private Namespace namespace;
   
@@ -42,9 +43,10 @@ public class InstanceBuilder {
   
   private boolean populateIdentityNameAttributes;
   
-  public InstanceBuilder(final Namespace namespace, final XmlSchemaTerminology terminology, final String languageIdentifier) {
+  public InstanceBuilder(final Namespace namespace, final XmlSchemaTerminology terminology, final Set chosenLanguage) {
       this.namespace = namespace;
       this.terminology = terminology;
+      this.chosenLanguage = chosenLanguage;
       boolean _isMachineEncoding = terminology.isMachineEncoding();
       boolean _operator_not = BooleanExtensions.operator_not(_isMachineEncoding);
       this.populateIdentityNameAttributes = _operator_not;
@@ -53,7 +55,9 @@ public class InstanceBuilder {
   public ArtifactSet artifactSet() {
     ArtifactSet _xblockexpression = null;
     {
-      ArtifactSet _artifactSet = new ArtifactSet(this.namespace, this.terminology, this.languageIdentifier);
+      LanguageIdentityReference _language = this.language(this.chosenLanguage);
+      final LanguageIdentityReference languageReference = _language;
+      ArtifactSet _artifactSet = new ArtifactSet(this.namespace, this.terminology, languageReference);
       final ArtifactSet result = _artifactSet;
       String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
       result.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
@@ -376,8 +380,8 @@ public class InstanceBuilder {
     SemanticIdentityIdentityReference _xblockexpression = null;
     {
       Set _category = set.category();
-      IdentityTriple _identityTriple = this.identityTriple(_category);
-      final IdentityTriple identityTriple = _identityTriple;
+      IdentityReferenceAttributes _identityReference = this.identityReference(_category);
+      final IdentityReferenceAttributes identityTriple = _identityReference;
       SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_semanticIdentityIdentityReference);
     }
@@ -388,8 +392,8 @@ public class InstanceBuilder {
     CategoryIdentityReference _xblockexpression = null;
     {
       Set _category = set.category();
-      IdentityTriple _identityTriple = this.identityTriple(_category);
-      final IdentityTriple identityTriple = _identityTriple;
+      IdentityReferenceAttributes _identityReference = this.identityReference(_category);
+      final IdentityReferenceAttributes identityTriple = _identityReference;
       CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_categoryIdentityReference);
     }
@@ -399,8 +403,8 @@ public class InstanceBuilder {
   public ContainerIdentityReference container(final Set set) {
     ContainerIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _identityTriple = this.identityTriple(set);
-      final IdentityTriple identityTriple = _identityTriple;
+      IdentityReferenceAttributes _identityReference = this.identityReference(set);
+      final IdentityReferenceAttributes identityTriple = _identityReference;
       ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_containerIdentityReference);
     }
@@ -410,8 +414,8 @@ public class InstanceBuilder {
   public IsAbstractIdentityReference isAbstract(final Set set) {
     IsAbstractIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isAbstract);
-      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IdentityReferenceAttributes _valueIdentityReference = this.valueIdentityReference(set, S23MSemanticDomains.isAbstract);
+      final IdentityReferenceAttributes identityTriple = _valueIdentityReference;
       IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_isAbstractIdentityReference);
     }
@@ -421,8 +425,8 @@ public class InstanceBuilder {
   public FromIdentityReference from(final Set set) {
     FromIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _identityTriple = this.identityTriple(set);
-      final IdentityTriple identityTriple = _identityTriple;
+      IdentityReferenceAttributes _identityReference = this.identityReference(set);
+      final IdentityReferenceAttributes identityTriple = _identityReference;
       FromIdentityReference _fromIdentityReference = new FromIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_fromIdentityReference);
     }
@@ -432,10 +436,21 @@ public class InstanceBuilder {
   public ToIdentityReference to(final Set set) {
     ToIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _identityTriple = this.identityTriple(set);
-      final IdentityTriple identityTriple = _identityTriple;
+      IdentityReferenceAttributes _identityReference = this.identityReference(set);
+      final IdentityReferenceAttributes identityTriple = _identityReference;
       ToIdentityReference _toIdentityReference = new ToIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_toIdentityReference);
+    }
+    return _xblockexpression;
+  }
+  
+  public LanguageIdentityReference language(final Set set) {
+    LanguageIdentityReference _xblockexpression = null;
+    {
+      IdentityReferenceAttributes _identityReference = this.identityReference(set);
+      final IdentityReferenceAttributes ref = _identityReference;
+      LanguageIdentityReference _languageIdentityReference = new LanguageIdentityReference(this.namespace, this.terminology, ref.uniqueRepresentationReference, ref.identifier, ref.nameAttribute);
+      _xblockexpression = (_languageIdentityReference);
     }
     return _xblockexpression;
   }
@@ -443,8 +458,8 @@ public class InstanceBuilder {
   public MaximumCardinalityIdentityReference maxCardinality(final Set set) {
     MaximumCardinalityIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.maxCardinality);
-      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IdentityReferenceAttributes _valueIdentityReference = this.valueIdentityReference(set, S23MSemanticDomains.maxCardinality);
+      final IdentityReferenceAttributes identityTriple = _valueIdentityReference;
       MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_maximumCardinalityIdentityReference);
     }
@@ -454,8 +469,8 @@ public class InstanceBuilder {
   public MinimumCardinalityIdentityReference minCardinality(final Set set) {
     MinimumCardinalityIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.minCardinality);
-      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IdentityReferenceAttributes _valueIdentityReference = this.valueIdentityReference(set, S23MSemanticDomains.minCardinality);
+      final IdentityReferenceAttributes identityTriple = _valueIdentityReference;
       MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_minimumCardinalityIdentityReference);
     }
@@ -465,8 +480,8 @@ public class InstanceBuilder {
   public IsContainerIdentityReference isContainer(final Set set) {
     IsContainerIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isContainer);
-      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IdentityReferenceAttributes _valueIdentityReference = this.valueIdentityReference(set, S23MSemanticDomains.isContainer);
+      final IdentityReferenceAttributes identityTriple = _valueIdentityReference;
       IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_isContainerIdentityReference);
     }
@@ -476,8 +491,8 @@ public class InstanceBuilder {
   public IsNavigableIdentityReference isNavigable(final Set set) {
     IsNavigableIdentityReference _xblockexpression = null;
     {
-      IdentityTriple _valueIdentityTriple = this.valueIdentityTriple(set, S23MSemanticDomains.isNavigable);
-      final IdentityTriple identityTriple = _valueIdentityTriple;
+      IdentityReferenceAttributes _valueIdentityReference = this.valueIdentityReference(set, S23MSemanticDomains.isNavigable);
+      final IdentityReferenceAttributes identityTriple = _valueIdentityReference;
       IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(this.namespace, this.terminology, identityTriple.uniqueRepresentationReference, identityTriple.identifier, identityTriple.nameAttribute);
       _xblockexpression = (_isNavigableIdentityReference);
     }
@@ -515,19 +530,19 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
-  private IdentityTriple valueIdentityTriple(final Set set, final Set variable) {
-    IdentityTriple _xblockexpression = null;
+  private IdentityReferenceAttributes valueIdentityReference(final Set set, final Set variable) {
+    IdentityReferenceAttributes _xblockexpression = null;
     {
       Set _value = set.value(variable);
       final Set retrievedValue = _value;
-      IdentityTriple _identityTriple = this.identityTriple(retrievedValue);
-      _xblockexpression = (_identityTriple);
+      IdentityReferenceAttributes _identityReference = this.identityReference(retrievedValue);
+      _xblockexpression = (_identityReference);
     }
     return _xblockexpression;
   }
   
-  private IdentityTriple identityTriple(final Set set) {
-    IdentityTriple _xblockexpression = null;
+  private IdentityReferenceAttributes identityReference(final Set set) {
+    IdentityReferenceAttributes _xblockexpression = null;
     {
       org.s23m.cell.Identity _identity = set.identity();
       final org.s23m.cell.Identity identity = _identity;
@@ -545,8 +560,8 @@ public class InstanceBuilder {
         _xifexpression = null;
       }
       final String nameAttribute = _xifexpression;
-      IdentityTriple _identityTriple = new IdentityTriple(uniqueRepresentationReference, identifier, nameAttribute);
-      _xblockexpression = (_identityTriple);
+      IdentityReferenceAttributes _identityReferenceAttributes = new IdentityReferenceAttributes(uniqueRepresentationReference, identifier, nameAttribute);
+      _xblockexpression = (_identityReferenceAttributes);
     }
     return _xblockexpression;
   }

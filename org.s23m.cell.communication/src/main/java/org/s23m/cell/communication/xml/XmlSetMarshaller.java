@@ -42,6 +42,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 import org.s23m.cell.platform.api.Instantiation;
 import org.s23m.cell.platform.models.Agency;
+import org.s23m.cell.platform.models.CellPlatformAgent;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<String> {
@@ -82,9 +83,9 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 	 */
 	@Override
 	public String serialise(Set graph) throws SetMarshallingException {
-		// TODO use sets as shown in Scratch.java
-		String languageIdentifier = "ENGLISH";
-		final InstanceBuilder builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
+		// TODO allow language to be customised
+		Set language = CellPlatformAgent.cellMetaLanguage;
+		final InstanceBuilder builder = new InstanceBuilder(namespace, terminology, language);
 		final ArtifactSet artifactSet = builder.artifactSet();
 		
 		for (final Set containedInstance : graph.filterInstances()) {

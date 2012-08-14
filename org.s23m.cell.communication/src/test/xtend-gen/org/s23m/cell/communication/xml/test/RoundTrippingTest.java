@@ -53,6 +53,7 @@ import org.s23m.cell.communication.xml.test.IdempotentMethodInvocationHandler;
 import org.s23m.cell.communication.xml.test.MethodDescriptor;
 import org.s23m.cell.communication.xml.test.MockIdentity;
 import org.s23m.cell.platform.S23MPlatform;
+import org.s23m.cell.platform.models.CellPlatformAgent;
 import org.xml.sax.SAXException;
 
 @SuppressWarnings("all")
@@ -107,7 +108,7 @@ public class RoundTrippingTest extends TestCase {
           byte[] _bytes = xml.getBytes(Charsets.UTF_8);
           ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
           final ByteArrayInputStream is = _byteArrayInputStream;
-          ArtifactSetElementHandler _artifactSetElementHandler = new ArtifactSetElementHandler(NamespaceConstants.NS_S23M, terminology, "ENGLISH");
+          ArtifactSetElementHandler _artifactSetElementHandler = new ArtifactSetElementHandler(NamespaceConstants.NS_S23M, terminology, CellPlatformAgent.cellMetaLanguage);
           final ArtifactSetElementHandler handler = _artifactSetElementHandler;
           saxParser.parse(is, handler);
           ArtifactSet _result = handler.getResult();
@@ -142,8 +143,8 @@ public class RoundTrippingTest extends TestCase {
       final Namespace s23m = NamespaceConstants.NS_S23M;
       XmlSchemaTerminology _instance = DefaultXmlSchemaTerminology.getInstance();
       final XmlSchemaTerminology terminology = _instance;
-      final String languageIdentifier = "ENGLISH";
-      InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, languageIdentifier);
+      final Set language = CellPlatformAgent.cellMetaLanguage;
+      InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, language);
       final InstanceBuilder builder = _instanceBuilder;
       ArtifactSet _artifactSet = builder.artifactSet();
       final ArtifactSet result = _artifactSet;

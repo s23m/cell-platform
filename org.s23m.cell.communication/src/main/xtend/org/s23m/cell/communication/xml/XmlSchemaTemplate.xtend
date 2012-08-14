@@ -160,8 +160,10 @@ class XmlSchemaTemplate {
 			children += builder.element(terminology.identity, identityComplexType, ZERO_TO_MANY)
 		])
 		
+		val languageElement = builder.element(terminology.language, identityReference)
+		
 		val artifactSetComplexType = builder.complexType(artifactSet, [
-			children += builder.element(terminology.languageIdentifier, STRING)
+			children += builder.element(languageElement)
 			children += builder.element(modelElement, ZERO_TO_MANY)
 			children += builder.element(terminology.semanticDomain, semanticDomainComplexType, ZERO_TO_MANY)
 		])

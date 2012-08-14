@@ -28,12 +28,6 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.AbstractLeafNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 
-/*
-<s23m:[name]>
-	<s23m:uniqueRepresentationReference>[uniqueRepresentationReference]</s23m:uniqueRepresentationReference>
-	<s23m:identifier>[identifier]</s23m:identifier>
-</s23m:[name]>
-*/
 public abstract class IdentityReference extends AbstractLeafNode {
 	
 	private final String uniqueRepresentationReference;

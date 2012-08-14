@@ -38,25 +38,25 @@ import com.google.common.collect.Iterables;
 // TODO generate this class from the schema instance (and reduce duplication)?
 public class ArtifactSet extends AbstractCompositeNode {
 	
-	private StringElement languageIdentifier;
+	private LanguageIdentityReference language;
 	
 	private final List<Model> modelList;
 	
 	private final List<SemanticDomainNode> semanticDomainList;
 	
-	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
+	public ArtifactSet(Namespace namespace, XmlSchemaTerminology terminology, LanguageIdentityReference language) {
 		super(namespace, terminology.artifactSet());
-		this.languageIdentifier = new StringElement(namespace, terminology.languageIdentifier(), languageIdentifier);
+		this.language = language;
 		this.modelList = new ArrayList<Model>();
 		this.semanticDomainList = new ArrayList<SemanticDomainNode>();
 	}
 
-	public void setLanguageIdentifier(StringElement languageIdentifier) {
-		this.languageIdentifier = languageIdentifier;		
+	public LanguageIdentityReference getLanguage() {
+		return language;
 	}
-	
-	public StringElement getLanguageIdentifier() {
-		return languageIdentifier;
+
+	public void setLanguage(LanguageIdentityReference removed) {
+		this.language = language;
 	}
 	
 	public List<Model> getModelList() {
@@ -78,7 +78,7 @@ public class ArtifactSet extends AbstractCompositeNode {
 	@Override
 	public Iterable<? extends Node> getChildren() {
 		return Iterables.concat(
-			ImmutableList.of(languageIdentifier),
+			ImmutableList.of(language),
 			modelList,
 			semanticDomainList
 		);

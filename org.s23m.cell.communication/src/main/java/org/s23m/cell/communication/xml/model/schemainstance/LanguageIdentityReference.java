@@ -22,29 +22,18 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.sax;
+package org.s23m.cell.communication.xml.model.schemainstance;
 
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
-import org.s23m.cell.communication.xml.model.dom.Node;
-import org.s23m.cell.communication.xml.model.schemainstance.EdgeEnd;
-import org.s23m.cell.communication.xml.model.schemainstance.IsNavigableIdentityReference;
 
-public class IsNavigableIdentityReferenceProcessor extends AbstractIdentityReferenceProcessor<IsNavigableIdentityReference> {
+public class LanguageIdentityReference extends IdentityReference {
 
-	@Override
-	protected IsNavigableIdentityReference createIdentityReference(Namespace namespace,
+	public LanguageIdentityReference(Namespace namespace,
 			XmlSchemaTerminology terminology,
 			String uniqueRepresentationReference,
-			String identifier) {
-		return new IsNavigableIdentityReference(namespace, terminology, uniqueRepresentationReference, identifier, null);
+			String identifier,
+			String nameAttribute) {
+		super(namespace, terminology, terminology.language(), uniqueRepresentationReference, identifier, nameAttribute);
 	}
-
-	@Override
-	public void endElement(Node removed, Node top, String textContent) {
-		if (top instanceof EdgeEnd) {
-			((EdgeEnd) top).setIsNavigable((IsNavigableIdentityReference) removed);
-		}
-	}
-
 }

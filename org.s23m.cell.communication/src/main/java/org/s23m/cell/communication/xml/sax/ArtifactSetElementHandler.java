@@ -27,6 +27,7 @@ package org.s23m.cell.communication.xml.sax;
 import java.util.Map;
 import java.util.Stack;
 
+import org.s23m.cell.Set;
 import org.s23m.cell.communication.xml.InstanceBuilder;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
@@ -70,10 +71,10 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	
 	private String textContent;
 	
-	public ArtifactSetElementHandler(Namespace namespace, XmlSchemaTerminology terminology, String languageIdentifier) {
+	public ArtifactSetElementHandler(Namespace namespace, XmlSchemaTerminology terminology, Set chosenLanguage) {
 		this.terminology = terminology;
 		this.namespace = namespace;
-		builder = new InstanceBuilder(namespace, terminology, languageIdentifier);
+		builder = new InstanceBuilder(namespace, terminology, chosenLanguage);
 		stack = new Stack<Node>();
 		
 		processors = new ImmutableMap.Builder<String, SaxElementProcessor<?>>()
@@ -87,7 +88,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.isAbstract(), new IsAbstractIdentityReferenceProcessor())
 	        .put(terminology.isContainer(), new IsContainerIdentityReferenceProcessor())
 	        .put(terminology.isNavigable(), new IsNavigableIdentityReferenceProcessor())
-	        .put(terminology.languageIdentifier(), new LanguageIdentifierProcessor())
+	        .put(terminology.language(), new LanguageIdentityReferenceProcessor())
 	        .put(terminology.maximumCardinality(), new MaximumCardinalityIdentityReferenceProcessor())
 	        .put(terminology.minimumCardinality(), new MinimumCardinalityIdentityReferenceProcessor())
 	        .put(terminology.model(), new ModelProcessor())
