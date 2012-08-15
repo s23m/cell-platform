@@ -41,18 +41,20 @@ object BuildSettings {
     ivyXML := DependencyManagement.ivyXml,
    
     // append several options to the list of options passed to the Java compiler
-    javacOptions ++= Seq("-source", "1.5", "-target", "1.5"),
-    
-    publishTo <<= (version) { version: String =>
-      val nexus = "http://localhost:8081/nexus/content/repositories/"
-      if (version.trim.endsWith("SNAPSHOT")) {
-				Some("snapshots" at nexus + "snapshots/")
-			} else {
-				Some("releases"  at nexus + "releases/")
-			}
-		},
+    javacOptions ++= Seq("-source", "1.5", "-target", "1.5")
 	
-		credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+	/*
+    publishTo <<= (version) { version: String =>
+		val nexus = "http://localhost:8081/nexus/content/repositories/"
+		if (version.trim.endsWith("SNAPSHOT")) {
+			Some("snapshots" at nexus + "snapshots/")
+		} else {
+			Some("releases" at nexus + "releases/")
+		}
+	},
+	
+	credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+	*/
   )
 
   val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
