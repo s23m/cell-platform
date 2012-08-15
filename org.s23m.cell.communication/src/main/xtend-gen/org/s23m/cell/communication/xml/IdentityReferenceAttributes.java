@@ -9,8 +9,8 @@ public class IdentityReferenceAttributes {
   public String nameAttribute;
   
   public IdentityReferenceAttributes(final String u, final String i, final String n) {
-      this.uniqueRepresentationReference = u;
-      this.identifier = i;
-      this.nameAttribute = n;
+    this.uniqueRepresentationReference = u;
+    this.identifier = i;
+    this.nameAttribute = n;
   }
 }

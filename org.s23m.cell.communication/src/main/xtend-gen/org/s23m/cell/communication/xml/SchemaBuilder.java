@@ -1,11 +1,9 @@
 package org.s23m.cell.communication.xml;
 
+import com.google.common.base.Objects;
 import java.util.List;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
@@ -31,16 +29,16 @@ public class SchemaBuilder {
   private String rootElementName;
   
   public SchemaBuilder(final String rootElementName) {
-      this.rootElementName = rootElementName;
-      Schema _schema = new Schema();
-      this.schema = _schema;
-      String _xmlns = NamespaceExtensions.xmlns(XmlSchemaConstants.XML_SCHEMA_PREFIX);
-      this.schema.setAttribute(_xmlns, XmlSchemaConstants.XML_SCHEMA_URI);
-      String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
-      this.schema.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
-      this.schema.setAttribute("targetNamespace", NamespaceConstants.S23M_SCHEMA_URI);
-      this.schema.setAttribute("elementFormDefault", "qualified");
-      this.schema.setAttribute("attributeFormDefault", "unqualified");
+    this.rootElementName = rootElementName;
+    Schema _schema = new Schema();
+    this.schema = _schema;
+    String _xmlns = NamespaceExtensions.xmlns(XmlSchemaConstants.XML_SCHEMA_PREFIX);
+    this.schema.setAttribute(_xmlns, XmlSchemaConstants.XML_SCHEMA_URI);
+    String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
+    this.schema.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
+    this.schema.setAttribute("targetNamespace", NamespaceConstants.S23M_SCHEMA_URI);
+    this.schema.setAttribute("elementFormDefault", "qualified");
+    this.schema.setAttribute("attributeFormDefault", "unqualified");
   }
   
   public Schema build() {
@@ -57,30 +55,29 @@ public class SchemaBuilder {
     {
       final Function1<Node,Boolean> _function = new Function1<Node,Boolean>() {
           public Boolean apply(final Node it) {
-            boolean _operator_and = false;
-            boolean _operator_and_1 = false;
+            boolean _and = false;
+            boolean _and_1 = false;
             if (!(it instanceof Element)) {
-              _operator_and_1 = false;
+              _and_1 = false;
             } else {
               List<ElementReference> _references = ((Element) it).getReferences();
               boolean _isEmpty = _references.isEmpty();
-              _operator_and_1 = BooleanExtensions.operator_and((it instanceof Element), _isEmpty);
+              _and_1 = ((it instanceof Element) && _isEmpty);
             }
-            if (!_operator_and_1) {
-              _operator_and = false;
+            if (!_and_1) {
+              _and = false;
             } else {
               String _nameAttribute = ((Element) it).getNameAttribute();
-              boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_nameAttribute, SchemaBuilder.this.rootElementName);
-              _operator_and = BooleanExtensions.operator_and(_operator_and_1, _operator_notEquals);
+              boolean _notEquals = (!Objects.equal(_nameAttribute, SchemaBuilder.this.rootElementName));
+              _and = (_and_1 && _notEquals);
             }
-            return _operator_and;
+            return _and;
           }
         };
       final Function1<Node,Boolean> predicate = _function;
       List<Node> _children = this.schema.getChildren();
       Iterable<Node> _filter = IterableExtensions.<Node>filter(_children, predicate);
-      List<Node> _list = IterableExtensions.<Node>toList(_filter);
-      final List<Node> elements = _list;
+      final List<Node> elements = IterableExtensions.<Node>toList(_filter);
       List<Node> _children_1 = this.schema.getChildren();
       boolean _removeAll = _children_1.removeAll(elements);
       _xblockexpression = (_removeAll);
@@ -92,7 +89,7 @@ public class SchemaBuilder {
     T _xblockexpression = null;
     {
       List<Node> _children = this.schema.getChildren();
-      CollectionExtensions.<T>operator_add(_children, node);
+      _children.add(node);
       _xblockexpression = (node);
     }
     return _xblockexpression;

@@ -1,7 +1,5 @@
 package org.s23m.cell.communication.xml;
 
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-
 @SuppressWarnings("all")
 public class NamespaceExtensions {
   public static String xmlns(final String name) {
@@ -10,8 +8,8 @@ public class NamespaceExtensions {
   }
   
   public static String qualifiedName(final String namespacePrefix, final String name) {
-    String _operator_plus = StringExtensions.operator_plus(namespacePrefix, ":");
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, name);
-    return _operator_plus_1;
+    String _plus = (namespacePrefix + ":");
+    String _plus_1 = (_plus + name);
+    return _plus_1;
   }
 }

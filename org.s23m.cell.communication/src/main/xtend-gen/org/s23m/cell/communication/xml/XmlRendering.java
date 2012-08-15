@@ -5,9 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.model.dom.CompositeNode;
@@ -47,8 +45,7 @@ public class XmlRendering {
   
   private static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
-    Iterable<? extends Node> _children = node.getChildren();
-    final Iterable<? extends Node> children = _children;
+    final Iterable<? extends Node> children = node.getChildren();
     _builder.newLineIfNotEmpty();
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
     _builder.append(_renderPrefix, "");
@@ -62,8 +59,8 @@ public class XmlRendering {
         _builder.newLineIfNotEmpty();
         {
           for(final Node n : children) {
-            int _operator_plus = IntegerExtensions.operator_plus(level, 1);
-            CharSequence _render = XmlRendering.render(n, _operator_plus);
+            int _plus = (level + 1);
+            CharSequence _render = XmlRendering.render(n, _plus);
             _builder.append(_render, "");
             _builder.newLineIfNotEmpty();
           }
@@ -78,47 +75,47 @@ public class XmlRendering {
   
   private static CharSequence _render(final StringElement node, final int level) {
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
-    String _operator_plus = StringExtensions.operator_plus(_renderPrefix, ">");
+    String _plus = (_renderPrefix + ">");
     String _text = node.getText();
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _text);
+    String _plus_1 = (_plus + _text);
     String _renderSuffix = XmlRendering.renderSuffix(node);
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _renderSuffix);
-    return _operator_plus_2;
+    String _plus_2 = (_plus_1 + _renderSuffix);
+    return _plus_2;
   }
   
   private static CharSequence _render(final Node node, final int level) {
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
-    String _operator_plus = StringExtensions.operator_plus(_renderPrefix, "/>");
-    return _operator_plus;
+    String _plus = (_renderPrefix + "/>");
+    return _plus;
   }
   
   private static String renderPrefix(final Node node, final int level) {
     String _whitespace = XmlRendering.whitespace(level);
-    String _operator_plus = StringExtensions.operator_plus(_whitespace, "<");
+    String _plus = (_whitespace + "<");
     String _name = XmlRendering.name(node);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
+    String _plus_1 = (_plus + _name);
     String _renderAttributes = XmlRendering.renderAttributes(node);
-    String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _renderAttributes);
-    return _operator_plus_2;
+    String _plus_2 = (_plus_1 + _renderAttributes);
+    return _plus_2;
   }
   
   private static String renderSuffix(final Node node, final int level) {
     String _whitespace = XmlRendering.whitespace(level);
     String _renderSuffix = XmlRendering.renderSuffix(node);
-    String _operator_plus = StringExtensions.operator_plus(_whitespace, _renderSuffix);
-    return _operator_plus;
+    String _plus = (_whitespace + _renderSuffix);
+    return _plus;
   }
   
   private static String renderSuffix(final Node node) {
     String _name = XmlRendering.name(node);
-    String _operator_plus = StringExtensions.operator_plus("</", _name);
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ">");
-    return _operator_plus_1;
+    String _plus = ("</" + _name);
+    String _plus_1 = (_plus + ">");
+    return _plus_1;
   }
   
   private static String whitespace(final int level) {
-    int _operator_multiply = IntegerExtensions.operator_multiply(level, XmlRendering.INDENTATION);
-    String _repeat = StringUtils.repeat(_operator_multiply, " ");
+    int _multiply = (level * XmlRendering.INDENTATION);
+    String _repeat = StringUtils.repeat(_multiply, " ");
     return _repeat;
   }
   
@@ -136,8 +133,7 @@ public class XmlRendering {
       StringBuilder _stringBuilder = new StringBuilder();
       final StringBuilder builder = _stringBuilder;
       Map<String,String> _attributes = node.getAttributes();
-      Set<Entry<String,String>> _entrySet = _attributes.entrySet();
-      final Set<Entry<String,String>> entrySet = _entrySet;
+      final Set<Entry<String,String>> entrySet = _attributes.entrySet();
       for (final Entry<String,String> entry : entrySet) {
         {
           builder.append(" ");

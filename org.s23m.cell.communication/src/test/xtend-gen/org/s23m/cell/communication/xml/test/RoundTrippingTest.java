@@ -14,7 +14,6 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Test;
 import org.s23m.cell.Identity;
@@ -68,22 +67,18 @@ public class RoundTrippingTest extends TestCase {
   private Set set;
   
   public void setUp() {
-      S23MPlatform.boot();
-      Set _createSet = this.createSet();
-      this.set = _createSet;
+    S23MPlatform.boot();
+    Set _createSet = this.createSet();
+    this.set = _createSet;
   }
   
   @Test
   public void testSerialisationRoundTrip() {
-      ArtifactSet _createInstanceModel = this.createInstanceModel();
-      final ArtifactSet artifactSetModel = _createInstanceModel;
-      String _render = XmlRendering.render(artifactSetModel);
-      final String xml = _render;
-      ArtifactSet _deserialise = this.deserialise(xml);
-      final ArtifactSet deserialised = _deserialise;
-      String _render_1 = XmlRendering.render(deserialised);
-      final String renderedDeserialisedModel = _render_1;
-      Assert.assertEquals(xml, renderedDeserialisedModel);
+    final ArtifactSet artifactSetModel = this.createInstanceModel();
+    final String xml = XmlRendering.render(artifactSetModel);
+    final ArtifactSet deserialised = this.deserialise(xml);
+    final String renderedDeserialisedModel = XmlRendering.render(deserialised);
+    Assert.assertEquals(xml, renderedDeserialisedModel);
   }
   
   private ArtifactSet deserialise(final String xml) {
@@ -91,20 +86,16 @@ public class RoundTrippingTest extends TestCase {
     {
       XmlSchemaFactory _xmlSchemaFactory = new XmlSchemaFactory();
       final XmlSchemaFactory schemaFactory = _xmlSchemaFactory;
-      XmlSchemaTerminology _instance = DefaultXmlSchemaTerminology.getInstance();
-      final XmlSchemaTerminology terminology = _instance;
-      Schema _createSchema = schemaFactory.createSchema(terminology);
-      final Schema schema = _createSchema;
-      SAXParserFactory _newInstance = SAXParserFactory.newInstance();
-      final SAXParserFactory factory = _newInstance;
+      final XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
+      final Schema schema = schemaFactory.createSchema(terminology);
+      final SAXParserFactory factory = SAXParserFactory.newInstance();
       factory.setNamespaceAware(true);
       factory.setSchema(schema);
       ArtifactSet _xtrycatchfinallyexpression = null;
       try {
         ArtifactSet _xblockexpression_1 = null;
         {
-          SAXParser _newSAXParser = factory.newSAXParser();
-          final SAXParser saxParser = _newSAXParser;
+          final SAXParser saxParser = factory.newSAXParser();
           byte[] _bytes = xml.getBytes(Charsets.UTF_8);
           ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
           final ByteArrayInputStream is = _byteArrayInputStream;
@@ -141,19 +132,16 @@ public class RoundTrippingTest extends TestCase {
     ArtifactSet _xblockexpression = null;
     {
       final Namespace s23m = NamespaceConstants.NS_S23M;
-      XmlSchemaTerminology _instance = DefaultXmlSchemaTerminology.getInstance();
-      final XmlSchemaTerminology terminology = _instance;
+      final XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
       final Set language = CellPlatformAgent.cellMetaLanguage;
       InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, language);
       final InstanceBuilder builder = _instanceBuilder;
-      ArtifactSet _artifactSet = builder.artifactSet();
-      final ArtifactSet result = _artifactSet;
+      final ArtifactSet result = builder.artifactSet();
       SemanticIdentityIdentityReference _semanticIdentity = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category = builder.category(this.set);
       ContainerIdentityReference _container = builder.container(this.set);
       IsAbstractIdentityReference _isAbstract = builder.isAbstract(this.set);
-      Model _model = builder.model(_semanticIdentity, _category, _container, _isAbstract);
-      final Model model = _model;
+      final Model model = builder.model(_semanticIdentity, _category, _container, _isAbstract);
       SemanticIdentityIdentityReference _semanticIdentity_1 = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category_1 = builder.category(this.set);
       IsAbstractIdentityReference _isAbstract_1 = builder.isAbstract(this.set);
@@ -194,8 +182,7 @@ public class RoundTrippingTest extends TestCase {
       OperatorExtensions.operator_add(model, _command);
       SemanticIdentityIdentityReference _semanticIdentity_7 = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category_7 = builder.category(this.set);
-      Query _query = builder.query(_semanticIdentity_7, _category_7);
-      final Query query = _query;
+      final Query query = builder.query(_semanticIdentity_7, _category_7);
       SemanticIdentityIdentityReference _semanticIdentity_8 = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category_8 = builder.category(this.set);
       Parameter _parameter = builder.parameter(_semanticIdentity_8, _category_8);
@@ -224,14 +211,13 @@ public class RoundTrippingTest extends TestCase {
       IdempotentMethodInvocationHandler _idempotentMethodInvocationHandler_2 = new IdempotentMethodInvocationHandler(org.s23m.cell.api.Query.vertex);
       final IdempotentMethodInvocationHandler valueHandler = _idempotentMethodInvocationHandler_2;
       MethodDescriptor _methodDescriptor = new MethodDescriptor("identity");
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _operator_mappedTo = ObjectExtensions.<MethodDescriptor, IdempotentMethodInvocationHandler>operator_mappedTo(_methodDescriptor, identityHandler);
+      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor, identityHandler);
       MethodDescriptor _methodDescriptor_1 = new MethodDescriptor("category");
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _operator_mappedTo_1 = ObjectExtensions.<MethodDescriptor, IdempotentMethodInvocationHandler>operator_mappedTo(_methodDescriptor_1, categoryHandler);
-      MethodDescriptor _methodDescriptor_2 = new MethodDescriptor("value", org.s23m.cell.Set.class);
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _operator_mappedTo_2 = ObjectExtensions.<MethodDescriptor, IdempotentMethodInvocationHandler>operator_mappedTo(_methodDescriptor_2, valueHandler);
-      HashMap<MethodDescriptor,IdempotentMethodInvocationHandler> _newHashMap = CollectionLiterals.<MethodDescriptor, IdempotentMethodInvocationHandler>newHashMap(_operator_mappedTo, _operator_mappedTo_1, _operator_mappedTo_2);
-      final HashMap<MethodDescriptor,IdempotentMethodInvocationHandler> handlers = _newHashMap;
-      Set _createInstance = GenericFactory.<Set>createInstance(org.s23m.cell.Set.class, handlers);
+      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo_1 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_1, categoryHandler);
+      MethodDescriptor _methodDescriptor_2 = new MethodDescriptor("value", Set.class);
+      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo_2 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_2, valueHandler);
+      final HashMap<MethodDescriptor,IdempotentMethodInvocationHandler> handlers = CollectionLiterals.<MethodDescriptor, IdempotentMethodInvocationHandler>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
+      Set _createInstance = GenericFactory.<Set>createInstance(Set.class, handlers);
       _xblockexpression = (_createInstance);
     }
     return _xblockexpression;
@@ -240,10 +226,8 @@ public class RoundTrippingTest extends TestCase {
   private MockIdentity createIdentity() {
     MockIdentity _xblockexpression = null;
     {
-      UUID _randomUUID = UUID.randomUUID();
-      final UUID identifier = _randomUUID;
-      UUID _randomUUID_1 = UUID.randomUUID();
-      final UUID uniqueRepresentationReference = _randomUUID_1;
+      final UUID identifier = UUID.randomUUID();
+      final UUID uniqueRepresentationReference = UUID.randomUUID();
       MockIdentity _mockIdentity = new MockIdentity(identifier, uniqueRepresentationReference);
       _xblockexpression = (_mockIdentity);
     }
