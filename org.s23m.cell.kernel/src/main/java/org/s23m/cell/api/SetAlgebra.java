@@ -53,4 +53,7 @@ public class SetAlgebra {
 	public static Set anEmptySet() {
 		return  F_SetAlgebra.anEmptySet();
 	}
+	public static Set addElementToOrderedSet(final Set orderedSet, final Set element) {
+		return  F_SetAlgebra.addElementToOrderedSet(orderedSet, element);
+	}
 }
