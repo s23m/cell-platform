@@ -93,6 +93,7 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.minimumCardinality(), new MinimumCardinalityIdentityReferenceProcessor())
 	        .put(terminology.model(), new ModelProcessor())
 	        .put(terminology.parameter(), new ParameterProcessor())
+	        .put(terminology.payload(), new PayloadProcessor())
 	        .put(terminology.query(), new QueryProcessor())
 	        .put(terminology.semanticDomain(), new SemanticDomainProcessor())
 	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())

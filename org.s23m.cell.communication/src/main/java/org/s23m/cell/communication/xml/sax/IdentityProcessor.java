@@ -4,7 +4,9 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Identity;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
 import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.xml.sax.Attributes;
 
 public class IdentityProcessor implements SaxElementProcessor<Identity> {
@@ -30,10 +32,8 @@ public class IdentityProcessor implements SaxElementProcessor<Identity> {
 
 	@Override
 	public void endElement(Node removed, Node top, String textContent) {
-		if (top instanceof Identity) {
-			StringElement removedElement = (StringElement) removed;
-			String removedElementContents = removedElement.getText();
-			((Identity) top).setPayload(removedElementContents);
+		if (top instanceof SemanticDomainNode) {
+			((SemanticDomainNode) top).addIdentity((Identity) removed);	
 		}
 	}
 

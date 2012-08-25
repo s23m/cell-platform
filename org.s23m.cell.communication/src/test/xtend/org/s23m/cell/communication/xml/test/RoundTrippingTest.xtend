@@ -115,7 +115,9 @@ class RoundTrippingTest extends TestCase {
 		structure.addQuery(query(builder, set))
 		structure.addSuperSetReference(superSetReference(builder, set))
 		
-		// TODO add identities
+		val identity = builder.identity(set)
+		identity.setPayload("contents")
+		semanticDomain.addIdentity(identity)
 		
 		result.addSemanticDomain(semanticDomain)
 		

@@ -67,6 +67,10 @@ public class Identity extends AbstractCompositeNode {
 	public void setPayload(String payloadContents) {
 		this.payload = new StringElement(namespace, terminology.payload(), payloadContents);
 	}
+	
+	public void setPayload(StringElement payload) {
+		this.payload = payload;
+	}
 
 	@Override
 	public Iterable<? extends Node> getChildren() {
