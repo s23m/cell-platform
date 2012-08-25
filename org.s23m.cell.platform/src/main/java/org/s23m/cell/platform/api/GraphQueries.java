@@ -33,46 +33,46 @@ public class GraphQueries {
 	 * QUERIES
 	 */
 
-		/**
-		 * Given a connected subgraph, produce an ordered set of vertices
-		 * in dependency order based on visibility arrows.
-		 *
-		 * See http://en.wikipedia.org/wiki/Topological_sorting
-		 */
-		public static Set topologicalVisibilitySort(final Set connectedSubgraph) {
-			return F_GraphQueries.topologicalVisibilitySort(connectedSubgraph);
-		}
+	/**
+	 * Given a connected subgraph, produce an ordered set of vertices
+	 * in dependency order based on visibility arrows.
+	 *
+	 * See http://en.wikipedia.org/wiki/Topological_sorting
+	 */
+	public static Set topologicalVisibilitySort(final Set connectedSubgraph) {
+		return F_GraphQueries.topologicalVisibilitySort(connectedSubgraph);
+	}
 
-		/**
-		 * Partitions a model into independent parts, based on its visibility arrows.
-		 *
-		 * This is equivalent to determining the set of weakly connected components in
-		 * a directed graph.
-		 *
-		 * See http://mathworld.wolfram.com/WeaklyConnectedComponent.html
-		 *
-		 * 1. filter all the vertices that don't have any visibilities attached
-		 *  (the content of these vertices can be serialised first). These are
-		 *  the "independent vertices" iVertices
-		 *  [look at edge-ends]
-		 *
-		 * 2. If the model is called M, define C as the complement of iVertices in M
-		 *
-		 * 3. Analyse C and partition C into as many disconnected subgraphs of
-		 *  vertices (connected via visibilities) as possible. The result will be
-		 *  subsets C1, .... Cn, with n >= 1
-		 *
-		 * 4. Each Ci above is a directed acyclic graph consisting of vertices and
-		 *  visibilities. We need to serialise the root first and then the next level down
-		 *  from the root.
-		 *
-		 */
-		public static Set partitionModelByVisibilityArrows(final Set model) {
-			return F_GraphQueries.partitionModelByVisibilityArrows(model);
-		}
+	/**
+	 * Partitions a model into independent parts, based on its visibility arrows.
+	 *
+	 * This is equivalent to determining the set of weakly connected components in
+	 * a directed graph.
+	 *
+	 * See http://mathworld.wolfram.com/WeaklyConnectedComponent.html
+	 *
+	 * 1. filter all the vertices that don't have any visibilities attached
+	 *  (the content of these vertices can be serialised first). These are
+	 *  the "independent vertices" iVertices
+	 *  [look at edge-ends]
+	 *
+	 * 2. If the model is called M, define C as the complement of iVertices in M
+	 *
+	 * 3. Analyse C and partition C into as many disconnected subgraphs of
+	 *  vertices (connected via visibilities) as possible. The result will be
+	 *  subsets C1, .... Cn, with n >= 1
+	 *
+	 * 4. Each Ci above is a directed acyclic graph consisting of vertices and
+	 *  visibilities. We need to serialise the root first and then the next level down
+	 *  from the root.
+	 *
+	 */
+	public static Set partitionModelByVisibilityArrows(final Set model) {
+		return F_GraphQueries.partitionModelByVisibilityArrows(model);
+	}
 
 
-		public static final Set filterConnectedComponents(final Set graph) {
-			return F_GraphQueries.filterConnectedComponents(graph);
-		}
+	public static final Set filterConnectedComponents(final Set graph) {
+		return F_GraphQueries.filterConnectedComponents(graph);
+	}
 }
