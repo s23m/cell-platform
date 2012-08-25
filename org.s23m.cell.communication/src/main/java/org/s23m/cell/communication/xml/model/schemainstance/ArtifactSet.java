@@ -55,7 +55,7 @@ public class ArtifactSet extends AbstractCompositeNode {
 		return language;
 	}
 
-	public void setLanguage(LanguageIdentityReference removed) {
+	public void setLanguage(LanguageIdentityReference language) {
 		this.language = language;
 	}
 	

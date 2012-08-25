@@ -116,13 +116,94 @@
 	</s23m:model>
 	
 	<s23m:semanticDomain>
-		<s23m:model>
+		<s23m:structure>
 			<s23m:semanticIdentity uniqueRepresentationReference="1" identifier="2"/>
 			<s23m:category uniqueRepresentationReference="3" identifier="4"/>
 			
 			<s23m:container uniqueRepresentationReference="5" identifier="6"/>
 			<s23m:isAbstract uniqueRepresentationReference="7" identifier="8"/>
-		</s23m:model>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:vertex>
+				<s23m:semanticIdentity uniqueRepresentationReference="9" identifier="10"/>
+				<s23m:category uniqueRepresentationReference="11" identifier="12"/>
+				
+				<s23m:isAbstract uniqueRepresentationReference="13" identifier="14"/>
+				<s23m:maximumCardinality uniqueRepresentationReference="15" identifier="16"/>
+			</s23m:vertex>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:visibility>
+				<s23m:semanticIdentity uniqueRepresentationReference="17" identifier="18"/>
+				<s23m:category uniqueRepresentationReference="19" identifier="20"/>			
+				
+				<s23m:isAbstract uniqueRepresentationReference="21" identifier="22"/>
+				<s23m:from uniqueRepresentationReference="23" identifier="24"/>
+				<s23m:to uniqueRepresentationReference="25" identifier="26"/>
+			</s23m:visibility>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:edge>
+				<s23m:semanticIdentity uniqueRepresentationReference="27" identifier="28"/>
+				<s23m:category uniqueRepresentationReference="29" identifier="30"/>
+				
+				<s23m:isAbstract uniqueRepresentationReference="31" identifier="32"/>
+				<s23m:from>
+					<s23m:semanticIdentity uniqueRepresentationReference="33" identifier="34"/>
+					<s23m:category uniqueRepresentationReference="35" identifier="36"/>
+					
+					<s23m:isAbstract uniqueRepresentationReference="37" identifier="38"/>
+					<s23m:minimumCardinality uniqueRepresentationReference="39" identifier="40"/>
+					<s23m:maximumCardinality uniqueRepresentationReference="41" identifier="42"/>
+					<s23m:isContainer uniqueRepresentationReference="43" identifier="44"/>
+					<s23m:isNavigable uniqueRepresentationReference="45" identifier="46"/>
+				</s23m:from>
+				<s23m:to>
+					<s23m:semanticIdentity uniqueRepresentationReference="47" identifier="48"/>
+					<s23m:category uniqueRepresentationReference="49" identifier="50"/>			
+				
+					<s23m:isAbstract uniqueRepresentationReference="51" identifier="52"/>
+					<s23m:minimumCardinality uniqueRepresentationReference="53" identifier="54"/>
+					<s23m:maximumCardinality uniqueRepresentationReference="55" identifier="56"/>
+					<s23m:isContainer uniqueRepresentationReference="57" identifier="58"/>
+					<s23m:isNavigable uniqueRepresentationReference="59" identifier="60"/>
+				</s23m:to>				
+			</s23m:edge>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:superSetReference>
+				<s23m:semanticIdentity uniqueRepresentationReference="61" identifier="62"/>
+				<s23m:category uniqueRepresentationReference="63" identifier="64"/>
+				
+				<s23m:isAbstract uniqueRepresentationReference="65" identifier="66"/>
+				<s23m:from uniqueRepresentationReference="67" identifier="68"/>
+				<s23m:to uniqueRepresentationReference="69" identifier="70"/>			
+			</s23m:superSetReference>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:command>
+				<s23m:semanticIdentity uniqueRepresentationReference="71" identifier="72"/>
+				<s23m:category uniqueRepresentationReference="73" identifier="74"/>
+				
+				<!-- minOccurs="0" maxOccurs="unbounded" -->
+				<s23m:parameter>
+					<s23m:semanticIdentity uniqueRepresentationReference="75" identifier="76"/>
+					<s23m:category uniqueRepresentationReference="77" identifier="78"/>
+				</s23m:parameter>
+			</s23m:command>
+			
+			<!-- minOccurs="0" maxOccurs="unbounded" -->
+			<s23m:query>
+				<s23m:semanticIdentity uniqueRepresentationReference="79" identifier="80"/>
+				<s23m:category uniqueRepresentationReference="81" identifier="82"/>
+				
+				<!-- minOccurs="0" maxOccurs="unbounded" -->
+				<s23m:parameter>
+					<s23m:semanticIdentity uniqueRepresentationReference="83" identifier="84"/>
+					<s23m:category uniqueRepresentationReference="85" identifier="86"/>
+				</s23m:parameter>			
+			</s23m:query>
+		</s23m:structure>
 		<!-- minOccurs="0" maxOccurs="unbounded" -->
 		<s23m:identity identifier="identifier" name="name" pluralName="pluralName" technicalName="technicalName">
 			<s23m:payload>Some text</s23m:payload>

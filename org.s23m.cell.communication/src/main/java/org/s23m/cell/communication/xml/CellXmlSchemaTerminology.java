@@ -182,6 +182,12 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	}
 
 	@Override
+	public String structure() {
+		// TODO add to languages
+		return "structure";
+	}
+	
+	@Override
 	public String technicalName() {
 		return nameOf(S23MSemanticDomains.technicalName);
 	}

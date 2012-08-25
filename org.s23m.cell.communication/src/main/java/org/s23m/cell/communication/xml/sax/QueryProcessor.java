@@ -29,6 +29,7 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.xml.sax.Attributes;
 
 public class QueryProcessor implements SaxElementProcessor<Query> {
@@ -42,6 +43,8 @@ public class QueryProcessor implements SaxElementProcessor<Query> {
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Model) {
 			((Model) top).addQuery((Query) removed);
+		} else if (top instanceof Structure) {
+			((Structure) top).addQuery((Query) removed);
 		}
 	}
 

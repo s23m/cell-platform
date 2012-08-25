@@ -5,6 +5,7 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Command;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.xml.sax.Attributes;
 
 public class CommandProcessor implements SaxElementProcessor<Command> {
@@ -18,6 +19,8 @@ public class CommandProcessor implements SaxElementProcessor<Command> {
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Model) {
 			((Model) top).addCommand((Command) removed);
+		} else if (top instanceof Structure) {
+			((Structure) top).addCommand((Command) removed);
 		}
 	}
 

@@ -33,6 +33,7 @@ public interface XmlSchemaTerminology {
 	String container();
 	String edge();
 	String from();
+	String identity();
 	String identifier();
 	String isAbstract();
 	String isContainer();
@@ -41,22 +42,20 @@ public interface XmlSchemaTerminology {
 	String maximumCardinality();
 	String minimumCardinality();
 	String model();
+	String name();
 	String parameter();
+	String payload();
+	String pluralName();
 	String query();
 	String semanticDomain();
 	String semanticIdentity();
+	String structure();
 	String superSetReference();
+	String technicalName();
 	String to();
 	String uniqueRepresentationReference();
 	String vertex();
 	String visibility();
-	
-	// TODO incorporate these into instance domain model
-	String identity();
-	String name();
-	String payload();
-	String pluralName();
-	String technicalName();
 	
 	/* Schema-only concepts */
 	String category();

@@ -92,23 +92,69 @@ class RoundTrippingTest extends TestCase {
 			builder.container(set),
 			builder.isAbstract(set)
 		)
+		model += vertex(builder, set)
+		model += visibility(builder, set)
+		model += edge(builder, set)
+		model += command(builder, set)
+		model += query(builder, set)
+		model += superSetReference(builder, set)
+		result.addModel(model)
 		
-		model += builder.vertex(
+		val semanticDomain = builder.semanticDomain(
 			builder.semanticIdentity(set),
 			builder.category(set),
-			builder.isAbstract(set),
-			builder.maxCardinality(set)
+			builder.container(set),
+			builder.isAbstract(set)
 		)
+		val structure = semanticDomain.structure
 		
-		model += builder.visibility(
+		structure.addVertex(vertex(builder, set))
+		structure.addVisibility(visibility(builder, set))
+		structure.addEdge(edge(builder, set))
+		structure.addCommand(command(builder, set))
+		structure.addQuery(query(builder, set))
+		structure.addSuperSetReference(superSetReference(builder, set))
+		
+		// TODO add identities
+		
+		result.addSemanticDomain(semanticDomain)
+		
+		result
+	}
+	
+	def private superSetReference(InstanceBuilder builder, Set set) { 
+		builder.superSetReference(
 			builder.semanticIdentity(set),
 			builder.category(set),
 			builder.isAbstract(set),
 			builder.from(set),
 			builder.to(set)
 		)
+	}
+	
+	def private query(InstanceBuilder builder, Set set) { 
+		val query = builder.query(
+			builder.semanticIdentity(set),
+			builder.category(set)
+		)
 		
-		model += builder.edge(
+		query.addParameter(builder.parameter(
+			builder.semanticIdentity(set),
+			builder.category(set)
+		))
+		
+		query
+	}
+	
+	def private command(InstanceBuilder builder, Set set) { 
+		builder.command(
+			builder.semanticIdentity(set),
+			builder.category(set)
+		)
+	}
+	
+	def private edge(InstanceBuilder builder, Set set) { 
+		builder.edge(
 			builder.semanticIdentity(set),
 			builder.category(set),
 			builder.isAbstract(set),
@@ -133,34 +179,25 @@ class RoundTrippingTest extends TestCase {
 				builder.isNavigable(set)
 			)
 		)
-		
-		model += builder.command(
-			builder.semanticIdentity(set),
-			builder.category(set)
-		)
-		
-		val query = builder.query(
-			builder.semanticIdentity(set),
-			builder.category(set)
-		)
-		
-		query.addParameter(builder.parameter(
-			builder.semanticIdentity(set),
-			builder.category(set)
-		))
-		
-		model += query
-		
-		model += builder.superSetReference(
+	}
+	
+	def private visibility(InstanceBuilder builder, Set set) { 
+		builder.visibility(
 			builder.semanticIdentity(set),
 			builder.category(set),
 			builder.isAbstract(set),
 			builder.from(set),
 			builder.to(set)
 		)
-		
-		result.addModel(model)
-		result
+	}
+	
+	def private vertex(InstanceBuilder builder, Set set) { 
+		builder.vertex(
+			builder.semanticIdentity(set),
+			builder.category(set),
+			builder.isAbstract(set),
+			builder.maxCardinality(set)
+		)
 	}
 	
 	def private createSet() {

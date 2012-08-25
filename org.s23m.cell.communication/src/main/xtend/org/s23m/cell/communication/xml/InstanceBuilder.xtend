@@ -30,6 +30,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter
 import org.s23m.cell.communication.xml.model.schemainstance.Identity
 import org.s23m.cell.communication.xml.model.schemainstance.LanguageIdentityReference
+import org.s23m.cell.communication.xml.model.schemainstance.Structure
 
 class InstanceBuilder {
 	
@@ -54,6 +55,10 @@ class InstanceBuilder {
 		result.setAttribute(xmlns(INSTANCE_NAMESPACE_PREFIX), INSTANCE_SCHEMA_URI)
 		result.setAttribute(xmlns(S23M), S23M_SCHEMA_URI)
 		result
+	}
+	
+	def structure() {
+		new Structure(namespace, terminology)
 	}
 	
 	/* Model */
@@ -81,6 +86,30 @@ class InstanceBuilder {
 		result.setContainer(container)
 		result.setIsAbstract(isAbstract)
 			
+		result
+	}
+	
+	/* Semantic Domain */
+	
+	def semanticDomain(Set set) {
+		val semanticIdentity = semanticIdentity(set)
+		val category = category(set)
+		val container = container(set)
+		val isAbstract = isAbstract(set)		
+		semanticDomain(semanticIdentity, category, container, isAbstract)
+	}
+	
+	def semanticDomain(SemanticIdentityIdentityReference semanticIdentity,
+					CategoryIdentityReference category,
+					ContainerIdentityReference container,
+					IsAbstractIdentityReference isAbstract) {
+		val result = new org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode(namespace, terminology)
+		val s = structure()
+		s.setSemanticIdentity(semanticIdentity)
+		s.setCategory(category)
+		s.setContainer(container)
+		s.setIsAbstract(isAbstract)
+		result.setStructure(s)
 		result
 	}
 	
@@ -431,13 +460,7 @@ class InstanceBuilder {
 			identityTriple.nameAttribute
 		)		
 	}
-	
-	/* Semantic Domain */
-	
-	def semanticDomain() {
-		new org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode(namespace, terminology)
-	}
-	
+		
 	def identity(Set set) {
 		val result = new Identity(namespace, terminology)
 		val identity = set.identity()

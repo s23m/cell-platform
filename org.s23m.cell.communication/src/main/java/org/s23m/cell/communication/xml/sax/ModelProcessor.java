@@ -42,7 +42,7 @@ public class ModelProcessor implements SaxElementProcessor<Model> {
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof ArtifactSet) {
 			((ArtifactSet) top).addModel((Model) removed);	
-		}		
+		}
 	}
 
 }

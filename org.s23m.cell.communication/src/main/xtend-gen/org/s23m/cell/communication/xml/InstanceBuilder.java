@@ -27,6 +27,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
@@ -66,6 +67,11 @@ public class InstanceBuilder {
     return _xblockexpression;
   }
   
+  public Structure structure() {
+    Structure _structure = new Structure(this.namespace, this.terminology);
+    return _structure;
+  }
+  
   /**
    * Model
    */
@@ -93,6 +99,38 @@ public class InstanceBuilder {
       result.setCategory(category);
       result.setContainer(container);
       result.setIsAbstract(isAbstract);
+      _xblockexpression = (result);
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * Semantic Domain
+   */
+  public SemanticDomainNode semanticDomain(final Set set) {
+    SemanticDomainNode _xblockexpression = null;
+    {
+      final SemanticIdentityIdentityReference semanticIdentity = this.semanticIdentity(set);
+      final CategoryIdentityReference category = this.category(set);
+      final ContainerIdentityReference container = this.container(set);
+      final IsAbstractIdentityReference isAbstract = this.isAbstract(set);
+      SemanticDomainNode _semanticDomain = this.semanticDomain(semanticIdentity, category, container, isAbstract);
+      _xblockexpression = (_semanticDomain);
+    }
+    return _xblockexpression;
+  }
+  
+  public SemanticDomainNode semanticDomain(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
+    SemanticDomainNode _xblockexpression = null;
+    {
+      SemanticDomainNode _semanticDomainNode = new SemanticDomainNode(this.namespace, this.terminology);
+      final SemanticDomainNode result = _semanticDomainNode;
+      final Structure s = this.structure();
+      s.setSemanticIdentity(semanticIdentity);
+      s.setCategory(category);
+      s.setContainer(container);
+      s.setIsAbstract(isAbstract);
+      result.setStructure(s);
       _xblockexpression = (result);
     }
     return _xblockexpression;
@@ -502,14 +540,6 @@ public class InstanceBuilder {
       _xblockexpression = (_isNavigableIdentityReference);
     }
     return _xblockexpression;
-  }
-  
-  /**
-   * Semantic Domain
-   */
-  public SemanticDomainNode semanticDomain() {
-    SemanticDomainNode _semanticDomainNode = new SemanticDomainNode(this.namespace, this.terminology);
-    return _semanticDomainNode;
   }
   
   public Identity identity(final Set set) {

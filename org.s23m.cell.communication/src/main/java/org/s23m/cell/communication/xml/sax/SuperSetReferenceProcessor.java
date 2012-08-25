@@ -4,6 +4,7 @@ import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.xml.sax.Attributes;
 
@@ -18,6 +19,8 @@ public class SuperSetReferenceProcessor implements SaxElementProcessor<SuperSetR
 	public void endElement(Node removed, Node top, String textContent) {
 		if (top instanceof Model) {
 			((Model) top).addSuperSetReference((SuperSetReference) removed);
+		} else if (top instanceof Structure) {
+			((Structure) top).addSuperSetReference((SuperSetReference) removed);
 		}
 	}
 

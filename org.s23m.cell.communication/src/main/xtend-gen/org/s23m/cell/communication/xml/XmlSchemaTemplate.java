@@ -42,6 +42,7 @@ public class XmlSchemaTemplate {
       final String query = terminology.query();
       final String function = terminology.function();
       final String artifactSet = terminology.artifactSet();
+      final String structure = terminology.structure();
       SchemaBuilder _schemaBuilder = new SchemaBuilder(artifactSet);
       final SchemaBuilder builder = _schemaBuilder;
       String _uuid = terminology.uuid();
@@ -195,9 +196,6 @@ public class XmlSchemaTemplate {
         };
       Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_7);
       final ComplexType graphComplexType = builder.complexType(graph, _withExtension_9);
-      Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType);
-      final ComplexType modelComplexType = builder.complexType(model, _withExtension_10);
-      final Element modelElement = builder.element(model, modelComplexType);
       String _identity = terminology.identity();
       String _identifier_1 = terminology.identifier();
       Attribute _mandatoryAttribute_2 = builder.mandatoryAttribute(_identifier_1, uuid);
@@ -217,11 +215,15 @@ public class XmlSchemaTemplate {
           }
         };
       final ComplexType identityComplexType = builder.complexType(_identity, _asList_1, _function_8);
+      Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType);
+      final ComplexType structureComplexType = builder.complexType(structure, _withExtension_10);
+      Extension _withExtension_11 = SchemaBuilder.withExtension(structureComplexType);
+      final ComplexType modelComplexType = builder.complexType(model, _withExtension_11);
       String _semanticDomain = terminology.semanticDomain();
       final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(modelElement);
+            Element _element = builder.element(structure, structureComplexType);
             _children.add(_element);
             List<Node> _children_1 = it.getChildren();
             String _identity = terminology.identity();
@@ -232,6 +234,7 @@ public class XmlSchemaTemplate {
       final ComplexType semanticDomainComplexType = builder.complexType(_semanticDomain, _function_9);
       String _language = terminology.language();
       final Element languageElement = builder.element(_language, identityReference);
+      final Element modelElement = builder.element(model, modelComplexType);
       final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             List<Node> _children = it.getChildren();

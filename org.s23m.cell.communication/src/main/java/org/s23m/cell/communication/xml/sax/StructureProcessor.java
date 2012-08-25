@@ -22,14 +22,27 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.model.schemainstance;
+package org.s23m.cell.communication.xml.sax;
 
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.dom.Node;
+import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
+import org.xml.sax.Attributes;
 
-public class Model extends Structure {
+public class StructureProcessor implements SaxElementProcessor<Structure> {
 
-	public Model(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.model());
+	@Override
+	public Structure startElement(Namespace namespace, XmlSchemaTerminology terminology, Node top, Attributes attributes) {
+		return new Structure(namespace, terminology);
 	}
+
+	@Override
+	public void endElement(Node removed, Node top, String textContent) {
+		if (top instanceof SemanticDomainNode) {
+			((SemanticDomainNode) top).setStructure((Structure) removed);	
+		}
+	}
+
 }

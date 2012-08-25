@@ -36,8 +36,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public class SemanticDomainNode extends AbstractCompositeNode {
-	
-	private Model model;
+	// TODO consider extending Structure directly
+	private Structure structure;
 	
 	private final List<Identity> identityList;
 
@@ -46,12 +46,12 @@ public class SemanticDomainNode extends AbstractCompositeNode {
 		this.identityList = Lists.newArrayList();
 	}
 	
-	public void setModel(Model model) {
-		this.model = model;
+	public void setStructure(Structure structure) {
+		this.structure = structure;
 	}
 	
-	public Model getModel() {
-		return model;
+	public Structure getStructure() {
+		return structure;
 	}
 	
 	public void addIdentity(Identity identity) {
@@ -65,7 +65,7 @@ public class SemanticDomainNode extends AbstractCompositeNode {
 	@Override
 	public Iterable<? extends Node> getChildren() {
 		return Iterables.concat(
-			ImmutableList.of(model),
+			ImmutableList.of(structure),
 			identityList	
 		);
 	}

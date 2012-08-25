@@ -77,10 +77,16 @@
 
 	<xsd:complexType name="model">
 		<xsd:complexContent>
-			<xsd:extension base="s23m:graph"/>
+			<xsd:extension base="s23m:structure"/>
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<xsd:complexType name="structure">
+		<xsd:complexContent>
+			<xsd:extension base="s23m:graph"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
 	<xsd:complexType name="graph">
 		<xsd:complexContent>
 			<xsd:extension base="s23m:category">
@@ -190,7 +196,7 @@
 
 	<xsd:complexType name="semanticDomain">
 		<xsd:sequence>
-			<xsd:element ref="s23m:model"/>
+			<xsd:element ref="s23m:structure"/>
 			<xsd:element name="identity" type="s23m:identity" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>

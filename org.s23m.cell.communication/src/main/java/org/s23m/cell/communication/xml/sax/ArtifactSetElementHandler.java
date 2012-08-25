@@ -94,7 +94,9 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.model(), new ModelProcessor())
 	        .put(terminology.parameter(), new ParameterProcessor())
 	        .put(terminology.query(), new QueryProcessor())
+	        .put(terminology.semanticDomain(), new SemanticDomainProcessor())
 	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())
+	        .put(terminology.structure(), new StructureProcessor())
 	        .put(terminology.superSetReference(), new SuperSetReferenceProcessor())
 	        .put(terminology.to(), new ToProcessor())
 	        .put(terminology.vertex(), new VertexProcessor())
@@ -119,6 +121,9 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		final Node top = stack.isEmpty() ? null : stack.peek();
 		final SaxElementProcessor<?> processor = processors.get(localName);
+		if (processor == null) {
+			throw new IllegalStateException("No processor defined for '" + localName + "' element");
+		}
 		final Node element = processor.startElement(namespace, terminology, top, attributes);
 		stack.push(element);
 	}

@@ -27,9 +27,13 @@ package org.s23m.cell.communication.xml.model.schemainstance;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 
-public class Model extends Structure {
+public class Structure extends Graph {
 
-	public Model(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.model());
+	protected Structure(Namespace namespace, String name) {
+		super(namespace, name);
+	}
+
+	public Structure(Namespace namespace, XmlSchemaTerminology terminology) {
+		super(namespace, terminology.structure());
 	}
 }

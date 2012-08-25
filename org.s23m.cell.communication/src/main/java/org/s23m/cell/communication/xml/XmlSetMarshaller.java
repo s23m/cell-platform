@@ -37,6 +37,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Edge;
 import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
@@ -89,13 +90,12 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 		final ArtifactSet artifactSet = builder.artifactSet();
 		
 		for (final Set containedInstance : graph.filterInstances()) {
-			Model model = serialiseModel(builder, containedInstance);
-			artifactSet.addModel(model);
+			serialiseModel(artifactSet, builder, containedInstance);			
 		}
 		
 		final Set containedSemanticDomains = Instantiation.toSemanticDomain(graph).filterPolymorphic(SemanticDomain.semanticdomain);
 		for (final Set semanticDomain : containedSemanticDomains) {
-			artifactSet.addSemanticDomain(serialiseSemanticDomain(builder, semanticDomain));
+			serialiseSemanticDomain(artifactSet, builder, semanticDomain);
 		}
 		
 		return XmlRendering.render(artifactSet).toString();
@@ -108,72 +108,73 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 		return null;
 	}
 
-	private Model serialiseModel(InstanceBuilder builder, Set model) {
-		if (isSuperSetOf(Agency.agent, model.category()) || isSuperSetOf(Agency.stage, model.category())) {
+	private void serialiseModel(ArtifactSet parent, InstanceBuilder builder, Set set) {
+		if (isSuperSetOf(Agency.agent, set.category()) || isSuperSetOf(Agency.stage, set.category())) {
 			// cover potential polymorphic extensions of Agent and Stage (these could become a variability)
-			
-			// TODO how does this apply in the case of models? 
-			//serialiseSemanticDomain(builder, Instantiation.toSemanticDomain(model));
+			final Set semanticDomain = Instantiation.toSemanticDomain(set);
+			serialiseSemanticDomain(parent, builder, semanticDomain);
 		}
-		Model structure = serialiseStructure(builder, model);
-		return structure;
+		final Model model = builder.model(set);
+		populateStructure(builder, model, set);
+		
+		parent.addModel(model);
 	}
 
-	private SemanticDomainNode serialiseSemanticDomain(InstanceBuilder builder, Set semanticDomain) {
-		final SemanticDomainNode result = builder.semanticDomain(); 
+	private void serialiseSemanticDomain(ArtifactSet parent, InstanceBuilder builder, Set set) {
+		final SemanticDomainNode semanticDomain = builder.semanticDomain(set);
 		
 		// serialise identities
-		Set orderedSetOfSemanticIdentities = semanticDomain.filterPolymorphic(SemanticDomain.semanticIdentity);
+		final Set orderedSetOfSemanticIdentities = set.filterPolymorphic(SemanticDomain.semanticIdentity);
 		for (Set semanticIdentitySet: orderedSetOfSemanticIdentities) {
 			Identity identity = builder.identity(semanticIdentitySet);
-			result.addIdentity(identity);	
+			semanticDomain.addIdentity(identity);	
 		}
 		
-		final Model model = serialiseStructure(builder, semanticDomain);
-		result.setModel(model);
-		return result;
+		final Structure structure = populateStructure(builder, builder.structure(), set);
+		semanticDomain.setStructure(structure);
+		
+		parent.addSemanticDomain(semanticDomain);
 	}
 
-	private Model serialiseStructure(InstanceBuilder builder, Set model) {
-		final Model result = builder.model(model);
+	private Structure populateStructure(InstanceBuilder builder, Structure container, Set structure) {
 		
 		// process Vertex list
-		for (Set vertexInstance : model.filterProperClass(Query.vertex)) {
+		for (Set vertexInstance : structure.filterProperClass(Query.vertex)) {
 			Vertex vertex = builder.vertex(vertexInstance);
-			result.addVertex(vertex);
+			container.addVertex(vertex);
 		}
 		
 		// process Edge list
-		for (Set edgeInstance : model.filterProperClass(Query.edge)) {
+		for (Set edgeInstance : structure.filterProperClass(Query.edge)) {
 			Edge edge = builder.edge(edgeInstance);
-			result.addEdge(edge);
+			container.addEdge(edge);
 		}
 		
 		// process Visibility list
-		for (Set visibilityInstance : model.filterProperClass(Query.visibility)) {
+		for (Set visibilityInstance : structure.filterProperClass(Query.visibility)) {
 			Visibility visibility = builder.visibility(visibilityInstance);
-			result.addVisibility(visibility);
+			container.addVisibility(visibility);
 		}
 		
 		// process SuperSetReference list
-		for (Set superSetReferenceInstance : model.filterProperClass(Query.superSetReference)) {
+		for (Set superSetReferenceInstance : structure.filterProperClass(Query.superSetReference)) {
 			SuperSetReference superSetReference = builder.superSetReference(superSetReferenceInstance);
-			result.addSuperSetReference(superSetReference);
+			container.addSuperSetReference(superSetReference);
 		}
 		
 		// process Command list
-		for (Set commandInstance : model.filter(S23MSemanticDomains.command)) {
+		for (Set commandInstance : structure.filter(S23MSemanticDomains.command)) {
 			Command command = builder.command(commandInstance);
-			result.addCommand(command);
+			container.addCommand(command);
 		}
 		
 		// process Query list
-		for (Set queryInstance : model.filter(S23MSemanticDomains.query)) {
+		for (Set queryInstance : structure.filter(S23MSemanticDomains.query)) {
 			org.s23m.cell.communication.xml.model.schemainstance.Query query = builder.query(queryInstance);
-			result.addQuery(query);
+			container.addQuery(query);
 		}
 		
-		return result;
+		return container;
 	}
 	
 	private boolean isSuperSetOf(Set set, Set candidateSuperSet) {

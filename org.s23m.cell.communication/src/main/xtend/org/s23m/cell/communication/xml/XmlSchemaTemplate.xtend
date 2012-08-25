@@ -57,6 +57,7 @@ class XmlSchemaTemplate {
 		val query = terminology.query
 		val function = terminology.function
 		val artifactSet = terminology.artifactSet
+		val structure = terminology.structure 
 		
 		val builder = new SchemaBuilder(artifactSet)
 	
@@ -139,10 +140,6 @@ class XmlSchemaTemplate {
 			children += builder.element(query, queryComplexType, ZERO_TO_MANY)
 		]))
 		
-		val modelComplexType = builder.complexType(model, withExtension(graphComplexType))
-		
-		val modelElement = builder.element(model, modelComplexType)
-		
 		val identityComplexType = builder.complexType(terminology.identity,
 			asList(
 				builder.mandatoryAttribute(terminology.identifier, uuid),
@@ -154,13 +151,19 @@ class XmlSchemaTemplate {
 			]
 		)
 
+		val structureComplexType = builder.complexType(structure, withExtension(graphComplexType))
+		
+		val modelComplexType = builder.complexType(model, withExtension(structureComplexType))
+		
 		/* Encoding of semantic domain artifacts */
 		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, [
-			children += builder.element(modelElement)
+			children += builder.element(structure, structureComplexType)
 			children += builder.element(terminology.identity, identityComplexType, ZERO_TO_MANY)
 		])
 		
 		val languageElement = builder.element(terminology.language, identityReference)
+		
+		val modelElement = builder.element(model, modelComplexType)
 		
 		val artifactSetComplexType = builder.complexType(artifactSet, [
 			children += builder.element(languageElement)
