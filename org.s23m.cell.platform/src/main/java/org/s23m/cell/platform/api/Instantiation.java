@@ -38,9 +38,9 @@ import org.s23m.cell.core.F_Instantiation;
 import org.s23m.cell.core.F_InstantiationImpl;
 import org.s23m.cell.core.Graph;
 import org.s23m.cell.impl.SemanticDomainCode;
-import org.s23m.cell.platform.models.Agency;
-import org.s23m.cell.platform.models.CellEngineering;
-import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.Agency;
+import org.s23m.cell.platform.api.models.CellEngineering;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 public class Instantiation {
 

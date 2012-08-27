@@ -31,16 +31,16 @@ import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.api.CellQueries;
 import org.s23m.cell.platform.api.Instantiation;
+import org.s23m.cell.platform.api.models.Agency;
+import org.s23m.cell.platform.api.models.CellEngineering;
+import org.s23m.cell.platform.api.models.CellPlatformAgent;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.Language;
+import org.s23m.cell.platform.api.models.LogicalFormula;
+import org.s23m.cell.platform.api.models.Organization;
+import org.s23m.cell.platform.api.models.SessionHandling;
+import org.s23m.cell.platform.api.models.ValidityInterval;
 import org.s23m.cell.platform.impl.F_CellQueries;
-import org.s23m.cell.platform.models.Agency;
-import org.s23m.cell.platform.models.CellEngineering;
-import org.s23m.cell.platform.models.CellPlatformAgent;
-import org.s23m.cell.platform.models.CellPlatformDomain;
-import org.s23m.cell.platform.models.Language;
-import org.s23m.cell.platform.models.LogicalFormula;
-import org.s23m.cell.platform.models.Organization;
-import org.s23m.cell.platform.models.SessionHandling;
-import org.s23m.cell.platform.models.ValidityInterval;
 
 public class AgencyTestFoundation {
 

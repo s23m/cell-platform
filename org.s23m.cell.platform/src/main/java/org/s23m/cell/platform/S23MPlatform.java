@@ -27,7 +27,7 @@ package org.s23m.cell.platform;
 import org.s23m.cell.api.KernelSets;
 import org.s23m.cell.api.ProperClasses;
 import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
-import org.s23m.cell.platform.models.CellPlatform;
+import org.s23m.cell.platform.api.models.CellPlatform;
 
 /**
  * {@link F_SemanticStateOfInMemoryModel} provides access to the Sets and Properties of the S23M kernel

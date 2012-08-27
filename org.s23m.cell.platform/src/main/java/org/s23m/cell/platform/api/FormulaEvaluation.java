@@ -34,6 +34,11 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_InstantiationImpl;
 import org.s23m.cell.core.OrderedSet;
 import org.s23m.cell.platform.S23MPlatform;
+import org.s23m.cell.platform.api.models.CellEngineering;
+import org.s23m.cell.platform.api.models.CellPlatformAgent;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.Formula;
+import org.s23m.cell.platform.api.models.LogicalFormula;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.And;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Contains;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Empty;
@@ -42,11 +47,6 @@ import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.EqualsTo
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Not;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Or;
 import org.s23m.cell.platform.formulaProcessors.informationqualitylogic.Xor;
-import org.s23m.cell.platform.models.CellEngineering;
-import org.s23m.cell.platform.models.CellPlatformAgent;
-import org.s23m.cell.platform.models.CellPlatformDomain;
-import org.s23m.cell.platform.models.Formula;
-import org.s23m.cell.platform.models.LogicalFormula;
 
 public class FormulaEvaluation {
 

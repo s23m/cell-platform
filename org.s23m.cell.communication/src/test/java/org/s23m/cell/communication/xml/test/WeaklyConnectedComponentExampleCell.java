@@ -32,9 +32,9 @@ import java.util.Queue;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
 import org.s23m.cell.platform.api.Instantiation;
-import org.s23m.cell.platform.models.CellEngineering;
+import org.s23m.cell.platform.api.models.CellEngineering;
+import org.s23m.cell.platform.api.models.Organization;
 
-import org.s23m.cell.platform.models.Organization;
 import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 import org.s23m.cell.Set;
 import static org.s23m.cell.S23MKernel.coreGraphs;

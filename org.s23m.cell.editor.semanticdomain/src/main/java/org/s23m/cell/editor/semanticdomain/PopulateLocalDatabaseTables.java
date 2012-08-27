@@ -25,7 +25,7 @@
 package org.s23m.cell.editor.semanticdomain;
 
 import org.s23m.cell.S23MKernel;
-import org.s23m.cell.platform.models.CellPlatform;
+import org.s23m.cell.platform.api.models.CellPlatform;
 import org.s23m.cell.repository.client.RepositoryClient;
 import org.s23m.cell.repository.client.mediator.RepositoryClientMediator;
 import org.s23m.cell.serialization.container.ArtefactContainer;

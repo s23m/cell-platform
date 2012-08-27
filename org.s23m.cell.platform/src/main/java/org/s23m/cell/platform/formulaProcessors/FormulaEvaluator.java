@@ -1,8 +1,8 @@
 package org.s23m.cell.platform.formulaProcessors;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.platform.models.CellPlatformAgent;
-import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.CellPlatformAgent;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 
 public  class FormulaEvaluator {

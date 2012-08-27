@@ -39,7 +39,7 @@ import org.s23m.cell.editor.semanticdomain.EditorIcon;
 import org.s23m.cell.editor.semanticdomain.data.DetailsData;
 import org.s23m.cell.editor.semanticdomain.data.TreeContainer;
 import org.s23m.cell.editor.semanticdomain.data.TreeNode;
-import org.s23m.cell.platform.models.CellPlatform;
+import org.s23m.cell.platform.api.models.CellPlatform;
 import org.s23m.cell.repository.client.RepositoryClient;
 import org.s23m.cell.repository.client.mediator.RepositoryClientMediator;
 import org.s23m.cell.serialization.container.ArtefactContainer;

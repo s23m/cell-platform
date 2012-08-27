@@ -34,7 +34,7 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
-import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
