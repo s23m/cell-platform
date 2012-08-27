@@ -226,8 +226,10 @@ public class CellPlatformDomain {
 	public static final Set agent_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("agent_to_nativeLanguage", "set of agent_to_nativeLanguage", cellPlatformDomain);
 	public static final Set cell_to_nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("cell_to_nativeLanguage", "set of cell_to_nativeLanguage", cellPlatformDomain);
 
-	public static final Set cellMetaLanguage = Instantiation.addSemanticIdentitySet("cell metalanguage", "cell metalanguage", cellPlatformDomain);
+	public static final Set cellMetaLanguage = Instantiation.addSemanticIdentitySet("Cell Meta", "Cell Meta", cellPlatformDomain);
+	public static final Set codingLanguage = Instantiation.addDisjunctSemanticIdentitySet("Coding", "Coding", cellPlatformDomain);
 
+	public static final Set xmlLanguage = Instantiation.addDisjunctSemanticIdentitySet("XML", "XML", cellPlatformDomain);
 	public static final Set javaLanguage = Instantiation.addDisjunctSemanticIdentitySet("Java", "Java", cellPlatformDomain);
 	public static final Set sqlLanguage = Instantiation.addDisjunctSemanticIdentitySet("SQL", "SQL", cellPlatformDomain);
 	public static final Set englishLanguage = Instantiation.addDisjunctSemanticIdentitySet("English", "English", cellPlatformDomain);

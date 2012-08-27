@@ -43,6 +43,9 @@ public final class CellPlatformAgent {
 	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
 	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
 	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.cellMetaLanguage);
+	public static final Set codingLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.codingLanguage);
+
+	public static final Set xmlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.xmlLanguage);
 	public static final Set javaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaLanguage);
 	public static final Set sqlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.sqlLanguage);
 	public static final Set englishLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.englishLanguage);
