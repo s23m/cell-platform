@@ -2,4 +2,4 @@ target
 bin
 *.class
 .history
-._trace
+*._trace
