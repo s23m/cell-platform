@@ -150,6 +150,27 @@ public class CellPlatformDomain {
 	public static final Set xaverwiesmann = Instantiation.addDisjunctSemanticIdentitySet("Xaver Wiesmann", "Xaver Wiesmann", cellPlatformDomain);
 
 	public static final Set perspective_cellplatform_kernel = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_kernel", "perspective_cellplatform_kernel", cellPlatformDomain);
+	public static final Set perspective_technology = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_coding", "perspective_cellplatform_coding", cellPlatformDomain);
+	public static final Set technology_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("technology_to_jargon", "technology_to_jargon", cellPlatformDomain);
+	public static final Set perspective_xmlProcessor = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_xml", "perspective_cellplatform_xml", cellPlatformDomain);
+	public static final Set xmlProcessor_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("xmlProcessor_to_jargon", "xmlProcessor_to_jargon", cellPlatformDomain);
+	public static final Set perspective_javaVirtualMachine = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_java", "perspective_cellplatform_java", cellPlatformDomain);
+	public static final Set javaVirtualMachine_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("javaVirtualMachine_to_jargon", "javaVirtualMachine_to_jargon", cellPlatformDomain);
+	public static final Set perspective_sqlDatabase = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_sql", "perspective_cellplatform_sql", cellPlatformDomain);
+	public static final Set sqlDatabase_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("sqlDatabase_to_jargon", "sqlDatabase_to_jargon", cellPlatformDomain);
+
+	public static final Set origin = Instantiation.addDisjunctSemanticIdentitySet("origin", "origins", cellPlatformDomain);
+	public static final Set derivation = Instantiation.addDisjunctSemanticIdentitySet("derivation", "derivations", cellPlatformDomain);
+
+	public static final Set transformBlanksToNoCharacter = Instantiation.addDisjunctSemanticIdentitySet("transformBlanksToNoCharacter", "transformBlanksToNoCharacter", cellPlatformDomain);
+	public static final Set transformBlanksToMinus = Instantiation.addDisjunctSemanticIdentitySet("transformBlanksToMinus", "transformBlanksToMinus", cellPlatformDomain);
+	public static final Set transformBlanksToUnderscore = Instantiation.addDisjunctSemanticIdentitySet("transformBlanksToUnderscore", "transformBlanksToUnderscore", cellPlatformDomain);
+	public static final Set transformFirstCharacterOfAllWordsToUpper = Instantiation.addDisjunctSemanticIdentitySet("transformFirstCharacterOfAllWordsToUpper", "transformFirstCharacterOfAllWordsToUpper", cellPlatformDomain);
+	public static final Set transformFirstCharacterOfAllWordsToLower = Instantiation.addDisjunctSemanticIdentitySet("transformFirstCharacterOfAllWordsToLower", "transformFirstCharacterOfAllWordsToLower", cellPlatformDomain);
+	public static final Set transformFirstCharacterToLower = Instantiation.addDisjunctSemanticIdentitySet("transformFirstCharacterToLower", "transformFirstCharacterToLower", cellPlatformDomain);
+	public static final Set transformAllToLower = Instantiation.addDisjunctSemanticIdentitySet("transformAllToLower", "transformAllToLower", cellPlatformDomain);
+	public static final Set transformAllToUpper = Instantiation.addDisjunctSemanticIdentitySet("transformAllToUpper", "transformAllToUpper", cellPlatformDomain);
+
 
 	public static final Set lifeCycle = Instantiation.addDisjunctSemanticIdentitySet("life cycle", "life cycles", cellPlatformDomain);
 	public static final Set state = Instantiation.addDisjunctSemanticIdentitySet("state", "states", cellPlatformDomain);

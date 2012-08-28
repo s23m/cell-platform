@@ -52,6 +52,11 @@ public final class CellPlatformAgent {
 	public static final Set deutschLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.deutschLanguage);
 	public static final Set koreanLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.koreanLanguage);
 
+	public static final Set technology = org.s23m.cell.platform.api.Instantiation.addAgent("Technology", "Technology");
+	public static final Set xmlProcessor = org.s23m.cell.platform.api.Instantiation.addAgent("XML Processor", "XML Processor");
+	public static final Set javaVirtualMachine = org.s23m.cell.platform.api.Instantiation.addAgent("Java VM", "Java VM");
+	public static final Set sqlDatabase = org.s23m.cell.platform.api.Instantiation.addAgent("SQL DB", "SQL DB");
+
 	public static final Set	v1 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), cellMetaLanguage);
 
 	public static final Set s23mNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
@@ -143,6 +148,130 @@ public final class CellPlatformAgent {
 			s23mCellKernel,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
 			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set perspective_technology = Instantiation.arrow(Agency.perspective,
+			CellPlatformDomain.perspective_technology,
+			S23MSemanticDomains.from,
+			s23mCellPlatform,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.to,
+			technology,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set technology_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+			CellPlatformDomain.technology_to_jargon,
+			CellPlatformDomain.perspective,
+			perspective_technology,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			codingLanguage,
+			S23MSemanticDomains.minCardinality_1,
+			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set perspective_xmlProcessor = Instantiation.arrow(Agency.perspective,
+			CellPlatformDomain.perspective_xmlProcessor,
+			S23MSemanticDomains.from,
+			s23mCellPlatform,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.to,
+			xmlProcessor,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set xmlProcessor_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+			CellPlatformDomain.xmlProcessor_to_jargon,
+			CellPlatformDomain.perspective,
+			perspective_xmlProcessor,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			xmlLanguage,
+			S23MSemanticDomains.minCardinality_1,
+			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set perspective_javaVirtualMachine = Instantiation.arrow(Agency.perspective,
+			CellPlatformDomain.perspective_javaVirtualMachine,
+			S23MSemanticDomains.from,
+			s23mCellPlatform,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.to,
+			javaVirtualMachine,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set javaVirtualMachine_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+			CellPlatformDomain.javaVirtualMachine_to_jargon,
+			CellPlatformDomain.perspective,
+			perspective_javaVirtualMachine,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			javaLanguage,
+			S23MSemanticDomains.minCardinality_1,
+			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+
+	public static final Set perspective_sqlDatabase = Instantiation.arrow(Agency.perspective,
+			CellPlatformDomain.perspective_sqlDatabase,
+			S23MSemanticDomains.from,
+			s23mCellPlatform,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			S23MSemanticDomains.to,
+			sqlDatabase,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.is_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set sqlDatabase_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+			CellPlatformDomain.sqlDatabase_to_jargon,
+			CellPlatformDomain.perspective,
+			perspective_sqlDatabase,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			sqlLanguage,
+			S23MSemanticDomains.minCardinality_1,
+			S23MSemanticDomains.maxCardinality_1,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
