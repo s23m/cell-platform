@@ -39,7 +39,7 @@ import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
 import org.s23m.cell.kernel.testbench.KernelTestSequence;
 import org.s23m.cell.kernel.testbench.TestSequence;
-import org.s23m.cell.platform.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 public class Test {
 

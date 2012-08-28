@@ -23,7 +23,7 @@
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
 
-package org.s23m.cell.platform.models;
+package org.s23m.cell.platform.api.models;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 

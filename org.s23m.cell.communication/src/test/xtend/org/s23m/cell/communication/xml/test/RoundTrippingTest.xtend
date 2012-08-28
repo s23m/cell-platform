@@ -24,7 +24,7 @@ import org.s23m.cell.communication.xml.XmlRendering
 import org.s23m.cell.communication.xml.XmlSchemaFactory
 import org.s23m.cell.communication.xml.InstanceBuilder
 
-import org.s23m.cell.platform.models.CellPlatformAgent
+import org.s23m.cell.platform.api.models.CellPlatformAgent
 
 class RoundTrippingTest extends TestCase {
 	

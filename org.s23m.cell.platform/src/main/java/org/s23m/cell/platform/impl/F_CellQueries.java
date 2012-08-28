@@ -6,14 +6,14 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_InstantiationImpl;
 import org.s23m.cell.platform.S23MPlatform;
-import org.s23m.cell.platform.models.Agency;
-import org.s23m.cell.platform.models.CellEngineering;
-import org.s23m.cell.platform.models.CellPlatformAgent;
-import org.s23m.cell.platform.models.CellPlatformDomain;
-import org.s23m.cell.platform.models.Language;
-import org.s23m.cell.platform.models.Legal;
-import org.s23m.cell.platform.models.Organization;
-import org.s23m.cell.platform.models.Terminology;
+import org.s23m.cell.platform.api.models.Agency;
+import org.s23m.cell.platform.api.models.CellEngineering;
+import org.s23m.cell.platform.api.models.CellPlatformAgent;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
+import org.s23m.cell.platform.api.models.Language;
+import org.s23m.cell.platform.api.models.Legal;
+import org.s23m.cell.platform.api.models.Organization;
+import org.s23m.cell.platform.api.models.Terminology;
 
 
 public  class F_CellQueries {

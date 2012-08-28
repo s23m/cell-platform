@@ -42,8 +42,8 @@ import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
 import org.s23m.cell.platform.api.Instantiation;
-import org.s23m.cell.platform.models.Agency;
-import org.s23m.cell.platform.models.CellPlatformAgent;
+import org.s23m.cell.platform.api.models.Agency;
+import org.s23m.cell.platform.api.models.CellPlatformAgent;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<String> {
