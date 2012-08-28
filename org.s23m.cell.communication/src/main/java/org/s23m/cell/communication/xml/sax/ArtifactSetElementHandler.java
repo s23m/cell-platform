@@ -47,8 +47,6 @@ import com.google.common.collect.ImmutableMap;
  * the last event occurred. It provides useful methods such as getLineNumber()
  * and getColumnNumber()"
  * 
- * TODO change schema to use attributes for 'scalar' values
- * 
  * TODO use a "cursor" pointing to the current top-level element being processed,
  * to avoid instanceof checks. Would need a state machine to be defined. See
  * http://www.jamesh.id.au/articles/libxml-sax/libxml-sax.html
@@ -97,7 +95,6 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	        .put(terminology.query(), new QueryProcessor())
 	        .put(terminology.semanticDomain(), new SemanticDomainProcessor())
 	        .put(terminology.semanticIdentity(), new SemanticIdentityIdentityReferenceProcessor())
-	        .put(terminology.structure(), new StructureProcessor())
 	        .put(terminology.superSetReference(), new SuperSetReferenceProcessor())
 	        .put(terminology.to(), new ToProcessor())
 	        .put(terminology.vertex(), new VertexProcessor())
@@ -117,7 +114,6 @@ public class ArtifactSetElementHandler extends DefaultHandler {
 	public void endDocument() throws SAXException {
 	}
 
-	// TODO pass attributes on to SaxElementProcessors
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		final Node top = stack.isEmpty() ? null : stack.peek();

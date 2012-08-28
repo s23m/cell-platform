@@ -5,8 +5,6 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 import org.s23m.cell.communication.xml.model.schemainstance.Identity;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
-import org.s23m.cell.communication.xml.model.schemainstance.StringElement;
-import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.xml.sax.Attributes;
 
 public class IdentityProcessor implements SaxElementProcessor<Identity> {
@@ -36,5 +34,4 @@ public class IdentityProcessor implements SaxElementProcessor<Identity> {
 			((SemanticDomainNode) top).addIdentity((Identity) removed);	
 		}
 	}
-
 }

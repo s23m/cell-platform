@@ -156,10 +156,9 @@ class XmlSchemaTemplate {
 		val modelComplexType = builder.complexType(model, withExtension(structureComplexType))
 		
 		/* Encoding of semantic domain artifacts */
-		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, [
-			children += builder.element(structure, structureComplexType)
+		val semanticDomainComplexType = builder.complexType(terminology.semanticDomain, withExtension(structureComplexType, [
 			children += builder.element(terminology.identity, identityComplexType, ZERO_TO_MANY)
-		])
+		]))
 		
 		val languageElement = builder.element(terminology.language, identityReference)
 		

@@ -130,8 +130,7 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 			semanticDomain.addIdentity(identity);	
 		}
 		
-		final Structure structure = populateStructure(builder, builder.structure(), set);
-		semanticDomain.setStructure(structure);
+		populateStructure(builder, semanticDomain, set);
 		
 		parent.addSemanticDomain(semanticDomain);
 	}

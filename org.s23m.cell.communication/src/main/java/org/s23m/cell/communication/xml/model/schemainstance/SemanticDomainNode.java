@@ -27,17 +27,13 @@ package org.s23m.cell.communication.xml.model.schemainstance;
 import java.util.List;
 
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.s23m.cell.communication.xml.model.dom.AbstractCompositeNode;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.dom.Node;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-public class SemanticDomainNode extends AbstractCompositeNode {
-	// TODO consider extending Structure directly
-	private Structure structure;
+public class SemanticDomainNode extends Structure {
 	
 	private final List<Identity> identityList;
 
@@ -45,15 +41,7 @@ public class SemanticDomainNode extends AbstractCompositeNode {
 		super(namespace, terminology.semanticDomain());
 		this.identityList = Lists.newArrayList();
 	}
-	
-	public void setStructure(Structure structure) {
-		this.structure = structure;
-	}
-	
-	public Structure getStructure() {
-		return structure;
-	}
-	
+		
 	public void addIdentity(Identity identity) {
 		identityList.add(identity);
 	}
@@ -61,12 +49,13 @@ public class SemanticDomainNode extends AbstractCompositeNode {
 	public List<Identity> getIdentityList() {
 		return identityList;
 	}
-
+	
 	@Override
-	public Iterable<? extends Node> getChildren() {
+	protected Iterable<? extends Node> getAdditionalChildren() {
+		Iterable<? extends Node> currentChildren = super.getAdditionalChildren();
 		return Iterables.concat(
-			ImmutableList.of(structure),
-			identityList	
+			currentChildren,
+			identityList
 		);
 	}
 }

@@ -24,16 +24,11 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.communication.xml.model.schemainstance;
 
-import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 
-public class Structure extends Graph {
+public abstract class Structure extends Graph {
 
 	protected Structure(Namespace namespace, String name) {
 		super(namespace, name);
-	}
-
-	public Structure(Namespace namespace, XmlSchemaTerminology terminology) {
-		super(namespace, terminology.structure());
 	}
 }

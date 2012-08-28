@@ -195,10 +195,13 @@
 	<!-- Encoding of semantic domain artifacts -->
 
 	<xsd:complexType name="semanticDomain">
-		<xsd:sequence>
-			<xsd:element ref="s23m:structure"/>
-			<xsd:element name="identity" type="s23m:identity" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="s23m:structure">
+				<xsd:sequence>
+					<xsd:element name="identity" type="s23m:identity" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>	
+		</xsd:complexContent>
 	</xsd:complexType>
 
 	<xsd:complexType name="identity">

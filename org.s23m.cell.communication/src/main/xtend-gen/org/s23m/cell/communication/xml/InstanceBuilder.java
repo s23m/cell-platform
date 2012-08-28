@@ -27,7 +27,6 @@ import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticIdentityIdentityReference;
-import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.ToIdentityReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
@@ -65,11 +64,6 @@ public class InstanceBuilder {
       _xblockexpression = (result);
     }
     return _xblockexpression;
-  }
-  
-  public Structure structure() {
-    Structure _structure = new Structure(this.namespace, this.terminology);
-    return _structure;
   }
   
   /**
@@ -125,12 +119,10 @@ public class InstanceBuilder {
     {
       SemanticDomainNode _semanticDomainNode = new SemanticDomainNode(this.namespace, this.terminology);
       final SemanticDomainNode result = _semanticDomainNode;
-      final Structure s = this.structure();
-      s.setSemanticIdentity(semanticIdentity);
-      s.setCategory(category);
-      s.setContainer(container);
-      s.setIsAbstract(isAbstract);
-      result.setStructure(s);
+      result.setSemanticIdentity(semanticIdentity);
+      result.setCategory(category);
+      result.setContainer(container);
+      result.setIsAbstract(isAbstract);
       _xblockexpression = (result);
     }
     return _xblockexpression;
