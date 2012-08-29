@@ -53,7 +53,9 @@ object GmodelBuild extends Build {
     kernel,
     kernelTestbench,
     platform,
-    platformTestscripts,
+	
+    platformTests,
+	platformTestscripts,
     kernelTests
 	
 	//artifactpool,
@@ -109,6 +111,14 @@ object GmodelBuild extends Build {
     file ("org.s23m.cell.platform"),
     settings = javaProjectSettings
   ) dependsOn (kernel)
+  
+  lazy val platformTests = Project(
+	"platform-tests",
+    file ("org.s23m.cell.platform.tests"),
+    settings = javaTestProjectSettings ++ Seq(
+	    libraryDependencies ++= Seq( JUnit )
+	)
+  ) dependsOn (kernel, platform)
 
   lazy val platformTestscripts = Project(
     "platform-testscripts",
