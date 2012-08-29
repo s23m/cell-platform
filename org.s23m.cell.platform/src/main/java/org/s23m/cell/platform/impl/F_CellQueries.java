@@ -5,6 +5,7 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.F_InstantiationImpl;
+import org.s23m.cell.core.F_SetAlgebra;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.models.Agency;
 import org.s23m.cell.platform.api.models.CellEngineering;
@@ -124,7 +125,7 @@ public  class F_CellQueries {
 	public static final Set perspectiveLanguage(final Set perspective) {
 		final Set perspectiveLanguageContainerV = perspective.filter(Agency.perspectiveV);
 		if (perspectiveLanguageContainerV.size() > 0) {
-			final Set perspectiveLanguageContainer = perspectiveLanguageContainerV.extractFirst().filter(Agency.perspective_to_jargon).filterTo();
+			final Set perspectiveLanguageContainer = perspectiveLanguageContainerV.extractFirst().filter(Agency.perspective_to_jargons).filterTo();
 			if (perspectiveLanguageContainer.size() > 0) {
 				return perspectiveLanguageContainer.extractFirst();
 			} else {
@@ -134,6 +135,24 @@ public  class F_CellQueries {
 			return F_CellQueries.nativeLanguage(perspective.from());
 		}
 	}
+	/* perspectiveLanguages(final Set perspective) returns a set containing more than one jargon */
+	/* if the target of the perspective requires the use of multiple jargons. */
+	/* For example, in the case of the perspective P from some agent onto the JVM [agent], */
+	/* perspectiveLanguages(P) returns a set containing a Jargon for Java Classes, one for Java Members, one for Java Packages */
+	public static final Set perspectiveLanguages(final Set perspective) {
+		final Set perspectiveLanguageContainerV = perspective.filter(Agency.perspectiveV);
+		if (perspectiveLanguageContainerV.size() > 0) {
+			final Set perspectiveLanguageContainer = perspectiveLanguageContainerV.extractFirst().filter(Agency.perspective_to_jargons).filterTo();
+			if (perspectiveLanguageContainer.size() > 0) {
+				return perspectiveLanguageContainer;
+			} else {
+				return F_SetAlgebra.wrapInOrderedSet(F_CellQueries.nativeLanguage(perspective.from()));
+			}
+		} else {
+			return F_SetAlgebra.wrapInOrderedSet(F_CellQueries.nativeLanguage(perspective.from()));
+		}
+	}
+
 
 	private static final Set cellLanguageContainer(final Set cell) {
 		final Set cellLanguageContainer = cell.filter(Organization.cell_to_nativeLanguage);
@@ -313,8 +332,14 @@ public  class F_CellQueries {
 	public static final String nameAsString(final Set name) {
 		return name.identity().name();
 	}
+	public static final String nameAsString(final Set name, final Set jargon) {
+		return F_NamingConventions.nameAsString(name, jargon);
+	}
 	public static final String pluralNameAsString(final Set name) {
 		return name.identity().pluralName();
+	}
+	public static final String pluralNameAsString(final Set name, final Set jargon) {
+		return F_NamingConventions.pluralNameAsString(name, jargon);
 	}
 
 	public static final Set abbreviations(final Set name, final Set language) {

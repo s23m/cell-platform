@@ -25,8 +25,8 @@ public class Scratch {
 
 		// The "cell meta language" is the human readable language used by the S23M kernel (equates to English) 
 		Set cellMetaLanguage = CellPlatformAgent.cellMetaLanguage;
-		Set javaLanguage = CellPlatformAgent.javaLanguage;
-		Set sqlLanguage = CellPlatformAgent.sqlLanguage;
+		Set javaLanguage = CellPlatformAgent.javaClassJargon;
+		Set sqlLanguage = CellPlatformAgent.sqlJargon;
 		Set englishLanguage = CellPlatformAgent.englishLanguage;
 		Set deutschLanguage = CellPlatformAgent.deutschLanguage;
 		Set koreanLanguage = CellPlatformAgent.koreanLanguage;

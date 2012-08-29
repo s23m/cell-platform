@@ -41,6 +41,7 @@ public class CellPlatform {
 		ValidityInterval.instantiateFeature();
 		TimeConsciousness.instantiateFeature();
 		Language.instantiateFeature();
+		Jargon.instantiateFeature();
 		Terminology.instantiateFeature();
 		Legal.instantiateFeature();
 		Organization.instantiateFeature();

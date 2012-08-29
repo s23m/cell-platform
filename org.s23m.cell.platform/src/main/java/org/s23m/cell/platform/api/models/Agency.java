@@ -73,8 +73,8 @@ public class Agency {
 	private static final Set v3 = Instantiation.arrow(coreGraphs.visibility, perspective, CellEngineering.language);
 	private static final Set v4 = Instantiation.arrow(coreGraphs.visibility, perspective, CellEngineering.jargon);
 
-	public static final Set perspective_to_jargon = Instantiation.arrow(coreGraphs.edge,
-			CellPlatformDomain.perspective_to_jargon,
+	public static final Set perspective_to_jargons = Instantiation.arrow(coreGraphs.edge,
+			CellPlatformDomain.perspective_to_jargons,
 			perspectiveV,
 			perspectiveV,
 			S23MSemanticDomains.minCardinality_0,
@@ -84,7 +84,7 @@ public class Agency {
 			CellPlatformDomain.jargon,
 			CellEngineering.language,
 			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.maxCardinality_n,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);

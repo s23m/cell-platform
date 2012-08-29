@@ -31,7 +31,6 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
-import org.s23m.cell.platform.S23MPlatform;
 
 /**
  * {@link CellEngineering} implements all instantiation semantics related to the modelling of container state machines
@@ -53,112 +52,6 @@ public final class CellEngineering {
 	public static final Set jargon = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.jargon);
 	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, jargon, language);
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, jargon, language);
-
-	public static final Set transformBlanksToNoCharacter = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformBlanksToNoCharacter,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformBlanksToMinus = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformBlanksToMinus,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformBlanksToUnderscore = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformBlanksToUnderscore,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformFirstCharacterOfAllWordsToUpper = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformFirstCharacterOfAllWordsToUpper,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformFirstCharacterToLower = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformFirstCharacterToLower,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformAllToLower = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformAllToLower,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
-	public static final Set transformAllToUpper = Instantiation.arrow(S23MPlatform.coreGraphs.edge,
-			CellPlatformDomain.transformAllToUpper,
-			CellPlatformDomain.derivation,
-			jargon,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
-			S23MSemanticDomains.isNavigable_FALSE,
-			S23MSemanticDomains.isContainer_FALSE,
-			CellPlatformDomain.origin,
-			language,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
-			S23MSemanticDomains.isNavigable_TRUE,
-			S23MSemanticDomains.isContainer_FALSE
-	);
 
 	public static final Set timeConsciousness = Root.cellengineering.addConcrete(coreGraphs.vertex, CellPlatformDomain.timeConsciousness);
 

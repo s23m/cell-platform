@@ -42,12 +42,14 @@ public final class CellPlatformAgent {
 	public static final Set development = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "development", "development");
 	public static final Set testing = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "test", "test");
 	public static final Set production = org.s23m.cell.platform.api.Instantiation.addStage(s23mCellPlatform, "production", "production");
-	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.cellMetaLanguage);
-	public static final Set codingLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.codingLanguage);
+	public static final Set cellMetaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.cellMetaLanguage);
+	public static final Set codingLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.codingLanguage);
 
-	public static final Set xmlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.xmlLanguage);
-	public static final Set javaLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaLanguage);
-	public static final Set sqlLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.sqlLanguage);
+	public static final Set xmlJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.xmlJargon);
+	public static final Set javaClassJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaClassJargon);
+	public static final Set javaMemberJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaMemberJargon);
+	public static final Set javaPackageJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaPackageJargon);
+	public static final Set sqlJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.sqlJargon);
 	public static final Set englishLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.englishLanguage);
 	public static final Set deutschLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.deutschLanguage);
 	public static final Set koreanLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.koreanLanguage);
@@ -167,18 +169,19 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set technology_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+	public static final Set perspective_technologyV = perspective_technology.addConcrete(coreGraphs.vertex, perspective_technology);
+	public static final Set technology_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.technology_to_jargon,
 			CellPlatformDomain.perspective,
-			perspective_technology,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
+			perspective_technologyV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.jargon,
 			codingLanguage,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
@@ -198,18 +201,19 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set xmlProcessor_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+	public static final Set perspective_xmlProcessorV = perspective_xmlProcessor.addConcrete(coreGraphs.vertex, perspective_xmlProcessor);
+	public static final Set xmlProcessor_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.xmlProcessor_to_jargon,
 			CellPlatformDomain.perspective,
-			perspective_xmlProcessor,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
+			perspective_xmlProcessorV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.jargon,
-			xmlLanguage,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			xmlJargon,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
@@ -229,18 +233,49 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set javaVirtualMachine_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
-			CellPlatformDomain.javaVirtualMachine_to_jargon,
+	public static final Set perspective_javaVirtualMachineV = perspective_javaVirtualMachine.addConcrete(coreGraphs.vertex, perspective_javaVirtualMachine);
+	public static final Set javaVirtualMachine_to_javaClassJargon = Instantiation.arrow(Agency.perspective_to_jargons,
+			CellPlatformDomain.javaVirtualMachine_to_classJargon,
 			CellPlatformDomain.perspective,
-			perspective_javaVirtualMachine,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
+			perspective_javaVirtualMachineV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.jargon,
-			javaLanguage,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			javaClassJargon,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set javaVirtualMachine_to_memberJargon = Instantiation.arrow(Agency.perspective_to_jargons,
+			CellPlatformDomain.javaVirtualMachine_to_memberJargon,
+			CellPlatformDomain.perspective,
+			perspective_javaVirtualMachineV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			javaMemberJargon,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+	);
+	public static final Set javaVirtualMachine_to_packageJargon = Instantiation.arrow(Agency.perspective_to_jargons,
+			CellPlatformDomain.javaVirtualMachine_to_packageJargon,
+			CellPlatformDomain.perspective,
+			perspective_javaVirtualMachineV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			CellPlatformDomain.jargon,
+			javaPackageJargon,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
@@ -260,18 +295,19 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set sqlDatabase_to_jargon = Instantiation.arrow(Agency.perspective_to_jargon,
+	public static final Set perspective_sqlDatabaseV = perspective_sqlDatabase.addConcrete(coreGraphs.vertex, perspective_sqlDatabase);
+	public static final Set sqlDatabase_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.sqlDatabase_to_jargon,
 			CellPlatformDomain.perspective,
-			perspective_sqlDatabase,
-			S23MSemanticDomains.minCardinality_0,
-			S23MSemanticDomains.maxCardinality_n,
+			perspective_sqlDatabaseV,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_FALSE,
 			S23MSemanticDomains.isContainer_FALSE,
 			CellPlatformDomain.jargon,
-			sqlLanguage,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			sqlJargon,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
@@ -300,13 +336,13 @@ public final class CellPlatformAgent {
 	private static final Set w6 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.visibility);
 	private static final Set w7 = cellMetaLanguage.addConcrete(Language.word, S23MPlatform.coreGraphs.superSetReference);
 
-	private static final Set w11 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedPair", "orderedPairs", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w12 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedSet", "orderedSets", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w13 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("graph", "graphs", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w14 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("vertex", "vertices", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w15 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("edge", "edges", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w16 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("visibility", "visibilities", Instantiation.toSemanticDomain(s23mCellPlatform)));
-	private static final Set w17 = javaLanguage.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("superSetReference", "superSetReferences", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w11 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedPair", "orderedPairs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w12 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("orderedSet", "orderedSets", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w13 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("graph", "graphs", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w14 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("vertex", "vertices", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w15 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("edge", "edges", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w16 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("visibility", "visibilities", Instantiation.toSemanticDomain(s23mCellPlatform)));
+	private static final Set w17 = javaClassJargon.addConcrete(Language.word, Instantiation.addDisjunctSemanticIdentitySet("superSetReference", "superSetReferences", Instantiation.toSemanticDomain(s23mCellPlatform)));
 	private static final Set w11e = w11.addConcrete(Language.word, w1);
 	private static final Set w12e = w12.addConcrete(Language.word, w2);
 	private static final Set w13e = w13.addConcrete(Language.word, w3);
@@ -366,9 +402,26 @@ public final class CellPlatformAgent {
 
 	static Set instantiateFeature() {
 
-
 		// additional semantics
+		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
+		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterToLower) ;
+		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
 
+		 javaPackageJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
+		 javaPackageJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+
+		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
+		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+
+		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
+		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterToLower) ;
+		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+
+		 sqlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToUpper) ;
+		 sqlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToUnderscore) ;
 
 		return s23mCellPlatform;
 	}
