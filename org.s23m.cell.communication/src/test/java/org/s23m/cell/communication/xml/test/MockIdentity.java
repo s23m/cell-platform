@@ -108,4 +108,16 @@ public class MockIdentity implements Identity {
 		return null;
 	}
 
+	@Override
+	public String codeName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pluralCodeName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
