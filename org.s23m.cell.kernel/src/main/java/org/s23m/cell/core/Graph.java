@@ -1037,6 +1037,33 @@ public class Graph extends OrderedPair implements Set {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		}
 	}
+	@Override
+	public Set assignNewCodeName(final String newCodeName) {
+		if (SemanticDomain.semanticIdentity.isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)) {
+			((IdentityImpl) this.identity()).assignNewCodeName(newCodeName);
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
+				this.hasNewName = true;
+				Graph.addSetToChangedSets(this);
+			}
+			return coreSets.successful;}
+		else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+		}
+	}
+
+	@Override
+	public Set assignNewPluralCodeName(final String newPluralCodeName) {
+		if (SemanticDomain.semanticIdentity.isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)) {
+			((IdentityImpl) this.identity()).assignNewPluralCodeName(newPluralCodeName);
+			if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
+				this.hasNewPluralName = true;
+				Graph.addSetToChangedSets(this);
+			}
+			return coreSets.successful;}
+		else {
+			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+		}
+	}
 
 	@Override
 	public Set assignNewPayload(final String newPayload) {

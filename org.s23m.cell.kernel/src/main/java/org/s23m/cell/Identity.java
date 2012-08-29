@@ -52,6 +52,22 @@ public interface Identity {
 	String pluralName();
 
 	/**
+	 * The name in the S23M "coding language", which is the machine-oriented counterpart
+	 * of the human-oriented S23M "meta language"
+	 * The codeName() is suitable for use as a name in textual programming languages
+	 * after applying appropriate naming conventions that replace whitespace and
+	 * address any required upper and lower case character conversion
+	 */
+	String codeName();
+	/**
+	 * The plural of codeName()
+	 */
+	String pluralCodeName();
+	/**
+	 * DEPRECATED
+	 * 
+	 * IS REPLACED BY codeName() and pluralCodeName()
+	 * 
 	 * Computes a technicalName that is suitable for use as a name in textual programming languages
 	 * In the multi-vocabulary edition of S23M, the result depends on the context in which the
 	 * getTechnicalName() is used.

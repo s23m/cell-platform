@@ -80,6 +80,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * this operation returns is_NOTAPPLICABLE for all sets that are not semantic identities
 	 */
 	Set assignNewName(String newName);
+	Set assignNewCodeName(String newCodeName);
 	Set assignNewPayload(String newPayload);
 	/**
 	 * assignNewPluralName(newName)
@@ -88,6 +89,7 @@ public interface ProperClassOfGraphs extends EventListener, Computation {
 	 * this operation returns is_NOTAPPLICABLE for all sets that are not semantic identities
 	 */
 	Set assignNewPluralName(String newPluralName);
+	Set assignNewPluralCodeName(String newPluralCodeName);
 	Set commands();
 	Set complement(Set set);
 

@@ -7,12 +7,12 @@ import org.s23m.cell.platform.api.models.Jargon;
 
 public  class F_NamingConventions {
 
-	public static final String nameAsString(final Set name, final Set jargon) {
-		return applyConventions(name.identity().name(), jargon.filter(Jargon.namingConvention));
+	public static final String codeNameAsString(final Set name, final Set jargon) {
+		return applyConventions(name.identity().codeName(), jargon.filter(Jargon.namingConvention));
 	}
 
-	public static final String pluralNameAsString(final Set name, final Set jargon) {
-		return applyConventions(name.identity().pluralName(), jargon.filter(Jargon.namingConvention));
+	public static final String pluralCodeNameAsString(final Set name, final Set jargon) {
+		return applyConventions(name.identity().pluralCodeName(), jargon.filter(Jargon.namingConvention));
 	}
 
 	private static final String applyConventions(final String name, final Set transformations) {

@@ -37,10 +37,14 @@ public class IdentityImpl implements Identity {
 	private UUID uniqueRepresentationReference;
 	private String name;
 	private String pluralName;
+	private String codeName;
+	private String pluralCodeName;
 	private String payload;
 	private boolean isPartOfUniversalCellConcept = false;
 	private String newName;
 	private String newPluralName;
+	private String newCodeName;
+	private String newPluralCodeName;
 
 
 	public static void initialize(final UUIDReservoirForKernel reservoir) {
@@ -51,6 +55,13 @@ public class IdentityImpl implements Identity {
 		super();
 		this.setName(name);
 		this.setPluralName(pluralName);
+		this.setCodeName(null);
+		this.setPluralCodeName(null);
+		this.newName = null;
+		this.newPluralName = null;
+		this.newCodeName = null;
+		this.newPluralCodeName = null;
+
 		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setIdentifier(UUID.randomUUID());
 			this.setUniqueRepresentationReference(identifier());
@@ -80,6 +91,12 @@ public class IdentityImpl implements Identity {
 		super();
 		this.setName(semanticIdentity.name());
 		this.setPluralName(semanticIdentity.pluralName());
+		this.setCodeName(null);
+		this.setPluralCodeName(null);
+		this.newName = null;
+		this.newPluralName = null;
+		this.newCodeName = null;
+		this.newPluralCodeName = null;
 		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setUniqueRepresentationReference(UUID.randomUUID());
 		} else {
@@ -93,6 +110,12 @@ public class IdentityImpl implements Identity {
 		this.setUniqueRepresentationReference(uniqueRepresentationReference);
 		this.setName(name);
 		this.setPluralName(pluralName);
+		this.setCodeName(null);
+		this.setPluralCodeName(null);
+		this.newName = null;
+		this.newPluralName = null;
+		this.newCodeName = null;
+		this.newPluralCodeName = null;
 	}
 
 	/* Implementation of semantics */
@@ -154,6 +177,13 @@ public class IdentityImpl implements Identity {
 	private void setPluralName(final String pluralName) {
 		this.pluralName = pluralName;
 	}
+	private void setCodeName(final String codeName) {
+		this.codeName = codeName;
+	}
+
+	private void setPluralCodeName(final String pluralCodeName) {
+		this.pluralCodeName = pluralCodeName;
+	}
 
 	public boolean isPartOfKernel() {
 		return kernelIdentityReservoir.isPartOfKernel(this.uniqueRepresentationReference);
@@ -181,26 +211,52 @@ public class IdentityImpl implements Identity {
 	public void assignNewPluralName(final String newPluralName) {
 		this.newPluralName = newPluralName;
 	}
+	public void assignNewCodeName(final String newCodeName) {
+		this.newCodeName = newCodeName;
+	}
+	public void assignNewPluralCodeName(final String newPluralCodeName) {
+		this.newPluralCodeName = newPluralCodeName;
+	}
 
 	public void commitNewName() {
 		this.name = this.newName;
+		this.codeName = this.newCodeName;
 	}
 
 	public void commitNewPluralName() {
 		this.pluralName = this.newPluralName;
+		this.pluralCodeName = this.newPluralCodeName;
 	}
 
 	public void rollbackNewName() {
 		this.newName = this.name;
+		this.newCodeName = this.codeName;
 	}
 
 	public void rollbackNewPluralName() {
 		this.newPluralName = this.pluralName;
+		this.newPluralCodeName = this.pluralCodeName;
 	}
 
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "< " + name + ": " + identifier + " >";
+	}
+
+	public String codeName() {
+		if (this.codeName == null) {
+			return name;
+		} else {
+			return codeName;
+		}
+	}
+
+	public String pluralCodeName() {
+		if (this.pluralCodeName == null) {
+			return pluralName;
+		} else {
+			return pluralCodeName;
+		}
 	}
 
 }

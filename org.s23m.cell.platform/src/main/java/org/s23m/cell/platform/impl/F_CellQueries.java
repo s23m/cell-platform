@@ -332,14 +332,14 @@ public  class F_CellQueries {
 	public static final String nameAsString(final Set name) {
 		return name.identity().name();
 	}
-	public static final String nameAsString(final Set name, final Set jargon) {
-		return F_NamingConventions.nameAsString(name, jargon);
+	public static final String codeNameAsString(final Set name, final Set jargon) {
+		return F_NamingConventions.codeNameAsString(name, jargon);
 	}
 	public static final String pluralNameAsString(final Set name) {
 		return name.identity().pluralName();
 	}
-	public static final String pluralNameAsString(final Set name, final Set jargon) {
-		return F_NamingConventions.pluralNameAsString(name, jargon);
+	public static final String pluralCodeNameAsString(final Set name, final Set jargon) {
+		return F_NamingConventions.pluralCodeNameAsString(name, jargon);
 	}
 
 	public static final Set abbreviations(final Set name, final Set language) {

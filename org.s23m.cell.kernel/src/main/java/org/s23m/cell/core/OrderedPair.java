@@ -389,6 +389,14 @@ public class OrderedPair implements Set {
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 	}
 
+	public Set assignNewCodeName(final String newCodeName) {
+		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+	}
+
+	public Set assignNewPluralCodeName(final String newPluralCodeName) {
+		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
+	}
+
 	public Set assignNewPayload(final String newPayload) {
 		return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 	}
