@@ -46,10 +46,16 @@ public final class CellPlatformAgent {
 	public static final Set codingLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.codingLanguage);
 
 	public static final Set xmlJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.xmlJargon);
+	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, xmlJargon, codingLanguage);
 	public static final Set javaClassJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaClassJargon);
+	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, javaClassJargon, codingLanguage);
 	public static final Set javaMemberJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaMemberJargon);
+	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, javaMemberJargon, codingLanguage);
 	public static final Set javaPackageJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.javaPackageJargon);
+	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, javaPackageJargon, codingLanguage);
 	public static final Set sqlJargon = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.jargon, CellPlatformDomain.sqlJargon);
+	private static final Set s5 = Instantiation.arrow(coreGraphs.superSetReference, sqlJargon, codingLanguage);
+
 	public static final Set englishLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.englishLanguage);
 	public static final Set deutschLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.deutschLanguage);
 	public static final Set koreanLanguage = production.filter(CellEngineering.language).extractFirst().addConcrete(CellEngineering.language, CellPlatformDomain.koreanLanguage);

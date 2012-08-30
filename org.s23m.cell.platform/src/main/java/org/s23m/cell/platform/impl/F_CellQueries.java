@@ -235,8 +235,10 @@ public  class F_CellQueries {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
 			} else {
-				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)
+					|| CellPlatformAgent.codingLanguage.isSuperSetOf(F_CellQueries.nativeLanguage(F_CellQueries.agent(session))).is_TRUE()) {
 					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+												// or the language is a jargon derived from the coding language
 				} else {
 					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
@@ -269,8 +271,10 @@ public  class F_CellQueries {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
 			} else {
-				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
-					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)
+					|| CellPlatformAgent.codingLanguage.isSuperSetOf(F_CellQueries.perspectiveLanguage(perspective)).is_TRUE()) {
+				return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+												// or the language is a jargon derived from the coding language
 				} else {
 					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
@@ -302,8 +306,10 @@ public  class F_CellQueries {
 					return cell.semanticIdentity(); // element of a semantic domain
 				}
 			} else {
-				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)) {
+				if (cellAgent.isEqualTo(CellPlatformAgent.s23mCellPlatform)
+						|| CellPlatformAgent.codingLanguage.isSuperSetOf(language).is_TRUE()) {
 					return cell.semanticIdentity(); // element of "cell platform : agent" model, never to be translated
+													// or the language is a jargon derived from the coding language
 				} else {
 					return CellPlatformDomain.toBeTranslated; // an element of a regular agent model, lacking a corresponding semantic unit
 				}
