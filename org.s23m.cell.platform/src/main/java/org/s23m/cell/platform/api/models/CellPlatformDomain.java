@@ -240,6 +240,11 @@ public class CellPlatformDomain {
 	public static final Set language = Instantiation.addDisjunctSemanticIdentitySet("language", "languages", cellPlatformDomain);
 	public static final Set jargon = Instantiation.addDisjunctSemanticIdentitySet("jargon", "jargons", cellPlatformDomain);
 	public static final Set namingConvention = Instantiation.addDisjunctSemanticIdentitySet("naming convention", "naming conventions", cellPlatformDomain);
+	public static final Set characterTransformation = Instantiation.addDisjunctSemanticIdentitySet("character transformation", "character transformations", cellPlatformDomain);
+	public static final Set wordTransformation = Instantiation.addDisjunctSemanticIdentitySet("word transformation", "word transformations", cellPlatformDomain);
+	public static final Set statementTransformation = Instantiation.addDisjunctSemanticIdentitySet("statement transformation", "statement transformations", cellPlatformDomain);
+	public static final Set whiteTransformation = Instantiation.addDisjunctSemanticIdentitySet("white transformation", "white transformations", cellPlatformDomain);
+
 	public static final Set nativeLanguage = Instantiation.addDisjunctSemanticIdentitySet("native language", "native languages", cellPlatformDomain);
 	public static final Set perspective = Instantiation.addDisjunctSemanticIdentitySet("perspective", "perspectives", cellPlatformDomain);
 	public static final Set perspective_to_jargons = Instantiation.addDisjunctSemanticIdentitySet("perspective_to_jargons", "set of perspective_to_jargons", cellPlatformDomain);

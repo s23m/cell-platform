@@ -409,25 +409,25 @@ public final class CellPlatformAgent {
 	static Set instantiateFeature() {
 
 		// additional semantics
-		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
-		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
-		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterToLower) ;
-		 xmlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+		 xmlJargon.addConcrete(Jargon.characterTransformation, CellPlatformDomain.allCharactersToLower) ;
+		 xmlJargon.addConcrete(Jargon.wordTransformation, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 xmlJargon.addConcrete(Jargon.statementTransformation, CellPlatformDomain.firstCharacterToLower) ;
+		 xmlJargon.addConcrete(Jargon.whiteTransformation, CellPlatformDomain.whiteToNoCharacter) ;
 
-		 javaPackageJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
-		 javaPackageJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+		 javaPackageJargon.addConcrete(Jargon.characterTransformation, CellPlatformDomain.allCharactersToLower) ;
+		 javaPackageJargon.addConcrete(Jargon.whiteTransformation, CellPlatformDomain.whiteToNoCharacter) ;
 
-		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
-		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
-		 javaClassJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+		 javaClassJargon.addConcrete(Jargon.characterTransformation, CellPlatformDomain.allCharactersToLower) ;
+		 javaClassJargon.addConcrete(Jargon.wordTransformation, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 javaClassJargon.addConcrete(Jargon.whiteTransformation, CellPlatformDomain.whiteToNoCharacter) ;
 
-		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToLower) ;
-		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
-		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.firstCharacterToLower) ;
-		 javaMemberJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToNoCharacter) ;
+		 javaMemberJargon.addConcrete(Jargon.characterTransformation, CellPlatformDomain.allCharactersToLower) ;
+		 javaMemberJargon.addConcrete(Jargon.wordTransformation, CellPlatformDomain.firstCharacterOfAllWordsToUpper) ;
+		 javaMemberJargon.addConcrete(Jargon.statementTransformation, CellPlatformDomain.firstCharacterToLower) ;
+		 javaMemberJargon.addConcrete(Jargon.whiteTransformation, CellPlatformDomain.whiteToNoCharacter) ;
 
-		 sqlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.allCharactersToUpper) ;
-		 sqlJargon.addConcrete(Jargon.namingConvention, CellPlatformDomain.whiteToUnderscore) ;
+		 sqlJargon.addConcrete(Jargon.characterTransformation, CellPlatformDomain.allCharactersToUpper) ;
+		 sqlJargon.addConcrete(Jargon.whiteTransformation, CellPlatformDomain.whiteToUnderscore) ;
 
 		return s23mCellPlatform;
 	}

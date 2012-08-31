@@ -8,35 +8,29 @@ import org.s23m.cell.platform.api.models.Jargon;
 public  class F_NamingConventions {
 
 	public static final String codeNameAsString(final Set name, final Set jargon) {
-		return applyConventions(name.identity().codeName(), jargon.filter(Jargon.namingConvention));
+		return applyConventions(name.identity().codeName(), jargon);
 	}
 
 	public static final String pluralCodeNameAsString(final Set name, final Set jargon) {
-		return applyConventions(name.identity().pluralCodeName(), jargon.filter(Jargon.namingConvention));
+		return applyConventions(name.identity().pluralCodeName(), jargon);
 	}
 
-	private static final String applyConventions(final String name, final Set transformations) {
+	private static final String applyConventions(final String name, final Set jargon) {
 		String result = name;
-		if (transformations.containsSemanticMatch(CellPlatformDomain.allCharactersToLower)) {
-			result = allCharactersToLower(result);
+		for (final Set convention : jargon.filter(Jargon.characterTransformation)) {
+			if (convention.isEqualTo(CellPlatformDomain.allCharactersToLower)) {result = allCharactersToLower(result);}
+			if (convention.isEqualTo(CellPlatformDomain.allCharactersToUpper)) {result = allCharactersToUpper(result);}
 		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.allCharactersToUpper)) {
-			result = allCharactersToUpper(result);
+		for (final Set convention : jargon.filter(Jargon.wordTransformation)) {
+			if (convention.isEqualTo(CellPlatformDomain.firstCharacterOfAllWordsToUpper)) {result = firstCharacterOfAllWordsToUpper(result);}
 		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.firstCharacterOfAllWordsToUpper)) {
-			result = firstCharacterOfAllWordsToUpper(result);
+		for (final Set convention : jargon.filter(Jargon.statementTransformation)) {
+			if (convention.isEqualTo(CellPlatformDomain.firstCharacterToLower)) {result = firstCharacterToLower(result);}
 		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.firstCharacterToLower)) {
-			result = firstCharacterToLower(result);
-		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.whiteToNoCharacter)) {
-			return blanksToNoCharacter(result);
-		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.whiteToMinus)) {
-			return blanksToMinus(result);
-		}
-		if (transformations.containsSemanticMatch(CellPlatformDomain.whiteToUnderscore)) {
-			return blanksToUnderscore(result);
+		for (final Set convention : jargon.filter(Jargon.whiteTransformation)) {
+			if (convention.isEqualTo(CellPlatformDomain.whiteToNoCharacter)) {result = whiteToNoCharacter(result);}
+			if (convention.isEqualTo(CellPlatformDomain.whiteToMinus)) {result = whiteToMinus(result);}
+			if (convention.isEqualTo(CellPlatformDomain.whiteToUnderscore)) {result = whiteToUnderscore(result);}
 		}
 		return result;
 	}
@@ -74,13 +68,13 @@ public  class F_NamingConventions {
 		}
 	}
 
-	private static final String blanksToNoCharacter(final String name) {
+	private static final String whiteToNoCharacter(final String name) {
 		return name.replaceAll("\\s", "");
 	}
-	private static final String blanksToMinus (final String name) {
+	private static final String whiteToMinus (final String name) {
 		return name.replaceAll("\\s", "-");
 	}
-	private static final String blanksToUnderscore (final String name) {
+	private static final String whiteToUnderscore (final String name) {
 		return name.replaceAll("\\s", "_");
 	}
 
