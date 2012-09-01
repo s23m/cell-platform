@@ -106,12 +106,12 @@ class RoundTrippingTest extends TestCase {
 			builder.container(set),
 			builder.isAbstract(set)
 		)
-		semanticDomain.addVertex(vertex(builder, set))
-		semanticDomain.addVisibility(visibility(builder, set))
-		semanticDomain.addEdge(edge(builder, set))
-		semanticDomain.addCommand(command(builder, set))
-		semanticDomain.addQuery(query(builder, set))
-		semanticDomain.addSuperSetReference(superSetReference(builder, set))
+		semanticDomain += vertex(builder, set)
+		semanticDomain += visibility(builder, set)
+		semanticDomain += edge(builder, set)
+		semanticDomain += command(builder, set)
+		semanticDomain += query(builder, set)
+		semanticDomain += superSetReference(builder, set)
 		
 		val identity = builder.identity(set)
 		identity.setPayload("contents")

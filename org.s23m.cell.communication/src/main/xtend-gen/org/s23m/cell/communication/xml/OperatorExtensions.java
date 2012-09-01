@@ -7,6 +7,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Model;
 import org.s23m.cell.communication.xml.model.schemainstance.Parameter;
 import org.s23m.cell.communication.xml.model.schemainstance.Query;
 import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
+import org.s23m.cell.communication.xml.model.schemainstance.Structure;
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
@@ -28,30 +29,30 @@ public class OperatorExtensions {
   }
   
   /**
-   * Model
+   * Structure
    */
-  public static void operator_add(final Model m, final Vertex v) {
-    m.addVertex(v);
+  public static void operator_add(final Structure s, final Vertex v) {
+    s.addVertex(v);
   }
   
-  public static void operator_add(final Model m, final Edge e) {
-    m.addEdge(e);
+  public static void operator_add(final Structure s, final Edge e) {
+    s.addEdge(e);
   }
   
-  public static void operator_add(final Model m, final Command c) {
-    m.addCommand(c);
+  public static void operator_add(final Structure s, final Command c) {
+    s.addCommand(c);
   }
   
-  public static void operator_add(final Model m, final Query q) {
-    m.addQuery(q);
+  public static void operator_add(final Structure s, final Query q) {
+    s.addQuery(q);
   }
   
-  public static void operator_add(final Model m, final Visibility v) {
-    m.addVisibility(v);
+  public static void operator_add(final Structure s, final Visibility v) {
+    s.addVisibility(v);
   }
   
-  public static void operator_add(final Model m, final SuperSetReference s) {
-    m.addSuperSetReference(s);
+  public static void operator_add(final Structure s, final SuperSetReference superSetReference) {
+    s.addSuperSetReference(superSetReference);
   }
   
   /**

@@ -9,6 +9,7 @@ import org.s23m.cell.communication.xml.model.schemainstance.Query
 import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference
 import org.s23m.cell.communication.xml.model.schemainstance.Vertex
 import org.s23m.cell.communication.xml.model.schemainstance.Visibility
+import org.s23m.cell.communication.xml.model.schemainstance.Structure
 
 /**
  * Syntactic sugar for operations
@@ -25,30 +26,30 @@ class OperatorExtensions {
 		a.addSemanticDomain(s)
 	}
 	
-	/* Model */
+	/* Structure */
 	
-	def static operator_add(Model m, Vertex v) {
-		m.addVertex(v)
+	def static operator_add(Structure s, Vertex v) {
+		s.addVertex(v)
 	}
 	
-	def static operator_add(Model m, Edge e) {
-		m.addEdge(e)
+	def static operator_add(Structure s, Edge e) {
+		s.addEdge(e)
 	}
 	
-	def static operator_add(Model m, Command c) {
-		m.addCommand(c)
+	def static operator_add(Structure s, Command c) {
+		s.addCommand(c)
 	}
 	
-	def static operator_add(Model m, Query q) {
-		m.addQuery(q)
+	def static operator_add(Structure s, Query q) {
+		s.addQuery(q)
 	}
 	
-	def static operator_add(Model m, Visibility v) {
-		m.addVisibility(v)
+	def static operator_add(Structure s, Visibility v) {
+		s.addVisibility(v)
 	}
 	
-	def static operator_add(Model m, SuperSetReference s) {
-		m.addSuperSetReference(s)
+	def static operator_add(Structure s, SuperSetReference superSetReference) {
+		s.addSuperSetReference(superSetReference)
 	}
 	
 	/* Function */
