@@ -203,7 +203,7 @@
 			</s23m:parameter>			
 		</s23m:query>
 		<!-- minOccurs="0" maxOccurs="unbounded" -->
-		<s23m:identity identifier="identifier" name="name" pluralName="pluralName" technicalName="technicalName">
+		<s23m:identity identifier="identifier" name="name" pluralName="pluralName" codeName="codeName" pluralCodeName="pluralCodeName">
 			<s23m:payload>Some text</s23m:payload>
 		</s23m:identity>
 	</s23m:semanticDomain>

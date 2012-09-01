@@ -115,6 +115,10 @@ class RoundTrippingTest extends TestCase {
 		
 		val identity = builder.identity(set)
 		identity.setPayload("contents")
+		identity.setNameAttribute("name")
+		identity.setPluralName("pluralName")
+		identity.setCodeName("codeName")
+		identity.setPluralCodeName("pluralCodeName")
 		semanticDomain.addIdentity(identity)
 		
 		result.addSemanticDomain(semanticDomain)

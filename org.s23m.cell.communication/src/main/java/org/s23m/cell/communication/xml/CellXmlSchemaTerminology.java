@@ -27,6 +27,7 @@ package org.s23m.cell.communication.xml;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 
@@ -49,6 +50,12 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	@Override
 	public String category() {
 		return nameOf(S23MSemanticDomains.category);
+	}
+	
+	@Override
+	public String codeName() {
+		// TODO add to languages
+		return "codeName";
 	}
 
 	@Override
@@ -157,6 +164,12 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 	}
 
 	@Override
+	public String pluralCodeName() {
+		// TODO add to languages
+		return "pluralCodeName";
+	}
+	
+	@Override
 	public String pluralName() {
 		return nameOf(S23MSemanticDomains.pluralName);
 	}
@@ -187,11 +200,6 @@ public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 		return "structure";
 	}
 	
-	@Override
-	public String technicalName() {
-		return nameOf(S23MSemanticDomains.technicalName);
-	}
-
 	@Override
 	public String to() {
 		return nameOf(S23MSemanticDomains.to);

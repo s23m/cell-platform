@@ -203,9 +203,11 @@ public class XmlSchemaTemplate {
       Attribute _mandatoryAttribute_3 = builder.mandatoryAttribute(_name_1, DataType.STRING);
       String _pluralName = terminology.pluralName();
       Attribute _mandatoryAttribute_4 = builder.mandatoryAttribute(_pluralName, DataType.STRING);
-      String _technicalName = terminology.technicalName();
-      Attribute _mandatoryAttribute_5 = builder.mandatoryAttribute(_technicalName, DataType.STRING);
-      List<Attribute> _asList_1 = Arrays.<Attribute>asList(_mandatoryAttribute_2, _mandatoryAttribute_3, _mandatoryAttribute_4, _mandatoryAttribute_5);
+      String _codeName = terminology.codeName();
+      Attribute _mandatoryAttribute_5 = builder.mandatoryAttribute(_codeName, DataType.STRING);
+      String _pluralCodeName = terminology.pluralCodeName();
+      Attribute _mandatoryAttribute_6 = builder.mandatoryAttribute(_pluralCodeName, DataType.STRING);
+      List<Attribute> _asList_1 = Arrays.<Attribute>asList(_mandatoryAttribute_2, _mandatoryAttribute_3, _mandatoryAttribute_4, _mandatoryAttribute_5, _mandatoryAttribute_6);
       final Procedure1<Sequence> _function_8 = new Procedure1<Sequence>() {
           public void apply(final Sequence it) {
             List<Node> _children = it.getChildren();

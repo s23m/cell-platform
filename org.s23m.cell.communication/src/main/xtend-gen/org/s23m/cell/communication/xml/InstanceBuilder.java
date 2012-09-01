@@ -547,8 +547,10 @@ public class InstanceBuilder {
       result.setNameAttribute(_name);
       String _pluralName = identity.pluralName();
       result.setPluralName(_pluralName);
-      String _technicalName = identity.technicalName();
-      result.setTechnicalName(_technicalName);
+      String _codeName = identity.codeName();
+      result.setCodeName(_codeName);
+      String _pluralCodeName = identity.pluralCodeName();
+      result.setPluralCodeName(_pluralCodeName);
       String _payload = identity.payload();
       result.setPayload(_payload);
       _xblockexpression = (result);

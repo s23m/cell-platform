@@ -14,7 +14,9 @@ public class Identity extends AbstractCompositeNode {
 	private String identifier;
 	private String nameAttribute;
 	private String pluralName;
-	private String technicalName;
+	private String codeName;
+	private String pluralCodeName;
+	
 	private StringElement payload;
 	
 	private final XmlSchemaTerminology terminology;
@@ -51,15 +53,24 @@ public class Identity extends AbstractCompositeNode {
 		setAttribute(terminology.pluralName(), pluralName);
 	}
 
-	public String getTechnicalName() {
-		return technicalName;
+	public String getCodeName() {
+		return codeName;
 	}
 
-	public void setTechnicalName(String technicalName) {
-		this.technicalName = technicalName;
-		setAttribute(terminology.technicalName(), technicalName);
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
+		setAttribute(terminology.codeName(), codeName);
 	}
 	
+	public String getPluralCodeName() {
+		return pluralCodeName;
+	}
+
+	public void setPluralCodeName(String pluralCodeName) {
+		this.pluralCodeName = pluralCodeName;
+		setAttribute(terminology.pluralCodeName(), pluralCodeName);
+	}
+
 	public String getPayload() {
 		return payload.getText();
 	}

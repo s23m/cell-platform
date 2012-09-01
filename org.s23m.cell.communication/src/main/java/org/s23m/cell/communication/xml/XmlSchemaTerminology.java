@@ -29,6 +29,7 @@ public interface XmlSchemaTerminology {
 	boolean isMachineEncoding();
 	
 	String artifactSet();
+	String codeName();
 	String command();
 	String container();
 	String edge();
@@ -45,13 +46,13 @@ public interface XmlSchemaTerminology {
 	String name();
 	String parameter();
 	String payload();
+	String pluralCodeName();
 	String pluralName();
 	String query();
 	String semanticDomain();
 	String semanticIdentity();
 	String structure();
 	String superSetReference();
-	String technicalName();
 	String to();
 	String uniqueRepresentationReference();
 	String vertex();

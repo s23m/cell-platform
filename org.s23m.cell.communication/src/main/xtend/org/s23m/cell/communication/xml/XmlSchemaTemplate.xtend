@@ -145,7 +145,8 @@ class XmlSchemaTemplate {
 				builder.mandatoryAttribute(terminology.identifier, uuid),
 				builder.mandatoryAttribute(terminology.name, STRING),
 				builder.mandatoryAttribute(terminology.pluralName, STRING),			
-				builder.mandatoryAttribute(terminology.technicalName, STRING)
+				builder.mandatoryAttribute(terminology.codeName, STRING),
+				builder.mandatoryAttribute(terminology.pluralCodeName, STRING)
 			), [
 				children += builder.element(terminology.payload, STRING)
 			]

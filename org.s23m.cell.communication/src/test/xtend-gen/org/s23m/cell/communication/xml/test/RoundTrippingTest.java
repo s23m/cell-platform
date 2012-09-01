@@ -175,6 +175,10 @@ public class RoundTrippingTest extends TestCase {
       OperatorExtensions.operator_add(semanticDomain, _superSetReference_1);
       final org.s23m.cell.communication.xml.model.schemainstance.Identity identity = builder.identity(this.set);
       identity.setPayload("contents");
+      identity.setNameAttribute("name");
+      identity.setPluralName("pluralName");
+      identity.setCodeName("codeName");
+      identity.setPluralCodeName("pluralCodeName");
       semanticDomain.addIdentity(identity);
       result.addSemanticDomain(semanticDomain);
       _xblockexpression = (result);

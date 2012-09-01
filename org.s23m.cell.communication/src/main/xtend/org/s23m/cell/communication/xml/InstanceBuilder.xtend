@@ -460,7 +460,8 @@ class InstanceBuilder {
 		result.setIdentifier(identity.identifier.toString)
 		result.setNameAttribute(identity.name)
 		result.setPluralName(identity.pluralName)
-		result.setTechnicalName(identity.technicalName)
+		result.setCodeName(identity.codeName)
+		result.setPluralCodeName(identity.pluralCodeName)
 		result.setPayload(identity.payload)
 		result
 	}

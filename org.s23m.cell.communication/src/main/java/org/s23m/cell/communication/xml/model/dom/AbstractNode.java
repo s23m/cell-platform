@@ -61,7 +61,11 @@ public abstract class AbstractNode implements Node {
 	}
 	
 	public void setAttribute(String key, String value) {
-		this.attributes.put(key, value);
+		if (value == null) {
+			this.attributes.remove(key);
+		} else {
+			this.attributes.put(key, value);	
+		}
 	}
 
 	public void updateCardinality(Cardinality cardinality) {

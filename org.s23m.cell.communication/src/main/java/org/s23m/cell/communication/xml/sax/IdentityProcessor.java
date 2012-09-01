@@ -18,13 +18,15 @@ public class IdentityProcessor implements SaxElementProcessor<Identity> {
 		final String identifier = attributes.getValue(terminology.identifier());
 		final String name = attributes.getValue(terminology.name());
 		final String pluralName = attributes.getValue(terminology.pluralName());
-		final String technicalName = attributes.getValue(terminology.technicalName());
+		final String codeName = attributes.getValue(terminology.codeName());
+		final String pluralCodeName = attributes.getValue(terminology.pluralCodeName());
 		
 		final Identity identity = new Identity(namespace, terminology);
 		identity.setIdentifier(identifier);
 		identity.setNameAttribute(name);
 		identity.setPluralName(pluralName);
-		identity.setTechnicalName(technicalName);
+		identity.setCodeName(codeName);
+		identity.setPluralCodeName(pluralCodeName);
 		return identity;
 	}
 
