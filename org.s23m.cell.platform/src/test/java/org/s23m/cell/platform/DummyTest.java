@@ -32,6 +32,7 @@ import org.s23m.cell.platform.api.FormulaEvaluation;
 
 public class DummyTest extends TestCase {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testIt() {
 		final Set symbols = FormulaEvaluation.implementedFunctionSymbols;

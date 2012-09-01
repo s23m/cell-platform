@@ -53,8 +53,7 @@ object GmodelBuild extends Build {
     kernel,
     kernelTestbench,
     platform,
-	
-    platformTests,
+
 	platformTestscripts,
     kernelTests
 	
@@ -91,7 +90,6 @@ object GmodelBuild extends Build {
     "kernel-tests",
     file ("org.s23m.cell.kernel.tests"),
     settings = javaTestProjectSettings ++ Seq(
-	    libraryDependencies ++= Seq( JUnit ),
 	    /*
 	     * Set the Java test source directory to be <base>/src/main/java
 	     * because of the cell-eclipse projects which depend on these classes 
@@ -109,17 +107,9 @@ object GmodelBuild extends Build {
   lazy val platform = Project(
     "platform",
     file ("org.s23m.cell.platform"),
-    settings = javaProjectSettings
+    settings = javaTestProjectSettings
   ) dependsOn (kernel)
   
-  lazy val platformTests = Project(
-	"platform-tests",
-    file ("org.s23m.cell.platform.tests"),
-    settings = javaTestProjectSettings ++ Seq(
-	    libraryDependencies ++= Seq( JUnit )
-	)
-  ) dependsOn (kernel, platform)
-
   lazy val platformTestscripts = Project(
     "platform-testscripts",
     file ("org.s23m.cell.platform.testscripts"),
@@ -137,9 +127,7 @@ object GmodelBuild extends Build {
   lazy val artifactpoolTests = Project(
     "artifactpool-tests",
     file ("org.s23m.cell.artifactpool.tests"),
-    settings = javaTestProjectSettings ++ Seq(
-    	libraryDependencies ++= Seq( JUnit )
-    )
+    settings = javaTestProjectSettings
   ) dependsOn(artifactpool)
   
   lazy val common = Project(
