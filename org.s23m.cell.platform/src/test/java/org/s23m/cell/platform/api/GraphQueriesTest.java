@@ -27,6 +27,7 @@ package org.s23m.cell.platform.api;
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
@@ -38,10 +39,16 @@ import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 
 public class GraphQueriesTest extends TestCase {
 
+	private static boolean agencyTestFoundationInitialised = false;
+
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		S23MPlatform.boot();
-		AgencyTestFoundation.instantiateFeature();
+		if (!agencyTestFoundationInitialised) {
+			AgencyTestFoundation.instantiateFeature();
+			agencyTestFoundationInitialised = true;
+		}
 	}
 
 	@Test
