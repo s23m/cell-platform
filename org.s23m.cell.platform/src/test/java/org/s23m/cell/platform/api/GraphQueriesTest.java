@@ -38,11 +38,24 @@ import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 
 public class GraphQueriesTest extends TestCase {
 
-	@Test
-	public void testFilterConnectedComponents() {
+	@Override
+	protected void setUp() throws Exception {
 		S23MPlatform.boot();
 		AgencyTestFoundation.instantiateFeature();
+	}
 
+	@Test
+	public void testTopologicalVisibilitySort() {
+		// TODO
+	}
+
+	@Test
+	public void testPartitionModelByVisibilityArrows() {
+		// TODO
+	}
+
+	@Test
+	public void testFilterConnectedComponents() {
 		final Set graph = createGraph();
 		final Set orderedSet = GraphQueries.filterConnectedComponents(graph);
 		assertEquals(Query.orderedSet, orderedSet.category());
