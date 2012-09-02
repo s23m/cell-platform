@@ -27,13 +27,11 @@ package org.s23m.cell.platform.api.models;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
-import org.s23m.cell.platform.testfoundation.TestFoundation;
-
 public class CellPlatform {
 
 	public static void instantiateFeature() {
-		int kernelComplexity = identityFactory.kernelComplexity();
-		int inMemoryComplexity = identityFactory.inMemoryComplexity();
+		final int kernelComplexity = identityFactory.kernelComplexity();
+		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
 		CellEngineering.instantiateFeature();
 		Agency.instantiateFeature();
 
@@ -52,12 +50,6 @@ public class CellPlatform {
 		SessionHandling.instantiateFeature();
 		Location.instantiateFeature();
 		CellPlatformAgent.instantiateFeature();
-
-		kernelComplexity = identityFactory.kernelComplexity();
-		inMemoryComplexity = identityFactory.inMemoryComplexity();
-		// Basis for test cases building on top of the foundation
-		TestFoundation.instantiateFeature();
-
 	}
 
 }

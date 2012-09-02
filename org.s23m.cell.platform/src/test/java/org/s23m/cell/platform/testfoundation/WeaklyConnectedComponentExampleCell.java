@@ -22,7 +22,7 @@
  * Contributor(s):
  * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
-package org.s23m.cell.communication.xml.test;
+package org.s23m.cell.platform.testfoundation;
 
 
 import java.util.HashSet;
@@ -35,7 +35,6 @@ import org.s23m.cell.platform.api.Instantiation;
 import org.s23m.cell.platform.api.models.CellEngineering;
 import org.s23m.cell.platform.api.models.Organization;
 
-import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 import org.s23m.cell.Set;
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.SetAlgebra.*;
