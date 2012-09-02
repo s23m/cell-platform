@@ -47,9 +47,10 @@ public class Xor extends FormulaEvaluator {
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
-			else {
-				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());
+			} else {
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());
+			}
 		}
 
     	if (termsForImmediateEvaluation.size() == terms.size()) {
@@ -61,12 +62,9 @@ public class Xor extends FormulaEvaluator {
     	}
 	}
 
-
 	private Set xor(final Set t) {
-		return InformationQualityLogic.or(t).
-    				and
-    				(InformationQualityLogic.
-    						not(InformationQualityLogic.and(t)));
-
+		final Set lhs = InformationQualityLogic.or(t);
+		final Set rhs = InformationQualityLogic.not(InformationQualityLogic.and(t));
+		return lhs.and(rhs);
 	}
 }

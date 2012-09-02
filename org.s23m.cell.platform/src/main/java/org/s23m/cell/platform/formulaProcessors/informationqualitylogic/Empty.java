@@ -46,9 +46,10 @@ public class Empty extends FormulaEvaluator {
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));}
-			else {
-				termsForImmediateEvaluation = termsForImmediateEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));}
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));
+			} else {
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(constants.filter(term.category().extractUniqueMatch(term)));
+			}
 		}
 
 		switch (arity) {

@@ -47,9 +47,10 @@ public class Or extends FormulaEvaluator {
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
-			else {
-				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());
+			} else {
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());
+			}
 		}
 
     	if (termsForImmediateEvaluation.size() == terms.size()) {

@@ -32,7 +32,6 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
-
 public class Legal {
 
 	private static final Set v6 = Instantiation.arrow(coreGraphs.visibility, CellEngineering.legal, CellEngineering.timeConsciousness);

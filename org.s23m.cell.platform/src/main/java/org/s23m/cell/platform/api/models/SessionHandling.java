@@ -31,7 +31,6 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 
-
 public class SessionHandling {
 
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.sessionHandling);

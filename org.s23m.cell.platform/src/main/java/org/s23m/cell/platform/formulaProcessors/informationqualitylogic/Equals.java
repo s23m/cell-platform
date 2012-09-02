@@ -45,9 +45,10 @@ public class Equals extends FormulaEvaluator {
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
-			else {
-				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());
+			} else {
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());
+			}
 		}
 		// TODO implement !
 		final Set remainder = SetAlgebra.anEmptySet();

@@ -31,7 +31,6 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
-
 public class Agency {
 
 	private static final Set v0 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.agency);

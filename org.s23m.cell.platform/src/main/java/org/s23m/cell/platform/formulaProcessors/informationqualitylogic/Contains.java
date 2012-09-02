@@ -46,10 +46,11 @@ public class Contains extends FormulaEvaluator {
 
 		for (final Set term : this.terms) {
 			if (constants.containsRepresentation(term)) {
-				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());}
-			else {
-				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());}
+				termsForRecursiveEvaluation = termsForRecursiveEvaluation.union(term.wrapInOrderedSet());
+			} else {
+				termsForImmediateEvaluation = termsForImmediateEvaluation.union(term.wrapInOrderedSet());
 			}
+		}
 
 		switch (arity) {
         case BINARY:
