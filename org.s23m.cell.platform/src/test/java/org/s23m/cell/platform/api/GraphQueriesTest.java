@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.s23m.cell.Set;
+import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.models.CellEngineering;
@@ -44,6 +45,7 @@ public class GraphQueriesTest extends TestCase {
 
 		final Set graph = createGraph();
 		final Set orderedSet = GraphQueries.filterConnectedComponents(graph);
+		assertEquals(Query.orderedSet, orderedSet.category());
 
 		//assertEquals(6, result.size());
 
