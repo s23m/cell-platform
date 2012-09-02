@@ -71,7 +71,6 @@ public class GraphQueries {
 		return F_GraphQueries.partitionModelByVisibilityArrows(model);
 	}
 
-
 	public static final Set filterConnectedComponents(final Set graph) {
 		return F_GraphQueries.filterConnectedComponents(graph);
 	}
