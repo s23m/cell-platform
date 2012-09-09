@@ -62,7 +62,8 @@ object Manifest {
 	}
 
 	private def retrieveManifestEntries(baseDir: File): List[(String,String)] = {
-		val manifestLocation = "file://" + baseDir.getAbsolutePath + "/META-INF/MANIFEST.MF"
+		val manifestLocation = "file:///" + baseDir.getAbsolutePath + "/META-INF/MANIFEST.MF"
+		println("Manifest location: " + manifestLocation)
 		val manifest = new JarManifest(new URL(manifestLocation).openStream)
 		val attributes = manifest.getMainAttributes
 		val entrySet = attributes.entrySet.asScala
