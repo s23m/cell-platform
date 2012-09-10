@@ -1,1 +1,0 @@
-./sbt.sh "project repository" run
