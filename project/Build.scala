@@ -29,15 +29,6 @@ import sbt.Path._
 import BuildSettings._
 import DependencyManagement._
 import Keys._
-  
-/*
-TODO fix up project structure to eliminate warnings
-
-[warn] Using project/plugins/ is deprecated for plugin configuration (/home/andrew/code/GoogleCode/gmodel-sbt-build/project/plugins).
-[warn] Put .sbt plugin definitions directly in project/,
-[warn]   .scala plugin definitions in project/project/,
-[warn]   and remove the project/plugins/ directory.
-*/
 
 object CellBuild extends Build {
 
