@@ -66,7 +66,10 @@ public class GraphQueriesTest extends TestCase {
 		final Set twoElements = GraphQueries.filterConnectedComponents(create2ComponentGraph());
 		final Set oneElement = GraphQueries.filterConnectedComponents(create1ComponentGraph());
 
-		assertEquals(((eightElements.size() == 8) && (twoElements.size() == 2) && (oneElement.size() == 1) ), true);
+		assertEquals(8, eightElements.size());
+		assertEquals(2, twoElements.size());
+		assertEquals(1, oneElement.size());
+
 	}
 
 	private Set create8ComponentGraph() {
