@@ -33,7 +33,7 @@ import org.s23m.cell.impl.SemanticDomainCode;
 public final class F_SetAlgebra {
 
 	public static Set union(final Set set1, final Set set2) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		for (final Set element : a) {
@@ -52,7 +52,7 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set intersection(final Set set1, final Set set2) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		for (final Set element : a) {
@@ -74,7 +74,7 @@ public final class F_SetAlgebra {
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		final Set intersection = intersection(a, b);
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		for (final Set element : a) {
 			if (!intersection.containsRepresentation(element)) {
 				((OrderedSet) result).add(element);
@@ -97,7 +97,7 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set transformToOrderedSetOfSemanticIdentities(final Set set) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		for (final Set element : set) {
 			if (!result.containsSemanticMatch(element)) {
 				((OrderedSet) result).add(element.semanticIdentity());
@@ -107,7 +107,7 @@ public final class F_SetAlgebra {
 	}
 	// TODO unify with implementation of SemanticDomainCode.isElementOf(final Set semanticDomain, final Set element, final Set set)
 	private static Set transformSemanticIdentitySetToOrderedSet(final Set set) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final Set result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		final Set elementLinks1 = set.container().filter(SemanticDomain.elements_to_semanticIdentitySet);
 		for (final Set link : elementLinks1) {
 			if (link.to().isEqualTo(set)) {

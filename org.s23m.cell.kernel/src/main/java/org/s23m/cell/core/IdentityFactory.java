@@ -88,6 +88,10 @@ public class IdentityFactory implements KernelIdentities {
 	public 			Identity createAnonymousIdentity() {
 		return deduplicate(new IdentityImpl("ANONYMOUS", "ANONYMOUS", SemanticIdentityRegistry.anonymous.ordinal()));
 	}
+	public 			Identity createAnAnonymousIdentity() {
+		return new IdentityImpl(anonymous());
+	}
+
 	public Identity createAnonymousIdentity(final boolean isKernelIdentity) {
 		if (isKernelIdentity) {
 			return createAnonymousIdentityInKernel();

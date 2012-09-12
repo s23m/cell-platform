@@ -38,8 +38,8 @@ import java.util.UUID;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.collections.map.MultiValueMap;
-import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Identity;
+import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Query;
@@ -98,20 +98,20 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	protected boolean remove(final Set o) {
 		this.ensureInitializedList();
 		final boolean isRemovedFromMap1 =
-			(this.map.remove(o.identity().identifier().toString()) != null)
-			? true : false;
+				(this.map.remove(o.identity().identifier().toString()) != null)
+				? true : false;
 		final boolean isRemovedFromMap2 =
-			(this.map.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-			? true : false;
+				(this.map.remove(o.identity().uniqueRepresentationReference().toString()) != null)
+				? true : false;
 		final boolean isRemovedFromIteratorMap =
-			(this.iteratorMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-			? true : false;
+				(this.iteratorMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
+				? true : false;
 		final boolean isRemovedFromIdMap1 =
-			(this.identifierMap.remove(o.identity().identifier().toString()) != null)
-			? true : false;
+				(this.identifierMap.remove(o.identity().identifier().toString()) != null)
+				? true : false;
 		final boolean isRemovedFromIdMap2 =
-			(this.identifierMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-			? true : false;
+				(this.identifierMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
+				? true : false;
 		// Create and propagate Set Maintenance EventImpl
 		final Set removeEvent = this.elementRemoved(o);
 		final Iterator<EventListener> i = subscribers.iterator();
@@ -417,8 +417,8 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedToSemanticRole(final Set toSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = toSetReferencedSemanticRole.container()
-		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
-		.filterFrom();
+				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
+				.filterFrom();
 		((OrderedSet)semanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.to())) {
@@ -431,8 +431,8 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFromSemanticRole(final Set fromSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = fromSetReferencedSemanticRole.container()
-		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
-		.filterTo();
+				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
+				.filterTo();
 		((OrderedSet)semanticIdentities).add(fromSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.from())) {
@@ -445,12 +445,12 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterByLinkedFromAndToSemanticRole(final Set fromSetReferencedSemanticRole, final Set toSetReferencedSemanticRole) {
 		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set fromSemanticIdentities = fromSetReferencedSemanticRole.container()
-		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
-		.filterTo();
+				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
+				.filterTo();
 		((OrderedSet)fromSemanticIdentities).add(fromSetReferencedSemanticRole);
 		final Set toSemanticIdentities = toSetReferencedSemanticRole.container()
-		.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
-		.filterFrom();
+				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
+				.filterFrom();
 		((OrderedSet)toSemanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (fromSemanticIdentities.containsSemanticMatch(element.from()) && toSemanticIdentities.containsSemanticMatch(element.to())) {
@@ -519,7 +519,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 				|| properClass.isEqualTo(F_Query.edgeEnd())
 				|| properClass.isEqualTo(F_Query.orderedSet())
 				|| properClass.isEqualTo(coreSets.orderedPair)
-		) {
+				) {
 			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for ( final Set element : this) {
 				if (element.properClass().isEqualTo(properClass)) {

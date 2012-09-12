@@ -30,7 +30,6 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.s23m.cell.Set;
-import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.models.CellEngineering;
@@ -63,49 +62,56 @@ public class GraphQueriesTest extends TestCase {
 
 	@Test
 	public void testFilterConnectedComponents() {
-		final Set graph = createGraph();
-		final Set orderedSet = GraphQueries.filterConnectedComponents(graph);
-		assertEquals(Query.orderedSet, orderedSet.category());
+		final Set eightElements = GraphQueries.filterConnectedComponents(create8ComponentGraph());
+		final Set twoElements = GraphQueries.filterConnectedComponents(create2ComponentGraph());
+		final Set oneElement = GraphQueries.filterConnectedComponents(create1ComponentGraph());
 
-		//assertEquals(6, result.size());
-
-		/*
-		Number of weakly connected components: 6
-
-		Output:
-		[Directed Graph {
-		  8 { Outgoing edges [],  Incoming edges [ <-- 3, <-- 5, <-- 6]}
-		}, Directed Graph {
-		  2 { Outgoing edges [],  Incoming edges [ <-- 5]}
-		}, Directed Graph {
-		  4 { Outgoing edges [ --> 5],  Incoming edges []}
-		  5 { Outgoing edges [ --> 7, --> 8, --> 2],  Incoming edges [ <-- 4, <-- 1]}
-		  7 { Outgoing edges [],  Incoming edges [ <-- 5, <-- 6]}
-		}, Directed Graph {
-		  6 { Outgoing edges [ --> 8, --> 7],  Incoming edges [ <-- 3, <-- 1]}
-		}, Directed Graph {
-		  1 { Outgoing edges [ --> 5, --> 6],  Incoming edges []}
-		}, Directed Graph {
-		  3 { Outgoing edges [ --> 8, --> 6],  Incoming edges []}
-		}]
-		*/
+		assertEquals(((eightElements.size() == 8) && (twoElements.size() == 2) && (oneElement.size() == 1) ), true);
 	}
 
-	/*
-	 * Input:
-	 *
-	 * Directed Graph {
-	 *   1 { Outgoing edges [ --> 5, --> 6],  Incoming edges []}
-	 *   2 { Outgoing edges [],  Incoming edges [ <-- 5]}
-	 *   3 { Outgoing edges [ --> 6, --> 8],  Incoming edges []}
-	 *   4 { Outgoing edges [ --> 5],  Incoming edges []}
-	 *   5 { Outgoing edges [ --> 2, --> 7, --> 8],  Incoming edges [ <-- 1, <-- 4]}
-	 *   6 { Outgoing edges [ --> 7, --> 8],  Incoming edges [ <-- 1, <-- 3]}
-	 *   7 { Outgoing edges [],  Incoming edges [ <-- 5, <-- 6]}
-	 *   8 { Outgoing edges [],  Incoming edges [ <-- 3, <-- 5, <-- 6]}
-	 * }
-	 */
-	private Set createGraph() {
+	private Set create8ComponentGraph() {
+		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
+		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
+
+		final Set one = createVertex(graph, "1");
+		final Set two = createVertex(graph, "2");
+		final Set three = createVertex(graph, "3");
+		final Set four = createVertex(graph, "4");
+		final Set five = createVertex(graph, "5");
+		final Set six = createVertex(graph, "6");
+		final Set seven = createVertex(graph, "7");
+		final Set eight = createVertex(graph, "8");
+
+		return graph;
+	}
+	private Set create2ComponentGraph() {
+		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
+		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
+
+		final Set one = createVertex(graph, "1");
+		final Set two = createVertex(graph, "2");
+		final Set three = createVertex(graph, "3");
+		final Set four = createVertex(graph, "4");
+		final Set five = createVertex(graph, "5");
+		final Set six = createVertex(graph, "6");
+		final Set seven = createVertex(graph, "7");
+		final Set eight = createVertex(graph, "8");
+
+		addEdge(one, five);
+
+		addEdge(three, six);
+		addEdge(three, eight);
+
+		addEdge(four, five);
+
+		addEdge(five, two);
+		addEdge(five, seven);
+
+		addEdge(six, eight);
+
+		return graph;
+	}
+	private Set create1ComponentGraph() {
 		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
 		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
 
@@ -142,7 +148,7 @@ public class GraphQueriesTest extends TestCase {
 
 	private void addEdge(final Set from, final Set to) {
 		Instantiation.arrow(coreGraphs.edge,
-			S23MSemanticDomains.anonymous,
+			Instantiation.addDisjunctSemanticIdentitySet("test-edge", "test-edge", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)),
 			from,
 			from,
 			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,

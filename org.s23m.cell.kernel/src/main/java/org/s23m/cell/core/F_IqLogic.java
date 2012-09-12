@@ -126,7 +126,7 @@ public final class F_IqLogic {
 
 	public static Set not(final Set set) {
 		if (set.properClass().isEqualTo(S23MSemanticDomains.orderedSet)) {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 			for (final Set element: set) {
 				result.add(not(element));
 			}
@@ -162,7 +162,7 @@ public final class F_IqLogic {
 
 	public static Set and(final Set orderedSet) {
 		if (orderedSet.properClass().isEqualTo(S23MSemanticDomains.orderedSet) && orderedSet.size() > 0) {
-			final OrderedSet b = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSet b = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 			final Set a = orderedSet.extractFirst();
 			for (final Set element : orderedSet) {
 				if (!element.isEqualToRepresentation(a)) {
@@ -188,7 +188,7 @@ public final class F_IqLogic {
 
 	public static Set or(final Set orderedSet) {
 		if (orderedSet.properClass().isEqualTo(S23MSemanticDomains.orderedSet) &&  orderedSet.size() > 0) {
-			final OrderedSet b = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSet b = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 			final Set a = orderedSet.extractFirst();
 			for (final Set element : orderedSet) {
 				if (!element.isEqualToRepresentation(a)) {

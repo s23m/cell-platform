@@ -45,7 +45,8 @@ public final class F_InstantiationImpl {
 		return new OrderedSet(semanticIdentity, category);
 	}
 	public static Set createResultSet() {
-		return new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		return new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+		//return new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 	}
 
 	public static Set createFunction(final Identity semanticIdentity, final Set parameter, final Set category) {
@@ -127,9 +128,9 @@ public final class F_InstantiationImpl {
 		return new SuperSetReference(specialization, generalization, category);
 	}
 	protected static Arrow createInstanceListIterator() {
-		return new Arrow(identityFactory.createAnonymousIdentity());
+		return new Arrow(identityFactory.createAnAnonymousIdentity());
 	}
 	protected static Arrow createInstanceIterator() {
-		return new Arrow(identityFactory.createAnonymousIdentity());
+		return new Arrow(identityFactory.createAnAnonymousIdentity());
 	}
 }

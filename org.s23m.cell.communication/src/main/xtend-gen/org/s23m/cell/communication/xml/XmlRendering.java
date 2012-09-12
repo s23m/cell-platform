@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.s23m.cell.communication.xml.NamespaceExtensions;
 import org.s23m.cell.communication.xml.StringUtils;
 import org.s23m.cell.communication.xml.model.dom.CompositeNode;
@@ -35,41 +34,32 @@ public class XmlRendering {
   
   private static CharSequence doRender(final CompositeNode node) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(XmlRendering.PREAMBLE, "");
-    _builder.newLineIfNotEmpty();
-    CharSequence _render = XmlRendering.render(node, 0);
-    _builder.append(_render, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("\u00AC\u00B4PREAMBLE\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4render(node, 0)\u00AC\u00AA");
+    _builder.newLine();
     return _builder;
   }
   
   private static CharSequence _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
-    final Iterable<? extends Node> children = node.getChildren();
-    _builder.newLineIfNotEmpty();
-    String _renderPrefix = XmlRendering.renderPrefix(node, level);
-    _builder.append(_renderPrefix, "");
-    {
-      boolean _isEmpty = IterableExtensions.isEmpty(children);
-      if (_isEmpty) {
-        _builder.append("/>");
-        _builder.newLineIfNotEmpty();
-      } else {
-        _builder.append(">");
-        _builder.newLineIfNotEmpty();
-        {
-          for(final Node n : children) {
-            int _plus = (level + 1);
-            CharSequence _render = XmlRendering.render(n, _plus);
-            _builder.append(_render, "");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        String _renderSuffix = XmlRendering.renderSuffix(node, level);
-        _builder.append(_renderSuffix, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    _builder.append("\u00AC\u00B4val children = node.children\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4renderPrefix(node, level)\u00AC\u00AA\u00AC\u00B4IF children.empty\u00AC\u00AA/>");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4ELSE\u00AC\u00AA>");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4FOR n : children\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\u00AC\u00B4render(n, level + 1)\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4ENDFOR\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4renderSuffix(node, level)\u00AC\u00AA");
+    _builder.newLine();
+    _builder.append("\u00AC\u00B4ENDIF\u00AC\u00AA");
+    _builder.newLine();
     return _builder;
   }
   
