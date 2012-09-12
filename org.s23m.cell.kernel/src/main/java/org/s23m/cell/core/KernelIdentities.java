@@ -197,6 +197,7 @@ public interface KernelIdentities {
 	Identity semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance();
 	Identity semanticErr_ValueIsNotAssigned();
 	Identity semanticErr_VariableCantBeRemovedCategoryStillHasInstances();
+	Identity semanticErr_CycleOfVisibilities();
 	Identity setMaintenanceCommand();
 	Identity setValue();
 	Identity size();

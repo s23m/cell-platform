@@ -408,7 +408,7 @@ public enum SemanticIdentityRegistry {
 	agents,
 	sandbox,
 	wrapInOrderedSet,
-
+	semanticErr_CycleOfVisibilities,
 
 }
 

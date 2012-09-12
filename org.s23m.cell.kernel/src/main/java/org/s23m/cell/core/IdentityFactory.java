@@ -306,6 +306,8 @@ public class IdentityFactory implements KernelIdentities {
 	public final	Identity semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance() {return createIdentityInKernel("the Value is not an instance of a Variable of the isInformation of this Set" , "the Value is not an instance of a Variable of the isInformation of this Set", SemanticIdentityRegistry.semanticErr_ValueIsNotAnInstanceOfVariableOfCategoryOfInstance.ordinal());}
 	public final	Identity semanticErr_ValueIsNotAssigned() {return createIdentityInKernel("property is NOTASSIGNED" , "Property has not been assigned", SemanticIdentityRegistry.semanticErr_ValueIsNotAssigned.ordinal());}
 	public final	Identity semanticErr_VariableCantBeRemovedCategoryStillHasInstances() {return createIdentityInKernel("Variable can't be removed, container still has instances" , "Variable can't be removed, container still has instances", SemanticIdentityRegistry.semanticErr_VariableCantBeRemovedCategoryStillHasInstances.ordinal());}
+	public final	Identity semanticErr_CycleOfVisibilities() {return createIdentityInKernel("cycle of visibilities" , "cycle of visibilities", SemanticIdentityRegistry.semanticErr_CycleOfVisibilities.ordinal());}
+
 	public final    Identity semanticIdentity() {return createIdentityInKernel("semantic identity","semantic identities", SemanticIdentityRegistry.semanticIdentity.ordinal());}
 	public final    Identity semanticIdentitySet() {return createIdentityInKernel("semantic identity set","semantic identity sets", SemanticIdentityRegistry.semanticIdentitySet.ordinal());}
 	public final    Identity semanticRole() {return createIdentityInKernel("semantic role","semantic roles", SemanticIdentityRegistry.semanticRole.ordinal());}

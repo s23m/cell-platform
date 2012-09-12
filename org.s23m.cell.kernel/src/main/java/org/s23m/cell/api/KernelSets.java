@@ -121,6 +121,7 @@ public final class KernelSets {
 	public final Set semanticErr_operationIsNotYetImplemented;
 	public final Set semanticErr_OnlyTransportContainerCanHaveContentElements;
 	public final Set  semanticErr_ThisSetIsNotAvailableInMemory;
+	public final Set semanticErr_CycleOfVisibilities;
 
 	public final Set parameter;
 	public final Set target;
@@ -354,6 +355,7 @@ public final class KernelSets {
 		semanticErr_operationIsNotYetImplemented = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_operationIsNotYetImplemented(), semanticErr);
 		semanticErr_OnlyTransportContainerCanHaveContentElements = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_OnlyTransportContainerCanHaveContentElements(), semanticErr);
 		semanticErr_ThisSetIsNotAvailableInMemory = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_ThisSetIsNotAvailableInMemory(), semanticErr);
+		semanticErr_CycleOfVisibilities = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.semanticErr_CycleOfVisibilities(), semanticErr);
 
 		parameter = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.parameter(), orderedPair);
 		properClass = F_InstantiationImpl.createOrderedPair(fundamentalSIDs.properClass(), parameter);
