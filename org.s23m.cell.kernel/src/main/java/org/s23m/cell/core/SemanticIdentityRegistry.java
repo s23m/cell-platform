@@ -409,6 +409,7 @@ public enum SemanticIdentityRegistry {
 	sandbox,
 	wrapInOrderedSet,
 	semanticErr_CycleOfVisibilities,
+	aTransientResultSet,
 
 }
 

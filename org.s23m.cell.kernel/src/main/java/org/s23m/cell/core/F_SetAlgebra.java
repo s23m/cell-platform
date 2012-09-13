@@ -134,7 +134,9 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set addElementToOrderedSet(final Set orderedSet, final Set element) {
-		((OrderedSet) orderedSet).add(element);
+		if (!orderedSet.containsRepresentation(element)) {
+			((OrderedSet) orderedSet).add(element);
+		}
 		return orderedSet;
 	}
 

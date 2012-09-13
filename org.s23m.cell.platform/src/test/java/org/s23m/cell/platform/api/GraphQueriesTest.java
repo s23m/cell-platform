@@ -25,6 +25,7 @@
 package org.s23m.cell.platform.api;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.S23MKernel.coreSets;
 import junit.framework.TestCase;
 
 import org.junit.Before;
@@ -51,8 +52,10 @@ public class GraphQueriesTest extends TestCase {
 	}
 
 	@Test
-	public void testTopologicalVisibilitySort() {
-		// TODO
+	public void testTopologicalVertexSort() {
+		final Set topologicallySortedVertices = GraphQueries.topologicalVertexSort(createVisibilitiesGraph());
+		assertEquals(false, topologicallySortedVertices.isEqualTo(coreSets.semanticErr_CycleOfVisibilities));
+		assertEquals(false, topologicallySortedVertices.category().isEqualTo(coreSets.semanticErr));
 	}
 
 	@Test
@@ -144,7 +147,36 @@ public class GraphQueriesTest extends TestCase {
 
 		return graph;
 	}
+	private Set createVisibilitiesGraph() {
+		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
+		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
 
+		final Set one = createVertex(graph, "1");
+		final Set two = createVertex(graph, "2");
+		final Set three = createVertex(graph, "3");
+		final Set four = createVertex(graph, "4");
+		final Set five = createVertex(graph, "5");
+		final Set six = createVertex(graph, "6");
+		final Set seven = createVertex(graph, "7");
+		final Set eight = createVertex(graph, "8");
+
+		addVisibility(one, five);
+		addVisibility(one, six);
+
+		addVisibility(three, six);
+		addVisibility(three, eight);
+
+		addVisibility(four, five);
+
+		addVisibility(five, two);
+		addVisibility(five, seven);
+		addVisibility(five, eight);
+
+		addVisibility(six, seven);
+		addVisibility(six, eight);
+
+		return graph;
+	}
 	private Set createVertex(final Set container, final String label) {
 		return container.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet(label, label, Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
 	}
@@ -165,5 +197,12 @@ public class GraphQueriesTest extends TestCase {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 		);
+	}
+	private void addVisibility(final Set from, final Set to) {
+		Instantiation.arrow(coreGraphs.visibility,
+			from,
+			to
+		);
+
 	}
 }

@@ -64,6 +64,8 @@ public class IdentityFactory implements KernelIdentities {
 	public final 	Identity allowableEdgeCategories() {return createIdentityInKernel("allowableEdgeCategories" , "allowableEdgeCategories", SemanticIdentityRegistry.allowableEdgeCategories.ordinal());}
 	public final 	Identity anonymous() {return createAnonymousIdentity();}
 	public final 	Identity anonymousInKernel() {return createAnonymousIdentityInKernel();}
+	private final String aTransientResultSet = "a transient result set 235711131719232931";
+	public final	Identity aTransientResultSet() {return createIdentity(aTransientResultSet , aTransientResultSet, SemanticIdentityRegistry.aTransientResultSet.ordinal());}
 	public final	Identity asList() {return createIdentityInKernel("asList" , "asList", SemanticIdentityRegistry.asList.ordinal());}
 	public final	Identity assignNewName() {return createIdentityInKernel("assignNewName" , "assignNewName", SemanticIdentityRegistry.assignNewName.ordinal());}
 	public final	Identity assignNewPayload() {return createIdentityInKernel("assignNewPayload" , "assignNewPayload", SemanticIdentityRegistry.assignNewPayload.ordinal());}
@@ -119,7 +121,11 @@ public class IdentityFactory implements KernelIdentities {
 	}
 
 	public final	Identity decommission() {return createIdentityInKernel("decommission" , "decommission", SemanticIdentityRegistry.decommission.ordinal());}
+
 	private Identity deduplicate(final Identity id) {
+		//if (id.name().toString().equals(aTransientResultSet)) {
+		//	return id;
+		//} else {
 		if (this.inMemoryIdentities.containsKey(id.uniqueRepresentationReference().toString())) {
 			return (Identity) this.inMemoryIdentities.get(id.uniqueRepresentationReference().toString());
 		} else
@@ -127,6 +133,7 @@ public class IdentityFactory implements KernelIdentities {
 			this.inMemoryIdentities.put(id.uniqueRepresentationReference().toString(), id);
 			return id;
 		}
+		//}
 	}
 	public final	Identity directSuperSetOf() {return createIdentityInKernel("directSuperSetOf" , "directSuperSetOf", SemanticIdentityRegistry.directSuperSetOf.ordinal());}
 	public final    Identity disjunctSemanticIdentitySet() {return createIdentityInKernel("disjunct semantic identity set","disjunct semantic identity sets", SemanticIdentityRegistry.disjunctSemanticIdentitySet.ordinal());}

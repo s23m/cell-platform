@@ -39,7 +39,7 @@ public class GraphQueries {
 	 *
 	 * See http://en.wikipedia.org/wiki/Topological_sorting
 	 */
-	public static Set topologicalVisibilitySort(final Set connectedSubgraph) {
+	public static Set topologicalVertexSort(final Set connectedSubgraph) {
 		return F_GraphQueries.topologicalVertexSort(connectedSubgraph);
 	}
 

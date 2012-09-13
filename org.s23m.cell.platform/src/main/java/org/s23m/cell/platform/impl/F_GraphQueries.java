@@ -30,6 +30,61 @@ public  class F_GraphQueries {
 			// L <- Empty list that will contain the sorted elements
 			Set L = SetAlgebra.anEmptySet();
 
+			final Set allArrows = connectedSubgraph.filterArrows();
+			final Set allVertices = connectedSubgraph.filterProperClass(Query.vertex);
+
+			final Set verticesWithIncomingArrows = allArrows.filterTo();
+
+			// S <- Set of all vertices with no remaining incoming arrows
+			final Set nextLevelVertices = allVertices.complement(verticesWithIncomingArrows);
+
+			final List<Set> listOfNextLevelVertices = nextLevelVertices.asList();
+
+			Set remainingArrows = allArrows;
+
+			L = L.union(nextLevelVertices);
+
+			while (!listOfNextLevelVertices.isEmpty()) {
+				// remove a vertex v from listOfNextLevelVertices
+				final Set v = listOfNextLevelVertices.remove(listOfNextLevelVertices.size() - 1);
+
+				// for each vertex w with an arrow  from v to w do
+				for (final Set arrow : remainingArrows.filterByLinkedFrom(v)) {
+					// remove arrow  from the graph
+					remainingArrows = remainingArrows.complement(arrow);
+					final Set w = arrow.to();
+					// if w has no other incoming arrow then insert w into S
+					if (remainingArrows.filterByLinkedTo(w).isEmpty()) {
+						listOfNextLevelVertices.add(w);
+						L = SetAlgebra.addElementToOrderedSet(L, v);						
+					}
+				}
+			}
+			
+			// check to see if all edges are removed
+			boolean cycle = false;
+			for (final Set v : allVertices) {
+				if (!remainingArrows.filterByLinkedTo(v).isEmpty()) {
+					cycle = true;
+					break;
+				}
+			}
+			if (cycle) {
+				// Cycle present, topological sort not possible
+				return Instantiation.raiseError(coreSets.semanticErr_CycleOfVisibilities, coreSets.semanticErr);
+			} //else {System.out.println("Topological Sort: "+ Arrays.toString(L.toArray()));}
+			return L;
+		}
+	}
+
+	public static Set topologicalVertexSortFlawed(final Set connectedSubgraph) {
+		if (connectedSubgraph.category().isEqualTo(Query.orderedSet)) {
+			// error
+			return Instantiation.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance, coreSets.semanticErr);
+		} else {
+			// L <- Empty list that will contain the sorted elements
+			Set L = SetAlgebra.anEmptySet();
+
 			final Set allVisibilities = connectedSubgraph.filterProperClass(Query.visibility);
 			final Set allVertices = connectedSubgraph.filterProperClass(Query.vertex);
 

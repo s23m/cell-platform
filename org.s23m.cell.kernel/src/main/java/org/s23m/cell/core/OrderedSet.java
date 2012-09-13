@@ -69,7 +69,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 
 	protected OrderedSet(final Identity semanticIdentity) {
-		super(semanticIdentity, OrderedSet.orderedSet);
+		super(semanticIdentity, OrderedSetAnonymousFilterResults.orderedSet);
 	}
 
 	OrderedSet() {
@@ -78,7 +78,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set properClass() {
-		return OrderedSet.orderedSet;
+		return OrderedSetAnonymousFilterResults.orderedSet;
 	}
 
 	// ***************************************
@@ -308,7 +308,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterBySemanticIdentity(final Set set) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final List<Set> r = (List<Set>) this.identifierMap.get(set.identity().identifier().toString());
 		for (final Set element : r) {
 			result.add(element);
@@ -341,7 +341,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedTo(final Set toSet) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.to().isEqualToRepresentation(toSet)) {
@@ -353,7 +353,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedFrom(final Set fromSet) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.from().isEqualToRepresentation(fromSet)) {
@@ -371,7 +371,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (toSet.isInformation().is_FALSE()) {
 			return this.filterByLinkedFrom(fromSet);
 		}
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.to().isEqualToRepresentation(toSet)
@@ -384,7 +384,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterFrom() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
@@ -394,7 +394,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterTo() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.to());
@@ -404,7 +404,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterFromAndTo() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
@@ -415,11 +415,11 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedToSemanticRole(final Set toSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = toSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 				.filterFrom();
-		((OrderedSet)semanticIdentities).add(toSetReferencedSemanticRole);
+		((OrderedSetAnonymousFilterResults)semanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.to())) {
 				result.add(element);
@@ -429,11 +429,11 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedFromSemanticRole(final Set fromSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set semanticIdentities = fromSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 				.filterTo();
-		((OrderedSet)semanticIdentities).add(fromSetReferencedSemanticRole);
+		((OrderedSetAnonymousFilterResults)semanticIdentities).add(fromSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.from())) {
 				result.add(element);
@@ -443,15 +443,15 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedFromAndToSemanticRole(final Set fromSetReferencedSemanticRole, final Set toSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		final Set fromSemanticIdentities = fromSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 				.filterTo();
-		((OrderedSet)fromSemanticIdentities).add(fromSetReferencedSemanticRole);
+		((OrderedSetAnonymousFilterResults)fromSemanticIdentities).add(fromSetReferencedSemanticRole);
 		final Set toSemanticIdentities = toSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 				.filterFrom();
-		((OrderedSet)toSemanticIdentities).add(toSetReferencedSemanticRole);
+		((OrderedSetAnonymousFilterResults)toSemanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (fromSemanticIdentities.containsSemanticMatch(element.from()) && toSemanticIdentities.containsSemanticMatch(element.to())) {
 				result.add(element);
@@ -461,7 +461,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterByLinkedToVia(final Set toEdgeEnd) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)) {
@@ -474,7 +474,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterByLinkedFromVia(final Set fromEdgeEnd) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
@@ -493,7 +493,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (toEdgeEnd.isInformation().is_FALSE()) {
 			return this.filterByLinkedFromVia(fromEdgeEnd);
 		}
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)
@@ -520,7 +520,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 				|| properClass.isEqualTo(F_Query.orderedSet())
 				|| properClass.isEqualTo(coreSets.orderedPair)
 				) {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for ( final Set element : this) {
 				if (element.properClass().isEqualTo(properClass)) {
 					result.add(element);
@@ -534,7 +534,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterByEquivalenceClass(final Set set) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		Set aSemantics = set;
 		if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).is_FALSE()) {
 			aSemantics = set.semanticIdentity();
@@ -554,7 +554,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filter(final Set category) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for ( final Set element : this) {
 			if (element.category().isEqualTo(category)) {
 				result.add(element);
@@ -565,7 +565,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterPolymorphic(final Set category) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for ( final Set element : this) {
 			if (category.isSuperSetOf(element.category()).isEqualTo(coreSets.is_TRUE)
 					&& category.isSuperSetOf(element).isEqualTo(coreSets.is_FALSE)) {
@@ -581,7 +581,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 	@Override
 	public Set filterArrows() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+		final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 		for ( final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element);
@@ -657,7 +657,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.and(this.union(b));
 		} else {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for (final Set element : this) {
 				result.add(element);
 			}
@@ -671,7 +671,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.or(this.union(b));
 		} else {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
+			final OrderedSetAnonymousFilterResults result = new OrderedSetAnonymousFilterResults(F_Instantiation.identityFactory.createAnonymousIdentity());
 			for (final Set element : this) {
 				result.add(element);
 			}

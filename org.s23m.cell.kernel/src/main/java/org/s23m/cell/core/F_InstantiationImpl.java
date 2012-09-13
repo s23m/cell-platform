@@ -30,6 +30,7 @@ import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
+import org.s23m.cell.api.Instantiation;
 
 public final class F_InstantiationImpl {
 
@@ -45,7 +46,8 @@ public final class F_InstantiationImpl {
 		return new OrderedSet(semanticIdentity, category);
 	}
 	public static Set createResultSet() {
-		return new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+		return new OrderedSet(identityFactory.createIdentity(F_Instantiation.identityFactory.aTransientResultSet().name(), F_Instantiation.identityFactory.aTransientResultSet().name(), Instantiation.indexIsNotAvailable));
+		//return new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
 		//return new OrderedSet(F_Instantiation.identityFactory.createAnonymousIdentity());
 	}
 
