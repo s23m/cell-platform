@@ -25,6 +25,7 @@
 
 package org.s23m.cell.core;
 
+import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.S23MKernel.coreSets;
 
 import java.util.UUID;
@@ -48,7 +49,8 @@ public final class F_Instantiation {
 		if (	(containerCategory.isSuperSetOf(category)).isEqualTo(coreSets.is_TRUE)
 				|| (containerCategory.container().localRootSuperSetOf(containerCategory).isEqualTo(category.container().localRootSuperSetOf(category))) // see example ecoreERmodelling
 				||	(containerCategory.getVertices().containsSemanticMatch(category))
-				||	(containerCategory.containsEdgeTo(category).isEqualTo(coreSets.is_TRUE)))
+				||	(containerCategory.containsEdgeTo(category).isEqualTo(coreSets.is_TRUE))
+				||	(container.properClass().isEqualTo(coreGraphs.edge)) )
 		{
 			if (category.value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)) {
 
@@ -84,7 +86,9 @@ public final class F_Instantiation {
 		if (	(containerCategory.isSuperSetOf(category)).isEqualTo(coreSets.is_TRUE)
 				|| (containerCategory.container().localRootSuperSetOf(containerCategory).isEqualTo(category.container().localRootSuperSetOf(category))) // see example ecoreERmodelling
 				||	(containerCategory.getVertices().containsSemanticMatch(category))
-				||	(containerCategory.containsEdgeTo(category).isEqualTo(coreSets.is_TRUE)))
+				||	(containerCategory.containsEdgeTo(category).isEqualTo(coreSets.is_TRUE))
+				||	(container.properClass().isEqualTo(coreGraphs.edge)) )
+
 		{
 			if (category.value(coreSets.isAbstract).isEqualTo( coreSets.isAbstract_FALSE)) {
 				if ((category.value(coreSets.maxCardinality).isEqualTo(coreSets.maxCardinality_1) &&  container.filterPolymorphic(category).size() < 1)

@@ -150,16 +150,16 @@ public class CellPlatformDomain {
 	public static final Set xaverwiesmann = Instantiation.addDisjunctSemanticIdentitySet("Xaver Wiesmann", "Xaver Wiesmann", cellPlatformDomain);
 
 	public static final Set perspective_cellplatform_kernel = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_kernel", "perspective_cellplatform_kernel", cellPlatformDomain);
-	public static final Set perspective_technology = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_coding", "perspective_cellplatform_coding", cellPlatformDomain);
+	public static final Set perspective_technology = Instantiation.addDisjunctSemanticIdentitySet("perspective_technology", "perspective_technology", cellPlatformDomain);
 	public static final Set technology_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("technology_to_jargon", "technology_to_jargon", cellPlatformDomain);
-	public static final Set perspective_xmlProcessor = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_xml", "perspective_cellplatform_xml", cellPlatformDomain);
+	public static final Set perspective_xmlProcessor = Instantiation.addDisjunctSemanticIdentitySet("perspective_xmlProcessor", "perspective_xmlProcessor", cellPlatformDomain);
 	public static final Set xmlProcessor_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("xmlProcessor_to_jargon", "xmlProcessor_to_jargon", cellPlatformDomain);
-	public static final Set perspective_javaVirtualMachine = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_java", "perspective_cellplatform_java", cellPlatformDomain);
+	public static final Set perspective_javaVirtualMachine = Instantiation.addDisjunctSemanticIdentitySet("perspective_javaVirtualMachine", "perspective_javaVirtualMachine", cellPlatformDomain);
 	public static final Set javaVirtualMachine_to_classJargon = Instantiation.addDisjunctSemanticIdentitySet("javaVirtualMachine_to_classJargon", "javaVirtualMachine_to_classJargon", cellPlatformDomain);
 	public static final Set javaVirtualMachine_to_memberJargon = Instantiation.addDisjunctSemanticIdentitySet("javaVirtualMachine_to_memberJargon", "javaVirtualMachine_to_memberJargon", cellPlatformDomain);
 	public static final Set javaVirtualMachine_to_packageJargon = Instantiation.addDisjunctSemanticIdentitySet("javaVirtualMachine_to_packageJargon", "javaVirtualMachine_to_packageJargon", cellPlatformDomain);
 
-	public static final Set perspective_sqlDatabase = Instantiation.addDisjunctSemanticIdentitySet("perspective_cellplatform_sql", "perspective_cellplatform_sql", cellPlatformDomain);
+	public static final Set perspective_sqlDatabase = Instantiation.addDisjunctSemanticIdentitySet("perspective_sqlDatabase", "perspective_sqlDatabase", cellPlatformDomain);
 	public static final Set sqlDatabase_to_jargon = Instantiation.addDisjunctSemanticIdentitySet("sqlDatabase_to_jargon", "sqlDatabase_to_jargon", cellPlatformDomain);
 
 	public static final Set allCharactersToLower = Instantiation.addDisjunctSemanticIdentitySet("allCharactersToLower", "allCharactersToLower", cellPlatformDomain);

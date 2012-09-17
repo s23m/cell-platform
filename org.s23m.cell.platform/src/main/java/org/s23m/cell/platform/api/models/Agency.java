@@ -60,8 +60,8 @@ public class Agency {
 			S23MSemanticDomains.isContainer_FALSE,
 			S23MSemanticDomains.to,
 			agent,
-			S23MSemanticDomains.minCardinality_1,
-			S23MSemanticDomains.maxCardinality_1,
+			S23MSemanticDomains.minCardinality_0,
+			S23MSemanticDomains.maxCardinality_n,
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
@@ -87,6 +87,8 @@ public class Agency {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
+	//private static final Set s6 = Instantiation.arrow(coreGraphs.superSetReference, perspective_to_jargons, coreGraphs.edge); // to enable edges as containers
+
 	public static final Set replication = Instantiation.arrow(coreGraphs.edge,
 			CellPlatformDomain.replication,
 			CellPlatformDomain.original,

@@ -31,6 +31,7 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import org.s23m.cell.Identity;
 import org.s23m.cell.SemanticStateOfInMemoryModel;
 import org.s23m.cell.Set;
+import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.SemanticDomain;
 
 /**
@@ -116,7 +117,8 @@ public final class ArrowConstraints {
 		if (category.isEqualTo(edge)) {
 			if ((firstSet.category().isEqualTo(graph))
 					|| 	(firstSet.category().isEqualTo(arrow))
-					|| 	(firstSet.category().isEqualTo(edge))
+					//	|| 	(firstSet.category().isEqualTo(edge)
+					|| 	(firstSet.category().isEqualTo(edge) || (coreGraphs.edge.isSuperSetOf(firstSet.category())).isEqualTo(coreSets.is_TRUE)) // to accommodate specialisations of edges
 					|| 	(firstSet.category().isEqualTo(edgeEnd))
 					|| 	(firstSet.category().isEqualTo(superSetReference))
 					|| 	(firstSet.category().isEqualTo(visibility))
@@ -267,7 +269,8 @@ public final class ArrowConstraints {
 	}
 
 	private Set addEdge() {
-		if (firstSet.hasVisibilityOf(secondSet).isEqualTo(coreSets.is_TRUE)) {
+		if (firstSet.hasVisibilityOf(secondSet).isEqualTo(coreSets.is_TRUE)
+				|| firstSet.container().container().isEqualTo(Root.agents)) {
 			return F_InstantiationImpl.createEdge(firstEdgeEndIdentity,
 					firstSet,
 					firstMinCardinality,

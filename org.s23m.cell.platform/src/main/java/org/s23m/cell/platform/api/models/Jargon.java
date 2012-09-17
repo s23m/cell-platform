@@ -36,15 +36,16 @@ public class Jargon {
 
 	private static final Set v2 = Instantiation.arrow(coreGraphs.visibility, Root.cellengineering, CellEngineering.jargon);
 
-	public static final Set namingConvention = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.namingConvention);
-	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, namingConvention, coreGraphs.vertex);
-	public static final Set characterTransformation = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.characterTransformation);
+	public static final Set namingConvention = CellEngineering.language.addAbstract(CellEngineering.jargon, CellPlatformDomain.namingConvention);
+	//private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, namingConvention, coreGraphs.vertex);
+	private static final Set s0 = Instantiation.arrow(coreGraphs.superSetReference, namingConvention, CellEngineering.jargon);
+	public static final Set characterTransformation = CellEngineering.language.addConcrete(CellEngineering.jargon, CellPlatformDomain.characterTransformation);
 	private static final Set s1 = Instantiation.arrow(coreGraphs.superSetReference, characterTransformation, namingConvention);
-	public static final Set wordTransformation = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.characterTransformation);
+	public static final Set wordTransformation = CellEngineering.language.addConcrete(CellEngineering.jargon, CellPlatformDomain.characterTransformation);
 	private static final Set s2 = Instantiation.arrow(coreGraphs.superSetReference, wordTransformation, namingConvention);
-	public static final Set statementTransformation = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.characterTransformation);
+	public static final Set statementTransformation = CellEngineering.language.addConcrete(CellEngineering.jargon, CellPlatformDomain.characterTransformation);
 	private static final Set s3 = Instantiation.arrow(coreGraphs.superSetReference, statementTransformation, namingConvention);
-	public static final Set whiteTransformation = CellEngineering.language.addAbstract(coreGraphs.vertex, CellPlatformDomain.characterTransformation);
+	public static final Set whiteTransformation = CellEngineering.language.addConcrete(CellEngineering.jargon, CellPlatformDomain.characterTransformation);
 	private static final Set s4 = Instantiation.arrow(coreGraphs.superSetReference, whiteTransformation, namingConvention);
 
 	public static Set instantiateFeature() {

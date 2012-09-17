@@ -66,6 +66,13 @@ public final class CellPlatformAgent {
 	public static final Set sqlDatabase = org.s23m.cell.platform.api.Instantiation.addAgent("SQL DB", "SQL DB");
 
 	public static final Set	v1 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), cellMetaLanguage);
+	public static final Set	v2 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), codingLanguage);
+	public static final Set	v3 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), xmlJargon);
+	public static final Set	v4 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), javaClassJargon);
+	public static final Set	v5 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), javaMemberJargon);
+	public static final Set	v6 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), javaPackageJargon);
+	public static final Set	v7 = Instantiation.arrow(S23MPlatform.coreGraphs.visibility, production.filter(CellEngineering.language).extractFirst(), sqlJargon);
+
 
 	public static final Set s23mNativeLanguage = Instantiation.arrow(Agency.agent_to_nativeLanguage,
 			CellPlatformDomain.s23mNativeLanguage,
@@ -175,7 +182,9 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set perspective_technologyV = perspective_technology.addConcrete(coreGraphs.vertex, perspective_technology);
+	//public static final Set perspective_technologyV = perspective_technology.addConcrete(coreGraphs.vertex, perspective_technology);
+	public static final Set perspective_technologyV = perspective_technology.addConcrete(Agency.perspectiveV, perspective_technology);
+
 	public static final Set technology_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.technology_to_jargon,
 			CellPlatformDomain.perspective,
@@ -207,7 +216,7 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set perspective_xmlProcessorV = perspective_xmlProcessor.addConcrete(coreGraphs.vertex, perspective_xmlProcessor);
+	public static final Set perspective_xmlProcessorV = perspective_xmlProcessor.addConcrete(Agency.perspectiveV, perspective_xmlProcessor);
 	public static final Set xmlProcessor_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.xmlProcessor_to_jargon,
 			CellPlatformDomain.perspective,
@@ -239,7 +248,7 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set perspective_javaVirtualMachineV = perspective_javaVirtualMachine.addConcrete(coreGraphs.vertex, perspective_javaVirtualMachine);
+	public static final Set perspective_javaVirtualMachineV = perspective_javaVirtualMachine.addConcrete(Agency.perspectiveV, perspective_javaVirtualMachine);
 	public static final Set javaVirtualMachine_to_javaClassJargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.javaVirtualMachine_to_classJargon,
 			CellPlatformDomain.perspective,
@@ -301,7 +310,7 @@ public final class CellPlatformAgent {
 			S23MSemanticDomains.isNavigable_TRUE,
 			S23MSemanticDomains.isContainer_FALSE
 	);
-	public static final Set perspective_sqlDatabaseV = perspective_sqlDatabase.addConcrete(coreGraphs.vertex, perspective_sqlDatabase);
+	public static final Set perspective_sqlDatabaseV = perspective_sqlDatabase.addConcrete(Agency.perspectiveV, perspective_sqlDatabase);
 	public static final Set sqlDatabase_to_jargon = Instantiation.arrow(Agency.perspective_to_jargons,
 			CellPlatformDomain.sqlDatabase_to_jargon,
 			CellPlatformDomain.perspective,

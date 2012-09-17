@@ -74,7 +74,7 @@ public class GraphQueriesTest extends TestCase {
 	}
 
 	@Test
-	public void testFilterConnectedComponents() {
+	public void groupByConnectedComponents() {
 		final Set eightElements = GraphQueries.groupByConnectedComponents(create8ComponentGraph());
 		final Set twoElements = GraphQueries.groupByConnectedComponents(create2ComponentGraph());
 		final Set oneElement = GraphQueries.groupByConnectedComponents(create1ComponentGraph());
