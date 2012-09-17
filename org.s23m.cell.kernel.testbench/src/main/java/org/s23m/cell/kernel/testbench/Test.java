@@ -39,7 +39,7 @@ public class Test {
 	 */
 	public static void main(final String[] args) {
 		org.s23m.cell.S23MKernel.boot();
-		TestSequence.run();
+		// insert all ad-hoc tests here
 
 		final Set g = coreGraphs.graph;
 		final Set kerDef = g.filter(coreSets.kernelDefect);

@@ -23,7 +23,7 @@
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
 
-package org.s23m.cell.kernel.testbench;
+package org.s23m.cell.platform.api;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
