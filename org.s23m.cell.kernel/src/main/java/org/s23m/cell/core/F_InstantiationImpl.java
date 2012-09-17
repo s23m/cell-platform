@@ -129,10 +129,10 @@ public final class F_InstantiationImpl {
 	protected static SuperSetReference createSuperSetReference(final Set specialization, final Set generalization, final Set category) {
 		return new SuperSetReference(specialization, generalization, category);
 	}
-	protected static Arrow createInstanceListIterator() {
-		return new Arrow(identityFactory.createAnAnonymousIdentity());
-	}
-	protected static Arrow createInstanceIterator() {
-		return new Arrow(identityFactory.createAnAnonymousIdentity());
-	}
+	//protected static Arrow createInstanceListIterator() {
+	//	return new Arrow(identityFactory.createAnonymousIdentity());
+	//}
+	//protected static Arrow createInstanceIterator() {
+	//	return new Arrow(identityFactory.createAnonymousIdentity());
+	//}
 }

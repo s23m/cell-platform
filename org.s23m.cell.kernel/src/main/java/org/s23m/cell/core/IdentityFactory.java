@@ -65,7 +65,7 @@ public class IdentityFactory implements KernelIdentities {
 	public final 	Identity anonymous() {return createAnonymousIdentity();}
 	public final 	Identity anonymousInKernel() {return createAnonymousIdentityInKernel();}
 	private final String aTransientResultSet = "a transient result set 235711131719232931";
-	public final	Identity aTransientResultSet() {return createIdentity(aTransientResultSet , aTransientResultSet, SemanticIdentityRegistry.aTransientResultSet.ordinal());}
+	public 	Identity aTransientResultSet() {return createIdentity(aTransientResultSet , aTransientResultSet, SemanticIdentityRegistry.aTransientResultSet.ordinal());}
 	public final	Identity asList() {return createIdentityInKernel("asList" , "asList", SemanticIdentityRegistry.asList.ordinal());}
 	public final	Identity assignNewName() {return createIdentityInKernel("assignNewName" , "assignNewName", SemanticIdentityRegistry.assignNewName.ordinal());}
 	public final	Identity assignNewPayload() {return createIdentityInKernel("assignNewPayload" , "assignNewPayload", SemanticIdentityRegistry.assignNewPayload.ordinal());}
@@ -89,9 +89,8 @@ public class IdentityFactory implements KernelIdentities {
 	public final	Identity containsRepresentations() {return createIdentityInKernel("containsRepresentations" , "containsRepresentations", SemanticIdentityRegistry.containsRepresentations.ordinal());}
 	public 			Identity createAnonymousIdentity() {
 		return deduplicate(new IdentityImpl("ANONYMOUS", "ANONYMOUS", SemanticIdentityRegistry.anonymous.ordinal()));
-	}
-	public 			Identity createAnAnonymousIdentity() {
-		return new IdentityImpl(anonymous());
+		//return new IdentityImpl("ANONYMOUS", "ANONYMOUS", SemanticIdentityRegistry.anonymous.ordinal());
+
 	}
 
 	public Identity createAnonymousIdentity(final boolean isKernelIdentity) {

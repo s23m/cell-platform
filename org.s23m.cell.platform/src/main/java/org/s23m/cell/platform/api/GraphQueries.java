@@ -34,13 +34,13 @@ public class GraphQueries {
 	 */
 
 	/**
-	 * Given a connected subgraph, produce an ordered set of vertices
-	 * in dependency order based on visibility arrows.
+	 * Given a connected subgraph, produce an ordered set of vertices and arrows
+	 * in dependency order arrows dependencies
 	 *
 	 * See http://en.wikipedia.org/wiki/Topological_sorting
 	 */
-	public static Set topologicalVertexSort(final Set connectedSubgraph) {
-		return F_GraphQueries.topologicalVertexSort(connectedSubgraph);
+	public static Set sortConnectedComponentElementsInTopologicalOrder(final Set connectedSubgraph) {
+		return F_GraphQueries.sortConnectedComponentElementsInTopologicalOrder(connectedSubgraph);
 	}
 
 	/**
@@ -67,11 +67,11 @@ public class GraphQueries {
 	 *  from the root.
 	 *
 	 */
-	public static Set partitionModelByVisibilityArrows(final Set model) {
-		return F_GraphQueries.partitionModelByVisibilityArrows(model);
+	public static Set sortSetInTopologicalOrder(final Set set) {
+		return F_GraphQueries.sortSetInTopologicalOrder(set);
 	}
 
-	public static final Set filterConnectedComponents(final Set graph) {
-		return F_GraphQueries.filterConnectedComponents(graph);
+	public static final Set groupByConnectedComponents(final Set graph) {
+		return F_GraphQueries.groupByConnectedComponents(graph);
 	}
 }

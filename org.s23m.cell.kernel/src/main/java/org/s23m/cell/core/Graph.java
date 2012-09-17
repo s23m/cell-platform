@@ -582,8 +582,8 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set visibleInstancesForSubGraph(final Set subGraph) {
-		final OrderedSet visibleGraphs = new OrderedSet(identityFactory.createAnonymousIdentity());
-		final OrderedSet visibleChildren = new OrderedSet(identityFactory.createAnonymousIdentity());
+		final OrderedSet visibleGraphs = new OrderedSet(identityFactory.aTransientResultSet());
+		final OrderedSet visibleChildren = new OrderedSet(identityFactory.aTransientResultSet());
 
 		// add the universally visible core instances
 		visibleGraphs.add(coreGraphs.vertex);
@@ -716,7 +716,7 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set filter(final Set category) {
 		this.ensureInitializedOrderedSets();
-		final OrderedSet resultSet = new OrderedSet(identityFactory.createAnonymousIdentity());
+		final OrderedSet resultSet = new OrderedSet(identityFactory.aTransientResultSet());
 		for (final Set instance : this.allContainedInstances) {
 			if (instance.category().isEqualTo(category)) {
 				resultSet.add(instance);
@@ -728,7 +728,7 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set filterPolymorphic(final Set category) {
 		this.ensureInitializedOrderedSets();
-		final OrderedSet resultSet = new OrderedSet(identityFactory.createAnonymousIdentity());
+		final OrderedSet resultSet = new OrderedSet(identityFactory.aTransientResultSet());
 		for (final Set instance : this.allContainedInstances) {
 			if (category.isSuperSetOf(instance.category()).isEqualTo(coreSets.is_TRUE)
 					&& category.isSuperSetOf(instance).isEqualTo(coreSets.is_FALSE)) {
@@ -1101,7 +1101,7 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set allowableEdgeCategories(final Set orderedPair) {
-		final OrderedSet result = new OrderedSet(identityFactory.createAnonymousIdentity());
+		final OrderedSet result = new OrderedSet(identityFactory.aTransientResultSet());
 		for (final Set edge : this.category().container().filterProperClass(Edge.edge)) {
 			if (((edge.from().isSuperSetOf(this.category()).isEqualTo(coreSets.is_TRUE)))
 					&& (ArrowConstraints.isAllowableEdgeCategory(edge, this, orderedPair).isEqualTo(coreSets.is_TRUE))) {
@@ -1121,7 +1121,7 @@ public class Graph extends OrderedPair implements Set {
 
 	@Override
 	public Set unionOfconnectingArrows(final Set instance) {
-		final OrderedSet result = new OrderedSet(identityFactory.createAnonymousIdentity());
+		final OrderedSet result = new OrderedSet(identityFactory.aTransientResultSet());
 		for (final Set arrow : instance.container().filterArrows()) {
 			if ((arrow.from().isEqualToRepresentation(instance) && (arrow.to().isEqualToRepresentation(this)))
 					|| ((arrow.from().isEqualToRepresentation(this) && arrow.to().isEqualToRepresentation(instance)))) {

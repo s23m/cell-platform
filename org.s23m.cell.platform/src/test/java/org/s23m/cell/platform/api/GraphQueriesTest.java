@@ -52,22 +52,32 @@ public class GraphQueriesTest extends TestCase {
 	}
 
 	@Test
-	public void testTopologicalVertexSort() {
-		final Set topologicallySortedVertices = GraphQueries.topologicalVertexSort(createVisibilitiesGraph());
+	public void testSortConnectedComponentElementsInTopologicalOrder() {
+		final Set topologicallySortedVertices = GraphQueries.sortConnectedComponentElementsInTopologicalOrder(createVisibilitiesGraph());
 		assertEquals(false, topologicallySortedVertices.isEqualTo(coreSets.semanticErr_CycleOfVisibilities));
 		assertEquals(false, topologicallySortedVertices.category().isEqualTo(coreSets.semanticErr));
 	}
 
 	@Test
-	public void testPartitionModelByVisibilityArrows() {
-		// TODO
+	public void testSortSetInTopologicalOrder() {
+		final Set eightElements = GraphQueries.sortSetInTopologicalOrder(create8ComponentGraph());
+		final Set twoElements = GraphQueries.sortSetInTopologicalOrder(create2ComponentGraph());
+		final Set oneElement = GraphQueries.sortSetInTopologicalOrder(create1ComponentGraph());
+		final Set topologicallySortedVertices = GraphQueries.sortSetInTopologicalOrder(createVisibilitiesGraph());
+
+		assertEquals(8, eightElements.size());
+		assertEquals(15, twoElements.size());
+		assertEquals(18, oneElement.size());
+
+		assertEquals(18, topologicallySortedVertices.size());
+
 	}
 
 	@Test
 	public void testFilterConnectedComponents() {
-		final Set eightElements = GraphQueries.filterConnectedComponents(create8ComponentGraph());
-		final Set twoElements = GraphQueries.filterConnectedComponents(create2ComponentGraph());
-		final Set oneElement = GraphQueries.filterConnectedComponents(create1ComponentGraph());
+		final Set eightElements = GraphQueries.groupByConnectedComponents(create8ComponentGraph());
+		final Set twoElements = GraphQueries.groupByConnectedComponents(create2ComponentGraph());
+		final Set oneElement = GraphQueries.groupByConnectedComponents(create1ComponentGraph());
 
 		assertEquals(8, eightElements.size());
 		assertEquals(2, twoElements.size());

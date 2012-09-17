@@ -45,7 +45,7 @@ public final class F_Query {
 	}
 
 	public static Set findDependentArrows(final Set referencedSet) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
 		for (final Set instance : inMemorySets()) {
 			for (final Set arrow : referencedSet.unionOfconnectingArrows(instance)) {
 				result.add(arrow);
@@ -55,7 +55,7 @@ public final class F_Query {
 	}
 
 	public static Set findDependentInstances(final Set category) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
 		for (final Set instance : inMemorySets()) {
 			if (instance.category().isEqualToRepresentation(category)) {
 				result.add(instance);
@@ -66,7 +66,7 @@ public final class F_Query {
 
 	public static Set findDependentSets(final Set set) {
 		// relevant for DECOMMISSION_SEMANTICS
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
 		// test for child instances in the containment tree
 		for (final Set instance : set.filterInstances()) {
 			result.add(instance);
@@ -153,7 +153,7 @@ public final class F_Query {
 				|| set.category().isEqualTo(semanticIdentitySet)
 				))) {
 			final Set elementLinks = semanticDomain.filter(SemanticDomain.elements_to_semanticIdentitySet);
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.createAnAnonymousIdentity());
+			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
 
 			for (final Set element : elementLinks) {
 				if (element.to().isEqualTo(set)) {
