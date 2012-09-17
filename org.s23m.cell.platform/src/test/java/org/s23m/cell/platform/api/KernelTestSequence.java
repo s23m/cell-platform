@@ -85,12 +85,14 @@ public class KernelTestSequence {
 		sex.addElement(male);
 		sex.addElement(female);
 
+		/*
 		Instantiation.arrow(coreGraphs.visibility, entityrelationshipschema, testDomain);
 		// TODO: don't allow the creation of visibilities with target within a semantic domain such as: F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, entity, sex);
 
 		Instantiation.arrow(coreGraphs.visibility, RepositoryStructure.applicationengineering, testDomain);
 		Instantiation.arrow(coreGraphs.visibility, crm, testDomain);
 		Instantiation.arrow(coreGraphs.visibility, crm_product, testDomain);
+		*/
 		Instantiation.arrow(coreGraphs.visibility, hierarchicalerschema, testDomain);
 
 		// EXAMPLE CODE FOR DEFINING DERIVEDARTEFACTS
