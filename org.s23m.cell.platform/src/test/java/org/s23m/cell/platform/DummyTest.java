@@ -27,14 +27,12 @@ package org.s23m.cell.platform;
 import junit.framework.TestCase;
 
 import org.junit.Test;
-import org.s23m.cell.Set;
-import org.s23m.cell.platform.api.FormulaEvaluation;
 
 public class DummyTest extends TestCase {
 
 	@SuppressWarnings("unused")
 	@Test
 	public void testIt() {
-		final Set symbols = FormulaEvaluation.implementedFunctionSymbols;
+		/* put test here */
 	}
 }
