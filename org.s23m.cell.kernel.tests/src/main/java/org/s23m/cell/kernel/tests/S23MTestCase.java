@@ -5,7 +5,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Instantiation;
@@ -41,7 +40,6 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 		this.setMaintenanceEvents.clear();
 	}
 
-	@Test
 	public void testInstantiationSequence() {
 		executeInstantiationSequence();
 		checkForRuntimeErrors();

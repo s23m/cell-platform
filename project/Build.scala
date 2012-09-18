@@ -61,13 +61,7 @@ object CellBuild extends Build {
   lazy val kernelTests = Project(
     "kernel-tests",
     file ("org.s23m.cell.kernel.tests"),
-    settings = javaTestProjectSettings ++ Seq(
-	    /*
-	     * Set the Java test source directory to be <base>/src/main/java
-	     * because of the cell-eclipse projects which depend on these classes 
-	     */
-	    javaSource in Test <<= baseDirectory(_ / "src" / "main" / "java")
-  	)
+    settings = javaTestProjectSettings
   ) dependsOn (kernel)
 
   lazy val platform = Project(

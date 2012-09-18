@@ -5,11 +5,11 @@ import org.s23m.cell.kernel.tests.EcoreEmulationTest;
 import org.s23m.cell.kernel.tests.EnterpriseArchitectureModellingTest;
 import org.s23m.cell.kernel.tests.EntityRelationshipModellingTest;
 import org.s23m.cell.kernel.tests.EventHandlingTest;
-import org.s23m.cell.kernel.tests.S23MTestCase;
 import org.s23m.cell.kernel.tests.GraphVisualisationCreationTest;
 import org.s23m.cell.kernel.tests.InformationQualityLogicTest;
 import org.s23m.cell.kernel.tests.InformationQualityLogicTestB;
 import org.s23m.cell.kernel.tests.QueryTest;
+import org.s23m.cell.kernel.tests.S23MTestCase;
 import org.s23m.cell.kernel.tests.SemanticIdentityReconstitutionTest;
 import org.s23m.cell.kernel.tests.VisualisationExampleTest;
 
@@ -38,6 +38,7 @@ public class RunInstantiationSequence {
 	}
 
 	private void execute(final S23MTestCase testCase) {
+		System.out.println("Executing " + testCase.getClass().getName() + "...");
 		testCase.setUp();
 		testCase.testInstantiationSequence();
 	}
