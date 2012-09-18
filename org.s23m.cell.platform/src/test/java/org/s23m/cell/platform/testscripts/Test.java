@@ -23,7 +23,7 @@
  * Jorn Bettin
  * ***** END LICENSE BLOCK ***** */
 
-package org.s23m.cell.cellplatform.testscripts;
+package org.s23m.cell.platform.testscripts;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;

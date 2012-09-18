@@ -32,7 +32,7 @@ import static org.s23m.cell.core.F_Instantiation.identityFactory;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.Root;
 
-public class Test {
+public class TestKernel {
 
 	/**
 	 * @param args

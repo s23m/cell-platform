@@ -6,6 +6,4 @@ Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",
  org.s23m.cell.kernel.tests;bundle-version="1.0.0",
- org.s23m.cell.platform;bundle-version="1.0.0",
- org.s23m.cell.kernel.testbench;bundle-version="1.0.0"
-Export-Package: org.s23m.cell.cellplatform.testscripts
+ org.s23m.cell.platform;bundle-version="1.0.0"
