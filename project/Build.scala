@@ -39,11 +39,8 @@ object CellBuild extends Build {
   ) aggregate (
     communication,
     kernel,
-    kernelTestbench,
-    platform,
-
-	platformTestscripts,
-    kernelTests
+    kernelTests,
+    platform
   )
 
   lazy val communication = Project(
@@ -73,22 +70,10 @@ object CellBuild extends Build {
   	)
   ) dependsOn (kernel)
 
-  lazy val kernelTestbench = Project(
-    "kernel-testbench",
-    file ("org.s23m.cell.kernel.testbench"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel)
-
   lazy val platform = Project(
     "platform",
     file ("org.s23m.cell.platform"),
     settings = javaTestProjectSettings
   ) dependsOn (kernel)
   
-  lazy val platformTestscripts = Project(
-    "platform-testscripts",
-    file ("org.s23m.cell.platform.testscripts"),
-    settings = javaProjectSettings
-  ) dependsOn (kernel, kernelTests, kernelTestbench, platform)
-
 }
