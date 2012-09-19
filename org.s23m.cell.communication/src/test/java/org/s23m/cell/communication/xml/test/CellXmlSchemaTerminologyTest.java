@@ -8,7 +8,6 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.communication.xml.CellXmlSchemaTerminology;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -50,7 +49,6 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 		return result;
 	}
 
-	@Test
 	public void testUniqueness() throws Exception {
 		final Set<String> setOfTerms = new HashSet<String>();
 		for (final String key : terms.keySet()) {
@@ -61,14 +59,12 @@ public class CellXmlSchemaTerminologyTest extends TestCase {
 			}
 		}
 	}
-	
-	@Test
+
 	public void testSomeTerms() {
 		assertEquals("category", terminology.category());
 		assertEquals("from", terminology.from());
 	}
 	
-	@Test
 	public void testTermsHaveNoSpaces() {
 		for (final Map.Entry<String, String> entry : terms.entrySet()) {
 			final String term = entry.getValue();

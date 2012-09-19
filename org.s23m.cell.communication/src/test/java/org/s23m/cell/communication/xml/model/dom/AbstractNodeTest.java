@@ -26,13 +26,10 @@ package org.s23m.cell.communication.xml.model.dom;
 
 import java.util.LinkedHashMap;
 
-import org.junit.Test;
-
 import junit.framework.TestCase;
 
 public class AbstractNodeTest extends TestCase {
 	
-	@Test
 	public void testSettingAttributeToNullClearsIt() {
 		SimpleAbstractNode node = new SimpleAbstractNode(null, "test");
 		String key1 = "abc";

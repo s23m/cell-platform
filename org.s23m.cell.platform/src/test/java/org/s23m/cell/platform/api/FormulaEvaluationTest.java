@@ -26,46 +26,36 @@ package org.s23m.cell.platform.api;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 public class FormulaEvaluationTest extends TestCase {
 
-	@Test
 	public void testAndOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testContainsOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testEmptyOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testEqualsOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testEqualsToRepresentationOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testNotOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testOrOperator() {
 		// TODO
 	}
 
-	@Test
 	public void testXorOperator() {
 		// TODO
 	}

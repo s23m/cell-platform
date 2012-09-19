@@ -35,7 +35,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.communication.xml.NamespaceConstants;
@@ -123,7 +122,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		document = factory.createSchemaAsDocument(terminology);
 	}
 	
-	@Test
 	public void testBasicStructure() throws TransformerFactoryConfigurationError, TransformerException {
 		NodeList rootList = document.getChildNodes();
 		assertEquals(1, rootList.getLength());
@@ -134,7 +132,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("Expected: " + kernelTypeNames + "\nActual: " + complexTypeNames, complexTypeNames.containsAll(kernelTypeNames));
 	}
 	
-	@Test
 	public void testAllTermsAreBeingUsed() {
 		java.util.Set<String> allTerms = DefaultXmlSchemaTerminology.getAllTerms();
 		
@@ -144,7 +141,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("Not all terms are being used. Difference: " + difference, names.containsAll(allTerms));
 	}
 	
-	@Test
 	public void testAllDeclaredTypesReferToElements() {
 		Collection<Node> allElements = retrieveAllElements();
 		java.util.Set<String> ourDeclaredTypes = new HashSet<String>(allElements.size());
@@ -166,7 +162,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertTrue("At least one type does not refer to a declared element.\nqualifiedNames: " + qualifiedNames + "\nourDeclaredTypes: " + ourDeclaredTypes, qualifiedNames.containsAll(ourDeclaredTypes));
 	}
 	
-	@Test
 	public void testOnlyXsdTypeInUseIsStringType() {
 		List<Node> declaredNodes = retrieveAllDeclaredNodes();
 		String xsdNamespacePrefix = retrieveXsdNamespacePrefix();
@@ -185,7 +180,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	}
 	
-	@Test
 	public void testNoAttributesAreDeclared() {
 		List<Node> declaredNodes = retrieveAllDeclaredNodes();
 		for (Node node : declaredNodes) {
@@ -193,7 +187,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	}
 	
-	@Test
 	public void testRootElementExists() {
 		Collection<Node> allElements = retrieveAllElements();
 		
@@ -212,7 +205,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertNotNull("The root element was not found", found);
 	}
 	
-	@Test
 	public void testComplexTypeNamesAreUnique() {
 		Collection<Node> complexTypeNodes = getComplexTypeElements();
 		assertFalse(complexTypeNodes.isEmpty());
@@ -226,7 +218,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		assertEquals(complexTypeNames.size(), new HashSet<String>(complexTypeNames).size());
 	}
 	
-	@Test
 	public void testComplexTypeChildren() {
 		Collection<Node> elements = getComplexTypeElements();
 		
@@ -258,7 +249,6 @@ public class XmlSchemaFactoryTest extends TestCase {
 		}
 	}
 	
-	@Test
 	public void testXsdNodeNamespaceIsUsedConsistently() {
 		// check that all XSD nodes (complexTypes, simpleTypes, elements) use the XSD namespace
 		Collection<Node> complexTypeElements = getComplexTypeElements();

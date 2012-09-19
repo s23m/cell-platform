@@ -27,8 +27,6 @@ package org.s23m.cell.platform.api;
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import junit.framework.TestCase;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.SetAlgebra;
 import org.s23m.cell.api.models.S23MSemanticDomains;
@@ -42,7 +40,6 @@ public class SetAlgebraTest extends TestCase {
 	private static boolean agencyTestFoundationInitialised = false;
 
 	@Override
-	@Before
 	protected void setUp() throws Exception {
 		S23MPlatform.boot();
 		if (!agencyTestFoundationInitialised) {
@@ -51,7 +48,6 @@ public class SetAlgebraTest extends TestCase {
 		}
 	}
 
-	@Test
 	public void testSetAlgebra() {
 		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
 		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));

@@ -27,7 +27,6 @@ package org.s23m.cell.communication.xml;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
-import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
 public class CellXmlSchemaTerminology implements XmlSchemaTerminology {
 

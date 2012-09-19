@@ -26,12 +26,9 @@ package org.s23m.cell.platform;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 public class DummyTest extends TestCase {
 
 	@SuppressWarnings("unused")
-	@Test
 	public void testIt() {
 		/* put test here */
 	}

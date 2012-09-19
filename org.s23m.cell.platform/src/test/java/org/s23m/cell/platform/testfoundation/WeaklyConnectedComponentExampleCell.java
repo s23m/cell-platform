@@ -25,20 +25,20 @@
 package org.s23m.cell.platform.testfoundation;
 
 
+import static org.s23m.cell.S23MKernel.coreGraphs;
+import static org.s23m.cell.api.SetAlgebra.addElementToOrderedSet;
+import static org.s23m.cell.api.SetAlgebra.anEmptySet;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
-
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.Instantiation;
 import org.s23m.cell.platform.api.models.CellEngineering;
 import org.s23m.cell.platform.api.models.Organization;
-
-import org.s23m.cell.Set;
-import static org.s23m.cell.S23MKernel.coreGraphs;
-import static org.s23m.cell.api.SetAlgebra.*;
 
 
 public class WeaklyConnectedComponentExampleCell {

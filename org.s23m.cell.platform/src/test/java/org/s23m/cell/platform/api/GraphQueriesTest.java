@@ -28,8 +28,6 @@ import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.S23MKernel.coreSets;
 import junit.framework.TestCase;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.S23MPlatform;
@@ -42,7 +40,6 @@ public class GraphQueriesTest extends TestCase {
 	private static boolean agencyTestFoundationInitialised = false;
 
 	@Override
-	@Before
 	protected void setUp() throws Exception {
 		S23MPlatform.boot();
 		if (!agencyTestFoundationInitialised) {
@@ -51,14 +48,12 @@ public class GraphQueriesTest extends TestCase {
 		}
 	}
 
-	@Test
 	public void testSortConnectedComponentElementsInTopologicalOrder() {
 		final Set topologicallySortedVertices = GraphQueries.sortConnectedComponentElementsInTopologicalOrder(createVisibilitiesGraph());
 		assertEquals(false, topologicallySortedVertices.isEqualTo(coreSets.semanticErr_CycleOfVisibilities));
 		assertEquals(false, topologicallySortedVertices.category().isEqualTo(coreSets.semanticErr));
 	}
 
-	@Test
 	public void testSortSetInTopologicalOrder() {
 		final Set eightElements = GraphQueries.sortSetInTopologicalOrder(create8ComponentGraph());
 		final Set twoElements = GraphQueries.sortSetInTopologicalOrder(create2ComponentGraph());
@@ -73,8 +68,7 @@ public class GraphQueriesTest extends TestCase {
 
 	}
 
-	@Test
-	public void groupByConnectedComponents() {
+	public void testGroupByConnectedComponents() {
 		final Set eightElements = GraphQueries.groupByConnectedComponents(create8ComponentGraph());
 		final Set twoElements = GraphQueries.groupByConnectedComponents(create2ComponentGraph());
 		final Set oneElement = GraphQueries.groupByConnectedComponents(create1ComponentGraph());
