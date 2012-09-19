@@ -26,45 +26,44 @@
 import sbt._
 import Keys._
 
-object BuildSettings {
-  // TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
-  val buildVersion = "1.0.0"
-  
-  val buildSettings = Defaults.defaultSettings ++ Seq(
-    organization := "org.s23m",
-    // TODO replace with sbt-release version
-    version      := buildVersion,
-    scalaVersion := "2.9.1",
-    shellPrompt  := ShellPrompt.buildShellPrompt,
-    crossPaths := false,
-    
-    ivyXML := DependencyManagement.ivyXml,
-   
-    // append several options to the list of options passed to the Java compiler
-    javacOptions ++= Seq("-source", "1.5", "-target", "1.5")
-	
-	/*
-    publishTo <<= (version) { version: String =>
-		val nexus = "http://localhost:8081/nexus/content/repositories/"
-		if (version.trim.endsWith("SNAPSHOT")) {
-			Some("snapshots" at nexus + "snapshots/")
-		} else {
-			Some("releases" at nexus + "releases/")
-		}
-	},
-	
-	credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
-	*/
-  )
+import de.johoop.jacoco4sbt._
+import JacocoPlugin._
 
-  val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
+object BuildSettings {
+	// TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
+	val buildVersion = "1.0.0"
+	
+	private val parallelTestExecution = false
   
-  val javaTestProjectSettings = javaProjectSettings ++ Seq(
-    parallelExecution in Test := false,
-    libraryDependencies += "com.novocode" % "junit-interface" % "0.7" % "test->default",
-    libraryDependencies += DependencyManagement.JUnit,
-    testListeners <+= (target).map {
-      t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
-	}
-  )
+	// jacoco4sbt
+	private val jacocoSettings = jacoco.settings ++ Seq(
+		jacoco.reportFormats in jacoco.Config := Seq(XMLReport("utf-8"), HTMLReport("utf-8")),
+		// for consistency with "test"
+		parallelExecution in jacoco.Config := parallelTestExecution
+	)
+
+	val buildSettings = Defaults.defaultSettings ++ jacocoSettings ++ Seq(
+		organization := "org.s23m",
+		// TODO replace with sbt-release version
+		version      := buildVersion,
+		scalaVersion := "2.9.1",
+		shellPrompt  := ShellPrompt.buildShellPrompt,
+		crossPaths := false,
+		
+		ivyXML := DependencyManagement.ivyXml,
+	   
+		// append several options to the list of options passed to the Java compiler
+		javacOptions ++= Seq("-source", "1.5", "-target", "1.5")
+	)
+	
+	val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
+  
+	val javaTestProjectSettings = javaProjectSettings ++ Seq(
+		parallelExecution in Test := parallelTestExecution,
+		libraryDependencies += "com.novocode" % "junit-interface" % "0.7" % "test->default",
+		libraryDependencies += DependencyManagement.JUnit,
+		testListeners <+= (target).map {
+			t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
+		}
+	)
 }
