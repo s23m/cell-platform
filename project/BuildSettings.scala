@@ -26,36 +26,46 @@
 import sbt._
 import Keys._
 
-import de.johoop.cpd4sbt.Language
-import de.johoop.cpd4sbt.ReportType
-import de.johoop.cpd4sbt.CopyPasteDetector._
-
-import de.johoop.jacoco4sbt._
-import JacocoPlugin._
-
 object BuildSettings {
 	// TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
 	val buildVersion = "1.0.0"
 	
 	private val parallelTestExecution = false
-  
-	// jacoco4sbt
-	private val jacoco4sbtSettings = jacoco.settings ++ Seq(
-		jacoco.reportFormats in jacoco.Config := Seq(XMLReport("utf-8"), HTMLReport("utf-8")),
-		// for consistency with "test"
-		parallelExecution in jacoco.Config := parallelTestExecution
-	)
 	
-	private val cpd4sbtSettings = cpdSettings ++ Seq(
-		cpdLanguage := Language.Java,
-		cpdReportType := ReportType.Simple,
-		cpdReportName := "cpd.txt"
-	)
+	object StaticAnalysis {
+		import de.johoop.cpd4sbt.Language
+		import de.johoop.cpd4sbt.{ReportType => CpdReportType}
+		import de.johoop.cpd4sbt.CopyPasteDetector._
+		
+		import de.johoop.jacoco4sbt._
+		import JacocoPlugin._
+	
+		import de.johoop.findbugs4sbt.{ReportType => FindBugsReportType}
+		import de.johoop.findbugs4sbt.FindBugs._
+	
+		private val cpd4sbtSettings = cpdSettings ++ Seq(
+			cpdLanguage := Language.Java,
+			cpdReportType := CpdReportType.Simple,
+			cpdReportName := "cpd.txt"
+		)
+		
+		private val findbugs4sbtSettings = findbugsSettings ++ Seq(
+			findbugsReportType := FindBugsReportType.Html,
+			findbugsReportName := "findbugs.html"
+		)
+		
+		private val jacoco4sbtSettings = jacoco.settings ++ Seq(
+			jacoco.reportFormats in jacoco.Config := Seq(XMLReport("utf-8"), HTMLReport("utf-8")),
+			// for consistency with "test"
+			parallelExecution in jacoco.Config := parallelTestExecution
+		)
+		
+		val defaultSettings = jacoco4sbtSettings ++ cpd4sbtSettings ++ findbugs4sbtSettings 
+	}
 	
 	val buildSettings = {
 		Defaults.defaultSettings ++ 
-		jacoco4sbtSettings ++
-		cpd4sbtSettings ++
+		StaticAnalysis.defaultSettings ++
 		Seq(
 			organization := "org.s23m",
 			// TODO replace with sbt-release version
