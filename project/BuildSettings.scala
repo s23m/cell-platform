@@ -26,6 +26,10 @@
 import sbt._
 import Keys._
 
+import de.johoop.cpd4sbt.Language
+import de.johoop.cpd4sbt.ReportType
+import de.johoop.cpd4sbt.CopyPasteDetector._
+
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
 
@@ -36,26 +40,37 @@ object BuildSettings {
 	private val parallelTestExecution = false
   
 	// jacoco4sbt
-	private val jacocoSettings = jacoco.settings ++ Seq(
+	private val jacoco4sbtSettings = jacoco.settings ++ Seq(
 		jacoco.reportFormats in jacoco.Config := Seq(XMLReport("utf-8"), HTMLReport("utf-8")),
 		// for consistency with "test"
 		parallelExecution in jacoco.Config := parallelTestExecution
 	)
-
-	val buildSettings = Defaults.defaultSettings ++ jacocoSettings ++ Seq(
-		organization := "org.s23m",
-		// TODO replace with sbt-release version
-		version      := buildVersion,
-		scalaVersion := "2.9.1",
-		shellPrompt  := ShellPrompt.buildShellPrompt,
-		crossPaths := false,
-		
-		ivyXML := DependencyManagement.ivyXml,
-	   
-		// append several options to the list of options passed to the Java compiler
-		javacOptions ++= Seq("-source", "1.5", "-target", "1.5")
+	
+	private val cpd4sbtSettings = cpdSettings ++ Seq(
+		cpdLanguage := Language.Java,
+		cpdReportType := ReportType.Simple,
+		cpdReportName := "cpd.txt"
 	)
 	
+	val buildSettings = {
+		Defaults.defaultSettings ++ 
+		jacoco4sbtSettings ++
+		cpd4sbtSettings ++
+		Seq(
+			organization := "org.s23m",
+			// TODO replace with sbt-release version
+			version      := buildVersion,
+			scalaVersion := "2.9.1",
+			shellPrompt  := ShellPrompt.buildShellPrompt,
+			crossPaths := false,
+			
+			ivyXML := DependencyManagement.ivyXml,
+		   
+			// append several options to the list of options passed to the Java compiler
+			javacOptions ++= Seq("-source", "1.5", "-target", "1.5")
+		)
+	}
+		
 	val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
   
 	val javaTestProjectSettings = javaProjectSettings ++ Seq(
