@@ -55,54 +55,54 @@ public  class F_GraphQueries {
 	 * See http://en.wikipedia.org/wiki/Topological_sorting
 	 */
 	public static Set sortConnectedComponentElementsInTopologicalOrder(final Set connectedSubgraph) {
-			// result <- Empty set that will contain the sorted elements
-			Set result = SetAlgebra.anEmptySet();
+		// result <- Empty set that will contain the sorted elements
+		Set result = SetAlgebra.anEmptySet();
 
-			final Set allArrows = connectedSubgraph.filterArrows();
-			final Set allVertices = connectedSubgraph.filterProperClass(Query.vertex);
+		final Set allArrows = connectedSubgraph.filterArrows();
+		final Set allVertices = connectedSubgraph.filterProperClass(Query.vertex);
 
-			final Set verticesWithOutboundArrows = allArrows.filterFrom();
+		final Set verticesWithOutboundArrows = allArrows.filterFrom();
 
-			// nextLevelVertices <- Set of all vertices with no remaining outbound arrows
-			final Set nextLevelVertices = allVertices.complement(verticesWithOutboundArrows);
+		// nextLevelVertices <- Set of all vertices with no remaining outbound arrows
+		final Set nextLevelVertices = allVertices.complement(verticesWithOutboundArrows);
 
-			final List<Set> listOfNextLevelVertices = nextLevelVertices.asList();
+		final List<Set> listOfNextLevelVertices = nextLevelVertices.asList();
 
-			Set remainingArrows = allArrows;
+		Set remainingArrows = allArrows;
 
-			result = result.union(nextLevelVertices);
+		result = result.union(nextLevelVertices);
 
-			while (!listOfNextLevelVertices.isEmpty()) {
-				// remove a vertex v from listOfNextLevelVertices
-				final Set v = listOfNextLevelVertices.remove(listOfNextLevelVertices.size() - 1);
+		while (!listOfNextLevelVertices.isEmpty()) {
+			// remove a vertex v from listOfNextLevelVertices
+			final Set v = listOfNextLevelVertices.remove(listOfNextLevelVertices.size() - 1);
 
-				// for each vertex w with an arrow  from w to v do
-				for (final Set arrow : remainingArrows.filterByLinkedTo(v)) {
-					// remove arrow  from the graph
-					remainingArrows = remainingArrows.complement(F_SetAlgebra.wrapInOrderedSet(arrow));
-					final Set w = arrow.from();
-					// if w has no other outgoing arrow then insert w into S
-					if (remainingArrows.filterByLinkedFrom(w).isEmpty()) {
-						listOfNextLevelVertices.add(w);
-						result = SetAlgebra.addElementToOrderedSet(result, w);
-					}
-					result = SetAlgebra.addElementToOrderedSet(result, arrow);
-					}
-			}
-
-			// check to see if all arrows are removed
-			boolean cycle = false;
-			for (final Set v : allVertices) {
-				if (!remainingArrows.filterByLinkedTo(v).isEmpty()) {
-					cycle = true;
-					break;
+			// for each vertex w with an arrow  from w to v do
+			for (final Set arrow : remainingArrows.filterByLinkedTo(v)) {
+				// remove arrow  from the graph
+				remainingArrows = remainingArrows.complement(F_SetAlgebra.wrapInOrderedSet(arrow));
+				final Set w = arrow.from();
+				// if w has no other outgoing arrow then insert w into S
+				if (remainingArrows.filterByLinkedFrom(w).isEmpty()) {
+					listOfNextLevelVertices.add(w);
+					result = SetAlgebra.addElementToOrderedSet(result, w);
 				}
+				result = SetAlgebra.addElementToOrderedSet(result, arrow);
+				}
+		}
+
+		// check to see if all arrows are removed
+		boolean cycle = false;
+		for (final Set v : allVertices) {
+			if (!remainingArrows.filterByLinkedTo(v).isEmpty()) {
+				cycle = true;
+				break;
 			}
-			if (cycle) {
-				// Cycle present, topological sort not possible
-				return Instantiation.raiseError(coreSets.semanticErr_CycleOfVisibilities, coreSets.semanticErr);
-			} //else {System.out.println("Topological Sort: "+ Arrays.toString(L.toArray()));}
-			return result;
+		}
+		if (cycle) {
+			// Cycle present, topological sort not possible
+			return Instantiation.raiseError(coreSets.semanticErr_CycleOfVisibilities, coreSets.semanticErr);
+		} //else {System.out.println("Topological Sort: "+ Arrays.toString(L.toArray()));}
+		return result;
 	}
 
 

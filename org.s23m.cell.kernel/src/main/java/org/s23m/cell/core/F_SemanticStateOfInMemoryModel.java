@@ -69,11 +69,11 @@ public class F_SemanticStateOfInMemoryModel {
 	//public static final CoreGraphs coreGraphs = new CoreGraphs();
 	public static final int indexIsNotAvailable = -1;
 
-	private static boolean semanticDomainIsInitialized = false;
-	private static boolean cellKernelSemanticDomainIsInitialized = false;
-	private static boolean cellEditorIsLive = false;
+	private static volatile Boolean semanticDomainIsInitialized = false;
+	private static volatile Boolean cellKernelSemanticDomainIsInitialized = false;
+	private static volatile Boolean cellEditorIsLive = false;
 
-	private static boolean isDebugModeOn = false;
+	private static volatile boolean isDebugModeOn = false;
 
 	public static boolean semanticDomainIsInitialized() {
 		return semanticDomainIsInitialized;
@@ -104,18 +104,25 @@ public class F_SemanticStateOfInMemoryModel {
 	}
 
 	public static void completeCellKernelSemanticDomainInitialization() {
-		if (!cellEditorIsLive()) {
-			if (!semanticDomainIsInitialized) {
-				completeSemanticDomainInitialization();
+		if (!cellEditorIsLive) {
+			synchronized (cellEditorIsLive) {
+				if (!cellEditorIsLive) {
+					if (!semanticDomainIsInitialized) {
+						synchronized (semanticDomainIsInitialized) {
+							if (!semanticDomainIsInitialized) {
+								completeSemanticDomainInitialization();
+							}
+						}
+					}
+					S23MSemanticDomains.instantiateFeature();
+					InstanceDerivation.instantiateFeature();
+					HTMLRepresentation.instantiateFeature();
+					final int kernelComplexity = identityFactory.kernelComplexity();
+					final int inMemoryComplexity = identityFactory.inMemoryComplexity();
+					cellKernelSemanticDomainIsInitialized = true;
+				}
 			}
-			S23MSemanticDomains.instantiateFeature();
-			InstanceDerivation.instantiateFeature();
-			HTMLRepresentation.instantiateFeature();
 		}
-		final int kernelComplexity = identityFactory.kernelComplexity();
-		final int inMemoryComplexity = identityFactory.inMemoryComplexity();
-		cellKernelSemanticDomainIsInitialized = true;
-		semanticDomainIsInitialized = true;
 	}
 
 	public static void goLiveWithCellEditor() {

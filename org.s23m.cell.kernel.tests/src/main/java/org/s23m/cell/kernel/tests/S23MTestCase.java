@@ -14,7 +14,7 @@ import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
 public abstract class S23MTestCase extends TestCase implements EventListener {
 
-	private static boolean kernelHasBooted = false;
+	private static volatile Boolean kernelHasBooted = false;
 
 	protected static InstantiationData testData;
 
@@ -28,36 +28,25 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 
 	@Override
 	public void setUp() {
+		// initialisation must only ever be done once
 		if (!kernelHasBooted) {
-			org.s23m.cell.S23MKernel.boot();
-			//org.s23m.cell.platform.S23MPlatform.bootTemplate();
-			instantiationSequences = InstantiationSequences.getInstance();
-			testData = new InstantiationData(instantiationSequences);
+			synchronized (kernelHasBooted) {
+				if (!kernelHasBooted) {
+					org.s23m.cell.S23MKernel.boot();
+					//org.s23m.cell.platform.S23MPlatform.bootTemplate();
+					instantiationSequences = InstantiationSequences.getInstance();
+					testData = new InstantiationData(instantiationSequences);
 
-			kernelHasBooted = true;
+					kernelHasBooted = true;
+				}
+			}
 		}
-
 		this.setMaintenanceEvents.clear();
 	}
 
 	public void testInstantiationSequence() {
 		executeInstantiationSequence();
 		checkForRuntimeErrors();
-	}
-
-	protected abstract void executeInstantiationSequence();
-
-	private void checkForRuntimeErrors() {
-		final Set runtimeErrors = Query.runtimeErrors();
-		if (!runtimeErrors.isEmpty()) {
-			final StringBuilder builder = new StringBuilder("The following runtime errors were encountered:\n");
-			// TODO improve display of sets
-			for (final Set set: runtimeErrors) {
-				builder.append(set);
-				builder.append("\n");
-			}
-			fail(builder.toString());
-		}
 	}
 
 	public void raiseError() {
@@ -68,4 +57,20 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 		setMaintenanceEvents.add(event);
 		return event;
 	}
+
+	protected abstract void executeInstantiationSequence();
+
+	private void checkForRuntimeErrors() {
+		final Set runtimeErrors = Query.runtimeErrors();
+		if (!runtimeErrors.isEmpty()) {
+			final StringBuilder builder = new StringBuilder(getClass().getSimpleName() + ": The following runtime errors were encountered:\n");
+			// TODO improve display of sets
+			for (final Set set: runtimeErrors) {
+				builder.append(set);
+				builder.append("\n");
+			}
+			fail(builder.toString());
+		}
+	}
+
 }

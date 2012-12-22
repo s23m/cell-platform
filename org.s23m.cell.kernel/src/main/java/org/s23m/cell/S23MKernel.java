@@ -62,6 +62,8 @@ import org.s23m.cell.core.F_SemanticStateOfInMemoryModel;
  */
 public class S23MKernel {
 
+	private static volatile Boolean kernelInitialisationCompleted = false;
+
 	public static final KernelSets coreSets = new KernelSets(F_Instantiation.identityFactory);
 	public static final ProperClasses coreGraphs = new ProperClasses();
 
@@ -72,25 +74,37 @@ public class S23MKernel {
 	public static void switchOnDebugMode() {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.switchOnDebugMode();
 	}
+	
 	public static void switchOffDebugMode() {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.switchOffDebugMode();
 	}
+	
 	public static void goLiveWithCellEditor() {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.goLiveWithCellEditor();
 	}
+	
 	public static void completeCellKernelInitialization() {
-		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeCellKernelSemanticDomainInitialization();
-		if (!SemanticStateOfInMemoryModel.cellEditorIsLive()) {
-			Visualization.instantiateFeature();
-			SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
-			//The following is sandbox content
-			RepositoryStructure.instantiateFeature();
-			EnterpriseArchitecture.instantiateFeature();
+		// initialisation must only ever be done once
+		if (!kernelInitialisationCompleted) {
+			synchronized (kernelInitialisationCompleted) {
+				if (!kernelInitialisationCompleted) {
+					org.s23m.cell.core.F_SemanticStateOfInMemoryModel.completeCellKernelSemanticDomainInitialization();
+					if (!SemanticStateOfInMemoryModel.cellEditorIsLive()) {
+						Visualization.instantiateFeature();
+						SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
+						//The following is sandbox content
+						RepositoryStructure.instantiateFeature();
+						EnterpriseArchitecture.instantiateFeature();
+					}
+					SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
+					
+					kernelInitialisationCompleted = true;
+				}
+			}
 		}
-		SemanticStateOfInMemoryModel.cellKernelIsInitialized = true;
 	}
+	
 	public static void boot() {
 		completeCellKernelInitialization();
 	}
-
 }

@@ -57,7 +57,7 @@ import org.s23m.cell.platform.api.models.CellPlatform;
  */
 public class S23MPlatform {
 
-	private static boolean cellPlatformIsInitialized = false;
+	private static volatile Boolean cellPlatformIsInitialized = false;
 
 	public static final KernelSets coreSets = org.s23m.cell.S23MKernel.coreSets;
 	public static final ProperClasses coreGraphs = org.s23m.cell.S23MKernel.coreGraphs;
@@ -75,21 +75,23 @@ public class S23MPlatform {
 	public static void goLiveWithCellEditor() {
 		org.s23m.cell.core.F_SemanticStateOfInMemoryModel.goLiveWithCellEditor();
 	}
-	public static void completeCellKernelInitialization() {
-		org.s23m.cell.S23MKernel.completeCellKernelInitialization();
+
+	public static void boot() {
+		// initialisation must only ever be done once
+		if (!cellPlatformIsInitialized) {
+			synchronized (cellPlatformIsInitialized) {
+				if (!cellPlatformIsInitialized) {
+					completeCellPlatformInitialization();
+					cellPlatformIsInitialized = true;
+				}
+			}
+		}
 	}
 
-	public static void completeCellPlatformInitialization() {
+	private static void completeCellPlatformInitialization() {
 		org.s23m.cell.S23MKernel.completeCellKernelInitialization();
 		if (!org.s23m.cell.SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			CellPlatform.instantiateFeature();
-		}
-		cellPlatformIsInitialized = true;
-	}
-
-	public static void boot() {
-		if (!cellPlatformIsInitialized) {
-			completeCellPlatformInitialization();
 		}
 	}
 }

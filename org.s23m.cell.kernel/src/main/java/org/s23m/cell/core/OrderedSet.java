@@ -21,6 +21,7 @@
  *
  * Contributor(s):
  * Jorn Bettin
+ * Andrew Shewring
  * ***** END LICENSE BLOCK ***** */
 
 package org.s23m.cell.core;
@@ -29,15 +30,17 @@ import static org.s23m.cell.S23MKernel.coreSets;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.collections.MultiMap;
-import org.apache.commons.collections.map.ListOrderedMap;
-import org.apache.commons.collections.map.MultiValueMap;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 import org.s23m.cell.Identity;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
@@ -45,24 +48,44 @@ import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
+import org.s23m.cell.core.collections.LazyValue;
+import org.s23m.cell.core.collections.StripedLockArrayListMultiMap;
 import org.s23m.cell.impl.SemanticDomainCode;
 
-@SuppressWarnings("unchecked")
 public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
+
+	private static final int NUMBER_OF_STRIPES = 16;
 
 	/* Reify the S23M OrderedSet concept */
 	protected static final OrderedSet orderedSet = new OrderedSet();
 
-	private boolean listInitialized = false;
+	private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+	private final Lock writeLock = readWriteLock.writeLock();
+	private final Lock readLock = readWriteLock.readLock();
 
-	// TODO use an equivalent from Google Guava
-	private ListOrderedMap map;
-	private ListOrderedMap iteratorMap;
+	private final LazyValue<List<Set>> contentsHolder = new LazyValue<List<Set>>() {
+		@Override protected List<Set> computeValue() {
+			return new CopyOnWriteArrayList<Set>();
+		}
+	};
 
-	// TODO use an equivalent from Google Guava
-	private MultiMap identifierMap;
+	private final LazyValue<StripedLockArrayListMultiMap<String, Set>> identifierMapHolder = new LazyValue<StripedLockArrayListMultiMap<String,Set>>() {
+		@Override protected StripedLockArrayListMultiMap<String, Set> computeValue() {
+			return new StripedLockArrayListMultiMap<String, Set>(NUMBER_OF_STRIPES);
+		}
+	};
 
-	private List<EventListener> subscribers;
+	private final LazyValue<Map<String, Set>> mapHolder = new LazyValue<Map<String, Set>>() {
+		@Override protected Map<String, Set> computeValue() {
+			return new NonBlockingHashMap<String, Set>();
+		}
+	};
+
+	private final LazyValue<List<EventListener>> subscribersHolder = new LazyValue<List<EventListener>>() {
+		@Override protected List<EventListener> computeValue() {
+			return new CopyOnWriteArrayList<EventListener>();
+		}
+	};
 
 	protected OrderedSet(final Identity semanticIdentity, final Set category) {
 		super(semanticIdentity, category);
@@ -76,66 +99,53 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		super(identityFactory.orderedSet());
 	}
 
+	public static OrderedSet createTransientOrderedSet() {
+		return new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+	}
+
 	@Override
 	public Set properClass() {
 		return OrderedSet.orderedSet;
 	}
 
-	// ***************************************
-	//    Implementation of the equivalent of java.util.List operations
-	// ***************************************
-
-	private void ensureInitializedList() {
-		if (!listInitialized) {
-			iteratorMap = new ListOrderedMap();
-			map = new ListOrderedMap();
-			identifierMap = new MultiValueMap();
-			subscribers = new ArrayList<EventListener>();
-			listInitialized = true;
-		}
-	}
+	// ***************************************************************
+	//  Implementation of the equivalent of java.util.List operations
+	// ***************************************************************
 
 	protected boolean remove(final Set o) {
-		this.ensureInitializedList();
-		final boolean isRemovedFromMap1 =
-				(this.map.remove(o.identity().identifier().toString()) != null)
-				? true : false;
-		final boolean isRemovedFromMap2 =
-				(this.map.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-				? true : false;
-		final boolean isRemovedFromIteratorMap =
-				(this.iteratorMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-				? true : false;
-		final boolean isRemovedFromIdMap1 =
-				(this.identifierMap.remove(o.identity().identifier().toString()) != null)
-				? true : false;
-		final boolean isRemovedFromIdMap2 =
-				(this.identifierMap.remove(o.identity().uniqueRepresentationReference().toString()) != null)
-				? true : false;
-		// Create and propagate Set Maintenance EventImpl
-		final Set removeEvent = this.elementRemoved(o);
-		final Iterator<EventListener> i = subscribers.iterator();
-		while (i.hasNext()) {
-			i.next().processEvent(removeEvent);
+		try {
+			writeLock.lock();
+
+			final boolean isRemovedFromMap1 = getMap().remove(o.identity().identifier().toString()) != null;
+			final boolean isRemovedFromMap2 = getMap().remove(o.identity().uniqueRepresentationReference().toString()) != null;
+			final boolean isRemovedFromIteratorMap = removeByURR(o) != null;
+			final boolean isRemovedFromIdMap1 = getIdentifierMap().remove(o.identity().identifier().toString()) == null;
+			final boolean isRemovedFromIdMap2 = getIdentifierMap().remove(o.identity().uniqueRepresentationReference().toString()) == null;
+			// Create and propagate Set Maintenance EventImpl
+			final Set removeEvent = elementRemoved(o);
+			final Iterator<EventListener> i = getSubscribers().iterator();
+			while (i.hasNext()) {
+				i.next().processEvent(removeEvent);
+			}
+			return isRemovedFromMap1 && isRemovedFromMap2 && isRemovedFromIdMap1 && isRemovedFromIdMap2 && isRemovedFromIteratorMap;
+		} finally {
+			writeLock.unlock();
 		}
-		return isRemovedFromMap1 && isRemovedFromMap2 && isRemovedFromIdMap1 && isRemovedFromIdMap2 && isRemovedFromIteratorMap;
 	}
 
 	@Override
 	public boolean containsSemanticMatch(final Set o) {
-		this.ensureInitializedList();
-		return this.identifierMap.containsKey(o.identity().identifier().toString());
+		return getIdentifierMap().containsKey(o.identity().identifier().toString());
 	}
 
 	@Override
 	public boolean containsRepresentation(final Set o) {
-		this.ensureInitializedList();
-		return (this.map.containsKey(o.identity().uniqueRepresentationReference().toString())) || (this.map.containsKey(o.identity().identifier().toString()));
+		final Map<String, Set> map = getMap();
+		return map.containsKey(o.identity().uniqueRepresentationReference().toString()) || map.containsKey(o.identity().identifier().toString());
 	}
 
 	@Override
 	public boolean containsSemanticMatchesForAll(final Set c) {
-		this.ensureInitializedList();
 		final Iterator<Set> i = c.iterator();
 		while (i.hasNext()) {
 			if (!this.containsSemanticMatch(i.next())) {
@@ -147,7 +157,6 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public boolean containsAllRepresentations(final Set c) {
-		this.ensureInitializedList();
 		final Iterator<Set> i = c.iterator();
 		while (i.hasNext()) {
 			if (!this.containsRepresentation(i.next())) {
@@ -157,140 +166,205 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		return true;
 	}
 
-	private Set get(final int index) {
-		this.ensureInitializedList();
-		return (Set) this.map.getValue(index);
+	private Set getByUUID(final UUID o) {
+		return getMap().get(o.toString());
 	}
-	private int indexOfUUID(final UUID o) {
-		this.ensureInitializedList();
-		return this.map.indexOf(o.toString());
+
+	private int iteratorIndexOfUUID(final List<Set> contents, final UUID o) {
+		int i = 0;
+		for (final Set set : contents) {
+			final UUID key = getURR(set);
+			if (key.equals(o)) {
+				return i;
+			}
+			i++;
+		}
+		return -1;
 	}
-	private Set getValue(final int index) {
-		this.ensureInitializedList();
-		return (Set) this.iteratorMap.getValue(index);
+
+	private Set getValue(final List<Set> contents, final int index) {
+		return contents.get(index);
 	}
-	private int iteratorIndexOfUUID(final UUID o) {
-		this.ensureInitializedList();
-		return this.iteratorMap.indexOf(o.toString());
+
+	private Set removeByURR(final Set o) {
+		// we don't rely on the equals method here, but do the checking based on URR instead
+		final UUID uuidToRemove = getURR(o);
+		for (final Set set : getContents()) {
+			final UUID key = getURR(set);
+			if (key.equals(uuidToRemove)) {
+				return set;
+			}
+		}
+		return null;
+	}
+
+	private UUID getURR(final Set o) {
+		return o.identity().uniqueRepresentationReference();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		this.ensureInitializedList();
-		return this.iteratorMap.isEmpty();
+		return getContents().isEmpty();
 	}
 
 	@Override
 	public Iterator<Set> iterator() {
-		this.ensureInitializedList();
-		return this.iteratorMap.values().iterator();
+		return getContents().iterator();
 	}
 
 	@Override
 	public ListIterator<Set> listIterator() {
-		this.ensureInitializedList();
-		return new ArrayList(Arrays.asList(this.iteratorMap.values().toArray())).listIterator();
+		return getContents().listIterator();
 	}
 
 	@Override
 	public ListIterator<Set> listIterator(final int index) {
-		this.ensureInitializedList();
-		return new ArrayList(Arrays.asList(this.iteratorMap.values().toArray())).listIterator(index);
+		return getContents().listIterator(index);
 	}
 
 	@Override
 	public int size() {
-		this.ensureInitializedList();
-		return this.iteratorMap.size();
+		return getContents().size();
 	}
 
 	@Override
 	public Set[] toArray() {
-		this.ensureInitializedList();
-		return (Set[]) this.iteratorMap.values().toArray();
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			return contents.toArray(new Set[contents.size()]);
+		} finally {
+			readLock.unlock();
+		}
 	}
 
 	@Override
 	public Set[] toArray(final Set[] a) {
-		this.ensureInitializedList();
-		return (Set[]) this.iteratorMap.values().toArray(a);
+		return getContents().toArray(a);
 	}
 
 	@Override
 	public List<Set> asList() {
-		this.ensureInitializedList();
-		return new ArrayList<Set>(this.iteratorMap.values());
+		return new ArrayList<Set>(getContents());
 	}
 
 	protected boolean add(final Set o) {
-		this.ensureInitializedList();
-		this.iteratorMap.put(o.identity().uniqueRepresentationReference().toString(), o);
-		this.map.put(o.identity().uniqueRepresentationReference().toString(), o);
-		this.identifierMap.put(o.identity().identifier().toString() , o);
-		if (!o.identity().uniqueRepresentationReference().equals(o.identity().identifier())) {
-			this.map.put(o.identity().identifier().toString(), o);
-			this.identifierMap.put(o.identity().uniqueRepresentationReference().toString() , o);
-		}
+		try {
+			writeLock.lock();
 
-		// Create and propagate Set Maintenance EventImpl
-		if (org.s23m.cell.core.F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
-			final Set addEvent = this.elementAdded(o);
-			final Iterator<EventListener> i = subscribers.iterator();
-			while (i.hasNext()) {
-				i.next().processEvent(addEvent);
+			getContents().add(o);
+			getMap().put(o.identity().uniqueRepresentationReference().toString(), o);
+			getIdentifierMap().put(o.identity().identifier().toString(), o);
+			if (!o.identity().uniqueRepresentationReference().equals(o.identity().identifier())) {
+				getMap().put(o.identity().identifier().toString(), o);
+				getIdentifierMap().put(o.identity().uniqueRepresentationReference().toString() , o);
 			}
+
+			// Create and propagate Set Maintenance EventImpl
+			if (org.s23m.cell.core.F_SemanticStateOfInMemoryModel.cellKernelSemanticDomainIsInitialized()) {
+				final Set addEvent = this.elementAdded(o);
+				final Iterator<EventListener> i = getSubscribers().iterator();
+				while (i.hasNext()) {
+					i.next().processEvent(addEvent);
+				}
+			}
+			return true;
+		} finally {
+			writeLock.unlock();
 		}
-		return true;
 	}
+
 	@Override
 	public Set extractFirst() {
-		if (this.size() > 0) {
-			return this.getValue(0);
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			if (!contents.isEmpty()) {
+				return contents.get(0);
+			}
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
+		} finally {
+			readLock.unlock();
 		}
-		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractSecond() {
-		if (this.size() > 1) {
-			return this.getValue(1);
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			if (contents.size() > 1) {
+				return contents.get(1);
+			}
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
+		} finally {
+			readLock.unlock();
 		}
-		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractLast() {
-		if (this.size() > 0) {
-			return this.getValue(this.size()-1);
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			if (!contents.isEmpty()) {
+				return contents.get(contents.size() - 1);
+			}
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
+		} finally {
+			readLock.unlock();
 		}
-		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractNext(final Set element) {
-		final int next = this.iteratorIndexOfUUID(element.identity().uniqueRepresentationReference()) +1;
-		if (this.size() > next && next > -1) {
-			return this.getValue(next);
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			final int indexOf = iteratorIndexOfUUID(contents, getURR(element));
+			if (indexOf >= 0) {
+				final int next = indexOf + 1;
+				if (size() > next && next > -1) {
+					return getValue(contents, next);
+				}
+			}
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
+		} finally {
+			readLock.unlock();
 		}
-		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractPrevious(final Set element) {
-		final int previous = this.iteratorIndexOfUUID(element.identity().uniqueRepresentationReference()) -1;
-		if (-1 < previous && previous < this.size()) {
-			return this.getValue(previous);
+		try {
+			readLock.lock();
+			final List<Set> contents = getContents();
+			final int indexOf = iteratorIndexOfUUID(contents, getURR(element));
+			if (indexOf >= 0) {
+				final int previous = indexOf - 1;
+				if (-1 < previous && previous < size()) {
+					return getValue(contents, previous);
+				}
+			}
+			return S23MSemanticDomains.is_NOTAPPLICABLE;
+		} finally {
+			readLock.unlock();
 		}
-		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractUniqueMatch(final Identity identity) {
-		final int i = this.indexOfUUID(identity.uniqueRepresentationReference());
-		final int j = this.indexOfUUID(identity.identifier());
-		if (i > -1) {
-			return this.get(i);
+		final Set i = getByUUID(identity.uniqueRepresentationReference());
+		if (i != null) {
+			return i;
 		}
-		if (j > -1) {
-			return this.get(j);
+		final Set j = getByUUID(identity.identifier());
+		if (j != null) {
+			return j;
 		}
 		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
+
 	@Override
 	public Set extractUniqueMatch(final Set set) {
 		return extractUniqueMatch(set.identity());
@@ -299,19 +373,21 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	@Override
 	public Set extractUniqueMatch(final String uuidAsString) {
 		final UUID uuid = UUID.fromString(uuidAsString);
-		final int i = this.indexOfUUID(uuid);
-		if (i >= -1) {
-			return this.get(i);
+		final Set i = getByUUID(uuid);
+		if (i != null) {
+			return i;
 		}
 		return S23MSemanticDomains.is_NOTAPPLICABLE;
 	}
 
 	@Override
 	public Set filterBySemanticIdentity(final Set set) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		final List<Set> r = (List<Set>) this.identifierMap.get(set.identity().identifier().toString());
-		for (final Set element : r) {
-			result.add(element);
+		final OrderedSet result = createTransientOrderedSet();
+		final Collection<Set> r = getIdentifierMap().get(set.identity().identifier().toString());
+		if (r != null) {
+			for (final Set element : r) {
+				result.add(element);
+			}
 		}
 		return result;
 	}
@@ -339,9 +415,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set complement(final Set set) {
 		return F_SetAlgebra.complement(this, set);
 	}
+
 	@Override
 	public Set filterByLinkedTo(final Set toSet) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.to().isEqualToRepresentation(toSet)) {
@@ -351,9 +428,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedFrom(final Set fromSet) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.from().isEqualToRepresentation(fromSet)) {
@@ -363,28 +441,30 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedFromAndTo(final Set fromSet, final Set toSet) {
 		if (fromSet.isInformation().is_FALSE()) {
-			return this.filterByLinkedTo(toSet);
-		}
-		if (toSet.isInformation().is_FALSE()) {
-			return this.filterByLinkedFrom(fromSet);
-		}
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		for (final Set element : this) {
-			if (element.isAnArrow().is_TRUE())  {
-				if (element.to().isEqualToRepresentation(toSet)
-						&& element.from().isEqualToRepresentation(fromSet)) {
-					result.add(element);
+			return filterByLinkedTo(toSet);
+		} else if (toSet.isInformation().is_FALSE()) {
+			return filterByLinkedFrom(fromSet);
+		} else {
+			final OrderedSet result = createTransientOrderedSet();
+			for (final Set element : this) {
+				if (element.isAnArrow().is_TRUE())  {
+					if (element.to().isEqualToRepresentation(toSet)
+							&& element.from().isEqualToRepresentation(fromSet)) {
+						result.add(element);
+					}
 				}
 			}
+			return result;
 		}
-		return result;
 	}
+
 	@Override
 	public Set filterFrom() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
@@ -392,9 +472,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterTo() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.to());
@@ -402,9 +483,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterFromAndTo() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element.from());
@@ -413,13 +495,14 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedToSemanticRole(final Set toSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		final Set semanticIdentities = toSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 				.filterFrom();
-		((OrderedSet)semanticIdentities).add(toSetReferencedSemanticRole);
+		((OrderedSet) semanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.to())) {
 				result.add(element);
@@ -427,13 +510,14 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedFromSemanticRole(final Set fromSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		final Set semanticIdentities = fromSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 				.filterTo();
-		((OrderedSet)semanticIdentities).add(fromSetReferencedSemanticRole);
+		((OrderedSet) semanticIdentities).add(fromSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (semanticIdentities.containsSemanticMatch(element.from())) {
 				result.add(element);
@@ -441,17 +525,18 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedFromAndToSemanticRole(final Set fromSetReferencedSemanticRole, final Set toSetReferencedSemanticRole) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		final Set fromSemanticIdentities = fromSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, fromSetReferencedSemanticRole, S23MSemanticDomains.is_NOTAPPLICABLE)
 				.filterTo();
-		((OrderedSet)fromSemanticIdentities).add(fromSetReferencedSemanticRole);
+		((OrderedSet) fromSemanticIdentities).add(fromSetReferencedSemanticRole);
 		final Set toSemanticIdentities = toSetReferencedSemanticRole.container()
 				.filterArrows(SemanticDomain.semanticRole_to_equivalenceClass, S23MSemanticDomains.is_NOTAPPLICABLE, toSetReferencedSemanticRole)
 				.filterFrom();
-		((OrderedSet)toSemanticIdentities).add(toSetReferencedSemanticRole);
+		((OrderedSet) toSemanticIdentities).add(toSetReferencedSemanticRole);
 		for (final Set element : this) {
 			if (fromSemanticIdentities.containsSemanticMatch(element.from()) && toSemanticIdentities.containsSemanticMatch(element.to())) {
 				result.add(element);
@@ -459,9 +544,10 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 		return result;
 	}
+
 	@Override
 	public Set filterByLinkedToVia(final Set toEdgeEnd) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)) {
@@ -474,7 +560,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterByLinkedFromVia(final Set fromEdgeEnd) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				if (element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
@@ -488,21 +574,21 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	@Override
 	public Set filterByLinkedFromAndToVia(final Set fromEdgeEnd, final Set toEdgeEnd) {
 		if (fromEdgeEnd.isInformation().is_FALSE()) {
-			return this.filterByLinkedToVia(toEdgeEnd);
-		}
-		if (toEdgeEnd.isInformation().is_FALSE()) {
-			return this.filterByLinkedFromVia(fromEdgeEnd);
-		}
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		for (final Set element : this) {
-			if (element.isAnArrow().is_TRUE())  {
-				if (element.toEdgeEnd().isEqualTo(toEdgeEnd)
-						&& element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
-					result.add(element);
+			return filterByLinkedToVia(toEdgeEnd);
+		} else if (toEdgeEnd.isInformation().is_FALSE()) {
+			return filterByLinkedFromVia(fromEdgeEnd);
+		} else {
+			final OrderedSet result = createTransientOrderedSet();
+			for (final Set element : this) {
+				if (element.isAnArrow().is_TRUE())  {
+					if (element.toEdgeEnd().isEqualTo(toEdgeEnd)
+							&& element.fromEdgeEnd().isEqualTo(fromEdgeEnd)) {
+						result.add(element);
+					}
 				}
 			}
+			return result;
 		}
-		return result;
 	}
 
 	/**
@@ -518,10 +604,9 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 				|| properClass.isEqualTo(F_Query.edge())
 				|| properClass.isEqualTo(F_Query.edgeEnd())
 				|| properClass.isEqualTo(F_Query.orderedSet())
-				|| properClass.isEqualTo(coreSets.orderedPair)
-				) {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-			for ( final Set element : this) {
+				|| properClass.isEqualTo(coreSets.orderedPair)) {
+			final OrderedSet result = createTransientOrderedSet();
+			for (final Set element : this) {
 				if (element.properClass().isEqualTo(properClass)) {
 					result.add(element);
 				}
@@ -534,13 +619,13 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterByEquivalenceClass(final Set set) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = createTransientOrderedSet();
 		Set aSemantics = set;
 		if (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).is_FALSE()) {
 			aSemantics = set.semanticIdentity();
 		}
 		aSemantics = SemanticDomainCode.transformSemanticRoleToEquivalenceClass(aSemantics);
-		for ( final Set element : this) {
+		for (final Set element : this) {
 			Set bSemantics = element;
 			if (SemanticDomain.semanticIdentity.isSuperSetOf(element.category()).is_FALSE()) {
 				bSemantics = element.semanticIdentity();
@@ -554,8 +639,8 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filter(final Set category) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		for ( final Set element : this) {
+		final OrderedSet result = createTransientOrderedSet();
+		for (final Set element : this) {
 			if (element.category().isEqualTo(category)) {
 				result.add(element);
 			}
@@ -565,8 +650,8 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 
 	@Override
 	public Set filterPolymorphic(final Set category) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		for ( final Set element : this) {
+		final OrderedSet result = createTransientOrderedSet();
+		for (final Set element : this) {
 			if (category.isSuperSetOf(element.category()).isEqualTo(coreSets.is_TRUE)
 					&& category.isSuperSetOf(element).isEqualTo(coreSets.is_FALSE)) {
 				result.add(element);
@@ -579,10 +664,11 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	public Set filterInstances() {
 		return this;
 	}
+
 	@Override
 	public Set filterArrows() {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
-		for ( final Set element : this) {
+		final OrderedSet result = createTransientOrderedSet();
+		for (final Set element : this) {
 			if (element.isAnArrow().is_TRUE())  {
 				result.add(element);
 			}
@@ -593,21 +679,19 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	@Override
 	public Set filterArrows(final Set properClassOrCategory, final Set fromSet, final Set toSet) {
 		if (properClassOrCategory.isInformation().is_TRUE()) {
-			if (fromSet.isInformation().is_FALSE()
-					&& toSet.isInformation().is_FALSE()) {
+			if (fromSet.isInformation().is_FALSE() && toSet.isInformation().is_FALSE()) {
 				if (properClassOrCategory.isAnArrow().is_TRUE()) {
-					return this.filterProperClass(properClassOrCategory);
+					return filterProperClass(properClassOrCategory);
 				} else {
-					return this.filterArrows().filter(properClassOrCategory);
+					return filterArrows().filter(properClassOrCategory);
 				}
-			}
-			if (properClassOrCategory.isAnArrow().is_TRUE()) {
-				return this.filterProperClass(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+			} else if (properClassOrCategory.isAnArrow().is_TRUE()) {
+				return filterProperClass(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			} else {
-				return this.filterArrows().filter(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
+				return filterArrows().filter(properClassOrCategory).filterByLinkedFromAndTo(fromSet, toSet);
 			}
 		} else {
-			return this.filterArrows().filterByLinkedFromAndTo(fromSet, toSet);
+			return filterArrows().filterByLinkedFromAndTo(fromSet, toSet);
 		}
 	}
 
@@ -621,29 +705,29 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 	}
 
 	private Set createEvent(final Set category, final Set element) {
-		return  new EventImpl(identityFactory.createAnonymousIdentity(), category, element, this);
+		return new EventImpl(identityFactory.createAnonymousIdentity(), category, element, this);
 	}
+
 	private Set elementAdded(final Set newElement) {
-		final Set addEvent = createEvent(S23MKernel.coreSets.elementAdded, newElement);
-		return addEvent;
+		return createEvent(S23MKernel.coreSets.elementAdded, newElement);
 	}
 
 	private Set elementRemoved(final Set removedElement) {
-		final Set removeEvent = createEvent(S23MKernel.coreSets.elementRemoved, removedElement);
-		return removeEvent;
+		return createEvent(S23MKernel.coreSets.elementRemoved, removedElement);
 	}
 
 	@Override
 	public Set addSubscriber(final EventListener instance) {
-		subscribers.add(instance);
+		getSubscribers().add(instance);
 		return this;
 	}
 
 	@Override
 	public Set removeSubscriber(final EventListener instance) {
-		subscribers.remove(instance);
+		getSubscribers().remove(instance);
 		return this;
 	}
+
 	/**
 	 * Support for Information Quality Logic
 	 */
@@ -657,7 +741,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.and(this.union(b));
 		} else {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+			final OrderedSet result = createTransientOrderedSet();
 			for (final Set element : this) {
 				result.add(element);
 			}
@@ -671,7 +755,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		if (b.properClass().isEqualTo(Query.orderedSet)) {
 			return F_IqLogic.or(this.union(b));
 		} else {
-			final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+			final OrderedSet result = createTransientOrderedSet();
 			for (final Set element : this) {
 				result.add(element);
 			}
@@ -701,14 +785,31 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		Set result = S23MSemanticDomains.is_FALSE;
 		for (final Set element : this) {
 			if (setSemantics.containsSemanticMatch(element)) {
-				result = result.and(setSemantics.extractUniqueMatch(element.semanticIdentity())).isEqualTo(element.semanticIdentity(), equivalenceClass);
+				final Set si = element.semanticIdentity();
+				result = result.and(setSemantics.extractUniqueMatch(si)).isEqualTo(si, equivalenceClass);
 			}
 		}
 		return result;
 	}
+
 	@Override
 	public Set setMaintenanceCommand() {
 		return this;
+	}
 
+	private List<Set> getContents() {
+		return contentsHolder.get();
+	}
+
+	private Map<String, Set> getMap() {
+		return mapHolder.get();
+	}
+
+	private List<EventListener> getSubscribers() {
+		return subscribersHolder.get();
+	}
+
+	private StripedLockArrayListMultiMap<String,Set> getIdentifierMap() {
+		return identifierMapHolder.get();
 	}
 }

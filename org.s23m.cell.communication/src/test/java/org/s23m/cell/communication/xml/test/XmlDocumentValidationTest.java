@@ -35,7 +35,6 @@ import javax.xml.validation.Validator;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.communication.xml.XmlSchemaFactory;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -45,10 +44,12 @@ import com.google.common.io.Resources;
 
 public class XmlDocumentValidationTest extends TestCase {
 	
-	@Test
-	public void testExampleInstanceValidatesAgainstGeneratedSchema() throws Exception {
+	@Override
+	protected void setUp() throws Exception {
 		S23MKernel.boot();
-		
+	}
+	
+	public void testExampleInstanceValidatesAgainstGeneratedSchema() throws Exception {
 		XmlSchemaFactory xmlSchemaFactory = new XmlSchemaFactory();
 		XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
 		Schema schema = xmlSchemaFactory.createSchema(terminology);

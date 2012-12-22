@@ -46,13 +46,11 @@ public class IdentityImpl implements Identity {
 	private String newCodeName;
 	private String newPluralCodeName;
 
-
 	public static void initialize(final UUIDReservoirForKernel reservoir) {
 		kernelIdentityReservoir = reservoir;
 	}
 
 	public IdentityImpl(final String name, final String pluralName, final int nameRegistryIndex) {
-		super();
 		this.setName(name);
 		this.setPluralName(pluralName);
 		this.setCodeName(null);
@@ -65,8 +63,8 @@ public class IdentityImpl implements Identity {
 		if (F_SemanticStateOfInMemoryModel.cellEditorIsLive()) {
 			this.setIdentifier(UUID.randomUUID());
 			this.setUniqueRepresentationReference(identifier());
-			if ((nameRegistryIndex == SemanticIdentityRegistry.anonymousInKernel.ordinal())
-					|| (nameRegistryIndex == SemanticIdentityRegistry.anonymous.ordinal())	) {
+			if (nameRegistryIndex == SemanticIdentityRegistry.anonymousInKernel.ordinal()
+					|| nameRegistryIndex == SemanticIdentityRegistry.anonymous.ordinal()) {
 				this.setPluralName(identifier().toString());
 			}
 		} else {
@@ -87,8 +85,8 @@ public class IdentityImpl implements Identity {
 			this.setUniqueRepresentationReference(identifier());
 		}
 	}
+
 	public IdentityImpl(final Identity semanticIdentity) {
-		super();
 		this.setName(semanticIdentity.name());
 		this.setPluralName(semanticIdentity.pluralName());
 		this.setCodeName(null);
@@ -104,8 +102,8 @@ public class IdentityImpl implements Identity {
 		}
 		this.setIdentifier(semanticIdentity.identifier());
 	}
+
 	public IdentityImpl(final String name, final String pluralName, final UUID identifier, final UUID uniqueRepresentationReference) {
-		super();
 		this.setIdentifier(identifier);
 		this.setUniqueRepresentationReference(uniqueRepresentationReference);
 		this.setName(name);
@@ -121,31 +119,21 @@ public class IdentityImpl implements Identity {
 	/* Implementation of semantics */
 
 	public boolean isEqualToRepresentation(final Identity representation) {
-		if (this.uniqueRepresentationReference().equals(representation.uniqueRepresentationReference())) {
-			return true;
-		} else {
-			return false;
-		}
+		return uniqueRepresentationReference().equals(representation.uniqueRepresentationReference());
 	}
 
 	public boolean isEqualTo(final Identity semanticIdentity) {
-		if (this.identifier().equals(semanticIdentity.identifier())) {
-			return true;
-		} else {
-			return false;
-		}
+		return identifier().equals(semanticIdentity.identifier());
 	}
 
 	public boolean isEqualTo(final Set property) {
-		if (this.identifier().equals(property.identity().identifier())) {
-			return true;
-		} else {
-			return false;
-		}
+		return identifier().equals(property.identity().identifier());
 	}
+
 	public UUID identifier() {
 		return identifier;
 	}
+
 	public UUID uniqueRepresentationReference() {
 		return uniqueRepresentationReference;
 	}
@@ -166,6 +154,7 @@ public class IdentityImpl implements Identity {
 	private void setIdentifier(final UUID id) {
 		identifier = id;
 	}
+
 	private void setUniqueRepresentationReference(final UUID uniqueRepresentationReference) {
 		this.uniqueRepresentationReference = uniqueRepresentationReference;
 	}
@@ -177,6 +166,7 @@ public class IdentityImpl implements Identity {
 	private void setPluralName(final String pluralName) {
 		this.pluralName = pluralName;
 	}
+
 	private void setCodeName(final String codeName) {
 		this.codeName = codeName;
 	}
@@ -205,15 +195,19 @@ public class IdentityImpl implements Identity {
 	public void makePartOfUniversalCellConcept() {
 		this.isPartOfUniversalCellConcept = true;
 	}
+
 	public void assignNewName(final String newName) {
 		this.newName = newName;
 	}
+
 	public void assignNewPluralName(final String newPluralName) {
 		this.newPluralName = newPluralName;
 	}
+
 	public void assignNewCodeName(final String newCodeName) {
 		this.newCodeName = newCodeName;
 	}
+
 	public void assignNewPluralCodeName(final String newPluralCodeName) {
 		this.newPluralCodeName = newPluralCodeName;
 	}
@@ -244,7 +238,7 @@ public class IdentityImpl implements Identity {
 	}
 
 	public String codeName() {
-		if (this.codeName == null) {
+		if (codeName == null) {
 			return name;
 		} else {
 			return codeName;
@@ -252,11 +246,10 @@ public class IdentityImpl implements Identity {
 	}
 
 	public String pluralCodeName() {
-		if (this.pluralCodeName == null) {
+		if (pluralCodeName == null) {
 			return pluralName;
 		} else {
 			return pluralCodeName;
 		}
 	}
-
 }

@@ -55,7 +55,7 @@ object CellBuild extends Build {
   lazy val kernel = Project(
     "kernel",
     file ("org.s23m.cell.kernel"),
-    settings = javaProjectSettings
+    settings = javaTestProjectSettings
   )
 
   lazy val kernelTests = Project(

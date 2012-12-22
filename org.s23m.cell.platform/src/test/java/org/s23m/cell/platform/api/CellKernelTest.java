@@ -25,7 +25,6 @@
 package org.s23m.cell.platform.api;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
-import junit.framework.TestCase;
 
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
@@ -37,22 +36,9 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
-import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.models.CellPlatformDomain;
-import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 
-public class CellKernelTest extends TestCase {
-
-	private static boolean agencyTestFoundationInitialised = false;
-
-	@Override
-	protected void setUp() throws Exception {
-		S23MPlatform.boot();
-		if (!agencyTestFoundationInitialised) {
-			AgencyTestFoundation.instantiateFeature();
-			agencyTestFoundationInitialised = true;
-		}
-	}
+public class CellKernelTest extends AgencyTestFoundationTestCase {
 
 	public void testBasicTransactions() {
 		TestSequence.run();

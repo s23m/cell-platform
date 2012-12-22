@@ -33,7 +33,7 @@ import org.s23m.cell.impl.SemanticDomainCode;
 public final class F_SetAlgebra {
 
 	public static Set union(final Set set1, final Set set2) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final Set result = OrderedSet.createTransientOrderedSet();
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		for (final Set element : a) {
@@ -52,7 +52,7 @@ public final class F_SetAlgebra {
 	}
 
 	public static Set intersection(final Set set1, final Set set2) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final Set result = OrderedSet.createTransientOrderedSet();
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		for (final Set element : a) {
@@ -62,19 +62,22 @@ public final class F_SetAlgebra {
 		}
 		return result;
 	}
+
 	public static Set wrapInOrderedSet(final Set set) {
-		final OrderedSet result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final OrderedSet result = OrderedSet.createTransientOrderedSet();
 		result.add(set);
 		return result;
 	}
+
 	public static Set anEmptySet() {
 		return F_InstantiationImpl.createResultSet();
 	}
+
 	public static Set complement(final Set set1, final Set set2) {
 		final Set a = transformToOrderedSet(set1);
 		final Set b = transformToOrderedSet(set2);
 		final Set intersection = intersection(a, b);
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final Set result = OrderedSet.createTransientOrderedSet();
 		for (final Set element : a) {
 			if (!intersection.containsRepresentation(element)) {
 				((OrderedSet) result).add(element);
@@ -85,19 +88,17 @@ public final class F_SetAlgebra {
 
 	public static Set isElementOf(final Set element, final Set set) {
 		if (SemanticDomain.semanticIdentity.isSuperSetOf(element.category()).isEqualTo(S23MSemanticDomains.is_TRUE)
-				&& (SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE))) 	{
+				&& SemanticDomain.semanticIdentity.isSuperSetOf(set.category()).isEqualTo(S23MSemanticDomains.is_TRUE)) 	{
 			return SemanticDomainCode.isElementOf(element.container(), element, set);
+		} else if (transformToOrderedSet(set).containsRepresentation(element)) {
+			return S23MSemanticDomains.is_TRUE;
 		} else {
-			if (transformToOrderedSet(set).containsRepresentation(element)) {
-				return S23MSemanticDomains.is_TRUE;
-			} else {
-				return S23MSemanticDomains.is_FALSE;
-			}
+			return S23MSemanticDomains.is_FALSE;
 		}
 	}
 
 	public static Set transformToOrderedSetOfSemanticIdentities(final Set set) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final Set result = OrderedSet.createTransientOrderedSet();
 		for (final Set element : set) {
 			if (!result.containsSemanticMatch(element)) {
 				((OrderedSet) result).add(element.semanticIdentity());
@@ -105,9 +106,10 @@ public final class F_SetAlgebra {
 		}
 		return result;
 	}
+
 	// TODO unify with implementation of SemanticDomainCode.isElementOf(final Set semanticDomain, final Set element, final Set set)
 	private static Set transformSemanticIdentitySetToOrderedSet(final Set set) {
-		final Set result = new OrderedSet(F_Instantiation.identityFactory.aTransientResultSet());
+		final Set result = OrderedSet.createTransientOrderedSet();
 		final Set elementLinks1 = set.container().filter(SemanticDomain.elements_to_semanticIdentitySet);
 		for (final Set link : elementLinks1) {
 			if (link.to().isEqualTo(set)) {
@@ -139,6 +141,4 @@ public final class F_SetAlgebra {
 		}
 		return orderedSet;
 	}
-
 }
-

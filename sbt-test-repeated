@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+OUTPUT_DIR=$DIR/target
+mkdir -p $OUTPUT_DIR
+OUTPUT_FILE=$OUTPUT_DIR/sbt-test-output.txt
+
+START=1
+END=5
+
+for I in $(eval echo {$START..$END})
+do
+	./sbt test > $OUTPUT_FILE
+	RETURN_CODE=$PIPESTATUS
+	if [ $RETURN_CODE -ne 0 ]
+	then
+		echo "Tests failed - see "$OUTPUT_FILE
+		echo "Return code: "$RETURN_CODE
+		echo "Index: "$I
+		break # Abandon the loop
+	fi
+done

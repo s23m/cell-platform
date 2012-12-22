@@ -30,7 +30,7 @@ object BuildSettings {
 	// TODO properly enforce naming conventions (http://maven.apache.org/guides/mini/guide-naming-conventions.html) with minimal duplication
 	val buildVersion = "1.0.0"
 	
-	private val parallelTestExecution = false
+	private val parallelTestExecution = true
 	
 	object StaticAnalysis {
 		import de.johoop.cpd4sbt.Language

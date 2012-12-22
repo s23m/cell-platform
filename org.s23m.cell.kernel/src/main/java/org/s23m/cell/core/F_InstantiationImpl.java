@@ -28,6 +28,9 @@ package org.s23m.cell.core;
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
@@ -68,10 +71,20 @@ public final class F_InstantiationImpl {
 	}
 
 	public static Vertex raiseError(final Identity semanticIdentity, final Set category) {
+		recordError(semanticIdentity, category);
+		return new Vertex((Graph) coreGraphs.graph, semanticIdentity, category);
+	}
+
+	@SuppressWarnings("unused")
+	private static void recordError(final Identity semanticIdentity, final Set category) {
+		// TODO improve error handling
+		final StringWriter sw = new StringWriter();
+		new Throwable().printStackTrace(new PrintWriter(sw));
+		System.err.println(sw.toString());
+
 		// Errors are attached to the S23M Graph container.
 		// Currently errors are not stored in a persistent log.
-		// Persisent logging is a matter of reading & serialising the error vertices contained in the S23M Graph
-		return new Vertex((Graph) coreGraphs.graph, semanticIdentity, category);
+		// Persistent logging is a matter of reading & serialising the error vertices contained in the S23M Graph
 	}
 
 	protected static EdgeEnd createEdgeEnd(final Set container, final Identity firstSemanticIdentity, final Set firstValue) {

@@ -24,23 +24,7 @@
  * ***** END LICENSE BLOCK ***** */
 package org.s23m.cell.platform.api;
 
-import junit.framework.TestCase;
-
-import org.s23m.cell.platform.S23MPlatform;
-import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
-
-public class CellQueriesTest extends TestCase {
-
-	private static boolean agencyTestFoundationInitialised = false;
-
-	@Override
-	protected void setUp() throws Exception {
-		S23MPlatform.boot();
-		if (!agencyTestFoundationInitialised) {
-			AgencyTestFoundation.instantiateFeature();
-			agencyTestFoundationInitialised = true;
-		}
-	}
+public class CellQueriesTest extends AgencyTestFoundationTestCase {
 
 	public void testAgent() {
 		// TODO

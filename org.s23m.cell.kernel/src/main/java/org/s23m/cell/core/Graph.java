@@ -746,8 +746,7 @@ public class Graph extends OrderedPair implements Set {
 	@Override
 	public Set containsEdgeTo (final Set anElement) {
 		for (final Set edge : this.getEdges()) {
-			if (	(edge.from().isEqualTo(anElement))
-					|| 	(edge.to().isEqualTo(anElement)) ) {
+			if (edge.from().isEqualTo(anElement) || edge.to().isEqualTo(anElement)) {
 				return coreSets.is_TRUE;
 			}
 		}

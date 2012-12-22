@@ -27,9 +27,10 @@ package org.s23m.cell.core;
 
 import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
+import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.collections.map.ListOrderedMap;
+import org.cliffc.high_scale_lib.NonBlockingHashMap;
 import org.s23m.cell.Identity;
 import org.s23m.cell.api.Instantiation;
 
@@ -41,13 +42,12 @@ import org.s23m.cell.api.Instantiation;
  * the FundamentalSemanticIdentities interface.
  */
 public class IdentityFactory implements KernelIdentities {
-	private final ListOrderedMap inMemoryIdentities = new ListOrderedMap();
+	private final Map<String, Identity> inMemoryIdentities = new NonBlockingHashMap<String, Identity>();
 	private final UUIDReservoirForKernel uUIDReservoir = new UUIDReservoirForKernel();
-
 
 	public IdentityFactory() {
 		//	final UUIDReservoirForKernelGraph uUIDReservoir = new UUIDReservoirForKernelGraph();
-		uUIDReservoir.fill();
+		// uUIDReservoir.fill();
 		IdentityImpl.initialize(uUIDReservoir);
 		orderedPair();
 		graph();
@@ -125,11 +125,11 @@ public class IdentityFactory implements KernelIdentities {
 		//if (id.name().toString().equals(aTransientResultSet)) {
 		//	return id;
 		//} else {
-		if (this.inMemoryIdentities.containsKey(id.uniqueRepresentationReference().toString())) {
-			return (Identity) this.inMemoryIdentities.get(id.uniqueRepresentationReference().toString());
-		} else
-		{
-			this.inMemoryIdentities.put(id.uniqueRepresentationReference().toString(), id);
+		final String urr = id.uniqueRepresentationReference().toString();
+		if (inMemoryIdentities.containsKey(urr)) {
+			return inMemoryIdentities.get(urr);
+		} else {
+			inMemoryIdentities.put(urr, id);
 			return id;
 		}
 		//}
@@ -179,7 +179,7 @@ public class IdentityFactory implements KernelIdentities {
 	public final 	Identity indexOfIdentifier() {return createIdentityInKernel("indexOfIdentifier" , "indexOfIdentifier", SemanticIdentityRegistry.indexOfIdentifier.ordinal());}
 	// the number of identities that have been loaded into memory
 	public int inMemoryComplexity() {
-		return this.inMemoryIdentities.size();
+		return inMemoryIdentities.size();
 	}
 	public final	Identity instantiateAbstract() {return createIdentityInKernel("instantiateAbstract" , "instantiateAbstract", SemanticIdentityRegistry.instantiateAbstract.ordinal());}
 	public final	Identity instantiateConcrete() {return createIdentityInKernel("instantiateConcrete" , "instantiateConcrete", SemanticIdentityRegistry.instantiateConcrete.ordinal());}
@@ -216,9 +216,9 @@ public class IdentityFactory implements KernelIdentities {
 	// the size of the kernel in terms of the number of UUID that have been assigned
 	public int kernelComplexity() {
 		int complexity = 0;
-		for (int i=0; i < this.inMemoryIdentities.size(); i++) {
-			final Identity iIdentity = (Identity) this.inMemoryIdentities.getValue(i);
-			if (uUIDReservoir.isPartOfKernel(iIdentity.uniqueRepresentationReference())) {
+		for (final Map.Entry<String, Identity> entry : inMemoryIdentities.entrySet()) {
+			final Identity identity = entry.getValue();
+			if (uUIDReservoir.isPartOfKernel(identity.uniqueRepresentationReference())) {
 				complexity = complexity+1;
 			}
 		}
