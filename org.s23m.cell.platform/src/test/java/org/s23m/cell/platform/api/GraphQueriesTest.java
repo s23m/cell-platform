@@ -39,6 +39,7 @@ public class GraphQueriesTest extends AgencyTestFoundationTestCase {
 	private static Set visibilitiesGraph;
 	private static Set oneComponentGraph;
 	private static Set twoComponentGraph;
+	private static Set sixComponentsGraph;
 	private static Set eightComponentGraph;
 
 	@Override
@@ -51,6 +52,7 @@ public class GraphQueriesTest extends AgencyTestFoundationTestCase {
 			visibilitiesGraph = createVisibilitiesGraph(root);
 			oneComponentGraph = create1ComponentGraph(root);
 			twoComponentGraph = create2ComponentGraph(root);
+			sixComponentsGraph = create6ComponentGraph(root);
 			eightComponentGraph = create8ComponentGraph(root);
 		}
 	}
@@ -76,10 +78,12 @@ public class GraphQueriesTest extends AgencyTestFoundationTestCase {
 
 	public void testGroupByConnectedComponents() {
 		final Set eightElements = GraphQueries.groupByConnectedComponents(eightComponentGraph);
+		final Set sixElements = GraphQueries.groupByConnectedComponents(sixComponentsGraph);
 		final Set twoElements = GraphQueries.groupByConnectedComponents(twoComponentGraph);
 		final Set oneElement = GraphQueries.groupByConnectedComponents(oneComponentGraph);
 
 		assertEquals(8, eightElements.size());
+		assertEquals(6, sixElements.size());
 		assertEquals(2, twoElements.size());
 		assertEquals(1, oneElement.size());
 	}
@@ -148,6 +152,25 @@ public class GraphQueriesTest extends AgencyTestFoundationTestCase {
 
 		addEdge(six, seven);
 		addEdge(six, eight);
+
+		return graph;
+	}
+
+	@SuppressWarnings("unused")
+	private Set create6ComponentGraph(final Set root) {
+		final Set graph = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
+
+		final Set one = createVertex(graph, "1");
+		final Set two = createVertex(graph, "2");
+		final Set three = createVertex(graph, "3");
+		final Set four = createVertex(graph, "4");
+		final Set five = createVertex(graph, "5");
+		final Set six = createVertex(graph, "6");
+		final Set seven = createVertex(graph, "7");
+		final Set eight = createVertex(graph, "8");
+
+		addEdge(one, two);
+		addEdge(three, six);
 
 		return graph;
 	}

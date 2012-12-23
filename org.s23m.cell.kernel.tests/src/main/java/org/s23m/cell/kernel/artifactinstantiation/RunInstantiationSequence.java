@@ -38,7 +38,7 @@ public class RunInstantiationSequence {
 	}
 
 	private void execute(final S23MTestCase testCase) {
-		System.out.println("Executing " + testCase.getClass().getName() + "...");
+		// System.out.println("Executing " + testCase.getClass().getName() + "...");
 		testCase.setUp();
 		testCase.testInstantiationSequence();
 	}

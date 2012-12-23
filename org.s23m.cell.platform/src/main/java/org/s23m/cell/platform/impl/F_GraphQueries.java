@@ -14,7 +14,6 @@ import org.s23m.cell.core.F_SetAlgebra;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.Instantiation;
 
-
 public  class F_GraphQueries {
 
 	/**
@@ -105,7 +104,11 @@ public  class F_GraphQueries {
 		return result;
 	}
 
-
+	/**
+	 * Finds the set of weakly connected components in a directed graph, i.e., the connected
+	 * components of the simple graph that is the result of ignoring the directionality
+	 * of the edges of the supplied directed graph
+	 */
 	public static final Set groupByConnectedComponents(final Set graph) {
 		final Set result = SetAlgebra.anEmptySet();
 
