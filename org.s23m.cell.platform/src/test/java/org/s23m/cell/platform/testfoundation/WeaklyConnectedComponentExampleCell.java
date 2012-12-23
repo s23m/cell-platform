@@ -94,142 +94,49 @@ public class WeaklyConnectedComponentExampleCell {
 		AgencyTestFoundation.instantiateFeature();
 
 		final Set root = AgencyTestFoundation.test1.filter(CellEngineering.organization).extractFirst();
-		final Set g = root.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("g", "g", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set one = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("1", "1", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set two = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("2", "2", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set three = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("3", "3", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set four = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("4", "4", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set five = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("5", "5", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set six = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("6", "6", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set seven = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("7", "7", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
-		final Set eight = g.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet("8", "8", Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
+		final Set g = createVertex(root, "g");
+		final Set one = createVertex(g, "1");
+		final Set two = createVertex(g, "2");
+		final Set three = createVertex(g, "3");
+		final Set four = createVertex(g, "4");
+		final Set five = createVertex(g, "5");
+		final Set six = createVertex(g, "6");
+		final Set seven = createVertex(g, "7");
+		final Set eight = createVertex(g, "8");
 
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				one,
-				one,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				five,
-				five,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				one,
-				one,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				six,
-				six,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				four,
-				four,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				five,
-				five,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				three,
-				three,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				six,
-				six,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				three,
-				three,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				eight,
-				eight,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				five,
-				five,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				two,
-				two,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				five,
-				five,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				seven,
-				seven,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				five,
-				five,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				eight,
-				eight,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
-		Instantiation.arrow(coreGraphs.edge,
-				S23MSemanticDomains.anonymous,
-				six,
-				six,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_FALSE,
-				S23MSemanticDomains.isContainer_FALSE,
-				eight,
-				eight,
-				S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
-				S23MSemanticDomains.isNavigable_TRUE,
-				S23MSemanticDomains.isContainer_FALSE);
+		createEdge(one, five);
+		createEdge(one, six);
+		createEdge(four, five);
+		createEdge(three, six);
+		createEdge(three, eight);
+		createEdge(five, two);
+		createEdge(five, seven);
+		createEdge(five, eight);
+		createEdge(six, eight);
+
 		return g;
+	}
+
+	private static void createEdge(final Set source, final Set target) {
+		Instantiation.arrow(
+			coreGraphs.edge,
+			S23MSemanticDomains.anonymous,
+			source,
+			source,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_FALSE,
+			S23MSemanticDomains.isContainer_FALSE,
+			target,
+			target,
+			S23MSemanticDomains.minCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.maxCardinality_NOTAPPLICABLE,
+			S23MSemanticDomains.isNavigable_TRUE,
+			S23MSemanticDomains.isContainer_FALSE
+		);
+	}
+
+	private static Set createVertex(final Set set, final String label) {
+		return set.addConcrete(Organization.cell, Instantiation.addDisjunctSemanticIdentitySet(label, label, Instantiation.toSemanticDomain(AgencyTestFoundation.test1)));
 	}
 }
