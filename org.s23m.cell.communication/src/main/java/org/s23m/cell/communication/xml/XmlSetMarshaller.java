@@ -98,7 +98,7 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 			serialiseSemanticDomain(artifactSet, builder, semanticDomain);
 		}
 		
-		return XmlRendering.render(artifactSet).toString();
+		return XmlRendering.render(artifactSet);
 	}
 	
 	@Override
