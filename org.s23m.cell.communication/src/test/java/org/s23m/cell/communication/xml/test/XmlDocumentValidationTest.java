@@ -38,7 +38,6 @@ import junit.framework.TestCase;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.communication.xml.XmlSchemaFactory;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
-import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
 
@@ -69,7 +68,7 @@ public class XmlDocumentValidationTest extends TestCase {
 		Validator validator = schema.newValidator();
 		try {
 		  validator.validate(xmlFile);
-		} catch (SAXException e) {
+		} catch (Exception e) {
 		  fail("Validation failed: " + e.getMessage());
 		}
 	}

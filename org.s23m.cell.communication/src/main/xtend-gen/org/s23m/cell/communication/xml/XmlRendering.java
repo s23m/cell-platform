@@ -73,7 +73,7 @@ public class XmlRendering {
     return _builder;
   }
   
-  private static CharSequence _render(final StringElement node, final int level) {
+  private static String _render(final StringElement node, final int level) {
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
     String _plus = (_renderPrefix + ">");
     String _text = node.getText();

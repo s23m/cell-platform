@@ -146,24 +146,24 @@ public class Instantiation {
 	}
 
 	public static Set toSemanticDomain(final Set set) {
-		final Set r =  Query.inMemorySets().filterBySemanticIdentity(set).filterPolymorphic(SemanticDomain.semanticdomain);
-		if (r.size()== 1) {
+		final Set r = Query.inMemorySets().filterBySemanticIdentity(set).filterPolymorphic(SemanticDomain.semanticdomain);
+		if (r.size() == 1) {
 			return r.extractFirst();
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		}
 	}
 	private static Set toAgent(final Set semanticDomain) {
-		final Set r =  Query.inMemorySets().filterBySemanticIdentity(semanticDomain).filterPolymorphic(Agency.agent);
-		if (r.size()== 1) {
+		final Set r = Query.inMemorySets().filterBySemanticIdentity(semanticDomain).filterPolymorphic(Agency.agent);
+		if (r.size() == 1) {
 			return r.extractFirst();
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
 		}
 	}
 	private static Set toStage(final Set semanticDomain) {
-		final Set r =  Query.inMemorySets().filterBySemanticIdentity(semanticDomain).filterPolymorphic(Agency.stage);
-		if (r.size()== 1) {
+		final Set r = Query.inMemorySets().filterBySemanticIdentity(semanticDomain).filterPolymorphic(Agency.stage);
+		if (r.size() == 1) {
 			return r.extractFirst();
 		} else {
 			return F_InstantiationImpl.raiseError(coreSets.semanticErr_operationIsIllegalOnThisInstance.identity(), coreSets.semanticErr);
@@ -205,8 +205,7 @@ public class Instantiation {
 			final Set secondMinCardinality,
 			final Set secondMaxCardinality,
 			final Set secondIsNavigable,
-			final Set secondIsContainer
-			) {
+			final Set secondIsContainer) {
 		return org.s23m.cell.core.F_Instantiation.arrow(category,
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(edgeIdentity),
 				org.s23m.cell.core.F_Instantiation.reuseSemanticIdentity(firstSemanticIdentity),
@@ -220,8 +219,7 @@ public class Instantiation {
 				secondMinCardinality,
 				secondMaxCardinality,
 				secondIsNavigable,
-				secondIsContainer
-				);
+				secondIsContainer);
 	}
 
 	public static Set arrowToEquivalenceClass(final Set newSemanticRole, final Set equivalenceClass) {

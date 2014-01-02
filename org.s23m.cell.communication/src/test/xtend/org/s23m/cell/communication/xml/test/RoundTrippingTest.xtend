@@ -33,7 +33,7 @@ class RoundTrippingTest extends TestCase {
 	private Set set
 	
 	override setUp() {
-		S23MPlatform::boot()
+		S23MPlatform.boot()
 		set = createSet()
 	}
 	
@@ -43,30 +43,30 @@ class RoundTrippingTest extends TestCase {
 		val artifactSetModel = createInstanceModel()
 		
 		// Serialise as XML
-		val xml = XmlRendering::render(artifactSetModel)
+		val xml = XmlRendering.render(artifactSetModel)
 		
 		// De-serialise it
 		val deserialised = deserialise(xml)
 		
 		// Render the original in-memory model and compare it with de-serialised version
-		val renderedDeserialisedModel = XmlRendering::render(deserialised)
+		val renderedDeserialisedModel = XmlRendering.render(deserialised)
 		
 		assertEquals(xml, renderedDeserialisedModel)
 	}
 	
 	def private ArtifactSet deserialise(String xml) {
 		val schemaFactory = new XmlSchemaFactory()
-		val terminology = DefaultXmlSchemaTerminology::getInstance
+		val terminology = DefaultXmlSchemaTerminology.getInstance
 		val schema = schemaFactory.createSchema(terminology)
 		
-		val factory = SAXParserFactory::newInstance
+		val factory = SAXParserFactory.newInstance
 		factory.setNamespaceAware(true)
 		// http://tutorials.jenkov.com/java-xml/sax-schema-validation.html
 		factory.setSchema(schema)
 	    try {
 	        val saxParser = factory.newSAXParser
-			val is = new ByteArrayInputStream(xml.getBytes(Charsets::UTF_8))
-			val handler = new ArtifactSetElementHandler(NS_S23M, terminology, CellPlatformAgent::cellMetaLanguage)
+			val is = new ByteArrayInputStream(xml.getBytes(Charsets.UTF_8))
+			val handler = new ArtifactSetElementHandler(NS_S23M, terminology, CellPlatformAgent.cellMetaLanguage)
 			saxParser.parse(is, handler)
 			handler.result
 	    } catch(ParserConfigurationException e1) {
@@ -80,8 +80,8 @@ class RoundTrippingTest extends TestCase {
 	
 	def private createInstanceModel() {
 		val s23m = NS_S23M
-		val terminology = DefaultXmlSchemaTerminology::getInstance()
-		val language = CellPlatformAgent::cellMetaLanguage
+		val terminology = DefaultXmlSchemaTerminology.getInstance()
+		val language = CellPlatformAgent.cellMetaLanguage
 		val builder = new InstanceBuilder(s23m, terminology, language)
 		
 		val result = builder.artifactSet
@@ -206,8 +206,8 @@ class RoundTrippingTest extends TestCase {
 	
 	def private createSet() {
 		val identityHandler = new IdempotentMethodInvocationHandler(identity)
-		val categoryHandler = new IdempotentMethodInvocationHandler(Query::vertex)
-		val valueHandler = new IdempotentMethodInvocationHandler(Query::vertex)
+		val categoryHandler = new IdempotentMethodInvocationHandler(Query.vertex)
+		val valueHandler = new IdempotentMethodInvocationHandler(Query.vertex)
 		val handlers = newHashMap(
 			new MethodDescriptor("identity") -> identityHandler,
 			new MethodDescriptor("category") -> categoryHandler,
@@ -217,8 +217,8 @@ class RoundTrippingTest extends TestCase {
 	}
 	
 	def private createIdentity() {
-		val identifier = UUID::randomUUID()
-		val uniqueRepresentationReference = UUID::randomUUID()
+		val identifier = UUID.randomUUID()
+		val uniqueRepresentationReference = UUID.randomUUID()
 		new MockIdentity(identifier, uniqueRepresentationReference)
 	}	
 }
