@@ -27,7 +27,7 @@ class XmlRendering {
 		«render(node, 0)»
 	'''
 	
-	private static def dispatch render(CompositeNode node, int level) '''
+	private static def dispatch String render(CompositeNode node, int level) '''
 		«val children = node.children»
 		«renderPrefix(node, level)»«IF children.empty»/>
 		«ELSE»>
@@ -42,7 +42,7 @@ class XmlRendering {
 		renderPrefix(node, level) + ">" + node.text + renderSuffix(node)
 	}
 	
-	private static def dispatch render(Node node, int level) {
+	private static dispatch def String render(Node node, int level) {
 		renderPrefix(node, level) + "/>"
 	}
 		
@@ -59,7 +59,7 @@ class XmlRendering {
 	}
 	
 	private static def whitespace(int level) {
-		StringUtils::repeat(level * INDENTATION, " ")
+		StringUtils.repeat(level * INDENTATION, " ")
 	}
 	
 	private static def name(Node node) {

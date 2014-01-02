@@ -37,13 +37,13 @@ public class XmlRendering {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(XmlRendering.PREAMBLE, "");
     _builder.newLineIfNotEmpty();
-    CharSequence _render = XmlRendering.render(node, 0);
+    String _render = XmlRendering.render(node, 0);
     _builder.append(_render, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  private static CharSequence _render(final CompositeNode node, final int level) {
+  private static String _render(final CompositeNode node, final int level) {
     StringConcatenation _builder = new StringConcatenation();
     final Iterable<? extends Node> children = node.getChildren();
     _builder.newLineIfNotEmpty();
@@ -60,7 +60,7 @@ public class XmlRendering {
         {
           for(final Node n : children) {
             int _plus = (level + 1);
-            Object _render = XmlRendering.render(n, _plus);
+            String _render = XmlRendering.render(n, _plus);
             _builder.append(_render, "");
             _builder.newLineIfNotEmpty();
           }
@@ -70,7 +70,7 @@ public class XmlRendering {
         _builder.newLineIfNotEmpty();
       }
     }
-    return _builder;
+    return _builder.toString();
   }
   
   private static String _render(final StringElement node, final int level) {
@@ -83,7 +83,7 @@ public class XmlRendering {
     return _plus_2;
   }
   
-  private static CharSequence _render(final Node node, final int level) {
+  private static String _render(final Node node, final int level) {
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
     String _plus = (_renderPrefix + "/>");
     return _plus;
@@ -151,7 +151,7 @@ public class XmlRendering {
     return _xblockexpression;
   }
   
-  private static CharSequence render(final Node node, final int level) {
+  private static String render(final Node node, final int level) {
     if (node instanceof StringElement) {
       return _render((StringElement)node, level);
     } else if (node instanceof CompositeNode) {
