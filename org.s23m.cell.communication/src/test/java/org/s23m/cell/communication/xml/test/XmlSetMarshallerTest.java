@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.junit.Ignore;
 import org.s23m.cell.Set;
+import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
@@ -12,7 +13,6 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.models.CellPlatformDomain;
 
-@Ignore
 public class XmlSetMarshallerTest extends TestCase {
 
 	public XmlSetMarshallerTest() {
@@ -27,7 +27,12 @@ public class XmlSetMarshallerTest extends TestCase {
 		XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
 		XmlSetMarshaller xmlSetMarshaller = new XmlSetMarshaller(namespace, terminology);
 		
-		String serialised = xmlSetMarshaller.serialise(exampleModel);
+		//String serialised = xmlSetMarshaller.serialise(exampleModel);
+		//System.out.println("serialised: " + serialised);
+		
+		String serialised = xmlSetMarshaller.serialise(S23MSemanticDomains.cellKernel);
 		System.out.println("serialised: " + serialised);
+		
+		
 	}
 }
