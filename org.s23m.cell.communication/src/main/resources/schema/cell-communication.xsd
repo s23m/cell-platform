@@ -25,7 +25,6 @@
  * Andrew Shewring
  ***** END LICENSE BLOCK ***** */
  -->
-<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:s23m="http://schemas.s23m.org/serialization/2012"
 	targetNamespace="http://schemas.s23m.org/serialization/2012"
