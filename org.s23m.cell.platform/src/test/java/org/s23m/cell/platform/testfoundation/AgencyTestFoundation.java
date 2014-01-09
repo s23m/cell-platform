@@ -47,6 +47,7 @@ public class AgencyTestFoundation {
 	public static Set ithanku;
 	public static Set object_cell;
 	public static Set test1;
+	public static Set ernst;
 
 
 	public static Set instantiateFeature() {
@@ -56,7 +57,7 @@ public class AgencyTestFoundation {
 		final Set prod = org.s23m.cell.platform.api.Instantiation.addStage(ithanku, "production", "set of production");
 		final Set ithanku1 = org.s23m.cell.platform.api.Instantiation.addAgent("i thank u #1", "set of i thank u #1");
 
-		final Set ernst = org.s23m.cell.platform.api.Instantiation.addAgent("Ernst Zermelo", "Ernst Zermelo");
+		ernst = org.s23m.cell.platform.api.Instantiation.addAgent("Ernst Zermelo", "Ernst Zermelo");
 		final Set dev1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "dev1", "dev1s");
 		test1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "test1", "test1s");
 		final Set prod1 = org.s23m.cell.platform.api.Instantiation.addStage(ernst, "prod1", "prod1s");
