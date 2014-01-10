@@ -13,7 +13,7 @@ import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.platform.S23MPlatform;
 import org.s23m.cell.platform.api.Instantiation;
 import org.s23m.cell.platform.api.models.CellPlatformDomain;
-import static org.s23m.cell.platform.testfoundation.AgencyTestFoundation.ithanku;;
+import static org.s23m.cell.platform.testfoundation.AgencyTestFoundation.ithanku;
 
 public class XmlSetMarshallerTest extends TestCase {
 
