@@ -34,10 +34,10 @@ public class XmlSetMarshallerTest extends TestCase {
 		XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
 		XmlSetMarshaller xmlSetMarshaller = new XmlSetMarshaller(namespace, terminology);
 		
-		//String serialised = xmlSetMarshaller.serialise(exampleModel);
-		//System.out.println("serialised: " + serialised);
+		String serialised = xmlSetMarshaller.serialise(exampleModel);
+		System.out.println("serialised: " + serialised);
 		
-		String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ithanku));
+		// String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ithanku));
 		// ALTERNATIVE EXAMPLE : String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ernst));
 		System.out.println("serialised: " + serialised);
 		
