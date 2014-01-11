@@ -19,6 +19,8 @@ public class XmlSetMarshallerTest extends TestCase {
 
 	public XmlSetMarshallerTest() {
 		S23MPlatform.boot();
+		org.s23m.cell.platform.testfoundation.AgencyTestFoundation.instantiateFeature();
+		
 	}
 	
 	public void testSerialise() throws SetMarshallingException {

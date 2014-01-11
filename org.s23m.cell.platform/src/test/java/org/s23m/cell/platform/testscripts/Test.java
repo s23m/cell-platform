@@ -112,9 +112,11 @@ public class Test {
 		kernelComplexity = identityFactory.kernelComplexity();
 		inMemoryComplexity = identityFactory.inMemoryComplexity();
 		inMemorySetCount = org.s23m.cell.api.Query.inMemorySets().size();
+
+		org.s23m.cell.platform.testfoundation.TestFoundation.instantiateFeature();
+
 		final Set root = Root.root;
 		final Set g0 = g;
-
 
 
 	}
