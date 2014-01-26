@@ -90,13 +90,21 @@ public class XmlRendering {
   }
   
   private static String renderPrefix(final Node node, final int level) {
-    String _whitespace = XmlRendering.whitespace(level);
-    String _plus = (_whitespace + "<");
-    String _name = XmlRendering.name(node);
-    String _plus_1 = (_plus + _name);
-    String _renderAttributes = XmlRendering.renderAttributes(node);
-    String _plus_2 = (_plus_1 + _renderAttributes);
-    return _plus_2;
+    String _xblockexpression = null;
+    {
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder builder = _stringBuilder;
+      String _whitespace = XmlRendering.whitespace(level);
+      builder.append(_whitespace);
+      builder.append("<");
+      String _name = XmlRendering.name(node);
+      builder.append(_name);
+      String _renderAttributes = XmlRendering.renderAttributes(node);
+      builder.append(_renderAttributes);
+      String _string = builder.toString();
+      _xblockexpression = (_string);
+    }
+    return _xblockexpression;
   }
   
   private static String renderSuffix(final Node node, final int level) {

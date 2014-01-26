@@ -1,0 +1,405 @@
+{
+	"artifactSet": {
+		"language": {
+			"name": "English",
+			"uniqueRepresentationReference": "0",
+			"identifier": "1"
+		},
+		"model": {
+			"semanticIdentity": {
+				"uniqueRepresentationReference": "1",
+				"identifier": "2"
+			},
+			"category": {
+				"uniqueRepresentationReference": "3",
+				"identifier": "4"
+			},
+			"container": {
+				"uniqueRepresentationReference": "5",
+				"identifier": "6"				
+			},
+			"isAbstract": {
+				"uniqueRepresentationReference": "7",
+				"identifier": "8"				
+			},
+			"vertex": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "9",
+					"identifier": "10"
+				},
+				"category": {
+					"uniqueRepresentationReference": "11",
+					"identifier": "12"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "13",
+					"identifier": "14"
+				},
+				"maximumCardinality": {
+					"uniqueRepresentationReference": "15",
+					"identifier": "16"
+				}
+			},
+			"visibility": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "17",
+					"identifier": "18"
+				},
+				"category": {
+					"uniqueRepresentationReference": "19",
+					"identifier": "20"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "21",
+					"identifier": "22"
+				},
+				"from": {
+					"uniqueRepresentationReference": "23",
+					"identifier": "24"
+				},
+				"to": {
+					"uniqueRepresentationReference": "25",
+					"identifier": "26"
+				}
+			},
+			"edge": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "27",
+					"identifier": "28"
+				},
+				"category": {
+					"uniqueRepresentationReference": "29",
+					"identifier": "30"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "31",
+					"identifier": "32"
+				},
+				"from": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "33",
+						"identifier": "34"
+					},
+					"category": {
+						"uniqueRepresentationReference": "35",
+						"identifier": "36"
+					},
+					"isAbstract": {
+						"uniqueRepresentationReference": "37",
+						"identifier": "38"
+					},
+					"minimumCardinality": {
+						"uniqueRepresentationReference": "39",
+						"identifier": "40"
+					},
+					"maximumCardinality": {
+						"uniqueRepresentationReference": "41",
+						"identifier": "42"
+					},
+					"isContainer": {
+						"uniqueRepresentationReference": "43",
+						"identifier": "44"
+					},
+					"isNavigable": {
+						"uniqueRepresentationReference": "45",
+						"identifier": "46"
+					}
+				},
+				"to": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "47",
+						"identifier": "48"
+					},
+					"category": {
+						"uniqueRepresentationReference": "49",
+						"identifier": "50"
+					},
+					"isAbstract": {
+						"uniqueRepresentationReference": "51",
+						"identifier": "52"
+					},
+					"minimumCardinality": {
+						"uniqueRepresentationReference": "53",
+						"identifier": "54"
+					},
+					"maximumCardinality": {
+						"uniqueRepresentationReference": "55",
+						"identifier": "56"
+					},
+					"isContainer": {
+						"uniqueRepresentationReference": "57",
+						"identifier": "58"
+					},
+					"isNavigable": {
+						"uniqueRepresentationReference": "59",
+						"identifier": "60"
+					}
+				}
+			},
+			"superSetReference": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "61",
+					"identifier": "62"
+				},
+				"category": {
+					"uniqueRepresentationReference": "63",
+					"identifier": "64"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "65",
+					"identifier": "66"
+				},
+				"from": {
+					"uniqueRepresentationReference": "67",
+					"identifier": "68"
+				},
+				"to": {
+					"uniqueRepresentationReference": "69",
+					"identifier": "70"
+				}			
+			},
+			"command": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "71",
+					"identifier": "72"
+				},
+				"category": {
+					"uniqueRepresentationReference": "73",
+					"identifier": "74"
+				},
+				"parameter": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "75",
+						"identifier": "76"
+					},
+					"category": {
+						"uniqueRepresentationReference": "77",
+						"identifier": "78"
+					}
+				}
+			},
+			"query": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "79",
+					"identifier": "80"
+				},
+				"category": {
+					"uniqueRepresentationReference": "81",
+					"identifier": "82"
+				},
+				"parameter": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "83",
+						"identifier": "84"
+					},
+					"category": {
+						"uniqueRepresentationReference": "85",
+						"identifier": "86"
+					}
+				}
+			}	
+		},
+		"semanticDomain": {
+			"semanticIdentity": {
+				"uniqueRepresentationReference": "1",
+				"identifier": "2"
+			},
+			"category": {
+				"uniqueRepresentationReference": "3",
+				"identifier": "4"
+			},
+			"container": {
+				"uniqueRepresentationReference": "5",
+				"identifier": "6"				
+			},
+			"isAbstract": {
+				"uniqueRepresentationReference": "7",
+				"identifier": "8"				
+			},
+			"vertex": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "9",
+					"identifier": "10"
+				},
+				"category": {
+					"uniqueRepresentationReference": "11",
+					"identifier": "12"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "13",
+					"identifier": "14"
+				},
+				"maximumCardinality": {
+					"uniqueRepresentationReference": "15",
+					"identifier": "16"
+				}
+			},
+			"visibility": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "17",
+					"identifier": "18"
+				},
+				"category": {
+					"uniqueRepresentationReference": "19",
+					"identifier": "20"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "21",
+					"identifier": "22"
+				},
+				"from": {
+					"uniqueRepresentationReference": "23",
+					"identifier": "24"
+				},
+				"to": {
+					"uniqueRepresentationReference": "25",
+					"identifier": "26"
+				}
+			},
+			"edge": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "27",
+					"identifier": "28"
+				},
+				"category": {
+					"uniqueRepresentationReference": "29",
+					"identifier": "30"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "31",
+					"identifier": "32"
+				},
+				"from": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "33",
+						"identifier": "34"
+					},
+					"category": {
+						"uniqueRepresentationReference": "35",
+						"identifier": "36"
+					},
+					"isAbstract": {
+						"uniqueRepresentationReference": "37",
+						"identifier": "38"
+					},
+					"minimumCardinality": {
+						"uniqueRepresentationReference": "39",
+						"identifier": "40"
+					},
+					"maximumCardinality": {
+						"uniqueRepresentationReference": "41",
+						"identifier": "42"
+					},
+					"isContainer": {
+						"uniqueRepresentationReference": "43",
+						"identifier": "44"
+					},
+					"isNavigable": {
+						"uniqueRepresentationReference": "45",
+						"identifier": "46"
+					}
+				},
+				"to": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "47",
+						"identifier": "48"
+					},
+					"category": {
+						"uniqueRepresentationReference": "49",
+						"identifier": "50"
+					},
+					"isAbstract": {
+						"uniqueRepresentationReference": "51",
+						"identifier": "52"
+					},
+					"minimumCardinality": {
+						"uniqueRepresentationReference": "53",
+						"identifier": "54"
+					},
+					"maximumCardinality": {
+						"uniqueRepresentationReference": "55",
+						"identifier": "56"
+					},
+					"isContainer": {
+						"uniqueRepresentationReference": "57",
+						"identifier": "58"
+					},
+					"isNavigable": {
+						"uniqueRepresentationReference": "59",
+						"identifier": "60"
+					}
+				}
+			},
+			"superSetReference": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "61",
+					"identifier": "62"
+				},
+				"category": {
+					"uniqueRepresentationReference": "63",
+					"identifier": "64"
+				},
+				"isAbstract": {
+					"uniqueRepresentationReference": "65",
+					"identifier": "66"
+				},
+				"from": {
+					"uniqueRepresentationReference": "67",
+					"identifier": "68"
+				},
+				"to": {
+					"uniqueRepresentationReference": "69",
+					"identifier": "70"
+				}			
+			},
+			"command": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "71",
+					"identifier": "72"
+				},
+				"category": {
+					"uniqueRepresentationReference": "73",
+					"identifier": "74"
+				},
+				"parameter": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "75",
+						"identifier": "76"
+					},
+					"category": {
+						"uniqueRepresentationReference": "77",
+						"identifier": "78"
+					}
+				}
+			},
+			"query": {
+				"semanticIdentity": {
+					"uniqueRepresentationReference": "79",
+					"identifier": "80"
+				},
+				"category": {
+					"uniqueRepresentationReference": "81",
+					"identifier": "82"
+				},
+				"parameter": {
+					"semanticIdentity": {
+						"uniqueRepresentationReference": "83",
+						"identifier": "84"
+					},
+					"category": {
+						"uniqueRepresentationReference": "85",
+						"identifier": "86"
+					}
+				}
+			},
+			"identity": {
+				"identifier": "identifier",
+				"name": "name",
+				"pluralName": "pluralName",
+				"codeName": "codeName",
+				"pluralCodeName": "pluralCodeName",
+				"payload": "Some text"
+			}
+		}
+	}
+}

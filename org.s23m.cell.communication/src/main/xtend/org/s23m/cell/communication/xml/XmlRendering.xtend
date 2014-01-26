@@ -47,7 +47,12 @@ class XmlRendering {
 	}
 		
 	private static def renderPrefix(Node node, int level) {
-		whitespace(level) + "<" + name(node) + renderAttributes(node)
+		val builder = new StringBuilder
+		builder.append(whitespace(level))
+		builder.append("<")
+		builder.append(name(node))
+		builder.append(renderAttributes(node))
+		builder.toString
 	}
 	
 	private static def renderSuffix(Node node, int level) {
