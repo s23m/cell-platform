@@ -89,21 +89,30 @@ public class FormulaEvaluation {
 			subFormula = formula;
 		}
 
-		if (Formula.unaryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {arity = Arity.UNARY;
+		if (Formula.unaryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {
+			arity = Arity.UNARY;
+		} else if (Formula.binaryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {
+			arity = Arity.BINARY;
+		} else if (Formula.naryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {
+			arity = Arity.NARY;
+		} else if (Formula.naryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {
+			arity = Arity.VARIABLE;
 		} else {
-			if (Formula.binaryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {arity = Arity.BINARY;
-			} else {
-				if (Formula.naryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {arity = Arity.NARY;
-				} else {
-					if (Formula.naryFunction.isSuperSetOf(subFormula.category()).is_TRUE()) {arity = Arity.VARIABLE;
-					} else {arity = Arity.CONSTANT;
-		}	}	}	}
-
+			arity = Arity.CONSTANT;
+		}
 		switch (arity) {
-		case UNARY: terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.unaryFunction_to_term).filterTo(); break;
-		case BINARY: terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.binaryFunction_to_terms).filterTo(); break;
-		case NARY: terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.naryFunction_to_terms).filterTo(); break;
-		default: terms =	S23MSemanticDomains.is_NOTAPPLICABLE; break;
+			case UNARY:
+				terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.unaryFunction_to_term).filterTo();
+				break;
+			case BINARY:
+				terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.binaryFunction_to_terms).filterTo();
+				break;
+			case NARY:
+				terms = subFormula.container().filterByLinkedFrom(subFormula).filter(Formula.naryFunction_to_terms).filterTo();
+				break;
+			default:
+				terms = S23MSemanticDomains.is_NOTAPPLICABLE;
+				break;
 		}
 		variables = formula.container().filter(Formula.variable).filterTo();
 		constants = formula.container().filter(Formula.constant).filterTo();
@@ -120,17 +129,18 @@ public class FormulaEvaluation {
 					final OrderedSet newTerms = (OrderedSet) F_InstantiationImpl.createResultSet();
 					for (final Set term : oldTerms) {
 						if (term.isEqualTo(value.category())) {
-							newTerms.addElement(value); }
-						else {
+							newTerms.addElement(value);
+						} else {
 							newTerms.addElement(term);
 						}
 					}
-				oldTerms = newTerms;
+					oldTerms = newTerms;
 				}
 			}
 		}
 		return oldTerms;
 	}
+
 	public static final Set evaluateEmbeddedFunctions(final Set terms, final Set variables, final Set values) {
 		final OrderedSet newTerms = (OrderedSet) F_InstantiationImpl.createResultSet();
 		if (S23MPlatform.coreSets.orderedSet.isSuperSetOf(terms).is_TRUE()) {
@@ -138,12 +148,12 @@ public class FormulaEvaluation {
 				if (Formula.unaryFunction.isSuperSetOf(term.category()).is_TRUE()
 						|| Formula.binaryFunction.isSuperSetOf(term.category()).is_TRUE()
 						|| Formula.naryFunction.isSuperSetOf(term.category()).is_TRUE()) {
-							newTerms.addElement(FormulaEvaluation.evaluate(term, values)); }
-						else {
-							newTerms.addElement(term);
-						}
-					}
+					newTerms.addElement(FormulaEvaluation.evaluate(term, values));
+				} else {
+					newTerms.addElement(term);
 				}
+			}
+		}
 		return newTerms;
 	}
 
@@ -161,33 +171,31 @@ public class FormulaEvaluation {
 					modified = true;
 				}
 			}
-
 		}
 		if (modified) {
 			return FormulaEvaluation.evaluateSubFormula(subFormula, arity,  terms,  variables,  constants, values);
 		} else {
-
-		// delegate to the appropriate formula evaluators
-		switch (arity) {
-			case NARY:
-				if (subFormula.category().isEqualTo(LogicalFormula.and)) {return And.create(subFormula, terms, variables, constants, values).evaluate();}
-				if (subFormula.category().isEqualTo(LogicalFormula.or)) {return Or.create(subFormula, terms, variables, constants, values).evaluate();}
-				if (subFormula.category().isEqualTo(LogicalFormula.xor)) {return Xor.create(subFormula, terms, variables, constants, values).evaluate();}
-				if (subFormula.category().isEqualTo(LogicalFormula.equal)) {return Equals.create(subFormula, terms, variables, constants, values).evaluate();}
-				if (subFormula.category().isEqualTo(LogicalFormula.equalToRepresentation)) {return EqualsToRepresentation.create(subFormula, terms, variables, constants, values).evaluate();}
-	    		if (!modified) {return subFormula;}
-	    		break;
-			case BINARY:
-				if (subFormula.category().isEqualTo(LogicalFormula.contains)) {return Contains.create(subFormula, terms, variables, constants, values).evaluate();}
-	    		if (!modified) {return subFormula;}
-	    		break;
-			case UNARY:
-				if (subFormula.category().isEqualTo(LogicalFormula.not)) {return Not.create(subFormula, terms, variables, constants, values).evaluate();}
-				if (subFormula.category().isEqualTo(LogicalFormula.empty)) {return Empty.create(subFormula, terms, variables, constants, values).evaluate();}
-	    		if (!modified) {return subFormula;}
-	    		break;
-			default:
-	    		if (!modified) {return subFormula;}
+			// delegate to the appropriate formula evaluators
+			switch (arity) {
+				case NARY:
+					if (subFormula.category().isEqualTo(LogicalFormula.and)) {return And.create(subFormula, terms, variables, constants, values).evaluate();}
+					if (subFormula.category().isEqualTo(LogicalFormula.or)) {return Or.create(subFormula, terms, variables, constants, values).evaluate();}
+					if (subFormula.category().isEqualTo(LogicalFormula.xor)) {return Xor.create(subFormula, terms, variables, constants, values).evaluate();}
+					if (subFormula.category().isEqualTo(LogicalFormula.equal)) {return Equals.create(subFormula, terms, variables, constants, values).evaluate();}
+					if (subFormula.category().isEqualTo(LogicalFormula.equalToRepresentation)) {return EqualsToRepresentation.create(subFormula, terms, variables, constants, values).evaluate();}
+		    		if (!modified) {return subFormula;}
+		    		break;
+				case BINARY:
+					if (subFormula.category().isEqualTo(LogicalFormula.contains)) {return Contains.create(subFormula, terms, variables, constants, values).evaluate();}
+		    		if (!modified) {return subFormula;}
+		    		break;
+				case UNARY:
+					if (subFormula.category().isEqualTo(LogicalFormula.not)) {return Not.create(subFormula, terms, variables, constants, values).evaluate();}
+					if (subFormula.category().isEqualTo(LogicalFormula.empty)) {return Empty.create(subFormula, terms, variables, constants, values).evaluate();}
+		    		if (!modified) {return subFormula;}
+		    		break;
+				default:
+		    		if (!modified) {return subFormula;}
 			}
 		}
 		final Set si = org.s23m.cell.platform.api.Instantiation.addDisjunctSemanticIdentitySet(
@@ -204,7 +212,6 @@ public class FormulaEvaluation {
 
 		return FormulaEvaluation.addSubFormula(subFormula.container(), subFormula.category(), si, terms, variables, constants);
 	}
-
 
 	public static final Set addSubFormula(final Set container, final Set properSubFormulaCategory, final Set properSubFormulaSemanticIdentity, final Set terms, final Set variables, final Set constants) {
 		final Set subFormula = container.addConcrete(properSubFormulaCategory, properSubFormulaSemanticIdentity);
