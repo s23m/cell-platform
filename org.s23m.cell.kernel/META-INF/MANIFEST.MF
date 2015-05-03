@@ -15,3 +15,5 @@ Export-Package: org.s23m.cell,
  org.s23m.cell.impl,
  org.s23m.cell.properclasses
 Require-Bundle: org.junit;resolution:=optional
+Bundle-ClassPath: lib/high-scale-lib-1.0.3.jar,
+ .
