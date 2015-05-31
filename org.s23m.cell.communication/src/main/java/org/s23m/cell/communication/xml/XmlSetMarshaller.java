@@ -25,79 +25,24 @@
 package org.s23m.cell.communication.xml;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.Query;
-import org.s23m.cell.api.models.S23MSemanticDomains;
-import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.communication.SetMarshaller;
 import org.s23m.cell.communication.SetMarshallingException;
+import org.s23m.cell.communication.impl.ArtifactSetFactory;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
 import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
-import org.s23m.cell.communication.xml.model.schemainstance.Command;
-import org.s23m.cell.communication.xml.model.schemainstance.Edge;
-import org.s23m.cell.communication.xml.model.schemainstance.Identity;
-import org.s23m.cell.communication.xml.model.schemainstance.Model;
-import org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode;
-import org.s23m.cell.communication.xml.model.schemainstance.Structure;
-import org.s23m.cell.communication.xml.model.schemainstance.SuperSetReference;
-import org.s23m.cell.communication.xml.model.schemainstance.Vertex;
-import org.s23m.cell.communication.xml.model.schemainstance.Visibility;
-import org.s23m.cell.platform.api.Instantiation;
-import org.s23m.cell.platform.api.models.Agency;
-import org.s23m.cell.platform.api.models.CellPlatformAgent;
 
 // TODO add a constructor accepting the Schema to use and validate against
 public class XmlSetMarshaller implements SetMarshaller<String> {
 
-	private final Namespace namespace;
-	
-	private final XmlSchemaTerminology terminology;
+	private final ArtifactSetFactory factory;
 		
 	public XmlSetMarshaller(Namespace namespace, XmlSchemaTerminology terminology) {
-		this.namespace = namespace;
-		this.terminology = terminology;
-	}		
+		this.factory = new ArtifactSetFactory(namespace, terminology);
+	}	
 	
-	/*
-	 * Implementation:
-	 * -> for processing exactly one instance, use the filter() operations:
-	 *  filterInstances() goes over all the contained instances (but remember to
-	 *  catch the Edge Ends that must be accessed from each Edge via toEdgeEnd() and fromEdgeEnd()).
-	 * -> can also use filter(<properClass>) to structure the work by proper classes.
-	 * 
-	 * Test case:
-	 * -> should be able to convert the set of models and the set of semantic domains to the XML format.
-	 * 
-	 * Later on:
-	 * 1) serialisation of all sets contained within a top-level agent (recursively)
-	 * 2) processing all changed sets within a transaction, all of which should be related to one agent
-	 * (instantiation API needs to be agent-aware: multiple transactions open at once, and every transaction
-	 * relates to exactly one agent)
-	 * 
-	 * Test case:
-	 * -> processing all semantic domains of an agent and the all models of an agent.
-	 * Need to make at least 2 passes along the containment tree to resolve all references.
-	 * 
-	 * Sets must be serialised in the right order:
-	 * - identities
-	 * - semantic domains and semantic identities (which can only be reconstituted with appropriate identities)
-	 * - models (which can only be reconstituted with appropriate semantic domains)
-	 */
 	@Override
 	public String serialise(Set graph) throws SetMarshallingException {
-		// TODO allow language to be customised
-		Set language = CellPlatformAgent.cellMetaLanguage;
-		final InstanceBuilder builder = new InstanceBuilder(namespace, terminology, language);
-		final ArtifactSet artifactSet = builder.artifactSet();
-		
-		for (final Set containedInstance : graph.filterInstances()) {
-			serialiseModel(artifactSet, builder, containedInstance);			
-		}
-		
-		final Set containedSemanticDomains = Instantiation.toSemanticDomain(graph).filterPolymorphic(SemanticDomain.semanticdomain);
-		for (final Set semanticDomain : containedSemanticDomains) {
-			serialiseSemanticDomain(artifactSet, builder, semanticDomain);
-		}
-		
+		final ArtifactSet artifactSet = factory.createArtifactSet(graph);
 		return XmlRendering.render(artifactSet);
 	}
 	
@@ -108,75 +53,4 @@ public class XmlSetMarshaller implements SetMarshaller<String> {
 		return null;
 	}
 
-	private void serialiseModel(ArtifactSet parent, InstanceBuilder builder, Set set) {
-		if (isSuperSetOf(Agency.agent, set.category()) || isSuperSetOf(Agency.stage, set.category())) {
-			// cover potential polymorphic extensions of Agent and Stage (these could become a variability)
-			final Set semanticDomain = Instantiation.toSemanticDomain(set);
-			serialiseSemanticDomain(parent, builder, semanticDomain);
-		}
-		final Model model = builder.model(set);
-		populateStructure(builder, model, set);
-		
-		parent.addModel(model);
-	}
-
-	private void serialiseSemanticDomain(ArtifactSet parent, InstanceBuilder builder, Set set) {
-		final SemanticDomainNode semanticDomain = builder.semanticDomain(set);
-		
-		// serialise identities
-		final Set orderedSetOfSemanticIdentities = set.filterPolymorphic(SemanticDomain.semanticIdentity);
-		for (Set semanticIdentitySet: orderedSetOfSemanticIdentities) {
-			Identity identity = builder.identity(semanticIdentitySet);
-			semanticDomain.addIdentity(identity);	
-		}
-		
-		populateStructure(builder, semanticDomain, set);
-		
-		parent.addSemanticDomain(semanticDomain);
-	}
-
-	private Structure populateStructure(InstanceBuilder builder, Structure container, Set structure) {
-		
-		// process Vertex list
-		for (Set vertexInstance : structure.filterProperClass(Query.vertex)) {
-			Vertex vertex = builder.vertex(vertexInstance);
-			container.addVertex(vertex);
-		}
-		
-		// process Edge list
-		for (Set edgeInstance : structure.filterProperClass(Query.edge)) {
-			Edge edge = builder.edge(edgeInstance);
-			container.addEdge(edge);
-		}
-		
-		// process Visibility list
-		for (Set visibilityInstance : structure.filterProperClass(Query.visibility)) {
-			Visibility visibility = builder.visibility(visibilityInstance);
-			container.addVisibility(visibility);
-		}
-		
-		// process SuperSetReference list
-		for (Set superSetReferenceInstance : structure.filterProperClass(Query.superSetReference)) {
-			SuperSetReference superSetReference = builder.superSetReference(superSetReferenceInstance);
-			container.addSuperSetReference(superSetReference);
-		}
-		
-		// process Command list
-		for (Set commandInstance : structure.filter(S23MSemanticDomains.command)) {
-			Command command = builder.command(commandInstance);
-			container.addCommand(command);
-		}
-		
-		// process Query list
-		for (Set queryInstance : structure.filter(S23MSemanticDomains.query)) {
-			org.s23m.cell.communication.xml.model.schemainstance.Query query = builder.query(queryInstance);
-			container.addQuery(query);
-		}
-		
-		return container;
-	}
-	
-	private boolean isSuperSetOf(Set set, Set candidateSuperSet) {
-		return set.isSuperSetOf(candidateSuperSet).isEqualTo(S23MSemanticDomains.is_TRUE);
-	}
 }

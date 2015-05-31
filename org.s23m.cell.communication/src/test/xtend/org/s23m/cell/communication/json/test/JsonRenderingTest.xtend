@@ -2,17 +2,9 @@ package org.s23m.cell.communication.json.test
 
 import junit.framework.TestCase
 import org.junit.Test
-import javax.xml.parsers.SAXParserFactory
-import javax.xml.parsers.ParserConfigurationException
-import org.xml.sax.SAXException
-import java.io.IOException
-import org.s23m.cell.communication.xml.sax.ArtifactSetElementHandler
-import java.io.ByteArrayInputStream
-import com.google.common.base.Charsets
 
 import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static extension org.s23m.cell.communication.xml.OperatorExtensions.*
-import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet
 import org.s23m.cell.api.Query
 import org.s23m.cell.platform.S23MPlatform
 import org.s23m.cell.Set
@@ -20,8 +12,6 @@ import org.s23m.cell.Identity
 import java.util.UUID
 import org.s23m.cell.communication.xml.test.MethodDescriptor
 import org.s23m.cell.communication.xml.test.MockIdentity
-import org.s23m.cell.communication.xml.XmlRendering
-import org.s23m.cell.communication.xml.XmlSchemaFactory
 import org.s23m.cell.communication.xml.InstanceBuilder
 
 import org.s23m.cell.platform.api.models.CellPlatformAgent

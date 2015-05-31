@@ -27,23 +27,23 @@ package org.s23m.cell.communication.json;
 import org.s23m.cell.Set;
 import org.s23m.cell.communication.SetMarshaller;
 import org.s23m.cell.communication.SetMarshallingException;
+import org.s23m.cell.communication.impl.ArtifactSetFactory;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
+import org.s23m.cell.communication.xml.model.schemainstance.ArtifactSet;
 
 public class JsonSetMarshaller implements SetMarshaller<String> {
 
-	private final Namespace namespace;
-	
-	private final XmlSchemaTerminology terminology;
+	private final ArtifactSetFactory factory;
 		
 	public JsonSetMarshaller(Namespace namespace, XmlSchemaTerminology terminology) {
-		this.namespace = namespace;
-		this.terminology = terminology;
-	}		
+		this.factory = new ArtifactSetFactory(namespace, terminology);
+	}
 	
 	@Override
 	public String serialise(Set graph) throws SetMarshallingException {
-		return null;
+		final ArtifactSet artifactSet = factory.createArtifactSet(graph);
+		return JsonRendering.render(artifactSet);
 	}
 	
 	@Override
