@@ -1,0 +1,19 @@
+Setting up a development environment
+------------------------------------
+
+1. Install the "Eclipse Mars 2 Modeling Tools" distribution of Eclipse, available for Mac OSX from
+
+http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/2/eclipse-modeling-mars-2-macosx-cocoa-x86_64.tar.gz
+
+2. Switch to a new empty workspace
+
+3. Import all projects from the cell repository into the empty workspace
+
+4. To run the tests, run the JUnit .launch files in the root directories of the following projects:
+
+org.s23m.cell.communication
+org.s23m.cell.kernel
+org.s23m.cell.kernel.tests
+org.s23m.cell.platform
+
+Each one can be run by right clicking it and selecting the JUnit menu item from the "Run As" menu.
