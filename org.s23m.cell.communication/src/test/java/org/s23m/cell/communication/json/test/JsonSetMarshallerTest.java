@@ -39,7 +39,7 @@ public class JsonSetMarshallerTest extends TestCase {
 			JsonSetMarshaller setMarshaller = new JsonSetMarshaller(namespace, terminology);
 			
 			String serialised = setMarshaller.serialise(exampleModel);
-			System.out.println("serialised: " + serialised);
+			//System.out.println("serialised: " + serialised);
 			
 			// String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ithanku));
 			// ALTERNATIVE EXAMPLE : String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ernst));

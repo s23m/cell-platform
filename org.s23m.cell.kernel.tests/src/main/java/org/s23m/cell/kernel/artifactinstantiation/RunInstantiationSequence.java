@@ -13,6 +13,10 @@ import org.s23m.cell.kernel.tests.S23MTestCase;
 import org.s23m.cell.kernel.tests.SemanticIdentityReconstitutionTest;
 import org.s23m.cell.kernel.tests.VisualisationExampleTest;
 
+/*
+ * @deprecated see AllInstantiationSequencesTest
+ */
+@Deprecated
 public class RunInstantiationSequence {
 
 	public static void main(final String[] args) {

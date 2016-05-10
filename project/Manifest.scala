@@ -67,7 +67,7 @@ object Manifest {
 		val manifest = new JarManifest(new URL(manifestLocation).openStream)
 		val attributes = manifest.getMainAttributes
 		val entrySet = attributes.entrySet.asScala
-		entrySet.map{entry => (entry.getKey.toString, entry.getValue.toString)}.toList
+		entrySet.map{entry => (entry.getKey().toString, entry.getValue().toString)}.toList
 	}
 
 }
