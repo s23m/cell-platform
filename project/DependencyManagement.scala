@@ -30,7 +30,7 @@ object DependencyManagement {
 
 	lazy val JUnit = "junit" % "junit" % "4.10"
 	lazy val Vaadin = "com.vaadin" % "vaadin" % "6.7.1"
-  lazy val Jetty = "org.eclipse.jetty" % "jetty-webapp" % "8.0.4.v20111024" % "container"
+    lazy val Jetty = "org.eclipse.jetty" % "jetty-webapp" % "8.0.4.v20111024" % "container"
 
 	def ivyXml = {
 		<dependencies>

@@ -50,8 +50,7 @@ object BuildSettings {
 		)
 		
 		private val findbugs4sbtSettings = findbugsSettings ++ Seq(
-			findbugsReportType := FindBugsReportType.Html,
-			findbugsReportName := "findbugs.html"
+			findbugsReportType := Some(FindBugsReportType.Html)
 		)
 		
 		private val jacoco4sbtSettings = jacoco.settings ++ Seq(
@@ -70,25 +69,31 @@ object BuildSettings {
 			organization := "org.s23m",
 			// TODO replace with sbt-release version
 			version      := buildVersion,
-			scalaVersion := "2.9.1",
+			scalaVersion := "2.11.7",
 			shellPrompt  := ShellPrompt.buildShellPrompt,
 			crossPaths := false,
 			
 			ivyXML := DependencyManagement.ivyXml,
 		   
 			// append several options to the list of options passed to the Java compiler
-			javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+			javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 		)
 	}
 		
 	val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
   
+    // see http://stackoverflow.com/a/34490115 for JUnit support
 	val javaTestProjectSettings = javaProjectSettings ++ Seq(
 		parallelExecution in Test := parallelTestExecution,
-		libraryDependencies += "com.novocode" % "junit-interface" % "0.7" % "test->default",
+		libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test->default",
 		libraryDependencies += DependencyManagement.JUnit,
+		crossPaths := false,
+		testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a"))
+		
+		/*
 		testListeners <+= (target).map {
 			t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
 		}
+		*/
 	)
 }

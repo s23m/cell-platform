@@ -24,7 +24,6 @@
  * ***** END LICENSE BLOCK ***** */
 
 import sbt._
-import sbt.Path._
 
 import BuildSettings._
 import DependencyManagement._
