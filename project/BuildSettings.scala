@@ -105,6 +105,11 @@ object BuildSettings {
                 super.doComplete(finalResult)
                 consoleLog.info("The test has been completed")
             }
-        })
+        }),
+
+        testListeners in Test <+= (target).map {
+            // see http://www.scala-sbt.org/release/sxr/sbt/JUnitXmlTestsListener.scala.html
+            t => new sbt.JUnitXmlTestsListener("target")
+        }
 	)
 }
