@@ -82,12 +82,29 @@ object BuildSettings {
 		
 	val javaProjectSettings = buildSettings ++ Packaging.defaultSettings
   
+
+    val consoleLog = new sbt.testing.Logger {
+        def ansiCodesSupported = false
+        def error(message: String) = println("error: " + message)
+        def info(message: String)  = println("info: " + message)
+        def warn(message: String)  = println("warn: " + message)
+        def debug(message: String) = println("debug: " + message)
+        def trace(t: Throwable)    = println("trace: " + t)
+    }
+
     // see http://stackoverflow.com/a/34490115 for JUnit support
 	val javaTestProjectSettings = javaProjectSettings ++ Seq(
 		parallelExecution in Test := parallelTestExecution,
 		libraryDependencies += DependencyManagement.JUnitInterface,
 		libraryDependencies += DependencyManagement.JUnit,
 		crossPaths := false,
-		testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a"))
+		testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a")),
+
+		testListeners in Test := Seq(new TestLogger(new TestLogging(consoleLog, {_ => new ContentLogger(consoleLog, () => {}) })) {
+            override def doComplete(finalResult: TestResult.Value): Unit = {
+                super.doComplete(finalResult)
+                consoleLog.info("The test has been completed")
+            }
+        })
 	)
 }
