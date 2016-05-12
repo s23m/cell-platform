@@ -85,15 +85,9 @@ object BuildSettings {
     // see http://stackoverflow.com/a/34490115 for JUnit support
 	val javaTestProjectSettings = javaProjectSettings ++ Seq(
 		parallelExecution in Test := parallelTestExecution,
-		libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test->default",
+		libraryDependencies += DependencyManagement.JUnitInterface,
 		libraryDependencies += DependencyManagement.JUnit,
 		crossPaths := false,
 		testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a"))
-		
-		/*
-		testListeners <+= (target).map {
-			t => new eu.henkelmann.sbt.JUnitXmlTestsListener(t.asFile.getAbsolutePath)
-		}
-		*/
 	)
 }

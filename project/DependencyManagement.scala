@@ -29,6 +29,7 @@ import xml.Node
 object DependencyManagement {
 
 	lazy val JUnit = "junit" % "junit" % "4.10"
+	lazy val JUnitInterface = "com.novocode" % "junit-interface" % "0.11" % "test->default"
 	lazy val Vaadin = "com.vaadin" % "vaadin" % "6.7.1"
     lazy val Jetty = "org.eclipse.jetty" % "jetty-webapp" % "8.0.4.v20111024" % "container"
 
