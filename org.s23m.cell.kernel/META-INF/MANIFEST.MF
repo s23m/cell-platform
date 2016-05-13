@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.s23m.cell.kernel
 Bundle-SymbolicName: org.s23m.cell.kernel; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.s23m.cell,
  org.s23m.cell.api,
  org.s23m.cell.api.computation,
@@ -14,6 +14,5 @@ Export-Package: org.s23m.cell,
  org.s23m.cell.event,
  org.s23m.cell.impl,
  org.s23m.cell.properclasses
-Require-Bundle: org.junit;resolution:=optional
 Bundle-ClassPath: lib/high-scale-lib-1.0.3.jar,
  .

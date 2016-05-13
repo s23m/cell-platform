@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.s23m.cell.communication
 Bundle-SymbolicName: org.s23m.cell.communication
 Bundle-Version: 1.0.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",
  org.s23m.cell.platform;bundle-version="1.0.0",
  org.s23m.cell.kernel.tests;bundle-version="1.0.0"
