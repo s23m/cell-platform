@@ -39,6 +39,7 @@ object CellBuild extends Build {
     communication,
     kernel,
     kernelTests,
+    persistence,
     platform
   )
 
@@ -62,6 +63,12 @@ object CellBuild extends Build {
     file ("org.s23m.cell.kernel.tests"),
     settings = javaTestProjectSettings
   ) dependsOn (kernel)
+
+  lazy val persistence = Project(
+    "persistence",
+    file ("org.s23m.cell.persistence"),
+    settings = javaTestProjectSettings
+  )
 
   lazy val platform = Project(
     "platform",

@@ -1,0 +1,96 @@
+package org.s23m.cell.persistence.jdbc.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.s23m.cell.persistence.dao.ArrowDao;
+import org.s23m.cell.persistence.model.Arrow;
+
+public class JdbcArrowDao implements ArrowDao {
+
+	private static final String URR = "urr";
+	private static final String CATEGORY = "category";
+	private static final String PROPER_CLASS = "properClass";
+	private static final String FROM_GRAPH = "fromGraph";
+	private static final String TO_GRAPH = "toGraph";
+
+	private static final String[] COLUMN_NAMES = {
+		CATEGORY,
+		PROPER_CLASS,
+		FROM_GRAPH,
+		TO_GRAPH,
+		URR
+	};
+
+	private static final String SELECT_BY_PK_TEMPLATE = SqlQueryTemplates.createSelectByIdQueryTemplate(Arrow.class, URR);
+
+	private static final String UPDATE_TEMPLATE = SqlQueryTemplates.createUpdateStatementTemplate(Arrow.class, COLUMN_NAMES);
+
+	private static final String INSERT_TEMPLATE = SqlQueryTemplates.createInsertStatementTemplate(Arrow.class, COLUMN_NAMES);
+
+	private final QueryRunner queryRunner;
+
+	private final ArrowGetHandler handler;
+
+	public JdbcArrowDao(final QueryRunner queryRunner) {
+		this.queryRunner = queryRunner;
+		this.handler = new ArrowGetHandler();
+	}
+
+	public Arrow get(final String urr) {
+		try {
+			return queryRunner.query(SELECT_BY_PK_TEMPLATE, handler, urr);
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not retrieve Arrow with URR '" + urr + "'", e);
+		}
+	}
+
+	public void saveOrUpdate(final Arrow arrow) {
+		try {
+			// try updating first
+			final Object[] parameters = {
+					arrow.getCategory(),
+					arrow.getProperClass(),
+					arrow.getFromGraph(),
+					arrow.getToGraph(),
+					arrow.getUrr()
+			};
+			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
+			if (updates == 0) {
+				// record does not exist - insert it
+				final int inserts = queryRunner.update(INSERT_TEMPLATE, parameters);
+				if (inserts == 0) {
+					throw new RuntimeException("Failed to insert Arrow: " + arrow);
+				}
+			}
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not save or update Arrow: " + arrow, e);
+		}
+	}
+
+	private static class ArrowGetHandler implements ResultSetHandler<Arrow> {
+
+		public Arrow handle(final ResultSet resultSet) throws SQLException {
+			final boolean hasNext = resultSet.next();
+			if (hasNext) {
+				final String category = resultSet.getString(CATEGORY);
+				final String properClass = resultSet.getString(PROPER_CLASS);
+				final String fromGraph = resultSet.getString(FROM_GRAPH);
+				final String toGraph = resultSet.getString(TO_GRAPH);
+				final String urr = resultSet.getString(URR);
+
+				final Arrow result = new Arrow();
+				result.setCategory(category);
+				result.setProperClass(properClass);
+				result.setFromGraph(fromGraph);
+				result.setToGraph(toGraph);
+				result.setUrr(urr);
+				return result;
+			} else {
+				return null;
+			}
+		}
+	}
+}
