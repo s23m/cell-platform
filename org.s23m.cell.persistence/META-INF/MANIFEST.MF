@@ -3,4 +3,3 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.s23m.cell.persistence
 Bundle-SymbolicName: org.s23m.cell.persistence;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
