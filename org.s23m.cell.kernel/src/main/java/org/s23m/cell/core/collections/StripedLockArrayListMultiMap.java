@@ -30,16 +30,16 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.cliffc.high_scale_lib.NonBlockingHashMap;
+import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
 import org.s23m.cell.core.concurrency.ehcache.LockType;
 import org.s23m.cell.core.concurrency.ehcache.StripedReadWriteLockSync;
 import org.s23m.cell.core.concurrency.ehcache.Sync;
 
 /**
  * Slightly modified version of the class presented in the blog post
- * 
+ *
  * http://dhruba.name/2011/06/11/concurrency-pattern-concurrent-multimaps-in-java/
- * 
+ *
  * ADVANTAGES
  * - Strongly consistent. Implements correct mutual exclusion of calls.
  * - Uses {@link NonBlockingHashMap} instead of {@link ConcurrentHashMap} so the backing cache member does not block at all. Far more efficient and scalable than {@link ConcurrentHashMap}.
@@ -48,7 +48,7 @@ import org.s23m.cell.core.concurrency.ehcache.Sync;
  *   The {@link #put(Object, Object)} method only blocks if the {@link NonBlockingHashMap#putIfAbsent(Object, Object)} fails and the {@link #remove(Object, Object)} only blocks if there is something there to remove.
  * And to save the best for last, there is no longer any blocking at the cache level. We now apply mutual exclusion only at the key level.
  * This implementation has the best of all worlds really as long as the copy on write approach is acceptable to you.
- * 
+ *
  * DISADVANTAGES
  * - Fundamentally being a copy on write approach it does more allocation than a mutative approach.
  */

@@ -40,7 +40,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.cliffc.high_scale_lib.NonBlockingHashMap;
 import org.s23m.cell.Identity;
 import org.s23m.cell.S23MKernel;
 import org.s23m.cell.Set;
@@ -50,6 +49,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
 import org.s23m.cell.core.collections.LazyValue;
 import org.s23m.cell.core.collections.StripedLockArrayListMultiMap;
+import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
 import org.s23m.cell.impl.SemanticDomainCode;
 
 public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {

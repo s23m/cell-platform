@@ -13,5 +13,4 @@ Export-Package: org.s23m.cell,
  org.s23m.cell.event,
  org.s23m.cell.impl,
  org.s23m.cell.properclasses
-Bundle-ClassPath: lib/high-scale-lib-1.0.3.jar,
- .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

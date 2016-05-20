@@ -30,14 +30,14 @@ import static org.s23m.cell.core.F_Instantiation.identityFactory;
 import java.util.Map;
 import java.util.UUID;
 
-import org.cliffc.high_scale_lib.NonBlockingHashMap;
 import org.s23m.cell.Identity;
 import org.s23m.cell.api.Instantiation;
+import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
 
 /**
  * {@link IdentityFactory} is a factory for Semantic Identities that connects
  * to the basic implementation of SemanticIdentity delivered with S23M.
- * 
+ *
  * The implementation can be overridden as needed by an alternative class that implements
  * the FundamentalSemanticIdentities interface.
  */
