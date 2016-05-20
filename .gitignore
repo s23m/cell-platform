@@ -3,3 +3,4 @@ bin
 *.class
 .history
 *._trace
+*.xtendbin
