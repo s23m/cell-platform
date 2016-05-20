@@ -69,8 +69,7 @@ public class XmlSchemaTemplate {
       final String function = terminology.function();
       final String artifactSet = terminology.artifactSet();
       final String structure = terminology.structure();
-      SchemaBuilder _schemaBuilder = new SchemaBuilder(artifactSet);
-      final SchemaBuilder builder = _schemaBuilder;
+      final SchemaBuilder builder = new SchemaBuilder(artifactSet);
       String _uuid = terminology.uuid();
       final ConstrainedSimpleType uuid = builder.simpleType(_uuid, DataType.STRING);
       String _identityReference = terminology.identityReference();
@@ -87,104 +86,111 @@ public class XmlSchemaTemplate {
       final Element fromElement = builder.element(from, identityReference);
       final Element toElement = builder.element(to, identityReference);
       final Procedure1<Sequence> _function = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            Element _element = builder.element(semanticIdentity, identityReference);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            Element _element_1 = builder.element(category, identityReference);
-            _children_1.add(_element_1);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          Element _element = builder.element(semanticIdentity, identityReference);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          Element _element_1 = builder.element(category, identityReference);
+          _children_1.add(_element_1);
+        }
+      };
       final ComplexType categoryComplexType = builder.complexType(category, _function);
       final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(isAbstractElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            ElementReference _element_1 = builder.element(maxCardinalityElement);
-            _children_1.add(_element_1);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(isAbstractElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          ElementReference _element_1 = builder.element(maxCardinalityElement);
+          _children_1.add(_element_1);
+        }
+      };
       Extension _withExtension = SchemaBuilder.withExtension(categoryComplexType, _function_1);
       final ComplexType vertexComplexType = builder.complexType(vertex, _withExtension);
       final Procedure1<Sequence> _function_2 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(isAbstractElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            ElementReference _element_1 = builder.element(fromElement);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            ElementReference _element_2 = builder.element(toElement);
-            _children_2.add(_element_2);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(isAbstractElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          ElementReference _element_1 = builder.element(fromElement);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          ElementReference _element_2 = builder.element(toElement);
+          _children_2.add(_element_2);
+        }
+      };
       Extension _withExtension_1 = SchemaBuilder.withExtension(categoryComplexType, _function_2);
       final ComplexType visibilityComplexType = builder.complexType(visibility, _withExtension_1);
       final Procedure1<Sequence> _function_3 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(isAbstractElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            ElementReference _element_1 = builder.element(fromElement);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            ElementReference _element_2 = builder.element(toElement);
-            _children_2.add(_element_2);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(isAbstractElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          ElementReference _element_1 = builder.element(fromElement);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          ElementReference _element_2 = builder.element(toElement);
+          _children_2.add(_element_2);
+        }
+      };
       Extension _withExtension_2 = SchemaBuilder.withExtension(categoryComplexType, _function_3);
       final ComplexType superSetReferenceComplexType = builder.complexType(superSetReference, _withExtension_2);
       final Procedure1<Sequence> _function_4 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(isAbstractElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            Element _element_1 = builder.element(minCardinality, identityReference);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            ElementReference _element_2 = builder.element(maxCardinalityElement);
-            _children_2.add(_element_2);
-            List<Node> _children_3 = it.getChildren();
-            Element _element_3 = builder.element(isContainer, identityReference);
-            _children_3.add(_element_3);
-            List<Node> _children_4 = it.getChildren();
-            Element _element_4 = builder.element(isNavigable, identityReference);
-            _children_4.add(_element_4);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(isAbstractElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          Element _element_1 = builder.element(minCardinality, identityReference);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          ElementReference _element_2 = builder.element(maxCardinalityElement);
+          _children_2.add(_element_2);
+          List<Node> _children_3 = it.getChildren();
+          Element _element_3 = builder.element(isContainer, identityReference);
+          _children_3.add(_element_3);
+          List<Node> _children_4 = it.getChildren();
+          Element _element_4 = builder.element(isNavigable, identityReference);
+          _children_4.add(_element_4);
+        }
+      };
       Extension _withExtension_3 = SchemaBuilder.withExtension(categoryComplexType, _function_4);
       final ComplexType edgeEndComplexType = builder.complexType(edgeEnd, _withExtension_3);
       final Procedure1<Sequence> _function_5 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(isAbstractElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            Element _element_1 = builder.element(from, edgeEndComplexType);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            Element _element_2 = builder.element(to, edgeEndComplexType);
-            _children_2.add(_element_2);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(isAbstractElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          Element _element_1 = builder.element(from, edgeEndComplexType);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          Element _element_2 = builder.element(to, edgeEndComplexType);
+          _children_2.add(_element_2);
+        }
+      };
       Extension _withExtension_4 = SchemaBuilder.withExtension(categoryComplexType, _function_5);
       final ComplexType edgeComplexType = builder.complexType(edge, _withExtension_4);
       final String parameter = terminology.parameter();
       Extension _withExtension_5 = SchemaBuilder.withExtension(categoryComplexType);
       final ComplexType parameterComplexType = builder.complexType(parameter, _withExtension_5);
       final Procedure1<Sequence> _function_6 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            Element _element = builder.element(parameter, parameterComplexType, Cardinality.ZERO_TO_MANY);
-            _children.add(_element);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          Element _element = builder.element(parameter, parameterComplexType, Cardinality.ZERO_TO_MANY);
+          _children.add(_element);
+        }
+      };
       Extension _withExtension_6 = SchemaBuilder.withExtension(categoryComplexType, _function_6);
       final ComplexType functionComplexType = builder.complexType(function, _withExtension_6);
       Extension _withExtension_7 = SchemaBuilder.withExtension(functionComplexType);
@@ -192,34 +198,35 @@ public class XmlSchemaTemplate {
       Extension _withExtension_8 = SchemaBuilder.withExtension(functionComplexType);
       final ComplexType queryComplexType = builder.complexType(query, _withExtension_8);
       final Procedure1<Sequence> _function_7 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            String _container = terminology.container();
-            Element _element = builder.element(_container, identityReference);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            ElementReference _element_1 = builder.element(isAbstractElement);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            Element _element_2 = builder.element(vertex, vertexComplexType, Cardinality.ZERO_TO_MANY);
-            _children_2.add(_element_2);
-            List<Node> _children_3 = it.getChildren();
-            Element _element_3 = builder.element(visibility, visibilityComplexType, Cardinality.ZERO_TO_MANY);
-            _children_3.add(_element_3);
-            List<Node> _children_4 = it.getChildren();
-            Element _element_4 = builder.element(edge, edgeComplexType, Cardinality.ZERO_TO_MANY);
-            _children_4.add(_element_4);
-            List<Node> _children_5 = it.getChildren();
-            Element _element_5 = builder.element(superSetReference, superSetReferenceComplexType, Cardinality.ZERO_TO_MANY);
-            _children_5.add(_element_5);
-            List<Node> _children_6 = it.getChildren();
-            Element _element_6 = builder.element(command, commandComplexType, Cardinality.ZERO_TO_MANY);
-            _children_6.add(_element_6);
-            List<Node> _children_7 = it.getChildren();
-            Element _element_7 = builder.element(query, queryComplexType, Cardinality.ZERO_TO_MANY);
-            _children_7.add(_element_7);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          String _container = terminology.container();
+          Element _element = builder.element(_container, identityReference);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          ElementReference _element_1 = builder.element(isAbstractElement);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          Element _element_2 = builder.element(vertex, vertexComplexType, Cardinality.ZERO_TO_MANY);
+          _children_2.add(_element_2);
+          List<Node> _children_3 = it.getChildren();
+          Element _element_3 = builder.element(visibility, visibilityComplexType, Cardinality.ZERO_TO_MANY);
+          _children_3.add(_element_3);
+          List<Node> _children_4 = it.getChildren();
+          Element _element_4 = builder.element(edge, edgeComplexType, Cardinality.ZERO_TO_MANY);
+          _children_4.add(_element_4);
+          List<Node> _children_5 = it.getChildren();
+          Element _element_5 = builder.element(superSetReference, superSetReferenceComplexType, Cardinality.ZERO_TO_MANY);
+          _children_5.add(_element_5);
+          List<Node> _children_6 = it.getChildren();
+          Element _element_6 = builder.element(command, commandComplexType, Cardinality.ZERO_TO_MANY);
+          _children_6.add(_element_6);
+          List<Node> _children_7 = it.getChildren();
+          Element _element_7 = builder.element(query, queryComplexType, Cardinality.ZERO_TO_MANY);
+          _children_7.add(_element_7);
+        }
+      };
       Extension _withExtension_9 = SchemaBuilder.withExtension(categoryComplexType, _function_7);
       final ComplexType graphComplexType = builder.complexType(graph, _withExtension_9);
       String _identity = terminology.identity();
@@ -235,13 +242,14 @@ public class XmlSchemaTemplate {
       Attribute _mandatoryAttribute_6 = builder.mandatoryAttribute(_pluralCodeName, DataType.STRING);
       List<Attribute> _asList_1 = Arrays.<Attribute>asList(_mandatoryAttribute_2, _mandatoryAttribute_3, _mandatoryAttribute_4, _mandatoryAttribute_5, _mandatoryAttribute_6);
       final Procedure1<Sequence> _function_8 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            String _payload = terminology.payload();
-            Element _element = builder.element(_payload, DataType.STRING);
-            _children.add(_element);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          String _payload = terminology.payload();
+          Element _element = builder.element(_payload, DataType.STRING);
+          _children.add(_element);
+        }
+      };
       final ComplexType identityComplexType = builder.complexType(_identity, _asList_1, _function_8);
       Extension _withExtension_10 = SchemaBuilder.withExtension(graphComplexType);
       final ComplexType structureComplexType = builder.complexType(structure, _withExtension_10);
@@ -249,36 +257,37 @@ public class XmlSchemaTemplate {
       final ComplexType modelComplexType = builder.complexType(model, _withExtension_11);
       String _semanticDomain = terminology.semanticDomain();
       final Procedure1<Sequence> _function_9 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            String _identity = terminology.identity();
-            Element _element = builder.element(_identity, identityComplexType, Cardinality.ZERO_TO_MANY);
-            _children.add(_element);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          String _identity = terminology.identity();
+          Element _element = builder.element(_identity, identityComplexType, Cardinality.ZERO_TO_MANY);
+          _children.add(_element);
+        }
+      };
       Extension _withExtension_12 = SchemaBuilder.withExtension(structureComplexType, _function_9);
       final ComplexType semanticDomainComplexType = builder.complexType(_semanticDomain, _withExtension_12);
       String _language = terminology.language();
       final Element languageElement = builder.element(_language, identityReference);
       final Element modelElement = builder.element(model, modelComplexType);
       final Procedure1<Sequence> _function_10 = new Procedure1<Sequence>() {
-          public void apply(final Sequence it) {
-            List<Node> _children = it.getChildren();
-            ElementReference _element = builder.element(languageElement);
-            _children.add(_element);
-            List<Node> _children_1 = it.getChildren();
-            ElementReference _element_1 = builder.element(modelElement, Cardinality.ZERO_TO_MANY);
-            _children_1.add(_element_1);
-            List<Node> _children_2 = it.getChildren();
-            String _semanticDomain = terminology.semanticDomain();
-            Element _element_2 = builder.element(_semanticDomain, semanticDomainComplexType, Cardinality.ZERO_TO_MANY);
-            _children_2.add(_element_2);
-          }
-        };
+        @Override
+        public void apply(final Sequence it) {
+          List<Node> _children = it.getChildren();
+          ElementReference _element = builder.element(languageElement);
+          _children.add(_element);
+          List<Node> _children_1 = it.getChildren();
+          ElementReference _element_1 = builder.element(modelElement, Cardinality.ZERO_TO_MANY);
+          _children_1.add(_element_1);
+          List<Node> _children_2 = it.getChildren();
+          String _semanticDomain = terminology.semanticDomain();
+          Element _element_2 = builder.element(_semanticDomain, semanticDomainComplexType, Cardinality.ZERO_TO_MANY);
+          _children_2.add(_element_2);
+        }
+      };
       final ComplexType artifactSetComplexType = builder.complexType(artifactSet, _function_10);
       builder.element(artifactSet, artifactSetComplexType);
-      Schema _build = builder.build();
-      _xblockexpression = (_build);
+      _xblockexpression = builder.build();
     }
     return _xblockexpression;
   }

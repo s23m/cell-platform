@@ -3,7 +3,6 @@ package org.s23m.cell.communication.json;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.s23m.cell.communication.xml.StringUtils;
@@ -28,8 +27,7 @@ public class JsonRendering {
   
   public static String render(final ArtifactSet node) {
     CharSequence _doRender = JsonRendering.doRender(node);
-    String _string = _doRender.toString();
-    return _string;
+    return _doRender.toString();
   }
   
   private static CharSequence doRender(final CompositeNode node) {
@@ -60,8 +58,7 @@ public class JsonRendering {
         } else {
           _builder.appendImmediate(JsonRendering.COMMA, "");
         }
-        int _plus = (level + 1);
-        String _render = JsonRendering.render(n, _plus);
+        String _render = JsonRendering.render(n, (level + 1));
         _builder.append(_render, "");
         _builder.newLineIfNotEmpty();
       }
@@ -76,27 +73,23 @@ public class JsonRendering {
     String _renderPrefix = JsonRendering.renderPrefix(node, level);
     String _text = node.getText();
     String _quote = JsonRendering.quote(_text);
-    String _plus = (_renderPrefix + _quote);
-    return _plus;
+    return (_renderPrefix + _quote);
   }
   
   private static String _render(final Node node, final int level) {
     String _xblockexpression = null;
     {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder builder = _stringBuilder;
+      final StringBuilder builder = new StringBuilder();
       String _renderPrefix = JsonRendering.renderPrefix(node, level);
       builder.append(_renderPrefix);
       builder.append(JsonRendering.START_BRACE);
-      int _plus = (level + 1);
-      String _renderAttributes = JsonRendering.renderAttributes(node, _plus);
+      String _renderAttributes = JsonRendering.renderAttributes(node, (level + 1));
       builder.append(_renderAttributes);
       builder.append(JsonRendering.NEWLINE);
       String _whitespace = JsonRendering.whitespace(level);
       builder.append(_whitespace);
       builder.append(JsonRendering.END_BRACE);
-      String _string = builder.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = builder.toString();
     }
     return _xblockexpression;
   }
@@ -106,42 +99,33 @@ public class JsonRendering {
     String _name = node.getName();
     String _quote = JsonRendering.quote(_name);
     String _plus = (_whitespace + _quote);
-    String _plus_1 = (_plus + JsonRendering.COLON);
-    return _plus_1;
+    return (_plus + JsonRendering.COLON);
   }
   
   private static String renderSuffix(final Node node, final int level) {
     String _whitespace = JsonRendering.whitespace(level);
-    String _plus = (_whitespace + JsonRendering.END_BRACE);
-    return _plus;
+    return (_whitespace + JsonRendering.END_BRACE);
   }
   
   private static String whitespace(final int level) {
-    int _multiply = (level * JsonRendering.INDENTATION);
-    String _repeat = StringUtils.repeat(_multiply, " ");
-    return _repeat;
+    return StringUtils.repeat((level * JsonRendering.INDENTATION), " ");
   }
   
   private static String quote(final String s) {
-    String _plus = ("\"" + s);
-    String _plus_1 = (_plus + "\"");
-    return _plus_1;
+    return (("\"" + s) + "\"");
   }
   
   private static String renderAttributes(final Node node, final int level) {
     String _xblockexpression = null;
     {
       final String indentation = JsonRendering.whitespace(level);
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder builder = _stringBuilder;
-      Map<String,String> _attributes = node.getAttributes();
-      final Set<Entry<String,String>> entrySet = _attributes.entrySet();
-      final Iterator<Entry<String,String>> iterator = entrySet.iterator();
-      boolean _hasNext = iterator.hasNext();
-      boolean _while = _hasNext;
-      while (_while) {
+      final StringBuilder builder = new StringBuilder();
+      Map<String, String> _attributes = node.getAttributes();
+      final Set<Map.Entry<String, String>> entrySet = _attributes.entrySet();
+      final Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
+      while (iterator.hasNext()) {
         {
-          final Entry<String,String> entry = iterator.next();
+          final Map.Entry<String, String> entry = iterator.next();
           builder.append(JsonRendering.NEWLINE);
           builder.append(indentation);
           String _key = entry.getKey();
@@ -151,16 +135,13 @@ public class JsonRendering {
           String _value = entry.getValue();
           String _quote_1 = JsonRendering.quote(_value);
           builder.append(_quote_1);
-          boolean _hasNext_1 = iterator.hasNext();
-          if (_hasNext_1) {
+          boolean _hasNext = iterator.hasNext();
+          if (_hasNext) {
             builder.append(JsonRendering.COMMA);
           }
         }
-        boolean _hasNext_1 = iterator.hasNext();
-        _while = _hasNext_1;
       }
-      String _string = builder.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = builder.toString();
     }
     return _xblockexpression;
   }

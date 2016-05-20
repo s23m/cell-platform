@@ -6,7 +6,7 @@ class IdentityReferenceAttributes {
 	public String uniqueRepresentationReference
 	public String identifier
 	public String nameAttribute
-		
+	
 	new(String u, String i, String n) {
 		this.uniqueRepresentationReference = u
 		this.identifier = i

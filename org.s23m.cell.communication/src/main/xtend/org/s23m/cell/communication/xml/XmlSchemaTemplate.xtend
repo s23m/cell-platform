@@ -27,11 +27,9 @@ package org.s23m.cell.communication.xml
 import org.s23m.cell.communication.xml.model.schema.Schema
 
 import static java.util.Arrays.*
-import static org.s23m.cell.communication.xml.NamespaceConstants.*
 import static org.s23m.cell.communication.xml.model.schema.Cardinality.*
 import static org.s23m.cell.communication.xml.model.schema.DataType.*
 
-import static extension org.s23m.cell.communication.xml.OperatorExtensions.*
 import static extension org.s23m.cell.communication.xml.SchemaBuilder.*
 
 class XmlSchemaTemplate {
@@ -130,7 +128,7 @@ class XmlSchemaTemplate {
 		/* Encoding of model artifacts */
 	
 		val graphComplexType = builder.complexType(graph, withExtension(categoryComplexType, [
-			children += builder.element(terminology.container, identityReference)
+			children += builder.element(terminology.container(), identityReference)
 			children += builder.element(isAbstractElement)
 			children += builder.element(vertex, vertexComplexType, ZERO_TO_MANY)
 			children += builder.element(visibility, visibilityComplexType, ZERO_TO_MANY)

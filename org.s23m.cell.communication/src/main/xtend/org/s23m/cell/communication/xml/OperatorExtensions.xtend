@@ -21,7 +21,7 @@ class OperatorExtensions {
 	def static operator_add(ArtifactSet a, Model m) {
 		a.addModel(m)
 	}
-	
+
 	def static operator_add(ArtifactSet a, org.s23m.cell.communication.xml.model.schemainstance.SemanticDomainNode s) {
 		a.addSemanticDomain(s)
 	}

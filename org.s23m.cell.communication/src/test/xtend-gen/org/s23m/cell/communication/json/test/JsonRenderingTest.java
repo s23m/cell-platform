@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.UUID;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Test;
 import org.s23m.cell.Identity;
@@ -46,15 +45,11 @@ import org.s23m.cell.platform.api.models.CellPlatformAgent;
 
 @SuppressWarnings("all")
 public class JsonRenderingTest extends TestCase {
-  private Identity identity = new Function0<Identity>() {
-    public Identity apply() {
-      MockIdentity _createIdentity = JsonRenderingTest.this.createIdentity();
-      return _createIdentity;
-    }
-  }.apply();
+  private Identity identity = this.createIdentity();
   
   private Set set;
   
+  @Override
   public void setUp() {
     S23MPlatform.boot();
     Set _createSet = this.createSet();
@@ -65,8 +60,7 @@ public class JsonRenderingTest extends TestCase {
   public void testSerialisationRoundTrip() {
     final ArtifactSet artifactSetModel = this.createInstanceModel();
     final String json = JsonRendering.render(artifactSetModel);
-    String _plus = ("JSON:\n" + json);
-    System.out.println(_plus);
+    System.out.println(("JSON:\n" + json));
   }
   
   private ArtifactSet createInstanceModel() {
@@ -75,8 +69,7 @@ public class JsonRenderingTest extends TestCase {
       final Namespace s23m = NamespaceConstants.NS_S23M;
       final XmlSchemaTerminology terminology = DefaultXmlSchemaTerminology.getInstance();
       final Set language = CellPlatformAgent.cellMetaLanguage;
-      InstanceBuilder _instanceBuilder = new InstanceBuilder(s23m, terminology, language);
-      final InstanceBuilder builder = _instanceBuilder;
+      final InstanceBuilder builder = new InstanceBuilder(s23m, terminology, language);
       final ArtifactSet result = builder.artifactSet();
       SemanticIdentityIdentityReference _semanticIdentity = builder.semanticIdentity(this.set);
       CategoryIdentityReference _category = builder.category(this.set);
@@ -121,7 +114,7 @@ public class JsonRenderingTest extends TestCase {
       identity.setPluralCodeName("pluralCodeName");
       semanticDomain.addIdentity(identity);
       result.addSemanticDomain(semanticDomain);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -132,8 +125,7 @@ public class JsonRenderingTest extends TestCase {
     IsAbstractIdentityReference _isAbstract = builder.isAbstract(set);
     FromIdentityReference _from = builder.from(set);
     ToIdentityReference _to = builder.to(set);
-    SuperSetReference _superSetReference = builder.superSetReference(_semanticIdentity, _category, _isAbstract, _from, _to);
-    return _superSetReference;
+    return builder.superSetReference(_semanticIdentity, _category, _isAbstract, _from, _to);
   }
   
   private Query query(final InstanceBuilder builder, final Set set) {
@@ -146,7 +138,7 @@ public class JsonRenderingTest extends TestCase {
       CategoryIdentityReference _category_1 = builder.category(set);
       Parameter _parameter = builder.parameter(_semanticIdentity_1, _category_1);
       query.addParameter(_parameter);
-      _xblockexpression = (query);
+      _xblockexpression = query;
     }
     return _xblockexpression;
   }
@@ -154,8 +146,7 @@ public class JsonRenderingTest extends TestCase {
   private Command command(final InstanceBuilder builder, final Set set) {
     SemanticIdentityIdentityReference _semanticIdentity = builder.semanticIdentity(set);
     CategoryIdentityReference _category = builder.category(set);
-    Command _command = builder.command(_semanticIdentity, _category);
-    return _command;
+    return builder.command(_semanticIdentity, _category);
   }
   
   private Edge edge(final InstanceBuilder builder, final Set set) {
@@ -178,8 +169,7 @@ public class JsonRenderingTest extends TestCase {
     IsContainerIdentityReference _isContainer_1 = builder.isContainer(set);
     IsNavigableIdentityReference _isNavigable_1 = builder.isNavigable(set);
     EdgeEnd _edgeEnd = builder.toEdgeEnd(_semanticIdentity_2, _category_2, _isAbstract_2, _minCardinality_1, _maxCardinality_1, _isContainer_1, _isNavigable_1);
-    Edge _edge = builder.edge(_semanticIdentity, _category, _isAbstract, _fromEdgeEnd, _edgeEnd);
-    return _edge;
+    return builder.edge(_semanticIdentity, _category, _isAbstract, _fromEdgeEnd, _edgeEnd);
   }
   
   private Visibility visibility(final InstanceBuilder builder, final Set set) {
@@ -188,8 +178,7 @@ public class JsonRenderingTest extends TestCase {
     IsAbstractIdentityReference _isAbstract = builder.isAbstract(set);
     FromIdentityReference _from = builder.from(set);
     ToIdentityReference _to = builder.to(set);
-    Visibility _visibility = builder.visibility(_semanticIdentity, _category, _isAbstract, _from, _to);
-    return _visibility;
+    return builder.visibility(_semanticIdentity, _category, _isAbstract, _from, _to);
   }
   
   private Vertex vertex(final InstanceBuilder builder, final Set set) {
@@ -197,28 +186,23 @@ public class JsonRenderingTest extends TestCase {
     CategoryIdentityReference _category = builder.category(set);
     IsAbstractIdentityReference _isAbstract = builder.isAbstract(set);
     MaximumCardinalityIdentityReference _maxCardinality = builder.maxCardinality(set);
-    Vertex _vertex = builder.vertex(_semanticIdentity, _category, _isAbstract, _maxCardinality);
-    return _vertex;
+    return builder.vertex(_semanticIdentity, _category, _isAbstract, _maxCardinality);
   }
   
   private Set createSet() {
     Set _xblockexpression = null;
     {
-      IdempotentMethodInvocationHandler _idempotentMethodInvocationHandler = new IdempotentMethodInvocationHandler(this.identity);
-      final IdempotentMethodInvocationHandler identityHandler = _idempotentMethodInvocationHandler;
-      IdempotentMethodInvocationHandler _idempotentMethodInvocationHandler_1 = new IdempotentMethodInvocationHandler(org.s23m.cell.api.Query.vertex);
-      final IdempotentMethodInvocationHandler categoryHandler = _idempotentMethodInvocationHandler_1;
-      IdempotentMethodInvocationHandler _idempotentMethodInvocationHandler_2 = new IdempotentMethodInvocationHandler(org.s23m.cell.api.Query.vertex);
-      final IdempotentMethodInvocationHandler valueHandler = _idempotentMethodInvocationHandler_2;
+      final IdempotentMethodInvocationHandler identityHandler = new IdempotentMethodInvocationHandler(this.identity);
+      final IdempotentMethodInvocationHandler categoryHandler = new IdempotentMethodInvocationHandler(org.s23m.cell.api.Query.vertex);
+      final IdempotentMethodInvocationHandler valueHandler = new IdempotentMethodInvocationHandler(org.s23m.cell.api.Query.vertex);
       MethodDescriptor _methodDescriptor = new MethodDescriptor("identity");
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor, identityHandler);
+      Pair<MethodDescriptor, IdempotentMethodInvocationHandler> _mappedTo = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor, identityHandler);
       MethodDescriptor _methodDescriptor_1 = new MethodDescriptor("category");
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo_1 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_1, categoryHandler);
+      Pair<MethodDescriptor, IdempotentMethodInvocationHandler> _mappedTo_1 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_1, categoryHandler);
       MethodDescriptor _methodDescriptor_2 = new MethodDescriptor("value", Set.class);
-      Pair<MethodDescriptor,IdempotentMethodInvocationHandler> _mappedTo_2 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_2, valueHandler);
-      final HashMap<MethodDescriptor,IdempotentMethodInvocationHandler> handlers = CollectionLiterals.<MethodDescriptor, IdempotentMethodInvocationHandler>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
-      Set _createInstance = GenericFactory.<Set>createInstance(Set.class, handlers);
-      _xblockexpression = (_createInstance);
+      Pair<MethodDescriptor, IdempotentMethodInvocationHandler> _mappedTo_2 = Pair.<MethodDescriptor, IdempotentMethodInvocationHandler>of(_methodDescriptor_2, valueHandler);
+      final HashMap<MethodDescriptor, IdempotentMethodInvocationHandler> handlers = CollectionLiterals.<MethodDescriptor, IdempotentMethodInvocationHandler>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
+      _xblockexpression = GenericFactory.<Set>createInstance(Set.class, handlers);
     }
     return _xblockexpression;
   }
@@ -228,8 +212,7 @@ public class JsonRenderingTest extends TestCase {
     {
       final UUID identifier = UUID.randomUUID();
       final UUID uniqueRepresentationReference = UUID.randomUUID();
-      MockIdentity _mockIdentity = new MockIdentity(identifier, uniqueRepresentationReference);
-      _xblockexpression = (_mockIdentity);
+      _xblockexpression = new MockIdentity(identifier, uniqueRepresentationReference);
     }
     return _xblockexpression;
   }

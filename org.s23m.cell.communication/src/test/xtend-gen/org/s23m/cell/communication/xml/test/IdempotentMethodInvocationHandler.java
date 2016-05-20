@@ -11,6 +11,7 @@ public class IdempotentMethodInvocationHandler implements MethodInvocationHandle
     this.result = result;
   }
   
+  @Override
   public Object invoke(final Object proxy, final Method method, final Object[] args) {
     return this.result;
   }

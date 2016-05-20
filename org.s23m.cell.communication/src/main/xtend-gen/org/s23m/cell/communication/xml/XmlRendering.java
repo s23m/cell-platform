@@ -2,7 +2,6 @@ package org.s23m.cell.communication.xml;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,14 +22,12 @@ public class XmlRendering {
   
   public static String render(final Schema node) {
     CharSequence _doRender = XmlRendering.doRender(node);
-    String _string = _doRender.toString();
-    return _string;
+    return _doRender.toString();
   }
   
   public static String render(final ArtifactSet node) {
     CharSequence _doRender = XmlRendering.doRender(node);
-    String _string = _doRender.toString();
-    return _string;
+    return _doRender.toString();
   }
   
   private static CharSequence doRender(final CompositeNode node) {
@@ -59,8 +56,7 @@ public class XmlRendering {
         _builder.newLineIfNotEmpty();
         {
           for(final Node n : children) {
-            int _plus = (level + 1);
-            String _render = XmlRendering.render(n, _plus);
+            String _render = XmlRendering.render(n, (level + 1));
             _builder.append(_render, "");
             _builder.newLineIfNotEmpty();
           }
@@ -79,21 +75,18 @@ public class XmlRendering {
     String _text = node.getText();
     String _plus_1 = (_plus + _text);
     String _renderSuffix = XmlRendering.renderSuffix(node);
-    String _plus_2 = (_plus_1 + _renderSuffix);
-    return _plus_2;
+    return (_plus_1 + _renderSuffix);
   }
   
   private static String _render(final Node node, final int level) {
     String _renderPrefix = XmlRendering.renderPrefix(node, level);
-    String _plus = (_renderPrefix + "/>");
-    return _plus;
+    return (_renderPrefix + "/>");
   }
   
   private static String renderPrefix(final Node node, final int level) {
     String _xblockexpression = null;
     {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder builder = _stringBuilder;
+      final StringBuilder builder = new StringBuilder();
       String _whitespace = XmlRendering.whitespace(level);
       builder.append(_whitespace);
       builder.append("<");
@@ -101,8 +94,7 @@ public class XmlRendering {
       builder.append(_name);
       String _renderAttributes = XmlRendering.renderAttributes(node);
       builder.append(_renderAttributes);
-      String _string = builder.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = builder.toString();
     }
     return _xblockexpression;
   }
@@ -110,39 +102,33 @@ public class XmlRendering {
   private static String renderSuffix(final Node node, final int level) {
     String _whitespace = XmlRendering.whitespace(level);
     String _renderSuffix = XmlRendering.renderSuffix(node);
-    String _plus = (_whitespace + _renderSuffix);
-    return _plus;
+    return (_whitespace + _renderSuffix);
   }
   
   private static String renderSuffix(final Node node) {
     String _name = XmlRendering.name(node);
     String _plus = ("</" + _name);
-    String _plus_1 = (_plus + ">");
-    return _plus_1;
+    return (_plus + ">");
   }
   
   private static String whitespace(final int level) {
-    int _multiply = (level * XmlRendering.INDENTATION);
-    String _repeat = StringUtils.repeat(_multiply, " ");
-    return _repeat;
+    return StringUtils.repeat((level * XmlRendering.INDENTATION), " ");
   }
   
   private static String name(final Node node) {
     Namespace _namespace = node.getNamespace();
     String _prefix = _namespace.getPrefix();
     String _name = node.getName();
-    String _qualifiedName = NamespaceExtensions.qualifiedName(_prefix, _name);
-    return _qualifiedName;
+    return NamespaceExtensions.qualifiedName(_prefix, _name);
   }
   
   private static String renderAttributes(final Node node) {
     String _xblockexpression = null;
     {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder builder = _stringBuilder;
-      Map<String,String> _attributes = node.getAttributes();
-      final Set<Entry<String,String>> entrySet = _attributes.entrySet();
-      for (final Entry<String,String> entry : entrySet) {
+      final StringBuilder builder = new StringBuilder();
+      Map<String, String> _attributes = node.getAttributes();
+      final Set<Map.Entry<String, String>> entrySet = _attributes.entrySet();
+      for (final Map.Entry<String, String> entry : entrySet) {
         {
           builder.append(" ");
           String _key = entry.getKey();
@@ -153,8 +139,7 @@ public class XmlRendering {
           builder.append("\"");
         }
       }
-      String _string = builder.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = builder.toString();
     }
     return _xblockexpression;
   }

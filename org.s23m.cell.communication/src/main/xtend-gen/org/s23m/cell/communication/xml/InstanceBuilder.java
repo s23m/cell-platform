@@ -55,13 +55,12 @@ public class InstanceBuilder {
     ArtifactSet _xblockexpression = null;
     {
       final LanguageIdentityReference languageReference = this.language(this.chosenLanguage);
-      ArtifactSet _artifactSet = new ArtifactSet(this.namespace, this.terminology, languageReference);
-      final ArtifactSet result = _artifactSet;
+      final ArtifactSet result = new ArtifactSet(this.namespace, this.terminology, languageReference);
       String _xmlns = NamespaceExtensions.xmlns(NamespaceConstants.INSTANCE_NAMESPACE_PREFIX);
       result.setAttribute(_xmlns, NamespaceConstants.INSTANCE_SCHEMA_URI);
       String _xmlns_1 = NamespaceExtensions.xmlns(NamespaceConstants.S23M);
       result.setAttribute(_xmlns_1, NamespaceConstants.S23M_SCHEMA_URI);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -76,8 +75,7 @@ public class InstanceBuilder {
       final CategoryIdentityReference category = this.category(set);
       final ContainerIdentityReference container = this.container(set);
       final IsAbstractIdentityReference isAbstract = this.isAbstract(set);
-      Model _model = this.model(semanticIdentity, category, container, isAbstract);
-      _xblockexpression = (_model);
+      _xblockexpression = this.model(semanticIdentity, category, container, isAbstract);
     }
     return _xblockexpression;
   }
@@ -85,15 +83,14 @@ public class InstanceBuilder {
   public Model model(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
     Model _xblockexpression = null;
     {
-      Model _model = new Model(
+      final Model result = new Model(
         this.namespace, 
         this.terminology);
-      final Model result = _model;
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setContainer(container);
       result.setIsAbstract(isAbstract);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -108,8 +105,7 @@ public class InstanceBuilder {
       final CategoryIdentityReference category = this.category(set);
       final ContainerIdentityReference container = this.container(set);
       final IsAbstractIdentityReference isAbstract = this.isAbstract(set);
-      SemanticDomainNode _semanticDomain = this.semanticDomain(semanticIdentity, category, container, isAbstract);
-      _xblockexpression = (_semanticDomain);
+      _xblockexpression = this.semanticDomain(semanticIdentity, category, container, isAbstract);
     }
     return _xblockexpression;
   }
@@ -117,13 +113,12 @@ public class InstanceBuilder {
   public SemanticDomainNode semanticDomain(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final ContainerIdentityReference container, final IsAbstractIdentityReference isAbstract) {
     SemanticDomainNode _xblockexpression = null;
     {
-      SemanticDomainNode _semanticDomainNode = new SemanticDomainNode(this.namespace, this.terminology);
-      final SemanticDomainNode result = _semanticDomainNode;
+      final SemanticDomainNode result = new SemanticDomainNode(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setContainer(container);
       result.setIsAbstract(isAbstract);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -135,8 +130,7 @@ public class InstanceBuilder {
       final CategoryIdentityReference category = this.category(set);
       final IsAbstractIdentityReference isAbstract = this.isAbstract(set);
       final MaximumCardinalityIdentityReference maxCardinality = this.maxCardinality(set);
-      Vertex _vertex = this.vertex(semanticIdentity, category, isAbstract, maxCardinality);
-      _xblockexpression = (_vertex);
+      _xblockexpression = this.vertex(semanticIdentity, category, isAbstract, maxCardinality);
     }
     return _xblockexpression;
   }
@@ -144,13 +138,12 @@ public class InstanceBuilder {
   public Vertex vertex(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MaximumCardinalityIdentityReference maxCardinality) {
     Vertex _xblockexpression = null;
     {
-      Vertex _vertex = new Vertex(this.namespace, this.terminology);
-      final Vertex result = _vertex;
+      final Vertex result = new Vertex(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setIsAbstract(isAbstract);
       result.setMaxCardinality(maxCardinality);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -165,8 +158,7 @@ public class InstanceBuilder {
       final FromIdentityReference from = this.from(_from);
       Set _to = set.to();
       final ToIdentityReference to = this.to(_to);
-      Visibility _visibility = this.visibility(semanticIdentity, category, isAbstract, from, to);
-      _xblockexpression = (_visibility);
+      _xblockexpression = this.visibility(semanticIdentity, category, isAbstract, from, to);
     }
     return _xblockexpression;
   }
@@ -174,14 +166,13 @@ public class InstanceBuilder {
   public Visibility visibility(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
     Visibility _xblockexpression = null;
     {
-      Visibility _visibility = new Visibility(this.namespace, this.terminology);
-      final Visibility result = _visibility;
+      final Visibility result = new Visibility(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setIsAbstract(isAbstract);
       result.setFrom(from);
       result.setTo(to);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -196,8 +187,7 @@ public class InstanceBuilder {
       final EdgeEnd from = this.fromEdgeEnd(_fromEdgeEnd);
       Set _edgeEnd = set.toEdgeEnd();
       final EdgeEnd to = this.toEdgeEnd(_edgeEnd);
-      Edge _edge = this.edge(semanticIdentity, category, isAbstract, from, to);
-      _xblockexpression = (_edge);
+      _xblockexpression = this.edge(semanticIdentity, category, isAbstract, from, to);
     }
     return _xblockexpression;
   }
@@ -205,16 +195,15 @@ public class InstanceBuilder {
   public Edge edge(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final EdgeEnd from, final EdgeEnd to) {
     Edge _xblockexpression = null;
     {
-      Edge _edge = new Edge(
+      final Edge result = new Edge(
         this.namespace, 
         this.terminology);
-      final Edge result = _edge;
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setIsAbstract(isAbstract);
       result.setFrom(from);
       result.setTo(to);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -229,8 +218,7 @@ public class InstanceBuilder {
       final MaximumCardinalityIdentityReference maxCardinality = this.maxCardinality(set);
       final IsContainerIdentityReference isContainer = this.isContainer(set);
       final IsNavigableIdentityReference isNavigable = this.isNavigable(set);
-      EdgeEnd _edgeEnd = this.toEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
-      _xblockexpression = (_edgeEnd);
+      _xblockexpression = this.toEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
     }
     return _xblockexpression;
   }
@@ -245,22 +233,19 @@ public class InstanceBuilder {
       final MaximumCardinalityIdentityReference maxCardinality = this.maxCardinality(set);
       final IsContainerIdentityReference isContainer = this.isContainer(set);
       final IsNavigableIdentityReference isNavigable = this.isNavigable(set);
-      EdgeEnd _fromEdgeEnd = this.fromEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
-      _xblockexpression = (_fromEdgeEnd);
+      _xblockexpression = this.fromEdgeEnd(semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
     }
     return _xblockexpression;
   }
   
   public EdgeEnd toEdgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
     EdgeEnd _edgeEnd = EdgeEnd.toEdgeEnd(this.namespace, this.terminology);
-    EdgeEnd _initialise = this.initialise(_edgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
-    return _initialise;
+    return this.initialise(_edgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
   }
   
   public EdgeEnd fromEdgeEnd(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
     EdgeEnd _fromEdgeEnd = EdgeEnd.fromEdgeEnd(this.namespace, this.terminology);
-    EdgeEnd _initialise = this.initialise(_fromEdgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
-    return _initialise;
+    return this.initialise(_fromEdgeEnd, semanticIdentity, category, isAbstract, minCardinality, maxCardinality, isContainer, isNavigable);
   }
   
   private EdgeEnd initialise(final EdgeEnd result, final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final MinimumCardinalityIdentityReference minCardinality, final MaximumCardinalityIdentityReference maxCardinality, final IsContainerIdentityReference isContainer, final IsNavigableIdentityReference isNavigable) {
@@ -273,7 +258,7 @@ public class InstanceBuilder {
       result.setMaxCardinality(maxCardinality);
       result.setIsContainer(isContainer);
       result.setIsNavigable(isNavigable);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -288,8 +273,7 @@ public class InstanceBuilder {
       final FromIdentityReference from = this.from(_from);
       Set _to = set.to();
       final ToIdentityReference to = this.to(_to);
-      SuperSetReference _superSetReference = this.superSetReference(semanticIdentity, category, isAbstract, from, to);
-      _xblockexpression = (_superSetReference);
+      _xblockexpression = this.superSetReference(semanticIdentity, category, isAbstract, from, to);
     }
     return _xblockexpression;
   }
@@ -297,14 +281,13 @@ public class InstanceBuilder {
   public SuperSetReference superSetReference(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category, final IsAbstractIdentityReference isAbstract, final FromIdentityReference from, final ToIdentityReference to) {
     SuperSetReference _xblockexpression = null;
     {
-      SuperSetReference _superSetReference = new SuperSetReference(this.namespace, this.terminology);
-      final SuperSetReference result = _superSetReference;
+      final SuperSetReference result = new SuperSetReference(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
       result.setIsAbstract(isAbstract);
       result.setFrom(from);
       result.setTo(to);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -314,8 +297,7 @@ public class InstanceBuilder {
     {
       final SemanticIdentityIdentityReference semanticIdentity = this.semanticIdentity(set);
       final CategoryIdentityReference category = this.category(set);
-      Command _command = this.command(semanticIdentity, category);
-      _xblockexpression = (_command);
+      _xblockexpression = this.command(semanticIdentity, category);
     }
     return _xblockexpression;
   }
@@ -323,11 +305,10 @@ public class InstanceBuilder {
   public Command command(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
     Command _xblockexpression = null;
     {
-      Command _command = new Command(this.namespace, this.terminology);
-      final Command result = _command;
+      final Command result = new Command(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -337,8 +318,7 @@ public class InstanceBuilder {
     {
       final SemanticIdentityIdentityReference semanticIdentity = this.semanticIdentity(set);
       final CategoryIdentityReference category = this.category(set);
-      Query _query = this.query(semanticIdentity, category);
-      _xblockexpression = (_query);
+      _xblockexpression = this.query(semanticIdentity, category);
     }
     return _xblockexpression;
   }
@@ -346,11 +326,10 @@ public class InstanceBuilder {
   public Query query(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
     Query _xblockexpression = null;
     {
-      Query _query = new Query(this.namespace, this.terminology);
-      final Query result = _query;
+      final Query result = new Query(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -358,11 +337,10 @@ public class InstanceBuilder {
   public Parameter parameter(final SemanticIdentityIdentityReference semanticIdentity, final CategoryIdentityReference category) {
     Parameter _xblockexpression = null;
     {
-      Parameter _parameter = new Parameter(this.namespace, this.terminology);
-      final Parameter result = _parameter;
+      final Parameter result = new Parameter(this.namespace, this.terminology);
       result.setSemanticIdentity(semanticIdentity);
       result.setCategory(category);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -372,13 +350,12 @@ public class InstanceBuilder {
     {
       Set _category = set.category();
       final IdentityReferenceAttributes identityTriple = this.identityReference(_category);
-      SemanticIdentityIdentityReference _semanticIdentityIdentityReference = new SemanticIdentityIdentityReference(
+      _xblockexpression = new SemanticIdentityIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_semanticIdentityIdentityReference);
     }
     return _xblockexpression;
   }
@@ -388,13 +365,12 @@ public class InstanceBuilder {
     {
       Set _category = set.category();
       final IdentityReferenceAttributes identityTriple = this.identityReference(_category);
-      CategoryIdentityReference _categoryIdentityReference = new CategoryIdentityReference(
+      _xblockexpression = new CategoryIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_categoryIdentityReference);
     }
     return _xblockexpression;
   }
@@ -403,13 +379,12 @@ public class InstanceBuilder {
     ContainerIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.identityReference(set);
-      ContainerIdentityReference _containerIdentityReference = new ContainerIdentityReference(
+      _xblockexpression = new ContainerIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_containerIdentityReference);
     }
     return _xblockexpression;
   }
@@ -418,13 +393,12 @@ public class InstanceBuilder {
     IsAbstractIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.valueIdentityReference(set, S23MSemanticDomains.isAbstract);
-      IsAbstractIdentityReference _isAbstractIdentityReference = new IsAbstractIdentityReference(
+      _xblockexpression = new IsAbstractIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_isAbstractIdentityReference);
     }
     return _xblockexpression;
   }
@@ -433,13 +407,12 @@ public class InstanceBuilder {
     FromIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.identityReference(set);
-      FromIdentityReference _fromIdentityReference = new FromIdentityReference(
+      _xblockexpression = new FromIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_fromIdentityReference);
     }
     return _xblockexpression;
   }
@@ -448,13 +421,12 @@ public class InstanceBuilder {
     ToIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.identityReference(set);
-      ToIdentityReference _toIdentityReference = new ToIdentityReference(
+      _xblockexpression = new ToIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_toIdentityReference);
     }
     return _xblockexpression;
   }
@@ -463,13 +435,12 @@ public class InstanceBuilder {
     LanguageIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes ref = this.identityReference(set);
-      LanguageIdentityReference _languageIdentityReference = new LanguageIdentityReference(
+      _xblockexpression = new LanguageIdentityReference(
         this.namespace, 
         this.terminology, 
         ref.uniqueRepresentationReference, 
         ref.identifier, 
         ref.nameAttribute);
-      _xblockexpression = (_languageIdentityReference);
     }
     return _xblockexpression;
   }
@@ -478,13 +449,12 @@ public class InstanceBuilder {
     MaximumCardinalityIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.valueIdentityReference(set, S23MSemanticDomains.maxCardinality);
-      MaximumCardinalityIdentityReference _maximumCardinalityIdentityReference = new MaximumCardinalityIdentityReference(
+      _xblockexpression = new MaximumCardinalityIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_maximumCardinalityIdentityReference);
     }
     return _xblockexpression;
   }
@@ -493,13 +463,12 @@ public class InstanceBuilder {
     MinimumCardinalityIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.valueIdentityReference(set, S23MSemanticDomains.minCardinality);
-      MinimumCardinalityIdentityReference _minimumCardinalityIdentityReference = new MinimumCardinalityIdentityReference(
+      _xblockexpression = new MinimumCardinalityIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_minimumCardinalityIdentityReference);
     }
     return _xblockexpression;
   }
@@ -508,13 +477,12 @@ public class InstanceBuilder {
     IsContainerIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.valueIdentityReference(set, S23MSemanticDomains.isContainer);
-      IsContainerIdentityReference _isContainerIdentityReference = new IsContainerIdentityReference(
+      _xblockexpression = new IsContainerIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_isContainerIdentityReference);
     }
     return _xblockexpression;
   }
@@ -523,13 +491,12 @@ public class InstanceBuilder {
     IsNavigableIdentityReference _xblockexpression = null;
     {
       final IdentityReferenceAttributes identityTriple = this.valueIdentityReference(set, S23MSemanticDomains.isNavigable);
-      IsNavigableIdentityReference _isNavigableIdentityReference = new IsNavigableIdentityReference(
+      _xblockexpression = new IsNavigableIdentityReference(
         this.namespace, 
         this.terminology, 
         identityTriple.uniqueRepresentationReference, 
         identityTriple.identifier, 
         identityTriple.nameAttribute);
-      _xblockexpression = (_isNavigableIdentityReference);
     }
     return _xblockexpression;
   }
@@ -537,8 +504,7 @@ public class InstanceBuilder {
   public Identity identity(final Set set) {
     Identity _xblockexpression = null;
     {
-      Identity _identity = new Identity(this.namespace, this.terminology);
-      final Identity result = _identity;
+      final Identity result = new Identity(this.namespace, this.terminology);
       final org.s23m.cell.Identity identity = set.identity();
       UUID _identifier = identity.identifier();
       String _string = _identifier.toString();
@@ -553,7 +519,7 @@ public class InstanceBuilder {
       result.setPluralCodeName(_pluralCodeName);
       String _payload = identity.payload();
       result.setPayload(_payload);
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -562,8 +528,7 @@ public class InstanceBuilder {
     IdentityReferenceAttributes _xblockexpression = null;
     {
       final Set retrievedValue = set.value(variable);
-      IdentityReferenceAttributes _identityReference = this.identityReference(retrievedValue);
-      _xblockexpression = (_identityReference);
+      _xblockexpression = this.identityReference(retrievedValue);
     }
     return _xblockexpression;
   }
@@ -578,20 +543,17 @@ public class InstanceBuilder {
       final String identifier = this.uuid(_identifier);
       String _xifexpression = null;
       if (this.populateIdentityNameAttributes) {
-        String _name = identity.name();
-        _xifexpression = _name;
+        _xifexpression = identity.name();
       } else {
         _xifexpression = null;
       }
       final String nameAttribute = _xifexpression;
-      IdentityReferenceAttributes _identityReferenceAttributes = new IdentityReferenceAttributes(uniqueRepresentationReference, identifier, nameAttribute);
-      _xblockexpression = (_identityReferenceAttributes);
+      _xblockexpression = new IdentityReferenceAttributes(uniqueRepresentationReference, identifier, nameAttribute);
     }
     return _xblockexpression;
   }
   
   private String uuid(final UUID uuid) {
-    String _string = uuid.toString();
-    return _string;
+    return uuid.toString();
   }
 }

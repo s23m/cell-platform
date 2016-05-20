@@ -1,15 +1,20 @@
 Setting up a development environment
 ------------------------------------
 
-1. Install the "Eclipse Mars 2 Modeling Tools" distribution of Eclipse, available for Mac OSX from
+1. Install the "Eclipse Java EE IDE for Web Developers" distribution of Eclipse, available for Mac OSX from
 
-http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/2/eclipse-modeling-mars-2-macosx-cocoa-x86_64.tar.gz
+http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/mars/2/eclipse-jee-mars-2-macosx-cocoa-x86_64.tar.gz
 
-2. Switch to a new empty workspace
+Version: Mars.2 Release (4.5.2)
+Build id: 20160218-0600
 
-3. Import all projects from the cell repository into the empty workspace
+2. A number of projects require the Xtend editor to be installed. For this the Xtext SDK can be used. Download it from https://eclipse.org/Xtext/download.html
 
-4. To run the tests, run the JUnit .launch files in the root directories of the following projects:
+3. Switch to a new empty workspace
+
+4. Import all projects from the cell repository into the empty workspace
+
+5. To run the tests, run the JUnit .launch files in the root directories of the following projects:
 
 org.s23m.cell.communication
 org.s23m.cell.kernel
