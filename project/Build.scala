@@ -67,7 +67,9 @@ object CellBuild extends Build {
   lazy val persistence = Project(
     "persistence",
     file ("org.s23m.cell.persistence"),
-    settings = javaTestProjectSettings
+    settings = javaTestProjectSettings ++ Seq(
+      unmanagedJars in Test <+= (baseDirectory) map { bd => Attributed.blank(bd / "test-lib" / "hsqldb.jar") }
+    )
   )
 
   lazy val platform = Project(
