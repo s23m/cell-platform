@@ -1,34 +1,27 @@
+package org.s23m.cell.persistence.jdbc.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.SQLException;
 import java.util.UUID;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.s23m.cell.persistence.jdbc.dao.JdbcArrowDao;
-import org.s23m.cell.persistence.jdbc.dao.JdbcEdgeDao;
-import org.s23m.cell.persistence.jdbc.dao.JdbcGraphDao;
-import org.s23m.cell.persistence.jdbc.dao.JdbcIdentityDao;
+import org.junit.Test;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
 import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
+	@Test
+	public void testPersistence() throws SQLException {
 
-public class MysqlEdgeTest {
-	public static void main(final String[] args) {
-		final String jdbcConnectionString = "jdbc:mysql://127.0.0.1/cell?useUnicode=true&characterEncoding=UTF-8";
-
-		final BoneCPDataSource dataSource = new BoneCPDataSource();
-		dataSource.setDriverClass("com.mysql.jdbc.Driver");
-		dataSource.setJdbcUrl(jdbcConnectionString);
-		dataSource.setUser("root");
-		dataSource.setPassword("root");
-
-		final QueryRunner runner = new QueryRunner(dataSource);
-		final JdbcGraphDao graphDao = new JdbcGraphDao(runner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(runner);
-		final JdbcArrowDao arrowDao = new JdbcArrowDao(runner);
-		final JdbcEdgeDao edgeDao = new JdbcEdgeDao(runner);
+		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
+		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
+		final JdbcArrowDao arrowDao = new JdbcArrowDao(queryRunner);
+		final JdbcEdgeDao edgeDao = new JdbcEdgeDao(queryRunner);
 
 		final String uuid = UUID.randomUUID().toString();
 		final Identity identity = new Identity();
@@ -38,7 +31,6 @@ public class MysqlEdgeTest {
 		identity.setCodeName("test");
 		identity.setPluralCodeName("tests");
 		identity.setPayload("some text");
-
 
 		final Graph graph = new Graph();
 		graph.setUuid(uuid);
@@ -54,7 +46,6 @@ public class MysqlEdgeTest {
 		graph.setProperClass(ProperClasses.VERTEX);
 		graph.setContentAsXml("<xml></xml>");
 
-
 		final Arrow arrow = new Arrow();
 		arrow.setFromGraph(uuid);
 		arrow.setToGraph(uuid);
@@ -62,7 +53,6 @@ public class MysqlEdgeTest {
 		// (typically a different uuid)
 		arrow.setCategory(uuid);
 		arrow.setProperClass(ProperClasses.VISIBILITY);
-
 
 		final Edge edge = new Edge();
 		edge.setUrr(uuid);
@@ -91,14 +81,8 @@ public class MysqlEdgeTest {
 
 		// now retrieve the result
 		final Edge retrieved = edgeDao.get(edge.getUrr());
-		if (retrieved == null) {
-			throw new RuntimeException("Retrieved Edge was null");
-		}
+		assertNotNull(retrieved);
 
-		if (!retrieved.getUrr().equals(edge.getUrr())) {
-			throw new RuntimeException("Retrieved Edge UUID does not match provided UUID");
-		}
-
-		System.out.println("Done!");
+		assertEquals(edge.getUrr(), retrieved.getUrr());
 	}
 }

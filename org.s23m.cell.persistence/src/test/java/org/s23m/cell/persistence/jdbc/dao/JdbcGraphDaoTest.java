@@ -1,28 +1,23 @@
+package org.s23m.cell.persistence.jdbc.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.SQLException;
 import java.util.UUID;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.s23m.cell.persistence.jdbc.dao.JdbcGraphDao;
-import org.s23m.cell.persistence.jdbc.dao.JdbcIdentityDao;
+import org.junit.Test;
 import org.s23m.cell.persistence.model.Graph;
 import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
+	@Test
+	public void testPersistence() throws SQLException {
 
-public class MysqlGraphTest {
-	public static void main(final String[] args) {
-		final String jdbcConnectionString = "jdbc:mysql://127.0.0.1/cell?useUnicode=true&characterEncoding=UTF-8";
-
-		final BoneCPDataSource dataSource = new BoneCPDataSource();
-		dataSource.setDriverClass("com.mysql.jdbc.Driver");
-		dataSource.setJdbcUrl(jdbcConnectionString);
-		dataSource.setUser("root");
-		dataSource.setPassword("root");
-
-		final QueryRunner runner = new QueryRunner(dataSource);
-		final JdbcGraphDao graphDao = new JdbcGraphDao(runner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(runner);
+		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
+		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
 
 		final String uuid = UUID.randomUUID().toString();
 		final Identity identity = new Identity();
@@ -55,14 +50,9 @@ public class MysqlGraphTest {
 
 		// now retrieve the result
 		final Graph retrieved = graphDao.get(result.getUrr());
-		if (retrieved == null) {
-			throw new RuntimeException("Retrieved Graph was null");
-		}
 
-		if (!retrieved.getUrr().equals(result.getUrr())) {
-			throw new RuntimeException("Retrieved Graph UUID does not match provided UUID");
-		}
+		assertNotNull(retrieved);
 
-		System.out.println("Done!");
+		assertEquals(result.getUrr(), retrieved.getUrr());
 	}
 }
