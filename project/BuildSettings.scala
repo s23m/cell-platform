@@ -100,13 +100,15 @@ object BuildSettings {
 		crossPaths := false,
 		testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a")),
 
-		testListeners in Test := Seq(new TestLogger(new TestLogging(consoleLog, {_ => new ContentLogger(consoleLog, () => {}) })) {
+		/*
+        testListeners in Test := Seq(new TestLogger(new TestLogging(consoleLog, {_ => new ContentLogger(consoleLog, () => {}) })) {
             override def doComplete(finalResult: TestResult.Value): Unit = {
                 super.doComplete(finalResult)
                 consoleLog.info("The test has been completed")
             }
         }),
-
+        */
+        
         testListeners in Test <+= (target).map {
             // see http://www.scala-sbt.org/release/sxr/sbt/JUnitXmlTestsListener.scala.html
             t => new sbt.JUnitXmlTestsListener("target")
