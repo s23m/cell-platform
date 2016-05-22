@@ -9,11 +9,14 @@ import java.util.Scanner;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.junit.After;
 import org.junit.Before;
+
+import com.zaxxer.hikari.HikariDataSource;
 
 public class AbstractJdbcTest {
 
-	protected DataSource dataSource;
+	protected HikariDataSource dataSource;
 
 	protected QueryRunner queryRunner;
 
@@ -23,6 +26,11 @@ public class AbstractJdbcTest {
 		executeDDL(dataSource);
 
 		queryRunner = new QueryRunner(dataSource);
+	}
+
+	@After
+	public void tearDown() {
+		dataSource.close();
 	}
 
 	private void executeDDL(final DataSource dataSource) throws SQLException {
