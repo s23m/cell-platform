@@ -53,27 +53,24 @@ public class SchemaBuilder {
   private boolean removeElementsWithoutReferences() {
     boolean _xblockexpression = false;
     {
-      final Function1<Node, Boolean> _function = new Function1<Node, Boolean>() {
-        @Override
-        public Boolean apply(final Node it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          if (!(it instanceof Element)) {
-            _and_1 = false;
-          } else {
-            List<ElementReference> _references = ((Element) it).getReferences();
-            boolean _isEmpty = _references.isEmpty();
-            _and_1 = _isEmpty;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            String _nameAttribute = ((Element) it).getNameAttribute();
-            boolean _notEquals = (!Objects.equal(_nameAttribute, SchemaBuilder.this.rootElementName));
-            _and = _notEquals;
-          }
-          return Boolean.valueOf(_and);
+      final Function1<Node, Boolean> _function = (Node it) -> {
+        boolean _and = false;
+        boolean _and_1 = false;
+        if (!(it instanceof Element)) {
+          _and_1 = false;
+        } else {
+          List<ElementReference> _references = ((Element) it).getReferences();
+          boolean _isEmpty = _references.isEmpty();
+          _and_1 = _isEmpty;
         }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          String _nameAttribute = ((Element) it).getNameAttribute();
+          boolean _notEquals = (!Objects.equal(_nameAttribute, this.rootElementName));
+          _and = _notEquals;
+        }
+        return Boolean.valueOf(_and);
       };
       final Function1<Node, Boolean> predicate = _function;
       List<Node> _children = this.schema.getChildren();
@@ -131,10 +128,7 @@ public class SchemaBuilder {
   }
   
   public Element element(final String name, final Type type) {
-    final Procedure1<Element> _function = new Procedure1<Element>() {
-      @Override
-      public void apply(final Element it) {
-      }
+    final Procedure1<Element> _function = (Element it) -> {
     };
     return this.element(name, type, _function);
   }
