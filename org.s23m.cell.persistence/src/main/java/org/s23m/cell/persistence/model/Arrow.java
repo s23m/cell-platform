@@ -9,6 +9,7 @@ import java.util.Set;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 
+// TODO: make immutable
 public final class Arrow {
 
 	private static final Set<String> ALLOWABLE_PROPER_CLASSES = ImmutableSet.of(EDGE, VISIBILITY, SUPERSET_REFERENCE);
@@ -17,11 +18,19 @@ public final class Arrow {
 
 	private String category;
 
+	// TODO: fix type to be enum type, and then also expose via getProperClassAsString()?
 	private String properClass;
 
 	private String fromGraph;
 
 	private String toGraph;
+
+	/**
+	 * Indicates whether a primary key has been assigned to the underlying row.
+	 */
+	public boolean isTransient() {
+		return urr == null;
+	}
 
 	public String getUrr() {
 		return urr;

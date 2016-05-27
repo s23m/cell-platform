@@ -17,11 +17,11 @@ public class JdbcArrowDao implements ArrowDao {
 	private static final String TO_GRAPH = "toGraph";
 
 	private static final String[] COLUMN_NAMES = {
-		CATEGORY,
-		PROPER_CLASS,
-		FROM_GRAPH,
-		TO_GRAPH,
-		URR
+			CATEGORY,
+			PROPER_CLASS,
+			FROM_GRAPH,
+			TO_GRAPH,
+			URR
 	};
 
 	private static final String SELECT_BY_PK_TEMPLATE = SqlQueryTemplates.createSelectByIdQueryTemplate(Arrow.class, URR);
@@ -47,26 +47,53 @@ public class JdbcArrowDao implements ArrowDao {
 		}
 	}
 
-	public void saveOrUpdate(final Arrow arrow) {
+	@Override
+	public void insert(final Arrow arrow) {
+		final Object[] parameters = {
+				arrow.getCategory(),
+				arrow.getProperClass(),
+				arrow.getFromGraph(),
+				arrow.getToGraph(),
+				arrow.getUrr()
+		};
+
 		try {
-			// try updating first
-			final Object[] parameters = {
-					arrow.getCategory(),
-					arrow.getProperClass(),
-					arrow.getFromGraph(),
-					arrow.getToGraph(),
-					arrow.getUrr()
-			};
-			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
-			if (updates == 0) {
-				// record does not exist - insert it
-				final int inserts = queryRunner.update(INSERT_TEMPLATE, parameters);
-				if (inserts == 0) {
+			final int updates = queryRunner.update(INSERT_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided arrow did not have a primary key
+				if (arrow.isTransient()) {
+					throw new RuntimeException("Failed to insert Arrow - no primary key provided: " + arrow);
+				} else {
 					throw new RuntimeException("Failed to insert Arrow: " + arrow);
 				}
 			}
 		} catch (final SQLException e) {
-			throw new RuntimeException("Could not save or update Arrow: " + arrow, e);
+			throw new RuntimeException("Could not insert Arrow: " + arrow, e);
+		}
+	}
+
+	@Override
+	public void update(final Arrow arrow) {
+		final Object[] parameters = {
+				arrow.getCategory(),
+				arrow.getProperClass(),
+				arrow.getFromGraph(),
+				arrow.getToGraph(),
+				arrow.getUrr()
+		};
+
+		try {
+			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided arrow did not have a primary key
+				if (arrow.isTransient()) {
+					throw new RuntimeException("Failed to update Arrow - no primary key provided: " + arrow);
+				} else {
+					throw new RuntimeException("Failed to update Arrow: " + arrow);
+				}
+			}
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not update Arrow: " + arrow, e);
 		}
 	}
 

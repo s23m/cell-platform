@@ -74,7 +74,7 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		graphDao.saveOrUpdate(graph);
 
 		// save arrow
-		arrowDao.saveOrUpdate(arrow);
+		arrowDao.insert(arrow);
 
 		// save edge
 		edgeDao.saveOrUpdate(edge);
