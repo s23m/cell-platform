@@ -23,17 +23,17 @@ public class JdbcEdgeDao implements EdgeDao {
 	private static final String TO_EDGE_END = "toEdgeEnd";
 
 	private static final String[] COLUMN_NAMES = {
-		MIN_CARDINALITY_VALUE_FROM_EDGE_END,
-		MIN_CARDINALITY_VALUE_TO_EDGE_END ,
-		MAX_CARDINALITY_VALUE_FROM_EDGE_END,
-		MAX_CARDINALITY_VALUE_TO_EDGE_END,
-		IS_NAVIGABLE_VALUE_FROM_EDGE_END,
-		IS_NAVIGABLE_VALUE_TO_EDGE_END,
-		IS_CONTAINER_VALUE_FROM_EDGE_END,
-		IS_CONTAINER_VALUE_TO_EDGE_END,
-		FROM_EDGE_END,
-		TO_EDGE_END,
-		URR
+			MIN_CARDINALITY_VALUE_FROM_EDGE_END,
+			MIN_CARDINALITY_VALUE_TO_EDGE_END ,
+			MAX_CARDINALITY_VALUE_FROM_EDGE_END,
+			MAX_CARDINALITY_VALUE_TO_EDGE_END,
+			IS_NAVIGABLE_VALUE_FROM_EDGE_END,
+			IS_NAVIGABLE_VALUE_TO_EDGE_END,
+			IS_CONTAINER_VALUE_FROM_EDGE_END,
+			IS_CONTAINER_VALUE_TO_EDGE_END,
+			FROM_EDGE_END,
+			TO_EDGE_END,
+			URR
 	};
 
 	private static final String SELECT_BY_PK_TEMPLATE = SqlQueryTemplates.createSelectByIdQueryTemplate(Edge.class, URR);
@@ -59,33 +59,58 @@ public class JdbcEdgeDao implements EdgeDao {
 		}
 	}
 
-	public void saveOrUpdate(final Edge edge) {
+	@Override
+	public void insert(final Edge edge) {
+		final Object[] parameters = createParameters(edge);
+
 		try {
-			// try updating first
-			final Object[] parameters = {
-					edge.getMinCardinalityValueFromEdgeEnd(),
-					edge.getMinCardinalityValueToEdgeEnd(),
-					edge.getMaxCardinalityValueFromEdgeEnd(),
-					edge.getMaxCardinalityValueToEdgeEnd(),
-					edge.getIsNavigableValueFromEdgeEnd(),
-					edge.getIsNavigableValueToEdgeEnd(),
-					edge.getIsContainerValueFromEdgeEnd(),
-					edge.getIsContainerValueToEdgeEnd(),
-					edge.getFromEdgeEnd(),
-					edge.getToEdgeEnd(),
-					edge.getUrr()
-			};
-			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
-			if (updates == 0) {
-				// record does not exist - insert it
-				final int inserts = queryRunner.update(INSERT_TEMPLATE, parameters);
-				if (inserts == 0) {
+			final int updates = queryRunner.update(INSERT_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided arrow did not have a primary key
+				if (edge.isTransient()) {
+					throw new RuntimeException("Failed to insert Edge - no primary key provided: " + edge);
+				} else {
 					throw new RuntimeException("Failed to insert Edge: " + edge);
 				}
 			}
 		} catch (final SQLException e) {
-			throw new RuntimeException("Could not save or update Edge: " + edge, e);
+			throw new RuntimeException("Could not insert Edge: " + edge, e);
 		}
+	}
+
+	@Override
+	public void update(final Edge edge) {
+		final Object[] parameters = createParameters(edge);
+
+		try {
+			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided arrow did not have a primary key
+				if (edge.isTransient()) {
+					throw new RuntimeException("Failed to update Edge - no primary key provided: " + edge);
+				} else {
+					throw new RuntimeException("Failed to update Edge: " + edge);
+				}
+			}
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not update Edge: " + edge, e);
+		}
+	}
+
+	private Object[] createParameters(final Edge edge) {
+		return new Object[] {
+				edge.getMinCardinalityValueFromEdgeEnd(),
+				edge.getMinCardinalityValueToEdgeEnd(),
+				edge.getMaxCardinalityValueFromEdgeEnd(),
+				edge.getMaxCardinalityValueToEdgeEnd(),
+				edge.getIsNavigableValueFromEdgeEnd(),
+				edge.getIsNavigableValueToEdgeEnd(),
+				edge.getIsContainerValueFromEdgeEnd(),
+				edge.getIsContainerValueToEdgeEnd(),
+				edge.getFromEdgeEnd(),
+				edge.getToEdgeEnd(),
+				edge.getUrr()
+		};
 	}
 
 	private static class EdgeGetHandler implements ResultSetHandler<Edge> {

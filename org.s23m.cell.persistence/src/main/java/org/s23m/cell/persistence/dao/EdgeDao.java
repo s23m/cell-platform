@@ -6,15 +6,22 @@ public interface EdgeDao {
 
 	/**
 	 * Retrieves the {@link Edge} with the given URR
-	 * 
+	 *
 	 * @param urr
 	 */
 	Edge get(String urr);
 
 	/**
-	 * Save or update the given {@link Edge}
-	 * 
+	 * Inserts a new row into the database corresponding to the provided {@link Edge}
+	 *
 	 * @param entity
 	 */
-	void saveOrUpdate(Edge entity);
+	void insert(Edge entity);
+
+	/**
+	 * Updates the row corresponding to the provided {@link Edge}
+	 *
+	 * @param entity
+	 */
+	void update(Edge entity);
 }

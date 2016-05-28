@@ -3,6 +3,9 @@ package org.s23m.cell.persistence.jdbc.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createArrow;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createGraph;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
 import java.sql.SQLException;
 import java.util.UUID;
@@ -24,8 +27,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid);
-		final Arrow result = createArrow(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Arrow result = createArrow(uuid, ProperClasses.EDGE);
 
 		identityDao.saveOrUpdate(identity);
 		graphDao.saveOrUpdate(graph);
@@ -46,8 +49,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid);
-		final Arrow result = createArrow(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Arrow result = createArrow(uuid, ProperClasses.EDGE);
 
 		identityDao.saveOrUpdate(identity);
 		graphDao.saveOrUpdate(graph);
@@ -70,8 +73,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid);
-		final Arrow result = createArrow(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Arrow result = createArrow(uuid, ProperClasses.VISIBILITY);
 		final String urr = result.getUrr();
 
 		identityDao.saveOrUpdate(identity);
@@ -93,47 +96,7 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidProperClassSpecified() {
 		final String uuid = UUID.randomUUID().toString();
-		final Arrow a = createArrow(uuid);
-		a.setProperClass("invalid");
-	}
-
-	private Arrow createArrow(final String uuid) {
-		final Arrow result = new Arrow();
-		result.setFromGraph(uuid);
-		result.setToGraph(uuid);
-		result.setUrr(uuid);
-		// (typically a different uuid)
-		result.setCategory(uuid);
-		result.setProperClass(ProperClasses.VISIBILITY);
-		return result;
-	}
-
-	private Graph createGraph(final String uuid) {
-		final Graph graph = new Graph();
-		graph.setUuid(uuid);
-		graph.setUrr(uuid);
-		// (typically a different uuid)
-		graph.setCategory(uuid);
-		// (typically a different uuid)
-		graph.setContainer(uuid);
-		// (typically a different uuid)
-		graph.setIsAbstractValue(uuid);
-		// (typically a different uuid)
-		graph.setMaxCardinalityValueInContainer(uuid);
-		graph.setProperClass(ProperClasses.VERTEX);
-		graph.setContentAsXml("<xml></xml>");
-		return graph;
-	}
-
-	private Identity createIdentity(final String uuid) {
-		final Identity identity = new Identity();
-		identity.setUuid(uuid);
-		identity.setName("graph test");
-		identity.setPluralName("tests");
-		identity.setCodeName("test");
-		identity.setPluralCodeName("tests");
-		identity.setPayload("some text");
-		return identity;
+		createArrow(uuid, "invalid");
 	}
 
 }

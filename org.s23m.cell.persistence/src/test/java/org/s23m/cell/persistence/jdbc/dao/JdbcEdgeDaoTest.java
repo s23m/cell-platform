@@ -2,6 +2,10 @@ package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createArrow;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createEdge;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createGraph;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
 import java.sql.SQLException;
 import java.util.UUID;
@@ -16,7 +20,7 @@ import org.s23m.cell.persistence.model.Identity;
 public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
 	@Test
-	public void testPersistence() throws SQLException {
+	public void testInsertionAndRetrieval() throws SQLException {
 
 		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
 		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
@@ -24,65 +28,20 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		final JdbcEdgeDao edgeDao = new JdbcEdgeDao(queryRunner);
 
 		final String uuid = UUID.randomUUID().toString();
-		final Identity identity = new Identity();
-		identity.setUuid(uuid);
-		identity.setName("graph test");
-		identity.setPluralName("tests");
-		identity.setCodeName("test");
-		identity.setPluralCodeName("tests");
-		identity.setPayload("some text");
 
-		final Graph graph = new Graph();
-		graph.setUuid(uuid);
-		graph.setUrr(uuid);
-		// (typically a different uuid)
-		graph.setCategory(uuid);
-		// (typically a different uuid)
-		graph.setContainer(uuid);
-		// (typically a different uuid)
-		graph.setIsAbstractValue(uuid);
-		// (typically a different uuid)
-		graph.setMaxCardinalityValueInContainer(uuid);
-		graph.setProperClass(ProperClasses.VERTEX);
-		graph.setContentAsXml("<xml></xml>");
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Arrow arrow = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Edge edge = createEdge(uuid);
 
-		final Arrow arrow = new Arrow();
-		arrow.setFromGraph(uuid);
-		arrow.setToGraph(uuid);
-		arrow.setUrr(uuid);
-		// (typically a different uuid)
-		arrow.setCategory(uuid);
-		arrow.setProperClass(ProperClasses.VISIBILITY);
-
-		final Edge edge = new Edge();
-		edge.setUrr(uuid);
-		edge.setMinCardinalityValueFromEdgeEnd(uuid);
-		edge.setMinCardinalityValueToEdgeEnd(uuid);
-		edge.setMaxCardinalityValueFromEdgeEnd(uuid);
-		edge.setMaxCardinalityValueToEdgeEnd(uuid);
-		edge.setIsNavigableValueFromEdgeEnd(uuid);
-		edge.setIsNavigableValueToEdgeEnd(uuid);
-		edge.setIsContainerValueFromEdgeEnd(uuid);
-		edge.setIsContainerValueToEdgeEnd(uuid);
-		edge.setFromEdgeEnd(uuid);
-		edge.setToEdgeEnd(uuid);
-
-		// save identity
 		identityDao.saveOrUpdate(identity);
-
-		// save graph
 		graphDao.saveOrUpdate(graph);
-
-		// save arrow
 		arrowDao.insert(arrow);
-
-		// save edge
-		edgeDao.saveOrUpdate(edge);
+		edgeDao.insert(edge);
 
 		// now retrieve the result
 		final Edge retrieved = edgeDao.get(edge.getUrr());
 		assertNotNull(retrieved);
-
 		assertEquals(edge.getUrr(), retrieved.getUrr());
 	}
 }

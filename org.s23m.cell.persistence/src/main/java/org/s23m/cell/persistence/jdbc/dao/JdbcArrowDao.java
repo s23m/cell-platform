@@ -49,13 +49,7 @@ public class JdbcArrowDao implements ArrowDao {
 
 	@Override
 	public void insert(final Arrow arrow) {
-		final Object[] parameters = {
-				arrow.getCategory(),
-				arrow.getProperClass(),
-				arrow.getFromGraph(),
-				arrow.getToGraph(),
-				arrow.getUrr()
-		};
+		final Object[] parameters = createParameters(arrow);
 
 		try {
 			final int updates = queryRunner.update(INSERT_TEMPLATE, parameters);
@@ -74,13 +68,7 @@ public class JdbcArrowDao implements ArrowDao {
 
 	@Override
 	public void update(final Arrow arrow) {
-		final Object[] parameters = {
-				arrow.getCategory(),
-				arrow.getProperClass(),
-				arrow.getFromGraph(),
-				arrow.getToGraph(),
-				arrow.getUrr()
-		};
+		final Object[] parameters = createParameters(arrow);
 
 		try {
 			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
@@ -95,6 +83,16 @@ public class JdbcArrowDao implements ArrowDao {
 		} catch (final SQLException e) {
 			throw new RuntimeException("Could not update Arrow: " + arrow, e);
 		}
+	}
+
+	private Object[] createParameters(final Arrow arrow) {
+		return new Object[] {
+				arrow.getCategory(),
+				arrow.getProperClass(),
+				arrow.getFromGraph(),
+				arrow.getToGraph(),
+				arrow.getUrr()
+		};
 	}
 
 	private static class ArrowGetHandler implements ResultSetHandler<Arrow> {
