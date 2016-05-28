@@ -1,6 +1,6 @@
 package org.s23m.cell.persistence.model;
 
-import com.google.common.base.Objects;
+import java.util.StringJoiner;
 
 public class Graph {
 
@@ -114,15 +114,15 @@ public class Graph {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(getClass())
-				.add("urr", urr)
-				.add("uuid", uuid)
-				.add("category", category)
-				.add("container", container)
-				.add("isAbstractValue", isAbstractValue)
-				.add("maxCardinalityValueInContainer", maxCardinalityValueInContainer)
-				.add("properClass", properClass)
-				.add("contentAsXml", contentAsXml)
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+				.add("urr = " + urr)
+				.add("uuid = " + uuid)
+				.add("category = " + category)
+				.add("container = " + container)
+				.add("isAbstractValue = " + isAbstractValue)
+				.add("maxCardinalityValueInContainer = " + maxCardinalityValueInContainer)
+				.add("properClass = " + properClass)
+				.add("contentAsXml = " + contentAsXml)
 				.toString();
 	}
 }

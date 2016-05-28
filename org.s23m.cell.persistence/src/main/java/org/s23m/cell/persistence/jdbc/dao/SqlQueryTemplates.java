@@ -1,8 +1,10 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
+import java.util.Arrays;
 import java.util.Collections;
-
-import com.google.common.base.Joiner;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class SqlQueryTemplates {
 
@@ -22,7 +24,7 @@ public class SqlQueryTemplates {
 
 	/**
 	 * Creates an UPDATE statement template
-	 * 
+	 *
 	 * @param entityClass
 	 * @param columnNames array of column names, with the last one being used for the WHERE clause
 	 *  and all preceding ones being used in the SET clause
@@ -49,18 +51,24 @@ public class SqlQueryTemplates {
 
 	/**
 	 * Creates an INSERT statement template
-	 * 
+	 *
 	 * @param entityClass
 	 * @param columnNames
 	 */
 	public static String createInsertStatementTemplate(final Class<?> entityClass, final String[] columnNames) {
-		final Joiner commaSeparator = Joiner.on(",");
 		final StringBuilder builder = new StringBuilder("INSERT INTO ");
 		builder.append(entityClass.getSimpleName());
 		builder.append(" (");
-		builder.append(commaSeparator.join(columnNames));
+
+		final List<String> columnNamesList = Arrays.asList(columnNames);
+		final Collector<CharSequence, ?, String> commaJoiner = Collectors.joining(",");
+		builder.append(columnNamesList.stream().collect(commaJoiner));
+
 		builder.append(") VALUES (");
-		builder.append(commaSeparator.join(Collections.nCopies(columnNames.length, "?")));
+
+		final List<String> placeHolders = Collections.nCopies(columnNamesList.size(), "?");
+		builder.append(placeHolders.stream().collect(commaJoiner));
+
 		builder.append(")");
 		return builder.toString();
 	}

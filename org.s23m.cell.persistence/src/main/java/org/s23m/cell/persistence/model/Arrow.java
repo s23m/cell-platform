@@ -6,8 +6,7 @@ import static org.s23m.cell.persistence.model.ProperClass.Visibility;
 
 import java.util.EnumSet;
 import java.util.Set;
-
-import com.google.common.base.Objects;
+import java.util.StringJoiner;
 
 // TODO: make immutable
 public final class Arrow {
@@ -88,12 +87,12 @@ public final class Arrow {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(getClass())
-				.add("urr", urr)
-				.add("category", category)
-				.add("properClass", properClass)
-				.add("fromGraph", fromGraph)
-				.add("toGraph", toGraph)
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+				.add("urr = " + urr)
+				.add("category = " + category)
+				.add("properClass = " + properClass)
+				.add("fromGraph = " + fromGraph)
+				.add("toGraph = " + toGraph)
 				.toString();
 	}
 }

@@ -1,6 +1,6 @@
 package org.s23m.cell.persistence.model;
 
-import com.google.common.base.Objects;
+import java.util.StringJoiner;
 
 public final class Edge {
 
@@ -156,18 +156,18 @@ public final class Edge {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(getClass())
-				.add("urr", urr)
-				.add("minCardinalityValueFromEdgeEnd", minCardinalityValueFromEdgeEnd)
-				.add("minCardinalityValueToEdgeEnd", minCardinalityValueToEdgeEnd)
-				.add("maxCardinalityValueFromEdgeEnd", maxCardinalityValueFromEdgeEnd)
-				.add("maxCardinalityValueToEdgeEnd", maxCardinalityValueToEdgeEnd)
-				.add("isNavigableValueFromEdgeEnd", isNavigableValueFromEdgeEnd)
-				.add("isNavigableValueToEdgeEnd", isNavigableValueToEdgeEnd)
-				.add("isContainerValueFromEdgeEnd", isContainerValueFromEdgeEnd)
-				.add("isContainerValueToEdgeEnd", isContainerValueToEdgeEnd)
-				.add("fromEdgeEnd", fromEdgeEnd)
-				.add("toEdgeEnd", toEdgeEnd)
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+				.add("urr = " + urr)
+				.add("minCardinalityValueFromEdgeEnd = " + minCardinalityValueFromEdgeEnd)
+				.add("minCardinalityValueToEdgeEnd = " + minCardinalityValueToEdgeEnd)
+				.add("maxCardinalityValueFromEdgeEnd = " + maxCardinalityValueFromEdgeEnd)
+				.add("maxCardinalityValueToEdgeEnd = " + maxCardinalityValueToEdgeEnd)
+				.add("isNavigableValueFromEdgeEnd = " + isNavigableValueFromEdgeEnd)
+				.add("isNavigableValueToEdgeEnd = " + isNavigableValueToEdgeEnd)
+				.add("isContainerValueFromEdgeEnd = " + isContainerValueFromEdgeEnd)
+				.add("isContainerValueToEdgeEnd = " + isContainerValueToEdgeEnd)
+				.add("fromEdgeEnd = " + fromEdgeEnd)
+				.add("toEdgeEnd = " + toEdgeEnd)
 				.toString();
 	}
 }

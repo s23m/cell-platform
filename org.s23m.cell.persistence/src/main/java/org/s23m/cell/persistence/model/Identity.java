@@ -1,6 +1,6 @@
 package org.s23m.cell.persistence.model;
 
-import com.google.common.base.Objects;
+import java.util.StringJoiner;
 
 // TODO equals and hashCode (only uuid needed in hashCode)
 // TODO make uuid final?
@@ -79,13 +79,13 @@ public final class Identity {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(getClass())
-				.add("uuid", uuid)
-				.add("name", name)
-				.add("pluralName", pluralName)
-				.add("codeName", codeName)
-				.add("pluralCodeName", pluralCodeName)
-				.add("payload", payload)
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+				.add("uuid = " + uuid)
+				.add("name = " + name)
+				.add("pluralName = " + pluralName)
+				.add("codeName = " + codeName)
+				.add("pluralCodeName = " + pluralCodeName)
+				.add("payload = " + payload)
 				.toString();
 	}
 }
