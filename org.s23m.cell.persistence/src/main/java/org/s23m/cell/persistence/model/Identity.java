@@ -1,26 +1,45 @@
 package org.s23m.cell.persistence.model;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
-// TODO equals and hashCode (only uuid needed in hashCode)
-// TODO make uuid final?
 public final class Identity {
 
 	/**
 	 * The primary key
 	 */
-	private String uuid;
+	private final String uuid;
 
-	private String name;
+	private final String name;
 
-	private String pluralName;
+	private final String pluralName;
 
-	private String codeName;
+	private final String codeName;
 
-	private String pluralCodeName;
+	private final String pluralCodeName;
 
 	// TODO change to byte[] ?
-	private String payload;
+	private final String payload;
+
+	/**
+	 * Constructor
+	 *
+	 * @param uuid
+	 * @param name
+	 * @param pluralName
+	 * @param codeName
+	 * @param pluralCodeName
+	 * @param payload
+	 */
+	public Identity(final String uuid, final String name, final String pluralName, final String codeName, final String pluralCodeName,
+			final String payload) {
+		this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
+		this.name = Objects.requireNonNull(name, "name must not be null");
+		this.pluralName = Objects.requireNonNull(pluralName, "pluralName must not be null");
+		this.codeName = codeName;
+		this.pluralCodeName = pluralCodeName;
+		this.payload = payload;
+	}
 
 	/**
 	 * Indicates whether a primary key has been assigned to the underlying row.
@@ -33,48 +52,81 @@ public final class Identity {
 		return uuid;
 	}
 
-	public void setUuid(final String uuid) {
-		this.uuid = uuid;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
 	}
 
 	public String getPluralName() {
 		return pluralName;
 	}
 
-	public void setPluralName(final String pluralName) {
-		this.pluralName = pluralName;
-	}
-
 	public String getCodeName() {
 		return codeName;
-	}
-
-	public void setCodeName(final String codeName) {
-		this.codeName = codeName;
 	}
 
 	public String getPluralCodeName() {
 		return pluralCodeName;
 	}
 
-	public void setPluralCodeName(final String pluralCodeName) {
-		this.pluralCodeName = pluralCodeName;
-	}
-
 	public String getPayload() {
 		return payload;
 	}
 
-	public void setPayload(final String payload) {
-		this.payload = payload;
+	@Override
+	public int hashCode() {
+		return uuid.hashCode();
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Identity other = (Identity) obj;
+
+		// mandatory fields
+
+		if (!uuid.equals(other.uuid)) {
+			return false;
+		}
+		if (!name.equals(other.name)) {
+			return false;
+		}
+		if (!pluralName.equals(other.pluralName)) {
+			return false;
+		}
+
+		// optional fields
+
+		if (codeName == null) {
+			if (other.codeName != null) {
+				return false;
+			}
+		} else if (!codeName.equals(other.codeName)) {
+			return false;
+		}
+		if (pluralCodeName == null) {
+			if (other.pluralCodeName != null) {
+				return false;
+			}
+		} else if (!pluralCodeName.equals(other.pluralCodeName)) {
+			return false;
+		}
+		if (payload == null) {
+			if (other.payload != null) {
+				return false;
+			}
+		} else if (!payload.equals(other.payload)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override

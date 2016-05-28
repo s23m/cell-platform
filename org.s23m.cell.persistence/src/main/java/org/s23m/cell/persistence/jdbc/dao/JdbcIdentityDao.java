@@ -110,14 +110,7 @@ public class JdbcIdentityDao implements IdentityDao {
 				final String pluralCodeName = resultSet.getString(PLURAL_CODE_NAME);
 				final String payload = resultSet.getString(PAYLOAD);
 
-				final Identity result = new Identity();
-				result.setUuid(uuid);
-				result.setName(name);
-				result.setPluralName(pluralName);
-				result.setCodeName(codeName);
-				result.setPluralCodeName(pluralCodeName);
-				result.setPayload(payload);
-				return result;
+				return new Identity(uuid, name, pluralName, codeName, pluralCodeName, payload);
 			} else {
 				return null;
 			}

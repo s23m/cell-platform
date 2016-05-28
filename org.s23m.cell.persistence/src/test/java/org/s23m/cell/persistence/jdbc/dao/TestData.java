@@ -54,13 +54,6 @@ public class TestData {
 	 * Creates an Identity instance with the given UUID as its primary key
 	 */
 	public static Identity createIdentity(final String uuid) {
-		final Identity identity = new Identity();
-		identity.setUuid(uuid);
-		identity.setName("name");
-		identity.setPluralName("pluralName");
-		identity.setCodeName("codeName");
-		identity.setPluralCodeName("pluralClassName");
-		identity.setPayload("payload");
-		return identity;
+		return new Identity(uuid, "name", "pluralName", "codeName", "pluralCodeName", "payload");
 	}
 }

@@ -5,6 +5,7 @@ import static org.s23m.cell.persistence.model.ProperClass.SuperSetReference;
 import static org.s23m.cell.persistence.model.ProperClass.Visibility;
 
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 
@@ -44,14 +45,14 @@ public final class Arrow {
 	 * @param toGraph
 	 */
 	public Arrow(final String urr, final String category, final ProperClass properClass, final String fromGraph, final String toGraph) {
-		this.urr = urr;
-		this.category = category;
+		this.urr = Objects.requireNonNull(urr, "urr must not be null");
+		this.category = Objects.requireNonNull(category, "category must not be null");
 		if (!ALLOWABLE_PROPER_CLASSES.contains(properClass)) {
 			throw new IllegalArgumentException("Proper class '" + properClass + "' is invalid for Arrow");
 		}
 		this.properClass = properClass;
-		this.fromGraph = fromGraph;
-		this.toGraph = toGraph;
+		this.fromGraph = Objects.requireNonNull(fromGraph, "fromGraph must not be null");
+		this.toGraph = Objects.requireNonNull(toGraph, "toGraph must not be null");
 	}
 
 	/**
@@ -83,14 +84,7 @@ public final class Arrow {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((fromGraph == null) ? 0 : fromGraph.hashCode());
-		result = prime * result + ((properClass == null) ? 0 : properClass.hashCode());
-		result = prime * result + ((toGraph == null) ? 0 : toGraph.hashCode());
-		result = prime * result + ((urr == null) ? 0 : urr.hashCode());
-		return result;
+		return urr.hashCode();
 	}
 
 	@Override
@@ -105,35 +99,19 @@ public final class Arrow {
 			return false;
 		}
 		final Arrow other = (Arrow) obj;
-		if (category == null) {
-			if (other.category != null) {
-				return false;
-			}
-		} else if (!category.equals(other.category)) {
+		if (!category.equals(other.category)) {
 			return false;
 		}
-		if (fromGraph == null) {
-			if (other.fromGraph != null) {
-				return false;
-			}
-		} else if (!fromGraph.equals(other.fromGraph)) {
+		if (!fromGraph.equals(other.fromGraph)) {
 			return false;
 		}
 		if (properClass != other.properClass) {
 			return false;
 		}
-		if (toGraph == null) {
-			if (other.toGraph != null) {
-				return false;
-			}
-		} else if (!toGraph.equals(other.toGraph)) {
+		if (!toGraph.equals(other.toGraph)) {
 			return false;
 		}
-		if (urr == null) {
-			if (other.urr != null) {
-				return false;
-			}
-		} else if (!urr.equals(other.urr)) {
+		if (!urr.equals(other.urr)) {
 			return false;
 		}
 		return true;

@@ -1,7 +1,6 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
@@ -21,9 +20,7 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 
 		// now retrieve the result
 		final Identity retrieved = identityDao.get(identity.getUuid());
-		assertNotNull(retrieved);
-		assertEquals(identity.getUuid(), retrieved.getUuid());
-		assertEquals(identity.toString(), retrieved.toString());
+		assertEquals(identity, retrieved);
 	}
 
 	@Test
@@ -54,10 +51,11 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 		assertEquals(uuid, retrieved1.getUuid());
 
 		// update the name
-		identity.setName("changed name");
-		identityDao.update(identity);
+		final Identity modified = new Identity(identity.getUuid(), "changed name", identity.getPluralName(),
+				identity.getCodeName(), identity.getPluralCodeName(), identity.getPayload());
+		identityDao.update(modified);
 
 		final Identity retrieved2 = identityDao.get(uuid);
-		assertEquals(identity.getName(), retrieved2.getName());
+		assertEquals(modified.getName(), retrieved2.getName());
 	}
 }
