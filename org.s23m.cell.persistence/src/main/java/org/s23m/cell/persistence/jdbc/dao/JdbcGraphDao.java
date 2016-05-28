@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.s23m.cell.persistence.dao.GraphDao;
 import org.s23m.cell.persistence.model.Graph;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class JdbcGraphDao implements GraphDao {
 
@@ -98,7 +99,7 @@ public class JdbcGraphDao implements GraphDao {
 				graph.getContainer(),
 				graph.getIsAbstractValue(),
 				graph.getMaxCardinalityValueInContainer(),
-				graph.getProperClass(),
+				graph.getProperClass().name(),
 				graph.getContentAsXml(),
 				graph.getUrr()
 		};
@@ -124,7 +125,7 @@ public class JdbcGraphDao implements GraphDao {
 				result.setContainer(container);
 				result.setIsAbstractValue(isAbstractValue);
 				result.setMaxCardinalityValueInContainer(maxCardinalityValueInContainer);
-				result.setProperClass(properClass);
+				result.setProperClass(ProperClass.valueOf(properClass));
 				result.setContentAsXml(contentAsXml);
 				result.setUrr(urr);
 				return result;

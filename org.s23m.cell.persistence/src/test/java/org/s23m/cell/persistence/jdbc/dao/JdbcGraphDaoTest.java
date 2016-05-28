@@ -12,8 +12,8 @@ import java.util.UUID;
 
 import org.junit.Test;
 import org.s23m.cell.persistence.model.Graph;
-import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
@@ -21,7 +21,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 	public void testInsertionAndRetrieval() throws SQLException {
 		final String uuid = UUID.randomUUID().toString();
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
@@ -36,7 +36,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 	public void testMultipleInsertionAttemptsFail() throws SQLException {
 		final String uuid = UUID.randomUUID().toString();
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
@@ -54,7 +54,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 		final String uuid = "1";
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
@@ -81,7 +81,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 		final String uuid = "1";
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);

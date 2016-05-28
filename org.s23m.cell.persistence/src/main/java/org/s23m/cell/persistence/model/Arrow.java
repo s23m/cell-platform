@@ -1,18 +1,18 @@
 package org.s23m.cell.persistence.model;
 
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.EDGE;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.SUPERSET_REFERENCE;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.VISIBILITY;
+import static org.s23m.cell.persistence.model.ProperClass.Edge;
+import static org.s23m.cell.persistence.model.ProperClass.SuperSetReference;
+import static org.s23m.cell.persistence.model.ProperClass.Visibility;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
 
 // TODO: make immutable
 public final class Arrow {
 
-	private static final Set<String> ALLOWABLE_PROPER_CLASSES = ImmutableSet.of(EDGE, VISIBILITY, SUPERSET_REFERENCE);
+	private static final Set<ProperClass> ALLOWABLE_PROPER_CLASSES = EnumSet.of(Edge, Visibility, SuperSetReference);
 
 	/**
 	 * The primary key
@@ -24,8 +24,7 @@ public final class Arrow {
 	 */
 	private String category;
 
-	// TODO: fix type to be enum type, and then also expose via getProperClassAsString()?
-	private String properClass;
+	private ProperClass properClass;
 
 	/**
 	 * Reference to a {@link Graph}.
@@ -60,11 +59,11 @@ public final class Arrow {
 		this.category = category;
 	}
 
-	public String getProperClass() {
+	public ProperClass getProperClass() {
 		return properClass;
 	}
 
-	public void setProperClass(final String properClass) {
+	public void setProperClass(final ProperClass properClass) {
 		if (!ALLOWABLE_PROPER_CLASSES.contains(properClass)) {
 			throw new IllegalArgumentException("Proper class '" + properClass + "' is invalid for Arrow");
 		}

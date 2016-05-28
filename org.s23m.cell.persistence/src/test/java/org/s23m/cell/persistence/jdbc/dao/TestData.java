@@ -4,13 +4,14 @@ import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
 import org.s23m.cell.persistence.model.Identity;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class TestData {
 
 	/*
 	 * Creates an Arrow instance by reusing the same provided UUID for the primary key and all foreign keys
 	 */
-	public static Arrow createArrow(final String uuid, final String properClass) {
+	public static Arrow createArrow(final String uuid, final ProperClass properClass) {
 		final Arrow result = new Arrow();
 		result.setUrr(uuid);
 		result.setFromGraph(uuid);
@@ -42,7 +43,7 @@ public class TestData {
 	/*
 	 * Creates a Graph instance by reusing the same provided UUID for the primary key and all foreign keys
 	 */
-	public static Graph createGraph(final String uuid, final String properClass) {
+	public static Graph createGraph(final String uuid, final ProperClass properClass) {
 		final Graph graph = new Graph();
 		graph.setUrr(uuid);
 		graph.setUuid(uuid);

@@ -14,8 +14,8 @@ import java.util.UUID;
 import org.junit.Test;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Graph;
-import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
@@ -24,8 +24,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.EDGE);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Edge);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
@@ -43,8 +43,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow result = createArrow(uuid, ProperClasses.EDGE);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow result = createArrow(uuid, ProperClass.Edge);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
@@ -63,8 +63,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow result = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow result = createArrow(uuid, ProperClass.Visibility);
 		final String urr = result.getUrr();
 
 		identityDao.insert(identity);
@@ -73,20 +73,20 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 		// now retrieve the result
 		final Arrow retrieved1 = arrowDao.get(urr);
-		assertEquals(ProperClasses.VISIBILITY, retrieved1.getProperClass());
+		assertEquals(ProperClass.Visibility, retrieved1.getProperClass());
 
 		// modify proper class and update
-		result.setProperClass(ProperClasses.EDGE);
+		result.setProperClass(ProperClass.Edge);
 		arrowDao.update(result);
 
 		final Arrow retrieved2 = arrowDao.get(urr);
-		assertEquals(ProperClasses.EDGE, retrieved2.getProperClass());
+		assertEquals(ProperClass.Edge, retrieved2.getProperClass());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidProperClassSpecified() {
 		final String uuid = UUID.randomUUID().toString();
-		createArrow(uuid, "invalid");
+		createArrow(uuid, null);
 	}
 
 	@Test
@@ -94,8 +94,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.EDGE);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Edge);
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);

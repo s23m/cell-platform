@@ -1,30 +1,8 @@
 package org.s23m.cell.persistence.model;
 
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.EDGE;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.EDGE_END;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.SUPERSET_REFERENCE;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.VERTEX;
-import static org.s23m.cell.persistence.model.Graph.ProperClasses.VISIBILITY;
-
-import java.util.Set;
-
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
 
 public class Graph {
-
-	/**
-	 * Identifiers for proper classes
-	 */
-	public static class ProperClasses {
-		public static final String VERTEX = "Vertex";
-		public static final String EDGE = "Edge";
-		public static final String EDGE_END = "EdgeEnd";
-		public static final String VISIBILITY = "Visibility";
-		public static final String SUPERSET_REFERENCE = "SuperSetReference";
-	}
-
-	private static final Set<String> PROPER_CLASSES = ImmutableSet.of(VERTEX, EDGE, EDGE_END, VISIBILITY, SUPERSET_REFERENCE);
 
 	/**
 	 * Reference to an {@link Identity}.
@@ -56,7 +34,7 @@ public class Graph {
 	 */
 	private String maxCardinalityValueInContainer;
 
-	private String properClass;
+	private ProperClass properClass;
 
 	/**
 	 * Reference to an {@link Identity}.
@@ -118,14 +96,11 @@ public class Graph {
 		this.maxCardinalityValueInContainer = maxCardinalityValueInContainer;
 	}
 
-	public String getProperClass() {
+	public ProperClass getProperClass() {
 		return properClass;
 	}
 
-	public void setProperClass(final String properClass) {
-		if (!PROPER_CLASSES.contains(properClass)) {
-			throw new IllegalArgumentException("Proper class '" + properClass + "' is invalid for Graph");
-		}
+	public void setProperClass(final ProperClass properClass) {
 		this.properClass = properClass;
 	}
 

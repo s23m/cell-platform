@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
-import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
@@ -26,8 +26,8 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
 		final Edge edge = createEdge(uuid);
 
 		identityDao.insert(identity);
@@ -47,8 +47,8 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
 		final Edge edge = createEdge(uuid);
 
 		identityDao.insert(identity);
@@ -69,8 +69,8 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		final String uuid = "1";
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
 		final Edge edge = createEdge(uuid);
 
 		identityDao.insert(identity);
@@ -100,8 +100,8 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		final String uuid = "1";
 
 		final Identity identity = createIdentity(uuid);
-		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow arrow = createArrow(uuid, ProperClasses.VISIBILITY);
+		final Graph graph = createGraph(uuid, ProperClass.Vertex);
+		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
 		final Edge edge = createEdge(uuid);
 
 		identityDao.insert(identity);

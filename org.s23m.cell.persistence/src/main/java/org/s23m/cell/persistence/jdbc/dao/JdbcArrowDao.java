@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.s23m.cell.persistence.dao.ArrowDao;
 import org.s23m.cell.persistence.model.Arrow;
+import org.s23m.cell.persistence.model.ProperClass;
 
 public class JdbcArrowDao implements ArrowDao {
 
@@ -88,7 +89,7 @@ public class JdbcArrowDao implements ArrowDao {
 	private Object[] createParameters(final Arrow arrow) {
 		return new Object[] {
 				arrow.getCategory(),
-				arrow.getProperClass(),
+				arrow.getProperClass().name(),
 				arrow.getFromGraph(),
 				arrow.getToGraph(),
 				arrow.getUrr()
@@ -108,7 +109,7 @@ public class JdbcArrowDao implements ArrowDao {
 
 				final Arrow result = new Arrow();
 				result.setCategory(category);
-				result.setProperClass(properClass);
+				result.setProperClass(ProperClass.valueOf(properClass));
 				result.setFromGraph(fromGraph);
 				result.setToGraph(toGraph);
 				result.setUrr(urr);

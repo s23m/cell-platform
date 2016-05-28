@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
-import org.s23m.cell.persistence.model.Graph.ProperClasses;
 import org.s23m.cell.persistence.model.Identity;
+import org.s23m.cell.persistence.model.ProperClass;
 
 /**
  * A larger scale, more realistic test in which the foreign key constraints are respected.
@@ -37,7 +37,7 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 		graph.setContainer(createAndSaveIdentity().getUuid());
 		graph.setIsAbstractValue(createAndSaveIdentity().getUuid());
 		graph.setMaxCardinalityValueInContainer(createAndSaveIdentity().getUuid());
-		graph.setProperClass(ProperClasses.EDGE);
+		graph.setProperClass(ProperClass.Edge);
 		graph.setContentAsXml("content");
 		graph.setUrr(createAndSaveIdentity().getUuid());
 
@@ -49,7 +49,7 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	private Arrow createAndSaveArrow() {
 		final Arrow arrow = new Arrow();
 		arrow.setCategory(createAndSaveIdentity().getUuid());
-		arrow.setProperClass(ProperClasses.VISIBILITY);
+		arrow.setProperClass(ProperClass.Visibility);
 		arrow.setFromGraph(createAndSaveGraph().getUrr());
 		arrow.setToGraph(createAndSaveGraph().getUrr());
 		arrow.setUrr(createAndSaveGraph().getUrr());
