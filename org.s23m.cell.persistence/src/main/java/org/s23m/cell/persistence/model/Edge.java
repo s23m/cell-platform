@@ -4,26 +4,59 @@ import com.google.common.base.Objects;
 
 public final class Edge {
 
+	/**
+	 * The primary key
+	 */
 	private String urr;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String minCardinalityValueFromEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String minCardinalityValueToEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String maxCardinalityValueFromEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String maxCardinalityValueToEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String isNavigableValueFromEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String isNavigableValueToEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String isContainerValueFromEdgeEnd;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String isContainerValueToEdgeEnd;
 
+	/**
+	 * Reference to a {@link Graph}.
+	 */
 	private String fromEdgeEnd;
 
+	/**
+	 * Reference to a {@link Graph}.
+	 */
 	private String toEdgeEnd;
 
 	/**

@@ -18,7 +18,7 @@ import org.s23m.cell.persistence.model.Identity;
 public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
 	@Test
-	public void testPersistence() throws SQLException {
+	public void testInsertionAndRetrieval() throws SQLException {
 		final String uuid = UUID.randomUUID().toString();
 		final Identity identity = createIdentity(uuid);
 		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);

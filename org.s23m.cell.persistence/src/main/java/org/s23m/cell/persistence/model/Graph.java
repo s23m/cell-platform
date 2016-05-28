@@ -26,20 +26,41 @@ public class Graph {
 
 	private static final Set<String> PROPER_CLASSES = ImmutableSet.of(VERTEX, EDGE, EDGE_END, VISIBILITY, SUPERSET_REFERENCE);
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String urr;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String uuid;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String category;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String container;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String isAbstractValue;
 
+	/**
+	 * Nullable reference to an {@link Identity}.
+	 */
 	private String maxCardinalityValueInContainer;
 
 	private String properClass;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String contentAsXml;
 
 	/**

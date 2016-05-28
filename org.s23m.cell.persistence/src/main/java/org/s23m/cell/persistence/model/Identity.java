@@ -6,6 +6,9 @@ import com.google.common.base.Objects;
 // TODO make uuid final?
 public final class Identity {
 
+	/**
+	 * The primary key
+	 */
 	private String uuid;
 
 	private String name;

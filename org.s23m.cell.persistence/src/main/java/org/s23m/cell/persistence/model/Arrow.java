@@ -14,15 +14,27 @@ public final class Arrow {
 
 	private static final Set<String> ALLOWABLE_PROPER_CLASSES = ImmutableSet.of(EDGE, VISIBILITY, SUPERSET_REFERENCE);
 
+	/**
+	 * The primary key
+	 */
 	private String urr;
 
+	/**
+	 * Reference to an {@link Identity}.
+	 */
 	private String category;
 
 	// TODO: fix type to be enum type, and then also expose via getProperClassAsString()?
 	private String properClass;
 
+	/**
+	 * Reference to a {@link Graph}.
+	 */
 	private String fromGraph;
 
+	/**
+	 * Reference to a {@link Graph}.
+	 */
 	private String toGraph;
 
 	/**
