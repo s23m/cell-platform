@@ -47,12 +47,12 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	}
 
 	private Arrow createAndSaveArrow() {
-		final Arrow arrow = new Arrow();
-		arrow.setCategory(createAndSaveIdentity().getUuid());
-		arrow.setProperClass(ProperClass.Visibility);
-		arrow.setFromGraph(createAndSaveGraph().getUrr());
-		arrow.setToGraph(createAndSaveGraph().getUrr());
-		arrow.setUrr(createAndSaveGraph().getUrr());
+		final String category = createAndSaveIdentity().getUuid();
+		final String fromGraph = createAndSaveGraph().getUrr();
+		final String toGraph = createAndSaveGraph().getUrr();
+		final String urr = createAndSaveGraph().getUrr();
+
+		final Arrow arrow = new Arrow(urr, category, ProperClass.Visibility, fromGraph, toGraph);
 
 		arrowDao.insert(arrow);
 

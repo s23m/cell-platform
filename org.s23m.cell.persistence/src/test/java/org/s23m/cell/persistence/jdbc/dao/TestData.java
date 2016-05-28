@@ -12,13 +12,7 @@ public class TestData {
 	 * Creates an Arrow instance by reusing the same provided UUID for the primary key and all foreign keys
 	 */
 	public static Arrow createArrow(final String uuid, final ProperClass properClass) {
-		final Arrow result = new Arrow();
-		result.setUrr(uuid);
-		result.setFromGraph(uuid);
-		result.setToGraph(uuid);
-		result.setCategory(uuid);
-		result.setProperClass(properClass);
-		return result;
+		return new Arrow(uuid, uuid, properClass, uuid, uuid);
 	}
 
 	/*

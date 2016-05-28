@@ -1,7 +1,6 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createArrow;
@@ -33,9 +32,7 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 		// now retrieve the result
 		final Arrow retrieved = arrowDao.get(arrow.getUrr());
-		assertNotNull(retrieved);
-		assertEquals(arrow.getUrr(), retrieved.getUrr());
-		assertEquals(arrow.toString(), retrieved.toString());
+		assertEquals(arrow, retrieved);
 	}
 
 	@Test
@@ -64,20 +61,20 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 		final Identity identity = createIdentity(uuid);
 		final Graph graph = createGraph(uuid, ProperClass.Vertex);
-		final Arrow result = createArrow(uuid, ProperClass.Visibility);
-		final String urr = result.getUrr();
+		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
+		final String urr = arrow.getUrr();
 
 		identityDao.insert(identity);
 		graphDao.insert(graph);
-		arrowDao.insert(result);
+		arrowDao.insert(arrow);
 
 		// now retrieve the result
 		final Arrow retrieved1 = arrowDao.get(urr);
 		assertEquals(ProperClass.Visibility, retrieved1.getProperClass());
 
 		// modify proper class and update
-		result.setProperClass(ProperClass.Edge);
-		arrowDao.update(result);
+		final Arrow modified = new Arrow(arrow.getUrr(), arrow.getCategory(), ProperClass.Edge, arrow.getFromGraph(), arrow.getToGraph());
+		arrowDao.update(modified);
 
 		final Arrow retrieved2 = arrowDao.get(urr);
 		assertEquals(ProperClass.Edge, retrieved2.getProperClass());
@@ -103,8 +100,9 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 		try {
 			// violate foreign key by pointing to a non-existent graph UUID
-			arrow.setFromGraph("nonexistent");
-			arrowDao.update(arrow);
+			final Arrow modified = new Arrow(arrow.getUrr(), arrow.getCategory(), arrow.getProperClass(), "nonexistent", arrow.getToGraph());
+
+			arrowDao.update(modified);
 			fail("Violation should have thrown an exception");
 		} catch (final RuntimeException e) {
 			// expected

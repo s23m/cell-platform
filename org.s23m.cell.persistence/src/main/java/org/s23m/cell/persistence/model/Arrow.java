@@ -8,7 +8,6 @@ import java.util.EnumSet;
 import java.util.Set;
 import java.util.StringJoiner;
 
-// TODO: make immutable
 public final class Arrow {
 
 	private static final Set<ProperClass> ALLOWABLE_PROPER_CLASSES = EnumSet.of(Edge, Visibility, SuperSetReference);
@@ -16,24 +15,44 @@ public final class Arrow {
 	/**
 	 * The primary key
 	 */
-	private String urr;
+	private final String urr;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String category;
+	private final String category;
 
-	private ProperClass properClass;
-
-	/**
-	 * Reference to a {@link Graph}.
-	 */
-	private String fromGraph;
+	private final ProperClass properClass;
 
 	/**
 	 * Reference to a {@link Graph}.
 	 */
-	private String toGraph;
+	private final String fromGraph;
+
+	/**
+	 * Reference to a {@link Graph}.
+	 */
+	private final String toGraph;
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param category
+	 * @param properClass
+	 * @param fromGraph
+	 * @param toGraph
+	 */
+	public Arrow(final String urr, final String category, final ProperClass properClass, final String fromGraph, final String toGraph) {
+		this.urr = urr;
+		this.category = category;
+		if (!ALLOWABLE_PROPER_CLASSES.contains(properClass)) {
+			throw new IllegalArgumentException("Proper class '" + properClass + "' is invalid for Arrow");
+		}
+		this.properClass = properClass;
+		this.fromGraph = fromGraph;
+		this.toGraph = toGraph;
+	}
 
 	/**
 	 * Indicates whether a primary key has been assigned to the underlying row.
@@ -46,43 +65,78 @@ public final class Arrow {
 		return urr;
 	}
 
-	public void setUrr(final String urr) {
-		this.urr = urr;
-	}
-
 	public String getCategory() {
 		return category;
-	}
-
-	public void setCategory(final String category) {
-		this.category = category;
 	}
 
 	public ProperClass getProperClass() {
 		return properClass;
 	}
 
-	public void setProperClass(final ProperClass properClass) {
-		if (!ALLOWABLE_PROPER_CLASSES.contains(properClass)) {
-			throw new IllegalArgumentException("Proper class '" + properClass + "' is invalid for Arrow");
-		}
-		this.properClass = properClass;
-	}
-
 	public String getFromGraph() {
 		return fromGraph;
-	}
-
-	public void setFromGraph(final String fromGraph) {
-		this.fromGraph = fromGraph;
 	}
 
 	public String getToGraph() {
 		return toGraph;
 	}
 
-	public void setToGraph(final String toGraph) {
-		this.toGraph = toGraph;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((fromGraph == null) ? 0 : fromGraph.hashCode());
+		result = prime * result + ((properClass == null) ? 0 : properClass.hashCode());
+		result = prime * result + ((toGraph == null) ? 0 : toGraph.hashCode());
+		result = prime * result + ((urr == null) ? 0 : urr.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Arrow other = (Arrow) obj;
+		if (category == null) {
+			if (other.category != null) {
+				return false;
+			}
+		} else if (!category.equals(other.category)) {
+			return false;
+		}
+		if (fromGraph == null) {
+			if (other.fromGraph != null) {
+				return false;
+			}
+		} else if (!fromGraph.equals(other.fromGraph)) {
+			return false;
+		}
+		if (properClass != other.properClass) {
+			return false;
+		}
+		if (toGraph == null) {
+			if (other.toGraph != null) {
+				return false;
+			}
+		} else if (!toGraph.equals(other.toGraph)) {
+			return false;
+		}
+		if (urr == null) {
+			if (other.urr != null) {
+				return false;
+			}
+		} else if (!urr.equals(other.urr)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

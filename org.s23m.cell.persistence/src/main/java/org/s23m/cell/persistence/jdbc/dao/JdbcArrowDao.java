@@ -102,18 +102,12 @@ public class JdbcArrowDao implements ArrowDao {
 			final boolean hasNext = resultSet.next();
 			if (hasNext) {
 				final String category = resultSet.getString(CATEGORY);
-				final String properClass = resultSet.getString(PROPER_CLASS);
+				final ProperClass properClass = ProperClass.valueOf(resultSet.getString(PROPER_CLASS));
 				final String fromGraph = resultSet.getString(FROM_GRAPH);
 				final String toGraph = resultSet.getString(TO_GRAPH);
 				final String urr = resultSet.getString(URR);
 
-				final Arrow result = new Arrow();
-				result.setCategory(category);
-				result.setProperClass(ProperClass.valueOf(properClass));
-				result.setFromGraph(fromGraph);
-				result.setToGraph(toGraph);
-				result.setUrr(urr);
-				return result;
+				return new Arrow(urr, category, properClass, fromGraph, toGraph);
 			} else {
 				return null;
 			}
