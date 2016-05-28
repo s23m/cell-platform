@@ -6,15 +6,22 @@ public interface IdentityDao {
 
 	/**
 	 * Retrieves the {@link Identity} with the given UUID
-	 * 
+	 *
 	 * @param uuid
 	 */
 	Identity get(String uuid);
 
 	/**
-	 * Save or update the given {@link Identity}
-	 * 
+	 * Inserts a new row into the database corresponding to the provided {@link Identity}
+	 *
 	 * @param entity
 	 */
-	void saveOrUpdate(Identity entity);
+	void insert(Identity entity);
+
+	/**
+	 * Updates the row corresponding to the provided {@link Identity}
+	 *
+	 * @param entity
+	 */
+	void update(Identity entity);
 }

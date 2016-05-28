@@ -13,9 +13,6 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 
 	@Test
 	public void testPersistence() throws SQLException {
-
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
-
 		final Identity identity = new Identity();
 		identity.setUuid(UUID.randomUUID().toString());
 		identity.setName("test");
@@ -25,7 +22,7 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 		identity.setPayload("some text");
 
 		// save identity
-		identityDao.saveOrUpdate(identity);
+		identityDao.insert(identity);
 
 		// now retrieve the result
 		final Identity retrieved = identityDao.get(identity.getUuid());

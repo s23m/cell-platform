@@ -2,6 +2,7 @@ package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createArrow;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createGraph;
@@ -20,40 +21,33 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 	@Test
 	public void testInsertionAndRetrieval() throws SQLException {
-		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
-		final JdbcArrowDao arrowDao = new JdbcArrowDao(queryRunner);
-
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
 		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
-		final Arrow result = createArrow(uuid, ProperClasses.EDGE);
+		final Arrow arrow = createArrow(uuid, ProperClasses.EDGE);
 
-		identityDao.saveOrUpdate(identity);
-		graphDao.saveOrUpdate(graph);
-		arrowDao.insert(result);
+		identityDao.insert(identity);
+		graphDao.insert(graph);
+		arrowDao.insert(arrow);
 
 		// now retrieve the result
-		final Arrow retrieved = arrowDao.get(result.getUrr());
+		final Arrow retrieved = arrowDao.get(arrow.getUrr());
 		assertNotNull(retrieved);
-		assertEquals(result.getUrr(), retrieved.getUrr());
+		assertEquals(arrow.getUrr(), retrieved.getUrr());
+		assertEquals(arrow.toString(), retrieved.toString());
 	}
 
 	@Test
 	public void testMultipleInsertionAttemptsFail() throws SQLException {
-		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
-		final JdbcArrowDao arrowDao = new JdbcArrowDao(queryRunner);
-
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
 		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
 		final Arrow result = createArrow(uuid, ProperClasses.EDGE);
 
-		identityDao.saveOrUpdate(identity);
-		graphDao.saveOrUpdate(graph);
+		identityDao.insert(identity);
+		graphDao.insert(graph);
 		arrowDao.insert(result);
 
 		try {
@@ -66,10 +60,6 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 
 	@Test
 	public void testUpdate() throws SQLException {
-		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
-		final JdbcArrowDao arrowDao = new JdbcArrowDao(queryRunner);
-
 		final String uuid = UUID.randomUUID().toString();
 
 		final Identity identity = createIdentity(uuid);
@@ -77,8 +67,8 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		final Arrow result = createArrow(uuid, ProperClasses.VISIBILITY);
 		final String urr = result.getUrr();
 
-		identityDao.saveOrUpdate(identity);
-		graphDao.saveOrUpdate(graph);
+		identityDao.insert(identity);
+		graphDao.insert(graph);
 		arrowDao.insert(result);
 
 		// now retrieve the result
@@ -97,6 +87,33 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 	public void testInvalidProperClassSpecified() {
 		final String uuid = UUID.randomUUID().toString();
 		createArrow(uuid, "invalid");
+	}
+
+	@Test
+	public void testForeignKeyConstraintViolated() {
+		final String uuid = UUID.randomUUID().toString();
+
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+		final Arrow arrow = createArrow(uuid, ProperClasses.EDGE);
+
+		identityDao.insert(identity);
+		graphDao.insert(graph);
+		arrowDao.insert(arrow);
+
+		try {
+			// violate foreign key by pointing to a non-existent graph UUID
+			arrow.setFromGraph("nonexistent");
+			arrowDao.update(arrow);
+			fail("Violation should have thrown an exception");
+		} catch (final RuntimeException e) {
+			// expected
+			final Throwable cause = e.getCause();
+			assertTrue(cause instanceof SQLException);
+			final String message = cause.getMessage();
+			final String expectedPrefix = "integrity constraint violation: foreign key no parent; FK_FROMGRAPH";
+			assertTrue(message.startsWith(expectedPrefix));
+		}
 	}
 
 }

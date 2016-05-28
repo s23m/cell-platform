@@ -18,12 +18,12 @@ public class JdbcIdentityDao implements IdentityDao {
 	private static final String PAYLOAD = "payload";
 
 	private static final String[] COLUMN_NAMES = {
-		NAME,
-		PLURAL_NAME,
-		CODE_NAME,
-		PLURAL_CODE_NAME,
-		PAYLOAD,
-		UUID
+			NAME,
+			PLURAL_NAME,
+			CODE_NAME,
+			PLURAL_CODE_NAME,
+			PAYLOAD,
+			UUID
 	};
 
 	private static final String SELECT_BY_PK_TEMPLATE = SqlQueryTemplates.createSelectByIdQueryTemplate(Identity.class, UUID);
@@ -31,7 +31,6 @@ public class JdbcIdentityDao implements IdentityDao {
 	private static final String UPDATE_TEMPLATE = SqlQueryTemplates.createUpdateStatementTemplate(Identity.class, COLUMN_NAMES);
 
 	private static final String INSERT_TEMPLATE = SqlQueryTemplates.createInsertStatementTemplate(Identity.class, COLUMN_NAMES);
-
 
 	private final QueryRunner queryRunner;
 
@@ -50,28 +49,53 @@ public class JdbcIdentityDao implements IdentityDao {
 		}
 	}
 
-	public void saveOrUpdate(final Identity i) {
+	@Override
+	public void insert(final Identity identity) {
+		final Object[] parameters = createParameters(identity);
+
 		try {
-			// try updating first
-			final Object[] parameters = {
-					i.getName(),
-					i.getPluralName(),
-					i.getCodeName(),
-					i.getPluralCodeName(),
-					i.getPayload(),
-					i.getUuid()
-			};
-			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
-			if (updates == 0) {
-				// record does not exist - insert it
-				final int inserts = queryRunner.update(INSERT_TEMPLATE, parameters);
-				if (inserts == 0) {
-					throw new RuntimeException("Failed to insert Identity: " + i);
+			final int updates = queryRunner.update(INSERT_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided identity did not have a primary key
+				if (identity.isTransient()) {
+					throw new RuntimeException("Failed to insert Identity - no primary key provided: " + identity);
+				} else {
+					throw new RuntimeException("Failed to insert Identity: " + identity);
 				}
 			}
 		} catch (final SQLException e) {
-			throw new RuntimeException("Could not save or update Identity: " + i, e);
+			throw new RuntimeException("Could not insert Identity: " + identity, e);
 		}
+	}
+
+	@Override
+	public void update(final Identity identity) {
+		final Object[] parameters = createParameters(identity);
+
+		try {
+			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided identity did not have a primary key
+				if (identity.isTransient()) {
+					throw new RuntimeException("Failed to update Identity - no primary key provided: " + identity);
+				} else {
+					throw new RuntimeException("Failed to update Identity: " + identity);
+				}
+			}
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not update Identity: " + identity, e);
+		}
+	}
+
+	private Object[] createParameters(final Identity identity) {
+		return new Object[] {
+				identity.getName(),
+				identity.getPluralName(),
+				identity.getCodeName(),
+				identity.getPluralCodeName(),
+				identity.getPayload(),
+				identity.getUuid()
+		};
 	}
 
 	private static class IdentityGetHandler implements ResultSetHandler<Identity> {

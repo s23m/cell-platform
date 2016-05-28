@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS identity (
+CREATE TABLE IF NOT EXISTS Identity (
   uuid varchar(36) NOT NULL,
   name varchar(100) NOT NULL,
   pluralName varchar(100) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS identity (
 
 -- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS graph (
+CREATE TABLE IF NOT EXISTS Graph (
   urr varchar(36) NOT NULL,
   uuid varchar(36) NOT NULL,
   category varchar(36) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS graph (
   
 -- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS arrow (
+CREATE TABLE IF NOT EXISTS Arrow (
 	urr varchar(36) NOT NULL,
 	category varchar(36) NOT NULL,
 	properClass varchar(36) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS arrow (
   
 -- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS edge (
+CREATE TABLE IF NOT EXISTS Edge (
   urr varchar(36) NOT NULL,
   minCardinalityValueFromEdgeEnd varchar(36) NOT NULL,
   minCardinalityValueToEdgeEnd varchar(36) NOT NULL,

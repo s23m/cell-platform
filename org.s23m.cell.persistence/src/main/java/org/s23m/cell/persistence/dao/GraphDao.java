@@ -6,15 +6,22 @@ public interface GraphDao {
 
 	/**
 	 * Retrieves the {@link Graph} with the given URR
-	 * 
+	 *
 	 * @param urr
 	 */
 	Graph get(String urr);
 
 	/**
-	 * Save or update the given {@link Graph}
-	 * 
+	 * Inserts a new row into the database corresponding to the provided {@link Graph}
+	 *
 	 * @param entity
 	 */
-	void saveOrUpdate(Graph entity);
+	void insert(Graph entity);
+
+	/**
+	 * Updates the row corresponding to the provided {@link Graph}
+	 *
+	 * @param entity
+	 */
+	void update(Graph entity);
 }

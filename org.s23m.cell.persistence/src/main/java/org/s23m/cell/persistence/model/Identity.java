@@ -19,6 +19,13 @@ public final class Identity {
 	// TODO change to byte[] ?
 	private String payload;
 
+	/**
+	 * Indicates whether a primary key has been assigned to the underlying row.
+	 */
+	public boolean isTransient() {
+		return uuid == null;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}

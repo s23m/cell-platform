@@ -42,6 +42,13 @@ public class Graph {
 
 	private String contentAsXml;
 
+	/**
+	 * Indicates whether a primary key has been assigned to the underlying row.
+	 */
+	public boolean isTransient() {
+		return urr == null;
+	}
+
 	public String getUrr() {
 		return urr;
 	}

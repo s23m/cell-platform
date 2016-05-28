@@ -2,6 +2,10 @@ package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createGraph;
+import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
 import java.sql.SQLException;
 import java.util.UUID;
@@ -15,44 +19,85 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
 	@Test
 	public void testPersistence() throws SQLException {
-
-		final JdbcGraphDao graphDao = new JdbcGraphDao(queryRunner);
-		final JdbcIdentityDao identityDao = new JdbcIdentityDao(queryRunner);
-
 		final String uuid = UUID.randomUUID().toString();
-		final Identity identity = new Identity();
-		identity.setUuid(uuid);
-		identity.setName("graph test");
-		identity.setPluralName("tests");
-		identity.setCodeName("test");
-		identity.setPluralCodeName("tests");
-		identity.setPayload("some text");
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
 
-		final Graph result = new Graph();
-		result.setUrr(uuid);
-		result.setUuid(uuid);
-		// (typically a different uuid)
-		result.setCategory(uuid);
-		// (typically a different uuid)
-		result.setContainer(uuid);
-		// (typically a different uuid)
-		result.setIsAbstractValue(uuid);
-		// (typically a different uuid)
-		result.setMaxCardinalityValueInContainer(uuid);
-		result.setProperClass(ProperClasses.VERTEX);
-		result.setContentAsXml("<xml></xml>");
+		identityDao.insert(identity);
+		graphDao.insert(graph);
 
-		// save identity
-		identityDao.saveOrUpdate(identity);
-
-		// save graph
-		graphDao.saveOrUpdate(result);
-
-		// now retrieve the result
-		final Graph retrieved = graphDao.get(result.getUrr());
-
+		final Graph retrieved = graphDao.get(graph.getUrr());
 		assertNotNull(retrieved);
+		assertEquals(graph.getUrr(), retrieved.getUrr());
+		assertEquals(graph.toString(), retrieved.toString());
+	}
 
-		assertEquals(result.getUrr(), retrieved.getUrr());
+	@Test
+	public void testMultipleInsertionAttemptsFail() throws SQLException {
+		final String uuid = UUID.randomUUID().toString();
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+
+		identityDao.insert(identity);
+		graphDao.insert(graph);
+
+		try {
+			graphDao.insert(graph);
+			fail("Multiple inserts should be disallowed");
+		} catch (final RuntimeException e) {
+			// expected
+		}
+	}
+
+	@Test
+	public void testUpdate() throws SQLException {
+		final String uuid = "1";
+
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+
+		identityDao.insert(identity);
+		graphDao.insert(graph);
+
+		// retrieve the result
+		final Graph retrieved1 = graphDao.get(uuid);
+		assertEquals(uuid, retrieved1.getContainer());
+
+		// store another identity
+		final String uuid2 = "2";
+		final Identity identity2 = createIdentity(uuid2);
+		identityDao.insert(identity2);
+
+		// modify property and update
+		graph.setContainer(uuid2);
+		graphDao.update(graph);
+
+		final Graph retrieved2 = graphDao.get(uuid);
+		assertEquals(uuid2, retrieved2.getContainer());
+	}
+
+	@Test
+	public void testForeignKeyConstraintViolated() {
+		final String uuid = "1";
+
+		final Identity identity = createIdentity(uuid);
+		final Graph graph = createGraph(uuid, ProperClasses.VERTEX);
+
+		identityDao.insert(identity);
+		graphDao.insert(graph);
+
+		try {
+			// violate foreign key by pointing to a non-existent identity UUID
+			graph.setCategory("2");
+			graphDao.update(graph);
+			fail("Violation should have thrown an exception");
+		} catch (final RuntimeException e) {
+			// expected
+			final Throwable cause = e.getCause();
+			assertTrue(cause instanceof SQLException);
+			final String message = cause.getMessage();
+			final String expectedPrefix = "integrity constraint violation: foreign key no parent; FK_CATEGORY";
+			assertTrue(message.startsWith(expectedPrefix));
+		}
 	}
 }

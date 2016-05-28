@@ -20,14 +20,14 @@ public class JdbcGraphDao implements GraphDao {
 	private static final String CONTENT_AS_XML = "contentAsXml";
 
 	private static final String[] COLUMN_NAMES = {
-		UUID,
-		CATEGORY,
-		CONTAINER,
-		IS_ABSTRACT_VALUE,
-		MAX_CARDINALITY_VALUE_IN_CONTAINER,
-		PROPER_CLASS,
-		CONTENT_AS_XML,
-		URR
+			UUID,
+			CATEGORY,
+			CONTAINER,
+			IS_ABSTRACT_VALUE,
+			MAX_CARDINALITY_VALUE_IN_CONTAINER,
+			PROPER_CLASS,
+			CONTENT_AS_XML,
+			URR
 	};
 
 	private static final String SELECT_BY_PK_TEMPLATE = SqlQueryTemplates.createSelectByIdQueryTemplate(Graph.class, URR);
@@ -53,30 +53,55 @@ public class JdbcGraphDao implements GraphDao {
 		}
 	}
 
-	public void saveOrUpdate(final Graph graph) {
+	@Override
+	public void insert(final Graph graph) {
+		final Object[] parameters = createParameters(graph);
+
 		try {
-			// try updating first
-			final Object[] parameters = {
-					graph.getUuid(),
-					graph.getCategory(),
-					graph.getContainer(),
-					graph.getIsAbstractValue(),
-					graph.getMaxCardinalityValueInContainer(),
-					graph.getProperClass(),
-					graph.getContentAsXml(),
-					graph.getUrr()
-			};
-			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
-			if (updates == 0) {
-				// record does not exist - insert it
-				final int inserts = queryRunner.update(INSERT_TEMPLATE, parameters);
-				if (inserts == 0) {
+			final int updates = queryRunner.update(INSERT_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided graph did not have a primary key
+				if (graph.isTransient()) {
+					throw new RuntimeException("Failed to insert Graph - no primary key provided: " + graph);
+				} else {
 					throw new RuntimeException("Failed to insert Graph: " + graph);
 				}
 			}
 		} catch (final SQLException e) {
-			throw new RuntimeException("Could not save or update Graph: " + graph, e);
+			throw new RuntimeException("Could not insert Graph: " + graph, e);
 		}
+	}
+
+	@Override
+	public void update(final Graph graph) {
+		final Object[] parameters = createParameters(graph);
+
+		try {
+			final int updates = queryRunner.update(UPDATE_TEMPLATE, parameters);
+			if (updates != 1) {
+				// failure - check if the provided graph did not have a primary key
+				if (graph.isTransient()) {
+					throw new RuntimeException("Failed to update Graph - no primary key provided: " + graph);
+				} else {
+					throw new RuntimeException("Failed to update Graph: " + graph);
+				}
+			}
+		} catch (final SQLException e) {
+			throw new RuntimeException("Could not update Graph: " + graph, e);
+		}
+	}
+
+	private Object[] createParameters(final Graph graph) {
+		return new Object[] {
+				graph.getUuid(),
+				graph.getCategory(),
+				graph.getContainer(),
+				graph.getIsAbstractValue(),
+				graph.getMaxCardinalityValueInContainer(),
+				graph.getProperClass(),
+				graph.getContentAsXml(),
+				graph.getUrr()
+		};
 	}
 
 	private static class GraphGetHandler implements ResultSetHandler<Graph> {
