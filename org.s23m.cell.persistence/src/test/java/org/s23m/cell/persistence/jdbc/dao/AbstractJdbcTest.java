@@ -22,7 +22,7 @@ public class AbstractJdbcTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dataSource = TestDatabaseSetup.createHsqldbDatasource();
+		dataSource = createHsqldbDatasource();
 		executeDDL(dataSource);
 
 		queryRunner = new QueryRunner(dataSource);
@@ -45,7 +45,17 @@ public class AbstractJdbcTest {
 		connection.close();
 	}
 
-	private static String readStream(final InputStream is) {
+	private HikariDataSource createHsqldbDatasource() {
+		final HikariDataSource dataSource = new HikariDataSource();
+		//dataSource.setDataSourceClassName("com.mysql.jdbc.Driver");
+		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
+		dataSource.setJdbcUrl("jdbc:hsqldb:mem:test");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
+		return dataSource;
+	}
+
+	private String readStream(final InputStream is) {
 		final Scanner scanner = new Scanner(is);
 		final Scanner s = scanner.useDelimiter("\\A");
 		try {
