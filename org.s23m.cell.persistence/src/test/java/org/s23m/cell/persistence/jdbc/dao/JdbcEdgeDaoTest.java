@@ -88,8 +88,12 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 		identityDao.insert(identity2);
 
 		// modify edge property and update
-		edge.setIsNavigableValueToEdgeEnd(uuid2);
-		edgeDao.update(edge);
+		final Edge modified = new Edge(edge.getUrr(), edge.getMinCardinalityValueFromEdgeEnd(), edge.getMinCardinalityValueToEdgeEnd(),
+				edge.getMaxCardinalityValueFromEdgeEnd(), edge.getMaxCardinalityValueToEdgeEnd(),
+				edge.getIsNavigableValueFromEdgeEnd(), uuid2, edge.getIsContainerValueFromEdgeEnd(),
+				edge.getIsContainerValueToEdgeEnd(), edge.getFromEdgeEnd(), edge.getToEdgeEnd());
+
+		edgeDao.update(modified);
 
 		final Edge retrieved2 = edgeDao.get(uuid);
 		assertEquals(uuid2, retrieved2.getIsNavigableValueToEdgeEnd());
@@ -111,8 +115,12 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
 		try {
 			// violate foreign key by pointing to a non-existent identity UUID
-			edge.setIsContainerValueFromEdgeEnd("2");
-			edgeDao.update(edge);
+			final Edge modified = new Edge(edge.getUrr(), edge.getMinCardinalityValueFromEdgeEnd(), edge.getMinCardinalityValueToEdgeEnd(),
+					edge.getMaxCardinalityValueFromEdgeEnd(), edge.getMaxCardinalityValueToEdgeEnd(),
+					edge.getIsNavigableValueFromEdgeEnd(), edge.getIsNavigableValueToEdgeEnd(), "2",
+					edge.getIsContainerValueToEdgeEnd(), edge.getFromEdgeEnd(), edge.getToEdgeEnd());
+
+			edgeDao.update(modified);
 			fail("Violation should have thrown an exception");
 		} catch (final RuntimeException e) {
 			// expected

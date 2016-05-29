@@ -11,10 +11,13 @@ import java.util.StringJoiner;
 
 public final class Arrow {
 
+	/**
+	 * The allowable proper classes
+	 */
 	private static final Set<ProperClass> ALLOWABLE_PROPER_CLASSES = EnumSet.of(Edge, Visibility, SuperSetReference);
 
 	/**
-	 * The primary key
+	 * The primary key (a UUID), which is a reference to a {@link Graph}
 	 */
 	private final String urr;
 
@@ -23,6 +26,9 @@ public final class Arrow {
 	 */
 	private final String category;
 
+	/**
+	 * The proper class, which is one of {@link #ALLOWABLE_PROPER_CLASSES}
+	 */
 	private final ProperClass properClass;
 
 	/**
@@ -34,6 +40,19 @@ public final class Arrow {
 	 * Reference to a {@link Graph}.
 	 */
 	private final String toGraph;
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param category
+	 * @param properClass
+	 * @param fromGraph
+	 * @param toGraph
+	 */
+	public Arrow(final Graph urr, final Identity category, final ProperClass properClass, final Graph fromGraph, final Graph toGraph) {
+		this(urr.getUrr(), category.getUuid(), properClass, fromGraph.getUrr(), toGraph.getUrr());
+	}
 
 	/**
 	 * Constructor

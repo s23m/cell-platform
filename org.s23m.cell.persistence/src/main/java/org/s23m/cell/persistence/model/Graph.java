@@ -54,6 +54,24 @@ public final class Graph {
 	 * @param maxCardinalityValueInContainer
 	 * @param contentAsXml
 	 */
+	public Graph(final Identity urr, final Identity uuid, final Identity category, final Identity container, final Identity isAbstractValue,
+			final ProperClass properClass, final Identity maxCardinalityValueInContainer, final String contentAsXml) {
+		this(urr.getUuid(), uuid.getUuid(), category.getUuid(), container.getUuid(), isAbstractValue.getUuid(), properClass,
+				maxCardinalityValueInContainer.getUuid(), contentAsXml);
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param uuid
+	 * @param category
+	 * @param container
+	 * @param isAbstractValue
+	 * @param properClass
+	 * @param maxCardinalityValueInContainer
+	 * @param contentAsXml
+	 */
 	public Graph(final String urr, final String uuid, final String category, final String container, final String isAbstractValue,
 			final ProperClass properClass, final String maxCardinalityValueInContainer, final String contentAsXml) {
 		this.urr = Objects.requireNonNull(urr, "urr must not be null");

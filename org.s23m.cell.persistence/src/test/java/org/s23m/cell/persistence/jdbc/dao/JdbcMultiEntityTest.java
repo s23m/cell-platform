@@ -61,18 +61,23 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	}
 
 	private Edge createAndSaveEdge() {
-		final Edge edge = new Edge();
-		edge.setMinCardinalityValueFromEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setMinCardinalityValueToEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setMaxCardinalityValueFromEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setMaxCardinalityValueToEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setIsNavigableValueFromEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setIsNavigableValueToEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setIsContainerValueFromEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setIsContainerValueToEdgeEnd(createAndSaveIdentity().getUuid());
-		edge.setFromEdgeEnd(createAndSaveGraph().getUrr());
-		edge.setToEdgeEnd(createAndSaveGraph().getUrr());
-		edge.setUrr(createAndSaveArrow().getUrr());
+		final Arrow urr = createAndSaveArrow();
+
+		final Identity minCardinalityValueFromEdgeEnd = createAndSaveIdentity();
+		final Identity minCardinalityValueToEdgeEnd = createAndSaveIdentity();
+		final Identity maxCardinalityValueFromEdgeEnd = createAndSaveIdentity();
+		final Identity maxCardinalityValueToEdgeEnd = createAndSaveIdentity();
+		final Identity isNavigableValueFromEdgeEnd = createAndSaveIdentity();
+		final Identity isNavigableValueToEdgeEnd = createAndSaveIdentity();
+		final Identity isContainerValueFromEdgeEnd = createAndSaveIdentity();
+		final Identity isContainerValueToEdgeEnd = createAndSaveIdentity();
+		final Graph fromEdgeEnd = createAndSaveGraph();
+		final Graph toEdgeEnd = createAndSaveGraph();
+
+		final Edge edge = new Edge(urr, minCardinalityValueFromEdgeEnd, minCardinalityValueToEdgeEnd,
+				maxCardinalityValueFromEdgeEnd, maxCardinalityValueToEdgeEnd,
+				isNavigableValueFromEdgeEnd, isNavigableValueToEdgeEnd, isContainerValueFromEdgeEnd,
+				isContainerValueToEdgeEnd, fromEdgeEnd, toEdgeEnd);
 
 		edgeDao.insert(edge);
 

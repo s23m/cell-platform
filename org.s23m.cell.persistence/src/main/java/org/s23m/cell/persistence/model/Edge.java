@@ -7,57 +7,115 @@ public final class Edge {
 	/**
 	 * The primary key
 	 */
-	private String urr;
+	private final String urr;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String minCardinalityValueFromEdgeEnd;
+	private final String minCardinalityValueFromEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String minCardinalityValueToEdgeEnd;
+	private final String minCardinalityValueToEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String maxCardinalityValueFromEdgeEnd;
+	private final String maxCardinalityValueFromEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String maxCardinalityValueToEdgeEnd;
+	private final String maxCardinalityValueToEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String isNavigableValueFromEdgeEnd;
+	private final String isNavigableValueFromEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String isNavigableValueToEdgeEnd;
+	private final String isNavigableValueToEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String isContainerValueFromEdgeEnd;
+	private final String isContainerValueFromEdgeEnd;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String isContainerValueToEdgeEnd;
+	private final String isContainerValueToEdgeEnd;
 
 	/**
 	 * Reference to a {@link Graph}.
 	 */
-	private String fromEdgeEnd;
+	private final String fromEdgeEnd;
 
 	/**
 	 * Reference to a {@link Graph}.
 	 */
-	private String toEdgeEnd;
+	private final String toEdgeEnd;
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param minCardinalityValueFromEdgeEnd
+	 * @param minCardinalityValueToEdgeEnd
+	 * @param maxCardinalityValueFromEdgeEnd
+	 * @param maxCardinalityValueToEdgeEnd
+	 * @param isNavigableValueFromEdgeEnd
+	 * @param isNavigableValueToEdgeEnd
+	 * @param isContainerValueFromEdgeEnd
+	 * @param isContainerValueToEdgeEnd
+	 * @param fromEdgeEnd
+	 * @param toEdgeEnd
+	 */
+	public Edge(final Arrow urr, final Identity minCardinalityValueFromEdgeEnd, final Identity minCardinalityValueToEdgeEnd,
+			final Identity maxCardinalityValueFromEdgeEnd, final Identity maxCardinalityValueToEdgeEnd,
+			final Identity isNavigableValueFromEdgeEnd, final Identity isNavigableValueToEdgeEnd, final Identity isContainerValueFromEdgeEnd,
+			final Identity isContainerValueToEdgeEnd, final Graph fromEdgeEnd, final Graph toEdgeEnd) {
+
+		this(urr.getUrr(), minCardinalityValueFromEdgeEnd.getUuid(), minCardinalityValueToEdgeEnd.getUuid(),
+				maxCardinalityValueFromEdgeEnd.getUuid(), maxCardinalityValueToEdgeEnd.getUuid(),
+				isNavigableValueFromEdgeEnd.getUuid(), isNavigableValueToEdgeEnd.getUuid(), isContainerValueFromEdgeEnd.getUuid(),
+				isContainerValueToEdgeEnd.getUuid(), fromEdgeEnd.getUrr(), toEdgeEnd.getUrr());
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param minCardinalityValueFromEdgeEnd
+	 * @param minCardinalityValueToEdgeEnd
+	 * @param maxCardinalityValueFromEdgeEnd
+	 * @param maxCardinalityValueToEdgeEnd
+	 * @param isNavigableValueFromEdgeEnd
+	 * @param isNavigableValueToEdgeEnd
+	 * @param isContainerValueFromEdgeEnd
+	 * @param isContainerValueToEdgeEnd
+	 * @param fromEdgeEnd
+	 * @param toEdgeEnd
+	 */
+	public Edge(final String urr, final String minCardinalityValueFromEdgeEnd, final String minCardinalityValueToEdgeEnd,
+			final String maxCardinalityValueFromEdgeEnd, final String maxCardinalityValueToEdgeEnd,
+			final String isNavigableValueFromEdgeEnd, final String isNavigableValueToEdgeEnd, final String isContainerValueFromEdgeEnd,
+			final String isContainerValueToEdgeEnd, final String fromEdgeEnd, final String toEdgeEnd) {
+		this.urr = urr;
+		this.minCardinalityValueFromEdgeEnd = minCardinalityValueFromEdgeEnd;
+		this.minCardinalityValueToEdgeEnd = minCardinalityValueToEdgeEnd;
+		this.maxCardinalityValueFromEdgeEnd = maxCardinalityValueFromEdgeEnd;
+		this.maxCardinalityValueToEdgeEnd = maxCardinalityValueToEdgeEnd;
+		this.isNavigableValueFromEdgeEnd = isNavigableValueFromEdgeEnd;
+		this.isNavigableValueToEdgeEnd = isNavigableValueToEdgeEnd;
+		this.isContainerValueFromEdgeEnd = isContainerValueFromEdgeEnd;
+		this.isContainerValueToEdgeEnd = isContainerValueToEdgeEnd;
+		this.fromEdgeEnd = fromEdgeEnd;
+		this.toEdgeEnd = toEdgeEnd;
+	}
 
 	/**
 	 * Indicates whether a primary key has been assigned to the underlying row.
@@ -70,88 +128,44 @@ public final class Edge {
 		return urr;
 	}
 
-	public void setUrr(final String urr) {
-		this.urr = urr;
-	}
-
 	public String getMinCardinalityValueFromEdgeEnd() {
 		return minCardinalityValueFromEdgeEnd;
-	}
-
-	public void setMinCardinalityValueFromEdgeEnd(final String minCardinalityValueFromEdgeEnd) {
-		this.minCardinalityValueFromEdgeEnd = minCardinalityValueFromEdgeEnd;
 	}
 
 	public String getMinCardinalityValueToEdgeEnd() {
 		return minCardinalityValueToEdgeEnd;
 	}
 
-	public void setMinCardinalityValueToEdgeEnd(final String minCardinalityValueToEdgeEnd) {
-		this.minCardinalityValueToEdgeEnd = minCardinalityValueToEdgeEnd;
-	}
-
 	public String getMaxCardinalityValueFromEdgeEnd() {
 		return maxCardinalityValueFromEdgeEnd;
-	}
-
-	public void setMaxCardinalityValueFromEdgeEnd(final String maxCardinalityValueFromEdgeEnd) {
-		this.maxCardinalityValueFromEdgeEnd = maxCardinalityValueFromEdgeEnd;
 	}
 
 	public String getMaxCardinalityValueToEdgeEnd() {
 		return maxCardinalityValueToEdgeEnd;
 	}
 
-	public void setMaxCardinalityValueToEdgeEnd(final String maxCardinalityValueToEdgeEnd) {
-		this.maxCardinalityValueToEdgeEnd = maxCardinalityValueToEdgeEnd;
-	}
-
 	public String getIsNavigableValueFromEdgeEnd() {
 		return isNavigableValueFromEdgeEnd;
-	}
-
-	public void setIsNavigableValueFromEdgeEnd(final String isNavigableValueFromEdgeEnd) {
-		this.isNavigableValueFromEdgeEnd = isNavigableValueFromEdgeEnd;
 	}
 
 	public String getIsNavigableValueToEdgeEnd() {
 		return isNavigableValueToEdgeEnd;
 	}
 
-	public void setIsNavigableValueToEdgeEnd(final String isNavigableValueToEdgeEnd) {
-		this.isNavigableValueToEdgeEnd = isNavigableValueToEdgeEnd;
-	}
-
 	public String getIsContainerValueFromEdgeEnd() {
 		return isContainerValueFromEdgeEnd;
-	}
-
-	public void setIsContainerValueFromEdgeEnd(final String isContainerValueFromEdgeEnd) {
-		this.isContainerValueFromEdgeEnd = isContainerValueFromEdgeEnd;
 	}
 
 	public String getIsContainerValueToEdgeEnd() {
 		return isContainerValueToEdgeEnd;
 	}
 
-	public void setIsContainerValueToEdgeEnd(final String isContainerValueToEdgeEnd) {
-		this.isContainerValueToEdgeEnd = isContainerValueToEdgeEnd;
-	}
-
 	public String getFromEdgeEnd() {
 		return fromEdgeEnd;
 	}
 
-	public void setFromEdgeEnd(final String fromEdgeEnd) {
-		this.fromEdgeEnd = fromEdgeEnd;
-	}
-
 	public String getToEdgeEnd() {
 		return toEdgeEnd;
-	}
-
-	public void setToEdgeEnd(final String toEdgeEnd) {
-		this.toEdgeEnd = toEdgeEnd;
 	}
 
 	@Override

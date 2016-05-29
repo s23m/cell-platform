@@ -19,19 +19,7 @@ public class TestData {
 	 * Creates an Edge instance by reusing the same provided UUID for the primary key and all foreign keys
 	 */
 	public static Edge createEdge(final String uuid) {
-		final Edge edge = new Edge();
-		edge.setUrr(uuid);
-		edge.setMinCardinalityValueFromEdgeEnd(uuid);
-		edge.setMinCardinalityValueToEdgeEnd(uuid);
-		edge.setMaxCardinalityValueFromEdgeEnd(uuid);
-		edge.setMaxCardinalityValueToEdgeEnd(uuid);
-		edge.setIsNavigableValueFromEdgeEnd(uuid);
-		edge.setIsNavigableValueToEdgeEnd(uuid);
-		edge.setIsContainerValueFromEdgeEnd(uuid);
-		edge.setIsContainerValueToEdgeEnd(uuid);
-		edge.setFromEdgeEnd(uuid);
-		edge.setToEdgeEnd(uuid);
-		return edge;
+		return new Edge(uuid, uuid, uuid, uuid, uuid, uuid, uuid, uuid, uuid, uuid, uuid);
 	}
 
 	/*
