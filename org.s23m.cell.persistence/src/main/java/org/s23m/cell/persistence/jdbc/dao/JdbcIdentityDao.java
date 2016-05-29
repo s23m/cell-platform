@@ -32,6 +32,14 @@ public final class JdbcIdentityDao implements IdentityDao {
 
 	private static final String INSERT_TEMPLATE = SqlQueryTemplates.createInsertStatementTemplate(Identity.class, COLUMN_NAMES);
 
+	private static final int NAME_LENGTH_LIMIT = 100;
+
+	private static final int PLURAL_NAME_LENGTH_LIMIT = 100;
+
+	private static final int CODE_NAME_LENGTH_LIMIT = 100;
+
+	private static final int PLURAL_CODE_NAME_LENGTH_LIMIT = 100;
+
 	private final QueryRunner queryRunner;
 
 	private final IdentityGetHandler handler;
@@ -88,14 +96,31 @@ public final class JdbcIdentityDao implements IdentityDao {
 	}
 
 	private Object[] createParameters(final Identity identity) {
+		// validate the lengths of fields
+		final String name = identity.getName();
+		final String pluralName = identity.getPluralName();
+		final String codeName = identity.getCodeName();
+		final String pluralCodeName = identity.getPluralCodeName();
+
+		validateLength(name, "name", NAME_LENGTH_LIMIT);
+		validateLength(pluralName, "pluralName", PLURAL_NAME_LENGTH_LIMIT);
+		validateLength(codeName, "codeName", CODE_NAME_LENGTH_LIMIT);
+		validateLength(pluralCodeName, "pluralCodeName", PLURAL_CODE_NAME_LENGTH_LIMIT);
+
 		return new Object[] {
-				identity.getName(),
-				identity.getPluralName(),
-				identity.getCodeName(),
-				identity.getPluralCodeName(),
+				name,
+				pluralName,
+				codeName,
+				pluralCodeName,
 				identity.getPayload(),
 				identity.getUuid()
 		};
+	}
+
+	private void validateLength(final String string, final String fieldName, final int lengthLimit) {
+		if (string.length() > lengthLimit) {
+			throw new IllegalArgumentException("Identity " + fieldName + " is invalid (exceeds length limit of " + lengthLimit + ")");
+		}
 	}
 
 	private static class IdentityGetHandler implements ResultSetHandler<Identity> {

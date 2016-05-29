@@ -5,7 +5,10 @@ import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 import org.s23m.cell.persistence.model.Identity;
@@ -58,5 +61,20 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 
 		final Identity retrieved2 = identityDao.get(uuid);
 		assertEquals(modified.getName(), retrieved2.getName());
+	}
+
+	@Test
+	public void testFieldLengthExceeded() throws SQLException {
+		final Collector<CharSequence, ?, String> commaJoiner = Collectors.joining("");
+		final String longName = Collections.nCopies(101, "a").stream().collect(commaJoiner);
+
+		final Identity identity = new Identity("uuid", longName, "pluralName", "codeName", "pluralCodeName", "payload");
+
+		try {
+			identityDao.insert(identity);
+			fail("Violating length should cause an exception");
+		} catch (final IllegalArgumentException e) {
+			assertEquals("Identity name is invalid (exceeds length limit of 100)", e.getMessage());
+		}
 	}
 }
