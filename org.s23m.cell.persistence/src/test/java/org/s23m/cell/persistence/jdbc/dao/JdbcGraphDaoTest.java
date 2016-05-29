@@ -1,7 +1,6 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createGraph;
@@ -27,9 +26,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 		graphDao.insert(graph);
 
 		final Graph retrieved = graphDao.get(graph.getUrr());
-		assertNotNull(retrieved);
-		assertEquals(graph.getUrr(), retrieved.getUrr());
-		assertEquals(graph.toString(), retrieved.toString());
+		assertEquals(graph, retrieved);
 	}
 
 	@Test
