@@ -1,45 +1,70 @@
 package org.s23m.cell.persistence.model;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
-public class Graph {
+public final class Graph {
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String urr;
+	private final String urr;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String uuid;
+	private final String uuid;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String category;
+	private final String category;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String container;
+	private final String container;
 
 	/**
 	 * Reference to an {@link Identity}.
 	 */
-	private String isAbstractValue;
+	private final String isAbstractValue;
+
+	private final ProperClass properClass;
 
 	/**
 	 * Nullable reference to an {@link Identity}.
 	 */
-	private String maxCardinalityValueInContainer;
-
-	private ProperClass properClass;
+	private final String maxCardinalityValueInContainer;
 
 	/**
-	 * Reference to an {@link Identity}.
+	 * The content of this graph as XML.
 	 */
-	private String contentAsXml;
+	private final String contentAsXml;
+
+	/**
+	 * Constructor
+	 *
+	 * @param urr
+	 * @param uuid
+	 * @param category
+	 * @param container
+	 * @param isAbstractValue
+	 * @param properClass
+	 * @param maxCardinalityValueInContainer
+	 * @param contentAsXml
+	 */
+	public Graph(final String urr, final String uuid, final String category, final String container, final String isAbstractValue,
+			final ProperClass properClass, final String maxCardinalityValueInContainer, final String contentAsXml) {
+		this.urr = Objects.requireNonNull(urr, "urr must not be null");
+		this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
+		this.category = Objects.requireNonNull(category, "category must not be null");
+		this.container = Objects.requireNonNull(container, "container must not be null");
+		this.isAbstractValue = Objects.requireNonNull(isAbstractValue, "isAbstractValue must not be null");
+		this.properClass = Objects.requireNonNull(properClass, "properClass must not be null");
+		this.maxCardinalityValueInContainer = maxCardinalityValueInContainer;
+		this.contentAsXml = contentAsXml;
+	}
 
 	/**
 	 * Indicates whether a primary key has been assigned to the underlying row.
@@ -52,64 +77,91 @@ public class Graph {
 		return urr;
 	}
 
-	public void setUrr(final String urr) {
-		this.urr = urr;
-	}
-
 	public String getUuid() {
 		return uuid;
-	}
-
-	public void setUuid(final String uuid) {
-		this.uuid = uuid;
 	}
 
 	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(final String category) {
-		this.category = category;
-	}
-
 	public String getContainer() {
 		return container;
-	}
-
-	public void setContainer(final String container) {
-		this.container = container;
 	}
 
 	public String getIsAbstractValue() {
 		return isAbstractValue;
 	}
 
-	public void setIsAbstractValue(final String isAbstractValue) {
-		this.isAbstractValue = isAbstractValue;
+	public ProperClass getProperClass() {
+		return properClass;
 	}
 
 	public String getMaxCardinalityValueInContainer() {
 		return maxCardinalityValueInContainer;
 	}
 
-	public void setMaxCardinalityValueInContainer(final String maxCardinalityValueInContainer) {
-		this.maxCardinalityValueInContainer = maxCardinalityValueInContainer;
-	}
-
-	public ProperClass getProperClass() {
-		return properClass;
-	}
-
-	public void setProperClass(final ProperClass properClass) {
-		this.properClass = properClass;
-	}
-
 	public String getContentAsXml() {
 		return contentAsXml;
 	}
 
-	public void setContentAsXml(final String contentAsXml) {
-		this.contentAsXml = contentAsXml;
+	@Override
+	public int hashCode() {
+		return uuid.hashCode();
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Graph other = (Graph) obj;
+
+		// mandatory fields
+
+		if (!urr.equals(other.urr)) {
+			return false;
+		}
+		if (!uuid.equals(other.uuid)) {
+			return false;
+		}
+		if (!category.equals(other.category)) {
+			return false;
+		}
+		if (!container.equals(other.container)) {
+			return false;
+		}
+		if (!isAbstractValue.equals(other.isAbstractValue)) {
+			return false;
+		}
+		if (properClass != other.properClass) {
+			return false;
+		}
+
+		// optional fields
+
+		if (maxCardinalityValueInContainer == null) {
+			if (other.maxCardinalityValueInContainer != null) {
+				return false;
+			}
+		} else if (!maxCardinalityValueInContainer.equals(other.maxCardinalityValueInContainer)) {
+			return false;
+		}
+		if (contentAsXml == null) {
+			if (other.contentAsXml != null) {
+				return false;
+			}
+		} else if (!contentAsXml.equals(other.contentAsXml)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -120,8 +172,8 @@ public class Graph {
 				.add("category = " + category)
 				.add("container = " + container)
 				.add("isAbstractValue = " + isAbstractValue)
-				.add("maxCardinalityValueInContainer = " + maxCardinalityValueInContainer)
 				.add("properClass = " + properClass)
+				.add("maxCardinalityValueInContainer = " + maxCardinalityValueInContainer)
 				.add("contentAsXml = " + contentAsXml)
 				.toString();
 	}

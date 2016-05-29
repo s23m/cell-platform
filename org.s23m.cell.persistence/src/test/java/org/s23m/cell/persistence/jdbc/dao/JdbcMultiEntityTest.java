@@ -31,15 +31,16 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	}
 
 	private Graph createAndSaveGraph() {
-		final Graph graph = new Graph();
-		graph.setUuid(createAndSaveIdentity().getUuid());
-		graph.setCategory(createAndSaveIdentity().getUuid());
-		graph.setContainer(createAndSaveIdentity().getUuid());
-		graph.setIsAbstractValue(createAndSaveIdentity().getUuid());
-		graph.setMaxCardinalityValueInContainer(createAndSaveIdentity().getUuid());
-		graph.setProperClass(ProperClass.Edge);
-		graph.setContentAsXml("content");
-		graph.setUrr(createAndSaveIdentity().getUuid());
+		final String uuid = createAndSaveIdentity().getUuid();
+		final String category = createAndSaveIdentity().getUuid();
+		final String container = createAndSaveIdentity().getUuid();
+		final String isAbstractValue = createAndSaveIdentity().getUuid();
+		final String maxCardinalityValueInContainer = createAndSaveIdentity().getUuid();
+		final ProperClass properClass = ProperClass.Edge;
+		final String contentAsXml = "content";
+		final String urr = createAndSaveIdentity().getUuid();
+
+		final Graph graph = new Graph(urr, uuid, category, container, isAbstractValue, properClass, maxCardinalityValueInContainer, contentAsXml);
 
 		graphDao.insert(graph);
 

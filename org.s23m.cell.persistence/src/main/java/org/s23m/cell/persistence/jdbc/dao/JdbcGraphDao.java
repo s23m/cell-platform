@@ -115,20 +115,11 @@ public class JdbcGraphDao implements GraphDao {
 				final String container = resultSet.getString(CONTAINER);
 				final String isAbstractValue = resultSet.getString(IS_ABSTRACT_VALUE);
 				final String maxCardinalityValueInContainer = resultSet.getString(MAX_CARDINALITY_VALUE_IN_CONTAINER);
-				final String properClass = resultSet.getString(PROPER_CLASS);
+				final ProperClass properClass = ProperClass.valueOf(resultSet.getString(PROPER_CLASS));
 				final String contentAsXml = resultSet.getString(CONTENT_AS_XML);
 				final String urr = resultSet.getString(URR);
 
-				final Graph result = new Graph();
-				result.setUuid(uuid);
-				result.setCategory(category);
-				result.setContainer(container);
-				result.setIsAbstractValue(isAbstractValue);
-				result.setMaxCardinalityValueInContainer(maxCardinalityValueInContainer);
-				result.setProperClass(ProperClass.valueOf(properClass));
-				result.setContentAsXml(contentAsXml);
-				result.setUrr(urr);
-				return result;
+				return new Graph(urr, uuid, category, container, isAbstractValue, properClass, maxCardinalityValueInContainer, contentAsXml);
 			} else {
 				return null;
 			}

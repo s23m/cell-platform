@@ -38,16 +38,7 @@ public class TestData {
 	 * Creates a Graph instance by reusing the same provided UUID for the primary key and all foreign keys
 	 */
 	public static Graph createGraph(final String uuid, final ProperClass properClass) {
-		final Graph graph = new Graph();
-		graph.setUrr(uuid);
-		graph.setUuid(uuid);
-		graph.setCategory(uuid);
-		graph.setContainer(uuid);
-		graph.setIsAbstractValue(uuid);
-		graph.setMaxCardinalityValueInContainer(uuid);
-		graph.setProperClass(properClass);
-		graph.setContentAsXml("<xml>content</xml>");
-		return graph;
+		return new Graph(uuid, uuid, uuid, uuid, uuid, properClass, uuid, uuid);
 	}
 
 	/*

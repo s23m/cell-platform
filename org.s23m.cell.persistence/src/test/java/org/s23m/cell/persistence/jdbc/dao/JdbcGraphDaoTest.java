@@ -69,8 +69,8 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 		identityDao.insert(identity2);
 
 		// modify property and update
-		graph.setContainer(uuid2);
-		graphDao.update(graph);
+		final Graph modified = new Graph(graph.getUrr(), graph.getUuid(), graph.getCategory(), uuid2, graph.getIsAbstractValue(), graph.getProperClass(), graph.getMaxCardinalityValueInContainer(), graph.getContentAsXml());
+		graphDao.update(modified);
 
 		final Graph retrieved2 = graphDao.get(uuid);
 		assertEquals(uuid2, retrieved2.getContainer());
@@ -88,8 +88,8 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
 		try {
 			// violate foreign key by pointing to a non-existent identity UUID
-			graph.setCategory("2");
-			graphDao.update(graph);
+			final Graph modified = new Graph(graph.getUrr(), graph.getUuid(), "2", graph.getContainer(), graph.getIsAbstractValue(), graph.getProperClass(), graph.getMaxCardinalityValueInContainer(), graph.getContentAsXml());
+			graphDao.update(modified);
 			fail("Violation should have thrown an exception");
 		} catch (final RuntimeException e) {
 			// expected
