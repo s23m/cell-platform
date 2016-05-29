@@ -1,5 +1,6 @@
 package org.s23m.cell.persistence.model;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public final class Edge {
@@ -104,17 +105,18 @@ public final class Edge {
 			final String maxCardinalityValueFromEdgeEnd, final String maxCardinalityValueToEdgeEnd,
 			final String isNavigableValueFromEdgeEnd, final String isNavigableValueToEdgeEnd, final String isContainerValueFromEdgeEnd,
 			final String isContainerValueToEdgeEnd, final String fromEdgeEnd, final String toEdgeEnd) {
-		this.urr = urr;
-		this.minCardinalityValueFromEdgeEnd = minCardinalityValueFromEdgeEnd;
-		this.minCardinalityValueToEdgeEnd = minCardinalityValueToEdgeEnd;
-		this.maxCardinalityValueFromEdgeEnd = maxCardinalityValueFromEdgeEnd;
-		this.maxCardinalityValueToEdgeEnd = maxCardinalityValueToEdgeEnd;
-		this.isNavigableValueFromEdgeEnd = isNavigableValueFromEdgeEnd;
-		this.isNavigableValueToEdgeEnd = isNavigableValueToEdgeEnd;
-		this.isContainerValueFromEdgeEnd = isContainerValueFromEdgeEnd;
-		this.isContainerValueToEdgeEnd = isContainerValueToEdgeEnd;
-		this.fromEdgeEnd = fromEdgeEnd;
-		this.toEdgeEnd = toEdgeEnd;
+
+		this.urr = Objects.requireNonNull(urr, "urr must not be null");
+		this.minCardinalityValueFromEdgeEnd = Objects.requireNonNull(minCardinalityValueFromEdgeEnd, "minCardinalityValueFromEdgeEnd must not be null");
+		this.minCardinalityValueToEdgeEnd = Objects.requireNonNull(minCardinalityValueToEdgeEnd, "minCardinalityValueToEdgeEnd must not be null");
+		this.maxCardinalityValueFromEdgeEnd = Objects.requireNonNull(maxCardinalityValueFromEdgeEnd, "maxCardinalityValueFromEdgeEnd must not be null");
+		this.maxCardinalityValueToEdgeEnd = Objects.requireNonNull(maxCardinalityValueToEdgeEnd, "maxCardinalityValueToEdgeEnd must not be null");
+		this.isNavigableValueFromEdgeEnd = Objects.requireNonNull(isNavigableValueFromEdgeEnd, "isNavigableValueFromEdgeEnd must not be null");
+		this.isNavigableValueToEdgeEnd = Objects.requireNonNull(isNavigableValueToEdgeEnd, "isNavigableValueToEdgeEnd must not be null");
+		this.isContainerValueFromEdgeEnd = Objects.requireNonNull(isContainerValueFromEdgeEnd, "isContainerValueFromEdgeEnd must not be null");
+		this.isContainerValueToEdgeEnd = Objects.requireNonNull(isContainerValueToEdgeEnd, "isContainerValueToEdgeEnd must not be null");
+		this.fromEdgeEnd = Objects.requireNonNull(fromEdgeEnd, "fromEdgeEnd must not be null");
+		this.toEdgeEnd = Objects.requireNonNull(toEdgeEnd, "toEdgeEnd must not be null");
 	}
 
 	/**
@@ -166,6 +168,72 @@ public final class Edge {
 
 	public String getToEdgeEnd() {
 		return toEdgeEnd;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + fromEdgeEnd.hashCode();
+		result = prime * result + isContainerValueFromEdgeEnd.hashCode();
+		result = prime * result + isContainerValueToEdgeEnd.hashCode();
+		result = prime * result + isNavigableValueFromEdgeEnd.hashCode();
+		result = prime * result + isNavigableValueToEdgeEnd.hashCode();
+		result = prime * result + maxCardinalityValueFromEdgeEnd.hashCode();
+		result = prime * result + maxCardinalityValueToEdgeEnd.hashCode();
+		result = prime * result + minCardinalityValueFromEdgeEnd.hashCode();
+		result = prime * result + minCardinalityValueToEdgeEnd.hashCode();
+		result = prime * result + toEdgeEnd.hashCode();
+		result = prime * result + urr.hashCode();
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Edge other = (Edge) obj;
+		if (!fromEdgeEnd.equals(other.fromEdgeEnd)) {
+			return false;
+		}
+		if (!isContainerValueFromEdgeEnd.equals(other.isContainerValueFromEdgeEnd)) {
+			return false;
+		}
+		if (!isContainerValueToEdgeEnd.equals(other.isContainerValueToEdgeEnd)) {
+			return false;
+		}
+		if (!isNavigableValueFromEdgeEnd.equals(other.isNavigableValueFromEdgeEnd)) {
+			return false;
+		}
+		if (!isNavigableValueToEdgeEnd.equals(other.isNavigableValueToEdgeEnd)) {
+			return false;
+		}
+		if (!maxCardinalityValueFromEdgeEnd.equals(other.maxCardinalityValueFromEdgeEnd)) {
+			return false;
+		}
+		if (!maxCardinalityValueToEdgeEnd.equals(other.maxCardinalityValueToEdgeEnd)) {
+			return false;
+		}
+		if (!minCardinalityValueFromEdgeEnd.equals(other.minCardinalityValueFromEdgeEnd)) {
+			return false;
+		}
+		if (!minCardinalityValueToEdgeEnd.equals(other.minCardinalityValueToEdgeEnd)) {
+			return false;
+		}
+		if (!toEdgeEnd.equals(other.toEdgeEnd)) {
+			return false;
+		}
+		if (!urr.equals(other.urr)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

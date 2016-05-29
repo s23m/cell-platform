@@ -21,6 +21,7 @@ public class JdbcIdentityDaoTest extends AbstractJdbcTest {
 		// now retrieve the result
 		final Identity retrieved = identityDao.get(identity.getUuid());
 		assertEquals(identity, retrieved);
+		assertEquals(identity.hashCode(), retrieved.hashCode());
 	}
 
 	@Test

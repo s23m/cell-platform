@@ -118,6 +118,7 @@ public final class JdbcEdgeDao implements EdgeDao {
 		public Edge handle(final ResultSet resultSet) throws SQLException {
 			final boolean hasNext = resultSet.next();
 			if (hasNext) {
+				final String urr = resultSet.getString(URR);
 				final String minCardinalityValueFromEdgeEnd = resultSet.getString(MIN_CARDINALITY_VALUE_FROM_EDGE_END);
 				final String minCardinalityValueToEdgeEnd = resultSet.getString(MIN_CARDINALITY_VALUE_TO_EDGE_END);
 				final String maxCardinalityValueFromEdgeEnd = resultSet.getString(MAX_CARDINALITY_VALUE_FROM_EDGE_END);
@@ -128,7 +129,6 @@ public final class JdbcEdgeDao implements EdgeDao {
 				final String isContainerValueToEdgeEnd = resultSet.getString(IS_CONTAINER_VALUE_TO_EDGE_END);
 				final String fromEdgeEnd = resultSet.getString(FROM_EDGE_END);
 				final String toEdgeEnd = resultSet.getString(TO_EDGE_END);
-				final String urr = resultSet.getString(URR);
 
 				return new Edge(urr, minCardinalityValueFromEdgeEnd, minCardinalityValueToEdgeEnd,
 						maxCardinalityValueFromEdgeEnd, maxCardinalityValueToEdgeEnd,

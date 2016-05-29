@@ -125,7 +125,25 @@ public final class Graph {
 
 	@Override
 	public int hashCode() {
-		return uuid.hashCode();
+		final int prime = 31;
+		int result = 1;
+
+		// mandatory fields
+
+		result = prime * result + urr.hashCode();
+		result = prime * result + uuid.hashCode();
+		result = prime * result + category.hashCode();
+		result = prime * result + container.hashCode();
+		result = prime * result + isAbstractValue.hashCode();
+		result = prime * result + properClass.hashCode();
+
+		// optional fields
+
+		result = prime * result
+				+ ((maxCardinalityValueInContainer == null) ? 0 : maxCardinalityValueInContainer.hashCode());
+		result = prime * result + ((contentAsXml == null) ? 0 : contentAsXml.hashCode());
+
+		return result;
 	}
 
 	@Override

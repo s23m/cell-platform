@@ -33,6 +33,7 @@ public class JdbcArrowDaoTest extends AbstractJdbcTest {
 		// now retrieve the result
 		final Arrow retrieved = arrowDao.get(arrow.getUrr());
 		assertEquals(arrow, retrieved);
+		assertEquals(arrow.hashCode(), retrieved.hashCode());
 	}
 
 	@Test

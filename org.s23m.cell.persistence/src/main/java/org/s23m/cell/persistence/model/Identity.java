@@ -74,7 +74,21 @@ public final class Identity {
 
 	@Override
 	public int hashCode() {
-		return uuid.hashCode();
+		final int prime = 31;
+		int result = 1;
+
+		// mandatory fields
+
+		result = prime * result + uuid.hashCode();
+		result = prime * result + name.hashCode();
+		result = prime * result + pluralName.hashCode();
+
+		// optional fields
+
+		result = prime * result + ((codeName == null) ? 0 : codeName.hashCode());
+		result = prime * result + ((payload == null) ? 0 : payload.hashCode());
+		result = prime * result + ((pluralCodeName == null) ? 0 : pluralCodeName.hashCode());
+		return result;
 	}
 
 	@Override

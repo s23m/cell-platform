@@ -103,7 +103,14 @@ public final class Arrow {
 
 	@Override
 	public int hashCode() {
-		return urr.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + category.hashCode();
+		result = prime * result + fromGraph.hashCode();
+		result = prime * result + properClass.hashCode();
+		result = prime * result + toGraph.hashCode();
+		result = prime * result + urr.hashCode();
+		return result;
 	}
 
 	@Override

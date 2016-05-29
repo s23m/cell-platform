@@ -27,6 +27,7 @@ public class JdbcGraphDaoTest extends AbstractJdbcTest {
 
 		final Graph retrieved = graphDao.get(graph.getUrr());
 		assertEquals(graph, retrieved);
+		assertEquals(graph.hashCode(), retrieved.hashCode());
 	}
 
 	@Test

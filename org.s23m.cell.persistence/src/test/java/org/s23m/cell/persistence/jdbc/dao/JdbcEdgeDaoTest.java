@@ -1,7 +1,6 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createArrow;
@@ -23,8 +22,7 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
 	@Test
 	public void testInsertionAndRetrieval() throws SQLException {
-		final String uuid = UUID.randomUUID().toString();
-
+		final String uuid = "1";
 		final Identity identity = createIdentity(uuid);
 		final Graph graph = createGraph(uuid, ProperClass.Vertex);
 		final Arrow arrow = createArrow(uuid, ProperClass.Visibility);
@@ -37,9 +35,8 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 
 		// now retrieve the result
 		final Edge retrieved = edgeDao.get(edge.getUrr());
-		assertNotNull(retrieved);
-		assertEquals(edge.getUrr(), retrieved.getUrr());
-		assertEquals(edge.toString(), retrieved.toString());
+		assertEquals(edge, retrieved);
+		assertEquals(edge.hashCode(), retrieved.hashCode());
 	}
 
 	@Test
