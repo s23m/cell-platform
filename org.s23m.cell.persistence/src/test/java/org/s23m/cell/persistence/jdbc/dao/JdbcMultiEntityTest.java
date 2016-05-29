@@ -31,14 +31,14 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	}
 
 	private Graph createAndSaveGraph() {
-		final String uuid = createAndSaveIdentity().getUuid();
-		final String category = createAndSaveIdentity().getUuid();
-		final String container = createAndSaveIdentity().getUuid();
-		final String isAbstractValue = createAndSaveIdentity().getUuid();
-		final String maxCardinalityValueInContainer = createAndSaveIdentity().getUuid();
+		final Identity uuid = createAndSaveIdentity();
+		final Identity category = createAndSaveIdentity();
+		final Identity container = createAndSaveIdentity();
+		final Identity isAbstractValue = createAndSaveIdentity();
+		final Identity maxCardinalityValueInContainer = createAndSaveIdentity();
 		final ProperClass properClass = ProperClass.Edge;
 		final String contentAsXml = "content";
-		final String urr = createAndSaveIdentity().getUuid();
+		final Identity urr = createAndSaveIdentity();
 
 		final Graph graph = new Graph(urr, uuid, category, container, isAbstractValue, properClass, maxCardinalityValueInContainer, contentAsXml);
 
@@ -48,10 +48,10 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	}
 
 	private Arrow createAndSaveArrow() {
-		final String category = createAndSaveIdentity().getUuid();
-		final String fromGraph = createAndSaveGraph().getUrr();
-		final String toGraph = createAndSaveGraph().getUrr();
-		final String urr = createAndSaveGraph().getUrr();
+		final Graph urr = createAndSaveGraph();
+		final Identity category = createAndSaveIdentity();
+		final Graph fromGraph = createAndSaveGraph();
+		final Graph toGraph = createAndSaveGraph();
 
 		final Arrow arrow = new Arrow(urr, category, ProperClass.Visibility, fromGraph, toGraph);
 
