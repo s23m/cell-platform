@@ -8,7 +8,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.s23m.cell.persistence.dao.IdentityDao;
 import org.s23m.cell.persistence.model.Identity;
 
-public class JdbcIdentityDao implements IdentityDao {
+public final class JdbcIdentityDao implements IdentityDao {
 
 	private static final String UUID = "uuid";
 	private static final String NAME = "name";

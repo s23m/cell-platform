@@ -9,7 +9,7 @@ import org.s23m.cell.persistence.dao.ArrowDao;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.ProperClass;
 
-public class JdbcArrowDao implements ArrowDao {
+public final class JdbcArrowDao implements ArrowDao {
 
 	private static final String URR = "urr";
 	private static final String CATEGORY = "category";

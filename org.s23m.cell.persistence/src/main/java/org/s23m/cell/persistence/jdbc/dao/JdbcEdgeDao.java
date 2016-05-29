@@ -8,7 +8,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.s23m.cell.persistence.dao.EdgeDao;
 import org.s23m.cell.persistence.model.Edge;
 
-public class JdbcEdgeDao implements EdgeDao {
+public final class JdbcEdgeDao implements EdgeDao {
 
 	private static final String URR = "urr";
 	private static final String MIN_CARDINALITY_VALUE_FROM_EDGE_END = "minCardinalityValueFromEdgeEnd";
@@ -130,19 +130,10 @@ public class JdbcEdgeDao implements EdgeDao {
 				final String toEdgeEnd = resultSet.getString(TO_EDGE_END);
 				final String urr = resultSet.getString(URR);
 
-				final Edge result = new Edge();
-				result.setMinCardinalityValueFromEdgeEnd(minCardinalityValueFromEdgeEnd);
-				result.setMinCardinalityValueToEdgeEnd(minCardinalityValueToEdgeEnd);
-				result.setMaxCardinalityValueFromEdgeEnd(maxCardinalityValueFromEdgeEnd);
-				result.setMaxCardinalityValueToEdgeEnd(maxCardinalityValueToEdgeEnd);
-				result.setIsNavigableValueFromEdgeEnd(isNavigableValueFromEdgeEnd);
-				result.setIsNavigableValueToEdgeEnd(isNavigableValueToEdgeEnd);
-				result.setIsContainerValueFromEdgeEnd(isContainerValueFromEdgeEnd);
-				result.setIsContainerValueToEdgeEnd(isContainerValueToEdgeEnd);
-				result.setFromEdgeEnd(fromEdgeEnd);
-				result.setToEdgeEnd(toEdgeEnd);
-				result.setUrr(urr);
-				return result;
+				return new Edge(urr, minCardinalityValueFromEdgeEnd, minCardinalityValueToEdgeEnd,
+						maxCardinalityValueFromEdgeEnd, maxCardinalityValueToEdgeEnd,
+						isNavigableValueFromEdgeEnd, isNavigableValueToEdgeEnd, isContainerValueFromEdgeEnd,
+						isContainerValueToEdgeEnd, fromEdgeEnd, toEdgeEnd);
 			} else {
 				return null;
 			}

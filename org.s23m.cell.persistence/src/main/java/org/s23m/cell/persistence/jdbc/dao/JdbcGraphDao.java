@@ -9,7 +9,7 @@ import org.s23m.cell.persistence.dao.GraphDao;
 import org.s23m.cell.persistence.model.Graph;
 import org.s23m.cell.persistence.model.ProperClass;
 
-public class JdbcGraphDao implements GraphDao {
+public final class JdbcGraphDao implements GraphDao {
 
 	private static final String URR = "urr";
 	private static final String UUID = "uuid";
