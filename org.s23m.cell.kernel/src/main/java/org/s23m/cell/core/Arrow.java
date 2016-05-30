@@ -34,7 +34,7 @@ import org.s23m.cell.Set;
 
 public class Arrow extends Graph  {
 
-	/* Reify the S23M AbstractEdge concept */
+	/* Reify the S23M Arrow concept */
 	protected static final Arrow arrow =  new Arrow();
 
 	protected Arrow(final Identity semanticIdentity, final Set category) {
