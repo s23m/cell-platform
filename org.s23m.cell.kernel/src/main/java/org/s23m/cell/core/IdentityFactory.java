@@ -29,10 +29,10 @@ import static org.s23m.cell.core.F_Instantiation.identityFactory;
 
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.s23m.cell.Identity;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
 
 /**
  * {@link IdentityFactory} is a factory for Semantic Identities that connects
@@ -42,7 +42,7 @@ import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
  * the FundamentalSemanticIdentities interface.
  */
 public class IdentityFactory implements KernelIdentities {
-	private final Map<String, Identity> inMemoryIdentities = new NonBlockingHashMap<String, Identity>();
+	private final Map<String, Identity> inMemoryIdentities = new ConcurrentHashMap<String, Identity>();
 	private final UUIDReservoirForKernel uUIDReservoir = new UUIDReservoirForKernel();
 
 	public IdentityFactory() {

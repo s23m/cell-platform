@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -47,14 +48,11 @@ import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models.SemanticDomain;
+import org.s23m.cell.core.collections.ConcurrentMultimap;
 import org.s23m.cell.core.collections.LazyValue;
-import org.s23m.cell.core.collections.StripedLockArrayListMultiMap;
-import org.s23m.cell.core.collections.highscalelib.NonBlockingHashMap;
 import org.s23m.cell.impl.SemanticDomainCode;
 
 public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
-
-	private static final int NUMBER_OF_STRIPES = 16;
 
 	/* Reify the S23M OrderedSet concept */
 	protected static final OrderedSet orderedSet = new OrderedSet();
@@ -69,15 +67,15 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		}
 	};
 
-	private final LazyValue<StripedLockArrayListMultiMap<String, Set>> identifierMapHolder = new LazyValue<StripedLockArrayListMultiMap<String,Set>>() {
-		@Override protected StripedLockArrayListMultiMap<String, Set> computeValue() {
-			return new StripedLockArrayListMultiMap<String, Set>(NUMBER_OF_STRIPES);
+	private final LazyValue<ConcurrentMultimap<String, Set>> identifierMapHolder = new LazyValue<ConcurrentMultimap<String,Set>>() {
+		@Override protected ConcurrentMultimap<String, Set> computeValue() {
+			return new ConcurrentMultimap<String, Set>();
 		}
 	};
 
 	private final LazyValue<Map<String, Set>> mapHolder = new LazyValue<Map<String, Set>>() {
 		@Override protected Map<String, Set> computeValue() {
-			return new NonBlockingHashMap<String, Set>();
+			return new ConcurrentHashMap<String, Set>();
 		}
 	};
 
@@ -809,7 +807,7 @@ public class OrderedSet extends OrderedPair implements Set, Iterable<Set> {
 		return subscribersHolder.get();
 	}
 
-	private StripedLockArrayListMultiMap<String,Set> getIdentifierMap() {
+	private ConcurrentMultimap<String,Set> getIdentifierMap() {
 		return identifierMapHolder.get();
 	}
 }

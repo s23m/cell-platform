@@ -28,6 +28,10 @@ public final class ConcurrentMultimap<K, V> {
 		this.cache = new ConcurrentHashMap<K, List<V>>();
 	}
 
+	public boolean containsKey(final K key) {
+		return cache.containsKey(key);
+	}
+
 	/**
 	 * Retrieves the list associated with the specified key.
 	 *
