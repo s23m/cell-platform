@@ -22,12 +22,24 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class ConcurrentMultimap<K, V> {
 
+	/**
+	 * Underlying map
+	 */
 	private final ConcurrentMap<K, List<V>> cache;
 
+	/**
+	 * Constructor
+	 */
 	public ConcurrentMultimap() {
 		this.cache = new ConcurrentHashMap<K, List<V>>();
 	}
 
+	/**
+	 * Indicates whether a mapping exists for the specified key.
+	 *
+	 * @param key
+	 * @return a boolean indicating whether the map contains the specified key
+	 */
 	public boolean containsKey(final K key) {
 		return cache.containsKey(key);
 	}
