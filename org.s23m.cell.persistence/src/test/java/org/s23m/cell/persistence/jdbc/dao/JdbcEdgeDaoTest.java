@@ -124,7 +124,7 @@ public class JdbcEdgeDaoTest extends AbstractJdbcTest {
 			final Throwable cause = e.getCause();
 			assertTrue(cause instanceof SQLException);
 			final String message = cause.getMessage();
-			final String expectedPrefix = "integrity constraint violation: foreign key no parent; FK_ISCONTAINERVALUEFROMEDGEEND";
+			final String expectedPrefix = "Referential integrity constraint violation: \"FK_ISCONTAINERVALUEFROMEDGEEND";
 			assertTrue(message.startsWith(expectedPrefix));
 		}
 	}

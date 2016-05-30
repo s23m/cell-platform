@@ -73,14 +73,16 @@ public abstract class AbstractJdbcTest {
 
 	private HikariDataSource createHsqldbDatasource() {
 		final HikariDataSource dataSource = new HikariDataSource();
-		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
+		dataSource.setDriverClassName("org.h2.Driver");
 
-		// set the database name based on the test name, so that we can run tests in parallel
-		// see http://hsqldb.org/doc/guide/dbproperties-chapt.html
+		// set the database name/location based on the test name so that we can run tests in parallel
 
+		final String tempDir = System.getProperty("java.io.tmpdir");
 		final String databaseName = getClass().getSimpleName();
-		final String hsqldbDriverAndProtocol = "jdbc:hsqldb:mem:";
-		final String hsqldbUrl = hsqldbDriverAndProtocol + databaseName;
+		final String databaseDir = tempDir + "/" + databaseName;
+
+		final String hsqldbDriverAndProtocol = "jdbc:h2:";
+		final String hsqldbUrl = hsqldbDriverAndProtocol + databaseDir;
 		dataSource.setJdbcUrl(hsqldbUrl);
 
 		dataSource.setUsername("sa");

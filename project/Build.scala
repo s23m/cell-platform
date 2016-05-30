@@ -68,7 +68,7 @@ object CellBuild extends Build {
     "persistence",
     file ("org.s23m.cell.persistence"),
     settings = javaTestProjectSettings ++ Seq(
-      unmanagedJars in Test <+= (baseDirectory) map { bd => Attributed.blank(bd / "test-lib" / "hsqldb.jar") }
+      unmanagedJars in Test <+= (baseDirectory) map { bd => Attributed.blank(bd / "test-lib" / "h2-1.4.192.jar") }
     )
   )
 

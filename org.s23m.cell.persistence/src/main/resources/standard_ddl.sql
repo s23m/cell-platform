@@ -1,3 +1,4 @@
+-- DDL which should execute correctly against PostgreSQL, MySQL, H2
 
 CREATE TABLE IF NOT EXISTS Identity (
   uuid varchar(36) NOT NULL,
@@ -5,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Identity (
   pluralName varchar(100) NOT NULL,
   codeName varchar(100),
   pluralCodeName varchar(100),
-  payload CLOB,
+  payload TEXT,
   PRIMARY KEY (uuid),
   CONSTRAINT uc_name_uuid UNIQUE (name, uuid)
 );
@@ -20,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Graph (
   isAbstractValue varchar(36) NOT NULL,
   maxCardinalityValueInContainer varchar(36),
   properClass varchar(36) NOT NULL,
-  contentAsXml CLOB,
+  contentAsXml TEXT,
   PRIMARY KEY (urr),
   CONSTRAINT uc_uuid_urr UNIQUE (uuid,urr),
   CONSTRAINT fk_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
