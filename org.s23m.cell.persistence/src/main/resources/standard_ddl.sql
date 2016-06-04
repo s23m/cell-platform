@@ -1,5 +1,8 @@
 -- DDL which should execute correctly against PostgreSQL, MySQL, H2
 
+-- TODO: think about adding 'utcTimestamp' time stamp to all tables, using UTC, to millisecond granularity
+-- May encounter issue where times are not monotonically increasing, so could use a sequence number instead (sequence per table)
+
 CREATE TABLE IF NOT EXISTS Identity (
   uuid varchar(36) NOT NULL,
   name varchar(100) NOT NULL,
@@ -58,18 +61,18 @@ CREATE TABLE IF NOT EXISTS Graph (
 -- --------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS Arrow (
-	urr varchar(36) NOT NULL,
-	category varchar(36) NOT NULL,
-	properClass varchar(36) NOT NULL,
-	fromGraph varchar(36) NOT NULL,
-	toGraph varchar(36) NOT NULL,
-	PRIMARY KEY (urr),
-	CONSTRAINT chk_arrow_properClass CHECK (properClass IN ('Edge', 'Visibility', 'SuperSetReference')), 
-	CONSTRAINT uc_from_to_properClass UNIQUE (fromGraph, toGraph, properClass, category),
-	CONSTRAINT uc_to_properClass UNIQUE (toGraph, properClass, category),
-	CONSTRAINT fk_arrow FOREIGN KEY (urr) REFERENCES graph (urr),
-	CONSTRAINT fk_fromGraph FOREIGN KEY (fromGraph) REFERENCES graph (urr),
-	CONSTRAINT fk_toGraph FOREIGN KEY (toGraph) REFERENCES graph (urr)
+  urr varchar(36) NOT NULL,
+  category varchar(36) NOT NULL,
+  properClass varchar(36) NOT NULL,
+  fromGraph varchar(36) NOT NULL,
+  toGraph varchar(36) NOT NULL,
+  PRIMARY KEY (urr),
+  CONSTRAINT chk_arrow_properClass CHECK (properClass IN ('Edge', 'Visibility', 'SuperSetReference')), 
+  CONSTRAINT uc_from_to_properClass UNIQUE (fromGraph, toGraph, properClass, category),
+  CONSTRAINT uc_to_properClass UNIQUE (toGraph, properClass, category),
+  CONSTRAINT fk_arrow FOREIGN KEY (urr) REFERENCES graph (urr),
+  CONSTRAINT fk_fromGraph FOREIGN KEY (fromGraph) REFERENCES graph (urr),
+  CONSTRAINT fk_toGraph FOREIGN KEY (toGraph) REFERENCES graph (urr)
 );
   
 -- --------------------------------------------------------
