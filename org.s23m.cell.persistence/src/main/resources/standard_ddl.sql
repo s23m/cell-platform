@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS Agent (
   lastName varchar(50) NOT NULL,
   alias varchar(50) NOT NULL,
   PRIMARY KEY (urr),
-  CONSTRAINT uc_uuid_urr UNIQUE (uuid,urr),
-  CONSTRAINT fk_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
-  CONSTRAINT fk_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid)
+  CONSTRAINT uc_agent_uuid_urr UNIQUE (uuid, urr),
+  CONSTRAINT fk_agent_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
+  CONSTRAINT fk_agent_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid)
 );
 
 -- --------------------------------------------------------
@@ -48,9 +48,9 @@ CREATE TABLE IF NOT EXISTS Graph (
   properClass varchar(36) NOT NULL,
   contentAsXml TEXT,
   PRIMARY KEY (urr),
-  CONSTRAINT uc_uuid_urr UNIQUE (uuid,urr),
-  CONSTRAINT fk_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
-  CONSTRAINT fk_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid),
+  CONSTRAINT uc_graph_uuid_urr UNIQUE (uuid,urr),
+  CONSTRAINT fk_graph_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
+  CONSTRAINT fk_graph_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid),
   CONSTRAINT fk_category FOREIGN KEY (category) REFERENCES identity (uuid),
   CONSTRAINT fk_container FOREIGN KEY (container) REFERENCES identity (uuid),
   CONSTRAINT fk_isAbstractValue FOREIGN KEY (isAbstractValue) REFERENCES identity (uuid),
