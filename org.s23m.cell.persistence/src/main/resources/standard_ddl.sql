@@ -1,26 +1,5 @@
 -- DDL which should execute correctly against PostgreSQL, MySQL, H2
 
--- TODO: email length
--- TODO: password length (scrypt)
--- TODO: mobile length
-
-CREATE TABLE IF NOT EXISTS Agent (
-  urr varchar(36) NOT NULL,
-  uuid varchar(36) NOT NULL,
-  email varchar(100) NOT NULL,
-  password varchar(100) NOT NULL,
-  mobile varchar(30) NOT NULL,
-  firstName varchar(50) NOT NULL,
-  lastName varchar(50) NOT NULL,
-  alias varchar(50) NOT NULL,
-  PRIMARY KEY (urr),
-  CONSTRAINT uc_uuid_urr UNIQUE (uuid,urr),
-  CONSTRAINT fk_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
-  CONSTRAINT fk_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid)
-);
-
--- --------------------------------------------------------
-
 CREATE TABLE IF NOT EXISTS Identity (
   uuid varchar(36) NOT NULL,
   name varchar(100) NOT NULL,
@@ -30,6 +9,28 @@ CREATE TABLE IF NOT EXISTS Identity (
   payload TEXT,
   PRIMARY KEY (uuid),
   CONSTRAINT uc_name_uuid UNIQUE (name, uuid)
+);
+
+-- --------------------------------------------------------
+
+-- TODO: email length
+-- TODO: password length (scrypt)
+-- TODO: mobile length
+-- TODO: add constraint: at least one of email and mobile
+
+CREATE TABLE IF NOT EXISTS Agent (
+  urr varchar(36) NOT NULL,
+  uuid varchar(36) NOT NULL,
+  email varchar(100),
+  password varchar(100) NOT NULL,
+  mobile varchar(30),
+  firstName varchar(50) NOT NULL,
+  lastName varchar(50) NOT NULL,
+  alias varchar(50) NOT NULL,
+  PRIMARY KEY (urr),
+  CONSTRAINT uc_uuid_urr UNIQUE (uuid,urr),
+  CONSTRAINT fk_urr FOREIGN KEY (urr) REFERENCES identity (uuid),
+  CONSTRAINT fk_uuid FOREIGN KEY (uuid) REFERENCES identity (uuid)
 );
 
 -- --------------------------------------------------------
