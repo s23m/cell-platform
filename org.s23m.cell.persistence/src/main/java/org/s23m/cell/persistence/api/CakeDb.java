@@ -14,6 +14,8 @@ public class CakeDb {
 		//    persist graph itself:
 		//       either persist either edge or arrow (and if edge, persist corresponding arrow)
 
+		// Note: http://blog.ploeh.dk/2014/08/11/cqs-versus-server-generated-ids/
+
 	}
 
 }
