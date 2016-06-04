@@ -70,7 +70,7 @@ object CellBuild extends Build {
     settings = javaTestProjectSettings ++ Seq(
       unmanagedJars in Test <+= (baseDirectory) map { bd => Attributed.blank(bd / "test-lib" / "h2-1.4.192.jar") }
     )
-  )
+  ) dependsOn (kernel)
 
   lazy val platform = Project(
     "platform",
