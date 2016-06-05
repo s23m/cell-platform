@@ -1,5 +1,6 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
+import org.s23m.cell.persistence.model.Agent;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
@@ -34,5 +35,12 @@ public class TestData {
 	 */
 	public static Identity createIdentity(final String uuid) {
 		return new Identity(uuid, "name", "pluralName", "codeName", "pluralCodeName", "payload");
+	}
+
+	/*
+	 * Creates an Agent instance with the given UUID as its primary key
+	 */
+	public static Agent createAgent(final String uuid) {
+		return new Agent(uuid, uuid, "bob@example.com", "secret", "0211231234", "Robert", "Smith", "Bob");
 	}
 }

@@ -69,7 +69,7 @@ public final class Agent {
 		this.alias = Objects.requireNonNull(alias, "alias must not be null");
 
 		// require at least one of mobile and email
-		if (email != null && mobile != null) {
+		if (email == null && mobile == null) {
 			throw new IllegalArgumentException("At least one of email and mobile is required");
 		}
 		this.email = email;

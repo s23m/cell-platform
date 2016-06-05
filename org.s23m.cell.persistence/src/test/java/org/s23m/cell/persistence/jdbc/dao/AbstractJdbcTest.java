@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.junit.After;
 import org.junit.Before;
+import org.s23m.cell.persistence.model.Agent;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
@@ -28,6 +29,7 @@ public abstract class AbstractJdbcTest {
 	protected JdbcIdentityDao identityDao;
 	protected JdbcArrowDao arrowDao;
 	protected JdbcEdgeDao edgeDao;
+	protected JdbcAgentDao agentDao;
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,12 +42,19 @@ public abstract class AbstractJdbcTest {
 		identityDao = new JdbcIdentityDao(queryRunner);
 		arrowDao = new JdbcArrowDao(queryRunner);
 		edgeDao = new JdbcEdgeDao(queryRunner);
+		agentDao = new JdbcAgentDao(queryRunner);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		// must drop tables in dependency order
-		final Class<?>[] entityClasses = new Class<?>[] { Edge.class, Arrow.class, Graph.class, Identity.class };
+		final Class<?>[] entityClasses = new Class<?>[] {
+			Edge.class,
+			Arrow.class,
+			Graph.class,
+			Agent.class,
+			Identity.class
+		};
 
 		for (final Class<?> c : entityClasses) {
 			dropTable(dataSource, c);
