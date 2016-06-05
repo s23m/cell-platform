@@ -21,6 +21,11 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public abstract class AbstractJdbcTest {
 
+	static {
+		// adjust SimpleLogger logging level for HikariCP - see http://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
+		System.setProperty("org.slf4j.simpleLogger.log.com.zaxxer.hikari", "error");
+	}
+
 	private HikariDataSource dataSource;
 
 	private QueryRunner queryRunner;
