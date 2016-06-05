@@ -72,16 +72,6 @@ public class JdbcAgentDaoTest extends AbstractJdbcTest {
 		assertEquals(newName, b.getFirstName());
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testNullUUIDSpecified() {
-		createAgent(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNeitherEmailNorMobileSpecified() {
-		new Agent("urr", "uuid", null, "secret", null, "Robert", "Smith", "Bob");
-	}
-
 	@Test
 	public void testForeignKeyConstraintViolated() {
 		final String uuid = UUID.randomUUID().toString();
