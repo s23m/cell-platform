@@ -26,7 +26,7 @@ public abstract class AbstractJdbcTest {
 		System.setProperty("org.slf4j.simpleLogger.log.com.zaxxer.hikari", "error");
 	}
 
-	private HikariDataSource dataSource;
+	protected HikariDataSource dataSource;
 
 	private QueryRunner queryRunner;
 
@@ -39,7 +39,9 @@ public abstract class AbstractJdbcTest {
 	@Before
 	public void setUp() throws Exception {
 		dataSource = createHsqldbDatasource();
-		executeDDL(dataSource);
+
+		executeDDL(dataSource, "sql/common_ddl.sql");
+		executeDDL(dataSource, "sql/h2_ddl.sql");
 
 		queryRunner = new QueryRunner(dataSource);
 
@@ -52,6 +54,11 @@ public abstract class AbstractJdbcTest {
 
 	@After
 	public void tearDown() throws Exception {
+		dropTables();
+		dataSource.close();
+	}
+
+	private void dropTables() throws SQLException {
 		// must drop tables in dependency order
 		final Class<?>[] entityClasses = new Class<?>[] {
 			Edge.class,
@@ -64,7 +71,6 @@ public abstract class AbstractJdbcTest {
 		for (final Class<?> c : entityClasses) {
 			dropTable(dataSource, c);
 		}
-		dataSource.close();
 	}
 
 	private void dropTable(final DataSource dataSource, final Class<?> c) throws SQLException {
@@ -72,8 +78,8 @@ public abstract class AbstractJdbcTest {
 		executeSql(dataSource, sql);
 	}
 
-	private void executeDDL(final DataSource dataSource) throws SQLException {
-		final InputStream stream = JdbcArrowDaoTest.class.getClassLoader().getResourceAsStream("standard_ddl.sql");
+	private void executeDDL(final DataSource dataSource, final String resourceLocation) throws SQLException {
+		final InputStream stream = JdbcArrowDaoTest.class.getClassLoader().getResourceAsStream(resourceLocation);
 		final String ddl = readStream(stream);
 		executeSql(dataSource, ddl);
 	}

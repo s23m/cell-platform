@@ -1,10 +1,16 @@
 package org.s23m.cell.persistence.jdbc.dao;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.s23m.cell.persistence.jdbc.dao.TestData.createIdentity;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.Test;
+import org.s23m.cell.persistence.model.Agent;
 import org.s23m.cell.persistence.model.Arrow;
 import org.s23m.cell.persistence.model.Edge;
 import org.s23m.cell.persistence.model.Graph;
@@ -21,6 +27,46 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 	@Test
 	public void testEdgeInsertion() throws SQLException {
 		createAndSaveEdge();
+
+		// check that auto-incrementing of sequence numbers works
+		final Long edgeCount = 1L;
+		checkSequenceNumber(edgeCount, Edge.class);
+		checkSequenceNumber(edgeCount, Arrow.class);
+
+		checkSequenceNumber(5L, Graph.class);
+		checkSequenceNumber(39L, Identity.class);
+	}
+
+	@Test
+	public void testAgentInsertion() throws SQLException {
+		// TODO insert agent and dependent identities
+		checkSequenceNumber(0L, Agent.class);
+	}
+
+	private void checkSequenceNumber(final Long expectedNumber, final Class<?> entityClass) throws SQLException {
+		final Long sequenceNumber = findMaximumSequenceNumber(entityClass);
+		assertThat(sequenceNumber, is(expectedNumber));
+
+		final Long count = findRecordCount(entityClass);
+		assertThat(sequenceNumber, is(count));
+	}
+
+	private Long findRecordCount(final Class<?> entityClass) throws SQLException {
+		return executeCountQuery("select count(*) from " + entityClass.getSimpleName());
+	}
+
+	private Long findMaximumSequenceNumber(final Class<?> entityClass) throws SQLException {
+		return executeCountQuery("select max(sequenceNumber) from " + entityClass.getSimpleName());
+	}
+
+	private Long executeCountQuery(final String sql) throws SQLException {
+		final Connection connection = dataSource.getConnection();
+		final Statement statement = connection.createStatement();
+		final ResultSet resultSet = statement.executeQuery(sql);
+		resultSet.next();
+		final Long result = resultSet.getLong(1);
+		connection.close();
+		return result;
 	}
 
 	private Identity createAndSaveIdentity() {

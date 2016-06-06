@@ -1,8 +1,5 @@
 -- DDL which should execute correctly against PostgreSQL, MySQL, H2
 
--- TODO: think about adding 'utcTimestamp' time stamp to all tables, using UTC, to millisecond granularity
--- May encounter issue where times are not monotonically increasing, so could use a sequence number instead (sequence per table)
-
 CREATE TABLE IF NOT EXISTS Identity (
   uuid varchar(36) NOT NULL,
   name varchar(100) NOT NULL,
@@ -16,17 +13,17 @@ CREATE TABLE IF NOT EXISTS Identity (
 
 -- --------------------------------------------------------
 
--- TODO: email length
--- TODO: password length (scrypt)
--- TODO: mobile length
--- TODO: add constraint: at least one of email and mobile
-
 CREATE TABLE IF NOT EXISTS Agent (
   urr varchar(36) NOT NULL,
   uuid varchar(36) NOT NULL,
-  email varchar(100),
-  password varchar(100) NOT NULL,
+  email varchar(254),
+  
+  -- should be large enough for bcrypt / scrypt
+  password varchar(1024) NOT NULL,
+  
+  -- phone numbers are a maximum of 15 digits, but this allows whitespace and + character
   mobile varchar(30),
+  
   firstName varchar(50) NOT NULL,
   lastName varchar(50) NOT NULL,
   alias varchar(50) NOT NULL,
