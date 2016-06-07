@@ -39,8 +39,10 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 
 	@Test
 	public void testAgentInsertion() throws SQLException {
-		// TODO insert agent and dependent identities
-		checkSequenceNumber(0L, Agent.class);
+		createAndSaveAgent();
+
+		checkSequenceNumber(1L, Agent.class);
+		checkSequenceNumber(2L, Identity.class);
 	}
 
 	private void checkSequenceNumber(final Long expectedNumber, final Class<?> entityClass) throws SQLException {
@@ -104,6 +106,17 @@ public class JdbcMultiEntityTest extends AbstractJdbcTest {
 		arrowDao.insert(arrow);
 
 		return arrow;
+	}
+
+	private Agent createAndSaveAgent() {
+		final Identity urr = createAndSaveIdentity();
+		final Identity uuid = createAndSaveIdentity();
+
+		final Agent agent = new Agent(urr, uuid, "email", "password", "mobile", "firstName", "lastName", "alias");
+
+		agentDao.insert(agent);
+
+		return agent;
 	}
 
 	private Edge createAndSaveEdge() {
