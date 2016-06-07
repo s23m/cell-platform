@@ -4,6 +4,7 @@ Bundle-Name: org.s23m.cell.communication
 Bundle-SymbolicName: org.s23m.cell.communication
 Bundle-Version: 1.0.0
 Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",
- org.s23m.cell.platform;bundle-version="1.0.0"
+ org.s23m.cell.platform;bundle-version="1.0.0",
+ org.s23m.cell.kernel.tests;bundle-version="1.0.0"
 Bundle-ClassPath: .,lib/org.eclipse.xtext.xbase.lib-2.9.2.jar,lib/com.google.guava_10.0.1.v201203051515.jar
 

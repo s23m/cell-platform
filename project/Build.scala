@@ -50,7 +50,7 @@ object CellBuild extends Build {
 	    unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
 		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
 	)
-  ) dependsOn (kernel, platform % "test->test;compile->compile")
+  ) dependsOn (kernel, kernelTests, platform % "test->test;compile->compile")
 
   lazy val kernel = Project(
     "kernel",
