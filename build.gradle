@@ -1,6 +1,7 @@
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'eclipse-wtp'
+    
+    sourceCompatibility = 1.8
 
     repositories {
        mavenCentral()
@@ -11,10 +12,6 @@ subprojects {
     }
 
     version = '1.0'
-
-    jar {
-        manifest.attributes provider: 'gradle'
-    }
 }
 
 project('org.s23m.cell.platform') {
