@@ -8,3 +8,7 @@ general:
   branches:
     only:
       - master # only build/deploy from master
+
+test:
+  override:
+    - ./gradlew test -is
