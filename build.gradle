@@ -63,7 +63,13 @@ subprojects {
     reportsDir = file("${buildDir}/reports/pmd")
     ruleSets = ["java-basic", "java-braces"]
   }
-
+  
+  /* Memory settings */
+  
+  tasks.withType(Test) {
+    maxHeapSize = "512m"
+    jvmArgs "-XX:MaxPermSize=512m"
+  }
 }
 
 project('org.s23m.cell.platform') {
