@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.s23m.cell.kernel.tests
-Bundle-SymbolicName: org.s23m.cell.kernel.tests
+Bundle-Name: org.s23m.cell.kernel.instantiation
+Bundle-SymbolicName: org.s23m.cell.kernel.instantiation
 Bundle-Version: 1.0.0
 Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",org.junit4;resolution:=optional
 Bundle-ActivationPolicy: lazy
