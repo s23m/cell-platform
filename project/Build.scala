@@ -44,6 +44,7 @@ object CellBuild extends Build {
     platformInstantiation
   )
 
+  // depends on platformInstantiation's test code (see http://www.scala-sbt.org/release/docs/Multi-Project.html#Per-configuration+classpath+dependencies)
   lazy val communication = Project(
     "communication",
     file ("org.s23m.cell.communication"),
