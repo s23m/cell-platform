@@ -19,7 +19,8 @@ subprojects {
 
   test {
     reports {
-      junitXml.enabled false
+      junitXml.enabled true
+      junitXml.destination = "${buildDir}/reports/junit-xml"
       html.enabled true
       html.destination = "${buildDir}/reports/junit-html"
     }
