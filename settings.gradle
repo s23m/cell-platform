@@ -1,2 +1,4 @@
 
-include 'org.s23m.cell.kernel', 'org.s23m.cell.platform', 'org.s23m.cell.persistence'
+include 'org.s23m.cell.kernel', 'org.s23m.cell.platform', 'org.s23m.cell.platform.instantiation', 'org.s23m.cell.persistence', 'org.s23m.cell.communication'
+
+// 'org.s23m.cell.kernel.tests'

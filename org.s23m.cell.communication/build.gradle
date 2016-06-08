@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+dependencies {
+  compile fileTree(dir: 'lib', include: ['*.jar'])
+  
+  testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = [
+        'src/main/java',
+        'src/main/xtend',
+        'src/main/xtend-gen'
+      ]
+    }
+  }
+  
+  test {
+    java {
+      srcDirs = [
+        'src/test/java',
+        'src/test/xtend',
+        'src/test/xtend-gen'
+      ]
+    }
+  }
+}
