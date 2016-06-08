@@ -69,8 +69,8 @@ subprojects {
 
     jvmArgs "-XX:MaxPermSize=512m"
     
-	/* Run tests in parallel */
-	maxParallelForks = 4 /* Runtime.runtime.availableProcessors() */
+    /* Run tests in parallel */
+    maxParallelForks = 4 /* Runtime.runtime.availableProcessors() */
   }
   
   /* 
