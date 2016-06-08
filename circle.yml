@@ -1,4 +1,10 @@
 machine:
   java:
     version: oraclejdk8
+  environment:
+    TERM: dumb
 
+general:
+  branches:
+    only:
+      - master # only build/deploy from master
