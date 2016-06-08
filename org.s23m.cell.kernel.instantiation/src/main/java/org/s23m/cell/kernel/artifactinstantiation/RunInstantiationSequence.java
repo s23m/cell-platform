@@ -1,45 +1,40 @@
 package org.s23m.cell.kernel.artifactinstantiation;
 
-import org.s23m.cell.kernel.tests.ArtefactDerivationTest;
-import org.s23m.cell.kernel.tests.EcoreEmulationTest;
-import org.s23m.cell.kernel.tests.EnterpriseArchitectureModellingTest;
-import org.s23m.cell.kernel.tests.EntityRelationshipModellingTest;
-import org.s23m.cell.kernel.tests.EventHandlingTest;
-import org.s23m.cell.kernel.tests.GraphVisualisationCreationTest;
-import org.s23m.cell.kernel.tests.InformationQualityLogicTest;
-import org.s23m.cell.kernel.tests.InformationQualityLogicTestB;
-import org.s23m.cell.kernel.tests.QueryTest;
-import org.s23m.cell.kernel.tests.S23MTestCase;
-import org.s23m.cell.kernel.tests.SemanticIdentityReconstitutionTest;
-import org.s23m.cell.kernel.tests.VisualisationExampleTest;
+import org.s23m.cell.Set;
 
 public class RunInstantiationSequence {
-
-	public static void main(final String[] args) {
-		run();
-	}
 
 	public static void run() {
 		new RunInstantiationSequence();
 	}
 
 	private RunInstantiationSequence() {
-		execute(new ArtefactDerivationTest());
-		execute(new EcoreEmulationTest());
-		execute(new EnterpriseArchitectureModellingTest());
-		execute(new EntityRelationshipModellingTest());
-		execute(new GraphVisualisationCreationTest());
-		execute(new InformationQualityLogicTest());
-		execute(new InformationQualityLogicTestB());
-		execute(new QueryTest());
-		execute(new SemanticIdentityReconstitutionTest());
-		execute(new VisualisationExampleTest());
-		execute(new EventHandlingTest());
+		execute(new ArtefactDerivation());
+		execute(new EcoreEmulation());
+		execute(new EnterpriseArchitectureModelling());
+		execute(new EntityRelationshipModelling());
+		execute(new GraphVisualisationCreation());
+		execute(new InformationQualityLogicSequence1());
+		execute(new InformationQualityLogicSequence2());
+		execute(new QuerySequence());
+		execute(new SemanticIdentityReconstitution());
+		execute(new VisualisationExample());
+
+		// there is no corresponding unit test, as this appears to cause
+		// sporadic test failures due to kernel constraint violations
+		execute(new EventHandling());
 	}
 
-	private void execute(final S23MTestCase testCase) {
-		// System.out.println("Executing " + testCase.getClass().getName() + "...");
-		testCase.setUp();
-		testCase.testInstantiationSequence();
+	private void execute(final InstantiationSequence sequence) {
+		final Set runtimeErrors = sequence.execute();
+		if (!runtimeErrors.isEmpty()) {
+			final StringBuilder builder = new StringBuilder(getClass().getSimpleName() + ": The following runtime errors were encountered:\n");
+			// TODO improve display of sets
+			for (final Set set: runtimeErrors) {
+				builder.append(set);
+				builder.append("\n");
+			}
+			throw new IllegalStateException(builder.toString());
+		}
 	}
 }

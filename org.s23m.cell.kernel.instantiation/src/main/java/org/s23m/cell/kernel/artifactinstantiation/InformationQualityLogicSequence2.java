@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
 import static org.s23m.cell.api.Query.vertex;
@@ -10,7 +10,7 @@ import static org.s23m.cell.api.models.S23MSemanticDomains.is_UNKNOWN;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.models2.RepositoryStructure;
 
-public class InformationQualityLogicTestB extends S23MTestCase {
+public class InformationQualityLogicSequence2 extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

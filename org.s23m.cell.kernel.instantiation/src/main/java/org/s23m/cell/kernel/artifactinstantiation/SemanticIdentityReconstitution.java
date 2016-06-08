@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import java.util.UUID;
 
@@ -6,7 +6,7 @@ import org.s23m.cell.Identity;
 import org.s23m.cell.Set;
 import org.s23m.cell.api.serializerinterface.Reconstitution;
 
-public class SemanticIdentityReconstitutionTest extends S23MTestCase {
+public class SemanticIdentityReconstitution extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.api.InformationQualityLogic.and;
 import static org.s23m.cell.api.InformationQualityLogic.isGreaterThan;
@@ -18,7 +18,7 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.InformationQualityLogic;
 import org.s23m.cell.api.models2.RepositoryStructure;
 
-public class InformationQualityLogicTest extends S23MTestCase {
+public class InformationQualityLogicSequence1 extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

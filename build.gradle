@@ -122,3 +122,10 @@ project('org.s23m.cell.communication') {
     testCompile project (path: ':org.s23m.cell.platform.instantiation', configuration: 'testArtifacts')
   }
 }
+
+project('org.s23m.cell.kernel.instantiation') {
+  dependencies {
+    compile project(':org.s23m.cell.kernel')
+  }
+}
+

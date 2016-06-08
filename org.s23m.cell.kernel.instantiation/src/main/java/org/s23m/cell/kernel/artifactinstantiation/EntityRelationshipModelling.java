@@ -1,28 +1,23 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
 import static org.s23m.cell.api.Instantiation.arrow;
 
 import org.s23m.cell.Set;
+import org.s23m.cell.api.models.InstanceDerivation;
 import org.s23m.cell.api.models.S23MSemanticDomains;
-import org.s23m.cell.api.models2.RepositoryStructure;
-import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
 
-// This could eventually replace the fields in TestSequence
-public class InstantiationData {
+public class EntityRelationshipModelling extends AbstractInstantiationSequence {
 
-	public final Set crm_product;
-	public final Set product_to_price;
-	public final Set order;
-
-	public InstantiationData(final InstantiationSequences instantiationSequences) {
-		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
-		final Set entity = instantiationSequences.entity;
+	@Override
+	protected void executeInstantiationSequence() {
 		final Set testDomain = instantiationSequences.testDomain;
+		final Set entityrelationshipschema = instantiationSequences.entityrelationshipschema;
 		final Set crm = instantiationSequences.crm;
-
-		crm_product = instantiationSequences.crm_product;
+		final Set crm_product = instantiationSequences.crm_product;
+		final Set hierarchicalerschema = instantiationSequences.hierarchicalerschema;
+		final Set entity = instantiationSequences.entity;
 
 		final Set sex = addDisjunctSemanticIdentitySet("sex", "sexes" , testDomain);
 		final Set male = addDisjunctSemanticIdentitySet("male", "males" , testDomain);
@@ -31,12 +26,27 @@ public class InstantiationData {
 		sex.addElement(male);
 		sex.addElement(female);
 
+		/*
+*/
+
+		/*
 		arrow(coreGraphs.visibility, entityrelationshipschema, testDomain);
 		// TODO: don't allow the creation of visibilities with target within a semantic domain such as: F_SemanticStateOfInMemoryModel.link(coreGraphs.visibility, entity, sex);
 
 		arrow(coreGraphs.visibility, RepositoryStructure.applicationengineering, testDomain);
 		arrow(coreGraphs.visibility, crm, testDomain);
 		arrow(coreGraphs.visibility, crm_product, testDomain);
+		*/
+		arrow(coreGraphs.visibility, hierarchicalerschema, testDomain);
+
+		// EXAMPLE CODE FOR DEFINING DERIVEDARTEFACTS
+
+		final Set sqltabledefinition = entityrelationshipschema.addConcrete(InstanceDerivation.derivedFile,
+				addDisjunctSemanticIdentitySet("sql table definition", "sql table definitions" , testDomain));
+		final Set userviewdefinition = entityrelationshipschema.addConcrete(InstanceDerivation.derivedFile,
+				addDisjunctSemanticIdentitySet("user view definition", "user view definitions" , testDomain));
+
+		// FURTHER STUFF
 
 		final Set attribute = entityrelationshipschema.addConcrete(coreGraphs.vertex,
 				addDisjunctSemanticIdentitySet("attribute", "attributes" , testDomain));
@@ -104,7 +114,7 @@ public class InstantiationData {
 				S23MSemanticDomains.isNavigable_NOTAPPLICABLE,
 				S23MSemanticDomains.isContainer_NOTAPPLICABLE
 				);
-		order = crm.addConcrete(entity,
+		final Set order = crm.addConcrete(entity,
 	  			addDisjunctSemanticIdentitySet("order", "orders", testDomain));
 	  	final Set price = crm.addConcrete(attribute,
 			addDisjunctSemanticIdentitySet("price", "prices" , testDomain));
@@ -124,7 +134,7 @@ public class InstantiationData {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 				);
-	  	product_to_price = arrow(entity_to_attribute,
+	  	final Set product_to_price = arrow(entity_to_attribute,
 				addDisjunctSemanticIdentitySet("owner", "owners" , testDomain),
 				addDisjunctSemanticIdentitySet("crm product to price", "crm product to price", testDomain),
 				crm_product,
@@ -138,8 +148,11 @@ public class InstantiationData {
 				S23MSemanticDomains.maxCardinality_n,
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
-				);
+		);
 
+		if (entity.allowableEdgeCategories(attribute).size() < 2) {
+			raiseError();
+		}
 
 	}
 

@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 
@@ -7,7 +7,7 @@ import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.RepositoryStructure;
 
-public class EcoreEmulationTest extends S23MTestCase {
+public class EcoreEmulation extends AbstractInstantiationSequence {
 
 	private Set EReference;
 	private Set EcoreDomain;

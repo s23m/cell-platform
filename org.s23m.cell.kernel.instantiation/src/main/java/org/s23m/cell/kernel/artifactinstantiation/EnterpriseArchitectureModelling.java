@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 import static org.s23m.cell.api.Instantiation.addDisjunctSemanticIdentitySet;
@@ -8,7 +8,7 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.EnterpriseArchitecture;
 
-public class EnterpriseArchitectureModellingTest extends S23MTestCase {
+public class EnterpriseArchitectureModelling extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

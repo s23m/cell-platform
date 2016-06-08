@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.api.models.S23MSemanticDomains.is_TRUE;
 import static org.s23m.cell.api.models.S23MSemanticDomains.is_UNKNOWN;
@@ -7,7 +7,7 @@ import org.s23m.cell.Set;
 import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 
-public class QueryTest extends S23MTestCase {
+public class QuerySequence extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

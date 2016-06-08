@@ -1,11 +1,11 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import org.s23m.cell.Set;
 import org.s23m.cell.api.Instantiation;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.Visualization;
 
-public class VisualisationExampleTest extends S23MTestCase {
+public class VisualisationExample extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.S23MKernel.coreGraphs;
 
@@ -9,7 +9,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.core.SemanticIdentityRegistry;
 import org.s23m.cell.impl.DerivationCode;
 
-public class ArtefactDerivationTest extends S23MTestCase {
+public class ArtefactDerivation extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

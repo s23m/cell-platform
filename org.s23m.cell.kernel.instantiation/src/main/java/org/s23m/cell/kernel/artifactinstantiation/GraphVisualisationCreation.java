@@ -1,4 +1,4 @@
-package org.s23m.cell.kernel.tests;
+package org.s23m.cell.kernel.artifactinstantiation;
 
 import static org.s23m.cell.api.Instantiation.arrow;
 
@@ -7,7 +7,7 @@ import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.api.models2.RepositoryStructure;
 import org.s23m.cell.api.models2.Visualization;
 
-public class GraphVisualisationCreationTest extends S23MTestCase {
+public class GraphVisualisationCreation extends AbstractInstantiationSequence {
 
 	@Override
 	protected void executeInstantiationSequence() {

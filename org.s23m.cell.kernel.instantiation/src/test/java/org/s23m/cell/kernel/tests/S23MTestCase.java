@@ -3,14 +3,15 @@ package org.s23m.cell.kernel.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.s23m.cell.Set;
 import org.s23m.cell.api.EventListener;
 import org.s23m.cell.api.Instantiation;
-import org.s23m.cell.api.Query;
 import org.s23m.cell.api.models.S23MSemanticDomains;
+import org.s23m.cell.kernel.artifactinstantiation.InstantiationData;
+import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequence;
 import org.s23m.cell.kernel.artifactinstantiation.InstantiationSequences;
+
+import junit.framework.TestCase;
 
 public abstract class S23MTestCase extends TestCase implements EventListener {
 
@@ -22,7 +23,10 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 
 	protected final List<Set> setMaintenanceEvents;
 
-	public S23MTestCase() {
+	private final InstantiationSequence sequence;
+
+	public S23MTestCase(final InstantiationSequence sequence) {
+		this.sequence = sequence;
 		this.setMaintenanceEvents = new ArrayList<Set>();
 	}
 
@@ -45,23 +49,7 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 	}
 
 	public void testInstantiationSequence() {
-		executeInstantiationSequence();
-		checkForRuntimeErrors();
-	}
-
-	public void raiseError() {
-		Instantiation.raiseError(S23MSemanticDomains.kernelDefect_KernelHasReachedAnIllegalState, S23MSemanticDomains.kernelDefect);
-	}
-
-	public Set processEvent(final Set event) {
-		setMaintenanceEvents.add(event);
-		return event;
-	}
-
-	protected abstract void executeInstantiationSequence();
-
-	private void checkForRuntimeErrors() {
-		final Set runtimeErrors = Query.runtimeErrors();
+		final Set runtimeErrors = sequence.execute();
 		if (!runtimeErrors.isEmpty()) {
 			final StringBuilder builder = new StringBuilder(getClass().getSimpleName() + ": The following runtime errors were encountered:\n");
 			// TODO improve display of sets
@@ -73,4 +61,12 @@ public abstract class S23MTestCase extends TestCase implements EventListener {
 		}
 	}
 
+	public void raiseError() {
+		Instantiation.raiseError(S23MSemanticDomains.kernelDefect_KernelHasReachedAnIllegalState, S23MSemanticDomains.kernelDefect);
+	}
+
+	public Set processEvent(final Set event) {
+		setMaintenanceEvents.add(event);
+		return event;
+	}
 }
