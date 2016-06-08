@@ -40,7 +40,8 @@ object CellBuild extends Build {
     kernel,
     kernelTests,
     persistence,
-    platform
+    platform,
+    platformInstantiation
   )
 
   lazy val communication = Project(
@@ -48,9 +49,9 @@ object CellBuild extends Build {
     file ("org.s23m.cell.communication"),
     settings = javaTestProjectSettings ++ Seq(
 	    unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend") },
-		unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
-	)
-  ) dependsOn (kernel, platform % "test->test;compile->compile")
+		  unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(bd / "src" / "main" / "xtend-gen") }
+	  )
+  ) dependsOn (kernel, platform, platformInstantiation % "test->test")
 
   lazy val kernel = Project(
     "kernel",
@@ -78,4 +79,9 @@ object CellBuild extends Build {
     settings = javaTestProjectSettings
   ) dependsOn (kernel)
   
+  lazy val platformInstantiation = Project(
+    "platformInstantiation",
+    file ("org.s23m.cell.platform.instantiation"),
+    settings = javaTestProjectSettings
+  ) dependsOn (kernel, platform)
 }

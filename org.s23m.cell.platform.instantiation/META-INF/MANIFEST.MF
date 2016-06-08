@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.s23m.cell.platform.instantiation
+Bundle-SymbolicName: org.s23m.cell.platform.instantiation;singleton:=true
+Bundle-Version: 1.0.0
+Import-Package: org.s23m.cell,
+ org.s23m.cell.api,
+ org.s23m.cell.impl
+Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0",
+ org.s23m.cell.platform;bundle-version="1.0.0"
+Export-Package: org.s23m.cell.platform.api,
+ org.s23m.cell.platform.testfoundation

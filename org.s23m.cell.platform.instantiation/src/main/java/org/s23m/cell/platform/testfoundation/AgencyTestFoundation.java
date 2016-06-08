@@ -27,7 +27,6 @@ package org.s23m.cell.platform.testfoundation;
 import static org.s23m.cell.S23MKernel.coreGraphs;
 
 import org.s23m.cell.Set;
-import org.s23m.cell.api.models.Root;
 import org.s23m.cell.api.models.S23MSemanticDomains;
 import org.s23m.cell.platform.api.CellQueries;
 import org.s23m.cell.platform.api.Instantiation;
@@ -39,8 +38,6 @@ import org.s23m.cell.platform.api.models.Language;
 import org.s23m.cell.platform.api.models.LogicalFormula;
 import org.s23m.cell.platform.api.models.Organization;
 import org.s23m.cell.platform.api.models.SessionHandling;
-import org.s23m.cell.platform.api.models.ValidityInterval;
-import org.s23m.cell.platform.impl.F_CellQueries;
 
 public class AgencyTestFoundation {
 
@@ -396,11 +393,6 @@ public class AgencyTestFoundation {
 				S23MSemanticDomains.isNavigable_TRUE,
 				S23MSemanticDomains.isContainer_FALSE
 		);
-
-		final Set kernelLicense = F_CellQueries.availableLicenses(Root.root).extractFirst();
-		final Set platformLicense = F_CellQueries.availableLicenses(CellEngineering.language).extractFirst();
-		final Set platformLicense2 = F_CellQueries.availableLicenses(ValidityInterval.validFromTimestamp).extractFirst();
-		final Set platformLicense3 = F_CellQueries.availableLicenses(CellEngineering.timeConsciousness).extractFirst();
 
 		final String name_d = CellQueries.nameAsString(CellQueries.name(object_cell, deutsch));
 		final String name_e = CellQueries.nameAsString(CellQueries.name(object_cell, english));
