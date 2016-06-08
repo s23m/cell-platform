@@ -74,10 +74,9 @@ subprojects {
   }
   
   /* 
-   * Using test utility code: 
+   * Mechanism for exposing a project's test code to other projects through 'testArtifacts' configuration: 
    *
    * https://discuss.gradle.org/t/how-do-i-declare-a-dependency-on-a-modules-test-code/7172/7
-   *
    */
   
   configurations {
@@ -118,7 +117,7 @@ project('org.s23m.cell.communication') {
     compile project(':org.s23m.cell.kernel')
     compile project(':org.s23m.cell.platform')
     
-    // dependency on test utility code
+    // tests depend on the other project's main and test code
     testCompile project (path: ':org.s23m.cell.platform.instantiation', configuration: 'testArtifacts')
   }
 }
