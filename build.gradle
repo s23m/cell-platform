@@ -17,18 +17,6 @@ subprojects {
     testCompile 'junit:junit:4.12'
   }
 
-  test {
-    reports {
-      junitXml.enabled true
-      junitXml.destination = "${buildDir}/reports/junit-xml"
-      html.enabled true
-      html.destination = "${buildDir}/reports/junit-html"
-    }
-	
-	/* Run tests in parallel */
-	maxParallelForks = Runtime.runtime.availableProcessors() / 2
-  }
-  
   /* JaCoCo */
  
   jacoco {
@@ -65,11 +53,24 @@ subprojects {
     ruleSets = ["java-basic", "java-braces"]
   }
   
-  /* Memory settings */
+  /* Tests */
+  
+  test {
+    reports {
+      junitXml.enabled true
+      junitXml.destination = "${buildDir}/reports/junit-xml"
+      html.enabled true
+      html.destination = "${buildDir}/reports/junit-html"
+    }
+  }
   
   tasks.withType(Test) {
     maxHeapSize = "512m"
+
     jvmArgs "-XX:MaxPermSize=512m"
+    
+	/* Run tests in parallel */
+	maxParallelForks = Runtime.runtime.availableProcessors()
   }
 }
 
