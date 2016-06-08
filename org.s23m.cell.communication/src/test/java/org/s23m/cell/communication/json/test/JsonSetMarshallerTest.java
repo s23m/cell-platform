@@ -3,6 +3,8 @@ package org.s23m.cell.communication.json.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 import org.s23m.cell.Set;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.json.JsonSetMarshaller;
@@ -17,7 +19,6 @@ public class JsonSetMarshallerTest extends AgencyTestFoundationTestCase {
 
 	private List<Set> exampleModels = new ArrayList<Set>();
 	
-	@Override
 	protected void doAdditionalSetup() {
 		// only instances of Agents or any of their contained models ever need to be serialised 
 		// ithanku is an example of an instance of an Agent. 
@@ -34,7 +35,7 @@ public class JsonSetMarshallerTest extends AgencyTestFoundationTestCase {
 			JsonSetMarshaller setMarshaller = new JsonSetMarshaller(namespace, terminology);
 			
 			String serialised = setMarshaller.serialise(exampleModel);
-			assertNotNull(serialised);
+			Assert.assertNotNull(serialised);
 			//System.out.println("serialised: " + serialised);
 			
 			// String serialised = xmlSetMarshaller.serialise(Instantiation.toSemanticDomain(ithanku));

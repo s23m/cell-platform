@@ -3,6 +3,7 @@ package org.s23m.cell.communication.xml.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.s23m.cell.Set;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.NamespaceConstants;
@@ -16,7 +17,6 @@ public class XmlSetMarshallerTest extends AgencyTestFoundationTestCase {
 
 	private List<Set> exampleModels = new ArrayList<Set>();
 	
-	@Override
 	protected void doAdditionalSetup() {
 		// only instances of Agents or any of their contained models ever need to be serialised 
 		// ithanku is an example of an instance of an Agent. 
@@ -36,7 +36,7 @@ public class XmlSetMarshallerTest extends AgencyTestFoundationTestCase {
 			XmlSetMarshaller xmlSetMarshaller = new XmlSetMarshaller(namespace, terminology);
 			
 			String serialised = xmlSetMarshaller.serialise(exampleModel);
-			assertNotNull(serialised);
+			Assert.assertNotNull(serialised);
 			
 			//System.out.println("serialised: " + serialised);
 			
