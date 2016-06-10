@@ -1,3 +1,4 @@
+/* List of projects to be built */
 
 include 'org.s23m.cell.kernel',
         'org.s23m.cell.kernel.instantiation',
@@ -5,6 +6,8 @@ include 'org.s23m.cell.kernel',
         'org.s23m.cell.platform.instantiation',
         'org.s23m.cell.persistence',
         'org.s23m.cell.communication'
+
+/* Provide shorter names for each project */
 
 project(':org.s23m.cell.kernel').name = 'kernel'
 
