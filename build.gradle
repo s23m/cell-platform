@@ -121,11 +121,9 @@ subprojects {
   
   tasks.withType(Test) {
     maxHeapSize = '512m'
-
-    jvmArgs '-XX:MaxPermSize=512m'
     
-    /* Run tests in parallel */
-    maxParallelForks = 4 /* Runtime.runtime.availableProcessors() */
+    /* Run tests in parallel. Use a maximum of 4 threads (to match Circle CI "max parallelism") */
+    maxParallelForks = 4
   }
   
   /* 
