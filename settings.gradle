@@ -1,2 +1,19 @@
 
-include 'org.s23m.cell.kernel', 'org.s23m.cell.kernel.instantiation', 'org.s23m.cell.platform', 'org.s23m.cell.platform.instantiation', 'org.s23m.cell.persistence', 'org.s23m.cell.communication'
+include 'org.s23m.cell.kernel',
+        'org.s23m.cell.kernel.instantiation',
+        'org.s23m.cell.platform',
+        'org.s23m.cell.platform.instantiation',
+        'org.s23m.cell.persistence',
+        'org.s23m.cell.communication'
+
+project(':org.s23m.cell.kernel').name = 'kernel'
+
+project(':org.s23m.cell.kernel.instantiation').name = 'kernel-instantiation'
+
+project(':org.s23m.cell.platform').name = 'platform'
+
+project(':org.s23m.cell.platform.instantiation').name = 'platform-instantiation'
+
+project(':org.s23m.cell.persistence').name = 'persistence'
+
+project(':org.s23m.cell.communication').name = 'communication' 

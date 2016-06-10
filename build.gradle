@@ -1,32 +1,87 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
+  }
+}
+
+allprojects {
+  apply plugin: 'com.jfrog.artifactory'
+  group = 'org.s23m.cell'
+  version = currentVersion
+  status = 'Integration'
+}
+
+// skip publishing the root module
+artifactoryPublish.skip = true
+
+artifactory {
+  clientConfig.setIncludeEnvVars(false)
+  clientConfig.info.addEnvironmentProperty('date',new java.util.Date().toString())
+
+  contextUrl = 'http://localhost:8081/artifactory'
+  
+  publish {
+    repository {
+      repoKey = 'libs-snapshot-local' // The Artifactory repository key to publish to
+      username = "${ARTIFACTORY_USER}" // The publisher user name
+      password = "${ARTIFACTORY_PASSWORD}" // The publisher password
+    }
+    defaults {
+      // Reference to Gradle publications defined in the build script.
+      // This is how we tell the Artifactory Plugin which artifacts should be
+      // published to Artifactory.
+      publications('mavenJava')
+      publishArtifacts = true
+      
+      publishPom = true // Publish generated POM files to Artifactory (true by default)
+      publishIvy = false // Publish generated Ivy descriptor files to Artifactory (true by default)
+    }
+  }
+  resolve {
+    repoKey = 'jcenter'
+  }
+}
+
 subprojects {
   apply plugin: 'java'
   apply plugin: 'jacoco'
   apply plugin: 'findbugs'
   apply plugin: 'pmd'
+  apply plugin: 'maven-publish'
 
-  version = '1.0'
-  
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
 
   repositories {
-     mavenCentral()
+    mavenCentral()
   }
   
   dependencies {
     testCompile 'junit:junit:4.12'
   }
+  
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        from components.java
+        artifact(file("$rootDir/gradle.properties"))
+      }
+    }
+  }
 
   /* JaCoCo */
  
   jacoco {
-    toolVersion = "0.7.6.201602180812"
+    toolVersion = '0.7.6.201602180812'
   }
   
   jacocoTestReport {
     reports {
       xml.enabled true
-      html.destination "${buildDir}/reports/jacoco-html"
+      html.destination file("$buildDir/reports/jacoco-html")
     }
   }
   
@@ -49,8 +104,8 @@ subprojects {
 
   pmd {
     ignoreFailures = true
-    reportsDir = file("${buildDir}/reports/pmd")
-    ruleSets = ["java-basic", "java-braces"]
+    reportsDir = file("$buildDir/reports/pmd")
+    ruleSets = ['java-basic', 'java-braces']
   }
   
   /* Tests */
@@ -58,16 +113,16 @@ subprojects {
   test {
     reports {
       junitXml.enabled true
-      junitXml.destination = "${buildDir}/reports/junit-xml"
+      junitXml.destination = file("$buildDir/reports/junit-xml")
       html.enabled true
-      html.destination = "${buildDir}/reports/junit-html"
+      html.destination = file("$buildDir/reports/junit-html")
     }
   }
   
   tasks.withType(Test) {
-    maxHeapSize = "512m"
+    maxHeapSize = '512m'
 
-    jvmArgs "-XX:MaxPermSize=512m"
+    jvmArgs '-XX:MaxPermSize=512m'
     
     /* Run tests in parallel */
     maxParallelForks = 4 /* Runtime.runtime.availableProcessors() */
@@ -84,7 +139,7 @@ subprojects {
   }
   
   task testJar(type: Jar) {
-    classifier "test"
+    classifier 'test'
     from sourceSets.test.output
   }
   
@@ -93,38 +148,37 @@ subprojects {
   }
 }
 
-project('org.s23m.cell.platform') {
+project(':platform') {
   dependencies {
-    compile project(':org.s23m.cell.kernel')
+    compile project(':kernel')
   }
 }
 
-project('org.s23m.cell.platform.instantiation') {
+project(':platform-instantiation') {
   dependencies {
-    compile project(':org.s23m.cell.kernel')
-    compile project(':org.s23m.cell.platform')
+    compile project(':kernel')
+    compile project(':platform')
   }
 }
 
-project('org.s23m.cell.persistence') {
+project(':persistence') {
   dependencies {
-    compile project(':org.s23m.cell.kernel')
+    compile project(':kernel')
   }
 }
 
-project('org.s23m.cell.communication') {
+project(':communication') {
   dependencies {
-    compile project(':org.s23m.cell.kernel')
-    compile project(':org.s23m.cell.platform')
+    compile project(':kernel')
+    compile project(':platform')
     
     // tests depend on the other project's main and test code
-    testCompile project (path: ':org.s23m.cell.platform.instantiation', configuration: 'testArtifacts')
+    testCompile project (path: ':platform-instantiation', configuration: 'testArtifacts')
   }
 }
 
-project('org.s23m.cell.kernel.instantiation') {
+project(':kernel-instantiation') {
   dependencies {
-    compile project(':org.s23m.cell.kernel')
+    compile project(':kernel')
   }
 }
-
