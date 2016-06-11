@@ -158,25 +158,6 @@ subprojects {
     // Run tests in parallel. Use a maximum of 4 threads (to match Circle CI "max parallelism")
     maxParallelForks = 4
   }
-  
-  /* 
-   * Mechanism for exposing a project's test code to other projects through 'testArtifacts' configuration: 
-   *
-   * https://discuss.gradle.org/t/how-do-i-declare-a-dependency-on-a-modules-test-code/7172/7
-   */
-  
-  configurations {
-    testArtifacts.extendsFrom testRuntime
-  }
-  
-  task testJar(type: Jar) {
-    classifier 'test'
-    from sourceSets.test.output
-  }
-  
-  artifacts {
-    testArtifacts testJar
-  }
 }
 
 /* Declaration of inter-project dependencies */
@@ -211,7 +192,7 @@ project(':communication') {
     compile project(':kernel')
     compile project(':platform')
     
-    // tests depend on the other project's main and test code
-    testCompile project (path: ':platform-instantiation', configuration: 'testArtifacts')
+    // test dependency on other project
+    testCompile project(':platform-instantiation')
   }
 }

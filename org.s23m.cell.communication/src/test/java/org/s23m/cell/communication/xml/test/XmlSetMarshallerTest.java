@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.s23m.cell.Set;
+import org.s23m.cell.communication.AgencyTestFoundationTestCase;
 import org.s23m.cell.communication.SetMarshallingException;
 import org.s23m.cell.communication.xml.NamespaceConstants;
 import org.s23m.cell.communication.xml.XmlSchemaTerminology;
 import org.s23m.cell.communication.xml.XmlSetMarshaller;
 import org.s23m.cell.communication.xml.model.dom.Namespace;
-import org.s23m.cell.platform.api.AgencyTestFoundationTestCase;
 import org.s23m.cell.platform.testfoundation.AgencyTestFoundation;
 
 public class XmlSetMarshallerTest extends AgencyTestFoundationTestCase {
