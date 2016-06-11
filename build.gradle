@@ -65,7 +65,8 @@ subprojects {
   targetCompatibility = 1.8
 
   repositories {
-    //mavenCentral()
+    /* Maven central dependency for resolving JUnit */
+    mavenCentral()
   }
   
   dependencies {
