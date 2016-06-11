@@ -1,3 +1,8 @@
+/*
+ * External dependencies for the build script: 
+ * https://docs.gradle.org/current/userguide/organizing_build_logic.html#sec:external_dependencies
+ */
+
 buildscript {
   repositories {
     jcenter()
@@ -6,6 +11,8 @@ buildscript {
     classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.0.0')
   }
 }
+
+/* Artifactory plugin and settings */
 
 allprojects {
   apply plugin: 'com.jfrog.artifactory'
@@ -45,6 +52,8 @@ artifactory {
   }
 }
 
+/* Shared settings for all subprojects */
+
 subprojects {
   apply plugin: 'java'
   apply plugin: 'jacoco'
@@ -56,7 +65,7 @@ subprojects {
   targetCompatibility = 1.8
 
   repositories {
-    mavenCentral()
+    //mavenCentral()
   }
   
   dependencies {
@@ -146,6 +155,14 @@ subprojects {
   }
 }
 
+/* Declaration of inter-project dependencies */
+
+project(':kernel-instantiation') {
+  dependencies {
+    compile project(':kernel')
+  }
+}
+
 project(':platform') {
   dependencies {
     compile project(':kernel')
@@ -172,11 +189,5 @@ project(':communication') {
     
     // tests depend on the other project's main and test code
     testCompile project (path: ':platform-instantiation', configuration: 'testArtifacts')
-  }
-}
-
-project(':kernel-instantiation') {
-  dependencies {
-    compile project(':kernel')
   }
 }
