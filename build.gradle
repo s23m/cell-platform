@@ -25,8 +25,7 @@ artifactoryPublish.skip = true
 
 artifactory {
   clientConfig.setIncludeEnvVars(false)
-  clientConfig.info.addEnvironmentProperty('date',new java.util.Date().toString())
-
+  
   contextUrl = 'http://localhost:8081/artifactory'
   
   publish {
