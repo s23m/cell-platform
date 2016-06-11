@@ -67,9 +67,6 @@ artifactory {
       publishIvy = false // Publish generated Ivy descriptor files to Artifactory (true by default)
     }
   }
-  resolve {
-    repoKey = 'jcenter'
-  }
 }
 
 /* Shared settings for all subprojects */
