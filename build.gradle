@@ -23,30 +23,38 @@ artifactoryPublish.skip = true
 
 artifactory {
   def localArtifactoryMode = "${artifactory_mode}" == "local"
+  def remoteArtifactoryMode = "${artifactory_mode}" == "remote"
 
-  clientConfig.setIncludeEnvVars(false)
-  
-  if (!localArtifactoryMode && "${artifactory_mode}" != "remote")
+  if (!localArtifactoryMode && !remoteArtifactoryMode)
     ant.fail("Invalid Artifactory mode '${artifactory_mode}'. Only 'local' and 'remote' is allowed.")
+  
+  if (remoteArtifactoryMode) {
+  	if (!project.hasProperty('artifactory_remote_url'))
+  	  ant.fail("Remote Artifactory URL (artifactory_remote_url) was not provided")
+  	if (!project.hasProperty('artifactory_remote_username'))
+  	  ant.fail("Remote Artifactory username (artifactory_remote_username) was not provided")
+  	if (!project.hasProperty('artifactory_remote_password'))
+  	  ant.fail("Remote Artifactory password (artifactory_remote_password) was not provided")
+  }
   
   println "Artifactory mode: ${artifactory_mode}"
   
-  if (localArtifactoryMode)
-    contextUrl = "${artifactory_local_url}"
-  else
-    ant.fail("The 'remote' Artifactory mode is not yet supported")
-
+  def artifactoryUrl = localArtifactoryMode ? "${artifactory_local_url}" : "${artifactory_remote_url}"
+  def artifactoryUsername = localArtifactoryMode ? "${artifactory_local_username}" : "${artifactory_remote_username}"
+  def artifactoryPassword = localArtifactoryMode ? "${artifactory_local_password}" : "${artifactory_remote_password}"
+  
+  println "Artifactory URL: ${artifactoryUrl}"
+  
+  contextUrl = artifactoryUrl
+  
+  clientConfig.setIncludeEnvVars(false)
+  
   publish {
     repository {
       // determine the Artifactory repository key to publish to
       repoKey = version.endsWith('-SNAPSHOT') ? 'libs-snapshot-local' : 'libs-release-local'
-    
-      if (localArtifactoryMode) {
-        username = "${artifactory_local_username}"
-        password = "${artifactory_local_password}"
-      } else {
-        ant.fail("The 'remote' Artifactory mode is not yet supported")
-      }
+      username = artifactoryUsername
+      password = artifactoryPassword
     }
     defaults {
       // Reference to Gradle publications defined in the build script.
