@@ -17,7 +17,6 @@ buildscript {
 allprojects {
   apply plugin: 'com.jfrog.artifactory'
   group = 'org.s23m.cell'
-  version = currentVersion
   status = 'Integration'
 }
 
