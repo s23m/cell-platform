@@ -16,25 +16,37 @@ buildscript {
 
 allprojects {
   apply plugin: 'com.jfrog.artifactory'
-  group = 'org.s23m.cell'
-  status = 'Integration'
 }
 
 // skip publishing the root module
 artifactoryPublish.skip = true
 
 artifactory {
+  def localArtifactoryMode = "${artifactory_mode}" == "local"
+
   clientConfig.setIncludeEnvVars(false)
   
-  contextUrl = 'http://localhost:8081/artifactory'
+  if (!localArtifactoryMode && "${artifactory_mode}" != "remote")
+    ant.fail("Invalid Artifactory mode '${artifactory_mode}'. Only 'local' and 'remote' is allowed.")
   
+  println "Artifactory mode: ${artifactory_mode}"
+  
+  if (localArtifactoryMode)
+    contextUrl = "${artifactory_local_url}"
+  else
+    ant.fail("The 'remote' Artifactory mode is not yet supported")
+
   publish {
     repository {
       // determine the Artifactory repository key to publish to
       repoKey = version.endsWith('-SNAPSHOT') ? 'libs-snapshot-local' : 'libs-release-local'
     
-      username = "${ARTIFACTORY_USER}" // The publisher user name
-      password = "${ARTIFACTORY_PASSWORD}" // The publisher password
+      if (localArtifactoryMode) {
+        username = "${artifactory_local_username}"
+        password = "${artifactory_local_password}"
+      } else {
+        ant.fail("The 'remote' Artifactory mode is not yet supported")
+      }
     }
     defaults {
       // Reference to Gradle publications defined in the build script.
@@ -64,8 +76,11 @@ subprojects {
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
 
+  group = 'org.s23m.cell'
+  status = 'Integration'
+
   repositories {
-    /* Maven central dependency for resolving JUnit */
+    // Maven central dependency for resolving JUnit
     mavenCentral()
   }
   
@@ -132,7 +147,7 @@ subprojects {
   tasks.withType(Test) {
     maxHeapSize = '512m'
     
-    /* Run tests in parallel. Use a maximum of 4 threads (to match Circle CI "max parallelism") */
+    // Run tests in parallel. Use a maximum of 4 threads (to match Circle CI "max parallelism")
     maxParallelForks = 4
   }
   
