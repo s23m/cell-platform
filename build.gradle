@@ -157,6 +157,14 @@ subprojects {
   }
 }
 
+/* Task to create an aggregate JUnit test report */
+
+task aggregateTests(type: TestReport) {
+  destinationDir = file("$buildDir/reports/allTests")
+  // Include the results from the `test` task in all subprojects
+  reportOn subprojects*.test
+}
+
 /* Declaration of inter-project dependencies */
 
 project(':kernel-instantiation') {
