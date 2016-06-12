@@ -185,19 +185,3 @@ project(':platform-instantiation') {
     compile project(':platform')
   }
 }
-
-project(':persistence') {
-  dependencies {
-    compile project(':kernel')
-  }
-}
-
-project(':communication') {
-  dependencies {
-    compile project(':kernel')
-    compile project(':platform')
-    
-    // test dependency on other project
-    testCompile project(':platform-instantiation')
-  }
-}
