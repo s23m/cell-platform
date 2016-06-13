@@ -16,4 +16,4 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/reports/junit-xml/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - ./gradlew check consolidateReports
-    - cp "build/reports" $CIRCLE_ARTIFACTS
+    - cp -r "build/reports" $CIRCLE_ARTIFACTS
