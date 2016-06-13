@@ -42,6 +42,8 @@ artifactory {
   def artifactoryUrl = localArtifactoryMode ? "${artifactory_local_url}" : "${artifactory_remote_url}"
   def artifactoryUsername = localArtifactoryMode ? "${artifactory_local_username}" : "${artifactory_remote_username}"
   def artifactoryPassword = localArtifactoryMode ? "${artifactory_local_password}" : "${artifactory_remote_password}"
+  def snapshotRepoKey = localArtifactoryMode ? 'libs-snapshot-local' : 'oss-snapshot-local'
+  def releaseRepoKey = localArtifactoryMode ? 'libs-release-local' : 'oss-release-local'
   
   println "Artifactory URL: ${artifactoryUrl}"
   
@@ -52,7 +54,7 @@ artifactory {
   publish {
     repository {
       // determine the Artifactory repository key to publish to
-      repoKey = version.endsWith('-SNAPSHOT') ? 'libs-snapshot-local' : 'libs-release-local'
+      repoKey = version.endsWith('-SNAPSHOT') ? snapshotRepoKey : releaseRepoKey
       username = artifactoryUsername
       password = artifactoryPassword
     }
