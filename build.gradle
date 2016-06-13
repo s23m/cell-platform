@@ -167,6 +167,23 @@ task aggregateTests(type: TestReport) {
   reportOn subprojects*.test
 }
 
+/* Task to consolidate reports for all subprojects */
+
+task consolidateReports {
+  
+  doLast {
+    childProjects.keySet().each {
+      def source = childProjects.get(it).reportsDir
+      def name = it
+      copy {
+        from source
+        include '**/*'
+        into "$buildDir/reports/$name"
+      }
+    }
+  }
+}
+
 /* Declaration of inter-project dependencies */
 
 project(':kernel-instantiation') {
