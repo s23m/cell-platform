@@ -11,8 +11,9 @@ general:
 
 test:
   override:
-    - ./gradlew test -is
+    - ./gradlew -Partifactory_mode=remote -Partifactory_remote_url=$ARTIFACTORY_REMOTE_URL -Partifactory_remote_username=$ARTIFACTORY_REMOTE_USER -Partifactory_remote_password=$ARTIFACTORY_REMOTE_PASSWORD test -is
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/reports/junit-xml/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-    
+    - ./gradlew check consolidateReports
+    - cp "build/reports" $CIRCLE_ARTIFACTS
