@@ -198,9 +198,13 @@ project(':platform') {
   }
 }
 
+// contains models for use in tests
 project(':platform-instantiation') {
   dependencies {
     compile project(':kernel')
     compile project(':platform')
+    
+    // add JUnit as a compile-time dependency
+    compile 'junit:junit:4.12'
   }
 }
