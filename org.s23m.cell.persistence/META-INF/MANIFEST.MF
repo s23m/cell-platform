@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: org.s23m.cell.persistence
-Bundle-SymbolicName: org.s23m.cell.persistence;singleton:=true
-Bundle-Version: 1.0.0
-Require-Bundle: org.s23m.cell.kernel;bundle-version="1.0.0"
