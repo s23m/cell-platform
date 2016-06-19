@@ -1,5 +1,5 @@
 /*
- * External dependencies for the build script: 
+ * External dependencies for the build script:
  * https://docs.gradle.org/current/userguide/organizing_build_logic.html#sec:external_dependencies
  */
 
@@ -14,6 +14,20 @@ buildscript {
 
 /* Artifactory plugin and settings */
 
+def localArtifactoryMode = "${artifactory_mode}" == "local"
+def remoteArtifactoryMode = "${artifactory_mode}" == "remote"
+
+if (!localArtifactoryMode && !remoteArtifactoryMode)
+  ant.fail("Invalid Artifactory mode '${artifactory_mode}'. Only 'local' and 'remote' is allowed.")
+
+println "Artifactory mode: ${artifactory_mode}"
+
+def artifactoryUrl = localArtifactoryMode ? "${artifactory_local_url}" : "${artifactory_remote_url}"
+def snapshotRepoKey = localArtifactoryMode ? 'libs-snapshot-local' : 'oss-snapshot-local'
+def releaseRepoKey = localArtifactoryMode ? 'libs-release-local' : 'oss-release-local'
+
+println "Artifactory URL: ${artifactoryUrl}"
+
 allprojects {
   apply plugin: 'com.jfrog.artifactory'
 }
@@ -22,41 +36,26 @@ allprojects {
 artifactoryPublish.skip = true
 
 artifactory {
-  def localArtifactoryMode = "${artifactory_mode}" == "local"
-  def remoteArtifactoryMode = "${artifactory_mode}" == "remote"
 
-  if (!localArtifactoryMode && !remoteArtifactoryMode)
-    ant.fail("Invalid Artifactory mode '${artifactory_mode}'. Only 'local' and 'remote' is allowed.")
-  
-  if (remoteArtifactoryMode) {
-  	if (!project.hasProperty('artifactory_remote_url'))
-  	  ant.fail("Remote Artifactory URL (artifactory_remote_url) was not provided")
-  	if (!project.hasProperty('artifactory_remote_username'))
-  	  ant.fail("Remote Artifactory username (artifactory_remote_username) was not provided")
-  	if (!project.hasProperty('artifactory_remote_password'))
-  	  ant.fail("Remote Artifactory password (artifactory_remote_password) was not provided")
-  }
-  
-  println "Artifactory mode: ${artifactory_mode}"
-  
-  def artifactoryUrl = localArtifactoryMode ? "${artifactory_local_url}" : "${artifactory_remote_url}"
-  def artifactoryUsername = localArtifactoryMode ? "${artifactory_local_username}" : "${artifactory_remote_username}"
-  def artifactoryPassword = localArtifactoryMode ? "${artifactory_local_password}" : "${artifactory_remote_password}"
-  def snapshotRepoKey = localArtifactoryMode ? 'libs-snapshot-local' : 'oss-snapshot-local'
-  def releaseRepoKey = localArtifactoryMode ? 'libs-release-local' : 'oss-release-local'
-  
-  println "Artifactory URL: ${artifactoryUrl}"
-  
   contextUrl = artifactoryUrl
-  
+
   clientConfig.setIncludeEnvVars(false)
-  
+
   publish {
     repository {
       // determine the Artifactory repository key to publish to
       repoKey = version.endsWith('-SNAPSHOT') ? snapshotRepoKey : releaseRepoKey
-      username = artifactoryUsername
-      password = artifactoryPassword
+
+      if (localArtifactoryMode) {
+        username = "${artifactory_local_username}"
+        password = "${artifactory_local_password}"
+      } else {
+        // remote mode
+        if (project.hasProperty('artifactory_remote_username'))
+          username = "${artifactory_remote_username}"
+        if (project.hasProperty('artifactory_remote_password'))
+          password = "${artifactory_remote_password}"
+      }
     }
     defaults {
       // Reference to Gradle publications defined in the build script.
@@ -64,7 +63,7 @@ artifactory {
       // published to Artifactory.
       publications('mavenJava')
       publishArtifacts = true
-      
+
       publishPom = true // Publish generated POM files to Artifactory (true by default)
       publishIvy = false // Publish generated Ivy descriptor files to Artifactory (true by default)
     }
@@ -90,11 +89,11 @@ subprojects {
     // Maven central dependency for resolving JUnit
     mavenCentral()
   }
-  
+
   dependencies {
     testCompile 'junit:junit:4.12'
   }
-  
+
   publishing {
     publications {
       mavenJava(MavenPublication) {
@@ -105,33 +104,33 @@ subprojects {
   }
 
   /* JaCoCo */
- 
+
   jacoco {
     toolVersion = '0.7.6.201602180812'
   }
-  
+
   jacocoTestReport {
     reports {
       xml.enabled true
       html.destination file("$buildDir/reports/jacoco-html")
     }
   }
-  
+
   check.dependsOn jacocoTestReport
- 
+
   /* Findbugs */
-  
+
   findbugs {
     ignoreFailures = true
   }
-  
+
   tasks.withType(FindBugs) {
     reports {
       xml.enabled false
       html.enabled true
     }
   }
- 
+
   /* PMD */
 
   pmd {
@@ -139,9 +138,9 @@ subprojects {
     reportsDir = file("$buildDir/reports/pmd")
     ruleSets = ['java-basic', 'java-braces']
   }
-  
+
   /* Tests */
-  
+
   test {
     reports {
       junitXml.enabled true
@@ -150,10 +149,10 @@ subprojects {
       html.destination = file("$buildDir/reports/junit-html")
     }
   }
-  
+
   tasks.withType(Test) {
     maxHeapSize = '512m'
-    
+
     // Run tests in parallel. Use a maximum of 4 threads (to match Circle CI "max parallelism")
     maxParallelForks = 4
   }
@@ -170,7 +169,7 @@ task aggregateTests(type: TestReport) {
 /* Task to consolidate reports for all subprojects */
 
 task consolidateReports {
-  
+
   doLast {
     childProjects.keySet().each {
       def source = childProjects.get(it).reportsDir
@@ -203,7 +202,7 @@ project(':platform-instantiation') {
   dependencies {
     compile project(':kernel')
     compile project(':platform')
-    
+
     // add JUnit as a compile-time dependency
     compile 'junit:junit:4.12'
   }
